@@ -2,6 +2,9 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <link rel="manifest" href="manifest.json">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Numa Prototype</title>
@@ -32,6 +35,18 @@ body{background:#F2F2EE;display:flex;flex-direction:column;margin:0;padding:0;he
 
 /* ── BOTTOM NAV ── */
 .nav{background:rgba(255,255,255,.97);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:.5px solid rgba(0,0,0,.08);display:flex;flex-shrink:0;padding-bottom:max(env(safe-area-inset-bottom),4px);z-index:20}
+/* ── PAGES ── */
+.pg{display:none;padding:10px 14px 20px;flex-direction:column;gap:9px}
+.pg.on{display:flex;animation:pgIn .28s cubic-bezier(.2,0,0,1) both}
+@keyframes pgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.pg.on > *{animation:cardIn .3s cubic-bezier(.2,0,0,1) both}
+.pg.on > *:nth-child(1){animation-delay:.04s}
+.pg.on > *:nth-child(2){animation-delay:.08s}
+.pg.on > *:nth-child(3){animation-delay:.12s}
+.pg.on > *:nth-child(4){animation-delay:.16s}
+.pg.on > *:nth-child(5){animation-delay:.19s}
+@keyframes cardIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
 
 /* ── SHEETS ── */
 .sbg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;display:none;pointer-events:none}
@@ -2551,7 +2566,7 @@ function obEnterApp(){
 
 
 <!-- ══ PWA Install Banner ══ -->
-<div id="pwa-install-banner" style="display:none!important" class="hidden" style="display:none!important">
+<div id="pwa-install-banner" style="display:none!important">
   <div class="pwa-icon">N</div>
   <div class="pwa-text">
     <strong>הוסף את Numa למסך הבית</strong>
@@ -2612,7 +2627,7 @@ function obEnterApp(){
     // הצג banner רק אם לא נדחה קודם
     const dismissed = localStorage.getItem('numa_pwa_dismissed');
     if (!dismissed) {
-      setTimeout(showInstallBanner, 3000);
+      // setTimeout(showInstallBanner, 3000); // disabled
     }
   });
 
