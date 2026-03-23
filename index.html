@@ -906,7 +906,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="ni" onclick="go('wmap',this)"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="3" r="2"/><circle cx="3" cy="12" r="2"/><circle cx="13" cy="12" r="2"/><circle cx="8" cy="9" r="1.5"/><path d="M8 5v2.5M8 10.5v.5M4.5 11L6.5 9.5M9.5 9.5L11.5 11"/></svg>מפת עושר <span class="ni-badge">חדש</span></div>
     <div class="ni" onclick="go('alloc',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 2a5 5 0 010 10V8L4.2 4.2A5 5 0 018 3z"/></svg>הקצאת נכסים</div>
     <div class="sb-sec">נכסים</div>
-    <div class="ni" onclick="go('inc',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm1 10H7V9H5l3-4 3 4H9v2z"/></svg>הכנסות</div>
+    <div class="ni" onclick="go('cf',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm1 10H7V9H5l3-4 3 4H9v2z"/></svg>הכנסות</div>
     <div class="ni" onclick="go('cf',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 8h10m-3-3l3 3-3 3M14 4v8"/></svg>תזרים חודשי <span class="ni-badge">חדש</span></div>
     <div class="ni" onclick="go('st',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 14l4-5 3 3 3-4 4 6H1z"/></svg>השקעות</div>
     <div class="ni" onclick="go('pe',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l6 3v4c0 3-2.5 5.5-6 7C2.5 13.5 0 11 0 8V4l8-3z"/></svg>פנסיה וקה"ש</div>
@@ -998,7 +998,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <button onclick="goMob('ov',null);closeSectionsDrawer()" style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:14px 8px;font-size:11px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:7px;transition:all .15s;-webkit-tap-highlight-color:transparent" ontouchstart="this.style.background='var(--gdim2)';" ontouchend="this.style.background='var(--bg2)'">
           <span style="font-size:22px">🏠</span>סקירה
         </button>
-        <button onclick="goMob('pen',null);closeSectionsDrawer()" style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:14px 8px;font-size:11px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:7px;transition:all .15s;-webkit-tap-highlight-color:transparent" ontouchstart="this.style.background='var(--gdim2)';" ontouchend="this.style.background='var(--bg2)'">
+        <button onclick="goMob('pe',null);closeSectionsDrawer()" style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:14px 8px;font-size:11px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:7px;transition:all .15s;-webkit-tap-highlight-color:transparent" ontouchstart="this.style.background='var(--gdim2)';" ontouchend="this.style.background='var(--bg2)'">
           <span style="font-size:22px">🛡️</span>פנסיה
         </button>
         <button onclick="goMob('st',null);closeSectionsDrawer()" style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:14px 8px;font-size:11px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:7px;transition:all .15s;-webkit-tap-highlight-color:transparent" ontouchstart="this.style.background='var(--gdim2)';" ontouchend="this.style.background='var(--bg2)'">
@@ -1245,7 +1245,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
   <!-- INCOME -->
-  <div class="pg" id="p-inc">
+  <div class="pg" id="p-inc" style="display:none!important">
     <div class="g2">
       <div class="card">
         <div class="ch"><div style="display:flex;align-items:center;gap:5px"><div class="ct">הכנסות חודשיות (נטו)</div><div class="help-q" onclick="this.nextElementSibling.classList.toggle('show')">?</div><div class="score-tip">הכנסה נטו = אחרי ניכוי מס הכנסה, ביטוח לאומי ופנסיה. לא ברוטו! רוב האנשים חושבים שהם מרוויחים יותר ממה שבאמת נכנס לבנק.</div></div></div>
@@ -1282,8 +1282,57 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
 
-  <!-- CASHFLOW PAGE — Rise Up style -->
+  <!-- CASHFLOW PAGE — Rise Up style (merged with inc) -->
   <div class="pg" id="p-cf">
+
+    <!-- INCOME INPUTS — collapsible -->
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;margin-bottom:.875rem;overflow:hidden">
+      <div onclick="toggleIncPanel()" style="display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;cursor:pointer">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:16px">💰</span>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--text)">הכנסות והוצאות בסיס</div>
+            <div style="font-size:10px;color:var(--text3)">הגדר הכנסה חודשית והוצאות קבועות</div>
+          </div>
+        </div>
+        <svg id="inc-panel-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:transform .3s;color:var(--text3)"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div id="inc-panel-body" style="display:none;padding:0 1rem 1rem;border-top:1px solid var(--border)">
+    <div class="g2">
+      <div class="card">
+        <div class="ch"><div style="display:flex;align-items:center;gap:5px"><div class="ct">הכנסות חודשיות (נטו)</div><div class="help-q" onclick="this.nextElementSibling.classList.toggle('show')">?</div><div class="score-tip">הכנסה נטו = אחרי ניכוי מס הכנסה, ביטוח לאומי ופנסיה. לא ברוטו! רוב האנשים חושבים שהם מרוויחים יותר ממה שבאמת נכנס לבנק.</div></div></div>
+        <div class="fi-row">
+          <div><div class="flbl">הכנסה שלי</div><input class="fi" id="inc1" type="number" placeholder="₪ 15,000" oninput="schedule()"></div>
+          <div><div class="flbl">בן/בת זוג</div><input class="fi" id="inc2" type="number" placeholder="₪ 12,000" oninput="schedule()"></div>
+        </div>
+        <div class="fgrp"><div class="flbl">הכנסות נוספות (שכירות, פרילנס)</div><input class="fi" id="inc3" type="number" placeholder="₪ אופציונלי" oninput="schedule()"></div>
+        <div style="margin:.5rem 0 .4rem;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;padding-top:.5rem;border-top:1px solid var(--border)">הוצאות חודשיות</div>
+        <div class="fi-row"><div><div class="flbl">דיור (שכ"ד/משכנתא)</div><input class="fi" id="exH" type="number" placeholder="₪" oninput="schedule()"></div><div><div class="flbl">מזון וקניות</div><input class="fi" id="exF" type="number" placeholder="₪" oninput="schedule()"></div></div>
+        <div class="fi-row"><div><div class="flbl">תחבורה</div><input class="fi" id="exT" type="number" placeholder="₪" oninput="schedule()"></div><div><div class="flbl">ביטוחים</div><input class="fi" id="exI" type="number" placeholder="₪" oninput="schedule()"></div></div>
+        <div class="fgrp"><div class="flbl">שונות (בילויים, קניות, כלכ"ב)</div><input class="fi" id="exO" type="number" placeholder="₪" oninput="schedule()"></div>
+        <div class="fgrp"><div class="flbl">קרן חירום — חודשים יעד</div><input class="fi" id="efm" type="number" placeholder="3–6 חודשים" oninput="schedule()"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.875rem">
+        <div class="card">
+          <div class="ch"><div class="ct">סיכום תזרים</div></div>
+          <div class="dr"><span class="dl">הכנסה כוללת</span><span class="dv" style="color:var(--green)" id="s-inc">—</span></div>
+          <div class="dr"><span class="dl">הוצאות קבועות</span><span class="dv" style="color:var(--red)" id="s-exp">—</span></div>
+          <div class="dr"><span class="dl">עודף לפני השקעות</span><span class="dv" id="s-surp">—</span></div>
+          <div class="dr"><span class="dl">יחס הוצאה/הכנסה</span><span class="dv" id="s-ratio">—</span></div>
+        </div>
+        <div class="card">
+          <div class="ch"><div class="ct">חלוקת הוצאות</div></div>
+          <div class="cw" style="height:160px"><canvas id="ch-exp"></canvas></div>
+        </div>
+        <div class="card" style="background:var(--gdim);border-color:var(--gbdr)">
+          <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:.3rem">💡 כלל 50/30/20</div>
+          <div style="font-size:11.5px;color:var(--text2);line-height:1.5">50% צרכים · 30% רצונות · 20% חיסכון</div>
+        </div>
+      </div>
+    </div>
+
+      </div>
+    </div>
 
     <!-- HEADER BANNER -->
     <div style="background:linear-gradient(140deg,#f0fdf6,#eef3ff);border:1px solid rgba(22,108,64,0.1);border-radius:var(--r-xl);padding:1.25rem;position:relative;overflow:hidden">
@@ -1375,7 +1424,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <!-- INVESTMENTS -->
   <div class="pg" id="p-st">
+    <!-- Tabs -->
+    <div style="display:flex;background:var(--bg3);border-radius:12px;padding:3px;margin-bottom:1rem;gap:2px" id="st-tabs">
+      <button onclick="switchStTab('portfolio')" id="st-tab-portfolio" style="flex:1;padding:6px 4px;border:none;border-radius:9px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;background:white;color:var(--green);box-shadow:0 1px 4px rgba(0,0,0,0.08)">📈 תיק השקעות</button>
+      <button onclick="switchStTab('gamal')" id="st-tab-gamal" style="flex:1;padding:6px 4px;border:none;border-radius:9px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;background:transparent;color:var(--text3)">🏦 גמל להשקעה</button>
+      <button onclick="switchStTab('mkm')" id="st-tab-mkm" style="flex:1;padding:6px 4px;border:none;border-radius:9px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;background:transparent;color:var(--text3)">📜 מק"מ</button>
+      <button onclick="switchStTab('esop')" id="st-tab-esop" style="flex:1;padding:6px 4px;border:none;border-radius:9px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;background:transparent;color:var(--text3)">💹 ESOP</button>
+    </div>
 
+    <!-- PORTFOLIO TAB -->
+    <div id="st-content-portfolio">
     <!-- PORTFOLIO TOTAL HERO -->
     <div style="background:linear-gradient(140deg,#f0fdf6,#eef4ff);border:1px solid rgba(22,108,64,0.12);border-radius:var(--r-xl);padding:1.125rem 1.25rem;position:relative;overflow:hidden">
       <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--blue))"></div>
@@ -1466,55 +1524,278 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="spacer"></div>
   </div>
 
-  <!-- PENSION -->
+  <!-- PENSION + GAMAL + KSH — MERGED -->
   <div class="pg" id="p-pe">
-    <div class="card">
-      <div class="ch"><div class="ct">קרנות פנסיה וקה"ש</div></div>
-      <div style="margin-bottom:.6rem;padding:.45rem .6rem;background:var(--gdim);border:1px solid var(--gbdr);border-radius:7px;font-size:11px;color:var(--text2)">💡 <strong style="color:var(--green)">מנייתי</strong> — 6–7% לעומת 4–5% כללי. הפרש של מאות אלפי ₪ ב-25 שנה</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start">
-        <div>
-          <div id="pe-list"></div>
-          <button class="add-btn" onclick="addItem('pe')">+ הוסף פנסיה</button>
 
-          <div style="margin:.6rem 0 .5rem;border-top:1px solid var(--border);padding-top:.6rem">
-            <div class="ch" style="margin-bottom:.4rem"><div class="ct" style="font-size:12px">קרנות השתלמות</div><div class="bdg bg">פטור ממס!</div></div>
+    <!-- TABS -->
+    <div style="display:flex;background:var(--bg3);border-radius:12px;padding:3px;margin-bottom:1rem;gap:2px;overflow-x:auto;scrollbar-width:none">
+      <button id="pe-tab-pen" onclick="switchPeTab('pen')" style="flex:1;min-width:70px;padding:7px 4px;border:none;border-radius:9px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;background:white;color:var(--green);box-shadow:0 1px 4px rgba(0,0,0,0.08);white-space:nowrap">🛡️ פנסיה</button>
+      <button id="pe-tab-sf" onclick="switchPeTab('sf')" style="flex:1;min-width:70px;padding:7px 4px;border:none;border-radius:9px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;background:transparent;color:var(--text3);white-space:nowrap">🏦 קה"ש</button>
+      <button id="pe-tab-gml" onclick="switchPeTab('gml')" style="flex:1;min-width:70px;padding:7px 4px;border:none;border-radius:9px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;background:transparent;color:var(--text3);white-space:nowrap">💼 גמל</button>
+      <button id="pe-tab-cmp" onclick="switchPeTab('cmp2')" style="flex:1;min-width:70px;padding:7px 4px;border:none;border-radius:9px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;background:transparent;color:var(--text3);white-space:nowrap">⚖️ השוואה</button>
+    </div>
+
+    <!-- TAB: פנסיה -->
+    <div id="pe-content-pen">
+      <div class="card">
+        <div class="ch"><div class="ct">קרנות פנסיה</div><div class="bdg bg">חובה מגיל 21</div></div>
+        <div style="margin-bottom:.6rem;padding:.45rem .6rem;background:var(--gdim);border:1px solid var(--gbdr);border-radius:7px;font-size:11px;color:var(--text2)">💡 <strong style="color:var(--green)">מסלול מנייתי</strong> — 6–7% לעומת 4–5% כללי. הפרש של מאות אלפי ₪ ב-25 שנה</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start">
+          <div>
+            <div id="pe-list"></div>
+            <button class="add-btn" onclick="addItem('pe')">+ הוסף פנסיה</button>
+            <div style="margin:.6rem 0 0;border-top:1px solid var(--border);padding-top:.6rem">
+              <div class="dr"><span class="dl">צבירה בפרישה</span><span class="dv" id="pe-fv">—</span></div>
+              <div class="dr"><span class="dl">קצבה חודשית</span><span class="dv" style="color:var(--green)" id="pe-mo">—</span></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--text3);margin-bottom:.4rem">צמיחת פנסיה</div>
+            <div class="cw" style="height:220px"><canvas id="ch-pe"></canvas></div>
+            <div style="margin-top:.75rem;background:linear-gradient(140deg,rgba(26,86,219,0.04),rgba(22,108,64,0.03));border:1px solid rgba(26,86,219,0.12);border-radius:var(--r-md);padding:.75rem">
+              <div style="font-size:10px;font-weight:700;color:var(--blue);margin-bottom:.35rem">📡 גמל נט — השוואת קרנות <span class="bdg bb" style="font-size:8.5px">2025</span></div>
+              <div id="gemel-comparison-chart" style="font-size:11px;color:var(--text3)">טוען...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="background:var(--bg3)">
+        <div style="font-size:12px;font-weight:700;margin-bottom:.5rem">📌 הפרשות 2025</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;font-size:11px">
+          <div style="background:white;border-radius:8px;padding:.5rem;text-align:center;border:0.5px solid var(--border)"><div style="color:var(--text3);margin-bottom:2px">עובד</div><div style="font-weight:700;color:var(--green)">6%</div></div>
+          <div style="background:white;border-radius:8px;padding:.5rem;text-align:center;border:0.5px solid var(--border)"><div style="color:var(--text3);margin-bottom:2px">מעסיק</div><div style="font-weight:700;color:var(--blue)">6.5%</div></div>
+          <div style="background:white;border-radius:8px;padding:.5rem;text-align:center;border:0.5px solid var(--border)"><div style="color:var(--text3);margin-bottom:2px">פיצויים</div><div style="font-weight:700">8.33%</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:.5rem">🌴 עובדות על פרישה מוקדמת</div>
+        <div class="tinder-stack" id="tinder-retire-facts" style="height:200px"></div>
+        <div class="tinder-dots"></div>
+        <div style="display:flex;justify-content:center;gap:.5rem;margin-top:.625rem">
+          <button onclick="tinderNext('tinder-retire-facts')" style="background:var(--green);border:none;border-radius:20px;padding:5px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;color:#fff">הבא ›</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: קה"ש -->
+    <div id="pe-content-sf" style="display:none">
+      <div class="card">
+        <div class="ch"><div class="ct">קרנות השתלמות</div><div class="bdg bg">פטור ממס אחרי 6 שנים!</div></div>
+        <div style="margin-bottom:.6rem;padding:.45rem .6rem;background:var(--gdim);border:1px solid var(--gbdr);border-radius:7px;font-size:11px;color:var(--text2)">
+          💡 <strong style="color:var(--green)">2025:</strong> תקרה לשכיר — ₪20,520/שנה (מעסיק 7.5% + עובד 2.5%). לעצמאי — ₪20,520/שנה (4.5% מהכנסה).
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start">
+          <div>
             <div id="sf-list"></div>
             <button class="add-btn" onclick="addItem('sf')">+ הוסף קה"ש</button>
+            <div style="margin:.6rem 0 0;border-top:1px solid var(--border);padding-top:.6rem">
+              <div class="dr"><span class="dl">קה"ש ללא מס</span><span class="dv" style="color:var(--green)" id="sf-fv">—</span></div>
+              <div class="dr"><span class="dl">חיסכון מס</span><span class="dv" style="color:var(--teal)" id="sf-saved">—</span></div>
+            </div>
           </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--text3);margin-bottom:.4rem">צמיחת קה"ש</div>
+            <div class="cw" style="height:220px"><canvas id="ch-sf"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="background:var(--bg3)">
+        <div style="font-size:12px;font-weight:700;margin-bottom:.5rem">📌 עובדות מפתח — קה"ש 2025</div>
+        <div style="font-size:11.5px;color:var(--text2);line-height:1.7">
+          ✅ <strong>6 שנים</strong> — ניתן למשוך ללא מס (או בגיל 67)<br>
+          ✅ <strong>מעסיק מוסיף 7.5%</strong> — כסף חינמי!<br>
+          ✅ <strong>הפרשות פטורות ממס הכנסה</strong> בעת ההפקדה<br>
+          ⚠️ משיכה לפני 6 שנים = מס 35% על הרווחים<br>
+          💡 ניתן להשתמש כבטוחה להלוואה בריבית נמוכה
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: גמל להשקעה -->
+    <div id="pe-content-gml" style="display:none">
+      <div class="card" style="background:linear-gradient(135deg,rgba(0,200,5,0.07),rgba(88,166,255,0.05));border-color:var(--gbdr);position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--blue))"></div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="font-size:36px">🏦</div>
+          <div style="flex:1">
+            <div style="font-size:17px;font-weight:800;letter-spacing:-.4px;margin-bottom:4px">קופת גמל להשקעה</div>
+            <div style="font-size:12px;color:var(--text2);line-height:1.6">חוסך כמו תיק השקעות, גדל כמו קה"ש, ובגיל 60 הופך לקצבה <strong style="color:var(--green)">פטורה ממס לגמרי.</strong></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;flex-shrink:0">
+            <span class="bdg bg">פטור ממס בפרישה</span>
+            <span class="bdg bb">עד ₪79,006/שנה 2025</span>
+            <span class="bdg ba">נזיל תמיד</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><div class="ct">מחשבון: כמה שווה הפטור ממס?</div></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:.875rem">
+          <div><div class="flbl">חסכון בגמל (₪)</div><input class="fi" id="gml-bal" type="number" value="500000" step="10000" oninput="calcGamalTax()"></div>
+          <div><div class="flbl">תשואה שנתית %</div><input class="fi" id="gml-ret" type="number" value="6.5" step="0.5" oninput="calcGamalTax()"></div>
+          <div><div class="flbl">שנים נוספות</div><input class="fi" id="gml-yrs" type="number" value="15" oninput="calcGamalTax()"></div>
+          <div><div class="flbl">תוחלת חיים אחרי פרישה</div><input class="fi" id="gml-life" type="number" value="25" oninput="calcGamalTax()"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem" id="gamal-tax-cards"></div>
+      </div>
+    </div>
+
+    <!-- TAB: השוואה -->
+    <div id="pe-content-cmp2" style="display:none">
+      <div class="card">
+        <div class="ch"><div class="ct">השוואת מכשירי חיסכון ישראליים 2025</div></div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:11px">
+            <thead>
+              <tr style="background:var(--bg3)">
+                <th style="padding:8px 10px;text-align:right;font-weight:700;border-bottom:1px solid var(--border)">מכשיר</th>
+                <th style="padding:8px 6px;text-align:center;font-weight:700;border-bottom:1px solid var(--border)">תקרה 2025</th>
+                <th style="padding:8px 6px;text-align:center;font-weight:700;border-bottom:1px solid var(--border)">נזילות</th>
+                <th style="padding:8px 6px;text-align:center;font-weight:700;border-bottom:1px solid var(--border)">מס רווח</th>
+                <th style="padding:8px 6px;text-align:center;font-weight:700;border-bottom:1px solid var(--border)">תשואה ממוצעת</th>
+                <th style="padding:8px 6px;text-align:center;font-weight:700;border-bottom:1px solid var(--border)">מי מתאים</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 10px;font-weight:700">🛡️ פנסיה מנייתי</td>
+                <td style="padding:8px 6px;text-align:center">20.83% שכר</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--red)">רק בפרישה</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--green)">פטור (קצבה)</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--green)">6–7%</td>
+                <td style="padding:8px 6px;text-align:center">כולם — חובה!</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:rgba(22,108,64,0.03)">
+                <td style="padding:8px 10px;font-weight:700">🏦 קרן השתלמות</td>
+                <td style="padding:8px 6px;text-align:center">₪20,520/שנה</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--amber)">אחרי 6 שנים</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--green)">פטור לחלוטין!</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--green)">6–7%</td>
+                <td style="padding:8px 6px;text-align:center">שכירים + עצמאים</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 10px;font-weight:700">💼 גמל להשקעה</td>
+                <td style="padding:8px 6px;text-align:center">₪79,006/שנה</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--green)">מיידי (עם מס)</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--green)">פטור מגיל 60</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--green)">6–7%</td>
+                <td style="padding:8px 6px;text-align:center">כולם — וולונטרי</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:rgba(22,108,64,0.03)">
+                <td style="padding:8px 10px;font-weight:700">📈 תיק השקעות</td>
+                <td style="padding:8px 6px;text-align:center">ללא תקרה</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--green)">מיידי תמיד</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--red)">25% מס</td>
+                <td style="padding:8px 6px;text-align:center">7–10%</td>
+                <td style="padding:8px 6px;text-align:center">אחרי מיצוי שאר</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 10px;font-weight:700">📜 מק"מ / פיקדון</td>
+                <td style="padding:8px 6px;text-align:center">ללא תקרה</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--green)">גמיש</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--amber)">15–25%</td>
+                <td style="padding:8px 6px;text-align:center">4–4.5%</td>
+                <td style="padding:8px 6px;text-align:center">כסף קצר-טווח</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 10px;font-weight:700">👔 ביטוח מנהלים</td>
+                <td style="padding:8px 6px;text-align:center">כמו פנסיה</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--red)">רק בפרישה</td>
+                <td style="padding:8px 6px;text-align:center;color:var(--green)">פטור (קצבה)</td>
+                <td style="padding:8px 6px;text-align:center">5–6%</td>
+                <td style="padding:8px 6px;text-align:center">מי שרוצה מקדם קצבה מובטח</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:.875rem;padding:.625rem .75rem;background:var(--gdim);border:1px solid var(--gbdr);border-radius:8px;font-size:11.5px;color:var(--text2);line-height:1.7">
+          💡 <strong style="color:var(--green)">הסדר האופטימלי:</strong> קה"ש עד התקרה (הכי טוב!) → גמל להשקעה → תיק השקעות. פנסיה — חובה בכל מקרה.
+        </div>
+      </div>
+    </div>
+
+
+    <!-- KSH TAB -->
+    <div id="pe-content-ksh" style="display:none">
+      <div class="card" style="background:linear-gradient(135deg,rgba(0,200,5,0.06),transparent);border-color:var(--gbdr)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="font-size:32px">🏦</div>
+          <div>
+            <div style="font-size:16px;font-weight:800;margin-bottom:3px">קרן השתלמות</div>
+            <div style="font-size:12px;color:var(--text2);line-height:1.6">ההטבה הפיננסית הכי טובה לשכיר בישראל. פטורה ממס אחרי 6 שנים. המעסיק מפקיד 7.5% משכרך — בחינם.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0">
+            <span class="bdg bg">פטור ממס!</span>
+            <span class="bdg bb">7.5% מעסיק</span>
+            <span class="bdg" style="background:rgba(124,58,237,0.1);color:var(--purple)">נזיל אחרי 6 שנה</span>
+          </div>
+        </div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="ch"><div class="ct">קרנות ההשתלמות שלי</div><div class="bdg bg">פטור ממס!</div></div>
+          <div id="sf-list2"></div>
+          <button class="add-btn" onclick="addItem('sf')">+ הוסף קה"ש</button>
           <div style="margin:.6rem 0 0;border-top:1px solid var(--border);padding-top:.6rem">
-            <div class="dr"><span class="dl">צבירה בפרישה</span><span class="dv" id="pe-fv">—</span></div>
-            <div class="dr"><span class="dl">קצבה חודשית</span><span class="dv" style="color:var(--green)" id="pe-mo">—</span></div>
-            <div class="dr"><span class="dl">קה"ש ללא מס</span><span class="dv" style="color:var(--green)" id="sf-fv">—</span></div>
-            <div class="dr"><span class="dl">חיסכון מס</span><span class="dv" style="color:var(--teal)" id="sf-saved">—</span></div>
+            <div class="dr"><span class="dl">שווי כיום</span><span class="dv" id="sf-now2">—</span></div>
+            <div class="dr"><span class="dl">עתידי (ללא מס)</span><span class="dv" style="color:var(--green)" id="sf-fv2">—</span></div>
+            <div class="dr"><span class="dl">חיסכון מס</span><span class="dv" style="color:var(--teal)" id="sf-saved2">—</span></div>
+          </div>
+          <div style="margin-top:.75rem;padding:.5rem .625rem;background:var(--gdim);border:1px solid var(--gbdr);border-radius:8px;font-size:11px;color:var(--text2);line-height:1.6">
+            💡 <strong style="color:var(--green)">טיפ:</strong> אם אין לך קה"ש — תבקש ממעסיקך. אתה מפסיד 7.5% מהשכר שלך בחינם.
           </div>
         </div>
-        <div>
-          <div style="font-size:11px;font-weight:600;color:var(--text3);margin-bottom:.4rem">צמיחת פנסיה וקה"ש</div>
-          <div class="cw" style="height:220px"><canvas id="ch-pe"></canvas></div>
-          <!-- GEMEL NET below chart -->
-          <div style="margin-top:.75rem;background:linear-gradient(140deg,rgba(26,86,219,0.04),rgba(22,108,64,0.03));border:1px solid rgba(26,86,219,0.12);border-radius:var(--r-md);padding:.75rem">
-            <div style="font-size:10px;font-weight:700;color:var(--blue);margin-bottom:.35rem">📡 גמל נט — השוואת קרנות <span class="bdg bb" style="font-size:8.5px">2024</span></div>
-            <div id="gemel-comparison-chart" style="font-size:11px;color:var(--text3)">טוען...</div>
+        <div class="card">
+          <div style="font-size:11px;font-weight:600;color:var(--text3);margin-bottom:.4rem">צמיחת קה"ש לאורך זמן</div>
+          <div style="height:220px"><canvas id="ch-sf2"></canvas></div>
+          <div style="margin-top:.75rem">
+            <div class="dr" style="font-size:11.5px"><span class="dl">תקרת הפקדה עובד</span><span class="dv">₪18,480/שנה (2024)</span></div>
+            <div class="dr" style="font-size:11.5px"><span class="dl">תקרת הפטור ממס</span><span class="dv">₪20,520/שנה</span></div>
+            <div class="dr" style="font-size:11.5px"><span class="dl">נזילות מלאה</span><span class="dv" style="color:var(--green)">אחרי 6 שנות חברות</span></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- RETIREMENT KNOWLEDGE CARDS -->
-    <div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.625rem">
-        <div>
-          <div style="font-size:13px;font-weight:700">🌴 עובדות על פרישה מוקדמת</div>
-          <div style="font-size:10.5px;color:var(--text3)">החלק לצד • גלה מה FIRE אומר בפועל</div>
+    <!-- INSURANCE MANAGER TAB -->
+    <div id="pe-content-mgr" style="display:none">
+
+      <div class="card" style="background:linear-gradient(135deg,rgba(248,81,73,0.05),transparent);border-color:rgba(248,81,73,0.2)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="font-size:32px">👔</div>
+          <div><div style="font-size:16px;font-weight:800;margin-bottom:3px">ביטוח מנהלים</div><div style="font-size:12px;color:var(--text2)">מי שהתחיל לעבוד לפני 2008 — ייתכן שיש לך ביטוח מנהלים במקום פנסיה. שונה לחלוטין מבחינת זכויות, מקדם קצבה, ועלויות.</div></div>
         </div>
       </div>
-      <div class="tinder-stack" id="tinder-retire-facts" style="height:200px"></div>
-      <div class="tinder-dots"></div>
-      <div style="display:flex;justify-content:center;gap:.5rem;margin-top:.625rem">
-        <button onclick="tinderNext('tinder-retire-facts')" style="background:var(--green);border:none;border-radius:20px;padding:5px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;color:#fff">הבא ›</button>
+      <div class="g2">
+        <div class="card">
+          <div class="ch"><div class="ct">הפוליסה שלי</div></div>
+          <div class="fi-row">
+            <div><div class="flbl">ערך פדיון (₪)</div><input class="fi" id="mgr-val" type="number" value="400000" step="10000" oninput="calcMgr()"></div>
+            <div><div class="flbl">שנת פתיחה</div><input class="fi" id="mgr-yr" type="number" value="2003" step="1" oninput="calcMgr()"></div>
+          </div>
+          <div class="fi-row">
+            <div><div class="flbl">הפקדה חודשית (₪)</div><input class="fi" id="mgr-mo" type="number" value="2500" oninput="calcMgr()"></div>
+            <div><div class="flbl">מקדם קצבה</div><input class="fi" id="mgr-factor" type="number" value="200" oninput="calcMgr()"></div>
+          </div>
+          <div class="fi-row">
+            <div><div class="flbl">דמי ניהול מצבירה %</div><input class="fi" id="mgr-fee1" type="number" value="1.2" step="0.1" oninput="calcMgr()"></div>
+            <div><div class="flbl">דמי ניהול מהפקדה %</div><input class="fi" id="mgr-fee2" type="number" value="4" step="0.5" oninput="calcMgr()"></div>
+          </div>
+          <div style="margin-top:.5rem;border-top:1px solid var(--border);padding-top:.5rem" id="mgr-result"></div>
+        </div>
+        <div class="card">
+          <div class="ch"><div class="ct">השוואה: מנהלים מול פנסיה חדשה</div></div>
+          <div style="height:220px"><canvas id="ch-mgr"></canvas></div>
+          <div style="margin-top:.5rem;padding:.5rem .625rem;background:var(--rdim);border:1px solid rgba(248,81,73,.2);border-radius:7px;font-size:11.5px;color:var(--text2);line-height:1.6">
+            ⚠️ <strong style="color:var(--red)">שים לב:</strong> פוליסות לפני 2013 עם מקדם קצבה מובטח — <strong>אל תבטל!</strong> זכות נדירה שאי אפשר לקבל היום.
+          </div>
+        </div>
       </div>
+
     </div>
 
+    </div><!-- /pe-content-pension -->
     <div class="spacer"></div>
   </div>
 
@@ -2169,8 +2450,8 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
   <!-- /INVESTMENT COMPARE -->
 
-  <!-- ═══ גמל להשקעה ═══ -->
-  <div class="pg" id="p-gmل">
+  <!-- גמל להשקעה — merged into p-pe -->
+  <div class="pg" id="p-gmل" style="display:none!important">
     <div class="card" style="background:linear-gradient(135deg,rgba(0,200,5,0.07),rgba(88,166,255,0.05));border-color:var(--gbdr);position:relative;overflow:hidden">
       <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--blue))"></div>
       <div style="display:flex;align-items:center;gap:14px">
@@ -2617,6 +2898,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <!-- ═══ WEALTH MAP ═══ -->
   <div class="pg" id="p-wmap">
+    <!-- Tabs -->
+    <div style="display:flex;background:var(--bg3);border-radius:12px;padding:3px;margin-bottom:1rem;gap:2px">
+      <button id="wmap-tab-map" onclick="switchWmapTab('map')" style="flex:1;padding:7px;border:none;border-radius:9px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;background:white;color:var(--green);box-shadow:0 1px 4px rgba(0,0,0,0.08)">🗺️ מפת עושר</button>
+      <button id="wmap-tab-alloc" onclick="switchWmapTab('alloc')" style="flex:1;padding:7px;border:none;border-radius:9px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;background:transparent;color:var(--text3)">🎯 הקצאת נכסים</button>
+    </div>
+
+    <!-- Map Content -->
+    <div id="wmap-content-map">
     <div style="background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:1px solid rgba(26,86,219,0.08);border-radius:18px;padding:1.5rem;position:relative;overflow:hidden">
       <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--green))"></div>
       <div style="display:flex;align-items:center;gap:14px">
@@ -2679,9 +2968,48 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
     <div class="spacer"></div>
+    </div><!-- /wmap-content-map -->
+
+    <!-- Alloc Content -->
+    <div id="wmap-content-alloc" style="display:none">
+
+    <div style="background:linear-gradient(135deg,#fff8f0,#fff3e0);border:1px solid rgba(255,149,0,0.15);border-radius:18px;padding:1.25rem;position:relative">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="font-size:32px">🎯</div>
+        <div>
+          <div style="font-size:16px;font-weight:800;margin-bottom:3px">הקצאת נכסים — יעד מול מציאות</div>
+          <div style="font-size:12px;color:var(--text2)">הגדר כמה אחוז מהתיק בכל קטגוריה — Family Office תמיד עושה זאת</div>
+        </div>
+      </div>
+      <div style="margin-top:.875rem;padding:.625rem .75rem;background:rgba(255,255,255,0.7);border-radius:9px;border:1px solid rgba(255,149,0,0.12)">
+        <div style="font-size:11px;font-weight:700;margin-bottom:.35rem">🤔 מה זה הקצאת נכסים?</div>
+        <div style="font-size:11.5px;color:var(--text2);line-height:1.65">כמה מהכסף שלך בכל סוג נכס. דוגמה: 60% מניות, 20% נדל"ן, 10% אג"ח, 10% מזומן.<br><b>למה חשוב?</b> כשאחד יורד, השני אולי עולה. זה מה שנקרא פיזור סיכון — ביצה אחת בסל אחד = סיכון מקסימלי.</div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;margin-bottom:.875rem">הגדר יעד הקצאה</div>
+        <div id="alloc-targets"></div>
+        <div style="margin-top:.5rem;font-size:10.5px;color:var(--text3)">* הסכום חייב להיות 100%</div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:.875rem">
+          <div style="font-size:13px;font-weight:700;margin-bottom:.75rem">יעד מול מציאות</div>
+          <div style="height:220px"><canvas id="ch-alloc"></canvas></div>
+        </div>
+        <div class="card">
+          <div style="font-size:13px;font-weight:700;margin-bottom:.625rem">ניתוח פערים</div>
+          <div id="alloc-gaps"></div>
+        </div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+    </div><!-- /wmap-content-alloc -->
+
   </div>
 
-  <!-- ═══ ASSET ALLOCATION ═══ -->
+  <!-- ═══ ASSET ALLOCATION ═══ (hidden - merged into wmap) -->
   <div class="pg" id="p-alloc">
     <div style="background:linear-gradient(135deg,#fff8f0,#fff3e0);border:1px solid rgba(255,149,0,0.15);border-radius:18px;padding:1.25rem;position:relative">
       <div style="display:flex;align-items:center;gap:12px">
@@ -2892,7 +3220,7 @@ function renderOtherAssets(){
 }
 function renderWealthMap(){
   const t=totals();
-  const stNow=t.stNow,sfNow=t.sfNow,peNow=t.peNow,altNow=t.altNow,propEq=t.propEq;
+  stNow=t.stNow,sfNow=t.sfNow,peNow=t.peNow,altNow=t.altNow,propEq=t.propEq;
   const otherVal=OTHER_ASSETS.reduce((a,x)=>a+x.val,0);
   const fin=stNow+sfNow+peNow+altNow;
   const nonFin=propEq+otherVal;
@@ -2932,7 +3260,7 @@ function renderWealthMap(){
 // ══════════════════════════════
 const ALLOC_TARGETS={stocks:60,bonds:10,realestate:20,cash:10};
 function renderAllocPage(){
-  const t=totals();
+  t=totals();
   const total=t.stNow+t.sfNow+t.peNow+t.altNow+t.propEq;
 
   // Target inputs
@@ -2956,7 +3284,7 @@ const BENEFICIARIES=[];
 const LEGACY_CHECKLIST=[{l:'צוואה חתומה ומאושרת',done:false,tip:'הכי חשוב — בלי צוואה הרכוש מחולק לפי חוק, לא לפי רצונך'},{l:'ייפוי כוח נוטריוני',done:false,tip:'מאפשר לאדם אחר לנהל ענייניך אם אינך כשיר'},{l:'מינוי מוטבים בפנסיה',done:false,tip:'הפנסיה לא עוברת בצוואה — צריך מינוי נפרד'},{l:'מינוי מוטבים בביטוח חיים',done:false,tip:'חובה לעדכן אחרי שינויים משפחתיים'},{l:'תיק מסמכים מסודר',done:false,tip:'צוואה, חשבונות, פוליסות — במקום אחד נגיש ליורשים'},{l:'שיחה עם יורשים',done:false,tip:'70% מהעיזבונות נכשלים בגלל חוסר תקשורת'}];
 function addBeneficiary(){BENEFICIARIES.push({id:Date.now(),name:'',rel:'ילד/ה',pct:25});renderLegacyPage();}
 function renderLegacyPage(){
-  const t=totals();
+  t=totals();
   const totalAssets=t.stNow+t.sfNow+t.peNow+t.altNow+t.propEq+OTHER_ASSETS.reduce((a,x)=>a+x.val,0);
   set('leg-assets',fmt(Math.round(totalAssets)));
   set('leg-debt',fmt(t.loBal));
@@ -2991,21 +3319,21 @@ function numFi(f,v,step){return`<input class="di-fi" data-f="${f}" type="number"
 function selFi(f,v,opts){return`<select class="di-sel" data-f="${f}">${opts.map(([k,l])=>`<option value="${k}"${v==k?' selected':''}>${l}</option>`).join('')}</select>`;}
 function rm(src,id){return`<button class="di-rm" onclick="delItem('${src}',${id})">✕</button>`;}
 function renderST(){
-  const el=$('st-list');if(!el)return;
+  el=$('st-list');if(!el)return;
   el.innerHTML=D.st.map(p=>`<div class="di" data-src="st" data-id="${p.id}"><div class="di-head"><input class="di-name" data-f="name" value="${p.name}">${rm('st',p.id)}</div><div class="di-g2"><div><div class="di-fl">שווי (₪)</div>${numFi('now',p.now,5000)}</div><div><div class="di-fl">חודשי (₪)</div>${numFi('mo',p.mo,500)}</div><div><div class="di-fl">תשואה %</div>${numFi('ret',p.ret,0.5)}</div><div><div class="di-fl">אופק (שנים)</div>${numFi('hor',p.hor,1)}</div></div></div>`).join('')+
   D.alt.map(a=>`<div class="di" data-src="alt" data-id="${a.id}"><div class="di-head"><input class="di-name" data-f="name" value="${a.name}">${rm('alt',a.id)}</div><div class="di-g2"><div><div class="di-fl">שווי (₪)</div>${numFi('now',a.now,5000)}</div><div><div class="di-fl">חודשי (₪)</div>${numFi('mo',a.mo,500)}</div><div><div class="di-fl">תשואה %</div>${numFi('ret',a.ret,0.5)}</div><div><div class="di-fl">אופק</div>${numFi('hor',a.hor,1)}</div></div></div>`).join('');
 }
 function renderPE(){
-  const el=$('pe-list');if(!el)return;
+  el=$('pe-list');if(!el)return;
   el.innerHTML=D.pe.map(p=>`<div class="di" data-src="pe" data-id="${p.id}"><div class="di-head"><input class="di-name" data-f="name" value="${p.name}"><span class="bdg ${p.eq?'bg':'ba'}" style="margin:0 6px;font-size:9px">${p.eq?'מנייתי':'כללי'}</span>${rm('pe',p.id)}</div><div class="di-g2"><div><div class="di-fl">יתרה (₪)</div>${numFi('now',p.now,10000)}</div><div><div class="di-fl">עובד/ת (₪)</div>${numFi('emp',p.emp,100)}</div><div><div class="di-fl">מעסיק (₪)</div>${numFi('er',p.er,100)}</div><div><div class="di-fl">תשואה %</div>${numFi('ret',p.ret,0.5)}</div><div><div class="di-fl">שנים לפרישה</div>${numFi('yrs',p.yrs,1)}</div><div style="display:flex;align-items:center;gap:5px;padding-top:14px"><input type="checkbox" data-f="eq" ${p.eq?'checked':''}><span style="font-size:10px;color:var(--text3)">מנייתי</span></div></div></div>`).join('');}
 function renderSF(){
-  const el=$('sf-list');if(!el)return;
+  el=$('sf-list');if(!el)return;
   el.innerHTML=D.sf.map(s=>`<div class="di" data-src="sf" data-id="${s.id}"><div class="di-head"><input class="di-name" data-f="name" value="${s.name}">${rm('sf',s.id)}</div><div class="di-g2"><div><div class="di-fl">שווי (₪)</div>${numFi('now',s.now,5000)}</div><div><div class="di-fl">עובד/ת (₪)</div>${numFi('emp',s.emp,100)}</div><div><div class="di-fl">מעסיק (₪)</div>${numFi('er',s.er,100)}</div><div><div class="di-fl">תשואה %</div>${numFi('ret',s.ret,0.5)}</div><div style="grid-column:1/-1"><div class="di-fl">אופק (שנים)</div>${numFi('hor',s.hor,1)}</div></div></div>`).join('');}
 function renderLO(){
-  const el=$('lo-list');if(!el)return;
+  el=$('lo-list');if(!el)return;
   el.innerHTML=D.lo.map(l=>`<div class="di" data-src="lo" data-id="${l.id}"><div class="di-head"><input class="di-name" data-f="name" value="${l.name}">${rm('lo',l.id)}</div><div class="di-g2" style="grid-template-columns:1fr 1fr 1fr"><div><div class="di-fl">יתרה (₪)</div>${numFi('bal',l.bal,1000)}</div><div><div class="di-fl">חודשי (₪)</div>${numFi('mo',l.mo,100)}</div><div><div class="di-fl">ריבית %</div>${numFi('rate',l.rate,0.1)}</div></div></div>`).join('');}
 function renderMort(){
-  const el=$('mort-list');if(!el)return;
+  el=$('mort-list');if(!el)return;
   el.innerHTML=MORT.map(m=>`<div class="di"><div class="di-head"><input class="di-name" value="${m.name}" onchange="MORT.find(x=>x.id==${m.id}).name=this.value"><span style="font-size:10px;color:var(--text3);margin:0 5px">${fmt(Math.round(mmMo(m)))}/חודש</span><button class="di-rm" onclick="MORT=MORT.filter(x=>x.id!=${m.id});renderMort();render()">✕</button></div><div class="di-g2" style="grid-template-columns:1fr 1fr 1fr"><div><div class="di-fl">קרן (₪)</div><input class="di-fi" type="number" value="${m.bal}" step="10000" onchange="MORT.find(x=>x.id==${m.id}).bal=+this.value;renderMort();render()"></div><div><div class="di-fl">ריבית %</div><input class="di-fi" type="number" value="${m.rate}" step="0.1" onchange="MORT.find(x=>x.id==${m.id}).rate=+this.value;renderMort();render()"></div><div><div class="di-fl">שנים</div><input class="di-fi" type="number" value="${m.yrs}" step="1" onchange="MORT.find(x=>x.id==${m.id}).yrs=+this.value;renderMort();render()"></div></div></div>`).join('');}
 function addMort(){MORT.push({id:Date.now(),name:'מסלול חדש',bal:100000,rate:4,yrs:20});renderMort();render();}
 
@@ -3023,7 +3351,7 @@ function delItem(src,id){D[src]=D[src].filter(x=>x.id!==id);REND[src]();schedule
 
 // ── INPUT DELEGATION ──
 document.addEventListener('input',e=>{
-  const t=e.target,ic=t.closest('[data-src]');if(!ic||ic.classList.contains('ai-panel'))return;
+  t=e.target,ic=t.closest('[data-src]');if(!ic||ic.classList.contains('ai-panel'))return;
   const src=ic.dataset.src,id=parseInt(ic.dataset.id),f=t.dataset.f;
   if(!src||!id||!f)return;
   const item=D[src]?.find(x=>x.id===id);if(!item)return;
@@ -3047,7 +3375,7 @@ function toggleRE(){
 
 // ── INSURANCE ──
 function updateIns(){
-  const inc=gv('inc1')+gv('inc2');
+  inc=gv('inc1')+gv('inc2');
   // Life
   const lifeCov=gv('ins-life-cov');
   const recLife=inc*60; // 5 years of income x 12
@@ -3072,7 +3400,7 @@ function updateIns(){
   if(homeStruct>500000)homeSt='ok';
   else if(homeStruct>0)homeSt='warn';
   else homeSt='miss';
-  const ps=parseInt($('re-st')?.value||0);
+  ps=parseInt($('re-st')?.value||0);
   setCover('ins-home',ps===0?'ok':homeSt,ps===0?'שוכרים — ביטוח תוכן מומלץ (לא חובה)':homeStruct>0?`מבנה: ${fmt(homeStruct)}. בדוק שעולה לפחות עלות בנייה (₪6,000-9,000 למ"ר)`:'בעלי נכס — ביטוח מבנה הוא קריטי');
 
   // Car
@@ -3113,7 +3441,7 @@ function updateIns(){
   }
 }
 function setCover(id,st,tip){
-  const el=$(id);if(!el)return;
+  el=$(id);if(!el)return;
   el.className='ins-cover '+(st==='ok'?'ok':st==='warn'?'warn':'miss');
   const dotEl=$(id+'-dot');const stEl=$(id+'-status');
   if(dotEl)dotEl.textContent=st==='ok'?'🟢':st==='warn'?'🟡':'🔴';
@@ -3124,7 +3452,7 @@ function setCover(id,st,tip){
 
 // ── OPTIMIZE ──
 function renderOpt(){
-  const t=totals();const fn=fireNum();const yrs=Math.max(1,gv('gRet')-gv('gAge'));const projAtRet=projNet(yrs);
+  t=totals();const fn=fireNum();const yrs=Math.max(1,gv('gRet')-gv('gAge'));const projAtRet=projNet(yrs);
   const items=[];
   const sr=t.inc>0?t.invest/t.inc:0;
   if(sr<0.15&&t.inc>0)items.push({type:'bad',title:'שיעור חיסכון נמוך מ-15%',body:`אתה חוסך ${(sr*100).toFixed(0)}% מהכנסתך. יעד מינימום: 15%, אידיאלי: 20%+. הגדלה של ₪${fmt(Math.round(t.inc*0.05))} נוספים לחודש = ${fmt(Math.round(fv(0,t.inc*0.05,7,yrs)))} נוספים בפרישה.`});
@@ -3156,7 +3484,7 @@ function renderOpt(){
 // ── CI CALCULATOR ──
 function renderCI(){
   const init=gv('ci-init'),mo=gv('ci-mo'),ret=gv('ci-ret'),yrs=gv('ci-yrs')||30;
-  const total=fv(init,mo,ret,yrs);
+  total=fv(init,mo,ret,yrs);
   const invested=init+mo*yrs*12;
   const gain=Math.max(0,total-invested);
   set('ci-invested',fmt(Math.round(invested)));
@@ -3168,9 +3496,9 @@ function renderCI(){
 
 // ── MAIN RENDER ──
 function render(){
-  const t=totals();
+  t=totals();
   const fn=fireNum(),fa=fireAge(),age=gv('gAge'),ret=gv('gRet'),yrsLeft=Math.max(1,ret-age);
-  const sr=t.inc>0?t.invest/t.inc:0;
+  sr=t.inc>0?t.invest/t.inc:0;
   const sc={saving:Math.min(25,sr/0.20*25),ef:Math.min(20,gv('efm')/6*20),debt:Math.max(0,25*(1-(t.inc>0?t.loMo/t.inc:0)/0.30)),retire:Math.min(20,projNet(yrsLeft)/Math.max(fn,1)*20),div:Math.min(10,[t.stNow>0,t.sfNow>0,t.peNow>0,t.altNow>0,t.propEq>0].filter(Boolean).length/4*10)};
   const score=Math.round(Object.values(sc).reduce((a,v)=>a+v,0));
   const scCol=score>=70?'var(--green)':score>=40?'var(--amber)':'var(--red)';
@@ -3213,7 +3541,7 @@ function render(){
     else optCards.push({cls:'occ-green',urgency:'✅ מצוין',title:`חיסכון ${savR}% — מעל הממוצע`,impact:`${fmt(Math.round(t.invest))}/חודש נחסך. ממוצע ישראלי: 8–12%. אתה מקדים את רוב האנשים.`,cta:'→ תחזית',nav:'ov'});
   }
   if(D.pe.length>0){
-    const hasEq=D.pe.some(p=>p.eq);const peFv2=D.pe.reduce((a,p)=>a+fv(p.now,p.emp+p.er,p.ret,p.yrs),0);
+    hasEq=D.pe.some(p=>p.eq);const peFv2=D.pe.reduce((a,p)=>a+fv(p.now,p.emp+p.er,p.ret,p.yrs),0);
     const peEqFv=D.pe.reduce((a,p)=>a+fv(p.now,p.emp+p.er,hasEq?p.ret:7,p.yrs),0);
     if(!hasEq){const gn=peEqFv-peFv2;optCards.push({cls:'occ-amber',urgency:'💡 שינוי פשוט',title:'פנסיה — לא במנייתי',impact:`מעבר למסלול מנייתי = ${fmtK(Math.round(gn))} נוספים לפרישה. שינוי חינמי דרך הפנסיה שלך.`,cta:'→ שנה מסלול',nav:'pe'});}
     else optCards.push({cls:'occ-green',urgency:'✅ טוב',title:'פנסיה — מנייתי ✓',impact:`צפי: ${fmtK(Math.round(peFv2))}. קצבה: ${fmt(Math.round(peFv2/240))}/חודש.`,cta:'→ ראה פנסיה',nav:'pe'});
@@ -3222,7 +3550,7 @@ function render(){
   else{const sfFv2=D.sf.reduce((a,s)=>a+fv(s.now,s.emp+s.er,s.ret,s.hor),0);const sfSav2=D.sf.reduce((a,s)=>{const gv4=fv(s.now,s.emp+s.er,s.ret,s.hor);const c3=s.now+(s.emp+s.er)*s.hor*12;return a+Math.max(0,gv4-c3)*0.25;},0);optCards.push({cls:'occ-green',urgency:'✅ מצוין',title:'קרן השתלמות פעילה',impact:`חוסך ${fmt(Math.round(sfSav2))} מס. צפי: ${fmtK(Math.round(sfFv2))}.`,cta:'→ ראה פרטים',nav:'pe'});}
   if(t.loBal>0){const wr=D.lo.reduce((a,l)=>l.rate>a.rate?l:a,D.lo[0]);const mInt=wr.bal*(wr.rate/100/12);if(wr.rate>6)optCards.push({cls:'occ-red',urgency:'⚠️ ריבית גבוהה',title:`${wr.name} — ${wr.rate}%`,impact:`${fmt(Math.round(mInt))}/חודש ריבית בלבד. כל ₪10K שמחזיר = חוסך ${fmt(Math.round(10000*wr.rate/100))}₪/שנה.`,cta:'→ הלוואות',nav:'lo'});}
   if(fn2>0&&netR<fn2){optCards.push({cls:'occ-blue',urgency:'🔥 FIRE',title:`עוד ${fmtK(Math.round(fn2-netR))} ליעד`,impact:`${pct2.toFixed(0)}% מהדרך. ${fa?'פרישה בגיל '+fa+' — בקצב הנוכחי.':'הגדר יעד הכנסה בדף FIRE.'}`,cta:'→ תכנן FIRE',nav:'fire'});}
-  if(optCards.length===0)optCards.push({cls:'occ-blue',urgency:'👋 מתחילים',title:'הזן נתונים לניתוח',impact:'הכנס הכנסות, פנסיה והשקעות — Numa יזהה הזדמנויות אופטימיזציה.',cta:'→ התחל',nav:'inc'});
+  if(optCards.length===0)optCards.push({cls:'occ-blue',urgency:'👋 מתחילים',title:'הזן נתונים לניתוח',impact:'הכנס הכנסות, פנסיה והשקעות — Numa יזהה הזדמנויות אופטימיזציה.',cta:'→ התחל',nav:'cf'});
   // optCards fed to tinder via renderAnalystTips → renderTinderInsights
 
   renderAnalystTips();
@@ -3275,7 +3603,7 @@ function render(){
   }
 
   if(curTab==='ov'){
-    const yA=yArr((projYrs||30)+1);
+    yA=yArr((projYrs||30)+1);
     mkC('ch-proj',{type:'line',data:{labels:yA,datasets:[{label:'ברוטו',data:yA.map((_,y)=>Math.round(adj(projGross(y),y))),borderColor:'rgba(0,122,255,0.9)',fill:false,tension:0.3,pointRadius:0},{label:'נטו',data:yA.map((_,y)=>Math.round(adj(projNet(y),y))),borderColor:'rgba(0,165,80,0.9)',backgroundColor:'rgba(0,165,80,0.08)',fill:true,tension:0.3,pointRadius:0}]},options:cOpts()});
     const dd=[...D.st.map((p,i)=>({l:p.name,v:p.now,c:CLRS[i%CLRS.length]})),...D.sf.map((s,i)=>({l:s.name,v:s.now,c:['#00C805','#00A804'][i%2]})),...D.pe.map((p,i)=>({l:p.name,v:p.now,c:['#BC8CFF','#a070ee'][i%2]})),...D.alt.map((a,i)=>({l:a.name,v:a.now,c:['#E3B341','#c99528'][i%2]})),...(t.propEq>0?[{l:'הון בנדל"ן',v:t.propEq,c:'#FF7B72'}]:[])].filter(d=>d.v>0);
     if(dd.length)mkC('ch-donut',{type:'doughnut',data:{labels:dd.map(d=>d.l),datasets:[{data:dd.map(d=>d.v),backgroundColor:dd.map(d=>d.c),borderWidth:0,borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},color:'var(--text3)',padding:5,boxWidth:8}},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}}});
@@ -3287,7 +3615,7 @@ function render(){
     const $s=$('s-surp');if($s)$s.style.color=t.inc-t.exp>0?'var(--green)':'var(--red)';
     const ev=[gv('exH'),gv('exF'),gv('exT'),gv('exI'),gv('exO')];
     const el2=['דיור','מזון','תחבורה','ביטוחים','שונות'];
-    const ef=el2.map((l,i)=>({l,v:ev[i],c:CLRS[i]})).filter(d=>d.v>0);
+    ef=el2.map((l,i)=>({l,v:ev[i],c:CLRS[i]})).filter(d=>d.v>0);
     if(ef.length)mkC('ch-exp',{type:'doughnut',data:{labels:ef.map(d=>d.l),datasets:[{data:ef.map(d=>d.v),backgroundColor:ef.map(d=>d.c),borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},color:'var(--text3)',padding:5,boxWidth:8}},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}}});
   }
 
@@ -3310,9 +3638,9 @@ function render(){
   }
 
   if(curTab==='re'){
-    const ps=parseInt($('re-st')?.value||0);
+    ps=parseInt($('re-st')?.value||0);
     if(ps===1){
-      const v=gv('reVal')||0,appr=gv('reAppr')||2;
+      v=gv('reVal')||0,appr=gv('reAppr')||2;
       const totBal=MORT.reduce((a,m)=>a+m.bal,0);const totMo=MORT.reduce((a,m)=>a+mmMo(m),0);
       set('v-mortMo',fmt(Math.round(totMo)));set('v-mortBal',fmt(totBal));set('v-reEq',fmt(Math.max(0,v-totBal)));
       const maxYrs=Math.max(...MORT.map(m=>m.yrs),1);const yA=yArr(maxYrs+1);
@@ -3327,14 +3655,14 @@ function render(){
       set('v-rpReq',fmt(Math.round(req)));set('v-rpCosts',fmt(costs));
       set('v-rpGap',gap>0?fmt(gap):'מספיק!');set('v-rpTime',gap>0?`${yN} שנים`:'מוכנים! 🎉');
       set('v-rpLoan',fmt(Math.round(pr*0.75)));
-      const maxY=Math.max(yN+3,10);const yA=yArr(maxY+1);let sav=eq;const sD=[eq],rD=[total];
+      maxY=Math.max(yN+3,10);const yA=yArr(maxY+1);let sav=eq;const sD=[eq],rD=[total];
       for(let i=1;i<=maxY;i++){sav+=mo*12;sD.push(Math.round(sav));rD.push(Math.round(total));}
       mkC('ch-re',{type:'line',data:{labels:yA,datasets:[{label:'חיסכון',data:sD,borderColor:'rgba(0,165,80,0.9)',backgroundColor:'rgba(0,165,80,0.08)',fill:true,tension:0.3,pointRadius:0},{label:'נדרש',data:rD,borderColor:'rgba(255,59,48,0.85)',fill:false,tension:0,pointRadius:0,borderDash:[5,4]}]},options:cOpts()});
     }
   }
 
   if(curTab==='lo'){
-    let loInt=0;D.lo.forEach(l=>{const r=l.rate/100/12;const mo=r>0&&l.mo>l.bal*r?Math.ceil(-Math.log(1-l.bal*r/l.mo)/Math.log(1+r)):Math.ceil(l.bal/Math.max(l.mo,1));loInt+=Math.max(0,l.mo*mo-l.bal);});
+    loInt=0;D.lo.forEach(l=>{const r=l.rate/100/12;const mo=r>0&&l.mo>l.bal*r?Math.ceil(-Math.log(1-l.bal*r/l.mo)/Math.log(1+r)):Math.ceil(l.bal/Math.max(l.mo,1));loInt+=Math.max(0,l.mo*mo-l.bal);});
     set('lo-mo',fmt(t.loMo));set('lo-bal',fmt(t.loBal));set('lo-int',fmt(Math.round(loInt)));
     if(D.lo.length){const maxMo=Math.max(...D.lo.map(l=>{const r=l.rate/100/12;if(!r||l.mo<=l.bal*r)return 240;return Math.ceil(-Math.log(1-l.bal*r/l.mo)/Math.log(1+r));}));const maxY=Math.ceil(maxMo/12);const yA=yArr(maxY+1);
     mkC('ch-lo',{type:'line',data:{labels:yA,datasets:D.lo.map((l,i)=>{let b=l.bal;const r=l.rate/100/12;const d=[Math.round(b)];for(let y=1;y<=maxY;y++){for(let m=0;m<12&&b>0;m++)b=Math.max(0,b-(l.mo-b*r));d.push(Math.round(b));}return{label:l.name,data:d,borderColor:CLRS[i%CLRS.length],fill:false,tension:0.2,pointRadius:0};})},options:cOpts()});}
@@ -3342,11 +3670,11 @@ function render(){
 
   if(curTab==='fire'){
     const pNet=projNet(yrsLeft);
-    const pct=fn>0?Math.min(100,(pNet/fn)*100):0;
+    pct=fn>0?Math.min(100,(pNet/fn)*100):0;
     const fbEL=$('fire-bar');if(fbEL)fbEL.style.width=pct.toFixed(1)+'%';
     set('fire-pct',pct.toFixed(0)+'% מהיעד');
     set('fire-n',fa?'גיל '+fa:'—');set('fire-n',fa?'גיל '+fa:'—');
-    const fn2=$('fire-n');if(fn2)fn2.style.color=fa?'var(--amber)':'var(--text3)';
+    fn2=$('fire-n');if(fn2)fn2.style.color=fa?'var(--amber)':'var(--text3)';
     set('fire-l',fa?`עוד ${fa-age} שנה — בגיל ${ret} תהיה לך ${fmt(Math.round(pNet))}`:'הגדר גיל פרישה ויעד הכנסה');
     set('fire-need',fmtK(fn));set('fire-have',fmtK(Math.round(pNet)));set('fire-age',fa?'גיל '+fa:'>80');
     set('v-fire',fmt(Math.round(fn)));set('v-proj',fmt(Math.round(pNet)));
@@ -3371,7 +3699,7 @@ function scProjNet(y,pvM,moM){pvM=pvM||1;moM=moM||1;return D.st.reduce((a,p)=>a+
 function renderScene(type){
   const titles={s1:'אחד מהזוג מפסיק',m3:'שוק יורד 30%',r2:'ריבית עולה 2%',e5:'פרישה מוקדמת'};
   set('sc-ttl',titles[type]);
-  const t=totals(),fn=fireNum(),age=gv('gAge'),ret=gv('gRet');
+  t=totals(),fn=fireNum(),age=gv('gAge'),ret=gv('gRet');
   const base30=projNet(30),baseSurplus=t.surplus;
   let fa=null;for(let y=1;y<=50;y++)if(projNet(y)>=fn){fa=age+y;break;}
   let sS=baseSurplus,s30=base30,sFA=fa;
@@ -3382,7 +3710,7 @@ function renderScene(type){
   const metrics=[{l:'עודף חודשי',b:fmt(baseSurplus),s:fmt(sS),w:sS<baseSurplus},{l:'צבירה ב-30 שנה',b:fmtK(base30),s:fmtK(s30),w:s30<base30},{l:'גיל פרישה',b:fa?''+fa:'>80',s:sFA?''+sFA:'>80',w:(sFA||99)>(fa||99)}];
   const tbl=$('sc-tbl');
   if(tbl)tbl.innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-bottom:.4rem"><span style="font-size:10px;color:var(--text3)">מדד</span><span style="font-size:10px;color:var(--text3);text-align:center">בסיס</span><span style="font-size:10px;color:var(--text3);text-align:center">תרחיש</span></div>'+metrics.map(m=>`<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:.4rem 0;border-top:1px solid var(--border)"><span style="font-size:11.5px;color:var(--text2)">${m.l}</span><span style="font-size:12px;font-weight:700;text-align:center">${m.b}</span><span style="font-size:12px;font-weight:700;text-align:center;color:${m.w?'var(--red)':'var(--green)'}">${m.s}</span></div>`).join('');
-  const yA=yArr(31);const bL=yA.map((_,y)=>Math.round(projNet(y)));
+  yA=yArr(31);const bL=yA.map((_,y)=>Math.round(projNet(y)));
   let sL;if(type==='s1')sL=yA.map((_,y)=>Math.round(scProjNet(y,1,0.6)));else if(type==='m3')sL=yA.map((_,y)=>Math.round(scProjNet(y,0.7,1)));else if(type==='r2')sL=bL.slice();else{const cy=Math.max(1,ret-5-age);sL=yA.map((_,y)=>y<=cy?Math.round(projNet(y)):null);}
   mkC('ch-sc',{type:'line',data:{labels:yA,datasets:[{label:'בסיס',data:bL,borderColor:'rgba(0,165,80,0.9)',fill:false,tension:0.3,pointRadius:0},{label:'תרחיש',data:sL,borderColor:'rgba(255,59,48,0.85)',fill:false,tension:0.3,pointRadius:0,borderDash:[4,3]}]},options:cOpts()});
 }
@@ -3395,7 +3723,7 @@ let _aiHintIdx=0;
 setInterval(()=>{
   if(typeof aiOpen!=='undefined'&&!aiOpen){
     _aiHintIdx=(_aiHintIdx+1)%AI_HINTS.length;
-    const el=document.getElementById('ai-quick-hint');
+    el=document.getElementById('ai-quick-hint');
     if(el){el.style.opacity='0';setTimeout(()=>{el.textContent=AI_HINTS[_aiHintIdx];el.style.opacity='1';},200);}
   }
 },4000);
@@ -3406,7 +3734,7 @@ function toggleAI(){
   if(aiOpen)setTimeout(()=>$('ai-in')?.focus(),350);
 }
 function buildSys(){
-  const t=totals(),fn=fireNum(),fa=fireAge(),age=gv('gAge'),ret=gv('gRet'),yrsL=Math.max(1,ret-age);
+  t=totals(),fn=fireNum(),fa=fireAge(),age=gv('gAge'),ret=gv('gRet'),yrsL=Math.max(1,ret-age);
   const fmt2=n=>Math.round(n).toLocaleString('he-IL');
   return`אתה Numa AI — עוזר פיננסי ישראלי חכם שמדבר כמו חבר טוב שמבין כסף. הסגנון שלך: ישיר, חם, לעניין — לא רובוטי ולא יבש. תמיד בעברית, תמיד עם מספרים אמיתיים.
 
@@ -3469,7 +3797,7 @@ async function aiSend(){
     aiHistory.pop();
   }
   if(btn)btn.disabled=false;
-  const msgs=$('ai-msgs');if(msgs)msgs.scrollTop=msgs.scrollHeight;
+  msgs=$('ai-msgs');if(msgs)msgs.scrollTop=msgs.scrollHeight;
 }
 
 function showApiKeyPrompt(){
@@ -3512,29 +3840,29 @@ function showApiKeyPrompt(){
 }
 
 function saveApiKey(){
-  const inp=$('api-key-input');
+  inp=$('api-key-input');
   if(!inp)return;
   const key=inp.value.trim();
   if(!key){alert('הכנס מפתח API');return;}
   if(!key.startsWith('sk-')){inp.style.borderColor='#E53935';inp.placeholder='חייב להתחיל ב-sk-';return;}
   localStorage.setItem('numa_api_key',key);
-  const backdrop=$('api-key-backdrop');if(backdrop)backdrop.remove();
+  backdrop=$('api-key-backdrop');if(backdrop)backdrop.remove();
   updateApiKeyStatus();
   // Show success in AI
   aiMsgAdd('bot','✅ מעולה! ה-API Key הוגדר בהצלחה.\n\nעכשיו אני יכול לענות על כל שאלה פיננסית בהתבסס על הנתונים שלך. מה תרצה לדעת?');
-  const msgs=$('ai-msgs');if(msgs)msgs.scrollTop=msgs.scrollHeight;
+  msgs=$('ai-msgs');if(msgs)msgs.scrollTop=msgs.scrollHeight;
   if(!aiOpen)toggleAI();
 }
 
 function clearApiKey(){
   localStorage.removeItem('numa_api_key');
-  const el=$('ai-key-status');
+  el=$('ai-key-status');
   if(el){el.textContent='לא מוגדר';el.style.color='var(--red)';}
 }
 
 function updateApiKeyStatus(){
-  const key=localStorage.getItem('numa_api_key');
-  const el=$('ai-key-status');
+  key=localStorage.getItem('numa_api_key');
+  el=$('ai-key-status');
   if(el){
     if(key&&key.startsWith('sk-')){
       el.textContent='✓ מוגדר ('+key.slice(0,8)+'...)';
@@ -3567,7 +3895,7 @@ const FUN_FACTS=[
 let factIdx=0;
 function showFact(){
   const f=FUN_FACTS[factIdx];
-  const el=document.getElementById('fun-ticker');
+  el=document.getElementById('fun-ticker');
   if($('fun-ico'))$('fun-ico').textContent=f.ico;
   if($('fun-text'))$('fun-text').textContent=f.text;
   if($('fun-sub'))$('fun-sub').textContent=f.sub;
@@ -3636,7 +3964,7 @@ function calcResult(){
   const PDESCS={snp:'חשיפה ל-500 החברות הגדולות בעולם. ביצועים היסטוריים מצוינים.',ksh:'פטורה ממס לאחר 6 שנים. העסקה הכי טובה במערכת הישראלית.',agach:'יציב ובטוח. תשואה נמוכה יותר אבל שינה טובה יותר בלילה.',pension:'פרישה עם קצבה חודשית. הגנה מרבית לאורך זמן.',pkh:'בטוח ב-100%, מובטח על ידי המדינה. מתאים לכסף שצריך להיות זמין.',etf_is:'חשיפה לשוק הישראלי. פחות תנודתי מ-S&P עם פוטנציאל מקומי.'};
   const PICOS={snp:'🇺🇸',ksh:'🏦',agach:'📜',pension:'🛡️',pkh:'💳',etf_is:'🇮🇱'};
   const PRETS={snp:'10.5%',ksh:'6–7%',agach:'3.5%',pension:'6.5%',pkh:'4.5%',etf_is:'7.1%'};
-  const el=$('quiz-result');
+  el=$('quiz-result');
   if(el)el.innerHTML=`
     <div style="text-align:center;padding:.5rem 0 1rem">
       <div style="font-size:36px;margin-bottom:.5rem">${PICOS[top3[0][0]]}</div>
@@ -3709,7 +4037,7 @@ function showProdDetail(id){
 // ─ COMPARE TABLE ─
 function renderTable(){
   const tbody=$('cmp-tbody');if(!tbody)return;
-  const sorted=[...PRODUCTS].sort((a,b)=>sortDesc?(b[sortKey]||0)-(a[sortKey]||0):(a[sortKey]||0)-(b[sortKey]||0));
+  sorted=[...PRODUCTS].sort((a,b)=>sortDesc?(b[sortKey]||0)-(a[sortKey]||0):(a[sortKey]||0)-(b[sortKey]||0));
   tbody.innerHTML=sorted.map((p,i)=>`<tr class="${i===0?'highlight':''}">
     <td><div style="display:flex;align-items:center;gap:8px"><span style="font-size:16px">${p.icon}</span><div><div style="font-weight:700;font-size:12px">${p.name}</div><div style="font-size:10px;color:var(--text3)">${p.tag}</div></div>${i===0?'<span class="bdg bg" style="font-size:9px">מוביל</span>':''}</div></td>
     <td style="text-align:center"><span style="font-weight:800;color:${(p.ret||0)>=7?'var(--green)':(p.ret||0)>=4?'var(--amber)':'var(--red)'};font-size:14px">${p.ret?p.ret+'%':'—'}</span></td>
@@ -3735,13 +4063,13 @@ function runSim(){
   const yrs=Math.min(parseInt($('sim-yrs')?.value)||20,40);
   const results=SIM_PRODUCTS.map(p=>{
     const r=p.ret/100/12,n=yrs*12;
-    const total=!r?amt+mo*n:amt*Math.pow(1+r,n)+mo*(Math.pow(1+r,n)-1)/r;
-    const invested=amt+mo*n;
-    const gain=Math.max(0,total-invested);
+    total=!r?amt+mo*n:amt*Math.pow(1+r,n)+mo*(Math.pow(1+r,n)-1)/r;
+    invested=amt+mo*n;
+    gain=Math.max(0,total-invested);
     return{...p,total,invested,gain};
   });
   const winner=results.reduce((a,b)=>b.total>a.total?b:a);
-  const el=$('sim-results');
+  el=$('sim-results');
   if(el)el.innerHTML=results.map(r=>`<div class="sim-result ${r.name===winner.name?'winner':''}">
     <div class="sim-r-l">${r.name}</div>
     <div class="sim-r-n" style="color:${r.color}">${r.total>=1e6?'₪'+(r.total/1e6).toFixed(1)+'M':'₪'+(r.total/1e3).toFixed(0)+'K'}</div>
@@ -3749,7 +4077,7 @@ function runSim(){
     ${r.name===winner.name?'<span class="sim-r-tag" style="background:var(--gdim);color:var(--green)">🏆 הכי טוב</span>':'<span class="sim-r-tag" style="background:var(--bg4);color:var(--text3)">'+r.ret+'%</span>'}
   </div>`).join('');
   // Chart
-  const yA=Array.from({length:yrs+1},(_,i)=>i===0?'היום':i===yrs?yrs+' שנה':'');
+  yA=Array.from({length:yrs+1},(_,i)=>i===0?'היום':i===yrs?yrs+' שנה':'');
   mkC('ch-sim',{type:'line',data:{labels:yA,datasets:results.map(r=>{const rv=r.ret/100/12;return{label:r.name,data:Array.from({length:yrs+1},(_,y)=>{const n=y*12;if(!rv)return Math.round(amt+mo*n);return Math.round(amt*Math.pow(1+rv,n)+mo*(Math.pow(1+rv,n)-1)/rv);}),borderColor:r.color,fill:false,tension:0.3,pointRadius:0,borderWidth:2};})},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:10},color:'var(--text3)',boxWidth:8,padding:6}},tooltip:{callbacks:{label:c=>c.dataset.label+': ₪'+Math.round(c.raw).toLocaleString('he-IL')}}},scales:{x:{ticks:{color:'var(--text3)',font:{size:10},maxTicksLimit:6},grid:{color:'rgba(0,0,0,0.05)'}},y:{ticks:{callback:v=>v>=1e6?'₪'+(v/1e6).toFixed(1)+'M':'₪'+(v/1e3).toFixed(0)+'K',color:'var(--text3)',font:{size:10}},grid:{color:'rgba(0,0,0,0.05)'}}}}});
 }
 
@@ -3762,7 +4090,7 @@ function addGamal(){
   renderGamal();
 }
 function renderGamal(){
-  const el=$('gamal-list');if(!el)return;
+  el=$('gamal-list');if(!el)return;
   el.innerHTML=GAMAL_DATA.map(g=>`<div class="di" data-src="gamal" data-id="${g.id}">
     <div class="di-head"><input class="di-name" value="${g.name}" onchange="GAMAL_DATA.find(x=>x.id==${g.id}).name=this.value"><button class="di-rm" onclick="GAMAL_DATA.splice(GAMAL_DATA.findIndex(x=>x.id==${g.id}),1);renderGamal()">✕</button></div>
     <div class="di-g2">
@@ -3798,7 +4126,7 @@ function calcGamalTax(){
   const lump2=bal+gain3*0.75;
   const moAnn=future/200;
   const moAnnTotal=moAnn*12*life;
-  const el=$('gamal-tax-cards');if(!el)return;
+  el=$('gamal-tax-cards');if(!el)return;
   el.innerHTML=[
     {l:'שווי עתידי בפרישה',v:fmt(Math.round(future)),c:'var(--text)',sub:'לאחר '+yrs2+' שנה'},
     {l:'פדיון חד-פעמי (אחרי מס 25%)',v:fmt(Math.round(lump2)),c:'var(--red)',sub:'תשלם '+fmt(Math.round(gain3*0.25))+' מס'},
@@ -3824,7 +4152,7 @@ function showExt(tab,el){
 }
 
 function calcMKM(){
-  const amt=gv('mkm-amt'),dur=gv('mkm-dur')||6,rate=gv('mkm-rate');
+  amt=gv('mkm-amt'),dur=gv('mkm-dur')||6,rate=gv('mkm-rate');
   const interest=amt*(rate/100)*(dur/12);
   const taxAmt=interest*0.15;
   const netReturn=interest-taxAmt;
@@ -3843,7 +4171,7 @@ function addChild(){
   renderChildren();
 }
 function renderChildren(){
-  const el=$('child-list');if(!el)return;
+  el=$('child-list');if(!el)return;
   el.innerHTML=CHILDREN.map(c=>`<div class="di" style="margin-bottom:.5rem">
     <div class="di-head"><input class="di-name" value="${c.name}" onchange="CHILDREN.find(x=>x.id==${c.id}).name=this.value"><button class="di-rm" onclick="CHILDREN.splice(CHILDREN.findIndex(x=>x.id==${c.id}),1);renderChildren()">✕</button></div>
     <div class="di-g2">
@@ -3855,10 +4183,10 @@ function renderChildren(){
       </select></div>
     </div></div>`).join('');
   const rates={equity:7,bitl:1.5,mixed:4.5};
-  const mo=62;
+  mo=62;
   const datasets=CHILDREN.map((c,i)=>{const r=rates[c.track];const yrsLeft=18-c.age;return{label:c.name,data:Array.from({length:yrsLeft+1},(_,y)=>Math.round(fv(0,mo,r,y))),borderColor:CLRS[i%CLRS.length],fill:false,tension:0.3,pointRadius:0};});
   if(datasets.length){const maxY=Math.max(...CHILDREN.map(c=>18-c.age),1);mkC('ch-child',{type:'line',data:{labels:Array.from({length:maxY+1},(_,i)=>i===0?'היום':'שנה '+i),datasets},options:cOpts()});}
-  const sum=$('child-summary');
+  sum=$('child-summary');
   if(sum)sum.innerHTML=CHILDREN.map(c=>{const r=rates[c.track];const yrsLeft=18-c.age;const total=Math.round(fv(0,mo,r,yrsLeft));return`<div style="background:var(--bg3);border-radius:8px;padding:.625rem;text-align:center;border:1px solid var(--border)"><div style="font-size:11px;color:var(--text3);margin-bottom:2px">${c.name}</div><div style="font-size:16px;font-weight:800;color:var(--green)">${fmtK(total)}</div><div style="font-size:10px;color:var(--text3)">בגיל 18</div></div>`;}).join('');
 }
 
@@ -3869,10 +4197,10 @@ function calcESOP(){
   const grossUSD=type==='rsu'?vestedUnits*price:vestedUnits*Math.max(0,price-strike);
   const grossILS=grossUSD*fx;
   const taxRate=type==='opts3i'?0.47:0.25;
-  const taxAmt=grossILS*taxRate;
+  taxAmt=grossILS*taxRate;
   const netILS=grossILS-taxAmt;
   const unvestedUSD=units*(1-pct/100)*(type==='rsu'?price:Math.max(0,price-strike));
-  const res=$('esop-result');
+  res=$('esop-result');
   if(res)res.innerHTML=`<div class="dr"><span class="dl">יחידות שהבשילו</span><span class="dv">${Math.round(vestedUnits).toLocaleString()}</span></div>
     <div class="dr"><span class="dl">שווי ברוטו</span><span class="dv">$${Math.round(grossUSD).toLocaleString()} = ${fmt(Math.round(grossILS))}</span></div>
     <div class="dr"><span class="dl">מס (${(taxRate*100).toFixed(0)}%)</span><span class="dv" style="color:var(--red)">-${fmt(Math.round(taxAmt))}</span></div>
@@ -3916,7 +4244,7 @@ function calcSalary(){
   const kshE=gross*(gv('sal-ksh-e')||2.5)/100;
   const kshR=gross*(gv('sal-ksh-r')||7.5)/100;
   const it=calcTax(gross-penE,pts);
-  const bl=calcBL2(gross);
+  bl=calcBL2(gross);
   const hl=calcHL(gross);
   const net=gross-it-bl-hl-penE-kshE;
   const empCost=gross+penR+kshR+gross*0.047; // vacation + employer contributions
@@ -3978,7 +4306,7 @@ function loadFromStorage(){
 }
 
 function exportData(){
-  const raw=localStorage.getItem(STORAGE_KEY)||'{}';
+  raw=localStorage.getItem(STORAGE_KEY)||'{}';
   const blob=new Blob([raw],{type:'application/json'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
@@ -3986,10 +4314,10 @@ function exportData(){
   a.click();
 }
 function importData(){
-  const inp=document.createElement('input');inp.type='file';inp.accept='.json';
+  inp=document.createElement('input');inp.type='file';inp.accept='.json';
   inp.onchange=e=>{
     const file=e.target.files[0];if(!file)return;
-    const r=new FileReader();
+    r=new FileReader();
     r.onload=ev=>{try{localStorage.setItem(STORAGE_KEY,ev.target.result);location.reload();}catch(err){alert('קובץ לא תקין');}};
     r.readAsText(file);
   };
@@ -4019,7 +4347,7 @@ const FEATURES={
 // Map feature key → nav onclick substring (to find the right .ni element)
 const FEAT_NAV={
   wmap:"go('wmap'", alloc:"go('alloc'",
-  inc:"go('inc'", cf:"go('cf'", st:"go('st'", pe:"go('pe'",
+  inc:"go('cf'", cf:"go('cf'", st:"go('st'", pe:"go('pe'",
   re:"go('re'", gamal:"go('gmل'", extras:"go('extras'",
   lo:"go('lo'", ins:"go('ins'", legacy:"go('legacy'",
   fire:"go('fire'", sc:"go('sc'", mc:"go('mc'",
@@ -4070,7 +4398,7 @@ const PROFILES={
 };
 
 function applyProfile(key){
-  const p=PROFILES[key];if(!p)return;
+  p=PROFILES[key];if(!p)return;
   p.on.forEach(k=>{if(k in FEATURES)FEATURES[k]=true;});
   p.off.forEach(k=>{if(k in FEATURES)FEATURES[k]=false;});
   applyFeatureFlags();
@@ -4097,7 +4425,7 @@ function toggleFeature(k){
 }
 
 function renderSidebarManager(){
-  const el=$('sb-manager-list');if(!el)return;
+  el=$('sb-manager-list');if(!el)return;
   const sections={};
   Object.entries(FEAT_META).forEach(([k,m])=>{
     if(!sections[m.sec])sections[m.sec]=[];
@@ -4117,7 +4445,7 @@ function renderSidebarManager(){
 
 function renderFeatureFlags(){
   renderSidebarManager();
-  const el=$('feature-flags-list');if(!el)return;
+  el=$('feature-flags-list');if(!el)return;
   el.innerHTML=`<div style="font-size:12px;color:var(--text2)">השתמש בכפתור "ניהול סקשנים" בסרגל הצד לניהול מה מוצג.</div>`;
 }
 
@@ -4129,11 +4457,11 @@ let obStep=-1;
 const OB_STEPS=5;
 
 function showOnboarding(){
-  const el=$('ob-overlay');if(el)el.style.display='flex';
+  el=$('ob-overlay');if(el)el.style.display='flex';
   renderObDots();
 }
 function hideOnboarding(){
-  const el=$('ob-overlay');if(el)el.style.display='none';
+  el=$('ob-overlay');if(el)el.style.display='none';
 }
 function renderObDots(step){
   [0,1,2,3,4].forEach(i=>{
@@ -4158,14 +4486,14 @@ function obPick(step,val,el){
     const idx=arr.indexOf(val);
     if(idx>=0)arr.splice(idx,1);else arr.push(val);
     if(arr.length===0)obAnswers[step]=null;
-    const nb=$('ob-next-'+step);
+    nb=$('ob-next-'+step);
     if(nb){if(arr&&arr.length>0)nb.removeAttribute('disabled');else nb.setAttribute('disabled','');}
   } else {
     // Single select
     obAnswers[step]=val;
     el.closest('.ob-opts').querySelectorAll('.ob-opt').forEach(o=>o.classList.remove('on'));
     el.classList.add('on');
-    const nb=$('ob-next-'+step);if(nb)nb.removeAttribute('disabled');
+    nb=$('ob-next-'+step);if(nb)nb.removeAttribute('disabled');
   }
 }
 function obNext(step){
@@ -4219,7 +4547,7 @@ function finishOnboarding(){
   render();
   hideOnboarding();
 
-  const toast=$('save-toast');
+  toast=$('save-toast');
   if(toast){
     toast.innerHTML='<svg width="13" height="13" viewBox="0 0 16 16" fill="var(--green)"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg> נשמר אוטומטית';
     toast.classList.add('show');
@@ -4239,7 +4567,7 @@ function goMob(tab,el){
   // Highlight correct tab based on section
   const tabMap={
     'ov':'mni-ov','nw':'mni-ov',
-    'pen':'mni-assets','re':'mni-assets','gml':'mni-assets',
+    'pe':'mni-assets','re':'mni-assets','gml':'mni-assets',
     'cf':'mni-cash',
     'st':'mni-invest','mkt':'mni-invest',
     'fire':'mni-fire','mc':'mni-fire',
@@ -4249,20 +4577,108 @@ function goMob(tab,el){
   if(activeId){const btn=document.getElementById(activeId);if(btn)btn.classList.add('on');}
   else if(el)el.classList.add('on');
   closeMobMenu();
-  const ni=document.querySelector(`.ni[onclick*="go('${tab}'"]`);
+  ni=document.querySelector(`.ni[onclick*="go('${tab}'"]`);
   go(tab,ni||document.querySelector('.ni'));
+}
+function toggleIncPanel(){
+  const body = document.getElementById('inc-panel-body');
+  const chev = document.getElementById('inc-panel-chevron');
+  const isOpen = body.style.display !== 'none';
+  body.style.display = isOpen ? 'none' : 'block';
+  if(chev) chev.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+function switchPeTab(tab){
+  const tabs = ['pension','ksh','gamal','compare'];
+  const colors = {pension:'var(--green)',ksh:'var(--teal)',gamal:'var(--blue)',compare:'var(--amber)'};
+  tabs.forEach(t => {
+    const content = document.getElementById('pe-content-'+t);
+    btn = document.getElementById('pe-tab-'+t);
+    if(content) content.style.display = t===tab ? 'block' : 'none';
+    if(btn){
+      if(t===tab){
+        btn.style.background='white';
+        btn.style.color=colors[t];
+        btn.style.boxShadow='0 1px 4px rgba(0,0,0,0.08)';
+      } else {
+        btn.style.background='transparent';
+        btn.style.color='var(--text3)';
+        btn.style.boxShadow='none';
+      }
+    }
+  });
+  // update hero sums
+  updatePeHero();
+}
+function updatePeHero(){
+  const peSum = window.D?.pe?.reduce((a,x)=>a+(x.now||0),0)||0;
+  const sfSum = window.D?.sf?.reduce((a,x)=>a+(x.now||0),0)||0;
+  const gmlSum = window.D?.gamal?.reduce((a,x)=>a+(x.now||0),0)||0;
+  fmt = n => n>0 ? '₪'+Math.round(n/1000)+'K' : '—';
+  const pe = document.getElementById('pe-hero-sum'); if(pe) pe.textContent=fmt(peSum);
+  const sf = document.getElementById('sf-hero-sum'); if(sf) sf.textContent=fmt(sfSum);
+  const gml = document.getElementById('gml-hero-sum'); if(gml) gml.textContent=fmt(gmlSum);
+  const tot = document.getElementById('pe-total-hero'); if(tot) tot.textContent=fmt(peSum+sfSum+gmlSum);
+}
+function switchPeTab(tab){
+  ['pen','sf','gml','cmp2'].forEach(t=>{
+    c=document.getElementById('pe-content-'+t);
+    b=document.getElementById('pe-tab-'+t);
+    if(c) c.style.display = t===tab ? 'block' : 'none';
+    if(b){
+      b.style.background = t===tab ? 'white' : 'transparent';
+      b.style.color = t===tab ? 'var(--green)' : 'var(--text3)';
+      b.style.boxShadow = t===tab ? '0 1px 4px rgba(0,0,0,0.08)' : 'none';
+    }
+  });
+}
+function switchPeTab(tab){
+  ['pension','ksh','mgr'].forEach(t=>{
+    c=document.getElementById('pe-content-'+t);
+    b=document.getElementById('pe-tab-'+t);
+    if(c) c.style.display = t===tab ? 'block' : 'none';
+    if(b){
+      b.style.background = t===tab ? 'white' : 'transparent';
+      b.style.color = t===tab ? (tab==='pension'?'var(--green)':tab==='ksh'?'var(--green)':'var(--red)') : 'var(--text3)';
+      b.style.boxShadow = t===tab ? '0 1px 4px rgba(0,0,0,0.08)' : 'none';
+    }
+  });
+}
+function switchStTab(tab){
+  ['portfolio','gamal','mkm','esop'].forEach(t=>{
+    c=document.getElementById('st-content-'+t);
+    b=document.getElementById('st-tab-'+t);
+    if(c) c.style.display = t===tab ? 'block' : 'none';
+    if(b){
+      b.style.background = t===tab ? 'white' : 'transparent';
+      b.style.color = t===tab ? 'var(--green)' : 'var(--text3)';
+      b.style.boxShadow = t===tab ? '0 1px 4px rgba(0,0,0,0.08)' : 'none';
+    }
+  });
+}
+function switchWmapTab(tab){
+  document.getElementById('wmap-content-map').style.display = tab==='map'?'block':'none';
+  document.getElementById('wmap-content-alloc').style.display = tab==='alloc'?'block':'none';
+  const mapBtn = document.getElementById('wmap-tab-map');
+  const allocBtn = document.getElementById('wmap-tab-alloc');
+  if(tab==='map'){
+    mapBtn.style.background='white';mapBtn.style.color='var(--green)';mapBtn.style.boxShadow='0 1px 4px rgba(0,0,0,0.08)';
+    allocBtn.style.background='transparent';allocBtn.style.color='var(--text3)';allocBtn.style.boxShadow='none';
+  } else {
+    allocBtn.style.background='white';allocBtn.style.color='var(--amber)';allocBtn.style.boxShadow='0 1px 4px rgba(0,0,0,0.08)';
+    mapBtn.style.background='transparent';mapBtn.style.color='var(--text3)';mapBtn.style.boxShadow='none';
+  }
 }
 function openSectionsDrawer(){
   const d=document.getElementById('mob-sections-drawer');
-  const p=document.getElementById('mob-sections-panel');
+  p=document.getElementById('mob-sections-panel');
   if(d&&p){
     d.style.display='block';
     requestAnimationFrame(()=>{p.style.transform='translateY(0)';});
   }
 }
 function closeSectionsDrawer(){
-  const d=document.getElementById('mob-sections-drawer');
-  const p=document.getElementById('mob-sections-panel');
+  d=document.getElementById('mob-sections-drawer');
+  p=document.getElementById('mob-sections-panel');
   if(d&&p){
     p.style.transform='translateY(100%)';
     setTimeout(()=>{d.style.display='none';},320);
@@ -4270,9 +4686,9 @@ function closeSectionsDrawer(){
 }
 function toggleMobMenu(){
   const m=$('mob-more-menu');
-  const bd=$('mob-more-backdrop');
+  bd=$('mob-more-backdrop');
   if(!m)return;
-  const isOpen=m.style.transform==='translateY(0px)'||m.style.transform==='translateY(0)';
+  isOpen=m.style.transform==='translateY(0px)'||m.style.transform==='translateY(0)';
   if(isOpen){closeMobMenu();}
   else{
     if(bd)bd.style.display='block';
@@ -4284,8 +4700,8 @@ function toggleMobMenu(){
   }
 }
 function closeMobMenu(){
-  const m=$('mob-more-menu');
-  const bd=$('mob-more-backdrop');
+  m=$('mob-more-menu');
+  bd=$('mob-more-backdrop');
   if(!m)return;
   m.style.transform='translateY(100%)';
   if(bd)bd.style.display='none';
@@ -4296,8 +4712,8 @@ function closeMobMenu(){
 // MONTE CARLO
 // ══════════════════════════════
 async function runMonteCarlo(){
-  const fn=fireNum();
-  const age=gv('gAge'),ret=gv('gRet');
+  fn=fireNum();
+  age=gv('gAge'),ret=gv('gRet');
   const yrsLeft=Math.max(1,ret-age);
   const vol=(gv('mc-vol')||15)/100;
   const infl=(gv('mc-infl2')||3)/100;
@@ -4308,7 +4724,7 @@ async function runMonteCarlo(){
   const baseAnn=yrsLeft>0?Math.pow(projGross(yrsLeft)/Math.max(projGross(0),1),1/yrsLeft)-1:0.07;
   const baseMo=(baseAnn+1)**(1/12)-1;
   const volMo=vol/Math.sqrt(12);
-  const mo=D.st.reduce((a,p)=>a+p.mo,0)+D.sf.reduce((a,s)=>a+s.emp+s.er,0)+D.pe.reduce((a,p)=>a+p.emp+p.er,0);
+  mo=D.st.reduce((a,p)=>a+p.mo,0)+D.sf.reduce((a,s)=>a+s.emp+s.er,0)+D.pe.reduce((a,p)=>a+p.emp+p.er,0);
   const now0=projGross(0);
 
   $('mc-loading').style.display='block';
@@ -4316,16 +4732,16 @@ async function runMonteCarlo(){
   $('mc-charts').style.display='none';
 
   // Run in chunks to not block UI
-  const results=[];
+  results=[];
   const CHUNK=500;
   for(let i=0;i<n;i+=CHUNK){
     await new Promise(r=>setTimeout(r,0));
-    const pct=Math.round((i/n)*100);
-    const pg=$('mc-prog');if(pg)pg.textContent=pct+'%';
+    pct=Math.round((i/n)*100);
+    pg=$('mc-prog');if(pg)pg.textContent=pct+'%';
     for(let j=0;j<CHUNK&&i+j<n;j++){
-      let val=now0;
+      val=now0;
       for(let m=0;m<yrsLeft*12;m++){
-        const r=baseMo+volMo*(Math.random()+Math.random()+Math.random()+Math.random()-2)*0.886; // approx normal
+        r=baseMo+volMo*(Math.random()+Math.random()+Math.random()+Math.random()-2)*0.886; // approx normal
         val=val*(1+r)+mo;
       }
       results.push(Math.max(0,val));
@@ -4368,11 +4784,11 @@ async function runMonteCarlo(){
     mkC('ch-mc-hist',{type:'bar',data:{labels,datasets:[{label:'מספר סימולציות',data:hist,backgroundColor:hist.map((_,i)=>{const v=minV+i*binSize;return v>=fn?'rgba(0,200,5,0.6)':'rgba(248,81,73,0.45)';}),borderRadius:3,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{title:t=>'טווח: '+t[0].label,label:c=>c.raw+' סימולציות'}}},scales:{x:{ticks:{maxTicksLimit:6,color:'var(--text3)',font:{size:9}},grid:{display:false}},y:{ticks:{color:'var(--text3)',font:{size:9}},grid:{color:'rgba(0,0,0,0.05)'}}}}});
 
     // Band chart — percentile paths over time
-    const yA=Array.from({length:yrsLeft+1},(_,i)=>i===0?'היום':i===yrsLeft?ret+'':'+'+i);
+    yA=Array.from({length:yrsLeft+1},(_,i)=>i===0?'היום':i===yrsLeft?ret+'':'+'+i);
     // Sample 200 paths for visual
     const paths=[];
     for(let i=0;i<200;i++){
-      let v=now0;const path=[v];
+      v=now0;const path=[v];
       for(let m=0;m<yrsLeft*12;m++){const r=baseMo+volMo*(Math.random()+Math.random()+Math.random()+Math.random()-2)*0.886;v=v*(1+r)+mo;if((m+1)%12===0)path.push(Math.max(0,v));}
       paths.push(path);
     }
@@ -4443,8 +4859,8 @@ function addCFCat(){
 }
 
 function renderCF(){
-  const t=totals();
-  const inc=t.inc;
+  t=totals();
+  inc=t.inc;
   const totalBudget=CF_CATS.reduce((a,c)=>a+c.budget,0);
   const totalActual=CF_CATS.reduce((a,c)=>a+c.actual,0);
   const left=inc-totalActual;
@@ -4467,7 +4883,7 @@ function renderCF(){
   const catsEl=$('cf-cats');
   if(catsEl){
     catsEl.innerHTML=CF_CATS.map(c=>{
-      const pct=c.budget>0?Math.min(150,Math.round(c.actual/c.budget*100)):0;
+      pct=c.budget>0?Math.min(150,Math.round(c.actual/c.budget*100)):0;
       const over=c.actual>c.budget;
       const warn=pct>80&&!over;
       const col=over?'var(--red)':warn?'var(--amber)':c.color;
@@ -4534,7 +4950,7 @@ function renderCF(){
     const badge=$('rule-badge');
     const ok=needsPct<=50&&wantsPct<=30&&savePct>=20;
     if(badge){badge.textContent=ok?'✓ עומד בכלל':'טרם עומד';badge.style.cssText=`background:${ok?'rgba(0,165,80,0.1)':'rgba(255,149,0,0.1)'};color:${ok?'var(--green)':'var(--amber)'}`;} 
-    const rows=[{l:'צרכים (דיור, מזון, תחבורה)',pct:needsPct,target:50,c:needsPct>55?'var(--red)':needsPct<=50?'var(--green)':'var(--amber)'},{l:'רצונות (בילויים, קניות)',pct:wantsPct,target:30,c:wantsPct>35?'var(--red)':wantsPct<=30?'var(--green)':'var(--amber)'},{l:'חיסכון והשקעות',pct:savePct,target:20,c:savePct>=20?'var(--green)':savePct>=15?'var(--amber)':'var(--red)'}];
+    rows=[{l:'צרכים (דיור, מזון, תחבורה)',pct:needsPct,target:50,c:needsPct>55?'var(--red)':needsPct<=50?'var(--green)':'var(--amber)'},{l:'רצונות (בילויים, קניות)',pct:wantsPct,target:30,c:wantsPct>35?'var(--red)':wantsPct<=30?'var(--green)':'var(--amber)'},{l:'חיסכון והשקעות',pct:savePct,target:20,c:savePct>=20?'var(--green)':savePct>=15?'var(--amber)':'var(--red)'}];
     rb.innerHTML=rows.map(r=>`<div style="margin-bottom:.625rem"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="font-weight:600">${r.l}</span><span style="color:${r.c};font-weight:700">${r.pct}% <span style="color:var(--text3);font-weight:400">/ יעד ${r.target}%</span></span></div><div style="height:6px;background:rgba(0,0,0,0.06);border-radius:3px;overflow:hidden"><div style="height:6px;border-radius:3px;background:${r.c};width:${Math.min(100,r.pct)}%;transition:width .4s"></div></div></div>`).join('');
   }
 
@@ -4579,13 +4995,13 @@ const KNOWLEDGE=[
 ];
 let knowIdx=0;
 function renderKnowledgeCards(){
-  const el=$('know-inner');if(!el)return;
+  el=$('know-inner');if(!el)return;
   const shuffled=[...KNOWLEDGE];
   el.innerHTML=shuffled.map(k=>`<div class="know-card ${k.col||'occ-blue'}"><div class="know-card-ico">${k.ico||'💡'}</div><div class="know-card-tag">${k.tag||''}</div><div class="know-card-fact">${k.fact||''}</div><div class="know-card-detail">${k.detail||''}</div></div>`).join('');
 }
 function shuffleKnowledge(){
-  const el=$('know-inner');if(!el)return;
-  const shuffled=[...KNOWLEDGE].sort(()=>Math.random()-0.5);
+  el=$('know-inner');if(!el)return;
+  shuffled=[...KNOWLEDGE].sort(()=>Math.random()-0.5);
   el.innerHTML=shuffled.map(k=>`<div class="know-card ${k.col||'occ-blue'}"><div class="know-card-ico">${k.ico||'💡'}</div><div class="know-card-tag">${k.tag||''}</div><div class="know-card-fact">${k.fact||''}</div><div class="know-card-detail">${k.detail||''}</div></div>`).join('');
   const scroll=$('know-scroll');if(scroll)scroll.scrollLeft=0;
 }
@@ -4649,7 +5065,7 @@ function updateLiveUI(){
 }
 
 function updateGemelComparison(){
-  const el=$('gemel-comparison');if(!el||!LIVE_DATA.loaded)return;
+  el=$('gemel-comparison');if(!el||!LIVE_DATA.loaded)return;
   const funds=LIVE_DATA.gemel.topPension||[];
   if(!funds.length)return;
   el.innerHTML=`<div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem">📡 נתוני גמל נט — השוואה מהירה</div>`+
@@ -4662,8 +5078,8 @@ function updateGemelComparison(){
 
 
 function renderSettingsFlags(){
-  const el=$('settings-flags');if(!el)return;
-  const sections={};
+  el=$('settings-flags');if(!el)return;
+  sections={};
   Object.entries(FEAT_META).forEach(([k,m])=>{
     if(!sections[m.sec])sections[m.sec]=[];
     sections[m.sec].push({k,...m});
@@ -4683,9 +5099,9 @@ function renderSettingsFlags(){
 // ANALYST TIPS — "האנליסטים שלנו"
 // ══════════════════════════════
 function renderAnalystTips(){
-  const el=$('analyst-tips-container');if(!el)return;
-  const t=totals();
-  const tips=[];
+  el=$('analyst-tips-container');if(!el)return;
+  t=totals();
+  tips=[];
 
   // Generate smart, specific tips based on user data
   if(t.inc>0){
@@ -4704,9 +5120,9 @@ function renderAnalystTips(){
   }
 
   if(D.pe.length>0&&!D.pe.some(p=>p.eq)){
-    const peFv=D.pe.reduce((a,p)=>a+fv(p.now,p.emp+p.er,p.ret,p.yrs),0);
-    const peEqFv=D.pe.reduce((a,p)=>a+fv(p.now,p.emp+p.er,7,p.yrs),0);
-    const gain=Math.round(peEqFv-peFv);
+    peFv=D.pe.reduce((a,p)=>a+fv(p.now,p.emp+p.er,p.ret,p.yrs),0);
+    peEqFv=D.pe.reduce((a,p)=>a+fv(p.now,p.emp+p.er,7,p.yrs),0);
+    gain=Math.round(peEqFv-peFv);
     tips.push({
       ico:'🛡️',bg:'rgba(26,122,74,0.08)',urgency:'שינוי בחינם',urgencyBg:'rgba(26,122,74,0.12)',urgencyCol:'#0d3d20',
       title:'עבור למסלול מנייתי בפנסיה',
@@ -4758,7 +5174,7 @@ function renderAnalystTips(){
       title:'3 דקות עכשיו = תמונה ברורה',
       body:'הכנס הכנסה חודשית, פנסיה ותיקי השקעות — ו-Numa יחשב לך בדיוק כמה תהיה לך בפרישה ומה הכי כדאי לשפר.',
       impact:'',impactCol:'',
-      cta:'→ התחל כאן',nav:'inc'
+      cta:'→ התחל כאן',nav:'cf'
     });
   }
 
@@ -4791,8 +5207,8 @@ function getCls(urgency){
 }
 
 function toggleSbManager(){
-  const m=$('sb-manager');if(!m)return;
-  const isOpen=m.style.display==='block';
+  m=$('sb-manager');if(!m)return;
+  isOpen=m.style.display==='block';
   m.style.display=isOpen?'none':'block';
   if(!isOpen)renderSidebarManager();
 }
@@ -4839,7 +5255,7 @@ function makeTinderStack(containerId, cards, onDone){
     _currX = x - _startX;
     const rot = _currX * 0.07;
     _activeEl.style.transform = `translateX(${_currX}px) rotate(${rot}deg)`;
-    const pct = Math.min(1, Math.abs(_currX)/90);
+    pct = Math.min(1, Math.abs(_currX)/90);
     const doneEl = _activeEl.querySelector('.tinder-action-done');
     const laterEl = _activeEl.querySelector('.tinder-action-later');
     if(doneEl) doneEl.style.opacity = _currX > 15 ? pct : 0;
@@ -4859,7 +5275,7 @@ function makeTinderStack(containerId, cards, onDone){
       setTimeout(render, 320);
     } else {
       _activeEl.style.transform = '';
-      const d=_activeEl.querySelector('.tinder-action-done');const l=_activeEl.querySelector('.tinder-action-later');
+      d=_activeEl.querySelector('.tinder-action-done');const l=_activeEl.querySelector('.tinder-action-later');
       if(d)d.style.opacity=0; if(l)l.style.opacity=0;
     }
     _currX=0; _activeEl=null;
@@ -4896,7 +5312,7 @@ function makeTinderStack(containerId, cards, onDone){
     
     const toShow = visible.slice(0, 3).reverse();
     toShow.forEach(({c:card, i:realIdx}, ci) => {
-      const el = document.createElement('div');
+      el = document.createElement('div');
       el.className = 'tinder-card ' + (card.cls||'occ-blue');
       el.innerHTML = card.html + `
         <div class="tinder-action-overlay tinder-action-done">✓ הבא</div>
@@ -4939,7 +5355,7 @@ function makeTinderStack(containerId, cards, onDone){
   render();
   // next/prev for button nav
   container._tinderNext=()=>{
-    const visible=cards.map((c,i)=>({c,i})).filter(({i})=>!dismissed.has(i));
+    visible=cards.map((c,i)=>({c,i})).filter(({i})=>!dismissed.has(i));
     if(visible.length){dismissed.add(visible[0].i);render();}
   };
   container._tinderPrev=()=>{
@@ -4987,12 +5403,12 @@ let _insightCards = [];
 function renderTinderInsights(tips){
   _insightCards = buildInsightCards(tips);
   // Shuffle knowledge into a fresh deck too
-  const shuffled = [..._insightCards].sort(()=>Math.random()-.5);
+  shuffled = [..._insightCards].sort(()=>Math.random()-.5);
   makeTinderStack('tinder-insights', shuffled, null);
 }
 
 function renderTinderFacts(){
-  const shuffled = buildKnowledgeCards().sort(()=>Math.random()-.5);
+  shuffled = buildKnowledgeCards().sort(()=>Math.random()-.5);
   makeTinderStack('tinder-facts', shuffled, null);
 }
 
@@ -5009,7 +5425,7 @@ function animateNumber(el, targetStr){
 
 // Animate score ring on update
 function animateScoreRing(score){
-  const arc=$('score-arc');if(!arc)return;
+  arc=$('score-arc');if(!arc)return;
   const circ=2*Math.PI*33;
   arc.setAttribute('stroke-dasharray','0 '+circ);
   requestAnimationFrame(()=>{
@@ -5037,7 +5453,7 @@ const SETUP_MISSIONS=[
 ];
 
 function renderSetupMissions(){
-  const el=$('setup-missions');if(!el)return;
+  el=$('setup-missions');if(!el)return;
   const pending=SETUP_MISSIONS.filter(m=>!m.done());
   if(pending.length===0){el.style.display='none';return;}
   el.style.display='block';
@@ -5063,12 +5479,12 @@ function renderSetupMissions(){
 // NET WORTH TREND (Monarch-inspired)
 // ══════════════════════════════
 function saveNWSnapshot(){
-  const t=totals();
+  t=totals();
   if(t.nw===0)return;
-  const key='numa_nw_history';
+  key='numa_nw_history';
   const history=JSON.parse(localStorage.getItem(key)||'[]');
   const today=new Date().toISOString().slice(0,7); // YYYY-MM
-  const last=history[history.length-1];
+  last=history[history.length-1];
   if(!last||last.d!==today){
     history.push({d:today,v:Math.round(t.nw)});
     if(history.length>24)history.shift(); // keep 2 years
@@ -5077,14 +5493,14 @@ function saveNWSnapshot(){
 }
 
 function renderNWTrend(){
-  const el=$('nw-trend-chart');if(!el)return;
-  const history=JSON.parse(localStorage.getItem('numa_nw_history')||'[]');
+  el=$('nw-trend-chart');if(!el)return;
+  history=JSON.parse(localStorage.getItem('numa_nw_history')||'[]');
 
   // If less than 2 data points — add current value
-  const t=totals();
+  t=totals();
   const allPoints=[...history];
   if(t.nw!==0){
-    const today=new Date().toISOString().slice(0,7);
+    today=new Date().toISOString().slice(0,7);
     if(!allPoints.length||allPoints[allPoints.length-1].d!==today){
       allPoints.push({d:today,v:Math.round(t.nw)});
     }
@@ -5096,7 +5512,7 @@ function renderNWTrend(){
   }
 
   const vals=allPoints.map(p=>p.v);
-  const labels=allPoints.map(p=>{
+  labels=allPoints.map(p=>{
     const [y,m]=p.d.split('-');
     return ['ינו','פבר','מרץ','אפר','מאי','יוני','יולי','אוג','ספט','אוק','נוב','דצמ'][parseInt(m)-1]+"'"+(y.slice(2));
   });
@@ -5135,8 +5551,8 @@ const IL_BENCHMARKS={
 };
 
 function renderSpendDNA(){
-  const el=$('spend-dna-content');if(!el)return;
-  const t=totals();
+  el=$('spend-dna-content');if(!el)return;
+  t=totals();
   if(t.inc===0){el.innerHTML='<div style="text-align:center;padding:1rem;color:var(--text3);font-size:12px">הזן הכנסה כדי לראות את ה-DNA שלך</div>';return;}
 
   const cats=[
@@ -5150,7 +5566,7 @@ function renderSpendDNA(){
 
   el.innerHTML=cats.map(c=>{
     const userPct=t.inc>0?Math.round(c.val/t.inc*100):0;
-    const diff=userPct-c.il_avg_pct;
+    diff=userPct-c.il_avg_pct;
     const status=Math.abs(diff)<=3?'neutral':diff>0&&c.key!=='savings'?'high':diff<0&&c.key==='savings'?'low':'ok';
     const statusColor=status==='neutral'?'var(--text3)':status==='high'?'var(--red)':status==='ok'?'var(--green)':'var(--amber)';
     const statusText=status==='neutral'?'בנורמה':status==='high'?`+${diff}% מהממוצע`:status==='ok'?`${Math.abs(diff)}% פחות מהממוצע`:`${Math.abs(diff)}% מתחת ליעד`;
@@ -5177,8 +5593,8 @@ function renderSpendDNA(){
 // STREAK COUNTER (Tendi-inspired)
 // ══════════════════════════════
 function updateStreak(){
-  const today=new Date().toDateString();
-  const last=localStorage.getItem('numa_last_visit');
+  today=new Date().toDateString();
+  last=localStorage.getItem('numa_last_visit');
   let streak=parseInt(localStorage.getItem('numa_streak')||'0');
   if(last===today){
     // Same day, no change
@@ -5191,7 +5607,7 @@ function updateStreak(){
   }
   localStorage.setItem('numa_last_visit',today);
   localStorage.setItem('numa_streak',streak);
-  const el=$('streak-count');
+  el=$('streak-count');
   if(el){
     el.textContent=streak+'d';
     el.title=streak+' ימים ברצף 🔥';
@@ -5210,9 +5626,9 @@ function celebrate(type,emoji,title,body){
   localStorage.setItem('numa_celebrated',JSON.stringify([..._celebrated]));
 
   // Confetti
-  const colors=['#166C40','#1E8A52','#1A56DB','#F59E0B','#EC4899','#8B5CF6'];
+  colors=['#166C40','#1E8A52','#1A56DB','#F59E0B','#EC4899','#8B5CF6'];
   for(let i=0;i<60;i++){
-    const c=document.createElement('div');
+    c=document.createElement('div');
     c.className='confetti-piece';
     c.style.cssText=`
       left:${Math.random()*100}vw;
@@ -5262,27 +5678,27 @@ function checkCelebrations(score, nw, fireAge, hasFIRETarget){
 // WEEKLY AI SUMMARY CARD (Monarch-inspired)
 // ══════════════════════════════
 function renderWeeklySummary(){
-  const el=$('weekly-summary');if(!el)return;
-  const t=totals();
+  el=$('weekly-summary');if(!el)return;
+  t=totals();
   const score_stored=parseInt(localStorage.getItem('numa_score_prev')||'0');
   const score_now=parseInt($('score-n')?.textContent||'0')||0;
   const scoreDiff=score_now-score_stored;
   if(score_now>0)localStorage.setItem('numa_score_prev',score_now);
 
-  const insights=[];
-  const h=new Date().getHours();
+  insights=[];
+  h=new Date().getHours();
   const dayName=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'][new Date().getDay()];
 
   // Greeting based on time
   const greeting=h<12?`בוקר טוב ☀️`:h<17?`שלום 👋`:`ערב טוב 🌙`;
 
   if(t.inc>0){
-    const sr=(t.invest/t.inc*100).toFixed(0);
+    sr=(t.invest/t.inc*100).toFixed(0);
     if(sr>=20)insights.push({ico:'🎯',text:`שיעור חיסכון ${sr}% — מעל היעד. אתה חוסך יותר מ-80% מהאוכלוסייה.`});
     else insights.push({ico:'💪',text:`שיעור חיסכון ${sr}% — יעד: 20%. כל ${fmt(Math.round(t.inc*0.01))} נוספים לחודש = ${fmtK(Math.round(fv(0,t.inc*0.01,7,25)))} בפרישה.`});
   }
   if(t.loBal>0 && D.lo.length>0){
-    const worst=D.lo.reduce((a,b)=>b.rate>a.rate?b:a);
+    worst=D.lo.reduce((a,b)=>b.rate>a.rate?b:a);
     insights.push({ico:'💳',text:`הלוואת "${worst.name}" ב-${worst.rate}% עולה לך ${fmt(Math.round(worst.bal*worst.rate/100/12))}/חודש ריבית בלבד.`});
   }
   if(scoreDiff>0){
@@ -5322,9 +5738,9 @@ function calcProfileCompletion(){
 }
 
 function renderProfileCompletion(){
-  const el=$('profile-completion');if(!el)return;
-  const pct=calcProfileCompletion();
-  const missing=[];
+  el=$('profile-completion');if(!el)return;
+  pct=calcProfileCompletion();
+  missing=[];
   if(!gv('inc1'))missing.push('הכנסה');
   if(D.pe.length===0)missing.push('פנסיה');
   if(D.st.length===0)missing.push('השקעות');
@@ -5342,7 +5758,7 @@ function renderProfileCompletion(){
     <div style="height:5px;background:var(--bg4);border-radius:3px;overflow:hidden">
       <div style="height:5px;border-radius:3px;background:${pct>=80?'var(--green)':pct>=50?'var(--amber)':'var(--red)'};width:${pct}%;transition:width .8s cubic-bezier(.4,0,.2,1)"></div>
     </div>
-    ${pct<100&&nextStep?`<div style="margin-top:.5rem;font-size:10.5px;color:var(--blue);cursor:pointer;font-weight:600" onclick="go('inc',document.querySelector('.ni'))">+ הוסף ${nextStep} ←</div>`:''}
+    ${pct<100&&nextStep?`<div style="margin-top:.5rem;font-size:10.5px;color:var(--blue);cursor:pointer;font-weight:600" onclick="go('cf',document.querySelector('.ni'))">+ הוסף ${nextStep} ←</div>`:''}
   `;
 }
 
@@ -5363,7 +5779,7 @@ const RE_FACTS=[
 ];
 
 function renderReFacts(){
-  const shuffled=[...RE_FACTS].sort(()=>Math.random()-.5);
+  shuffled=[...RE_FACTS].sort(()=>Math.random()-.5);
   makeTinderStack('tinder-re-facts', shuffled.map(f=>({cls:f.cls,html:`<div style="font-size:30px;margin-bottom:.4rem">${f.ico}</div><div style="font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.6;margin-bottom:.35rem">${f.tag}</div><div style="font-size:14px;font-weight:800;line-height:1.3;margin-bottom:.5rem">${f.title}</div><div style="font-size:11.5px;opacity:.75;line-height:1.55">${f.body}</div>`})), null);
 }
 
@@ -5371,28 +5787,28 @@ function renderReFacts(){
 // INVESTMENT PAGE — Total chart + Simulator + Facts Tinder
 // ══════════════════════════════
 function renderStTotal(){
-  const t=totals();
+  t=totals();
   const allPorts=[...D.st,...D.alt];
   const totalNow=allPorts.reduce((a,p)=>a+p.now,0);
-  const totalMo=allPorts.reduce((a,p)=>a+(p.mo||0),0);
+  totalMo=allPorts.reduce((a,p)=>a+(p.mo||0),0);
   const avgRet=allPorts.length?allPorts.reduce((a,p)=>a+p.ret,0)/allPorts.length:7;
   const in10=Math.round(fv(totalNow,totalMo,avgRet,10));
   set('st-total-big',totalNow>0?fmtK(totalNow):'₪—');
   set('st-mo-total',totalMo>0?fmt(totalMo):'—');
   set('st-10y',in10>0?fmtK(in10):'—');
   if(totalNow>0||totalMo>0){
-    const yrs=Math.min(30,Math.max(...allPorts.map(p=>p.hor||25),25));
-    const yA=Array.from({length:yrs+1},(_,i)=>i===0?'היום':i===yrs?yrs+' שנה':'');
-    const data=yA.map((_,y)=>Math.round(allPorts.reduce((a,p)=>a+fv(p.now,p.mo||0,p.ret,Math.min(y,p.hor||25)),0)));
+    yrs=Math.min(30,Math.max(...allPorts.map(p=>p.hor||25),25));
+    yA=Array.from({length:yrs+1},(_,i)=>i===0?'היום':i===yrs?yrs+' שנה':'');
+    data=yA.map((_,y)=>Math.round(allPorts.reduce((a,p)=>a+fv(p.now,p.mo||0,p.ret,Math.min(y,p.hor||25)),0)));
     mkC('ch-st-total',{type:'line',data:{labels:yA,datasets:[{data,borderColor:'rgba(22,108,64,0.9)',backgroundColor:'rgba(22,108,64,0.08)',fill:true,tension:0.4,pointRadius:0,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'תיק: '+fmtK(c.raw)}}},scales:{x:{ticks:{color:'rgba(255,255,255,0.5)',font:{size:9},maxTicksLimit:5},grid:{color:'rgba(255,255,255,0.05)'}},y:{ticks:{callback:v=>fmtK(v),color:'rgba(255,255,255,0.5)',font:{size:9}},grid:{color:'rgba(255,255,255,0.05)'}}}}});
   }
   renderStSimulator();
 }
 
 function renderStSimulator(){
-  const init=parseFloat(document.getElementById('st-sim-init')?.value)||100000;
-  const mo=parseFloat(document.getElementById('st-sim-mo')?.value)||3000;
-  const yrs=parseInt(document.getElementById('st-sim-yrs')?.value)||20;
+  init=parseFloat(document.getElementById('st-sim-init')?.value)||100000;
+  mo=parseFloat(document.getElementById('st-sim-mo')?.value)||3000;
+  yrs=parseInt(document.getElementById('st-sim-yrs')?.value)||20;
   const baseRet=parseFloat(document.getElementById('st-sim-ret')?.value)||7;
   const scenarios=[
     {label:'שמרני 4%',ret:4,color:'#F59E0B'},
@@ -5400,17 +5816,17 @@ function renderStSimulator(){
     {label:'מנייתי 10%',ret:10,color:'#1A56DB'},
     {label:'S&P 500 10.5%',ret:10.5,color:'#7C3AED'},
   ];
-  const el=document.getElementById('st-sim-results');
+  el=document.getElementById('st-sim-results');
   if(el)el.innerHTML=scenarios.map(s=>{
-    const total=Math.round(fv(init,mo,s.ret,yrs));
-    const gain=Math.round(total-(init+mo*yrs*12));
+    total=Math.round(fv(init,mo,s.ret,yrs));
+    gain=Math.round(total-(init+mo*yrs*12));
     return`<div style="background:var(--bg3);border-radius:10px;padding:.625rem;text-align:center;border:1px solid var(--border)">
       <div style="font-size:9.5px;color:var(--text3);margin-bottom:3px">${s.label}</div>
       <div style="font-size:15px;font-weight:800;color:${s.color};letter-spacing:-.4px">${fmtK(total)}</div>
       <div style="font-size:9.5px;color:var(--green);margin-top:2px">+${fmtK(gain)}</div>
     </div>`;
   }).join('');
-  const yA=Array.from({length:yrs+1},(_,i)=>i===0?'היום':i===yrs?yrs+' שנה':'');
+  yA=Array.from({length:yrs+1},(_,i)=>i===0?'היום':i===yrs?yrs+' שנה':'');
   mkC('ch-st-sim',{type:'line',data:{labels:yA,datasets:scenarios.map(s=>({label:s.label,data:yA.map((_,y)=>Math.round(fv(init,mo,s.ret,y))),borderColor:s.color,fill:false,tension:0.4,pointRadius:0,borderWidth:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:10},color:'var(--text3)',boxWidth:8,padding:6}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmtK(c.raw)}}},scales:{x:{ticks:{color:'var(--text3)',font:{size:9},maxTicksLimit:7},grid:{color:'rgba(0,0,0,0.04)'}},y:{ticks:{callback:v=>fmtK(v),color:'var(--text3)',font:{size:9}},grid:{color:'rgba(0,0,0,0.04)'}}}}});
 }
 
@@ -5427,7 +5843,7 @@ const ST_FACTS=[
 ];
 
 function renderStFacts(){
-  const shuffled=[...ST_FACTS].sort(()=>Math.random()-.5);
+  shuffled=[...ST_FACTS].sort(()=>Math.random()-.5);
   makeTinderStack('tinder-st-facts', shuffled.map(f=>({cls:f.cls,html:`<div style="font-size:28px;margin-bottom:.4rem">${f.ico}</div><div style="font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.6;margin-bottom:.3rem">${f.tag}</div><div style="font-size:14px;font-weight:800;line-height:1.3;margin-bottom:.5rem">${f.title}</div><div style="font-size:11.5px;opacity:.75;line-height:1.55">${f.body}</div>`})), null);
 }
 
@@ -5446,20 +5862,20 @@ const RETIRE_FACTS=[
 ];
 
 function renderRetireFacts(){
-  const shuffled=[...RETIRE_FACTS].sort(()=>Math.random()-.5);
+  shuffled=[...RETIRE_FACTS].sort(()=>Math.random()-.5);
   makeTinderStack('tinder-retire-facts', shuffled.map(f=>({cls:f.cls,html:`<div style="font-size:28px;margin-bottom:.4rem">${f.ico}</div><div style="font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.6;margin-bottom:.3rem">${f.tag}</div><div style="font-size:14px;font-weight:800;line-height:1.3;margin-bottom:.5rem">${f.title}</div><div style="font-size:11.5px;opacity:.75;line-height:1.55">${f.body}</div>`})), null);
 }
 
 // Gemel Net below chart
 function renderGemelChart(){
-  const el=document.getElementById('gemel-comparison-chart');if(!el||!LIVE_DATA.loaded)return;
-  const funds=LIVE_DATA.gemel.topPension||[];
+  el=document.getElementById('gemel-comparison-chart');if(!el||!LIVE_DATA.loaded)return;
+  funds=LIVE_DATA.gemel.topPension||[];
   if(!funds.length){el.textContent='אין נתונים';return;}
-  const myPe=D.pe[0];const myRet=myPe?myPe.ret:0;
+  myPe=D.pe[0];const myRet=myPe?myPe.ret:0;
   el.innerHTML=`<div style="font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem">📡 תשואות 5 שנים — קרנות פנסיה</div>`+
   funds.map(f=>{
-    const w=Math.min(100,(f.ret5/10)*100);
-    const diff=myRet>0?f.ret5-myRet:0;
+    w=Math.min(100,(f.ret5/10)*100);
+    diff=myRet>0?f.ret5-myRet:0;
     return`<div style="margin-bottom:.5rem">
       <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px">
         <span style="font-weight:600">${f.name}</span>
@@ -5480,19 +5896,19 @@ function renderGemelChart(){
 // AMORTIZATION CALCULATOR
 // ══════════════════════════════
 function renderAmort(){
-  const sum=parseFloat(document.getElementById('am-sum')?.value)||500000;
+  sum=parseFloat(document.getElementById('am-sum')?.value)||500000;
   const rate=parseFloat(document.getElementById('am-rate')?.value)||6;
-  const yrs=parseInt(document.getElementById('am-yrs')?.value)||20;
-  const type=document.getElementById('am-type')?.value||'shpitzer';
-  const n=yrs*12;
-  const r=rate/100/12;
+  yrs=parseInt(document.getElementById('am-yrs')?.value)||20;
+  type=document.getElementById('am-type')?.value||'shpitzer';
+  n=yrs*12;
+  r=rate/100/12;
 
   let totalInterest=0;
-  let rows=[];
+  rows=[];
 
   if(type==='shpitzer'){
     const pmt=r>0?sum*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1):sum/n;
-    let bal=sum;
+    bal=sum;
     for(let i=0;i<Math.min(n,24);i++){
       const int=bal*r;const prin=pmt-int;
       totalInterest+=int;bal-=prin;
@@ -5510,7 +5926,7 @@ function renderAmort(){
     ].map(x=>`<div style="background:var(--bg3);border-radius:9px;padding:.5rem;text-align:center;border:1px solid var(--border)"><div style="font-size:9.5px;color:var(--text3);margin-bottom:2px">${x.l}</div><div style="font-size:13px;font-weight:800;color:${x.c}">${x.v}</div></div>`).join('');
   }
 
-  const tbl=document.getElementById('am-table');
+  tbl=document.getElementById('am-table');
   if(tbl&&rows.length)tbl.innerHTML=`<table style="width:100%;border-collapse:collapse">
     <thead><tr style="background:var(--bg3)"><th style="padding:4px 6px;text-align:right;font-size:10px;color:var(--text3)">חודש</th><th style="padding:4px 6px;text-align:center;font-size:10px;color:var(--text3)">תשלום</th><th style="padding:4px 6px;text-align:center;font-size:10px;color:var(--red)">ריבית</th><th style="padding:4px 6px;text-align:center;font-size:10px;color:var(--green)">קרן</th><th style="padding:4px 6px;text-align:center;font-size:10px;color:var(--text3)">יתרה</th></tr></thead>
     <tbody>${rows.map(r=>`<tr style="border-bottom:1px solid var(--border)"><td style="padding:3px 6px;font-size:10px">${r.m}</td><td style="padding:3px 6px;text-align:center;font-size:10px;font-weight:600">${fmt(Math.round(r.pmt))}</td><td style="padding:3px 6px;text-align:center;font-size:10px;color:var(--red)">${fmt(Math.round(r.int))}</td><td style="padding:3px 6px;text-align:center;font-size:10px;color:var(--green)">${fmt(Math.round(r.prin))}</td><td style="padding:3px 6px;text-align:center;font-size:10px;color:var(--text3)">${fmtK(Math.round(r.bal))}</td></tr>`).join('')}</tbody>
@@ -5532,7 +5948,7 @@ const MKT_FACTS=[
 ];
 
 function renderMktFacts(){
-  const shuffled=[...MKT_FACTS].sort(()=>Math.random()-.5);
+  shuffled=[...MKT_FACTS].sort(()=>Math.random()-.5);
   makeTinderStack('tinder-mkt-facts', shuffled.map(f=>({cls:f.cls,html:`<div style="font-size:30px;margin-bottom:.4rem">${f.ico}</div><div style="font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.6;margin-bottom:.35rem">${f.tag}</div><div style="font-size:14px;font-weight:800;line-height:1.3;margin-bottom:.5rem">${f.title}</div><div style="font-size:11.5px;opacity:.75;line-height:1.55">${f.body}</div>`})), null);
 }
 
@@ -5548,17 +5964,17 @@ window.go=function(tab,el){
 };
 // Also render on re2 invest toggle
 function toggleRE2(){
-  const v=parseInt(document.getElementById('re-st')?.value||0);
-  const el=document.getElementById('re-invest');
+  v=parseInt(document.getElementById('re-st')?.value||0);
+  el=document.getElementById('re-invest');
   if(el)el.style.display=v===3?'block':'none';
 }
 // Property 2 yield calculation
 function calcRe2(){
-  const val=parseFloat(document.getElementById('re2Val')?.value)||0;
+  val=parseFloat(document.getElementById('re2Val')?.value)||0;
   const rent=parseFloat(document.getElementById('re2Rent')?.value)||0;
   const mort=parseFloat(document.getElementById('re2Mort')?.value)||0;
   const cost=parseFloat(document.getElementById('re2Cost')?.value)||0;
-  const el=document.getElementById('re2-summary');
+  el=document.getElementById('re2-summary');
   if(!el||!val)return;
   const annualRent=(rent-mort-cost)*12;
   const grossYield=(rent*12/val*100).toFixed(1);
@@ -5571,11 +5987,11 @@ function calcRe2(){
 
 // ── Tinder keyboard navigation helpers ──
 function tinderNext(containerId){
-  const c=document.getElementById(containerId);
+  c=document.getElementById(containerId);
   if(c&&c._tinderNext)c._tinderNext();
 }
 function tinderPrev(containerId){
-  const c=document.getElementById(containerId);
+  c=document.getElementById(containerId);
   if(c&&c._tinderPrev)c._tinderPrev();
 }
 // ══════════════════════════════
@@ -5620,15 +6036,15 @@ function _showApp(isNewLogin=false){
   const as=$('auth-screen');if(as)as.style.display='none';
   const vs=$('verify-screen');if(vs)vs.style.display='none';
   // Show app
-  const m=document.getElementById('main');if(m)m.style.removeProperty('display');
+  m=document.getElementById('main');if(m)m.style.removeProperty('display');
   document.querySelectorAll('.sb,.topbar,.mob-nav,.ai-panel').forEach(el=>el.style.removeProperty('display'));
   // Update user display
   if(currentUser){
     const name=currentUser.user_metadata?.name||currentUser.email?.split('@')[0]||'N';
-    const nd=$('user-name-display');if(nd)nd.textContent=name;
-    const av=$('user-avatar');if(av)av.textContent=(name[0]||'N').toUpperCase();
+    nd=$('user-name-display');if(nd)nd.textContent=name;
+    av=$('user-avatar');if(av)av.textContent=(name[0]||'N').toUpperCase();
     const uid=(currentUser.id||'').slice(0,8);
-    const key='numa_v2_'+uid;
+    key='numa_v2_'+uid;
     if(window.STORAGE_KEY!==key){window.STORAGE_KEY=key;loadFromStorage();render();}
     // הצג אונבורדינג רק פעם אחת — ורק בכניסה ממש (לא רענון טוקן)
     if(isNewLogin){
@@ -5642,9 +6058,9 @@ function _showApp(isNewLogin=false){
 
 function _showAuth(){
   // Show auth screen
-  const as=$('auth-screen');if(as)as.style.display='flex';
+  as=$('auth-screen');if(as)as.style.display='flex';
   // Hide entire app
-  const m=document.getElementById('main');if(m)m.style.display='none';
+  m=document.getElementById('main');if(m)m.style.display='none';
   document.querySelectorAll('.sb,.topbar,.mob-nav,.ai-panel').forEach(el=>el.style.display='none');
 }
 
@@ -5672,24 +6088,24 @@ function authTab(mode){
     ts.style.fontWeight=isSignup?'700':'600';
   }
   const nf=$('name-field');if(nf)nf.style.display=isSignup?'block':'none';
-  const btn=$('auth-btn');if(btn)btn.textContent=isSignup?'הרשמה ←':'כניסה ←';
+  btn=$('auth-btn');if(btn)btn.textContent=isSignup?'הרשמה ←':'כניסה ←';
   const fl=$('forgot-link');if(fl)fl.style.display=isSignup?'none':'block';
   _clearErr();
 }
 
 function _showErr(msg){
-  const e=$('auth-error');
+  e=$('auth-error');
   if(e){e.textContent=msg;e.style.color='#E53935';e.style.display='block';}
 }
 function _clearErr(){
-  const e=$('auth-error');if(e)e.style.display='none';
+  e=$('auth-error');if(e)e.style.display='none';
 }
 
 async function authSubmit(){
   const email=($('auth-email')?.value||'').trim();
   const password=$('auth-password')?.value||'';
-  const name=($('auth-name')?.value||'').trim();
-  const btn=$('auth-btn');
+  name=($('auth-name')?.value||'').trim();
+  btn=$('auth-btn');
 
   _clearErr();
   if(!email){_showErr('נא להכניס אימייל');return;}
@@ -5714,8 +6130,8 @@ async function authSubmit(){
         _showApp();
       } else {
         // Need email confirmation
-        const as=$('auth-screen');if(as)as.style.display='none';
-        const vs=$('verify-screen');if(vs)vs.style.display='flex';
+        as=$('auth-screen');if(as)as.style.display='none';
+        vs=$('verify-screen');if(vs)vs.style.display='flex';
       }
     } else {
       const {error}=await _sb.auth.signInWithPassword({email,password});
@@ -5723,7 +6139,7 @@ async function authSubmit(){
       // onAuthStateChange will handle _showApp()
     }
   }catch(e){
-    const msgs={
+    msgs={
       'Invalid login credentials':'אימייל או סיסמה שגויים',
       'Email not confirmed':'האימייל טרם אומת — בדוק את תיבת הדואר',
       'User already registered':'משתמש קיים — לחץ על כניסה',
@@ -5736,7 +6152,7 @@ async function authSubmit(){
 }
 
 async function authForgot(){
-  const email=($('auth-email')?.value||'').trim();
+  email=($('auth-email')?.value||'').trim();
   if(!email){_showErr('הכנס אימייל קודם');return;}
   if(!_sb)return;
   const {error}=await _sb.auth.resetPasswordForEmail(email,{
@@ -5744,7 +6160,7 @@ async function authForgot(){
   });
   if(error){_showErr(error.message);}
   else{
-    const e=$('auth-error');
+    e=$('auth-error');
     if(e){e.textContent='✓ שלחנו קישור לאיפוס סיסמה — בדוק את המייל';e.style.color='var(--green)';e.style.display='block';}
   }
 }
@@ -5809,7 +6225,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
     <span>סקירה</span>
   </button>
-  <button class="mob-nav-item" id="mni-assets" onclick="goMob('pen',this)">
+  <button class="mob-nav-item" id="mni-assets" onclick="goMob('pe',this)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span>נכסים</span>
   </button>
@@ -6124,7 +6540,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     deferredPrompt = e;
 
     // הצג banner רק אם לא נדחה קודם
-    const dismissed = localStorage.getItem('numa_pwa_dismissed');
+    dismissed = localStorage.getItem('numa_pwa_dismissed');
     if (!dismissed) {
       setTimeout(showInstallBanner, 3000);
     }
@@ -6145,7 +6561,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 
   function hideInstallBanner() {
-    const banner = document.getElementById('pwa-install-banner');
+    banner = document.getElementById('pwa-install-banner');
     if (banner) banner.classList.add('hidden');
   }
 
@@ -6185,11 +6601,11 @@ document.addEventListener('DOMContentLoaded',()=>{
   });
 
   function showUpdateToast(worker) {
-    const toast = document.getElementById('pwa-update-toast');
+    toast = document.getElementById('pwa-update-toast');
     if (toast) {
       toast.classList.add('show');
       // שמור reference לworker החדש
-      const updateBtn = document.getElementById('pwa-update-btn');
+      updateBtn = document.getElementById('pwa-update-btn');
       if (updateBtn) {
         updateBtn.onclick = () => {
           worker.postMessage('SKIP_WAITING');
@@ -6205,15 +6621,15 @@ document.addEventListener('DOMContentLoaded',()=>{
     || window.navigator.standalone === true;
 
   if (isIOS && !isInStandaloneMode) {
-    const dismissed = localStorage.getItem('numa_ios_hint_dismissed');
+    dismissed = localStorage.getItem('numa_ios_hint_dismissed');
     if (!dismissed) {
       setTimeout(() => {
-        const banner = document.getElementById('pwa-install-banner');
+        banner = document.getElementById('pwa-install-banner');
         if (banner) {
           // עדכן טקסט לiOS
           const textEl = banner.querySelector('.pwa-text span');
           if (textEl) textEl.textContent = 'לחץ על ⎋ ואז "הוסף למסך הבית"';
-          const installBtn = document.getElementById('pwa-install-btn');
+          installBtn = document.getElementById('pwa-install-btn');
           if (installBtn) {
             installBtn.textContent = 'הבנתי';
             installBtn.addEventListener('click', () => {
@@ -6241,13 +6657,13 @@ document.addEventListener('DOMContentLoaded',()=>{
   let startX, startY, fabX, fabY;
 
   function getPos(){
-    const r = fab.getBoundingClientRect();
+    r = fab.getBoundingClientRect();
     return {x: r.left, y: r.top};
   }
 
   function setPos(x, y){
     const maxX = window.innerWidth - fab.offsetWidth - 8;
-    const maxY = window.innerHeight - fab.offsetHeight - 8;
+    maxY = window.innerHeight - fab.offsetHeight - 8;
     x = Math.max(8, Math.min(x, maxX));
     y = Math.max(8, Math.min(y, maxY));
     fab.style.left = x + 'px';
@@ -6257,15 +6673,15 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   // Touch drag
   fab.addEventListener('touchstart', e=>{
-    const t = e.touches[0];
+    t = e.touches[0];
     startX = t.clientX; startY = t.clientY;
-    const p = getPos();
+    p = getPos();
     fabX = p.x; fabY = p.y;
     isDragging = false;
   }, {passive: true});
 
   fab.addEventListener('touchmove', e=>{
-    const t = e.touches[0];
+    t = e.touches[0];
     const dx = t.clientX - startX;
     const dy = t.clientY - startY;
     if(Math.abs(dx) > 5 || Math.abs(dy) > 5) isDragging = true;
@@ -6275,12 +6691,12 @@ document.addEventListener('DOMContentLoaded',()=>{
   // Mouse drag
   fab.addEventListener('mousedown', e=>{
     startX = e.clientX; startY = e.clientY;
-    const p = getPos();
+    p = getPos();
     fabX = p.x; fabY = p.y;
     isDragging = false;
     const onMove = e2=>{
-      const dx = e2.clientX - startX;
-      const dy = e2.clientY - startY;
+      dx = e2.clientX - startX;
+      dy = e2.clientY - startY;
       if(Math.abs(dx) > 5 || Math.abs(dy) > 5) isDragging = true;
       if(isDragging) setPos(fabX + dx, fabY + dy);
     };
