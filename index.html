@@ -4239,9 +4239,11 @@ function goMob(tab,el){
   // Highlight correct tab based on section
   const tabMap={
     'ov':'mni-ov','nw':'mni-ov',
-    'pen':'mni-assets','st':'mni-assets','re':'mni-assets','gml':'mni-assets',
-    'fire':'mni-plan','mc':'mni-plan','mkt':'mni-plan','salary':'mni-plan','ci':'mni-plan',
-    'lo':'mni-mgmt','ins':'mni-mgmt','settings':'mni-mgmt','estate':'mni-mgmt'
+    'pen':'mni-assets','re':'mni-assets','gml':'mni-assets',
+    'cf':'mni-cash',
+    'st':'mni-invest','mkt':'mni-invest',
+    'fire':'mni-fire','mc':'mni-fire',
+    'lo':'mni-more','ins':'mni-more','settings':'mni-more','estate':'mni-more','salary':'mni-more','ci':'mni-more'
   };
   const activeId=tabMap[tab];
   if(activeId){const btn=document.getElementById(activeId);if(btn)btn.classList.add('on');}
@@ -5808,16 +5810,20 @@ document.addEventListener('DOMContentLoaded',()=>{
     <span>סקירה</span>
   </button>
   <button class="mob-nav-item" id="mni-assets" onclick="goMob('pen',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span>נכסים</span>
   </button>
-  <button class="mob-nav-item" id="mni-plan" onclick="goMob('fire',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-    <span>תכנון</span>
+  <button class="mob-nav-item" id="mni-cash" onclick="goMob('cf',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    <span>תזרים</span>
   </button>
-  <button class="mob-nav-item" id="mni-mgmt" onclick="goMob('lo',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-    <span>ניהול</span>
+  <button class="mob-nav-item" id="mni-invest" onclick="goMob('st',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    <span>השקעות</span>
+  </button>
+  <button class="mob-nav-item" id="mni-fire" onclick="goMob('fire',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span>FIRE</span>
   </button>
   <button class="mob-nav-item" id="mni-more" onclick="toggleMobMenu()">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
@@ -5826,9 +5832,10 @@ document.addEventListener('DOMContentLoaded',()=>{
 </nav>
 
 <!-- AI FAB (Draggable) -->
-<div id="ai-fab" onclick="handleFabClick()">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round"><path d="M12 2a9 9 0 0 1 9 9c0 2.4-1 4.6-2.5 6.2L12 22l-6.5-4.8A9 9 0 0 1 3 11 9 9 0 0 1 12 2z"/><circle cx="12" cy="11" r="3"/></svg>
-  <div class="ai-dot"></div>
+<div id="ai-fab" onclick="handleFabClick()" style="width:auto;border-radius:30px;padding:0 14px 0 10px;gap:8px;min-width:52px">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" style="flex-shrink:0"><path d="M12 2a9 9 0 0 1 9 9c0 2.4-1 4.6-2.5 6.2L12 22l-6.5-4.8A9 9 0 0 1 3 11 9 9 0 0 1 12 2z"/><circle cx="12" cy="11" r="3"/></svg>
+  <span style="font-size:11px;font-weight:600;color:#4ade80;white-space:nowrap;direction:rtl">היי, אני כאן לכל שאלה</span>
+  <div class="ai-dot" style="position:relative;bottom:auto;left:auto;right:auto;width:7px;height:7px;flex-shrink:0"></div>
 </div>
 
 <!-- MOBILE MORE MENU (bottom sheet) -->
