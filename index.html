@@ -8,11 +8,11 @@
 <style>
 /* ── BASE ── */
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#b8b8b4;display:flex;justify-content:center;padding:14px;font-family:-apple-system,'Plus Jakarta Sans',sans-serif;direction:rtl;min-height:100vh}
+body{background:#F2F2EE;display:flex;justify-content:center;min-height:100vh;min-height:-webkit-fill-available;direction:rtl;overflow-x:hidden;width:100%;margin:0;padding:0}
 
 /* ── DEVICE ── */
-.dev{width:360px;height:720px;background:#F2F2EE;border-radius:44px;border:8px solid #0d0d0d;overflow:hidden;display:flex;flex-direction:column;position:relative;flex-shrink:0;box-shadow:0 32px 80px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.1)}
-.sb{background:#F2F2EE;padding:8px 20px 2px;display:flex;justify-content:space-between;flex-shrink:0}
+.dev{width:100%;max-width:480px;min-height:100vh;min-height:-webkit-fill-available;background:#F2F2EE;display:flex;flex-direction:column;position:relative;overflow-x:hidden;margin:0 auto}
+.sb{display:none}
 .sb span{font-size:11px;font-weight:700;color:#111}
 
 /* ── TOPBAR ── */
@@ -26,11 +26,11 @@ body{background:#b8b8b4;display:flex;justify-content:center;padding:14px;font-fa
 .notif-dot{position:absolute;top:5px;right:5px;width:6px;height:6px;background:#D93025;border-radius:50%;border:1.5px solid #fff}
 
 /* ── SCROLL ── */
-.scr{flex:1;overflow-y:scroll;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.scr{flex:1;overflow-y:scroll;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:60px}
 .scr::-webkit-scrollbar{display:none}
 
 /* ── BOTTOM NAV ── */
-.nav{background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-top:.5px solid rgba(0,0,0,.08);display:flex;flex-shrink:0;padding-bottom:4px;z-index:20}
+.nav{background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-top:.5px solid rgba(0,0,0,.08);display:flex;position:fixed;bottom:0;left:0;right:0;z-index:20;padding-bottom:env(safe-area-inset-bottom,4px)}
 .ni{flex:1;display:flex;flex-direction:column;align-items:center;padding:7px 2px 3px;gap:2px;cursor:pointer;border:none;background:transparent;font-family:inherit;color:#A8A8B0;position:relative;transition:color .15s;-webkit-tap-highlight-color:transparent}
 .ni.on{color:#166C40}
 .nl{position:absolute;top:0;left:15%;right:15%;height:2.5px;background:#166C40;border-radius:0 0 3px 3px;display:none}
