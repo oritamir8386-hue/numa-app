@@ -336,16 +336,26 @@ select.fi{cursor:pointer}
 .ob-feat{background:var(--bg3);border-radius:10px;padding:.6rem .75rem;display:flex;align-items:center;gap:.5rem;font-size:12px;font-weight:600;border:1px solid var(--border)}
 
 /* ═══ MOBILE NAV — iOS Quality ═══ */
-.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:62px;background:rgba(248,248,245,0.94);border-top:1px solid var(--border);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);z-index:100;grid-template-columns:repeat(4,1fr);align-items:center}
-.mob-nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;padding:.3rem;transition:color .15s;color:var(--text3);border:none;background:transparent;font-family:inherit}
+/* ── New Bottom Tab Bar ── */
+.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(248,248,245,0.96);border-top:0.5px solid var(--border);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);z-index:100;grid-template-columns:repeat(5,1fr);align-items:stretch;height:56px;padding-bottom:env(safe-area-inset-bottom)}
+.mob-nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5px;cursor:pointer;padding:.3rem .1rem;transition:all .15s;color:var(--text3);border:none;background:transparent;font-family:inherit;position:relative;-webkit-tap-highlight-color:transparent}
 .mob-nav-item.on{color:var(--green)}
+.mob-nav-item.on::before{content:'';position:absolute;top:0;left:20%;right:20%;height:2.5px;background:var(--green);border-radius:0 0 3px 3px}
 .mob-nav-item svg{width:20px;height:20px;transition:transform .15s}
 .mob-nav-item.on svg{transform:translateY(-1px)}
 .mob-nav-item span{font-size:9px;font-weight:600;letter-spacing:.01em}
+/* ── Draggable AI FAB ── */
+#ai-fab{display:none;position:fixed;z-index:200;bottom:72px;left:16px;width:52px;height:52px;border-radius:50%;background:linear-gradient(145deg,#0c1f14,#166C40);box-shadow:0 4px 20px rgba(22,108,64,0.45);align-items:center;justify-content:center;cursor:grab;border:1.5px solid rgba(74,222,128,0.3);touch-action:none;user-select:none}
+#ai-fab:active{cursor:grabbing;transform:scale(1.08)}
+#ai-fab .ai-dot{position:absolute;bottom:3px;right:3px;width:10px;height:10px;background:#4ade80;border-radius:50%;border:2px solid #0c1f14;animation:pulse 2s infinite;box-shadow:0 0 6px rgba(74,222,128,0.6)}
+@media(max-width:700px){
+  #ai-fab{display:flex}
+}
 @media(max-width:700px){
   /* ── LAYOUT ── */
   .sb{display:none}
   .mob-nav{display:grid}
+  .ai-panel{display:none!important}
   body{font-size:13px}
   .main{height:100vh;display:flex;flex-direction:column}
 
@@ -358,7 +368,7 @@ select.fi{cursor:pointer}
   .infl-wrap{display:none}
 
   /* ── CONTENT ── */
-  .content{padding:.625rem .75rem;padding-bottom:72px;gap:.625rem;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .content{padding:.625rem .75rem;padding-bottom:80px;gap:.625rem;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 
   /* ── GRIDS → SINGLE COLUMN ── */
   .g2,.g3,.g3eq{display:flex;flex-direction:column;gap:.625rem}
@@ -4226,7 +4236,16 @@ function finishOnboarding(){
 // ══════════════════════════════
 function goMob(tab,el){
   document.querySelectorAll('.mob-nav-item').forEach(b=>b.classList.remove('on'));
-  if(el)el.classList.add('on');
+  // Highlight correct tab based on section
+  const tabMap={
+    'ov':'mni-ov','nw':'mni-ov',
+    'pen':'mni-assets','st':'mni-assets','re':'mni-assets','gml':'mni-assets',
+    'fire':'mni-plan','mc':'mni-plan','mkt':'mni-plan','salary':'mni-plan','ci':'mni-plan',
+    'lo':'mni-mgmt','ins':'mni-mgmt','settings':'mni-mgmt','estate':'mni-mgmt'
+  };
+  const activeId=tabMap[tab];
+  if(activeId){const btn=document.getElementById(activeId);if(btn)btn.classList.add('on');}
+  else if(el)el.classList.add('on');
   closeMobMenu();
   const ni=document.querySelector(`.ni[onclick*="go('${tab}'"]`);
   go(tab,ni||document.querySelector('.ni'));
@@ -4249,10 +4268,26 @@ function closeSectionsDrawer(){
 }
 function toggleMobMenu(){
   const m=$('mob-more-menu');
-  if(m)m.style.display=m.style.display==='none'||!m.style.display?'block':'none';
+  const bd=$('mob-more-backdrop');
+  if(!m)return;
+  const isOpen=m.style.transform==='translateY(0px)'||m.style.transform==='translateY(0)';
+  if(isOpen){closeMobMenu();}
+  else{
+    if(bd)bd.style.display='block';
+    m.style.display='block';
+    requestAnimationFrame(()=>{m.style.transform='translateY(0)';});
+    // highlight More tab
+    document.querySelectorAll('.mob-nav-item').forEach(b=>b.classList.remove('on'));
+    const moreBtn=document.getElementById('mni-more');if(moreBtn)moreBtn.classList.add('on');
+  }
 }
 function closeMobMenu(){
-  const m=$('mob-more-menu');if(m)m.style.display='none';
+  const m=$('mob-more-menu');
+  const bd=$('mob-more-backdrop');
+  if(!m)return;
+  m.style.transform='translateY(100%)';
+  if(bd)bd.style.display='none';
+  setTimeout(()=>{if(m.style.transform==='translateY(100%)')m.style.display='none';},320);
 }
 
 // ══════════════════════════════
@@ -5766,19 +5801,50 @@ document.addEventListener('DOMContentLoaded',()=>{
   נשמר אוטומטית
 </div>
 
-<!-- mobile nav removed -->
+<!-- BOTTOM TAB BAR -->
+<nav class="mob-nav" id="mob-nav" dir="rtl">
+  <button class="mob-nav-item on" id="mni-ov" onclick="goMob('ov',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span>סקירה</span>
+  </button>
+  <button class="mob-nav-item" id="mni-assets" onclick="goMob('pen',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>
+    <span>נכסים</span>
+  </button>
+  <button class="mob-nav-item" id="mni-plan" onclick="goMob('fire',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    <span>תכנון</span>
+  </button>
+  <button class="mob-nav-item" id="mni-mgmt" onclick="goMob('lo',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+    <span>ניהול</span>
+  </button>
+  <button class="mob-nav-item" id="mni-more" onclick="toggleMobMenu()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
+    <span>עוד</span>
+  </button>
+</nav>
 
-<!-- MOBILE MORE MENU -->
-<div id="mob-more-menu" style="display:none;position:fixed;bottom:60px;left:0;right:0;background:rgba(248,248,245,0.97);border-top:1px solid var(--border);z-index:99;padding:.75rem;backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);box-shadow:0 -4px 24px rgba(0,0,0,0.07)">
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem">
-    <button onclick="goMob('st',null);closeMobMenu()" style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:.7rem .25rem;font-size:10px;font-weight:600;color:var(--text2);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;transition:all .15s"><span style="font-size:20px">📈</span>השקעות</button>
-    <button onclick="goMob('re',null);closeMobMenu()" style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:.7rem .25rem;font-size:10px;font-weight:600;color:var(--text2);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;transition:all .15s"><span style="font-size:20px">🏠</span>נדל"ן</button>
-    <button onclick="goMob('ins',null);closeMobMenu()" style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:.7rem .25rem;font-size:10px;font-weight:600;color:var(--text2);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;transition:all .15s"><span style="font-size:20px">🔒</span>ביטוח</button>
-    <button onclick="goMob('lo',null);closeMobMenu()" style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:.7rem .25rem;font-size:10px;font-weight:600;color:var(--text2);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;transition:all .15s"><span style="font-size:20px">💳</span>הלוואות</button>
-    <button onclick="goMob('mc',null);closeMobMenu()" style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:.7rem .25rem;font-size:10px;font-weight:600;color:var(--text2);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;transition:all .15s"><span style="font-size:20px">🎲</span>Monte Carlo</button>
-    <button onclick="goMob('mkt',null);closeMobMenu()" style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:.7rem .25rem;font-size:10px;font-weight:600;color:var(--text2);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;transition:all .15s"><span style="font-size:20px">💡</span>שוק ההון</button>
-    <button onclick="goMob('gmل',null);closeMobMenu()" style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:.7rem .25rem;font-size:10px;font-weight:600;color:var(--text2);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;transition:all .15s"><span style="font-size:20px">🏦</span>גמל</button>
-    <button onclick="goMob('settings',null);closeMobMenu()" style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:.7rem .25rem;font-size:10px;font-weight:600;color:var(--text2);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;transition:all .15s"><span style="font-size:20px">⚙️</span>הגדרות</button>
+<!-- AI FAB (Draggable) -->
+<div id="ai-fab" onclick="handleFabClick()">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round"><path d="M12 2a9 9 0 0 1 9 9c0 2.4-1 4.6-2.5 6.2L12 22l-6.5-4.8A9 9 0 0 1 3 11 9 9 0 0 1 12 2z"/><circle cx="12" cy="11" r="3"/></svg>
+  <div class="ai-dot"></div>
+</div>
+
+<!-- MOBILE MORE MENU (bottom sheet) -->
+<div id="mob-more-backdrop" onclick="closeMobMenu()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);z-index:148"></div>
+<div id="mob-more-menu" dir="rtl" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-radius:24px 24px 0 0;z-index:149;padding:0 1rem calc(1.5rem + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)">
+  <div style="display:flex;justify-content:center;padding:12px 0 4px"><div style="width:36px;height:4px;background:var(--bg4);border-radius:2px"></div></div>
+  <div style="font-size:15px;font-weight:800;color:var(--text);padding:.25rem 0 .875rem">עוד סקשנים</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+    <button onclick="goMob('st',null);closeMobMenu()" style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px 4px 10px;font-size:10px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;-webkit-tap-highlight-color:transparent"><span style="font-size:22px">📈</span>השקעות</button>
+    <button onclick="goMob('re',null);closeMobMenu()" style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px 4px 10px;font-size:10px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;-webkit-tap-highlight-color:transparent"><span style="font-size:22px">🏡</span>נדל"ן</button>
+    <button onclick="goMob('gml',null);closeMobMenu()" style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px 4px 10px;font-size:10px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;-webkit-tap-highlight-color:transparent"><span style="font-size:22px">🏦</span>גמל</button>
+    <button onclick="goMob('ins',null);closeMobMenu()" style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px 4px 10px;font-size:10px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;-webkit-tap-highlight-color:transparent"><span style="font-size:22px">🔒</span>ביטוח</button>
+    <button onclick="goMob('mc',null);closeMobMenu()" style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px 4px 10px;font-size:10px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;-webkit-tap-highlight-color:transparent"><span style="font-size:22px">🎲</span>Monte Carlo</button>
+    <button onclick="goMob('mkt',null);closeMobMenu()" style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px 4px 10px;font-size:10px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;-webkit-tap-highlight-color:transparent"><span style="font-size:22px">💡</span>שוק ההון</button>
+    <button onclick="goMob('salary',null);closeMobMenu()" style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px 4px 10px;font-size:10px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;-webkit-tap-highlight-color:transparent"><span style="font-size:22px">💰</span>שכר נטו</button>
+    <button onclick="goMob('settings',null);closeMobMenu()" style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px 4px 10px;font-size:10px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:5px;-webkit-tap-highlight-color:transparent"><span style="font-size:22px">⚙️</span>הגדרות</button>
   </div>
 </div>
 
@@ -6155,6 +6221,74 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
   }
 
+})();
+</script>
+
+<!-- FAB Drag + AI Panel Logic -->
+<script>
+(function(){
+  const fab = document.getElementById('ai-fab');
+  if(!fab) return;
+
+  let isDragging = false;
+  let startX, startY, fabX, fabY;
+
+  function getPos(){
+    const r = fab.getBoundingClientRect();
+    return {x: r.left, y: r.top};
+  }
+
+  function setPos(x, y){
+    const maxX = window.innerWidth - fab.offsetWidth - 8;
+    const maxY = window.innerHeight - fab.offsetHeight - 8;
+    x = Math.max(8, Math.min(x, maxX));
+    y = Math.max(8, Math.min(y, maxY));
+    fab.style.left = x + 'px';
+    fab.style.bottom = 'auto';
+    fab.style.top = y + 'px';
+  }
+
+  // Touch drag
+  fab.addEventListener('touchstart', e=>{
+    const t = e.touches[0];
+    startX = t.clientX; startY = t.clientY;
+    const p = getPos();
+    fabX = p.x; fabY = p.y;
+    isDragging = false;
+  }, {passive: true});
+
+  fab.addEventListener('touchmove', e=>{
+    const t = e.touches[0];
+    const dx = t.clientX - startX;
+    const dy = t.clientY - startY;
+    if(Math.abs(dx) > 5 || Math.abs(dy) > 5) isDragging = true;
+    if(isDragging) setPos(fabX + dx, fabY + dy);
+  }, {passive: true});
+
+  // Mouse drag
+  fab.addEventListener('mousedown', e=>{
+    startX = e.clientX; startY = e.clientY;
+    const p = getPos();
+    fabX = p.x; fabY = p.y;
+    isDragging = false;
+    const onMove = e2=>{
+      const dx = e2.clientX - startX;
+      const dy = e2.clientY - startY;
+      if(Math.abs(dx) > 5 || Math.abs(dy) > 5) isDragging = true;
+      if(isDragging) setPos(fabX + dx, fabY + dy);
+    };
+    const onUp = ()=>{
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+    };
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  });
+
+  window.handleFabClick = function(){
+    if(isDragging){isDragging=false;return;}
+    if(typeof toggleAI === 'function') toggleAI();
+  };
 })();
 </script>
 </body>

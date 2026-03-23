@@ -3,7 +3,7 @@
    עודכן: אוטומטי עם כל דפלוי
 ═══════════════════════════════════════════ */
 
-const CACHE_NAME = 'numa-v3';
+const CACHE_NAME = 'numa-v4';
 const STATIC_ASSETS = [
   './',
   './index.html',
