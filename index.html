@@ -12,7 +12,7 @@ html{height:100%;overflow:hidden;-webkit-text-size-adjust:100%}
 body{background:#F2F2EE;display:flex;flex-direction:column;margin:0;padding:0;height:100%;overflow:hidden;direction:rtl;font-family:-apple-system,'Plus Jakarta Sans',sans-serif}
 
 /* ── DEVICE ── */
-.dev{flex:1;display:flex;flex-direction:column;background:#F2F2EE;position:relative;overflow:hidden;height:100vh;height:100dvh}
+.dev{flex:1;display:flex;flex-direction:column;background:#F2F2EE;position:relative;height:100vh;height:100dvh}
 .sb{display:none}
 .sb span{font-size:11px;font-weight:700;color:#111}
 
@@ -27,7 +27,7 @@ body{background:#F2F2EE;display:flex;flex-direction:column;margin:0;padding:0;he
 .notif-dot{position:absolute;top:5px;right:5px;width:6px;height:6px;background:#D93025;border-radius:50%;border:1.5px solid #fff}
 
 /* ── SCROLL ── */
-.scr{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;min-height:0}
+.scr{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;min-height:0}
 .scr::-webkit-scrollbar{display:none}
 
 /* ── BOTTOM NAV ── */
@@ -1692,6 +1692,7 @@ body{background:#F2F2EE;display:flex;flex-direction:column;margin:0;padding:0;he
   <button class="ni" id="ni-more" onclick="openS('more')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg><span>עוד</span></button>
 </div>
 
+</div><!-- /dev -->
 <!-- AI FAB -->
 <button class="ai-fab" id="ai-fab" onclick="toggleAI()">
   <div class="ai-dot"></div>
@@ -1720,6 +1721,8 @@ body{background:#F2F2EE;display:flex;flex-direction:column;margin:0;padding:0;he
     <button class="ai-send" onclick="sendMsg()">שלח</button>
   </div>
 </div>
+
+
 
 <!-- SHEET: כלים -->
 <div class="sbg" id="bg-tools" onclick="closeS('tools')"></div>
@@ -1866,7 +1869,7 @@ body{background:#F2F2EE;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
 
 </div><!-- /ob-overlay -->
-</div><!-- /dev -->
+
 
 <script>
 const $=id=>document.getElementById(id);
@@ -2541,7 +2544,7 @@ function obEnterApp(){
 
 
 <!-- ══ PWA Install Banner ══ -->
-<div id="pwa-install-banner" class="hidden" style="display:none!important">
+<div id="pwa-install-banner" style="display:none!important" class="hidden" style="display:none!important">
   <div class="pwa-icon">N</div>
   <div class="pwa-text">
     <strong>הוסף את Numa למסך הבית</strong>
