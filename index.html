@@ -604,57 +604,73 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </div>
   </div>
 
-  <!-- NUMA SCORE — Activity Ring -->
-  <div class="c" style="text-align:center;padding:16px" onclick="var bd=document.getElementById('score-breakdown');if(bd)bd.style.display=bd.style.display==='none'?'block':'none'">
-    <div style="position:relative;width:200px;height:200px;margin:0 auto">
-      <svg width="200" height="200" viewBox="0 0 200 200">
-        <style>
-          @keyframes ringDraw{from{stroke-dasharray:0 565}to{}}
-          .ring-seg{animation:ringDraw 1s ease-out both;stroke-linecap:round}
-        </style>
-        <!-- Background tracks -->
-        <circle cx="100" cy="100" r="88" fill="none" stroke="#E8DCC8" stroke-width="8" opacity=".4"/>
-        <circle cx="100" cy="100" r="76" fill="none" stroke="#E8DCC8" stroke-width="8" opacity=".4"/>
-        <circle cx="100" cy="100" r="64" fill="none" stroke="#E8DCC8" stroke-width="8" opacity=".4"/>
-        <circle cx="100" cy="100" r="52" fill="none" stroke="#E8DCC8" stroke-width="8" opacity=".4"/>
-        <!-- Active arcs (drawn by JS) -->
-        <circle id="ring-cashflow" cx="100" cy="100" r="88" fill="none" stroke="#2b3a5c" stroke-width="8" stroke-dasharray="0 553" stroke-linecap="round" transform="rotate(-90 100 100)" class="ring-seg" style="animation-delay:.1s"/>
-        <circle id="ring-savings" cx="100" cy="100" r="76" fill="none" stroke="#27ae60" stroke-width="8" stroke-dasharray="0 478" stroke-linecap="round" transform="rotate(-90 100 100)" class="ring-seg" style="animation-delay:.2s"/>
-        <circle id="ring-insurance" cx="100" cy="100" r="64" fill="none" stroke="#c8a96a" stroke-width="8" stroke-dasharray="0 402" stroke-linecap="round" transform="rotate(-90 100 100)" class="ring-seg" style="animation-delay:.3s"/>
-        <circle id="ring-planning" cx="100" cy="100" r="52" fill="none" stroke="#e07b5a" stroke-width="8" stroke-dasharray="0 327" stroke-linecap="round" transform="rotate(-90 100 100)" class="ring-seg" style="animation-delay:.4s"/>
-      </svg>
-      <!-- Center number -->
-      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-        <div style="font-size:42px;font-weight:800;color:#1E2D4A;line-height:1" id="score-num">0</div>
-        <div style="font-size:11px;color:#6B7A96;margin-top:4px">Numa Score</div>
+  <!-- NUMA SCORE — Single Donut Chart -->
+  <div class="c" style="padding:16px" onclick="var bd=document.getElementById('score-breakdown');if(bd)bd.style.display=bd.style.display==='none'?'block':'none'">
+    <div style="display:flex;align-items:center;gap:16px;direction:ltr">
+      <!-- Donut ring -->
+      <div style="position:relative;width:130px;height:130px;flex-shrink:0">
+        <svg width="130" height="130" viewBox="0 0 200 200">
+          <style>
+            @keyframes arcDraw{from{stroke-dasharray:0 565.49}to{}}
+            .ring-arc{animation:arcDraw .8s ease-out both}
+          </style>
+          <circle cx="100" cy="100" r="90" fill="none" stroke="#E8DCC8" stroke-width="16" opacity=".25"/>
+          <circle id="ring-cashflow" cx="100" cy="100" r="90" fill="none" stroke="#2b3a5c" stroke-width="16" stroke-dasharray="0 565.49" stroke-dashoffset="0" transform="rotate(-90 100 100)" class="ring-arc" style="animation-delay:.1s"/>
+          <circle id="ring-savings" cx="100" cy="100" r="90" fill="none" stroke="#27ae60" stroke-width="16" stroke-dasharray="0 565.49" stroke-dashoffset="-141.37" transform="rotate(-90 100 100)" class="ring-arc" style="animation-delay:.2s"/>
+          <circle id="ring-insurance" cx="100" cy="100" r="90" fill="none" stroke="#c8a96a" stroke-width="16" stroke-dasharray="0 565.49" stroke-dashoffset="-282.74" transform="rotate(-90 100 100)" class="ring-arc" style="animation-delay:.3s"/>
+          <circle id="ring-planning" cx="100" cy="100" r="90" fill="none" stroke="#e07b5a" stroke-width="16" stroke-dasharray="0 565.49" stroke-dashoffset="-424.12" transform="rotate(-90 100 100)" class="ring-arc" style="animation-delay:.4s"/>
+        </svg>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <div style="font-size:32px;font-weight:800;color:#1E2D4A;line-height:1" id="score-num">0</div>
+          <div style="font-size:9px;color:#6B7A96;margin-top:3px">Numa Score</div>
+        </div>
+      </div>
+      <!-- Legend -->
+      <div style="display:flex;flex-direction:column;gap:10px;direction:rtl;flex:1">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:10px;height:10px;border-radius:50%;background:#2b3a5c;flex-shrink:0"></div>
+          <div style="flex:1;font-size:12px;font-weight:600;color:#1E2D4A">תזרים</div>
+          <div style="font-size:11px;font-weight:700;color:#2b3a5c" id="ring-score-cf">—</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:10px;height:10px;border-radius:50%;background:#27ae60;flex-shrink:0"></div>
+          <div style="flex:1;font-size:12px;font-weight:600;color:#1E2D4A">חיסכון</div>
+          <div style="font-size:11px;font-weight:700;color:#27ae60" id="ring-score-sav">—</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:10px;height:10px;border-radius:50%;background:#c8a96a;flex-shrink:0"></div>
+          <div style="flex:1;font-size:12px;font-weight:600;color:#1E2D4A">ביטוח</div>
+          <div style="font-size:11px;font-weight:700;color:#c8a96a" id="ring-score-ins">—</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:10px;height:10px;border-radius:50%;background:#e07b5a;flex-shrink:0"></div>
+          <div style="flex:1;font-size:12px;font-weight:600;color:#1E2D4A">תכנון</div>
+          <div style="font-size:11px;font-weight:700;color:#e07b5a" id="ring-score-plan">—</div>
+        </div>
       </div>
     </div>
-    <div style="font-size:10px;color:#A8A8B0;margin-top:8px">הקש לפירוט ↓</div>
+    <div style="font-size:10px;color:#A8A8B0;margin-top:10px;text-align:center">הקש לפירוט ↓</div>
 
     <!-- Breakdown (hidden, toggled on tap) -->
     <div id="score-breakdown" style="display:none;margin-top:14px;text-align:right">
       <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:.5px solid rgba(30,45,74,.08)">
         <div style="width:10px;height:10px;border-radius:50%;background:#2b3a5c;flex-shrink:0"></div>
         <div style="flex:1;font-size:12px;font-weight:600;color:#1E2D4A">תזרים</div>
-        <div style="font-size:12px;font-weight:700;color:#2b3a5c" id="ring-score-cf">—</div>
         <div style="font-size:10px;color:#6B7A96;width:60px;text-align:left" id="ring-status-cf">חסר נתונים</div>
       </div>
       <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:.5px solid rgba(30,45,74,.08)">
         <div style="width:10px;height:10px;border-radius:50%;background:#27ae60;flex-shrink:0"></div>
         <div style="flex:1;font-size:12px;font-weight:600;color:#1E2D4A">חיסכון</div>
-        <div style="font-size:12px;font-weight:700;color:#27ae60" id="ring-score-sav">—</div>
         <div style="font-size:10px;color:#6B7A96;width:60px;text-align:left" id="ring-status-sav">חסר נתונים</div>
       </div>
       <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:.5px solid rgba(30,45,74,.08)">
         <div style="width:10px;height:10px;border-radius:50%;background:#c8a96a;flex-shrink:0"></div>
         <div style="flex:1;font-size:12px;font-weight:600;color:#1E2D4A">ביטוח</div>
-        <div style="font-size:12px;font-weight:700;color:#c8a96a" id="ring-score-ins">—</div>
         <div style="font-size:10px;color:#6B7A96;width:60px;text-align:left" id="ring-status-ins">חסר נתונים</div>
       </div>
       <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:.5px solid rgba(30,45,74,.08)">
         <div style="width:10px;height:10px;border-radius:50%;background:#e07b5a;flex-shrink:0"></div>
         <div style="flex:1;font-size:12px;font-weight:600;color:#1E2D4A">תכנון</div>
-        <div style="font-size:12px;font-weight:700;color:#e07b5a" id="ring-score-plan">—</div>
         <div style="font-size:10px;color:#6B7A96;width:60px;text-align:left" id="ring-status-plan">חסר נתונים</div>
       </div>
     </div>
@@ -2014,19 +2030,23 @@ function renderOvCards(c){
   if(leg.will==='yes') planScore+=25;
   if(leg.ben==='yes') planScore+=20;
   if(leg.poa==='yes') planScore+=20;
-  // Draw rings
-  function drawRing(id,score,circ){
+  // Draw single-ring donut — 4 quarter arcs on the same circle (r=90)
+  var CIRC=2*Math.PI*90; // 565.49
+  var QTR=CIRC/4; // 141.37
+  function drawArc(id,score,qIndex){
     var el=document.getElementById(id);
     if(!el)return;
-    var filled=circ*score/100;
-    el.setAttribute('stroke-dasharray',filled+' '+(circ-filled));
-    if(score===0) el.setAttribute('stroke','#E8DCC8');
+    var filled=QTR*score/100;
+    el.setAttribute('stroke-dasharray',filled+' '+(CIRC-filled));
+    el.setAttribute('stroke-dashoffset',(-QTR*qIndex).toString());
+    if(score===0){el.setAttribute('stroke-opacity','0.12');}
+    else{el.removeAttribute('stroke-opacity');}
   }
-  drawRing('ring-cashflow',cfScore,553);
-  drawRing('ring-savings',savScore,478);
-  drawRing('ring-insurance',insScore,402);
-  drawRing('ring-planning',planScore,327);
-  // Breakdown
+  drawArc('ring-cashflow',cfScore,0);
+  drawArc('ring-savings',savScore,1);
+  drawArc('ring-insurance',insScore,2);
+  drawArc('ring-planning',planScore,3);
+  // Legend scores
   function setRing(id,score){
     var el=document.getElementById(id);
     if(!el)return;
