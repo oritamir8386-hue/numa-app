@@ -1061,6 +1061,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div style="height:.5px;background:rgba(30,45,74,.12);margin:8px 0"></div>
     <div style="font-size:11px;font-weight:600;color:#1E2D4A;margin-bottom:4px">קרנות השתלמות</div>
     <div id="hsh-list"></div>
+    <div class="aib" style="margin-top:8px">הפקדה לפנסיה עד תקרה של ₪20,520/שנה פטורה ממס. קה"ש נזילה אחרי 6 שנים עם פטור ממס רווחי הון עד תקרה.</div>
   </div>
 
   <!-- ═══ 2. גמל להשקעה ═══ -->
@@ -1076,6 +1077,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
   <div class="c">
     <div id="gamel-list"><div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין גמל להשקעה — <span style="color:#A07840;cursor:pointer" onclick="openAddModal('gamel')">+ הוסף</span></div></div>
+    <div class="aib" style="margin-top:8px">גמל להשקעה — פטור ממס רווחי הון (25%) על הרווחים. נזיל בכל רגע, בניגוד לפנסיה.</div>
   </div>
 
   <!-- ═══ 3. השקעות ═══ -->
@@ -1101,6 +1103,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddAlt()">+ הוסף</button>
     </div>
     <div id="alt-list"></div>
+    <div class="aib" style="margin-top:8px">כלל 4%: אם יש לך ₪2.5M מושקעים, תוכל למשוך ₪100K/שנה מבלי שהקרן תיגמר. זה הבסיס לחישוב FIRE.</div>
   </div>
 
   <!-- ═══ 4. נדל"ן ═══ -->
@@ -1116,6 +1119,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
   <div class="c">
     <div id="re-list"></div>
+    <div class="aib" style="margin-top:8px">דירה למגורים היא לא השקעה — היא הוצאה. ספור רק נכסי השקעה (שכ"ד) כחלק מהתיק שלך.</div>
   </div>
 
   <!-- ═══ 5. הלוואות ═══ -->
@@ -1142,6 +1146,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div style="font-size:10px;color:#6B7A96">חודשי: <span style="font-weight:700" id="lo-monthly">₪0</span></div>
     </div>
     <div id="lo-list"><div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין הלוואות — לחץ + הוסף</div></div>
+    <div class="aib" style="margin-top:8px">עדיפות: סלק קודם הלוואות עם ריבית מעל 5%. ריבית על חוב היא ריבית דריבית הפוכה — עובדת נגדך.</div>
   </div>
   <!-- Amortization calculator — accordion -->
   <div class="c" style="padding:0;overflow:hidden">
@@ -1234,6 +1239,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div><div class="il">תשואה %</div><input class="inp" id="fire-ret" value="7" type="number" oninput="renderFIREPage()"/></div>
     </div>
     <button class="btn-g" onclick="renderFIREPage()">עדכן חישוב ▶</button>
+    <div class="aib" style="margin-top:8px">FIRE = Financial Independence, Retire Early. יעד: נכסים = הוצאות שנתיות × 25. כלל 4% אומר שאפשר למשוך 4% בשנה מבלי שהכסף ייגמר.</div>
   </div>
 
   <!-- ═══ 2. FIRE Chart ═══ -->
@@ -1368,7 +1374,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
         <!-- סיעוד -->
         <div style="background:#E8DCC8;border-radius:12px;padding:11px">
           <div style="display:flex;align-items:center;gap:8px">
-            <div style="font-size:16px">🧓</div>
+            <span class="ic" style="color:#6B7A96"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
             <div style="font-size:11.5px;font-weight:700;flex:1">ביטוח סיעוד</div>
             <select id="ins-care-status" class="inp" style="width:90px;margin:0;font-size:10px;padding:4px 6px" onchange="saveIns()">
               <option value="">מצב...</option><option value="yes">יש לי</option><option value="no">אין לי</option>
@@ -1377,6 +1383,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
         </div>
       </div>
       <div id="ins-summary" style="margin-top:10px;padding:10px;background:rgba(160,120,64,.05);border-radius:10px;font-size:10.5px;color:#64646A">מלא את הפרטים לסיכום אישי</div>
+      <div class="aib" style="margin-top:8px">ביטוח חיים מומלץ: כיסוי של 100× הכנסה חודשית. ביטוח אכ"ע: לפחות 75% מהשכר. סיעוד: חשוב מגיל 40+.</div>
     </div>
   </div>
 
@@ -1429,6 +1436,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
           <div style="font-size:10px;color:#64646A;margin-top:2px" id="leg-breakdown">הזן נכסים בדף השקעות לחישוב</div>
         </div>
       </div>
+      <div class="aib" style="margin-top:8px">ללא צוואה, העיזבון מתחלק לפי חוק הירושה — לא בהכרח לפי רצונך. עדכון מוטבים בפנסיה חשוב לא פחות מצוואה.</div>
     </div>
   </div>
 
