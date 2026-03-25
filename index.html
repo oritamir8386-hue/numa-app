@@ -651,38 +651,39 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div class="sec-div"><span class="sec-div-label">צמיחה</span><div class="sec-div-line"></div></div>
 
   <!-- NW CHART — growth timeline -->
-  <div class="c" style="padding:13px 13px 10px">
+  <div class="c" style="padding:13px 13px 10px;background:#fff">
     <div class="ch"><div class="ct">מסע הצמיחה שלך</div></div>
-    <svg id="nw-timeline-svg" width="100%" viewBox="0 0 300 120" preserveAspectRatio="xMidYMid meet" style="display:block">
+    <svg id="nw-timeline-svg" width="100%" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet" style="display:block">
       <defs>
         <linearGradient id="nwFillGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#A07840" stop-opacity="0.12"/>
-          <stop offset="100%" stop-color="#A07840" stop-opacity="0.01"/>
+          <stop offset="0%" stop-color="#A07840" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#A07840" stop-opacity="0"/>
         </linearGradient>
         <clipPath id="nwLineClip">
-          <rect x="0" y="0" width="300" height="120">
-            <animate attributeName="width" from="0" to="300" dur="1.2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+          <rect x="0" y="0" width="320" height="200">
+            <animate attributeName="width" from="0" to="320" dur="1.5s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
           </rect>
         </clipPath>
       </defs>
       <!-- Grid lines -->
-      <line x1="20" y1="20" x2="280" y2="20" stroke="#E8DCC8" stroke-width=".5"/>
-      <line x1="20" y1="40" x2="280" y2="40" stroke="#E8DCC8" stroke-width=".5"/>
-      <line x1="20" y1="60" x2="280" y2="60" stroke="#E8DCC8" stroke-width=".5"/>
-      <line x1="20" y1="80" x2="280" y2="80" stroke="#E8DCC8" stroke-width=".5"/>
-      <!-- Area fill (solid part) -->
+      <line x1="25" y1="25" x2="295" y2="25" stroke="#E8DCC8" stroke-width=".5"/>
+      <line x1="25" y1="55" x2="295" y2="55" stroke="#E8DCC8" stroke-width=".5"/>
+      <line x1="25" y1="85" x2="295" y2="85" stroke="#E8DCC8" stroke-width=".5"/>
+      <line x1="25" y1="115" x2="295" y2="115" stroke="#E8DCC8" stroke-width=".5"/>
+      <line x1="25" y1="145" x2="295" y2="145" stroke="#E8DCC8" stroke-width=".5"/>
+      <!-- Area fill -->
       <path id="nw-area-solid" d="" fill="url(#nwFillGrad)" clip-path="url(#nwLineClip)"/>
-      <!-- Solid line (historical) -->
-      <path id="nw-line-solid" d="" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#nwLineClip)"/>
-      <!-- Projected area fill -->
-      <path id="nw-area-proj" d="" fill="url(#nwFillGrad)" opacity=".5" clip-path="url(#nwLineClip)"/>
-      <!-- Projected line (dashed) -->
-      <path id="nw-line-proj" d="" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 3" clip-path="url(#nwLineClip)"/>
-      <!-- Milestone pins rendered by JS -->
+      <!-- Solid line -->
+      <path id="nw-line-solid" d="" fill="none" stroke="#A07840" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#nwLineClip)"/>
+      <!-- Projected line -->
+      <path id="nw-line-proj" d="" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round" stroke-dasharray="5 4" clip-path="url(#nwLineClip)"/>
+      <!-- Projected area — empty by default -->
+      <path id="nw-area-proj" d="" fill="none"/>
+      <!-- Milestones -->
       <g id="nw-milestones"></g>
       <!-- Today marker -->
       <g id="nw-today-marker"></g>
-      <!-- X axis labels -->
+      <!-- X axis -->
       <g id="nw-x-labels"></g>
     </svg>
   </div>
@@ -4966,26 +4967,27 @@ function renderNWTimelineSVG(){
 function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,todayId,xlabelsId,gradId,cv){
   var svg=document.getElementById(svgId);
   if(!svg) return;
-  var W=300,H=120,padL=25,padR=20,padT=15,padB=30;
+  var W=320,H=200,padL=25,padR=25,padT=20,padB=35;
   var chartW=W-padL-padR,chartH=H-padT-padB;
   var nw=cv.netWorth||0;
   var savY=Math.max(cv.monthlySavings||0,0)*12;
   var rate=0.07;
   var currentYear=new Date().getFullYear();
-  var startYear=currentYear-6;
+  var startYear=2020;
+  var numYears=currentYear-startYear;
   // Demo data when no real data
   var demoMode=nw<=0;
-  var demoVals=[200000,280000,350000,520000,680000,1100000,1847000];
+  var demoVals=[350000,520000,680000,900000,1100000,1500000,1847000];
   if(demoMode) nw=1847000;
   // Historical points (simulated growth backwards)
   var pts=[];
-  for(var i=0;i<=6;i++){
-    var val=demoMode?demoVals[i]:Math.max(nw*Math.pow(1+rate,i-6),0);
+  for(var i=0;i<=numYears;i++){
+    var val=demoMode?(demoVals[Math.min(i,demoVals.length-1)]):Math.max(nw*Math.pow(1+rate,i-numYears),0);
     pts.push({year:startYear+i,val:val,proj:false});
   }
-  // Projected 3 years forward
+  // Projected 4 years forward
   var lastVal=pts[pts.length-1].val;
-  for(var j=1;j<=3;j++){
+  for(var j=1;j<=4;j++){
     pts.push({year:currentYear+j,val:lastVal*Math.pow(1+rate,j)+(demoMode?0:savY*j),proj:true});
   }
   var maxVal=Math.max.apply(null,pts.map(function(p){return p.val;}))||1;
@@ -4994,7 +4996,7 @@ function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,toda
   function sy(val){return padT+chartH-Math.min(val/maxVal,1)*chartH;}
   // Split into solid and projected
   var solidPts=[],projPts=[];
-  var todayIdx=6; // index of current year
+  var todayIdx=numYears; // index of current year
   pts.forEach(function(p,i){
     var x=sx(i),y=sy(p.val);
     if(i<=todayIdx) solidPts.push({x:x,y:y});
@@ -5028,24 +5030,26 @@ function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,toda
   var projArea=document.getElementById(projAreaId);
   if(projLine) projLine.setAttribute('d',smoothPath(projPts));
   if(projArea) projArea.setAttribute('d',''); // no fill for projected
-  // Today marker — shifted slightly right so it doesn't overlap year label
+  // Today marker — premium design
   var todayG=document.getElementById(todayId);
   if(todayG && solidPts.length>0){
-    var tp={x:solidPts[solidPts.length-1].x+8,y:solidPts[solidPts.length-1].y};
+    var tp=solidPts[solidPts.length-1];
     todayG.innerHTML=
-      '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="10" fill="#1E2D4A" opacity=".08"/>'+
-      '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="5" fill="#1E2D4A"/>'+
-      '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="2.5" fill="#F5F2EC"/>'+
-      '<text x="'+tp.x+'" y="'+(padT+chartH+20)+'" text-anchor="middle" font-size="10" fill="#1E2D4A" font-family="inherit" font-weight="600">'+(demoMode?'דוגמה':fmt(nw))+'</text>';
+      '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="16" fill="#1E2D4A" opacity=".12"/>'+
+      '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="8" fill="#1E2D4A"/>'+
+      '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="3" fill="#F5F2EC"/>'+
+      '<text x="'+tp.x+'" y="'+(H-5)+'" text-anchor="middle" font-size="11" fill="#1E2D4A" font-family="inherit" font-weight="700">'+(demoMode?'דוגמה':'היום')+'</text>';
   }
-  // X axis labels
+  // X axis labels — skip today's year (marker shows it)
   var xlG=document.getElementById(xlabelsId);
   if(xlG){
     var labels='';
+    var step=pts.length>12?3:2;
     pts.forEach(function(p,i){
-      if(i%2===0||i===todayIdx){
+      if(i===todayIdx) return; // today marker handles this
+      if(i%step===0||i===pts.length-1){
         var x=sx(i);
-        labels+='<text x="'+x+'" y="'+(H-5)+'" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">'+(p.year===currentYear?p.year+'*':p.year)+'</text>';
+        labels+='<text x="'+x+'" y="'+(H-8)+'" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">'+p.year+'</text>';
       }
     });
     xlG.innerHTML=labels;
@@ -5054,17 +5058,22 @@ function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,toda
   var msG=document.getElementById(milestonesId);
   if(msG){
     var ms=ND.milestones||[];
-    var pins=[{year:startYear+2,label:'🏠 קניית דירה'},{year:startYear+5,label:'🎓 קה"ש נזיל'}];
+    var pins=[{year:2022,label:'🏠 קניית דירה'},{year:2024,label:'🎓 קה"ש נזיל'}];
     ms.forEach(function(m){pins.push({year:m.year||currentYear,label:m.text});});
     var html='';
-    pins.forEach(function(pin){
+    pins.forEach(function(pin,pi){
       var idx=pin.year-startYear;
       if(idx<0||idx>=pts.length) return;
       var x=sx(idx),y=sy(pts[idx].val);
-      html+='<line x1="'+x+'" y1="'+(y-18)+'" x2="'+x+'" y2="'+y+'" stroke="#A07840" stroke-width=".8" stroke-dasharray="2 2"/>'+
-        '<circle cx="'+x+'" cy="'+y+'" r="3" fill="#A07840"/>'+
-        '<rect x="'+(x-30)+'" y="'+(y-30)+'" width="60" height="14" rx="4" fill="#E8DCC8"/>'+
-        '<text x="'+x+'" y="'+(y-20)+'" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit" font-weight="500">'+pin.label+'</text>';
+      var labelW=pin.label.length*6+20;
+      var fadeDelay=1.6+pi*0.3;
+      html+='<g style="opacity:0;animation:fadeIn .4s '+fadeDelay+'s both">'+
+        '<line x1="'+x+'" y1="'+(y-22)+'" x2="'+x+'" y2="'+y+'" stroke="#C9A96E" stroke-width=".8" stroke-dasharray="2 2"/>'+
+        '<circle cx="'+x+'" cy="'+y+'" r="7" fill="#A07840"/>'+
+        '<circle cx="'+x+'" cy="'+y+'" r="5" fill="#A07840" stroke="#fff" stroke-width="2"/>'+
+        '<rect x="'+(x-labelW/2)+'" y="'+(y-36)+'" width="'+labelW+'" height="18" rx="8" fill="#F5F2EC" stroke="#E8DCC8" stroke-width=".5"/>'+
+        '<text x="'+x+'" y="'+(y-24)+'" text-anchor="middle" font-size="11" fill="#1E2D4A" font-family="inherit" font-weight="500">'+pin.label+'</text>'+
+        '</g>';
     });
     msG.innerHTML=html;
   }
