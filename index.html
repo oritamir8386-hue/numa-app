@@ -4141,39 +4141,47 @@ function obEnterApp(){
       <div class="auth-logo-sub">ב-5 דקות — גלה כמה כסף אתה לא מנצל</div>
     </div>
 
-    <!-- Tabs -->
-    <div class="auth-tabs">
-      <button id="tab-login" class="auth-tab on" onclick="authTab('login')">כניסה</button>
-      <button id="tab-signup" class="auth-tab" onclick="authTab('signup')">הרשמה חינמית</button>
-    </div>
-
-    <!-- Form -->
-    <div class="auth-form-card">
+    <!-- Google Sign In -->
+    <div class="auth-form-card" style="text-align:center">
       <div id="auth-error" class="auth-error"></div>
 
-      <div id="name-field" class="auth-field" style="display:none">
-        <div class="auth-label">שם מלא</div>
-        <input id="auth-name" type="text" class="auth-input" placeholder="הכנס שמך" style="direction:rtl">
+      <button onclick="signInWithGoogle()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1E2D4A;border:.5px solid rgba(255,255,255,.2);border-radius:13px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 12px rgba(0,0,0,.15);transition:transform .12s">
+        <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        המשך עם Google
+      </button>
+
+      <div style="display:flex;align-items:center;gap:12px;margin:16px 0">
+        <div style="flex:1;height:.5px;background:rgba(255,255,255,.12)"></div>
+        <span style="font-size:10px;color:rgba(255,255,255,.3)">או</span>
+        <div style="flex:1;height:.5px;background:rgba(255,255,255,.12)"></div>
       </div>
 
-      <div class="auth-field">
-        <div class="auth-label">אימייל</div>
-        <input id="auth-email" type="email" class="auth-input" placeholder="your@email.com">
-      </div>
+      <button onclick="showEmailAuth()" id="email-auth-toggle" style="width:100%;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:.5px solid rgba(255,255,255,.1);border-radius:11px;padding:12px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s">
+        כניסה עם אימייל וסיסמה
+      </button>
 
-      <div class="auth-field" style="margin-bottom:18px">
-        <div class="auth-label">סיסמה</div>
-        <input id="auth-password" type="password" class="auth-input" placeholder="לפחות 6 תווים"
-          onkeydown="if(event.key==='Enter')authSubmit()">
-      </div>
-
-      <button id="auth-btn" class="auth-submit" onclick="authSubmit()">כניסה →</button>
-
-      <div class="auth-forgot" id="forgot-link">
-        <span onclick="authForgot()">שכחתי סיסמה</span>
-      </div>
-      <div id="local-mode-note" style="display:none;margin-top:10px;padding:7px;background:rgba(160,120,64,.1);border-radius:8px;font-size:10.5px;color:rgba(61,82,120,.8);text-align:center">
-        🔒 מצב לוקאלי — נשמר רק במכשיר זה
+      <!-- Email form — hidden by default -->
+      <div id="email-auth-form" style="display:none;margin-top:14px;text-align:right">
+        <div class="auth-tabs" style="margin-bottom:14px">
+          <button id="tab-login" class="auth-tab on" onclick="authTab('login')">כניסה</button>
+          <button id="tab-signup" class="auth-tab" onclick="authTab('signup')">הרשמה</button>
+        </div>
+        <div id="name-field" class="auth-field" style="display:none">
+          <div class="auth-label">שם מלא</div>
+          <input id="auth-name" type="text" class="auth-input" placeholder="הכנס שמך" style="direction:rtl">
+        </div>
+        <div class="auth-field">
+          <div class="auth-label">אימייל</div>
+          <input id="auth-email" type="email" class="auth-input" placeholder="your@email.com">
+        </div>
+        <div class="auth-field" style="margin-bottom:14px">
+          <div class="auth-label">סיסמה</div>
+          <input id="auth-password" type="password" class="auth-input" placeholder="לפחות 6 תווים" onkeydown="if(event.key==='Enter')authSubmit()">
+        </div>
+        <button id="auth-btn" class="auth-submit" onclick="authSubmit()">כניסה →</button>
+        <div class="auth-forgot" id="forgot-link">
+          <span onclick="authForgot()">שכחתי סיסמה</span>
+        </div>
       </div>
     </div>
 
@@ -4552,6 +4560,25 @@ function updateUserDisplay(){}
 
 let authMode='login';
 
+async function signInWithGoogle(){
+  if(!_sb){_showErr('מתחבר... נסה שוב');initSupabase();return;}
+  try{
+    var _err=document.getElementById('auth-error');if(_err)_err.style.display='none';
+    await _sb.auth.signInWithOAuth({
+      provider:'google',
+      options:{redirectTo:window.location.href.split('?')[0]}
+    });
+  }catch(e){
+    var _err=document.getElementById('auth-error');
+    if(_err){_err.textContent='שגיאה בהתחברות Google';_err.style.display='block';}
+  }
+}
+function showEmailAuth(){
+  var form=document.getElementById('email-auth-form');
+  var btn=document.getElementById('email-auth-toggle');
+  if(form){form.style.display=form.style.display==='none'?'block':'none';}
+  if(btn)btn.style.display='none';
+}
 function authTab(mode){
   authMode=mode||'login';
   const isSignup=(authMode==='signup');
