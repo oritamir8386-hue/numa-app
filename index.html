@@ -587,6 +587,14 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <!-- ══ TAB 0: סקירה ══ -->
   <div class="tab-pane on" id="ov-tab-0">
 
+  <!-- WEEKLY DIGEST CARD -->
+  <div id="weekly-digest-card" style="display:none;background:#1E2D4A;border-radius:14px;padding:14px;position:relative">
+    <button onclick="dismissWeekly()" style="position:absolute;top:8px;left:8px;background:none;border:none;color:rgba(255,255,255,.4);font-size:14px;cursor:pointer">×</button>
+    <div style="font-size:10px;color:#C9A96E;font-weight:600;letter-spacing:.04em;margin-bottom:6px">📊 מה השתנה מאז הביקור האחרון</div>
+    <div id="weekly-insights" style="font-size:11px;color:rgba(255,255,255,.8);line-height:1.6"></div>
+    <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:8px" id="weekly-timestamp"></div>
+  </div>
+
   <!-- ① HERO — Net Worth dominant -->
   <div class="hc">
     <div style="font-size:10px;color:#A8A8B0;font-weight:600;margin-bottom:4px">שווי נטו כולל</div>
@@ -1359,6 +1367,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <!-- FIRE -->
 <div class="pg" id="pg-fire">
   <button class="bk" onclick="goB()">← חזרה</button>
+  <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:8px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.5">התחזיות מבוססות על הנחות בלבד ואינן מהוות ייעוץ השקעות.</div>
   <div class="hc" style="text-align:center;padding:18px">
     <div style="font-size:10px;color:#A8A8B0;margin-bottom:3px">יעד FIRE שלך</div>
     <div style="font-size:36px;font-weight:800;letter-spacing:-2px" id="fire-number">—</div>
@@ -1441,6 +1450,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <!-- הלוואות -->
 <div class="pg" id="pg-lo">
   <button class="bk" onclick="goB()">← חזרה</button>
+  <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:8px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.5">Numa מציגה מידע בלבד ואינה מתווכת פיננסית.</div>
   <div class="g2">
     <div class="m"><div class="ml">סה"כ חוב</div><div class="mv" style="color:#D93025" id="lo-total">—</div></div>
     <div class="m"><div class="ml">תשלום חודשי</div><div class="mv" style="color:#D93025" id="lo-monthly">—</div></div>
@@ -1520,6 +1530,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <!-- ביטוחים -->
 <div class="pg" id="pg-ins">
   <button class="bk" onclick="goB()">← חזרה</button>
+  <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:8px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.5">Numa מציגה מידע בלבד ואינה מתווכת פיננסית.</div>
   <!-- ביטוחים fillable -->
   <div class="c">
     <div class="ch"><div class="ct">🛡️ הביטוחים שלי
@@ -1719,6 +1730,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <!-- Monte Carlo -->
 <div class="pg" id="pg-mc">
   <button class="bk" onclick="goB()">← חזרה</button>
+  <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:8px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.5">התחזיות מבוססות על הנחות בלבד ואינן מהוות ייעוץ השקעות.</div>
   <!-- Dark Explainer -->
   <div class="mc-dark">
     <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.5;margin-bottom:5px">מה זה בכלל?</div>
@@ -1966,10 +1978,16 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div class="vis-row"><span class="vis-label">🔥 מסלול FIRE</span><button class="vis-toggle on" id="vis-fire-ov" onclick="toggleVis('fire-ov',this)"></button></div>
     <div class="vis-row"><span class="vis-label">⚡ פעולות מומלצות</span><button class="vis-toggle on" id="vis-recs" onclick="toggleVis('recs',this)"></button></div>
   </div>
-  <div class="c" style="background:rgba(217,48,37,.04);border-color:rgba(217,48,37,.12)">
-    <div class="ct" style="margin-bottom:5px;color:#D93025">⚖️ כתב ויתור</div>
-    <div style="font-size:10px;color:#64646A;line-height:1.6">Numa היא כלי תכנון בלבד. המידע אינו מהווה ייעוץ פיננסי מורשה. כל החלטה — התייעץ עם בעל רישיון.</div>
+  <div class="c" style="background:rgba(163,45,45,.04);border-color:rgba(163,45,45,.12)">
+  <div class="ct" style="margin-bottom:5px;color:#A32D2D">⚖️ תנאי שימוש</div>
+  <div style="font-size:10px;color:#3D5278;line-height:1.7">
+    Numa היא אפליקציה לניהול מידע פיננסי אישי.<br>
+    המידע המוצג אינו מהווה ייעוץ פיננסי, השקעות, מס או ביטוח מורשה.<br>
+    Numa אינה רשאית ואינה מורשית לתת ייעוץ פיננסי.<br>
+    כל החלטה פיננסית תתקבל באחריות המשתמש בלבד.<br>
+    מומלץ להתייעץ עם יועץ פיננסי מורשה לפני כל החלטה.
   </div>
+</div>
 
   <!-- Numa Philosophy -->
   <div class="c" style="background:#E8DCC8;border-color:rgba(160,120,64,.15)">
@@ -2144,6 +2162,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div class="ai-msgs" id="ai-msgs" id2="ai-ctx-msg">
     <div class="ai-msg-ai" id="ai-opening-msg">שמתי לב שלא עדכנת נתונים לאחרונה — רוצה שאבדוק מה השתנה?</div>
   </div>
+  <div style="padding:0 14px 4px;font-size:10px;color:rgba(255,255,255,.18);text-align:center">המידע לצורך מידע בלבד ואינו ייעוץ פיננסי מורשה.</div>
   <div class="ai-chips">
     <button class="ai-chip" onclick="sendChip('מה הסיכון הכי גדול שלי?')">מה הסיכון הכי גדול שלי?</button>
     <button class="ai-chip" onclick="sendChip('איך מגיע ל-FIRE מוקדם יותר?')">FIRE מוקדם יותר?</button>
@@ -2162,6 +2181,16 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <!-- ════════════════════════════════
      ONBOARDING OVERLAY
 ════════════════════════════════ -->
+<!-- CELEBRATION OVERLAY -->
+<div id="celebration-overlay" style="display:none;position:fixed;inset:0;z-index:800;background:rgba(30,45,74,.95);align-items:center;justify-content:center;text-align:center;padding:24px">
+  <div style="animation:authIn .4s both">
+    <div style="font-size:48px;margin-bottom:16px" id="celeb-emoji">🎉</div>
+    <div style="font-size:22px;font-weight:800;color:#F5F2EC;letter-spacing:-.5px;margin-bottom:8px" id="celeb-title">מזל טוב!</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:24px" id="celeb-body">—</div>
+    <button onclick="closeCelebration()" style="background:#A07840;color:#fff;border:none;border-radius:12px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">המשך →</button>
+  </div>
+</div>
+
 <div class="ob-overlay" id="ob-overlay" style="display:none">
 
   <!-- WELCOME -->
@@ -2201,8 +2230,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <button class="ob-back" onclick="obBack(1)">← חזרה</button>
       <div class="ob-dots"><div class="ob-dot a" id="od1-1"></div><div class="ob-dot" id="od1-2"></div><div class="ob-dot" id="od1-3"></div></div>
       <div class="ob-qico">💼</div>
-      <div class="ob-qtitle">איך אתה/את מרוויח/ה?</div>
-      <div class="ob-qsub">נתאים את התפריטים והכלים בשבילך</div>
+      <div class="ob-qtitle">מה הדאגה הכי גדולה שלך עם כסף?</div>
+      <div class="ob-qsub">ככה נדע על מה לשים דגש בשבילך</div>
     </div>
     <div class="ob-qbody">
       <div class="ob-qopts">
@@ -2221,8 +2250,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <button class="ob-back" onclick="obBack(2)">← חזרה</button>
       <div class="ob-dots"><div class="ob-dot d"></div><div class="ob-dot a"></div><div class="ob-dot"></div></div>
       <div class="ob-qico">🎂</div>
-      <div class="ob-qtitle">באיזה עשור אתה/את?</div>
-      <div class="ob-qsub">משנה את אופק ההשקעה ויעד ה-FIRE</div>
+      <div class="ob-qtitle">כמה בערך נכנס לך בחודש?</div>
+      <div class="ob-qsub">לא צריך להיות מדויק — נעדכן אחר כך</div>
     </div>
     <div class="ob-qbody">
       <div class="ob-qopts">
@@ -2241,8 +2270,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <button class="ob-back" onclick="obBack(3)">← חזרה</button>
       <div class="ob-dots"><div class="ob-dot d"></div><div class="ob-dot d"></div><div class="ob-dot a"></div></div>
       <div class="ob-qico">🎯</div>
-      <div class="ob-qtitle">מה הכי חשוב לך?</div>
-      <div class="ob-qsub">בחר עד 2 — נתמקד בזה בדשבורד</div>
+      <div class="ob-qtitle">יש לך פנסיה או קרן השתלמות?</div>
+      <div class="ob-qsub">זה משנה המון בתכנון — בחר מה שמתאים</div>
     </div>
     <div class="ob-qbody">
       <div class="ob-qopts">
@@ -2261,7 +2290,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div class="ob-screen ob-resbg" id="obs-r">
     <div class="ob-res-top">
       <div class="ob-res-hello" id="ob-r-hello">ברוך הבא ל-Numa 👋</div>
-      <div class="ob-res-title" id="ob-r-title">הדשבורד שלך מוכן</div>
+      <div class="ob-res-title" id="ob-r-title">יופי, יש לי תמונה ראשונית! בוא נצלול פנימה 🎯</div>
       <div class="ob-profile-pill" id="ob-r-pill"><span class="ob-pp-ico">💼</span><span class="ob-pp-txt" id="ob-r-profile">שכיר/ה חכם/ה</span></div>
       <div class="ob-focus-cards" id="ob-r-cards"></div>
     </div>
@@ -2410,6 +2439,28 @@ function render(){
   var nwEl = document.getElementById('hero-nw');
   if(nwEl){ nwEl.dataset.target = Math.round(c.netWorth); nwEl._counted = false; nwEl.textContent = fmt(c.netWorth); }
 
+  // Demo mode for empty state
+  var demoMode = c.totalIncome === 0 && c.totalAssets === 0;
+  var demoBanner = document.getElementById('demo-banner');
+  if(demoMode){
+    if(nwEl) nwEl.textContent = '₪1,847,320';
+    var scoreNum = document.getElementById('score-num');
+    if(scoreNum) scoreNum.textContent = '74';
+    var scoreLbl = document.getElementById('score-lbl');
+    if(scoreLbl) scoreLbl.textContent = 'טוב מאוד';
+    if(!demoBanner){
+      var b = document.createElement('div');
+      b.id = 'demo-banner';
+      b.style.cssText = 'background:rgba(160,120,64,.08);border:.5px solid rgba(160,120,64,.2);border-radius:10px;padding:8px 12px;text-align:center;font-size:11px;color:#A07840;font-weight:600;cursor:pointer';
+      b.innerHTML = '👆 זו דוגמה — הוסף נתונים לראות את המצב האמיתי שלך';
+      b.onclick = function(){ document.getElementById('gs-cashflow')?.scrollIntoView({behavior:'smooth'}); };
+      var heroCard = nwEl?.closest('.hc');
+      if(heroCard) heroCard.parentNode.insertBefore(b, heroCard.nextSibling);
+    }
+  } else if(demoBanner){
+    demoBanner.remove();
+  }
+
   // Score arc (circumference = 2π×23 ≈ 144.5)
   var arcEl = document.querySelector('.score-arc-anim');
   if(arcEl){
@@ -2451,6 +2502,7 @@ function render(){
   renderMissions(c);
   renderNWTrend(c);
   renderDigest(c);
+  checkWeeklyDigest();
   renderOvCards(c);
   renderLoans(c);
   renderOvSummaries(c);
@@ -2458,6 +2510,7 @@ function render(){
   renderUpcoming();
   renderMilestones();
   renderNWTimelineSVG();
+  checkCelebrations(c);
 }
 
 /* ── RENDER: ALL OVERVIEW DYNAMIC CARDS ── */
@@ -2798,6 +2851,61 @@ function renderDigest(c){
   if(c.totalIncome === 0){ el.textContent = '—'; return; }
   var sav = Math.max(c.monthlySavings, 0);
   el.textContent = sav > 0 ? '+'+fmt(sav) : '₪0';
+}
+
+/* ── WEEKLY DIGEST ── */
+function checkWeeklyDigest(){
+  var last = localStorage.getItem('numa_last_visit');
+  var now = Date.now();
+  var sixDays = 6*24*60*60*1000;
+  var card = document.getElementById('weekly-digest-card');
+  if(!card) return;
+  if(last && (now - parseInt(last)) < sixDays){ card.style.display='none'; return; }
+  var c = calc();
+  if(c.totalIncome === 0){ card.style.display='none'; return; }
+  var insights = [];
+  insights.push('שווי נטו: ' + fmt(c.netWorth));
+  if(c.savingsRate > 0) insights.push('חיסכון חודשי: ' + c.savingsRate + '%');
+  if(c.score > 0) insights.push('Numa Score: ' + c.score + '/100');
+  var el = document.getElementById('weekly-insights');
+  if(el) el.innerHTML = insights.map(function(t){return '• ' + t;}).join('<br>');
+  var ts = document.getElementById('weekly-timestamp');
+  if(ts) ts.textContent = new Date().toLocaleDateString('he-IL');
+  card.style.display = '';
+}
+function dismissWeekly(){
+  var card = document.getElementById('weekly-digest-card');
+  if(card) card.style.display = 'none';
+  localStorage.setItem('numa_last_visit', Date.now().toString());
+}
+
+/* ── CELEBRATION SCREEN ── */
+function checkCelebrations(c){
+  var celebrated = JSON.parse(localStorage.getItem('numa_celebrated')||'{}');
+  var show = null;
+  if(c.score >= 70 && !celebrated.score70){
+    show = {emoji:'🏆',title:'הציון שלך עבר 70!',body:'Numa Score '+c.score+'/100 — אתה מעל הממוצע. המשך כך!',key:'score70'};
+  } else if(c.fireAge > 0 && c.fireAge < 120 && !celebrated.fireSet){
+    show = {emoji:'🔥',title:'FIRE הוגדר!',body:'עצמאות כלכלית בגיל '+c.fireAge+' — הדרך התחילה.',key:'fireSet'};
+  } else if(c.monthlySavings > 0 && !celebrated.firstSaving){
+    show = {emoji:'💰',title:'חיסכון ראשון!',body:'אתה חוסך '+fmt(c.monthlySavings)+' בחודש. ריבית דריבית עושה את השאר.',key:'firstSaving'};
+  } else if(c.netWorth >= 1000000 && !celebrated.million){
+    show = {emoji:'🎯',title:'מיליון ₪!',body:'שווי הנטו שלך עבר את המיליון. אבן דרך משמעותית.',key:'million'};
+  }
+  if(show){
+    var ov = document.getElementById('celebration-overlay');
+    if(!ov) return;
+    document.getElementById('celeb-emoji').textContent = show.emoji;
+    document.getElementById('celeb-title').textContent = show.title;
+    document.getElementById('celeb-body').textContent = show.body;
+    ov.style.display = 'flex';
+    celebrated[show.key] = true;
+    localStorage.setItem('numa_celebrated', JSON.stringify(celebrated));
+  }
+}
+function closeCelebration(){
+  var ov = document.getElementById('celebration-overlay');
+  if(ov) ov.style.display = 'none';
 }
 
 /* ── RENDER: CASHFLOW PAGE ── */
@@ -3901,7 +4009,7 @@ function obShowWelcome(){
   var obName = (document.getElementById('ob-name-inp')||{}).value || ND.profile.name || '';
   if(obName) ND.profile.name = obName; saveToStorage();
   document.getElementById('ob-r-hello').textContent = obName ? 'ברוך הבא, ' + obName + '! 👋' : 'ברוך הבא ל-Numa 👋';
-  document.getElementById('ob-r-title').textContent='הדשבורד שלך מוכן — '+ageLabel[age];
+  document.getElementById('ob-r-title').textContent='יופי, יש לי תמונה ראשונית! בוא נצלול פנימה 🎯';
   document.getElementById('ob-r-pill').querySelector('.ob-pp-ico').textContent=prof.ico;
   document.getElementById('ob-r-pill').querySelector('.ob-pp-txt').textContent=prof.title+' · '+prof.desc;
 
@@ -4192,6 +4300,10 @@ function obEnterApp(){
         🔒 מצב לוקאלי — נשמר רק במכשיר זה
       </div>
     </div>
+
+    <div style="text-align:center;margin-top:12px;font-size:10px;color:rgba(255,255,255,.25);line-height:1.5">
+  Numa היא כלי מידע בלבד ואינה מהווה ייעוץ פיננסי מורשה.<br>כל החלטה פיננסית — התייעץ עם בעל רישיון.
+</div>
 
     <!-- Trust -->
     <div class="auth-trust">
@@ -4686,12 +4798,12 @@ function renderMissions(cv){
   var mb=document.getElementById('miss-badge');
   if(!ml) return;
   var steps=[
-    {label:'הכנסה חודשית',done:cv.totalIncome>0,hint:'עבור לתזרים → הכנסות',reward:'בסיס לכל החישובים',nav:"goP('cf')"},
-    {label:'הוצאות חודשיות',done:cv.totalExpenses>0,hint:'עבור לתזרים → הוצאות',reward:'תובנות חיסכון אישיות',nav:"goP('cf')"},
-    {label:'פנסיה וקה"ש',done:cv.penT+cv.hshT>0,hint:'עבור להשקעות → + הוסף',reward:'חישוב שווי נטו אמיתי',nav:"goP('st')"},
-    {label:'תיק השקעות',done:cv.invT>0,hint:'עבור להשקעות → + הוסף',reward:'ניתוח תשואה מול מס',nav:"goP('st')"},
-    {label:'מזומן / קרן חירום',done:ND.cash>0,hint:'עבור להשקעות → מזומן',reward:'חישוב כרית ביטחון',nav:"goP('st')"},
-    {label:'נדל"ן',done:cv.reV>0,hint:'עבור להשקעות → נדל"ן',reward:'שווי נטו מדויק',nav:"goP('st')"}
+    {label:'הכנסה חודשית',done:cv.totalIncome>0,hint:'אתה מחמיץ תחזית מדויקת — הזן הכנסה',reward:'בסיס לכל החישובים',nav:"goP('cf')"},
+    {label:'הוצאות חודשיות',done:cv.totalExpenses>0,hint:'בלי הוצאות, אי אפשר לדעת לאן הולך הכסף',reward:'תובנות חיסכון אישיות',nav:"goP('cf')"},
+    {label:'פנסיה וקה"ש',done:cv.penT+cv.hshT>0,hint:'אתה מחמיץ ₪800+ כל חודש — הוסף פנסיה',reward:'חישוב שווי נטו אמיתי',nav:"goP('st')"},
+    {label:'תיק השקעות',done:cv.invT>0,hint:'התמונה הפיננסית שלך לא שלמה',reward:'ניתוח תשואה מול מס',nav:"goP('st')"},
+    {label:'מזומן / קרן חירום',done:ND.cash>0,hint:'אתה מפסיד הטבת מס של ₪20,000/שנה',reward:'חישוב כרית ביטחון',nav:"goP('st')"},
+    {label:'נדל"ן',done:cv.reV>0,hint:'שווי הנטו שלך לא מדויק בלי נדל"ן',reward:'שווי נטו מדויק',nav:"goP('st')"}
   ];
   var done=steps.filter(function(s){return s.done;}).length;
   if(mb) mb.textContent=done+'/6 — +'+(done*6)+' נקודות';
