@@ -733,41 +733,61 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:8px" id="weekly-timestamp"></div>
   </div>
 
-  <!-- NW CHART -->
-  <div class="c" style="padding:10px 13px 8px;background:#fff">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+  <!-- NW CHART — Growth Timeline -->
+  <div class="c" style="padding:12px 13px 10px;background:#fff">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <div style="font-size:12px;font-weight:700;color:#1E2D4A">מסע הצמיחה שלך</div>
       <div style="font-size:10px;color:#6B7A96" id="nw-chart-range-lbl">6 שנים + 4 קדימה</div>
     </div>
-    <svg id="nw-timeline-svg" width="100%" viewBox="0 0 300 130" preserveAspectRatio="xMidYMid meet" style="display:block">
-      <defs>
-        <linearGradient id="nwFillGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#A07840" stop-opacity="0.15"/>
-          <stop offset="100%" stop-color="#A07840" stop-opacity="0"/>
-        </linearGradient>
-        <clipPath id="nwLineClip">
-          <rect x="0" y="0" width="300" height="130">
-            <animate attributeName="width" from="0" to="300" dur="1.2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
-          </rect>
-        </clipPath>
-      </defs>
-      <line x1="20" y1="15" x2="280" y2="15" stroke="#E8DCC8" stroke-width=".5"/>
-      <line x1="20" y1="35" x2="280" y2="35" stroke="#E8DCC8" stroke-width=".5"/>
-      <line x1="20" y1="55" x2="280" y2="55" stroke="#E8DCC8" stroke-width=".5"/>
-      <line x1="20" y1="75" x2="280" y2="75" stroke="#E8DCC8" stroke-width=".5"/>
-      <line x1="20" y1="95" x2="280" y2="95" stroke="#E8DCC8" stroke-width=".5"/>
-      <path id="nw-area-solid" d="" fill="url(#nwFillGrad)" clip-path="url(#nwLineClip)"/>
-      <path id="nw-line-solid" d="" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#nwLineClip)"/>
-      <path id="nw-line-proj" d="" fill="none" stroke="#A07840" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5 4" clip-path="url(#nwLineClip)"/>
-      <path id="nw-area-proj" d="" fill="none"/>
-      <g id="nw-milestones"></g>
-      <g id="nw-today-marker"></g>
-      <g id="nw-x-labels"></g>
-    </svg>
-    <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
+    <!-- Tap tooltip -->
+    <div id="nw-tooltip" style="display:none;position:absolute;background:#1E2D4A;color:#F5F2EC;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:600;white-space:nowrap;z-index:10;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.2);transform:translateX(-50%)">
+      <div id="nw-tooltip-year" style="font-size:9px;color:#C9A96E;margin-bottom:1px"></div>
+      <div id="nw-tooltip-val"></div>
+      <div id="nw-tooltip-diff" style="font-size:9px;color:rgba(255,255,255,.5);margin-top:1px"></div>
+    </div>
+    <div style="position:relative;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;margin:0 -13px;padding:0 13px" id="nw-scroll-wrap">
+      <svg id="nw-timeline-svg" width="100%" viewBox="0 0 300 170" preserveAspectRatio="xMidYMid meet" style="display:block;min-width:300px;cursor:crosshair" onclick="handleNWTap(event)" ontouchmove="handleNWTap(event)">
+        <defs>
+          <linearGradient id="nwFillGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#A07840" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#A07840" stop-opacity="0"/>
+          </linearGradient>
+          <clipPath id="nwLineClip">
+            <rect x="0" y="0" width="300" height="170">
+              <animate attributeName="width" from="0" to="300" dur="1.2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+            </rect>
+          </clipPath>
+        </defs>
+        <line x1="20" y1="15" x2="280" y2="15" stroke="#E8DCC8" stroke-width=".5"/>
+        <line x1="20" y1="35" x2="280" y2="35" stroke="#E8DCC8" stroke-width=".5"/>
+        <line x1="20" y1="55" x2="280" y2="55" stroke="#E8DCC8" stroke-width=".5"/>
+        <line x1="20" y1="75" x2="280" y2="75" stroke="#E8DCC8" stroke-width=".5"/>
+        <line x1="20" y1="95" x2="280" y2="95" stroke="#E8DCC8" stroke-width=".5"/>
+        <line x1="20" y1="115" x2="280" y2="115" stroke="#E8DCC8" stroke-width=".5"/>
+        <path id="nw-area-solid" d="" fill="url(#nwFillGrad)" clip-path="url(#nwLineClip)"/>
+        <path id="nw-line-solid" d="" fill="none" stroke="#A07840" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#nwLineClip)"/>
+        <path id="nw-line-proj" d="" fill="none" stroke="#A07840" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5 4" clip-path="url(#nwLineClip)">
+          <animate attributeName="stroke-dashoffset" from="9" to="0" dur="1.5s" repeatCount="indefinite"/>
+        </path>
+        <path id="nw-area-proj" d="" fill="none"/>
+        <g id="nw-milestones"></g>
+        <g id="nw-today-marker"></g>
+        <g id="nw-x-labels"></g>
+        <g id="nw-tap-marker" style="display:none"></g>
+      </svg>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
       <span style="font-size:10px;color:#6B7A96">2</span>
       <input type="range" id="nw-range-sl" min="2" max="50" step="1" value="10" style="flex:1;accent-color:#A07840" oninput="window._nwRange=parseInt(this.value);renderNWTimelineSVG()"/>
       <span style="font-size:10px;color:#6B7A96">50</span>
     </div>
+    <!-- Milestone input -->
+    <div style="display:flex;gap:6px;margin-top:8px;padding-top:8px;border-top:.5px solid rgba(30,45,74,.08)">
+      <input class="inp" id="milestone-inp" placeholder="אירוע חיים (חתונה, דירה...)" style="flex:1;margin:0;padding:6px 10px;font-size:11px"/>
+      <input class="inp" id="milestone-year" type="number" placeholder="שנה" style="width:65px;margin:0;padding:6px 8px;font-size:11px;text-align:center"/>
+      <button onclick="addMilestoneWithYear()" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:6px 10px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">+ הוסף</button>
+    </div>
+    <div id="milestone-list" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px"></div>
   </div>
 
   <!-- ⑤ ASSETS — donut breakdown -->
@@ -4984,27 +5004,71 @@ function initLegacyPage(){
 
 /* ══ CMD 03: MILESTONES ══ */
 if(!ND.milestones) ND.milestones = [];
-function addMilestone(){
-  var inp = document.getElementById('milestone-inp');
-  if(!inp||!inp.value.trim()) return;
-  if(!ND.milestones) ND.milestones=[];
-  var year = new Date().getFullYear();
-  ND.milestones.push({id:ndId(),text:inp.value.trim(),year:year});
-  inp.value='';
-  saveToStorage();
-  renderMilestones();
-  showToast('✓ אירוע נוסף','יופיע על ציר הזמן שלך');
-}
+function addMilestone(){addMilestoneWithYear();}
 function renderNWTimelineSVG(){
   var cv=calc();
   // Always draw — use demo data if no real data
   _drawNWLine('nw-timeline-svg','nw-line-solid','nw-area-solid','nw-line-proj','nw-area-proj','nw-milestones','nw-today-marker','nw-x-labels','nwFillGrad',cv);
 }
+// Store chart data globally for tap handler
+window._nwChartData={pts:[],startYear:0,todayIdx:0,nw:0};
+function handleNWTap(e){
+  var svg=document.getElementById('nw-timeline-svg');
+  if(!svg||!window._nwChartData.pts.length) return;
+  var rect=svg.getBoundingClientRect();
+  var clientX=e.touches?e.touches[0].clientX:e.clientX;
+  var svgX=(clientX-rect.left)/rect.width*300;
+  var cd=window._nwChartData;
+  var W=300,padL=20,padR=20,chartW=W-padL-padR;
+  // Find closest point
+  var closest=0,minDist=999;
+  cd.pts.forEach(function(p,i){
+    var px=padL+i/(cd.pts.length-1)*chartW;
+    var d=Math.abs(px-svgX);
+    if(d<minDist){minDist=d;closest=i;}
+  });
+  var pt=cd.pts[closest];
+  var tooltip=document.getElementById('nw-tooltip');
+  var ttYear=document.getElementById('nw-tooltip-year');
+  var ttVal=document.getElementById('nw-tooltip-val');
+  var ttDiff=document.getElementById('nw-tooltip-diff');
+  if(!tooltip) return;
+  ttYear.textContent=pt.year+(pt.proj?' (תחזית)':'');
+  ttVal.textContent='₪'+Math.round(pt.val).toLocaleString();
+  var diff=pt.val-cd.nw;
+  ttDiff.textContent=diff>=0?'+₪'+Math.round(diff).toLocaleString()+' מהיום':'-₪'+Math.round(Math.abs(diff)).toLocaleString()+' מהיום';
+  var px=padL+closest/(cd.pts.length-1)*chartW;
+  var pxPct=(px/300)*100;
+  tooltip.style.display='block';
+  tooltip.style.left=pxPct+'%';
+  tooltip.style.top='-4px';
+  // Draw tap marker on SVG
+  var tapG=document.getElementById('nw-tap-marker');
+  if(tapG){
+    var H=170,padT=12,padB=35,chartH=H-padT-padB;
+    var maxVal=Math.max.apply(null,cd.pts.map(function(p){return p.val;}))||1;
+    var y=padT+chartH-Math.min(pt.val/maxVal,1)*chartH;
+    tapG.style.display='';
+    tapG.innerHTML='<line x1="'+px+'" y1="'+padT+'" x2="'+px+'" y2="'+(H-padB)+'" stroke="rgba(30,45,74,.15)" stroke-width="1" stroke-dasharray="3 3"/>'+
+      '<circle cx="'+px+'" cy="'+y+'" r="5" fill="#1E2D4A" stroke="#F5F2EC" stroke-width="2"/>';
+  }
+}
+function addMilestoneWithYear(){
+  var inp=document.getElementById('milestone-inp');
+  var yrInp=document.getElementById('milestone-year');
+  if(!inp||!inp.value.trim()) return;
+  if(!ND.milestones) ND.milestones=[];
+  var year=parseInt(yrInp?.value)||new Date().getFullYear();
+  ND.milestones.push({id:ndId(),text:inp.value.trim(),year:year});
+  inp.value='';if(yrInp)yrInp.value='';
+  saveToStorage();renderMilestones();renderNWTimelineSVG();
+  showToast('אירוע נוסף לציר הזמן');
+}
 function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,todayId,xlabelsId,gradId,cv){
   var svg=document.getElementById(svgId);
   if(!svg) return;
-  var W=300,H=130,padL=20,padR=20,padT=12,padB=25;
-  var chartW=W-padL-padR,chartH=H-padT-padB;
+  var W=300,H=170,padL=20,padR=20,padT=12,padB=35;
+  var chartH=H-padT-padB;
   var nw=cv.netWorth||0;
   var savY=Math.max(cv.monthlySavings||0,0)*12;
   var rate=0.07;
@@ -5016,6 +5080,10 @@ function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,toda
   if(histYears<1)histYears=1;
   if(projYears<1)projYears=1;
   var startYear=currentYear-histYears;
+  // Make chart wider for more years — horizontally scrollable
+  if(totalRange>15){W=Math.min(totalRange*22,800);svg.setAttribute('viewBox','0 0 '+W+' '+H);svg.style.minWidth=W+'px';}
+  else{W=300;svg.setAttribute('viewBox','0 0 300 '+H);svg.style.minWidth='300px';}
+  var chartW=W-padL-padR;
   // Update label
   var rangeLbl=document.getElementById('nw-chart-range-lbl');
   if(rangeLbl) rangeLbl.textContent=histYears+' שנים + '+projYears+' קדימה';
@@ -5032,6 +5100,8 @@ function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,toda
     pts.push({year:currentYear+j,val:lastVal*Math.pow(1+rate,j)+(demoMode?0:savY*j),proj:true});
   }
   var maxVal=Math.max.apply(null,pts.map(function(p){return p.val;}))||1;
+  // Store for tap handler
+  window._nwChartData={pts:pts,startYear:startYear,todayIdx:todayIdx,nw:nw};
   // Scale function
   function sx(idx){return padL+idx/(pts.length-1)*chartW;}
   function sy(val){return padT+chartH-Math.min(val/maxVal,1)*chartH;}
@@ -5079,7 +5149,12 @@ function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,toda
       '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="16" fill="#1E2D4A" opacity=".12"/>'+
       '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="8" fill="#1E2D4A"/>'+
       '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="3" fill="#F5F2EC"/>'+
-      '<text x="'+tp.x+'" y="'+(H-3)+'" text-anchor="middle" font-size="10" fill="#1E2D4A" font-family="inherit" font-weight="700">'+currentYear+'</text>';
+      '<text x="'+tp.x+'" y="'+(H-18)+'" text-anchor="middle" font-size="10" fill="#1E2D4A" font-family="inherit" font-weight="700">'+currentYear+'</text>';
+    // Hide tap marker when redrawing
+    var tapM=document.getElementById('nw-tap-marker');
+    if(tapM) tapM.style.display='none';
+    var tooltip=document.getElementById('nw-tooltip');
+    if(tooltip) tooltip.style.display='none';
   }
   // X axis labels — skip today's year (marker shows it)
   var xlG=document.getElementById(xlabelsId);
@@ -5090,7 +5165,7 @@ function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,toda
       if(i===todayIdx) return; // today marker handles this
       if(i%step===0||i===pts.length-1){
         var x=sx(i);
-        labels+='<text x="'+x+'" y="'+(H-8)+'" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">'+p.year+'</text>';
+        labels+='<text x="'+x+'" y="'+(H-18)+'" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">'+p.year+'</text>';
       }
     });
     xlG.innerHTML=labels;
