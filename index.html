@@ -2728,7 +2728,8 @@ function renderCF(c){
   function _bindInc(id,key){
     var el=$( id);if(!el)return;
     if(!el._bound){el._bound=true;el.value=ND.income[key]||'';}
-    el.oninput=function(){ND.income[key]=parseNum(this.value);saveToStorage();render();};
+    el.oninput=function(){ND.income[key]=parseNum(this.value);saveToStorage();};
+    el.onblur=function(){render();};
   }
 
   // Summary rows
