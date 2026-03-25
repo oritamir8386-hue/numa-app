@@ -1601,7 +1601,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 </div><!-- /dev -->
 <!-- AI FAB -->
 <button class="ai-fab" id="ai-fab">
-  <span style="font-size:18px;font-weight:800;color:#F5F2EC;line-height:1;pointer-events:none">N</span>
+  <span style="font-size:18px;font-weight:800;color:#C9A96E;line-height:1;pointer-events:none">N</span>
   <div class="ai-badge" id="ai-badge" style="pointer-events:none"></div>
   <div class="ai-fab-label" id="ai-fab-label">היי, אני הסוכן שלך</div>
 </button>
@@ -4518,7 +4518,7 @@ function renderMissions(cv){
 /* ── SALARY CALCULATOR ── */
 function calcSalary(){
   var gross=parseFloat(document.getElementById('sal-gross')?.value)||0;
-  if(gross<=0){ document.getElementById('sal-results').style.display='none'; document.getElementById('sal-net-hero').textContent='—'; document.getElementById('sal-sub-hero').textContent='הכנס שכר ברוטו לחישוב'; return; }
+  if(gross<=0){ document.getElementById('sal-results').style.display='none'; document.getElementById('sal-net-hero').innerHTML='<span style="font-size:16px;color:#6B7A96">—</span>'; document.getElementById('sal-sub-hero').textContent='הכנס שכר ברוטו למעלה'; return; }
   var credits=parseFloat(document.getElementById('sal-credits')?.value)||2.25;
   var penPct=parseFloat(document.getElementById('sal-pen-pct')?.value)||6;
   var hshPct=parseFloat(document.getElementById('sal-hsh-pct')?.value)||2.5;
@@ -4585,7 +4585,7 @@ function calcRaise(){
   var raise=parseFloat(document.getElementById('sal-raise')?.value)||0;
   var el=document.getElementById('sal-raise-net');
   if(!el) return;
-  if(!raise||!window._salGross){el.textContent='—';return;}
+  if(!raise||!window._salGross){el.textContent='הזן סכום העלאה';el.style.cssText='font-size:11px;color:#6B7A96';return;}
   var newGross=window._salGross+raise;
   // estimate net gain (marginal rate approx)
   var marginalRate=window._salGross>21420?0.47:window._salGross>16150?0.36:0.25;
@@ -4652,7 +4652,10 @@ function saveLegacy(){
   var c=calc();
   var legVal=document.getElementById('leg-val');
   var legBreak=document.getElementById('leg-breakdown');
-  if(legVal) legVal.textContent=c.netWorth>0?fmt(c.netWorth):'הזן נכסים לחישוב';
+  if(legVal){
+    if(c.netWorth>0) legVal.textContent=fmt(c.netWorth);
+    else legVal.innerHTML='<span style="font-size:13px;color:#6B7A96">הזן נכסים</span>';
+  }
   if(legBreak && c.netWorth>0){
     legBreak.textContent=(sp?fmt(c.netWorth*sp/100)+' לבן/בת זוג':'')+
       (kp?' · '+fmt(c.netWorth*kp/100)+' לילדים':'');
@@ -4732,13 +4735,16 @@ function updateInvMiniChart(){
   var future = start * Math.pow(1+rate, yrs);
   if(totalMonthly > 0) future += totalMonthly * 12 * ((Math.pow(1+rate,yrs)-1)/rate);
   var fvEl = document.getElementById('inv-future-val');
-  if(fvEl) fvEl.textContent = (start>0||totalMonthly>0) ? fmt(Math.round(future)) : 'הזן נתונים';
+  if(fvEl){
+    if(start>0||totalMonthly>0) fvEl.textContent=fmt(Math.round(future));
+    else fvEl.innerHTML='<span style="font-size:13px;color:#6B7A96">הוסף נכסים לתחזית</span>';
+  }
 
   // Mini chart SVG bars
   var mc = document.getElementById('inv-mini-chart');
   if(!mc) return;
   if(start<=0 && totalMonthly<=0){
-    mc.innerHTML = '<div style="font-size:10px;color:#A8A8B0;padding:8px 0;text-align:center">הוסף נכסים לראות תחזית</div>';
+    mc.innerHTML = '<div style="text-align:center;padding:10px 0"><div style="font-size:18px;margin-bottom:3px">📈</div><div style="font-size:10px;color:#6B7A96">הוסף נכסים כדי לראות תחזית צמיחה</div></div>';
     return;
   }
   var steps = 6;
@@ -5088,8 +5094,8 @@ function calcPortfolio(){
   var resEl=document.getElementById('sim-result');
   var chartWrap=document.getElementById('sim-chart-wrap');
   if(!start && !mo){
-    if(valEl){valEl.textContent='—';valEl.style.color='#888';}
-    if(subEl) subEl.textContent='';
+    if(valEl){valEl.innerHTML='<span style="font-size:16px;color:#6B7A96">—</span>';valEl.style.color='#888';}
+    if(subEl) subEl.textContent='הזן סכום התחלתי או הפקדה חודשית';
     if(chartWrap) chartWrap.innerHTML='';
     return;
   }
@@ -5182,9 +5188,9 @@ function runMonteCarlo(){
   var monthlyDep=cv.monthlyDeposits||0;
   if(start<=0&&monthlyDep<=0){
     var el=document.getElementById('mc-success');
-    if(el) el.textContent='—';
+    if(el) el.innerHTML='<span style="font-size:16px;color:#6B7A96">—</span>';
     var sub=document.getElementById('mc-sub');
-    if(sub) sub.textContent='הוסף נכסים לחישוב';
+    if(sub) sub.innerHTML='<div style="font-size:18px;margin-bottom:3px">🎲</div><div style="font-size:10px;color:#6B7A96;margin-bottom:5px">גלה את סיכויי ההצלחה של התיק שלך</div><button onclick="goP(\'assets\')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:5px 12px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit">הוסף נכסים →</button>';
     return;
   }
   var realReturn=avgReturn-inflation;
@@ -5252,10 +5258,10 @@ function calcCompound(){
   var totalEl=document.getElementById('ci-total');
   var chartEl=document.getElementById('ci-chart');
   if((!start&&!monthly)||!years){
-    if(investedEl) investedEl.textContent='—';
-    if(gainEl) gainEl.textContent='—';
-    if(totalEl) totalEl.textContent='—';
-    if(chartEl) chartEl.innerHTML='';
+    if(investedEl) investedEl.textContent='₪0';
+    if(gainEl) gainEl.textContent='₪0';
+    if(totalEl) totalEl.textContent='₪0';
+    if(chartEl) chartEl.innerHTML='<div style="text-align:center;padding:10px 0"><div style="font-size:18px;margin-bottom:3px">💰</div><div style="font-size:10px;color:#6B7A96">הזן סכום ושנים כדי לראות את כוח הריבית דריבית</div></div>';
     return;
   }
   var future=start*Math.pow(1+rate,years)+(monthly>0?monthly*12*((Math.pow(1+rate,years)-1)/rate):0);
@@ -5379,7 +5385,7 @@ function renderScenarios(){
     chartEl.innerHTML='<svg width="100%" viewBox="0 0 200 '+(H+12)+'" style="display:block;margin:0 -4px">'+scGrid+bars+
       '<line x1="0" y1="'+H+'" x2="200" y2="'+H+'" stroke="rgba(30,45,74,.08)" stroke-width=".5"/></svg>';
   }else if(chartEl){
-    chartEl.innerHTML='<div style="font-size:10.5px;color:#A8A8B0;padding:12px 0;text-align:center">הזן נתונים כדי לראות השוואה</div>';
+    chartEl.innerHTML='<div style="text-align:center;padding:14px 0"><div style="font-size:20px;margin-bottom:4px">📊</div><div style="font-size:11px;color:#6B7A96;margin-bottom:6px">הזן נתונים כדי לראות השוואת תיק</div><button onclick="goP(\'assets\')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:5px 12px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit">הוסף נכסים →</button></div>';
   }
 }
 
