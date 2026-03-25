@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <script>
 // Preview bypass — runs synchronously before anything else
-window.PREVIEW_MODE = true; // Auth disabled — open access
+window.PREVIEW_MODE = false; // Auth enabled — requires sign-in
 </script>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -542,7 +542,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
 </head>
 <body>
-<div class="dev">
+<div class="dev" style="display:none">
 <div class="sb"><span>9:41</span><span>●●● 🔋</span></div>
 <div class="top">
   <div style="display:flex;flex-direction:column;gap:1px">
@@ -3845,7 +3845,9 @@ function obEnterApp(){
 <!-- AUTH SCREENS — Numa v2 Design -->
 <style>
 #auth-screen{
-  display:none!important;
+  position:fixed;inset:0;z-index:99999;min-height:100vh;min-height:-webkit-fill-available;
+  display:flex;align-items:center;justify-content:center;
+  font-family:-apple-system,'Plus Jakarta Sans',sans-serif;
 }
 .auth-bg{
   position:absolute;inset:0;
@@ -4404,8 +4406,7 @@ function _showApp(isNewLogin=false){
   const as=$('auth-screen');if(as)as.style.display='none';document.body.style.overflow='';
   const vs=$('verify-screen');if(vs)vs.style.display='none';
   // Show app
-  const m=document.getElementById('main');if(m)m.style.removeProperty('display');
-  document.querySelectorAll('.sb,.topbar,.mob-nav,.ai-panel').forEach(el=>el.style.removeProperty('display'));
+  var dev=document.querySelector('.dev');if(dev)dev.style.removeProperty('display');
   // Update user display
   if(currentUser){
     const name=currentUser.user_metadata?.name||currentUser.user_metadata?.full_name||currentUser.email?.split('@')[0]||'';
@@ -4455,12 +4456,10 @@ function _showApp(isNewLogin=false){
 }
 
 function _showAuth(){
-  if(window.PREVIEW_MODE)return; // preview — never show auth
-  // Show auth screen
+  if(window.PREVIEW_MODE)return;
   const as=$('auth-screen');if(as)as.style.display='flex';
-  // Hide entire app
-  const m=document.getElementById('main');if(m)m.style.display='none';
-  document.querySelectorAll('.sb,.topbar,.mob-nav,.ai-panel').forEach(el=>el.style.display='none');
+  // Hide app
+  var dev=document.querySelector('.dev');if(dev)dev.style.display='none';
 }
 
 // Compatibility aliases
