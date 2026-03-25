@@ -593,7 +593,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div id="weekly-digest-card" style="display:none;background:#1E2D4A;border-radius:14px;padding:14px;position:relative">
     <button onclick="dismissWeekly()" style="position:absolute;top:8px;left:8px;background:none;border:none;color:rgba(255,255,255,.4);font-size:14px;cursor:pointer">×</button>
     <div style="font-size:10px;color:#C9A96E;font-weight:600;letter-spacing:.04em;margin-bottom:6px">📊 מה השתנה מאז הביקור האחרון</div>
-    <div id="weekly-insights" style="font-size:11px;color:rgba(255,255,255,.8);line-height:1.6"></div>
+    <div id="weekly-insights" style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.6"></div>
     <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:8px" id="weekly-timestamp"></div>
   </div>
 
@@ -783,7 +783,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div class="c">
       <div class="ch"><div class="ct">הכנסות חודשיות (נטו)</div></div>
       <div class="fi2">
-        <div><div class="il">הכנסה שלי</div><input class="inp" id="inc-my" placeholder="₪ הכנסה שלי" type="number"/></div>
+        <div><div class="il">הכנסה שלי</div><input class="inp" id="inc-my" placeholder="₪ 0" type="number"/></div>
         <div><div class="il">בן/בת זוג</div><input class="inp" id="inc-partner" placeholder="₪ 0" type="number"/></div>
       </div>
       <div><div class="il">הכנסות נוספות (שכ"ד / פרילנס)</div><input class="inp" id="inc-extra" placeholder="₪ אופציונלי" type="number"/></div>
@@ -1109,7 +1109,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <!-- ══════════════════ נכסים — Hub (merged pg-st + pg-lo) ══════════════════ -->
 <div class="pg" id="pg-assets">
   <!-- Compact sticky header -->
-  <div style="background:#1E2D4A;border-radius:12px;padding:10px 14px;position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;max-height:60px">
+  <div style="background:#1E2D4A;border-radius:12px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;max-height:60px">
     <div>
       <div style="font-size:10px;color:rgba(255,255,255,.45)">תיק כולל</div>
       <div style="font-size:20px;font-weight:800;color:#F5F2EC;letter-spacing:-.5px" id="inv-total">—</div>
@@ -2190,7 +2190,7 @@ function render(){
     if(lbl.textContent.includes('FIRE')){
       val.textContent = c.fireAge;
       val.style.color='#BA7517';
-      if(sub) sub.textContent = 'עוד '+(c.fireAge - ND.profile.age)+' שנים';
+      if(sub) sub.textContent = (c.fireAge - ND.profile.age)<=0?'הגעת ליעד!':'עוד '+(c.fireAge - ND.profile.age)+' שנים';
     }
     if(lbl.textContent.includes('חיסכון')){
       val.textContent = c.savingsRate+'%';
@@ -2226,7 +2226,7 @@ function renderOvCards(c){
   // FIRE hero pill + metric cards
   var mvf=$('mv-fire'),msf=$('ms-fire');
   if(mvf) mvf.textContent=c.totalIncome>0?'עצמאות בגיל '+c.fireAge:'—';
-  if(msf) msf.textContent=c.totalIncome>0?'· עוד '+(c.fireAge-ND.profile.age)+' שנים':'הזן נתונים';
+  if(msf) msf.textContent=c.totalIncome>0?((c.fireAge-ND.profile.age)<=0?'הגעת ליעד!':'· עוד '+(c.fireAge-ND.profile.age)+' שנים'):'הזן נתונים';
 
   // Asset breakdown
   var total=c.totalAssets;
@@ -2234,10 +2234,10 @@ function renderOvCards(c){
   if(atEl) atEl.textContent=total>0?fmt(total):'—';
   var pct=function(v){return total>0?Math.round(v/total*100)+'%':'—';};
   var pen=$('ap-pen'),re=$('ap-re'),inv=$('ap-inv'),cash=$('ap-cash');
-  if(pen) pen.textContent=pct(c.penT+c.hshT);
-  if(re)  re.textContent=pct(c.reV);
-  if(inv) inv.textContent=pct(c.invT);
-  if(cash) cash.textContent=pct(ND.cash);
+  if(pen) pen.textContent=pct(c.penT+c.hshT)+' · '+fmt(c.penT+c.hshT);
+  if(re)  re.textContent=pct(c.reV)+' · '+fmt(c.reV);
+  if(inv) inv.textContent=pct(c.invT)+' · '+fmt(c.invT);
+  if(cash) cash.textContent=pct(ND.cash)+' · '+fmt(ND.cash);
   // SVG donut segments
   if(total>0){
     var circ2=213.6, segGap=2, segs=[
@@ -2343,7 +2343,7 @@ function renderOvCards(c){
   var pct2=fireN>0?Math.min(100,Math.round(nw0/fireN*100)):0;
   if(fc) fc.textContent=fireN>0?pct2+'%':'—';
   if(fb) fb.style.width=(fireN>0?pct2:0)+'%';
-  if(fs) fs.textContent=c.totalIncome>0?'פרישה בגיל '+c.fireAge+' · עוד '+(c.fireAge-ND.profile.age)+' שנים':'הזן נתונים לחישוב';
+  if(fs) fs.textContent=c.totalIncome>0?((c.fireAge-ND.profile.age)<=0?'הגעת ליעד!':'פרישה בגיל '+c.fireAge+' · עוד '+(c.fireAge-ND.profile.age)+' שנים'):'הזן נתונים לחישוב';
   if(fh) fh.textContent='יש: '+(nw0>0?fmt(nw0):'—');
   if(fg) fg.textContent='יעד: '+(fireN>0?fmt(fireN):'—');
 
@@ -2705,9 +2705,9 @@ function renderCF(c){
       expCats.innerHTML='';
       cats.forEach(function(cat){
         var row=document.createElement('div');
-        row.style.cssText='display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:.5px solid rgba(30,45,74,.12)';
+        row.style.cssText='display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:.5px solid rgba(30,45,74,.12);direction:rtl;text-align:right';
         row.innerHTML='<div style="flex:1;font-size:11px;font-weight:600;color:#64646A">'+cat.l+'</div>'+
-          '<input class="inp" type="number" id="cat-'+cat.k+'" placeholder="₪ 0" style="width:110px;margin:0;text-align:left"/>';
+          '<input class="inp" type="number" id="cat-'+cat.k+'" placeholder="₪ 0" style="width:110px;margin:0;text-align:left;direction:ltr"/>';
         expCats.appendChild(row);
         var inp=row.querySelector('input');
         inp.value=ND.expenses[cat.k]||'';
@@ -2728,12 +2728,13 @@ function renderCF(c){
     var savPct=c.savingsRate;
     var bn=$('bar-nec'),bw=$('bar-want'),bs=$('bar-sav');
     var pn=$('pct-nec'),pw=$('pct-want'),ps=$('pct-sav');
-    if(bn) bn.style.width=Math.min(necPct*2,100)+'%';
-    if(bw) bw.style.width=Math.min(wantPct*2,100)+'%';
-    if(bs) bs.style.width=Math.min(savPct*5,100)+'%';
-    if(pn) pn.textContent=necPct+'%'+(necPct<=50?' ✓':' ⚠');
-    if(pw) pw.textContent=wantPct+'%'+(wantPct<=30?' ✓':' ⚠');
-    if(ps) ps.textContent=savPct+'%'+(savPct>=20?' ✓':' ⚠');
+    var lowExpenses=c.totalExpenses<c.totalIncome*0.1;
+    if(bn) bn.style.width=lowExpenses?'0%':Math.min(necPct*2,100)+'%';
+    if(bw) bw.style.width=lowExpenses?'0%':Math.min(wantPct*2,100)+'%';
+    if(bs) bs.style.width=lowExpenses?'0%':Math.min(savPct*5,100)+'%';
+    if(pn) pn.textContent=lowExpenses?'הזן הוצאות לחישוב':necPct+'%'+(necPct<=50?' ✓':' ⚠');
+    if(pw) pw.textContent=lowExpenses?'—':wantPct+'%'+(wantPct<=30?' ✓':' ⚠');
+    if(ps) ps.textContent=lowExpenses?'—':savPct+'%'+(savPct>=20?' ✓':' ⚠');
     var badge=$('rule-badge');
     if(badge){
       var ok=(necPct<=50&&wantPct<=30&&savPct>=20);
@@ -2756,7 +2757,7 @@ function renderCF(c){
       if(c.monthlySavings>0) tips.push('📈 עוד '+fmt(c.monthlySavings)+'/חודש לחיסכון = '+fmt(c.monthlySavings*12)+' בשנה · FIRE מתקרב לגיל '+c.fireAge+'.');
       if(ND.cash<c.totalExpenses*3) tips.push('🛡️ קרן חירום: יש לך '+fmt(ND.cash)+'. מומלץ '+fmt(c.totalExpenses*6)+' (6 חודשים).');
       if(tips.length===0) tips.push('💚 המצב הפיננסי שלך נראה טוב! המשך כך.');
-      insEl.innerHTML=tips.map(function(t){return'<div class="aib" style="margin-bottom:5px">'+t+'</div>';}).join('');
+      insEl.innerHTML=tips.map(function(t){return'<div class="aib" style="margin-bottom:5px">'+t+'<br><button onclick="goP(\'assets\')" style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:4px 10px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:4px">פעולה →</button></div>';}).join('');
     }
   }
 
@@ -3188,9 +3189,9 @@ function bindExpenseInputs(){
   expMap.forEach(function(pair){
     var key = pair[0], label = pair[1];
     var row = document.createElement('div');
-    row.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:4px';
+    row.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:4px;direction:rtl;text-align:right';
     row.innerHTML = '<div style="flex:1;font-size:11px;font-weight:600;color:#64646A">'+label+'</div>'+
-      '<input class="inp" style="width:110px;margin:0;text-align:left" type="number" id="exp_'+key+'" placeholder="₪" value="'+(ND.expenses[key]||'')+'"/>';
+      '<input class="inp" style="width:110px;margin:0;text-align:left;direction:ltr" type="number" id="exp_'+key+'" placeholder="₪" value="'+(ND.expenses[key]||'')+'"/>';
     var inp = row.querySelector('input');
     inp.addEventListener('input', function(){
       ND.expenses[key] = parseFloat(this.value)||0;
@@ -5061,9 +5062,9 @@ function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,toda
       var x=pp.x,y=pp.y;
       var labelW=pp.pin.label.length*6+20;
       var fadeDelay=1.6+pi*0.3;
-      var labelY=y-45-labelOffsets[pi];
-      var textY=y-33-labelOffsets[pi];
-      var lineTopY=y-22-labelOffsets[pi];
+      var labelY=y-55-labelOffsets[pi];
+      var textY=y-43-labelOffsets[pi];
+      var lineTopY=y-32-labelOffsets[pi];
       html+='<g style="opacity:0;animation:fadeIn .4s '+fadeDelay+'s both">'+
         '<line x1="'+x+'" y1="'+lineTopY+'" x2="'+x+'" y2="'+y+'" stroke="#C9A96E" stroke-width=".8" stroke-dasharray="2 2"/>'+
         '<circle cx="'+x+'" cy="'+y+'" r="7" fill="#A07840"/>'+
