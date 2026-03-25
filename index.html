@@ -881,12 +881,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </div>
   </div>
 
-  <div class="tabs" id="cft">
-    <button class="tab on" onclick="cfT('inc',this)">הכנסות</button>
-    <button class="tab" onclick="cfT('exp',this)">הוצאות</button>
-    <button class="tab" onclick="cfT('fl',this)">תזרים</button>
-  </div>
-
   <!-- הכנסות -->
   <div id="cf-inc">
     <div class="c">
@@ -911,7 +905,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
 
   <!-- הוצאות -->
-  <div id="cf-exp" style="display:none">
+  <div class="sec-div"><span class="sec-div-label">הוצאות</span><div class="sec-div-line"></div></div>
+  <div id="cf-exp">
     <div class="c">
       <div class="ch"><div class="ct">הוצאות לפי קטגוריה</div></div>
       <div id="exp-cats"></div>
@@ -941,7 +936,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
 
   <!-- תזרים -->
-  <div id="cf-fl" style="display:none">
+  <div class="sec-div"><span class="sec-div-label">תזרים נטו</span><div class="sec-div-line"></div></div>
+  <div id="cf-fl">
     <div class="hc">
       <div style="font-size:10px;color:#A8A8B0;font-weight:600;margin-bottom:2px">תזרים נטו חודשי</div>
       <div style="font-size:28px;font-weight:800;letter-spacing:-1px" id="cf-fl-hero">—</div>
@@ -1123,35 +1119,44 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div class="aib" style="margin-top:7px">💡 כדאי לבדוק מחזור משכנתא בכל ירידת ריבית — חיסכון ממוצע ₪50,000+</div>
   </div>
 
-  <!-- מק"מ · ילד · ESOP -->
-  <div class="sl">מק"מ · ילד · ESOP</div>
-  <div class="c">
-    <div class="extt">
-      <div class="etab on" onclick="extTab(this,'ext-mkm')">מק"מ</div>
-      <div class="etab" onclick="extTab(this,'ext-kid')">ילדים</div>
-      <div class="etab" onclick="extTab(this,'ext-esop')">ESOP</div>
-      <div class="etab" onclick="extTab(this,'ext-pol')">פוליסה</div>
+  <!-- מכשירים נוספים — accordion -->
+  <div class="sl">מכשירים נוספים</div>
+  <div class="c" style="padding:0;overflow:hidden">
+    <div class="sec-toggle" style="padding:12px 13px 10px" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">📄</span><span class="ct">מק"מ</span></div>
+      <span class="sec-arr">▾</span>
     </div>
-    <div id="ext-mkm">
+    <div class="sec-body closed" style="max-height:300px;padding:0 13px 10px">
       <div class="dr"><div class="dl">מק"מ נוכחי</div><div class="dv">₪50,000</div></div>
       <div class="dr"><div class="dl">תשואה שנתית</div><div class="dv" style="color:#A07840">4.8%</div></div>
       <div class="dr"><div class="dl">לעומת פיקדון בנק</div><div class="dv">+0.6% עדיף</div></div>
-      <div class="dr"><div class="dl">לעומת אג"ח ממשלתי</div><div class="dv">+0.3% עדיף</div></div>
     </div>
-    <div id="ext-kid" style="display:none">
-      <div class="dr"><div class="dl">👶 ילד 1 — דניאל</div><div class="dv">₪28,000</div></div>
+    <div class="sec-toggle" style="padding:10px 13px;border-top:.5px solid rgba(30,45,74,.12)" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">👶</span><span class="ct">חיסכון לילדים</span></div>
+      <span class="sec-arr">▾</span>
+    </div>
+    <div class="sec-body closed" style="max-height:300px;padding:0 13px 10px">
+      <div class="dr"><div class="dl">ילד 1 — דניאל</div><div class="dv">₪28,000</div></div>
       <div class="dr"><div class="dl">פוטנציאל בגיל 18</div><div class="dv" style="color:#A07840">₪82,000</div></div>
-      <div class="aib" style="margin-top:6px">💡 ₪200/חודש מגיל 0 = ₪82,000 בגיל 18. כוח הריבית דריבית!</div>
+      <div style="font-size:10px;color:#6B7A96;margin-top:6px">💡 ₪200/חודש מגיל 0 = ₪82,000 בגיל 18</div>
     </div>
-    <div id="ext-esop" style="display:none">
+    <div class="sec-toggle" style="padding:10px 13px;border-top:.5px solid rgba(30,45,74,.12)" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">💼</span><span class="ct">ESOP / אופציות</span></div>
+      <span class="sec-arr">▾</span>
+    </div>
+    <div class="sec-body closed" style="max-height:300px;padding:0 13px 10px">
       <div class="dr"><div class="dl">אופציות / RSU</div><div class="dv">₪45,000 ערך</div></div>
       <div class="dr"><div class="dl">Vesting עד</div><div class="dv">2027</div></div>
       <div class="dr"><div class="dl">Cliff</div><div class="dv">עבר</div></div>
     </div>
-    <div id="ext-pol" style="display:none">
+    <div class="sec-toggle" style="padding:10px 13px;border-top:.5px solid rgba(30,45,74,.12)" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">📋</span><span class="ct">פוליסת חיסכון</span></div>
+      <span class="sec-arr">▾</span>
+    </div>
+    <div class="sec-body closed" style="max-height:300px;padding:0 13px 10px">
       <div class="dr"><div class="dl">פוליסת חיסכון</div><div class="dv">₪35,000</div></div>
       <div class="dr"><div class="dl">תשואה שנתית</div><div class="dv" style="color:#A07840">5.2%</div></div>
-      <div class="dr"><div class="dl">השוואה: מנהלים vs פנסיה חדשה</div><div class="dv">פנסיה עדיפה ב-1.2%</div></div>
+      <div class="dr"><div class="dl">מנהלים vs פנסיה חדשה</div><div class="dv">פנסיה עדיפה ב-1.2%</div></div>
     </div>
   </div>
 
@@ -3435,16 +3440,9 @@ function goB(){
 }
 function openS(n){var bg=document.getElementById('bg-'+n);var sh=document.getElementById('sht-'+n);if(bg)bg.classList.add('on');if(sh)sh.classList.add('on');}
 function closeS(n){var bg=document.getElementById('bg-'+n);var sh=document.getElementById('sht-'+n);if(bg)bg.classList.remove('on');if(sh)sh.classList.remove('on');}
-function cfT(tab,el){
-  document.querySelectorAll('#cft .tab').forEach(function(t){t.classList.remove('on')});
-  el.classList.add('on');
-  ['inc','exp','fl'].forEach(function(t){var e=document.getElementById('cf-'+t);if(e)e.style.display=(t===tab)?'block':'none';});
-}
-function extTab(el,id){
-  document.querySelectorAll('.etab').forEach(function(t){t.classList.remove('on')});
-  el.classList.add('on');
-  ['ext-mkm','ext-kid','ext-esop','ext-pol'].forEach(function(t){var e=document.getElementById(t);if(e)e.style.display=(t===id)?'block':'none';});
-}
+// cfT and extTab removed — replaced with continuous scroll and accordions
+function cfT(){}
+function extTab(){}
 
 /* ── COUNT-UP ── */
 function countUp(el,target,prefix,dur){
