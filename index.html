@@ -1642,14 +1642,25 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
      ONBOARDING OVERLAY
 ════════════════════════════════ -->
 <!-- CELEBRATION OVERLAY -->
-<div id="celebration-overlay" style="display:none;position:fixed;inset:0;z-index:800;background:rgba(30,45,74,.95);align-items:center;justify-content:center;text-align:center;padding:24px">
-  <div style="animation:authIn .4s both">
-    <div style="font-size:48px;margin-bottom:16px" id="celeb-emoji">🎉</div>
-    <div style="font-size:22px;font-weight:800;color:#F5F2EC;letter-spacing:-.5px;margin-bottom:8px" id="celeb-title">מזל טוב!</div>
-    <div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:24px" id="celeb-body">—</div>
-    <button onclick="closeCelebration()" style="background:#A07840;color:#fff;border:none;border-radius:12px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">המשך →</button>
+<div id="celebration-overlay" style="display:none;position:fixed;inset:0;z-index:800;background:rgba(30,45,74,.97);align-items:center;justify-content:center;text-align:center;padding:24px;flex-direction:column">
+  <canvas id="celeb-confetti" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas>
+  <div style="animation:celebBounce .6s cubic-bezier(.2,0,0,1) both;position:relative;z-index:1">
+    <div style="font-size:64px;margin-bottom:12px" id="celeb-emoji">🎉</div>
+    <div style="font-size:28px;font-weight:800;color:#F5F2EC;letter-spacing:-.5px;margin-bottom:8px;line-height:1.3" id="celeb-title">מזל טוב!</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:10px;max-width:280px;margin-left:auto;margin-right:auto" id="celeb-body">—</div>
+    <div id="celeb-next" style="background:rgba(255,255,255,.08);border-radius:10px;padding:10px 16px;margin-bottom:20px;display:none">
+      <div style="font-size:10px;color:#C9A96E;font-weight:600;margin-bottom:3px">היעד הבא שלך</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.8);font-weight:600" id="celeb-next-text"></div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button onclick="shareCelebration()" style="background:rgba(255,255,255,.1);color:#C9A96E;border:1px solid rgba(201,169,110,.3);border-radius:12px;padding:12px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">שתף 🔗</button>
+      <button onclick="closeCelebration()" style="background:#A07840;color:#fff;border:none;border-radius:12px;padding:12px 24px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">המשך →</button>
+    </div>
   </div>
 </div>
+<style>
+@keyframes celebBounce{0%{opacity:0;transform:scale(.7) translateY(30px)}60%{transform:scale(1.05) translateY(-4px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+</style>
 
 <div class="ob-overlay" id="ob-overlay" style="display:none">
 
@@ -2487,29 +2498,137 @@ function renderAIInsights(c){
 function checkCelebrations(c){
   var celebrated = JSON.parse(localStorage.getItem('numa_celebrated')||'{}');
   var show = null;
-  if(c.score >= 70 && !celebrated.score70){
-    show = {emoji:'🏆',title:'הציון שלך עבר 70!',body:'Numa Score '+c.score+'/100 — אתה מעל הממוצע. המשך כך!',key:'score70'};
-  } else if(c.fireAge > 0 && c.fireAge < 120 && !celebrated.fireSet){
-    show = {emoji:'🔥',title:'FIRE הוגדר!',body:'עצמאות כלכלית בגיל '+c.fireAge+' — הדרך התחילה.',key:'fireSet'};
-  } else if(c.monthlySavings > 0 && !celebrated.firstSaving){
-    show = {emoji:'💰',title:'חיסכון ראשון!',body:'אתה חוסך '+fmt(c.monthlySavings)+' בחודש. ריבית דריבית עושה את השאר.',key:'firstSaving'};
-  } else if(c.netWorth >= 1000000 && !celebrated.million){
-    show = {emoji:'🎯',title:'מיליון ₪!',body:'שווי הנטו שלך עבר את המיליון. אבן דרך משמעותית.',key:'million'};
+
+  // ── Profile complete ──
+  var prof=ND.profile||{};
+  var profDone=prof.age>0&&c.totalIncome>0&&c.totalExpenses>0;
+  if(profDone && !celebrated.profileDone){
+    show={emoji:'✅',title:'הפרופיל מוכן!',body:'כל הנתונים הבסיסיים במקום. עכשיו Numa יכול לחשב הכל בדיוק.',key:'profileDone',next:'הוסף פנסיה וקה"ש כדי לראות תמונה מלאה'};
   }
+  // ── First saving ──
+  if(!show && c.monthlySavings>0 && !celebrated.firstSaving){
+    show={emoji:'💰',title:'חיסכון ראשון!',body:'אתה חוסך '+fmt(c.monthlySavings)+' בחודש. ריבית דריבית עושה את השאר.',key:'firstSaving',next:'יעד: חיסכון של 20% מההכנסה'};
+  }
+  // ── 6 months emergency fund ──
+  var emergencyTarget=c.totalExpenses>0?c.totalExpenses*6:0;
+  if(!show && emergencyTarget>0 && (ND.cash||0)>=emergencyTarget && !celebrated.emergency6){
+    show={emoji:'🛡️',title:'קרן חירום מלאה!',body:'יש לך '+fmt(ND.cash)+' נזיל — מספיק ל-6 חודשי הוצאות. שקט נפשי.',key:'emergency6',next:'עכשיו אפשר להשקיע את העודף'};
+  }
+  // ── Numa Score 70 ──
+  if(!show && c.score>=70 && !celebrated.score70){
+    show={emoji:'🏆',title:'הציון שלך עבר 70!',body:'Numa Score '+c.score+'/100 — אתה מעל הממוצע. המשך כך!',key:'score70',next:'יעד: הגיע ל-85 עם ביטוח ותכנון ירושה'};
+  }
+  // ── FIRE set ──
+  if(!show && c.fireAge>0 && c.fireAge<120 && !celebrated.fireSet){
+    show={emoji:'🔥',title:'FIRE הוגדר!',body:'עצמאות כלכלית בגיל '+c.fireAge+' — הדרך התחילה.',key:'fireSet',next:'הגדל הפקדות חודשיות כדי להקדים את היעד'};
+  }
+  // ── Round NW milestones: 100K, 250K, 500K, 750K, 1M, 2M, 5M, 10M ──
+  var nwMilestones=[
+    {val:100000,lbl:'₪100K',key:'nw100k',next:'היעד הבא: חצי מיליון ₪'},
+    {val:250000,lbl:'₪250K',key:'nw250k',next:'היעד הבא: חצי מיליון ₪'},
+    {val:500000,lbl:'חצי מיליון ₪',key:'nw500k',next:'היעד הבא: מיליון ₪!'},
+    {val:750000,lbl:'₪750K',key:'nw750k',next:'היעד הבא: מיליון ₪!'},
+    {val:1000000,lbl:'מיליון ₪',key:'nw1m',next:'היעד הבא: 2 מיליון ₪'},
+    {val:2000000,lbl:'2 מיליון ₪',key:'nw2m',next:'היעד הבא: 5 מיליון ₪'},
+    {val:5000000,lbl:'5 מיליון ₪',key:'nw5m',next:'היעד הבא: 10 מיליון ₪'},
+    {val:10000000,lbl:'10 מיליון ₪',key:'nw10m',next:'עצמאות מוחלטת!'}
+  ];
+  if(!show){
+    for(var mi=nwMilestones.length-1;mi>=0;mi--){
+      var ms=nwMilestones[mi];
+      if(c.netWorth>=ms.val && !celebrated[ms.key]){
+        show={emoji:'🎯',title:'הגעת ל'+ms.lbl+'!',body:'שווי הנטו שלך עבר '+ms.lbl+'. אבן דרך משמעותית!',key:ms.key,next:ms.next};
+        break;
+      }
+    }
+  }
+  // ── FIRE reached ──
+  if(!show && c.fireAge>0 && c.fireAge<=((ND.profile||{}).age||30) && !celebrated.fireReached){
+    show={emoji:'🏝️',title:'הגעת לעצמאות כלכלית!',body:'יש לך מספיק נכסים לחיות מהם. חופש מוחלט.',key:'fireReached',next:'עכשיו אפשר לחלום בגדול'};
+  }
+
   if(show){
-    var ov = document.getElementById('celebration-overlay');
-    if(!ov) return;
-    document.getElementById('celeb-emoji').textContent = show.emoji;
-    document.getElementById('celeb-title').textContent = show.title;
-    document.getElementById('celeb-body').textContent = show.body;
-    ov.style.display = 'flex';
-    celebrated[show.key] = true;
-    localStorage.setItem('numa_celebrated', JSON.stringify(celebrated));
+    showCelebration(show);
+    celebrated[show.key]=true;
+    localStorage.setItem('numa_celebrated',JSON.stringify(celebrated));
   }
 }
+
+var _celebTitle='';
+function showCelebration(data){
+  var ov=document.getElementById('celebration-overlay');
+  if(!ov) return;
+  document.getElementById('celeb-emoji').textContent=data.emoji;
+  document.getElementById('celeb-title').textContent=data.title;
+  document.getElementById('celeb-body').textContent=data.body;
+  _celebTitle=data.title;
+  var nextEl=document.getElementById('celeb-next');
+  var nextTxt=document.getElementById('celeb-next-text');
+  if(data.next && nextEl && nextTxt){
+    nextTxt.textContent=data.next;
+    nextEl.style.display='block';
+  } else if(nextEl){ nextEl.style.display='none'; }
+  ov.style.display='flex';
+  launchConfetti();
+}
 function closeCelebration(){
-  var ov = document.getElementById('celebration-overlay');
-  if(ov) ov.style.display = 'none';
+  var ov=document.getElementById('celebration-overlay');
+  if(ov) ov.style.display='none';
+  var canvas=document.getElementById('celeb-confetti');
+  if(canvas){var ctx=canvas.getContext('2d');ctx.clearRect(0,0,canvas.width,canvas.height);}
+  if(window._confettiRAF) cancelAnimationFrame(window._confettiRAF);
+}
+function shareCelebration(){
+  var text=_celebTitle+' — Numa App';
+  if(navigator.share){
+    navigator.share({title:'Numa',text:text}).catch(function(){});
+  } else {
+    navigator.clipboard.writeText(text).then(function(){showToast('הועתק! 📋');}).catch(function(){});
+  }
+}
+function launchConfetti(){
+  var canvas=document.getElementById('celeb-confetti');
+  if(!canvas) return;
+  canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;
+  var ctx=canvas.getContext('2d');
+  var colors=['#A07840','#C9A96E','#1E2D4A','#27ae60','#e07b5a','#F5F2EC','#D97706'];
+  var pieces=[];
+  for(var i=0;i<120;i++){
+    pieces.push({
+      x:canvas.width*Math.random(),
+      y:canvas.height*Math.random()*-.5 - 20,
+      w:4+Math.random()*6,
+      h:3+Math.random()*4,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      vx:(Math.random()-.5)*3,
+      vy:1.5+Math.random()*4,
+      rot:Math.random()*360,
+      vr:(Math.random()-.5)*8,
+      opacity:1
+    });
+  }
+  var start=Date.now();
+  function draw(){
+    var elapsed=Date.now()-start;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    var alive=false;
+    for(var i=0;i<pieces.length;i++){
+      var p=pieces[i];
+      p.x+=p.vx;p.y+=p.vy;p.vy+=0.08;p.rot+=p.vr;
+      if(elapsed>2000) p.opacity=Math.max(0,p.opacity-0.02);
+      if(p.opacity<=0||p.y>canvas.height+50) continue;
+      alive=true;
+      ctx.save();
+      ctx.globalAlpha=p.opacity;
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle=p.color;
+      ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx.restore();
+    }
+    if(alive) window._confettiRAF=requestAnimationFrame(draw);
+  }
+  draw();
 }
 
 /* ── RENDER: CASHFLOW PAGE ── */
