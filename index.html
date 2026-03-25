@@ -590,15 +590,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <!-- ══════════════════ סקירה ══════════════════ -->
 <div class="pg on" id="pg-ov">
 
-  <!-- ══ סקירה — רצף אחד ══ -->
-
-  <!-- WEEKLY DIGEST CARD -->
-  <div id="weekly-digest-card" style="display:none;background:#1E2D4A;border-radius:14px;padding:14px;position:relative">
-    <button onclick="dismissWeekly()" style="position:absolute;top:8px;left:8px;background:none;border:none;color:rgba(255,255,255,.4);font-size:14px;cursor:pointer">×</button>
-    <div style="font-size:10px;color:#C9A96E;font-weight:600;letter-spacing:.04em;margin-bottom:6px">📊 מה השתנה מאז הביקור האחרון</div>
-    <div id="weekly-insights" style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.6"></div>
-    <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:8px" id="weekly-timestamp"></div>
-  </div>
+  <!-- ══ סקירה — above the fold: hero → action → stats ══ -->
 
   <!-- ① HERO — Net Worth + Score combined -->
   <div class="hc" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
@@ -631,7 +623,29 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <span id="digest-val">—</span>
   </div>
 
-  <!-- ② FIRE card (dark) -->
+  <!-- ② Recommended action (1 card) -->
+  <div id="ov-action-card" style="background:#E8DCC8;border-radius:12px;padding:10px 13px;border:.5px solid rgba(160,120,64,.15)">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="font-size:14px">⚡</div>
+      <div style="flex:1;font-size:11.5px;font-weight:600;color:#1E2D4A;line-height:1.4" id="ov-action-text">הוסף הכנסה חודשית — הבסיס לכל חישוב</div>
+      <button id="ov-action-btn" onclick="goP('cf')" style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:5px 10px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">בצע →</button>
+    </div>
+  </div>
+
+  <!-- ③ 3 Stats summary -->
+  <div class="c" style="padding:10px">
+    <div style="display:flex;justify-content:space-around">
+      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">תזרים</div><div style="font-size:13px;font-weight:800;color:#A07840" id="qs-inc">₪0</div></div>
+      <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
+      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">חיסכון</div><div style="font-size:13px;font-weight:800;color:#A07840" id="qs-rate">0%</div></div>
+      <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
+      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">FIRE</div><div style="font-size:13px;font-weight:800;color:#1E2D4A" id="qs-fire-age">—</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ Below the fold — scroll to see ═══ -->
+
+  <!-- FIRE card (dark) -->
   <div id="vis-wrap-fire-ov" class="c" style="background:#1E2D4A;border-color:rgba(30,45,74,.3)" onclick="goP('plan')">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
       <div><div style="font-size:12px;font-weight:600;color:#F5F2EC">🔥 מסלול FIRE</div><div style="font-size:10px;color:rgba(255,255,255,.45)" id="fire-card-sub">גלה מתי תוכל להיות חופשי כלכלית</div></div>
@@ -641,17 +655,15 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35);margin-top:3px"><span id="fire-card-have">יש: ₪0</span><span id="fire-card-goal">יעד: ₪0</span></div>
   </div>
 
-  <!-- ③ 4 Quick Stats (metrics row) -->
-  <div class="c" style="padding:10px">
-    <div style="display:flex;justify-content:space-around">
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">הכנסה</div><div style="font-size:13px;font-weight:800;color:#A07840" id="qs-inc">₪0</div></div>
-      <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">הוצאה</div><div style="font-size:13px;font-weight:800;color:#64646A" id="qs-exp">₪0</div></div>
-      <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">חוב</div><div style="font-size:13px;font-weight:800;color:#6B7A96" id="qs-debt">₪0</div></div>
-      <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">חיסכון%</div><div style="font-size:13px;font-weight:800;color:#A07840" id="qs-rate">0%</div></div>
-    </div>
+  <!-- Hidden stats for JS compat -->
+  <div style="display:none"><span id="qs-exp">₪0</span><span id="qs-debt">₪0</span></div>
+
+  <!-- Weekly digest (shows conditionally) -->
+  <div id="weekly-digest-card" style="display:none;background:#1E2D4A;border-radius:14px;padding:14px;position:relative">
+    <button onclick="dismissWeekly()" style="position:absolute;top:8px;left:8px;background:none;border:none;color:rgba(255,255,255,.4);font-size:14px;cursor:pointer">×</button>
+    <div style="font-size:10px;color:#C9A96E;font-weight:600;letter-spacing:.04em;margin-bottom:6px">📊 מה השתנה מאז הביקור האחרון</div>
+    <div id="weekly-insights" style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.6"></div>
+    <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:8px" id="weekly-timestamp"></div>
   </div>
 
   <!-- NW CHART -->
@@ -1945,6 +1957,18 @@ function renderOvCards(c){
   var mvf=$('mv-fire'),msf=$('ms-fire');
   if(mvf) mvf.textContent=c.totalIncome>0?'עצמאות בגיל '+c.fireAge:'הגדר יעד';
   if(msf) msf.textContent=c.totalIncome>0?((c.fireAge-ND.profile.age)<=0?'הגעת ליעד!':'· עוד '+(c.fireAge-ND.profile.age)+' שנים'):'גלה מתי תהיה חופשי';
+  // FIRE stat in summary row
+  var qfa=$('qs-fire-age');
+  if(qfa) qfa.textContent=c.totalIncome>0?'גיל '+c.fireAge:'—';
+  // Single action card
+  var oat=$('ov-action-text'),oab=$('ov-action-btn');
+  if(oat && oab){
+    if(c.totalIncome===0){oat.textContent='הוסף הכנסה חודשית — הבסיס לכל חישוב';oab.textContent='בצע →';oab.setAttribute('onclick',"goP('cf')");}
+    else if(c.penT+c.hshT===0){oat.textContent='הוסף פנסיה וקה"ש — גלה את שווי הנטו שלך';oab.textContent='הוסף →';oab.setAttribute('onclick',"goP('assets')");}
+    else if(c.savingsRate<10&&c.totalIncome>0){oat.textContent='חיסכון '+c.savingsRate+'% — הגדל ל-20% ותפרוש מוקדם יותר';oab.textContent='בדוק →';oab.setAttribute('onclick',"goP('cf')");}
+    else if(ND.cash<c.totalExpenses*3&&c.totalExpenses>0){oat.textContent='קרן חירום מכסה '+Math.round(ND.cash/c.totalExpenses)+' חודשים מ-6 מומלצים';oab.textContent='עדכן →';oab.setAttribute('onclick',"goP('assets')");}
+    else{oat.textContent='Numa Score '+c.score+'/100 — המשך כך!';oab.textContent='פרטים →';oab.setAttribute('onclick',"goP('plan')");}
+  }
 
   // Asset breakdown
   var total=c.totalAssets;
@@ -1985,7 +2009,7 @@ function renderOvCards(c){
 
   // Quick stats
   var qi=$('qs-inc'),qe=$('qs-exp'),qd=$('qs-debt'),qr=$('qs-rate');
-  if(qi) qi.textContent=c.totalIncome>0?fmt(c.totalIncome):'₪0';
+  if(qi) qi.textContent=c.totalIncome>0?(c.monthlySavings>=0?'+':'')+fmt(c.monthlySavings):'₪0';
   if(qe) qe.textContent=c.totalExpenses>0?fmt(c.totalExpenses):'₪0';
   if(qd){var debt=c.reMrt+c.lnT;qd.textContent=debt>0?fmt(debt):'₪0';}
   if(qr) qr.textContent=c.totalIncome>0?c.savingsRate+'%':'0%';
