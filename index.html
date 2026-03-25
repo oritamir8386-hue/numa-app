@@ -44,6 +44,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .tbtn:active{transform:scale(.96)}
 .notif-btn{width:28px;height:28px;border-radius:50%;background:#F5F2EC;border:.5px solid rgba(30,45,74,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
 .notif-dot{position:absolute;top:5px;right:5px;width:6px;height:6px;background:#D93025;border-radius:50%;border:1.5px solid #fff}
+#avatar-menu > div:hover{background:#F5F2EC}
 
 /* ── SCROLL ── */
 .scr{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;min-height:0}
@@ -568,6 +569,14 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div class="notif-btn" onclick="showToast('2 תובנות חדשות ממתינות ✨')">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64646A" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
       <div class="notif-dot"></div>
+    </div>
+    <div style="position:relative" id="avatar-wrap">
+      <div id="user-avatar-btn" onclick="toggleAvatarMenu()" style="width:36px;height:36px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#F5F2EC;cursor:pointer">N</div>
+      <div id="avatar-menu" style="display:none;position:absolute;top:42px;left:0;background:#fff;border:.5px solid #E8DCC8;border-radius:12px;width:180px;box-shadow:0 4px 16px rgba(0,0,0,.12);z-index:100;overflow:hidden">
+        <div onclick="goSub('settings');toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid #E8DCC8">⚙️ הגדרות</div>
+        <div onclick="goP('tools');toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid #E8DCC8">👤 פרופיל</div>
+        <div onclick="authSignOut();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#A32D2D;cursor:pointer;display:flex;align-items:center;gap:8px">🚪 התנתק</div>
+      </div>
     </div>
   </div>
 </div>
@@ -1169,7 +1178,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </div>
   </div>
 
-  <button class="btn-g" style="margin-top:0;background:linear-gradient(145deg,#D93025,#c42820)">התנתק</button>
 </div>
 
 <!-- ══════════════════ נכסים — Hub (merged pg-st + pg-lo) ══════════════════ -->
@@ -1515,23 +1523,27 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div class="c">
     <div class="ch"><div class="ct">מסלול לפרישה</div></div>
 <svg width="100%" viewBox="0 0 200 105" style="display:block;margin:0 -4px">
-  <line x1="0" y1="22" x2="200" y2="22" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-  <line x1="0" y1="44" x2="200" y2="44" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-  <line x1="0" y1="66" x2="200" y2="66" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-  <line x1="0" y1="88" x2="200" y2="88" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-  <path d="M18 78 L50 70 L82 56 L114 42 L146 28 L178 10 L178 16 L146 35 L114 50 L82 62 L50 74 L18 82 Z" fill="rgba(160,120,64,.07)"/>
-  <rect x="4" y="72" width="28" height="16" rx="4" fill="#E8DCC8"/>
-  <rect x="36" y="62" width="28" height="26" rx="4" fill="#E8DCC8"/>
-  <rect x="68" y="49" width="28" height="39" rx="4" fill="#C9A96E"/>
-  <rect x="100" y="36" width="28" height="52" rx="4" fill="#A07840"/>
-  <rect x="132" y="23" width="28" height="65" rx="4" fill="#A07840"/>
-  <rect x="164" y="7" width="28" height="81" rx="4" fill="#1E2D4A"/>
+  <line x1="18" y1="22" x2="178" y2="22" stroke="#E8DCC8" stroke-width=".5"/>
+  <line x1="18" y1="44" x2="178" y2="44" stroke="#E8DCC8" stroke-width=".5"/>
+  <line x1="18" y1="66" x2="178" y2="66" stroke="#E8DCC8" stroke-width=".5"/>
+  <line x1="18" y1="88" x2="178" y2="88" stroke="#E8DCC8" stroke-width=".5"/>
+  <!-- Solid line: today to retirement age -->
+  <polyline points="18,80 50,72 82,58 114,42" fill="none" stroke="#1E2D4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Dashed line: retirement age forward -->
+  <polyline points="114,42 146,26 178,10" fill="none" stroke="#A07840" stroke-width="2" stroke-dasharray="4 3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- FIRE marker: circle at retirement point -->
+  <circle cx="114" cy="42" r="8" fill="#A07840" opacity=".15"/>
+  <circle cx="114" cy="42" r="4" fill="#A07840"/>
+  <text x="114" y="34" text-anchor="middle" font-size="8" fill="#A07840" font-family="inherit" font-weight="700">FIRE</text>
+  <!-- Today marker: navy circle with halo -->
+  <circle cx="18" cy="80" r="6" fill="#1E2D4A" opacity=".12"/>
+  <circle cx="18" cy="80" r="3" fill="#1E2D4A"/>
   <text x="18" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2024</text>
-  <text x="50" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2026</text>
-  <text x="82" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2028</text>
-  <text x="114" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2030</text>
-  <text x="146" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2032</text>
-  <text x="178" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2034</text>
+  <text x="50" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2028</text>
+  <text x="82" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2032</text>
+  <text x="114" y="100" text-anchor="middle" font-size="10" fill="#A07840" font-family="inherit" font-weight="600">2036</text>
+  <text x="146" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2040</text>
+  <text x="178" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2044</text>
 </svg>
   </div>
   <div class="c" style="background:rgba(160,120,64,.04);border-color:rgba(160,120,64,.12)">
@@ -1831,11 +1843,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div class="c" onclick="goSub('alloc')" style="cursor:pointer;display:flex;align-items:center;gap:12px">
       <div style="width:40px;height:40px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🥧</div>
       <div style="flex:1"><div style="font-size:12px;font-weight:600;color:#1E2D4A">הקצאת נכסים</div><div style="font-size:10px;color:#6B7A96;margin-top:2px">חלוקה מומלצת לפי גיל</div></div>
-      <div style="font-size:14px;color:#6B7A96">←</div>
-    </div>
-    <div class="c" onclick="goSub('settings')" style="cursor:pointer;display:flex;align-items:center;gap:12px">
-      <div style="width:40px;height:40px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">⚙️</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:600;color:#1E2D4A">הגדרות</div><div style="font-size:10px;color:#6B7A96;margin-top:2px">פרופיל, חישוב, נראות</div></div>
       <div style="font-size:14px;color:#6B7A96">←</div>
     </div>
   </div>
@@ -4457,6 +4464,8 @@ function _showApp(isNewLogin=false){
     const name=currentUser.user_metadata?.name||currentUser.user_metadata?.full_name||currentUser.email?.split('@')[0]||'';
     const nd=$('user-name-display');if(nd)nd.textContent=name;
     const av=$('user-avatar');if(av)av.textContent=(name[0]||'N').toUpperCase();
+    var avBtn=document.getElementById('user-avatar-btn');
+    if(avBtn) avBtn.textContent=(name[0]||'N').toUpperCase();
     // Personalized greeting in topbar
     const greet=$('top-greeting');
     if(greet){
@@ -4510,6 +4519,17 @@ function _showAuth(){
 // Compatibility aliases
 function showAuthScreen(){_showAuth();}
 function hideAuthScreen(){_showApp();}
+
+function toggleAvatarMenu(){
+  var m=document.getElementById('avatar-menu');
+  if(m) m.style.display=m.style.display==='none'?'block':'none';
+}
+// Close avatar menu when clicking outside
+document.addEventListener('click',function(e){
+  var w=document.getElementById('avatar-wrap');
+  var m=document.getElementById('avatar-menu');
+  if(w&&m&&!w.contains(e.target)) m.style.display='none';
+});
 function updateUserDisplay(){}
 
 let authMode='login';
@@ -5061,18 +5081,39 @@ function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,toda
     var pins=[{year:2022,label:'🏠 קניית דירה'},{year:2024,label:'🎓 קה"ש נזיל'}];
     ms.forEach(function(m){pins.push({year:m.year||currentYear,label:m.text});});
     var html='';
-    pins.forEach(function(pin,pi){
+    // Collect pin positions for collision avoidance
+    var pinPositions=[];
+    pins.forEach(function(pin){
       var idx=pin.year-startYear;
       if(idx<0||idx>=pts.length) return;
       var x=sx(idx),y=sy(pts[idx].val);
-      var labelW=pin.label.length*6+20;
+      pinPositions.push({pin:pin,x:x,y:y,idx:idx});
+    });
+    // Collision avoidance: if two labels within 40px on X, offset one up by 20px
+    var labelOffsets=[];
+    for(var ci=0;ci<pinPositions.length;ci++){
+      var extraOffset=0;
+      for(var cj=0;cj<ci;cj++){
+        if(Math.abs(pinPositions[ci].x-pinPositions[cj].x)<40){
+          extraOffset=20;
+          break;
+        }
+      }
+      labelOffsets.push(extraOffset);
+    }
+    pinPositions.forEach(function(pp,pi){
+      var x=pp.x,y=pp.y;
+      var labelW=pp.pin.label.length*6+20;
       var fadeDelay=1.6+pi*0.3;
+      var labelY=y-45-labelOffsets[pi];
+      var textY=y-33-labelOffsets[pi];
+      var lineTopY=y-22-labelOffsets[pi];
       html+='<g style="opacity:0;animation:fadeIn .4s '+fadeDelay+'s both">'+
-        '<line x1="'+x+'" y1="'+(y-22)+'" x2="'+x+'" y2="'+y+'" stroke="#C9A96E" stroke-width=".8" stroke-dasharray="2 2"/>'+
+        '<line x1="'+x+'" y1="'+lineTopY+'" x2="'+x+'" y2="'+y+'" stroke="#C9A96E" stroke-width=".8" stroke-dasharray="2 2"/>'+
         '<circle cx="'+x+'" cy="'+y+'" r="7" fill="#A07840"/>'+
         '<circle cx="'+x+'" cy="'+y+'" r="5" fill="#A07840" stroke="#fff" stroke-width="2"/>'+
-        '<rect x="'+(x-labelW/2)+'" y="'+(y-36)+'" width="'+labelW+'" height="18" rx="8" fill="#F5F2EC" stroke="#E8DCC8" stroke-width=".5"/>'+
-        '<text x="'+x+'" y="'+(y-24)+'" text-anchor="middle" font-size="11" fill="#1E2D4A" font-family="inherit" font-weight="500">'+pin.label+'</text>'+
+        '<rect x="'+(x-labelW/2)+'" y="'+labelY+'" width="'+labelW+'" height="18" rx="8" fill="#F5F2EC" stroke="#E8DCC8" stroke-width=".5"/>'+
+        '<text x="'+x+'" y="'+textY+'" text-anchor="middle" font-size="11" fill="#1E2D4A" font-family="inherit" font-weight="500">'+pp.pin.label+'</text>'+
         '</g>';
     });
     msG.innerHTML=html;
@@ -5242,18 +5283,21 @@ function calcPortfolio(){
       var v=start*Math.pow(1+rate,t)+(mo>0?mo*12*((Math.pow(1+rate,t)-1)/rate):0);
       pts.push(v); if(v>maxV) maxV=v;
     }
-    var bars=pts.map(function(v,i){
-      var bh=Math.max(2,Math.round(v/maxV*(H-pad)));
-      var x=i*(W/n);
-      var bw=Math.max(2,Math.round(W/n)-3);
-      var frac=i/n;
-      var col=frac>=1?'#1E2D4A':frac>0.7?'#A07840':frac>0.35?'#C9A96E':'#E8DCC8';
-      return '<rect x="'+x+'" y="'+(H-bh)+'" width="'+bw+'" height="'+bh+'" rx="4" fill="'+col+'"/>';
-    }).join('');
-    var simGrid='';for(var sg=0;sg<3;sg++){var sgy=Math.round(sg/2*(H-4));simGrid+='<line x1="0" y1="'+sgy+'" x2="'+W+'" y2="'+sgy+'" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>';}
+    var linePoints='';var areaPoints='';
+    for(var li=0;li<=n;li++){
+      var lx=li*(W/n);
+      var ly=H-Math.max(2,Math.round(pts[li]/maxV*(H-pad)));
+      linePoints+=lx+','+ly+(li<n?' ':'');
+      areaPoints+=(li===0?'M':'L')+lx+' '+ly;
+    }
+    areaPoints+=' L'+W+' '+H+' L0 '+H+' Z';
+    var simGrid='';for(var sg=0;sg<3;sg++){var sgy=Math.round(sg/2*(H-4));simGrid+='<line x1="0" y1="'+sgy+'" x2="'+W+'" y2="'+sgy+'" stroke="#E8DCC8" stroke-width=".5"/>';}
     chartWrap.innerHTML='<svg width="100%" viewBox="0 0 '+W+' '+(H+10)+'" style="display:block">'+
-      simGrid+bars+
-      '<line x1="0" y1="'+H+'" x2="'+W+'" y2="'+H+'" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>'+
+      '<defs><linearGradient id="simFillGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#A07840" stop-opacity=".15"/><stop offset="100%" stop-color="#A07840" stop-opacity="0"/></linearGradient></defs>'+
+      simGrid+
+      '<path d="'+areaPoints+'" fill="url(#simFillGrad)"/>'+
+      '<polyline points="'+linePoints+'" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'+
+      '<line x1="0" y1="'+H+'" x2="'+W+'" y2="'+H+'" stroke="#E8DCC8" stroke-width=".5"/>'+
       '<text x="0" y="'+(H+9)+'" font-size="10" fill="#6B7A96" font-family="inherit">היום</text>'+
       '<text x="'+W+'" y="'+(H+9)+'" text-anchor="end" font-size="10" fill="#1E2D4A" font-family="inherit" font-weight="600">+'+yrs+' שנה</text>'+
       '</svg>';
