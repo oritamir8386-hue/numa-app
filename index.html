@@ -868,7 +868,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 <div class="pg" id="pg-cf">
   <!-- Header Banner — fully dynamic -->
-  <div style="background:#E8DCC8;border:.5px solid rgba(160,120,64,.1);border-radius:14px;padding:12px;position:relative;overflow:hidden">
+  <div style="background:#E8DCC8;border:.5px solid rgba(160,120,64,.1);border-radius:14px;padding:12px;position:sticky;top:0;z-index:10;overflow:hidden">
     <div style="position:absolute;top:0;left:0;right:0;height:2.5px;background:#A07840"></div>
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
       <div style="font-size:24px">💸</div>
@@ -956,651 +956,22 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
 </div>
 
-<!-- ══════════════════ השקעות ══════════════════ -->
-<div class="pg" id="pg-st">
-  <!-- Total Hero -->
-  <div style="background:#fff;border:.5px solid rgba(0,0,0,.13);border-radius:14px;padding:14px;position:relative;overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:2.5px;background:#A07840"></div>
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-      <div>
-        <div style="font-size:10px;color:#A8A8B0;font-weight:600;margin-bottom:2px">תיק כולל
-          <span class="hq">?<div class="hq-box">סה"כ כל הנכסים הפיננסיים: פנסיה, קה"ש, גמל, השקעות. <strong>לא כולל נדל"ן.</strong></div></span>
-        </div>
-        <div style="font-size:26px;font-weight:800;letter-spacing:-1px" id="inv-total">—</div>
-      </div>
-      <div class="g2" style="gap:5px">
-        <div style="background:#fff;border-radius:8px;padding:6px 8px;text-align:center">
-          <div style="font-size:10px;color:#A8A8B0;margin-bottom:3px">הפקדה חודשית</div>
-          <input id="inv-deposit-inp" type="number" style="width:80px;border:none;border-bottom:.5px solid rgba(160,120,64,.3);background:transparent;font-size:12px;font-weight:800;color:#A07840;text-align:center;outline:none;font-family:inherit" placeholder="₪/חודש" oninput="ND._extraDeposit=parseFloat(this.value)||0;saveToStorage();try{drawInvChart();}catch(e){}"/>
-        </div>
-        <div style="background:#fff;border-radius:8px;padding:6px 8px;text-align:center"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">בעוד <span id="inv-yrs-lbl">25</span> שנה</div><div style="font-size:12px;font-weight:800;color:#A07840" id="inv-future-val">—</div></div>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-      <span style="font-size:10px;color:#A8A8B0">5 שנה</span>
-      <input type="range" id="inv-yrs-sl" min="5" max="50" step="5" value="25" style="flex:1;accent-color:#A07840" oninput="document.getElementById('inv-yrs-lbl').textContent=this.value;try{drawInvChart();}catch(e){}"/>
-      <span style="font-size:10px;color:#A8A8B0">50 שנה</span>
-    </div>
-    <div id="inv-mini-chart" style="margin-top:6px"><svg width="100%" viewBox="0 0 200 56" style="display:block;margin:0 -4px"><rect x="4" y="46" width="28" height="10" rx="4" fill="#E8DCC8"/><rect x="36" y="38" width="28" height="18" rx="4" fill="#E8DCC8"/><rect x="68" y="28" width="28" height="28" rx="4" fill="#C9A96E"/><rect x="100" y="19" width="28" height="37" rx="4" fill="#A07840"/><rect x="132" y="11" width="28" height="45" rx="4" fill="#A07840"/><rect x="164" y="4" width="28" height="52" rx="4" fill="#1E2D4A"/><line x1="0" y1="56" x2="200" y2="56" stroke="rgba(30,45,74,.08)" stroke-width=".5"/></svg></div>
-  </div>
+<!-- pg-st removed — merged into pg-assets -->
 
-  <!-- פנסיה וקה"ש — DYNAMIC -->
-  <div class="sl">פנסיה וקרנות השתלמות</div>
-  <div class="c">
-    <div class="ch"><div class="ct">קרנות פנסיה <span class="hq">?<div class="hq-box">פנסיה = חיסכון לפרישה. המעסיק מפקיש 6.5% ואתה 6% מהשכר. הכסף מושקע ועל הרווחים אין מס עד הפרישה. <strong>הטבת מס ענקית!</strong></div></span></div><button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddModal('pension')">+ הוסף</button></div>
-    <div id="pen-list"></div>
-    <div style="height:.5px;background:rgba(30,45,74,.12);margin:7px 0"></div>
-    <div class="ch" style="margin-bottom:4px"><div class="ct" style="font-size:11px">קרנות השתלמות <span class="hq">?<div class="hq-box">הטבת המס הכי טובה בישראל! הפקדה עד ₪20,520/שנה פטורה ממס לחלוטין. נזיל אחרי 6 שנים. <strong>חובה למקסם!</strong></div></span></div><button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddModal('hishtalmut')">+ הוסף</button></div>
-    <div id="hsh-list"></div>
-    <div class="aib" style="margin-top:8px">💡 הפקדה עד ₪20,520/שנה פטורה ממס לחלוטין — חובה למקסם!</div>
-  </div>
+<!-- pg-fire removed — merged into pg-plan -->
 
-  <!-- גמל להשקעה -->
-  <div class="sl">גמל להשקעה</div>
-  <div class="c">
-    <div class="ch"><div class="ct">הגמל שלי
-      <span class="hq">?<div class="hq-box">גמל להשקעה = חיסכון גמיש בפטור ממס רווחי הון! בניגוד לתיק מניות שמשלם 25% מס, כאן הרווחים פטורים לחלוטין.</div></span>
-    </div></div>
-    <div id="gamel-list"><div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין גמל להשקעה — <span style="color:#A07840;cursor:pointer" onclick="openAddModal('gamel')">+ הוסף</span></div></div>
-    <div style="height:.5px;background:rgba(30,45,74,.12);margin:8px 0"></div>
-    <div class="ch" style="margin-bottom:5px"><div class="ct" style="font-size:11px">השוואה: גמל vs תיק רגיל</div></div>
-    <div class="dr"><div class="dl">יתרון מס על 25 שנה</div><div class="dv" style="color:#A07840">+₪48,000</div></div>
-    <div class="dr"><div class="dl">מס על רווחים בגמל</div><div class="dv">0% (עד תקרה)</div></div>
-    <div class="dr"><div class="dl">מס על תיק רגיל</div><div class="dv" style="color:#D93025">25%</div></div>
-    <div class="aib" style="margin-top:7px">🏆 כמחשבון: כמה שווה הפטור ממס?<br>₪95,000 · 25 שנה · 7% = <strong>פטור שווה ₪48,000</strong></div>
-  </div>
+<!-- pg-lo removed — merged into pg-assets -->
 
-  <!-- השקעות — DYNAMIC -->
-  <div class="sl">תיקי השקעות</div>
-  <div class="c">
-    <div class="ch"><div class="ct">תיקי השקעות <span class="hq">?<div class="hq-box">תיק השקעות = כסף בשוק ההון. על הרווחים <strong>25% מס רווחי הון</strong> בעת מכירה. לכן גמל להשקעה עדיף לטווח ארוך!</div></span></div><button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddModal('investment')">+ הוסף</button></div>
-    <div id="inv-list"></div>
-    <div style="height:.5px;background:rgba(30,45,74,.12);margin:7px 0"></div>
-    <div class="ch" style="margin-bottom:4px"><div class="ct" style="font-size:11px">מזומן / קרן חירום</div></div>
-    <div style="display:flex;align-items:center;gap:8px"><div class="il" style="margin:0;flex:1">₪ מזומן ונזיל</div><input class="inp" id="cash-input" type="number" style="width:120px;margin:0" placeholder="₪ 0"/></div>
-  </div>
+<!-- pg-ins removed — merged into pg-plan -->
 
-  <!-- השקעות אלטרנטיביות -->
-  <div class="c">
-    <div class="ch" style="margin-bottom:4px">
-      <div class="ct" style="font-size:11px">השקעות אלטרנטיביות</div>
-      <button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddAlt()">+ הוסף</button>
-    </div>
-    <div id="alt-list"></div>
-    <div style="font-size:10px;color:#A8A8B0;margin-top:4px">
-      קרנות ריט · קרנות נאמנות · Angel investments
-    </div>
-  </div>
+<!-- pg-sc removed — merged into pg-plan -->
 
-  <!-- סימולטור תיק -->
-  <div class="c">
-    <div class="ch"><div class="ct">סימולטור תיק אישי <span class="hq">?<div class="hq-box">חשב כמה יהיה לך בעוד X שנים. מחשב ריבית דריבית על ההשקעה + הפקדות חודשיות.</div></span></div></div>
-    <div class="fi2">
-      <div><div class="il">השקעה כיום ₪</div><input class="inp" id="sim-start" type="number" placeholder="₪ סכום" oninput="calcPortfolio()"/></div>
-      <div><div class="il">הפקדה חודשית ₪</div><input class="inp" id="sim-mo" type="number" placeholder="₪/חודש" oninput="calcPortfolio()"/></div>
-    </div>
-    <div class="fi2">
-      <div><div class="il">תשואה שנתית %</div><input class="inp" id="sim-rate" type="number" value="7" oninput="calcPortfolio()"/></div>
-      <div><div class="il">שנים</div><input class="inp" id="sim-yrs" type="number" placeholder="20" value="20" oninput="calcPortfolio()"/></div>
-    </div>
-    <div id="sim-result" style="background:#E8DCC8;border-radius:9px;padding:12px;margin-top:6px;text-align:center">
-      <div style="font-size:10px;color:#888;margin-bottom:3px">הזן נתונים לחישוב</div>
-      <div id="sim-val" style="font-size:28px;font-weight:800;color:#888;letter-spacing:-1.5px">—</div>
-      <div id="sim-sub" style="font-size:10px;color:#888;margin-top:2px"></div>
-    </div>
-    <div id="sim-chart-wrap" style="margin-top:8px"></div>
-  </div>
+<!-- pg-legacy removed — merged into pg-plan -->
 
-  <!-- צמיחה עתידית 4 קווים - like screenshot -->
-  <div class="c" id="inv-chart-card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-      <div class="ct">צמיחה עתידית</div>
-      <span class="bdg Br">מס 25%</span>
-    </div>
-    <!-- Legend -->
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:7px">
-      <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:#64646A">
-        <svg width="18" height="8"><line x1="0" y1="4" x2="18" y2="4" stroke="#6B7A96" stroke-width="2"/></svg>תיק מניות ברוטו</div>
-      <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:#64646A">
-        <svg width="18" height="8"><line x1="0" y1="4" x2="18" y2="4" stroke="#6B7A96" stroke-width="2" stroke-dasharray="3,2"/></svg>תיק מניות נטו</div>
-      <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:#64646A">
-        <svg width="18" height="8"><line x1="0" y1="4" x2="18" y2="4" stroke="#A07840" stroke-width="2"/></svg>ת"א ברוטו</div>
-      <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:#64646A">
-        <svg width="18" height="8"><line x1="0" y1="4" x2="18" y2="4" stroke="#A07840" stroke-width="2" stroke-dasharray="3,2"/></svg>ת"א נטו</div>
-    </div>
-    <div style="direction:ltr">
-      <svg id="inv-svg" width="100%" height="130" viewBox="0 0 300 130" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <linearGradient id="blueGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#6B7A96" stop-opacity="0.06"/>
-            <stop offset="100%" stop-color="#6B7A96" stop-opacity="0"/>
-          </linearGradient>
-          <linearGradient id="greenGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#A07840" stop-opacity="0.12"/>
-            <stop offset="100%" stop-color="#A07840" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <!-- Grid -->
-        <line x1="30" y1="15" x2="295" y2="15" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-        <line x1="30" y1="45" x2="295" y2="45" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-        <line x1="30" y1="75" x2="295" y2="75" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-        <line x1="30" y1="105" x2="295" y2="105" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-        <!-- Y labels -->
-        <text x="28" y="18" font-size="7" fill="#6B7A96" text-anchor="end">₪2.5M</text>
-        <text x="28" y="48" font-size="7" fill="#6B7A96" text-anchor="end">₪1.5M</text>
-        <text x="28" y="78" font-size="7" fill="#6B7A96" text-anchor="end">₪500K</text>
-        <text x="28" y="108" font-size="7" fill="#6B7A96" text-anchor="end">₪0</text>
-        <!-- Blue fill -->
-        <path id="inv-bfill" fill="url(#blueGrad)"/>
-        <path id="inv-gfill" fill="url(#greenGrad)"/>
-        <!-- Lines -->
-        <path id="inv-b1" fill="none" stroke="#6B7A96" stroke-width="1.8" stroke-linejoin="round"/>
-        <path id="inv-b2" fill="none" stroke="#6B7A96" stroke-width="1.4" stroke-dasharray="4,3" stroke-linejoin="round"/>
-        <path id="inv-g1" fill="none" stroke="#A07840" stroke-width="1.8" stroke-linejoin="round"/>
-        <path id="inv-g2" fill="none" stroke="#A07840" stroke-width="1.4" stroke-dasharray="4,3" stroke-linejoin="round"/>
-      </svg>
-      <div style="display:flex;justify-content:space-between;margin-top:2px;padding:0 30px 0 0">
-        <span style="font-size:10px;color:#6B7A96">היום</span>
-        <span style="font-size:10px;color:#6B7A96">+5</span>
-        <span style="font-size:10px;color:#6B7A96">+10</span>
-        <span style="font-size:10px;color:#6B7A96">+15</span>
-        <span style="font-size:10px;color:#6B7A96">+20</span>
-        <span style="font-size:10px;color:#6B7A96">+25</span>
-      </div>
-    </div>
-    <div style="font-size:10px;color:#A8A8B0;margin-top:5px;text-align:center">קו מלא = ברוטו · קו מקווקו = נטו אחרי מס 25%</div>
-  </div>
-
-  <!-- נדל"ן — DYNAMIC -->
-  <div class="sl">נדל"ן ומשכנתא</div>
-  <div class="c">
-    <div class="ch"><div class="ct">נדל"ן ומשכנתא <span class="hq">?<div class="hq-box">משכנתא = הלוואה לדיור. תשלם על הריבית במשך שנים ארוכות. <strong>כדאי לבדוק מחזור משכנתא</strong> בכל ירידת ריבית!</div></span></div><button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddModal('realEstate')">+ הוסף</button></div>
-    <div id="re-list"></div>
-    <div class="aib" style="margin-top:7px">💡 כדאי לבדוק מחזור משכנתא בכל ירידת ריבית — חיסכון ממוצע ₪50,000+</div>
-  </div>
-
-  <!-- מכשירים נוספים — accordion -->
-  <div class="sl">מכשירים נוספים</div>
-  <div class="c" style="padding:0;overflow:hidden">
-    <div class="sec-toggle" style="padding:12px 13px 10px" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
-      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">📄</span><span class="ct">מק"מ</span></div>
-      <span class="sec-arr">▾</span>
-    </div>
-    <div class="sec-body closed" style="max-height:300px;padding:0 13px 10px">
-      <div class="dr"><div class="dl">מק"מ נוכחי</div><div class="dv">₪50,000</div></div>
-      <div class="dr"><div class="dl">תשואה שנתית</div><div class="dv" style="color:#A07840">4.8%</div></div>
-      <div class="dr"><div class="dl">לעומת פיקדון בנק</div><div class="dv">+0.6% עדיף</div></div>
-    </div>
-    <div class="sec-toggle" style="padding:10px 13px;border-top:.5px solid rgba(30,45,74,.12)" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
-      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">👶</span><span class="ct">חיסכון לילדים</span></div>
-      <span class="sec-arr">▾</span>
-    </div>
-    <div class="sec-body closed" style="max-height:300px;padding:0 13px 10px">
-      <div class="dr"><div class="dl">ילד 1 — דניאל</div><div class="dv">₪28,000</div></div>
-      <div class="dr"><div class="dl">פוטנציאל בגיל 18</div><div class="dv" style="color:#A07840">₪82,000</div></div>
-      <div style="font-size:10px;color:#6B7A96;margin-top:6px">💡 ₪200/חודש מגיל 0 = ₪82,000 בגיל 18</div>
-    </div>
-    <div class="sec-toggle" style="padding:10px 13px;border-top:.5px solid rgba(30,45,74,.12)" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
-      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">💼</span><span class="ct">ESOP / אופציות</span></div>
-      <span class="sec-arr">▾</span>
-    </div>
-    <div class="sec-body closed" style="max-height:300px;padding:0 13px 10px">
-      <div class="dr"><div class="dl">אופציות / RSU</div><div class="dv">₪45,000 ערך</div></div>
-      <div class="dr"><div class="dl">Vesting עד</div><div class="dv">2027</div></div>
-      <div class="dr"><div class="dl">Cliff</div><div class="dv">עבר</div></div>
-    </div>
-    <div class="sec-toggle" style="padding:10px 13px;border-top:.5px solid rgba(30,45,74,.12)" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
-      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">📋</span><span class="ct">פוליסת חיסכון</span></div>
-      <span class="sec-arr">▾</span>
-    </div>
-    <div class="sec-body closed" style="max-height:300px;padding:0 13px 10px">
-      <div class="dr"><div class="dl">פוליסת חיסכון</div><div class="dv">₪35,000</div></div>
-      <div class="dr"><div class="dl">תשואה שנתית</div><div class="dv" style="color:#A07840">5.2%</div></div>
-      <div class="dr"><div class="dl">מנהלים vs פנסיה חדשה</div><div class="dv">פנסיה עדיפה ב-1.2%</div></div>
-    </div>
-  </div>
-
-  <!-- TINDER CARDS — השקעות -->
-  <div>
-    <div style="font-size:10px;font-weight:700;color:#A8A8B0;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">🎓 ידע על השקעות — החלק לעוד</div>
-    <div class="tinder-wrap" id="tinder-st">
-      <div class="tcard" style="background:linear-gradient(135deg,#0f2347,#3D5278)">
-        <div class="tcard-tag" style="color:rgba(255,255,255,.7)">S&P 500</div>
-        <div class="tcard-title" style="color:#fff">תשואה ממוצעת 10.5% מ-1928</div>
-        <div class="tcard-body" style="color:rgba(255,255,255,.85)">₪1,000 שהושקעו לפני 30 שנה שווים היום ₪26,000. בלי לעשות שום דבר. זה כוח ריבית דריבית.</div>
-        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.5)">1 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-st')">הבא ›</button></div>
-      </div>
-      <div class="tcard" style="background:linear-gradient(135deg,#1E2D4A,#3D5278)">
-        <div class="tcard-tag" style="color:rgba(255,255,255,.7)">עיתוי שוק</div>
-        <div class="tcard-title" style="color:#fff">לנסות לתזמן את השוק = לפספס</div>
-        <div class="tcard-body" style="color:rgba(255,255,255,.85)">מי שפספס רק 10 הימים הטובים ב-20 שנה הפסיד 54% מהתשואה. השוק הוא לסבלנים.</div>
-        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.5)">2 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-st')">הבא ›</button></div>
-      </div>
-      <div class="tcard" style="background:#1E2D4A">
-        <div class="tcard-tag" style="color:rgba(255,255,255,.7)">גמל להשקעה</div>
-        <div class="tcard-title" style="color:#fff">הגמל עדיף על תיק מניות רגיל</div>
-        <div class="tcard-body" style="color:rgba(255,255,255,.85)">אותה תשואה, אבל ב-25% פחות מס. על ₪280,000 לאורך 20 שנה — זה הפרש של ₪48,000 בכיס שלך.</div>
-        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.5)">3 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-st')">הבא ›</button></div>
-      </div>
-    </div>
-    <div class="tinder-dots" id="dots-st">
-      <div class="tdot on"></div><div class="tdot"></div><div class="tdot"></div>
-    </div>
-  </div>
-</div>
-
-<!-- FIRE -->
-<div class="pg" id="pg-fire">
-  <button class="bk" onclick="goB()">← חזרה</button>
-  <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:8px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.5">התחזיות מבוססות על הנחות בלבד ואינן מהוות ייעוץ השקעות.</div>
-  <div class="hc" style="text-align:center;padding:18px">
-    <div style="font-size:10px;color:#A8A8B0;margin-bottom:3px">יעד FIRE שלך</div>
-    <div style="font-size:36px;font-weight:800;letter-spacing:-2px" id="fire-number">—</div>
-    <div style="font-size:11px;color:#64646A;margin:7px 0" id="fire-subtitle">הזן הכנסות והוצאות לחישוב</div>
-    <div class="pw" style="max-width:260px;margin:0 auto 5px"><div class="pb" id="fire-bar" style="width:0%"></div></div>
-    <div style="font-size:10px;color:#A8A8B0" id="fire-progress">הזן נתונים לחישוב</div>
-  </div>
-  <div class="g3">
-    <div class="m"><div class="ml">הוצ' חודשית</div><div class="mv" style="font-size:14px" id="fire-exp">—</div></div>
-    <div class="m"><div class="ml">הכנסה פסיבית</div><div class="mv" style="font-size:14px" id="fire-passive">—</div></div>
-    <div class="m"><div class="ml">שיעור חיסכון</div><div class="mv" style="font-size:14px;color:#A07840" id="fire-rate">0%</div></div>
-  </div>
-  <div class="c">
-    <div class="ch"><div class="ct">הגדרות פרישה</div></div>
-    <div class="fi2">
-      <div><div class="il">גיל נוכחי</div><input class="inp" id="fire-age-in" placeholder="גילך" type="number" oninput="renderFIREPage()"/></div>
-      <div><div class="il">גיל פרישה רצוי</div><input class="inp" id="fire-retire-in" value="60" type="number" oninput="renderFIREPage()"/></div>
-    </div>
-    <div class="fi2">
-      <div><div class="il">כלל נסיגה %</div><input class="inp" id="fire-wr" value="4" type="number" oninput="renderFIREPage()"/></div>
-      <div><div class="il">תשואה %</div><input class="inp" id="fire-ret" value="7" type="number" oninput="renderFIREPage()"/></div>
-    </div>
-    <button class="btn-g" onclick="renderFIREPage()">עדכן חישוב ▶</button>
-  </div>
-  <div class="c">
-    <div class="ch"><div class="ct">מסלול לפרישה</div></div>
-<svg width="100%" viewBox="0 0 200 105" style="display:block;margin:0 -4px">
-  <line x1="0" y1="22" x2="200" y2="22" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-  <line x1="0" y1="44" x2="200" y2="44" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-  <line x1="0" y1="66" x2="200" y2="66" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-  <line x1="0" y1="88" x2="200" y2="88" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-  <!-- confidence band -->
-  <path d="M18 78 L50 70 L82 56 L114 42 L146 28 L178 10 L178 16 L146 35 L114 50 L82 62 L50 74 L18 82 Z" fill="rgba(160,120,64,.07)"/>
-  <rect x="4" y="72" width="28" height="16" rx="4" fill="#E8DCC8"/>
-  <rect x="36" y="62" width="28" height="26" rx="4" fill="#E8DCC8"/>
-  <rect x="68" y="49" width="28" height="39" rx="4" fill="#C9A96E"/>
-  <rect x="100" y="36" width="28" height="52" rx="4" fill="#A07840"/>
-  <rect x="132" y="23" width="28" height="65" rx="4" fill="#A07840"/>
-  <rect x="164" y="7" width="28" height="81" rx="4" fill="#1E2D4A"/>
-  <text x="18" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2024</text>
-  <text x="50" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2026</text>
-  <text x="82" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2028</text>
-  <text x="114" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2030</text>
-  <text x="146" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2032</text>
-  <text x="178" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2034</text>
-</svg>
-  </div>
-  <div class="c" style="background:rgba(160,120,64,.04);border-color:rgba(160,120,64,.12)">
-    <div class="ct" style="margin-bottom:6px">💡 כלל ה-4%</div>
-    <div style="font-size:10.5px;color:#64646A;line-height:1.6">אם תוציא 4% מהתיק בשנה, הוא אמור להחזיק לנצח. ₪3.2M × 4% = ₪128,000/שנה = ₪10,667/חודש.</div>
-  </div>
-
-  <!-- Tinder cards — FIRE -->
-  <div>
-    <div style="font-size:10px;font-weight:700;color:#A8A8B0;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">🎓 ידע על פרישה מוקדמת</div>
-    <div class="tinder-wrap" id="tinder-fire">
-      <div class="tcard" style="background:linear-gradient(135deg,#1a0800,#7a3300)">
-        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">FIRE = Financial Independence, Retire Early</div>
-        <div class="tcard-title" style="color:#fff">FIRE לא אומר לא לעבוד — אומר לא חייב</div>
-        <div class="tcard-body" style="color:rgba(255,255,255,.85)">המטרה היא חופש בחירה. רוב אנשי FIRE ממשיכים לעבוד — אבל בתנאים שלהם, בתחום שאוהבים.</div>
-        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">1 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-fire')">הבא ›</button></div>
-      </div>
-      <div class="tcard" style="background:linear-gradient(135deg,#001a10,#005530)">
-        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">כלל ה-4%</div>
-        <div class="tcard-title" style="color:#fff">25× ההוצאה השנתית = יעד FIRE שלך</div>
-        <div class="tcard-body" style="color:rgba(255,255,255,.85)">מוציא ₪15,000/חודש? = ₪180,000/שנה. יעד FIRE = ₪180K × 25 = ₪4.5M. פשוט.</div>
-        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">2 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-fire')">הבא ›</button></div>
-      </div>
-      <div class="tcard" style="background:linear-gradient(135deg,#00103d,#002680)">
-        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">שיעור חיסכון</div>
-        <div class="tcard-title" style="color:#fff">50% חיסכון = פרישה תוך 17 שנה. 70% = 8 שנים</div>
-        <div class="tcard-body" style="color:rgba(255,255,255,.85)">שיעור החיסכון הוא המשתנה הכי חזק. הכנסה גבוהה עוזרת, אבל שיעור חיסכון מנצח הכל.</div>
-        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">3 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-fire')">הבא ›</button></div>
-      </div>
-    </div>
-    <div class="tinder-dots" id="dots-fire"><div class="tdot on"></div><div class="tdot"></div><div class="tdot"></div></div>
-  </div>
-</div>
-
-<!-- הלוואות -->
-<div class="pg" id="pg-lo">
-  <button class="bk" onclick="goB()">← חזרה</button>
-  <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:8px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.5">Numa מציגה מידע בלבד ואינה מתווכת פיננסית.</div>
-  <div class="g2">
-    <div class="m"><div class="ml">סה"כ חוב</div><div class="mv" style="color:#D93025" id="lo-total">—</div></div>
-    <div class="m"><div class="ml">תשלום חודשי</div><div class="mv" style="color:#D93025" id="lo-monthly">—</div></div>
-  </div>
-  <div class="c">
-    <div class="ch"><div class="ct">הלוואות</div><button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddModal('loan')">+ הוסף</button></div>
-    <div id="lo-list"><div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין הלוואות — לחץ + הוסף</div></div>
-  </div>
-  <div class="c">
-    <div class="ch"><div class="ct">לוח סילוק</div></div>
-<svg width="100%" viewBox="0 0 200 82" style="display:block;margin:0 -4px">
-  <line x1="0" y1="17" x2="200" y2="17" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-  <line x1="0" y1="35" x2="200" y2="35" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-  <line x1="0" y1="52" x2="200" y2="52" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-  <line x1="0" y1="70" x2="200" y2="70" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-  <rect x="4" y="6" width="24" height="64" rx="4" fill="#1E2D4A"/>
-  <rect x="32" y="14" width="24" height="56" rx="4" fill="#1E2D4A"/>
-  <rect x="60" y="23" width="24" height="47" rx="4" fill="#A07840"/>
-  <rect x="88" y="32" width="24" height="38" rx="4" fill="#A07840"/>
-  <rect x="116" y="41" width="24" height="29" rx="4" fill="#C9A96E"/>
-  <rect x="144" y="51" width="24" height="19" rx="4" fill="#C9A96E"/>
-  <rect x="172" y="61" width="24" height="9" rx="4" fill="#E8DCC8"/>
-</svg>
-  </div>
-  <!-- Loan Helper — like insurance comparison card -->
-  <div class="c" style="border-color:rgba(160,120,64,.2);background:#E8DCC8">
-    <div class="ch"><div class="ct">🔍 מצא הלוואה טובה יותר</div></div>
-    <div style="font-size:10.5px;color:#64646A;line-height:1.6;margin-bottom:10px">
-      ריביות בישראל: <strong style="color:#111">בנקים 5–8%</strong> · <strong style="color:#A07840">חוץ-בנקאי 4–6%</strong> · <strong style="color:#3D5278">מחזור משכנתא חוסך ₪200–600/חודש</strong>. 
-      לרוב הישראלים יש הלוואות ביקר מדי.
-    </div>
-    <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:10px">
-      <div style="background:#E8DCC8;border-radius:9px;padding:7px 10px;font-size:10.5px"><span style="color:#D97706;font-weight:700">⚠️ </span>ריבית מעל 6%? כדאי למחזר</div>
-      <div style="background:#E8DCC8;border-radius:9px;padding:7px 10px;font-size:10.5px"><span style="color:#A07840;font-weight:700">💡 </span>קרן השתלמות נזילה? עדיפה על הלוואה</div>
-      <div style="background:#E8DCC8;border-radius:9px;padding:7px 10px;font-size:10.5px"><span style="color:#3D5278;font-weight:700">📊 </span>הלוואת מסגרת vs הלוואה רגילה — כלים שונים</div>
-    </div>
-    <button class="btn-g" style="margin-top:0">קבל הצעה להלוואה טובה יותר</button>
-  </div>
-
-  <!-- Tinder cards — הלוואות -->
-  <div>
-    <div style="font-size:10px;font-weight:700;color:#A8A8B0;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">🎓 ידע על הלוואות</div>
-    <div class="tinder-wrap" id="tinder-lo">
-      <div class="tcard" style="background:linear-gradient(135deg,#2d0a00,#a33000)">
-        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">ריבית דריבית הפוכה</div>
-        <div class="tcard-title" style="color:#fff">הלוואה של ₪100K ב-7% = ₪41K ריבית לאורך 10 שנה</div>
-        <div class="tcard-body" style="color:rgba(255,255,255,.85)">כל שקל שתשלם יותר מהמינימום — ישירות לכיסך. להחזיר מהר = לחסוך אלפים.</div>
-        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">1 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-lo')">הבא ›</button></div>
-      </div>
-      <div class="tcard" style="background:linear-gradient(135deg,#001a3d,#003087)">
-        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">משכנתא</div>
-        <div class="tcard-title" style="color:#fff">מחזור משכנתא יכול לחסוך ₪200–800/חודש</div>
-        <div class="tcard-body" style="color:rgba(255,255,255,.85)">ירידת ריבית של 1% על משכנתא של ₪1M = חיסכון של ₪500/חודש = ₪120K לאורך 20 שנה!</div>
-        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">2 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-lo')">הבא ›</button></div>
-      </div>
-      <div class="tcard" style="background:linear-gradient(135deg,#1a1200,#7a5200)">
-        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">קרן השתלמות</div>
-        <div class="tcard-title" style="color:#fff">קרן השתלמות נזילה > הלוואה</div>
-        <div class="tcard-body" style="color:rgba(255,255,255,.85)">ריבית על הלוואה: 5–8%. תשואת קה"ש: 5–7%. כשהקרן נזילה — עדיף למשוך ממנה מאשר לקחת הלוואה!</div>
-        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">3 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-lo')">הבא ›</button></div>
-      </div>
-    </div>
-    <div class="tinder-dots" id="dots-lo"><div class="tdot on"></div><div class="tdot"></div><div class="tdot"></div></div>
-  </div>
-
-  <div class="c">
-    <div class="ch"><div class="ct">מחשבון לוח סילוקין</div></div>
-    <div class="fi2"><div><div class="il">סכום הלוואה</div><input class="inp" id="amort-amount" type="number" placeholder="₪ סכום" oninput="calcAmort()"/></div><div><div class="il">ריבית % שנתי</div><input class="inp" id="amort-rate" type="number" placeholder="% ריבית" oninput="calcAmort()"/></div></div>
-    <div class="fi2"><div><div class="il">תקופה (חודשים)</div><input class="inp" id="amort-months" type="number" placeholder="חודשים" oninput="calcAmort()"/></div><div><div class="il">תשלום חודשי</div><input class="inp" id="amort-payment" placeholder="יחושב אוטומטית" style="color:#A07840;font-weight:700" readonly/></div></div>
-    <div id="amort-details" style="margin-top:8px;display:none">
-      <div class="dr"><div class="dl">סה"כ תשלומים</div><div class="dv" id="amort-total">—</div></div>
-      <div class="dr"><div class="dl">סה"כ ריבית</div><div class="dv" style="color:#D93025" id="amort-interest">—</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ביטוחים -->
-<div class="pg" id="pg-ins">
-  <button class="bk" onclick="goB()">← חזרה</button>
-  <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:8px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.5">Numa מציגה מידע בלבד ואינה מתווכת פיננסית.</div>
-  <!-- ביטוחים fillable -->
-  <div class="c">
-    <div class="ch"><div class="ct">🛡️ הביטוחים שלי
-      <span class="hq">?<div class="hq-box">רשום כאן את הביטוחים שיש לך. Numa תבדוק פערים ותמליץ על שיפורים לפי הנתונים שלך.</div></span>
-    </div></div>
-    <div style="display:flex;flex-direction:column;gap:10px" id="ins-form">
-      <!-- ביטוח חיים -->
-      <div style="background:#E8DCC8;border-radius:12px;padding:11px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div style="font-size:16px">❤️</div>
-          <div style="font-size:11.5px;font-weight:700;flex:1">ביטוח חיים
-            <span class="hq">?<div class="hq-box">מומלץ: 10× שכר שנתי. אם שכרך ₪20K/חודש → כיסוי מומלץ ₪2.4M. מגן על המשפחה במקרה פטירה.</div></span>
-          </div>
-          <select id="ins-life-status" class="inp" style="width:90px;margin:0;font-size:10px;padding:4px 6px" onchange="saveIns()">
-            <option value="">מצב...</option><option value="yes">יש לי</option><option value="no">אין לי</option><option value="partial">חלקי</option>
-          </select>
-        </div>
-        <div class="fi2" style="gap:6px" id="ins-life-details" style="display:none">
-          <div><div class="il" style="font-size:10px">כיסוי (₪)</div><input class="inp" id="ins-life-cover" type="number" placeholder="₪ כיסוי" style="margin:0" oninput="saveIns()"/></div>
-          <div><div class="il" style="font-size:10px">פרמיה (₪/חודש)</div><input class="inp" id="ins-life-prem" type="number" placeholder="₪/חודש" style="margin:0" oninput="saveIns()"/></div>
-        </div>
-        <div id="ins-life-insight" style="font-size:10px;color:#A8A8B0;margin-top:5px"></div>
-      </div>
-      <!-- אכ"ע -->
-      <div style="background:#E8DCC8;border-radius:12px;padding:11px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div style="font-size:16px">💼</div>
-          <div style="font-size:11.5px;font-weight:700;flex:1">אובדן כושר עבודה (אכ"ע)
-            <span class="hq">?<div class="hq-box"><strong>החשוב ביותר!</strong> 1 מתוך 3 אנשים יאבד כושר עבודה לתקופה. מכסה 75% משכרך אם אינך יכול לעבוד.</div></span>
-          </div>
-          <select id="ins-dis-status" class="inp" style="width:90px;margin:0;font-size:10px;padding:4px 6px" onchange="saveIns()">
-            <option value="">מצב...</option><option value="yes">יש לי</option><option value="no">אין לי</option><option value="partial">חלקי</option>
-          </select>
-        </div>
-        <div class="fi2" style="gap:6px">
-          <div><div class="il" style="font-size:10px">כיסוי % משכר</div><input class="inp" id="ins-dis-pct" type="number" placeholder="75" style="margin:0" oninput="saveIns()"/></div>
-          <div><div class="il" style="font-size:10px">פרמיה (₪/חודש)</div><input class="inp" id="ins-dis-prem" type="number" placeholder="₪/חודש" style="margin:0" oninput="saveIns()"/></div>
-        </div>
-      </div>
-      <!-- ביטוח בריאות -->
-      <div style="background:#E8DCC8;border-radius:12px;padding:11px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
-          <div style="font-size:16px">🏥</div>
-          <div style="font-size:11.5px;font-weight:700;flex:1">ביטוח בריאות משלים
-            <span class="hq">?<div class="hq-box">ביטוח בריאות משלים = מעבר לקופת החולים. מכסה ניתוחים פרטיים, תרופות ומחלות קשות.</div></span>
-          </div>
-          <select id="ins-health-status" class="inp" style="width:90px;margin:0;font-size:10px;padding:4px 6px" onchange="saveIns()">
-            <option value="">מצב...</option><option value="yes">יש לי</option><option value="no">אין לי</option>
-          </select>
-        </div>
-        <div><div class="il" style="font-size:10px">פרמיה (₪/חודש)</div><input class="inp" id="ins-health-prem" type="number" placeholder="₪/חודש" style="margin-bottom:0" oninput="saveIns()"/></div>
-      </div>
-      <!-- סיעוד -->
-      <div style="background:#E8DCC8;border-radius:12px;padding:11px">
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="font-size:16px">🧓</div>
-          <div style="font-size:11.5px;font-weight:700;flex:1">ביטוח סיעוד
-            <span class="hq">?<div class="hq-box">עלות סיעוד: ₪8,000–15,000/חודש. רוב האנשים לא מבינים כמה זה יכול לדלדל חסכונות. כדאי להתחיל צעיר.</div></span>
-          </div>
-          <select id="ins-care-status" class="inp" style="width:90px;margin:0;font-size:10px;padding:4px 6px" onchange="saveIns()">
-            <option value="">מצב...</option><option value="yes">יש לי</option><option value="no">אין לי</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <!-- Summary -->
-    <div id="ins-summary" style="margin-top:10px;padding:10px;background:rgba(160,120,64,.05);border-radius:10px;font-size:10.5px;color:#64646A">מלא את הפרטים לסיכום אישי</div>
-    <div class="aib" style="margin-top:8px">💡 השוואת מחירי ביטוחים יכולה לחסוך ₪2,000–8,000/שנה — רוב האנשים לא עשו זאת בשלוש השנים האחרונות</div>
-  </div>
-
-  <!-- Tinder cards — ביטוחים -->
-  <div>
-    <div style="font-size:10px;font-weight:700;color:#A8A8B0;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">🎓 ידע על ביטוחים</div>
-    <div class="tinder-wrap" id="tinder-ins">
-      <div class="tcard" style="background:linear-gradient(135deg,#001430,#003060)">
-        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">ביטוח חיים</div>
-        <div class="tcard-title" style="color:#fff">כיסוי = 10× השכר השנתי שלך</div>
-        <div class="tcard-body" style="color:rgba(255,255,255,.85)">שכר ₪20K/חודש = ₪240K/שנה. כיסוי מומלץ: ₪2.4M. בודק אם יש לך מספיק?</div>
-        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">1 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-ins')">הבא ›</button></div>
-      </div>
-      <div class="tcard" style="background:linear-gradient(135deg,#1E2D4A,#3D5278)">
-        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">אובדן כושר עבודה</div>
-        <div class="tcard-title" style="color:#fff">1 מ-3 אנשים יאבד כושר עבודה לתקופה</div>
-        <div class="tcard-body" style="color:rgba(255,255,255,.85)">זה הביטוח הכי חשוב שאנשים מדלגים עליו. ביטוח חיים = למוות. אכ"ע = לחיים קשים.</div>
-        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">2 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-ins')">הבא ›</button></div>
-      </div>
-      <div class="tcard" style="background:linear-gradient(135deg,#0d2000,#2a5500)">
-        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">חיסכון על ביטוח</div>
-        <div class="tcard-title" style="color:#fff">השוואת מחירים חוסכת ₪2,000–8,000/שנה</div>
-        <div class="tcard-body" style="color:rgba(255,255,255,.85)">80% מהישראלים לא השוו ביטוח בשלוש השנים האחרונות. זה אחד הצעדים הקלים ביותר לחסוך.</div>
-        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">3 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-ins')">הבא ›</button></div>
-      </div>
-    </div>
-    <div class="tinder-dots" id="dots-ins"><div class="tdot on"></div><div class="tdot"></div><div class="tdot"></div></div>
-  </div>
-</div>
-
-<!-- תרחישים -->
-<div class="pg" id="pg-sc">
-  <button class="bk" onclick="goB()">← חזרה</button>
-  <div class="g2" id="sc-cards">
-    <div class="scc on"><div style="font-size:10px;color:#A07840;font-weight:700;margin-bottom:3px">📊 בסיס</div><div style="font-size:17px;font-weight:800" id="sc-base">—</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">7% · גיל 65</div></div>
-    <div class="scc"><div style="font-size:10px;color:#A07840;font-weight:700;margin-bottom:3px">📈 אופטימי</div><div style="font-size:17px;font-weight:800" id="sc-opt">—</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">9% · גיל 65</div></div>
-    <div class="scc"><div style="font-size:10px;color:#BA7517;font-weight:700;margin-bottom:3px">📉 שמרני</div><div style="font-size:17px;font-weight:800" id="sc-con">—</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">4% · גיל 65</div></div>
-    <div class="scc"><div style="font-size:10px;color:#C9A96E;font-weight:700;margin-bottom:3px">🔥 FIRE מהיר</div><div style="font-size:17px;font-weight:800" id="sc-fire">—</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">8% · גיל 52</div></div>
-  </div>
-  <div class="c">
-    <div class="ch"><div class="ct">השוואה 30 שנה</div></div>
-    <div id="sc-chart"></div>
-  </div>
-</div>
-
-<!-- עיזבון -->
-<div class="pg" id="pg-legacy">
-  <button class="bk" onclick="goB()">← חזרה</button>
-  <div class="c">
-    <div class="ch"><div class="ct">📜 מצב עיזבון
-      <span class="hq">?<div class="hq-box">עיזבון = מה קורה לרכוש שלך אחרי מותך. בלי צוואה, המדינה מחליטה — לא תמיד כפי שרצית.</div></span>
-    </div></div>
-    <div style="display:flex;flex-direction:column;gap:8px">
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:.5px solid rgba(30,45,74,.12)">
-        <div style="font-size:11px;font-weight:600">📄 צוואה
-          <span class="hq">?<div class="hq-box">צוואה = מסמך שקובע מי מקבל מה. ללא צוואה — חוק הירושה קובע. עלות ממוצעת: ₪1,500–3,000 אצל עורך דין.</div></span>
-        </div>
-        <select id="leg-will" class="inp" style="width:100px;margin:0;font-size:10px;padding:4px 6px" onchange="saveLegacy()">
-          <option value="">מצב...</option><option value="yes">יש צוואה</option><option value="no">אין צוואה</option><option value="old">ישנה/לעדכן</option>
-        </select>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:.5px solid rgba(30,45,74,.12)">
-        <div style="font-size:11px;font-weight:600">🏛️ מינוי מוטבים בפנסיה
-          <span class="hq">?<div class="hq-box">ללא מינוי מוטב, כספי הפנסיה עוברים לפי חוק — לא בהכרח לפי רצונך. בדוק מול קרן הפנסיה שלך.</div></span>
-        </div>
-        <select id="leg-ben" class="inp" style="width:100px;margin:0;font-size:10px;padding:4px 6px" onchange="saveLegacy()">
-          <option value="">מצב...</option><option value="yes">מעודכן</option><option value="no">לא הוגדר</option><option value="check">לבדוק</option>
-        </select>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:.5px solid rgba(30,45,74,.12)">
-        <div style="font-size:11px;font-weight:600">⚖️ ייפוי כוח מתמשך
-          <span class="hq">?<div class="hq-box">מסמך שמאפשר למישהו שסמכת עליו לנהל ענייניך אם אינך מסוגל. חיוני יותר מצוואה לדעת רבים.</div></span>
-        </div>
-        <select id="leg-poa" class="inp" style="width:100px;margin:0;font-size:10px;padding:4px 6px" onchange="saveLegacy()">
-          <option value="">מצב...</option><option value="yes">יש</option><option value="no">אין</option>
-        </select>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0">
-        <div style="font-size:11px;font-weight:600">💍 הסכם ממון
-          <span class="hq">?<div class="hq-box">הסכם ממון קובע מה שייך לכל אחד מבני הזוג. בלי הסכם — חוק יחסי הממון חל אוטומטית.</div></span>
-        </div>
-        <select id="leg-pre" class="inp" style="width:100px;margin:0;font-size:10px;padding:4px 6px" onchange="saveLegacy()">
-          <option value="">מצב...</option><option value="yes">יש</option><option value="no">אין</option><option value="na">לא רלוונטי</option>
-        </select>
-      </div>
-    </div>
-  </div>
-  <div class="c">
-    <div class="ch"><div class="ct">חלוקת עיזבון</div></div>
-    <div class="fi2" style="gap:6px">
-      <div><div class="il">% לבן/בת זוג</div><input class="inp" id="leg-spouse-pct" type="number" placeholder="60" style="margin:0" oninput="saveLegacy()"/></div>
-      <div><div class="il">% לילדים</div><input class="inp" id="leg-kids-pct" type="number" placeholder="40" style="margin:0" oninput="saveLegacy()"/></div>
-    </div>
-    <div style="margin-top:10px;padding:10px;background:#E8DCC8;border-radius:10px" id="leg-estate-val">
-      <div style="font-size:10px;color:#A8A8B0;margin-bottom:3px">שווי עיזבון מוערך (לפי נתוניך)</div>
-      <div style="font-size:18px;font-weight:800;color:#A07840" id="leg-val">—</div>
-      <div style="font-size:10px;color:#64646A;margin-top:2px" id="leg-breakdown">הזן נכסים בדף השקעות לחישוב</div>
-    </div>
-  </div>
-  <div class="aib">💡 מומלץ להסדיר צוואה. עלות ממוצעת: ₪1,500. ערך רגשי ומשפטי: אין מחיר.</div>
-</div>
-
-<!-- שיפור תיק — AI powered -->
-<div class="pg" id="pg-opt">
-  <button class="bk" onclick="goB()">← חזרה</button>
-  <div class="c" style="background:#E8DCC8;border-color:rgba(160,120,64,.2)">
-    <div class="ch">
-      <div>
-        <div class="ct">⭐ ניתוח תיק חכם — AI
-          <span class="hq">?<div class="hq-box">Numa מנתחת את הרכב התיק שלך — פנסיה, השקעות, נדל"ן — ומשווה להקצאה האידיאלית לגיל ורמת סיכון. <strong>מבוסס על הנתונים האמיתיים שהזנת.</strong></div></span>
-        </div>
-        <div style="font-size:10px;color:#A8A8B0;margin-top:2px">ניתוח אישי לפי הנתונים שהזנת</div>
-      </div>
-      <button id="opt-analyze-btn" onclick="runOptAnalysis()" style="background:#A07840;color:#fff;border:none;border-radius:9px;padding:7px 12px;font-size:10.5px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">נתח עכשיו ✨</button>
-    </div>
-    <div id="opt-result" style="font-size:10.5px;color:#64646A;line-height:1.7;margin-top:4px">
-      לחץ "נתח עכשיו" לניתוח אישי של התיק שלך.
-    </div>
-  </div>
-  <!-- דוגמה להקצאה מומלצת לפי גיל -->
-  <div class="c">
-    <div class="ch"><div class="ct">הקצאה מקובלת לפי גיל
-      <span class="hq">?<div class="hq-box">כלל האצבע: גיל שלך = % באג"ח. גיל 35 → 35% אג"ח, 65% מניות. Numa מתאמת לך אישית לפי המצב שלך.</div></span>
-    </div></div>
-    <div id="opt-allocation"></div>
-    <div class="aib" style="margin-top:8px">🎓 דוגמה: גיל 35 — 65% מניות גלובלי, 25% אג"ח ממשלתי, 10% מזומן/קרן כספית<br>גיל 55 — 40% מניות, 45% אג"ח, 15% מזומן</div>
-  </div>
-</div>
+<!-- pg-opt removed — merged into pg-plan -->
 
 <!-- Monte Carlo -->
-<div class="pg" id="pg-mc">
-  <button class="bk" onclick="goB()">← חזרה</button>
-  <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:8px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.5">התחזיות מבוססות על הנחות בלבד ואינן מהוות ייעוץ השקעות.</div>
-  <!-- Dark Explainer -->
-  <div class="mc-dark">
-    <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.5;margin-bottom:5px">מה זה בכלל?</div>
-    <div style="font-size:15px;font-weight:800;letter-spacing:-.3px;margin-bottom:8px;line-height:1.3">Monte Carlo — 10,000 עתידות אפשריות 🎲</div>
-    <div style="font-size:10.5px;opacity:.85;line-height:1.7;margin-bottom:12px">חישוב רגיל: "בתשואה 7% תהיה לך ₪2M." הבעיה? <strong>השוק לא עובד ככה.</strong><br>Monte Carlo מריץ 10,000 סימולציות ומראה <strong>טווח הסתברויות אמיתי</strong>.</div>
-    <div class="g3" style="gap:6px">
-      <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:8px;text-align:center">
-        <div style="font-size:18px;margin-bottom:3px">😰</div>
-        <div style="font-size:10px;font-weight:700;color:#fff;margin-bottom:1px">פסימי (10%)</div>
-        <div style="font-size:10px;opacity:.65;color:#fff">10% מהסימ' גרועות מזה</div>
-      </div>
-      <div style="background:rgba(160,120,64,.3);border:.5px solid rgba(160,120,64,.5);border-radius:10px;padding:8px;text-align:center">
-        <div style="font-size:18px;margin-bottom:3px">🎯</div>
-        <div style="font-size:10px;font-weight:700;color:#fff;margin-bottom:1px">מרכזי (50%)</div>
-        <div style="font-size:10px;opacity:.65;color:#fff">הכי סביר</div>
-      </div>
-      <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:8px;text-align:center">
-        <div style="font-size:18px;margin-bottom:3px">🚀</div>
-        <div style="font-size:10px;font-weight:700;color:#fff;margin-bottom:1px">אופטימי (90%)</div>
-        <div style="font-size:10px;opacity:.65;color:#fff">90% מהסימ' נמוכות</div>
-      </div>
-    </div>
-  </div>
-  <!-- Results -->
-  <div class="hc" style="text-align:center;padding:16px">
-    <div style="font-size:10px;color:#A8A8B0;margin-bottom:3px">הסתברות הצלחה</div>
-    <div style="font-size:38px;font-weight:800;color:#A07840;letter-spacing:-2px" id="mc-success">78%</div>
-    <div style="font-size:10px;color:#64646A" id="mc-sub">10,000 סימולציות · יעד ₪3.2M</div>
-  </div>
-  <div class="g3">
-    <div class="m" style="text-align:center"><div class="ml">פסימי (10%)</div><div class="mv" style="color:#D93025;font-size:13px" id="mc-p10">₪1.8M</div></div>
-    <div class="m" style="text-align:center"><div class="ml">מרכזי (50%)</div><div class="mv" style="color:#D97706;font-size:13px" id="mc-p50">₪3.4M</div></div>
-    <div class="m" style="text-align:center"><div class="ml">אופטימי (90%)</div><div class="mv" style="color:#A07840;font-size:13px" id="mc-p90">₪5.8M</div></div>
-  </div>
-  <div class="c">
-    <div class="ch"><div class="ct">פיזור תוצאות</div><span class="bdg Bg" id="mc-badge">78% הצלחה</span></div>
-    <div id="mc-chart"><svg width="100%" viewBox="0 0 200 78" style="display:block;margin:0 -4px"><rect x="4" y="67" width="20" height="11" rx="4" fill="#E8DCC8"/><rect x="28" y="53" width="20" height="25" rx="4" fill="#E8DCC8"/><rect x="52" y="30" width="20" height="48" rx="4" fill="#C9A96E"/><rect x="76" y="8" width="20" height="70" rx="4" fill="#1E2D4A"/><rect x="100" y="16" width="20" height="62" rx="4" fill="#1E2D4A"/><rect x="124" y="34" width="20" height="44" rx="4" fill="#C9A96E"/><rect x="148" y="56" width="20" height="22" rx="4" fill="#E8DCC8"/><rect x="172" y="70" width="20" height="8" rx="4" fill="#E8DCC8"/><line x1="0" y1="78" x2="200" y2="78" stroke="rgba(30,45,74,.08)" stroke-width=".5"/></svg></div><div style="font-size:10px;color:#A8A8B0;margin-top:4px;text-align:center">כל עמודה = טווח תוצאה · גובה = מספר סימולציות</div>
-  </div>
-  <div class="c">
-    <div class="ch"><div class="ct">פרמטרים</div></div>
-    <div class="fi2"><div><div class="il">תשואה ממוצעת %</div><input class="inp" id="mc-return" type="number" value="7" oninput="runMonteCarlo()"/></div><div><div class="il">סטיית תקן %</div><input class="inp" id="mc-std" type="number" value="15" oninput="runMonteCarlo()"/></div></div>
-    <div class="fi2"><div><div class="il">אינפלציה %</div><input class="inp" id="mc-inflation" type="number" value="3" oninput="runMonteCarlo()"/></div><div><div class="il">שנות השקעה</div><input class="inp" id="mc-years" type="number" value="20" oninput="runMonteCarlo()"/></div></div>
-    <button class="btn-g" onclick="runMonteCarlo()">הרץ מחדש ▶ 10,000 סימולציות</button>
-  </div>
-</div>
+<!-- pg-mc removed — merged into pg-plan -->
 
 <!-- שכר נטו -->
 <div class="pg" id="pg-salary">
@@ -1849,25 +1220,33 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <button class="btn-g" style="margin-top:0;background:linear-gradient(145deg,#D93025,#c42820)">התנתק</button>
 </div>
 
-<!-- ══════════════════ נכסים — Hub ══════════════════ -->
+<!-- ══════════════════ נכסים — Hub (merged pg-st + pg-lo) ══════════════════ -->
 <div class="pg" id="pg-assets">
-  <div style="font-size:14px;font-weight:700;color:#1E2D4A;margin-bottom:4px">הנכסים שלי</div>
-  <div style="font-size:10px;color:#6B7A96;margin-bottom:8px">כל מה שיש לך — במקום אחד</div>
-  <div style="display:flex;flex-direction:column;gap:10px">
-    <div class="c" onclick="goSub('st')" style="cursor:pointer;display:flex;align-items:center;gap:12px">
-      <div style="width:40px;height:40px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🏦</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:600;color:#1E2D4A">פנסיה, קה"ש והשקעות</div><div style="font-size:10px;color:#6B7A96;margin-top:2px">תיק השקעות + סימולטור</div></div>
-      <div style="font-size:14px;color:#6B7A96">←</div>
+  <!-- Sticky Summary Header -->
+  <div style="background:#fff;border:.5px solid rgba(0,0,0,.13);border-radius:14px;padding:14px;position:sticky;top:0;z-index:10;overflow:hidden">
+    <div style="position:absolute;top:0;left:0;right:0;height:2.5px;background:#A07840"></div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+      <div>
+        <div style="font-size:10px;color:#A8A8B0;font-weight:600;margin-bottom:2px">תיק כולל
+          <span class="hq">?<div class="hq-box">סה"כ כל הנכסים הפיננסיים: פנסיה, קה"ש, גמל, השקעות. <strong>לא כולל נדל"ן.</strong></div></span>
+        </div>
+        <div style="font-size:26px;font-weight:800;letter-spacing:-1px" id="inv-total">—</div>
+      </div>
+      <div class="g2" style="gap:5px">
+        <div style="background:#fff;border-radius:8px;padding:6px 8px;text-align:center">
+          <div style="font-size:10px;color:#A8A8B0;margin-bottom:3px">הפקדה חודשית</div>
+          <input id="inv-deposit-inp" type="number" style="width:80px;border:none;border-bottom:.5px solid rgba(160,120,64,.3);background:transparent;font-size:12px;font-weight:800;color:#A07840;text-align:center;outline:none;font-family:inherit" placeholder="₪/חודש" oninput="ND._extraDeposit=parseFloat(this.value)||0;saveToStorage();try{drawInvChart();}catch(e){}"/>
+        </div>
+        <div style="background:#fff;border-radius:8px;padding:6px 8px;text-align:center"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">בעוד <span id="inv-yrs-lbl">25</span> שנה</div><div style="font-size:12px;font-weight:800;color:#A07840" id="inv-future-val">—</div></div>
+      </div>
     </div>
-    <div class="c" onclick="goSub('lo')" style="cursor:pointer;display:flex;align-items:center;gap:12px">
-      <div style="width:40px;height:40px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">💳</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:600;color:#1E2D4A">הלוואות ומשכנתא</div><div style="font-size:10px;color:#6B7A96;margin-top:2px">חובות, לוח סילוקין, מחזור</div></div>
-      <div style="font-size:14px;color:#6B7A96">←</div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <span style="font-size:10px;color:#A8A8B0">5 שנה</span>
+      <input type="range" id="inv-yrs-sl" min="5" max="50" step="5" value="25" style="flex:1;accent-color:#A07840" oninput="document.getElementById('inv-yrs-lbl').textContent=this.value;try{drawInvChart();}catch(e){}"/>
+      <span style="font-size:10px;color:#A8A8B0">50 שנה</span>
     </div>
-  </div>
-  <!-- Quick summary -->
-  <div class="c" style="padding:10px;margin-top:4px">
-    <div style="display:flex;justify-content:space-around">
+    <div id="inv-mini-chart" style="margin-top:6px"><svg width="100%" viewBox="0 0 200 56" style="display:block;margin:0 -4px"><rect x="4" y="46" width="28" height="10" rx="4" fill="#E8DCC8"/><rect x="36" y="38" width="28" height="18" rx="4" fill="#E8DCC8"/><rect x="68" y="28" width="28" height="28" rx="4" fill="#C9A96E"/><rect x="100" y="19" width="28" height="37" rx="4" fill="#A07840"/><rect x="132" y="11" width="28" height="45" rx="4" fill="#A07840"/><rect x="164" y="4" width="28" height="52" rx="4" fill="#1E2D4A"/><line x1="0" y1="56" x2="200" y2="56" stroke="rgba(30,45,74,.08)" stroke-width=".5"/></svg></div>
+    <div style="display:flex;justify-content:space-around;margin-top:10px;padding-top:8px;border-top:.5px solid rgba(30,45,74,.12)">
       <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">נכסים</div><div style="font-size:13px;font-weight:800;color:#A07840" id="hub-assets-total">—</div></div>
       <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
       <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">חובות</div><div style="font-size:13px;font-weight:800;color:#A32D2D" id="hub-debt-total">—</div></div>
@@ -1875,43 +1254,610 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">שווי נטו</div><div style="font-size:13px;font-weight:800;color:#1E2D4A" id="hub-nw-total">—</div></div>
     </div>
   </div>
+
+  <!-- ═══ Section: פנסיה וקה"ש ═══ -->
+  <div class="sec-div" id="section-st"><span class="sec-div-label">פנסיה וקה"ש</span><div class="sec-div-line"></div></div>
+
+  <div class="c">
+    <div class="ch"><div class="ct">קרנות פנסיה <span class="hq">?<div class="hq-box">פנסיה = חיסכון לפרישה. המעסיק מפקיש 6.5% ואתה 6% מהשכר. הכסף מושקע ועל הרווחים אין מס עד הפרישה. <strong>הטבת מס ענקית!</strong></div></span></div><button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddModal('pension')">+ הוסף</button></div>
+    <div id="pen-list"></div>
+    <div style="height:.5px;background:rgba(30,45,74,.12);margin:7px 0"></div>
+    <div class="ch" style="margin-bottom:4px"><div class="ct" style="font-size:11px">קרנות השתלמות <span class="hq">?<div class="hq-box">הטבת המס הכי טובה בישראל! הפקדה עד ₪20,520/שנה פטורה ממס לחלוטין. נזיל אחרי 6 שנים. <strong>חובה למקסם!</strong></div></span></div><button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddModal('hishtalmut')">+ הוסף</button></div>
+    <div id="hsh-list"></div>
+    <div class="aib" style="margin-top:8px">💡 הפקדה עד ₪20,520/שנה פטורה ממס לחלוטין — חובה למקסם!</div>
+  </div>
+
+  <!-- גמל להשקעה -->
+  <div class="sl">גמל להשקעה</div>
+  <div class="c">
+    <div class="ch"><div class="ct">הגמל שלי
+      <span class="hq">?<div class="hq-box">גמל להשקעה = חיסכון גמיש בפטור ממס רווחי הון! בניגוד לתיק מניות שמשלם 25% מס, כאן הרווחים פטורים לחלוטין.</div></span>
+    </div></div>
+    <div id="gamel-list"><div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין גמל להשקעה — <span style="color:#A07840;cursor:pointer" onclick="openAddModal('gamel')">+ הוסף</span></div></div>
+    <div style="height:.5px;background:rgba(30,45,74,.12);margin:8px 0"></div>
+    <div class="ch" style="margin-bottom:5px"><div class="ct" style="font-size:11px">השוואה: גמל vs תיק רגיל</div></div>
+    <div class="dr"><div class="dl">יתרון מס על 25 שנה</div><div class="dv" style="color:#A07840">+₪48,000</div></div>
+    <div class="dr"><div class="dl">מס על רווחים בגמל</div><div class="dv">0% (עד תקרה)</div></div>
+    <div class="dr"><div class="dl">מס על תיק רגיל</div><div class="dv" style="color:#D93025">25%</div></div>
+    <div class="aib" style="margin-top:7px">🏆 כמחשבון: כמה שווה הפטור ממס?<br>₪95,000 · 25 שנה · 7% = <strong>פטור שווה ₪48,000</strong></div>
+  </div>
+
+  <!-- ═══ Section: השקעות ═══ -->
+  <div class="sec-div"><span class="sec-div-label">השקעות</span><div class="sec-div-line"></div></div>
+
+  <div class="c">
+    <div class="ch"><div class="ct">תיקי השקעות <span class="hq">?<div class="hq-box">תיק השקעות = כסף בשוק ההון. על הרווחים <strong>25% מס רווחי הון</strong> בעת מכירה. לכן גמל להשקעה עדיף לטווח ארוך!</div></span></div><button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddModal('investment')">+ הוסף</button></div>
+    <div id="inv-list"></div>
+    <div style="height:.5px;background:rgba(30,45,74,.12);margin:7px 0"></div>
+    <div class="ch" style="margin-bottom:4px"><div class="ct" style="font-size:11px">מזומן / קרן חירום</div></div>
+    <div style="display:flex;align-items:center;gap:8px"><div class="il" style="margin:0;flex:1">₪ מזומן ונזיל</div><input class="inp" id="cash-input" type="number" style="width:120px;margin:0" placeholder="₪ 0"/></div>
+  </div>
+
+  <!-- השקעות אלטרנטיביות -->
+  <div class="c">
+    <div class="ch" style="margin-bottom:4px">
+      <div class="ct" style="font-size:11px">השקעות אלטרנטיביות</div>
+      <button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddAlt()">+ הוסף</button>
+    </div>
+    <div id="alt-list"></div>
+    <div style="font-size:10px;color:#A8A8B0;margin-top:4px">
+      קרנות ריט · קרנות נאמנות · Angel investments
+    </div>
+  </div>
+
+  <!-- ═══ Section: נדל"ן ═══ -->
+  <div class="sec-div"><span class="sec-div-label">נדל"ן</span><div class="sec-div-line"></div></div>
+
+  <div class="c">
+    <div class="ch"><div class="ct">נדל"ן ומשכנתא <span class="hq">?<div class="hq-box">משכנתא = הלוואה לדיור. תשלם על הריבית במשך שנים ארוכות. <strong>כדאי לבדוק מחזור משכנתא</strong> בכל ירידת ריבית!</div></span></div><button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddModal('realEstate')">+ הוסף</button></div>
+    <div id="re-list"></div>
+    <div class="aib" style="margin-top:7px">💡 כדאי לבדוק מחזור משכנתא בכל ירידת ריבית — חיסכון ממוצע ₪50,000+</div>
+  </div>
+
+  <!-- ═══ Section: סימולטור ═══ -->
+  <div class="sec-div"><span class="sec-div-label">סימולטור</span><div class="sec-div-line"></div></div>
+
+  <div class="c">
+    <div class="ch"><div class="ct">סימולטור תיק אישי <span class="hq">?<div class="hq-box">חשב כמה יהיה לך בעוד X שנים. מחשב ריבית דריבית על ההשקעה + הפקדות חודשיות.</div></span></div></div>
+    <div class="fi2">
+      <div><div class="il">השקעה כיום ₪</div><input class="inp" id="sim-start" type="number" placeholder="₪ סכום" oninput="calcPortfolio()"/></div>
+      <div><div class="il">הפקדה חודשית ₪</div><input class="inp" id="sim-mo" type="number" placeholder="₪/חודש" oninput="calcPortfolio()"/></div>
+    </div>
+    <div class="fi2">
+      <div><div class="il">תשואה שנתית %</div><input class="inp" id="sim-rate" type="number" value="7" oninput="calcPortfolio()"/></div>
+      <div><div class="il">שנים</div><input class="inp" id="sim-yrs" type="number" placeholder="20" value="20" oninput="calcPortfolio()"/></div>
+    </div>
+    <div id="sim-result" style="background:#E8DCC8;border-radius:9px;padding:12px;margin-top:6px;text-align:center">
+      <div style="font-size:10px;color:#888;margin-bottom:3px">הזן נתונים לחישוב</div>
+      <div id="sim-val" style="font-size:28px;font-weight:800;color:#888;letter-spacing:-1.5px">—</div>
+      <div id="sim-sub" style="font-size:10px;color:#888;margin-top:2px"></div>
+    </div>
+    <div id="sim-chart-wrap" style="margin-top:8px"></div>
+  </div>
+
+  <!-- צמיחה עתידית 4 קווים -->
+  <div class="c" id="inv-chart-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <div class="ct">צמיחה עתידית</div>
+      <span class="bdg Br">מס 25%</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:7px">
+      <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:#64646A">
+        <svg width="18" height="8"><line x1="0" y1="4" x2="18" y2="4" stroke="#6B7A96" stroke-width="2"/></svg>תיק מניות ברוטו</div>
+      <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:#64646A">
+        <svg width="18" height="8"><line x1="0" y1="4" x2="18" y2="4" stroke="#6B7A96" stroke-width="2" stroke-dasharray="3,2"/></svg>תיק מניות נטו</div>
+      <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:#64646A">
+        <svg width="18" height="8"><line x1="0" y1="4" x2="18" y2="4" stroke="#A07840" stroke-width="2"/></svg>ת"א ברוטו</div>
+      <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:#64646A">
+        <svg width="18" height="8"><line x1="0" y1="4" x2="18" y2="4" stroke="#A07840" stroke-width="2" stroke-dasharray="3,2"/></svg>ת"א נטו</div>
+    </div>
+    <div style="direction:ltr">
+      <svg id="inv-svg" width="100%" height="130" viewBox="0 0 300 130" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="blueGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#6B7A96" stop-opacity="0.06"/>
+            <stop offset="100%" stop-color="#6B7A96" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="greenGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#A07840" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#A07840" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <line x1="30" y1="15" x2="295" y2="15" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
+        <line x1="30" y1="45" x2="295" y2="45" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
+        <line x1="30" y1="75" x2="295" y2="75" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
+        <line x1="30" y1="105" x2="295" y2="105" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
+        <text x="28" y="18" font-size="7" fill="#6B7A96" text-anchor="end">₪2.5M</text>
+        <text x="28" y="48" font-size="7" fill="#6B7A96" text-anchor="end">₪1.5M</text>
+        <text x="28" y="78" font-size="7" fill="#6B7A96" text-anchor="end">₪500K</text>
+        <text x="28" y="108" font-size="7" fill="#6B7A96" text-anchor="end">₪0</text>
+        <path id="inv-bfill" fill="url(#blueGrad)"/>
+        <path id="inv-gfill" fill="url(#greenGrad)"/>
+        <path id="inv-b1" fill="none" stroke="#6B7A96" stroke-width="1.8" stroke-linejoin="round"/>
+        <path id="inv-b2" fill="none" stroke="#6B7A96" stroke-width="1.4" stroke-dasharray="4,3" stroke-linejoin="round"/>
+        <path id="inv-g1" fill="none" stroke="#A07840" stroke-width="1.8" stroke-linejoin="round"/>
+        <path id="inv-g2" fill="none" stroke="#A07840" stroke-width="1.4" stroke-dasharray="4,3" stroke-linejoin="round"/>
+      </svg>
+      <div style="display:flex;justify-content:space-between;margin-top:2px;padding:0 30px 0 0">
+        <span style="font-size:10px;color:#6B7A96">היום</span>
+        <span style="font-size:10px;color:#6B7A96">+5</span>
+        <span style="font-size:10px;color:#6B7A96">+10</span>
+        <span style="font-size:10px;color:#6B7A96">+15</span>
+        <span style="font-size:10px;color:#6B7A96">+20</span>
+        <span style="font-size:10px;color:#6B7A96">+25</span>
+      </div>
+    </div>
+    <div style="font-size:10px;color:#A8A8B0;margin-top:5px;text-align:center">קו מלא = ברוטו · קו מקווקו = נטו אחרי מס 25%</div>
+  </div>
+
+  <!-- מכשירים נוספים — accordion -->
+  <div class="sl">מכשירים נוספים</div>
+  <div class="c" style="padding:0;overflow:hidden">
+    <div class="sec-toggle" style="padding:12px 13px 10px" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">📄</span><span class="ct">מק"מ</span></div>
+      <span class="sec-arr">▾</span>
+    </div>
+    <div class="sec-body closed" style="max-height:300px;padding:0 13px 10px">
+      <div class="dr"><div class="dl">מק"מ נוכחי</div><div class="dv">₪50,000</div></div>
+      <div class="dr"><div class="dl">תשואה שנתית</div><div class="dv" style="color:#A07840">4.8%</div></div>
+      <div class="dr"><div class="dl">לעומת פיקדון בנק</div><div class="dv">+0.6% עדיף</div></div>
+    </div>
+    <div class="sec-toggle" style="padding:10px 13px;border-top:.5px solid rgba(30,45,74,.12)" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">👶</span><span class="ct">חיסכון לילדים</span></div>
+      <span class="sec-arr">▾</span>
+    </div>
+    <div class="sec-body closed" style="max-height:300px;padding:0 13px 10px">
+      <div class="dr"><div class="dl">ילד 1 — דניאל</div><div class="dv">₪28,000</div></div>
+      <div class="dr"><div class="dl">פוטנציאל בגיל 18</div><div class="dv" style="color:#A07840">₪82,000</div></div>
+      <div style="font-size:10px;color:#6B7A96;margin-top:6px">💡 ₪200/חודש מגיל 0 = ₪82,000 בגיל 18</div>
+    </div>
+    <div class="sec-toggle" style="padding:10px 13px;border-top:.5px solid rgba(30,45,74,.12)" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">💼</span><span class="ct">ESOP / אופציות</span></div>
+      <span class="sec-arr">▾</span>
+    </div>
+    <div class="sec-body closed" style="max-height:300px;padding:0 13px 10px">
+      <div class="dr"><div class="dl">אופציות / RSU</div><div class="dv">₪45,000 ערך</div></div>
+      <div class="dr"><div class="dl">Vesting עד</div><div class="dv">2027</div></div>
+      <div class="dr"><div class="dl">Cliff</div><div class="dv">עבר</div></div>
+    </div>
+    <div class="sec-toggle" style="padding:10px 13px;border-top:.5px solid rgba(30,45,74,.12)" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">📋</span><span class="ct">פוליסת חיסכון</span></div>
+      <span class="sec-arr">▾</span>
+    </div>
+    <div class="sec-body closed" style="max-height:300px;padding:0 13px 10px">
+      <div class="dr"><div class="dl">פוליסת חיסכון</div><div class="dv">₪35,000</div></div>
+      <div class="dr"><div class="dl">תשואה שנתית</div><div class="dv" style="color:#A07840">5.2%</div></div>
+      <div class="dr"><div class="dl">מנהלים vs פנסיה חדשה</div><div class="dv">פנסיה עדיפה ב-1.2%</div></div>
+    </div>
+  </div>
+
+  <!-- TINDER CARDS — השקעות -->
+  <div>
+    <div style="font-size:10px;font-weight:700;color:#A8A8B0;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">🎓 ידע על השקעות — החלק לעוד</div>
+    <div class="tinder-wrap" id="tinder-st">
+      <div class="tcard" style="background:linear-gradient(135deg,#0f2347,#3D5278)">
+        <div class="tcard-tag" style="color:rgba(255,255,255,.7)">S&P 500</div>
+        <div class="tcard-title" style="color:#fff">תשואה ממוצעת 10.5% מ-1928</div>
+        <div class="tcard-body" style="color:rgba(255,255,255,.85)">₪1,000 שהושקעו לפני 30 שנה שווים היום ₪26,000. בלי לעשות שום דבר. זה כוח ריבית דריבית.</div>
+        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.5)">1 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-st')">הבא ›</button></div>
+      </div>
+      <div class="tcard" style="background:linear-gradient(135deg,#1E2D4A,#3D5278)">
+        <div class="tcard-tag" style="color:rgba(255,255,255,.7)">עיתוי שוק</div>
+        <div class="tcard-title" style="color:#fff">לנסות לתזמן את השוק = לפספס</div>
+        <div class="tcard-body" style="color:rgba(255,255,255,.85)">מי שפספס רק 10 הימים הטובים ב-20 שנה הפסיד 54% מהתשואה. השוק הוא לסבלנים.</div>
+        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.5)">2 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-st')">הבא ›</button></div>
+      </div>
+      <div class="tcard" style="background:#1E2D4A">
+        <div class="tcard-tag" style="color:rgba(255,255,255,.7)">גמל להשקעה</div>
+        <div class="tcard-title" style="color:#fff">הגמל עדיף על תיק מניות רגיל</div>
+        <div class="tcard-body" style="color:rgba(255,255,255,.85)">אותה תשואה, אבל ב-25% פחות מס. על ₪280,000 לאורך 20 שנה — זה הפרש של ₪48,000 בכיס שלך.</div>
+        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.5)">3 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-st')">הבא ›</button></div>
+      </div>
+    </div>
+    <div class="tinder-dots" id="dots-st">
+      <div class="tdot on"></div><div class="tdot"></div><div class="tdot"></div>
+    </div>
+  </div>
+
+  <!-- ═══ Section: הלוואות ═══ -->
+  <div class="sec-div" id="section-lo"><span class="sec-div-label">הלוואות</span><div class="sec-div-line"></div></div>
+
+  <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:8px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.5">Numa מציגה מידע בלבד ואינה מתווכת פיננסית.</div>
+  <div class="g2">
+    <div class="m"><div class="ml">סה"כ חוב</div><div class="mv" style="color:#D93025" id="lo-total">—</div></div>
+    <div class="m"><div class="ml">תשלום חודשי</div><div class="mv" style="color:#D93025" id="lo-monthly">—</div></div>
+  </div>
+  <div class="c">
+    <div class="ch"><div class="ct">הלוואות</div><button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddModal('loan')">+ הוסף</button></div>
+    <div id="lo-list"><div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין הלוואות — לחץ + הוסף</div></div>
+  </div>
+  <div class="c">
+    <div class="ch"><div class="ct">לוח סילוק</div></div>
+<svg width="100%" viewBox="0 0 200 82" style="display:block;margin:0 -4px">
+  <line x1="0" y1="17" x2="200" y2="17" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
+  <line x1="0" y1="35" x2="200" y2="35" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
+  <line x1="0" y1="52" x2="200" y2="52" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
+  <line x1="0" y1="70" x2="200" y2="70" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
+  <rect x="4" y="6" width="24" height="64" rx="4" fill="#1E2D4A"/>
+  <rect x="32" y="14" width="24" height="56" rx="4" fill="#1E2D4A"/>
+  <rect x="60" y="23" width="24" height="47" rx="4" fill="#A07840"/>
+  <rect x="88" y="32" width="24" height="38" rx="4" fill="#A07840"/>
+  <rect x="116" y="41" width="24" height="29" rx="4" fill="#C9A96E"/>
+  <rect x="144" y="51" width="24" height="19" rx="4" fill="#C9A96E"/>
+  <rect x="172" y="61" width="24" height="9" rx="4" fill="#E8DCC8"/>
+</svg>
+  </div>
+  <div class="c" style="border-color:rgba(160,120,64,.2);background:#E8DCC8">
+    <div class="ch"><div class="ct">🔍 מצא הלוואה טובה יותר</div></div>
+    <div style="font-size:10.5px;color:#64646A;line-height:1.6;margin-bottom:10px">
+      ריביות בישראל: <strong style="color:#111">בנקים 5–8%</strong> · <strong style="color:#A07840">חוץ-בנקאי 4–6%</strong> · <strong style="color:#3D5278">מחזור משכנתא חוסך ₪200–600/חודש</strong>.
+      לרוב הישראלים יש הלוואות ביקר מדי.
+    </div>
+    <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:10px">
+      <div style="background:#E8DCC8;border-radius:9px;padding:7px 10px;font-size:10.5px"><span style="color:#D97706;font-weight:700">⚠️ </span>ריבית מעל 6%? כדאי למחזר</div>
+      <div style="background:#E8DCC8;border-radius:9px;padding:7px 10px;font-size:10.5px"><span style="color:#A07840;font-weight:700">💡 </span>קרן השתלמות נזילה? עדיפה על הלוואה</div>
+      <div style="background:#E8DCC8;border-radius:9px;padding:7px 10px;font-size:10.5px"><span style="color:#3D5278;font-weight:700">📊 </span>הלוואת מסגרת vs הלוואה רגילה — כלים שונים</div>
+    </div>
+    <button class="btn-g" style="margin-top:0">קבל הצעה להלוואה טובה יותר</button>
+  </div>
+
+  <!-- Tinder cards — הלוואות -->
+  <div>
+    <div style="font-size:10px;font-weight:700;color:#A8A8B0;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">🎓 ידע על הלוואות</div>
+    <div class="tinder-wrap" id="tinder-lo">
+      <div class="tcard" style="background:linear-gradient(135deg,#2d0a00,#a33000)">
+        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">ריבית דריבית הפוכה</div>
+        <div class="tcard-title" style="color:#fff">הלוואה של ₪100K ב-7% = ₪41K ריבית לאורך 10 שנה</div>
+        <div class="tcard-body" style="color:rgba(255,255,255,.85)">כל שקל שתשלם יותר מהמינימום — ישירות לכיסך. להחזיר מהר = לחסוך אלפים.</div>
+        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">1 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-lo')">הבא ›</button></div>
+      </div>
+      <div class="tcard" style="background:linear-gradient(135deg,#001a3d,#003087)">
+        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">משכנתא</div>
+        <div class="tcard-title" style="color:#fff">מחזור משכנתא יכול לחסוך ₪200–800/חודש</div>
+        <div class="tcard-body" style="color:rgba(255,255,255,.85)">ירידת ריבית של 1% על משכנתא של ₪1M = חיסכון של ₪500/חודש = ₪120K לאורך 20 שנה!</div>
+        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">2 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-lo')">הבא ›</button></div>
+      </div>
+      <div class="tcard" style="background:linear-gradient(135deg,#1a1200,#7a5200)">
+        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">קרן השתלמות</div>
+        <div class="tcard-title" style="color:#fff">קרן השתלמות נזילה > הלוואה</div>
+        <div class="tcard-body" style="color:rgba(255,255,255,.85)">ריבית על הלוואה: 5–8%. תשואת קה"ש: 5–7%. כשהקרן נזילה — עדיף למשוך ממנה מאשר לקחת הלוואה!</div>
+        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">3 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-lo')">הבא ›</button></div>
+      </div>
+    </div>
+    <div class="tinder-dots" id="dots-lo"><div class="tdot on"></div><div class="tdot"></div><div class="tdot"></div></div>
+  </div>
+
+  <div class="c">
+    <div class="ch"><div class="ct">מחשבון לוח סילוקין</div></div>
+    <div class="fi2"><div><div class="il">סכום הלוואה</div><input class="inp" id="amort-amount" type="number" placeholder="₪ סכום" oninput="calcAmort()"/></div><div><div class="il">ריבית % שנתי</div><input class="inp" id="amort-rate" type="number" placeholder="% ריבית" oninput="calcAmort()"/></div></div>
+    <div class="fi2"><div><div class="il">תקופה (חודשים)</div><input class="inp" id="amort-months" type="number" placeholder="חודשים" oninput="calcAmort()"/></div><div><div class="il">תשלום חודשי</div><input class="inp" id="amort-payment" placeholder="יחושב אוטומטית" style="color:#A07840;font-weight:700" readonly/></div></div>
+    <div id="amort-details" style="margin-top:8px;display:none">
+      <div class="dr"><div class="dl">סה"כ תשלומים</div><div class="dv" id="amort-total">—</div></div>
+      <div class="dr"><div class="dl">סה"כ ריבית</div><div class="dv" style="color:#D93025" id="amort-interest">—</div></div>
+    </div>
+  </div>
 </div>
 
-<!-- ══════════════════ תכנון — Hub ══════════════════ -->
+<!-- ══════════════════ תכנון — Hub (merged pg-fire, pg-mc, pg-sc, pg-ins, pg-legacy) ══════════════════ -->
 <div class="pg" id="pg-plan">
-  <div style="font-size:14px;font-weight:700;color:#1E2D4A;margin-bottom:4px">תכנון פיננסי</div>
-  <div style="font-size:10px;color:#6B7A96;margin-bottom:8px">תכנן את העתיד שלך</div>
-  <div style="display:flex;flex-direction:column;gap:10px">
-    <div class="c" onclick="goSub('fire')" style="cursor:pointer;display:flex;align-items:center;gap:12px">
-      <div style="width:40px;height:40px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🔥</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:600;color:#1E2D4A">FIRE — עצמאות כלכלית</div><div style="font-size:10px;color:#6B7A96;margin-top:2px">גיל פרישה + תכנון חופש</div></div>
-      <div style="font-size:14px;color:#6B7A96">←</div>
+  <div style="font-size:14px;font-weight:700;color:#1E2D4A;margin-bottom:4px;position:sticky;top:0;z-index:10;background:#F5F0E8;padding:8px 0 6px">תכנון פיננסי</div>
+  <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:8px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.5">התחזיות מבוססות על הנחות בלבד ואינן מהוות ייעוץ השקעות.</div>
+
+  <!-- ═══ Section: FIRE ═══ -->
+  <div class="sec-div" id="section-fire"><span class="sec-div-label">FIRE — עצמאות כלכלית</span><div class="sec-div-line"></div></div>
+
+  <div class="hc" style="text-align:center;padding:18px">
+    <div style="font-size:10px;color:#A8A8B0;margin-bottom:3px">יעד FIRE שלך</div>
+    <div style="font-size:36px;font-weight:800;letter-spacing:-2px" id="fire-number">—</div>
+    <div style="font-size:11px;color:#64646A;margin:7px 0" id="fire-subtitle">הזן הכנסות והוצאות לחישוב</div>
+    <div class="pw" style="max-width:260px;margin:0 auto 5px"><div class="pb" id="fire-bar" style="width:0%"></div></div>
+    <div style="font-size:10px;color:#A8A8B0" id="fire-progress">הזן נתונים לחישוב</div>
+  </div>
+  <div class="g3">
+    <div class="m"><div class="ml">הוצ' חודשית</div><div class="mv" style="font-size:14px" id="fire-exp">—</div></div>
+    <div class="m"><div class="ml">הכנסה פסיבית</div><div class="mv" style="font-size:14px" id="fire-passive">—</div></div>
+    <div class="m"><div class="ml">שיעור חיסכון</div><div class="mv" style="font-size:14px;color:#A07840" id="fire-rate">0%</div></div>
+  </div>
+  <div class="c">
+    <div class="ch"><div class="ct">הגדרות פרישה</div></div>
+    <div class="fi2">
+      <div><div class="il">גיל נוכחי</div><input class="inp" id="fire-age-in" placeholder="גילך" type="number" oninput="renderFIREPage()"/></div>
+      <div><div class="il">גיל פרישה רצוי</div><input class="inp" id="fire-retire-in" value="60" type="number" oninput="renderFIREPage()"/></div>
     </div>
-    <div class="c" onclick="goSub('mc')" style="cursor:pointer;display:flex;align-items:center;gap:12px">
-      <div style="width:40px;height:40px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🎲</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:600;color:#1E2D4A">Monte Carlo</div><div style="font-size:10px;color:#6B7A96;margin-top:2px">סימולציה אקראית — 1,000 תרחישים</div></div>
-      <div style="font-size:14px;color:#6B7A96">←</div>
+    <div class="fi2">
+      <div><div class="il">כלל נסיגה %</div><input class="inp" id="fire-wr" value="4" type="number" oninput="renderFIREPage()"/></div>
+      <div><div class="il">תשואה %</div><input class="inp" id="fire-ret" value="7" type="number" oninput="renderFIREPage()"/></div>
     </div>
-    <div class="c" onclick="goSub('sc')" style="cursor:pointer;display:flex;align-items:center;gap:12px">
-      <div style="width:40px;height:40px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🎯</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:600;color:#1E2D4A">תרחישים</div><div style="font-size:10px;color:#6B7A96;margin-top:2px">בסיס / אופטימי / שמרני</div></div>
-      <div style="font-size:14px;color:#6B7A96">←</div>
+    <button class="btn-g" onclick="renderFIREPage()">עדכן חישוב ▶</button>
+  </div>
+  <div class="c">
+    <div class="ch"><div class="ct">מסלול לפרישה</div></div>
+<svg width="100%" viewBox="0 0 200 105" style="display:block;margin:0 -4px">
+  <line x1="0" y1="22" x2="200" y2="22" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
+  <line x1="0" y1="44" x2="200" y2="44" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
+  <line x1="0" y1="66" x2="200" y2="66" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
+  <line x1="0" y1="88" x2="200" y2="88" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
+  <path d="M18 78 L50 70 L82 56 L114 42 L146 28 L178 10 L178 16 L146 35 L114 50 L82 62 L50 74 L18 82 Z" fill="rgba(160,120,64,.07)"/>
+  <rect x="4" y="72" width="28" height="16" rx="4" fill="#E8DCC8"/>
+  <rect x="36" y="62" width="28" height="26" rx="4" fill="#E8DCC8"/>
+  <rect x="68" y="49" width="28" height="39" rx="4" fill="#C9A96E"/>
+  <rect x="100" y="36" width="28" height="52" rx="4" fill="#A07840"/>
+  <rect x="132" y="23" width="28" height="65" rx="4" fill="#A07840"/>
+  <rect x="164" y="7" width="28" height="81" rx="4" fill="#1E2D4A"/>
+  <text x="18" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2024</text>
+  <text x="50" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2026</text>
+  <text x="82" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2028</text>
+  <text x="114" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2030</text>
+  <text x="146" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2032</text>
+  <text x="178" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2034</text>
+</svg>
+  </div>
+  <div class="c" style="background:rgba(160,120,64,.04);border-color:rgba(160,120,64,.12)">
+    <div class="ct" style="margin-bottom:6px">💡 כלל ה-4%</div>
+    <div style="font-size:10.5px;color:#64646A;line-height:1.6">אם תוציא 4% מהתיק בשנה, הוא אמור להחזיק לנצח. ₪3.2M × 4% = ₪128,000/שנה = ₪10,667/חודש.</div>
+  </div>
+  <!-- Tinder cards — FIRE -->
+  <div>
+    <div style="font-size:10px;font-weight:700;color:#A8A8B0;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">🎓 ידע על פרישה מוקדמת</div>
+    <div class="tinder-wrap" id="tinder-fire">
+      <div class="tcard" style="background:linear-gradient(135deg,#1a0800,#7a3300)">
+        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">FIRE = Financial Independence, Retire Early</div>
+        <div class="tcard-title" style="color:#fff">FIRE לא אומר לא לעבוד — אומר לא חייב</div>
+        <div class="tcard-body" style="color:rgba(255,255,255,.85)">המטרה היא חופש בחירה. רוב אנשי FIRE ממשיכים לעבוד — אבל בתנאים שלהם, בתחום שאוהבים.</div>
+        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">1 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-fire')">הבא ›</button></div>
+      </div>
+      <div class="tcard" style="background:linear-gradient(135deg,#001a10,#005530)">
+        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">כלל ה-4%</div>
+        <div class="tcard-title" style="color:#fff">25× ההוצאה השנתית = יעד FIRE שלך</div>
+        <div class="tcard-body" style="color:rgba(255,255,255,.85)">מוציא ₪15,000/חודש? = ₪180,000/שנה. יעד FIRE = ₪180K × 25 = ₪4.5M. פשוט.</div>
+        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">2 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-fire')">הבא ›</button></div>
+      </div>
+      <div class="tcard" style="background:linear-gradient(135deg,#00103d,#002680)">
+        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">שיעור חיסכון</div>
+        <div class="tcard-title" style="color:#fff">50% חיסכון = פרישה תוך 17 שנה. 70% = 8 שנים</div>
+        <div class="tcard-body" style="color:rgba(255,255,255,.85)">שיעור החיסכון הוא המשתנה הכי חזק. הכנסה גבוהה עוזרת, אבל שיעור חיסכון מנצח הכל.</div>
+        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">3 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-fire')">הבא ›</button></div>
+      </div>
     </div>
-    <div class="c" onclick="goSub('ins')" style="cursor:pointer;display:flex;align-items:center;gap:12px">
-      <div style="width:40px;height:40px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🛡️</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:600;color:#1E2D4A">ביטוחים</div><div style="font-size:10px;color:#6B7A96;margin-top:2px">חיים, אכ"ע, בריאות, סיעוד</div></div>
-      <div style="font-size:14px;color:#6B7A96">←</div>
+    <div class="tinder-dots" id="dots-fire"><div class="tdot on"></div><div class="tdot"></div><div class="tdot"></div></div>
+  </div>
+
+  <!-- ═══ Section: Monte Carlo ═══ -->
+  <div class="sec-div" id="section-mc"><span class="sec-div-label">Monte Carlo</span><div class="sec-div-line"></div></div>
+
+  <div class="mc-dark">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.5;margin-bottom:5px">מה זה בכלל?</div>
+    <div style="font-size:15px;font-weight:800;letter-spacing:-.3px;margin-bottom:8px;line-height:1.3">Monte Carlo — 10,000 עתידות אפשריות 🎲</div>
+    <div style="font-size:10.5px;opacity:.85;line-height:1.7;margin-bottom:12px">חישוב רגיל: "בתשואה 7% תהיה לך ₪2M." הבעיה? <strong>השוק לא עובד ככה.</strong><br>Monte Carlo מריץ 10,000 סימולציות ומראה <strong>טווח הסתברויות אמיתי</strong>.</div>
+    <div class="g3" style="gap:6px">
+      <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:8px;text-align:center">
+        <div style="font-size:18px;margin-bottom:3px">😰</div>
+        <div style="font-size:10px;font-weight:700;color:#fff;margin-bottom:1px">פסימי (10%)</div>
+        <div style="font-size:10px;opacity:.65;color:#fff">10% מהסימ' גרועות מזה</div>
+      </div>
+      <div style="background:rgba(160,120,64,.3);border:.5px solid rgba(160,120,64,.5);border-radius:10px;padding:8px;text-align:center">
+        <div style="font-size:18px;margin-bottom:3px">🎯</div>
+        <div style="font-size:10px;font-weight:700;color:#fff;margin-bottom:1px">מרכזי (50%)</div>
+        <div style="font-size:10px;opacity:.65;color:#fff">הכי סביר</div>
+      </div>
+      <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:8px;text-align:center">
+        <div style="font-size:18px;margin-bottom:3px">🚀</div>
+        <div style="font-size:10px;font-weight:700;color:#fff;margin-bottom:1px">אופטימי (90%)</div>
+        <div style="font-size:10px;opacity:.65;color:#fff">90% מהסימ' נמוכות</div>
+      </div>
     </div>
-    <div class="c" onclick="goSub('legacy')" style="cursor:pointer;display:flex;align-items:center;gap:12px">
-      <div style="width:40px;height:40px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">📜</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:600;color:#1E2D4A">עיזבון</div><div style="font-size:10px;color:#6B7A96;margin-top:2px">צוואה, מוטבים, ייפוי כוח</div></div>
-      <div style="font-size:14px;color:#6B7A96">←</div>
+  </div>
+  <div class="hc" style="text-align:center;padding:16px">
+    <div style="font-size:10px;color:#A8A8B0;margin-bottom:3px">הסתברות הצלחה</div>
+    <div style="font-size:38px;font-weight:800;color:#A07840;letter-spacing:-2px" id="mc-success">78%</div>
+    <div style="font-size:10px;color:#64646A" id="mc-sub">10,000 סימולציות · יעד ₪3.2M</div>
+  </div>
+  <div class="g3">
+    <div class="m" style="text-align:center"><div class="ml">פסימי (10%)</div><div class="mv" style="color:#D93025;font-size:13px" id="mc-p10">₪1.8M</div></div>
+    <div class="m" style="text-align:center"><div class="ml">מרכזי (50%)</div><div class="mv" style="color:#D97706;font-size:13px" id="mc-p50">₪3.4M</div></div>
+    <div class="m" style="text-align:center"><div class="ml">אופטימי (90%)</div><div class="mv" style="color:#A07840;font-size:13px" id="mc-p90">₪5.8M</div></div>
+  </div>
+  <div class="c">
+    <div class="ch"><div class="ct">פיזור תוצאות</div><span class="bdg Bg" id="mc-badge">78% הצלחה</span></div>
+    <div id="mc-chart"><svg width="100%" viewBox="0 0 200 78" style="display:block;margin:0 -4px"><rect x="4" y="67" width="20" height="11" rx="4" fill="#E8DCC8"/><rect x="28" y="53" width="20" height="25" rx="4" fill="#E8DCC8"/><rect x="52" y="30" width="20" height="48" rx="4" fill="#C9A96E"/><rect x="76" y="8" width="20" height="70" rx="4" fill="#1E2D4A"/><rect x="100" y="16" width="20" height="62" rx="4" fill="#1E2D4A"/><rect x="124" y="34" width="20" height="44" rx="4" fill="#C9A96E"/><rect x="148" y="56" width="20" height="22" rx="4" fill="#E8DCC8"/><rect x="172" y="70" width="20" height="8" rx="4" fill="#E8DCC8"/><line x1="0" y1="78" x2="200" y2="78" stroke="rgba(30,45,74,.08)" stroke-width=".5"/></svg></div><div style="font-size:10px;color:#A8A8B0;margin-top:4px;text-align:center">כל עמודה = טווח תוצאה · גובה = מספר סימולציות</div>
+  </div>
+  <div class="c">
+    <div class="ch"><div class="ct">פרמטרים</div></div>
+    <div class="fi2"><div><div class="il">תשואה ממוצעת %</div><input class="inp" id="mc-return" type="number" value="7" oninput="runMonteCarlo()"/></div><div><div class="il">סטיית תקן %</div><input class="inp" id="mc-std" type="number" value="15" oninput="runMonteCarlo()"/></div></div>
+    <div class="fi2"><div><div class="il">אינפלציה %</div><input class="inp" id="mc-inflation" type="number" value="3" oninput="runMonteCarlo()"/></div><div><div class="il">שנות השקעה</div><input class="inp" id="mc-years" type="number" value="20" oninput="runMonteCarlo()"/></div></div>
+    <button class="btn-g" onclick="runMonteCarlo()">הרץ מחדש ▶ 10,000 סימולציות</button>
+  </div>
+
+  <!-- ═══ Section: תרחישים ═══ -->
+  <div class="sec-div" id="section-sc"><span class="sec-div-label">תרחישים</span><div class="sec-div-line"></div></div>
+
+  <div class="g2" id="sc-cards">
+    <div class="scc on"><div style="font-size:10px;color:#A07840;font-weight:700;margin-bottom:3px">📊 בסיס</div><div style="font-size:17px;font-weight:800" id="sc-base">—</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">7% · גיל 65</div></div>
+    <div class="scc"><div style="font-size:10px;color:#A07840;font-weight:700;margin-bottom:3px">📈 אופטימי</div><div style="font-size:17px;font-weight:800" id="sc-opt">—</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">9% · גיל 65</div></div>
+    <div class="scc"><div style="font-size:10px;color:#BA7517;font-weight:700;margin-bottom:3px">📉 שמרני</div><div style="font-size:17px;font-weight:800" id="sc-con">—</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">4% · גיל 65</div></div>
+    <div class="scc"><div style="font-size:10px;color:#C9A96E;font-weight:700;margin-bottom:3px">🔥 FIRE מהיר</div><div style="font-size:17px;font-weight:800" id="sc-fire">—</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">8% · גיל 52</div></div>
+  </div>
+  <div class="c">
+    <div class="ch"><div class="ct">השוואה 30 שנה</div></div>
+    <div id="sc-chart"></div>
+  </div>
+
+  <!-- ═══ Section: ביטוחים ═══ -->
+  <div class="sec-div" id="section-ins"><span class="sec-div-label">ביטוחים</span><div class="sec-div-line"></div></div>
+
+  <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:8px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.5">Numa מציגה מידע בלבד ואינה מתווכת פיננסית.</div>
+  <div class="c">
+    <div class="ch"><div class="ct">🛡️ הביטוחים שלי
+      <span class="hq">?<div class="hq-box">רשום כאן את הביטוחים שיש לך. Numa תבדוק פערים ותמליץ על שיפורים לפי הנתונים שלך.</div></span>
+    </div></div>
+    <div style="display:flex;flex-direction:column;gap:10px" id="ins-form">
+      <!-- ביטוח חיים -->
+      <div style="background:#E8DCC8;border-radius:12px;padding:11px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <div style="font-size:16px">❤️</div>
+          <div style="font-size:11.5px;font-weight:700;flex:1">ביטוח חיים
+            <span class="hq">?<div class="hq-box">מומלץ: 10× שכר שנתי. אם שכרך ₪20K/חודש → כיסוי מומלץ ₪2.4M. מגן על המשפחה במקרה פטירה.</div></span>
+          </div>
+          <select id="ins-life-status" class="inp" style="width:90px;margin:0;font-size:10px;padding:4px 6px" onchange="saveIns()">
+            <option value="">מצב...</option><option value="yes">יש לי</option><option value="no">אין לי</option><option value="partial">חלקי</option>
+          </select>
+        </div>
+        <div class="fi2" style="gap:6px" id="ins-life-details" style="display:none">
+          <div><div class="il" style="font-size:10px">כיסוי (₪)</div><input class="inp" id="ins-life-cover" type="number" placeholder="₪ כיסוי" style="margin:0" oninput="saveIns()"/></div>
+          <div><div class="il" style="font-size:10px">פרמיה (₪/חודש)</div><input class="inp" id="ins-life-prem" type="number" placeholder="₪/חודש" style="margin:0" oninput="saveIns()"/></div>
+        </div>
+        <div id="ins-life-insight" style="font-size:10px;color:#A8A8B0;margin-top:5px"></div>
+      </div>
+      <!-- אכ"ע -->
+      <div style="background:#E8DCC8;border-radius:12px;padding:11px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <div style="font-size:16px">💼</div>
+          <div style="font-size:11.5px;font-weight:700;flex:1">אובדן כושר עבודה (אכ"ע)
+            <span class="hq">?<div class="hq-box"><strong>החשוב ביותר!</strong> 1 מתוך 3 אנשים יאבד כושר עבודה לתקופה. מכסה 75% משכרך אם אינך יכול לעבוד.</div></span>
+          </div>
+          <select id="ins-dis-status" class="inp" style="width:90px;margin:0;font-size:10px;padding:4px 6px" onchange="saveIns()">
+            <option value="">מצב...</option><option value="yes">יש לי</option><option value="no">אין לי</option><option value="partial">חלקי</option>
+          </select>
+        </div>
+        <div class="fi2" style="gap:6px">
+          <div><div class="il" style="font-size:10px">כיסוי % משכר</div><input class="inp" id="ins-dis-pct" type="number" placeholder="75" style="margin:0" oninput="saveIns()"/></div>
+          <div><div class="il" style="font-size:10px">פרמיה (₪/חודש)</div><input class="inp" id="ins-dis-prem" type="number" placeholder="₪/חודש" style="margin:0" oninput="saveIns()"/></div>
+        </div>
+      </div>
+      <!-- ביטוח בריאות -->
+      <div style="background:#E8DCC8;border-radius:12px;padding:11px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+          <div style="font-size:16px">🏥</div>
+          <div style="font-size:11.5px;font-weight:700;flex:1">ביטוח בריאות משלים
+            <span class="hq">?<div class="hq-box">ביטוח בריאות משלים = מעבר לקופת החולים. מכסה ניתוחים פרטיים, תרופות ומחלות קשות.</div></span>
+          </div>
+          <select id="ins-health-status" class="inp" style="width:90px;margin:0;font-size:10px;padding:4px 6px" onchange="saveIns()">
+            <option value="">מצב...</option><option value="yes">יש לי</option><option value="no">אין לי</option>
+          </select>
+        </div>
+        <div><div class="il" style="font-size:10px">פרמיה (₪/חודש)</div><input class="inp" id="ins-health-prem" type="number" placeholder="₪/חודש" style="margin-bottom:0" oninput="saveIns()"/></div>
+      </div>
+      <!-- סיעוד -->
+      <div style="background:#E8DCC8;border-radius:12px;padding:11px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="font-size:16px">🧓</div>
+          <div style="font-size:11.5px;font-weight:700;flex:1">ביטוח סיעוד
+            <span class="hq">?<div class="hq-box">עלות סיעוד: ₪8,000–15,000/חודש. רוב האנשים לא מבינים כמה זה יכול לדלדל חסכונות. כדאי להתחיל צעיר.</div></span>
+          </div>
+          <select id="ins-care-status" class="inp" style="width:90px;margin:0;font-size:10px;padding:4px 6px" onchange="saveIns()">
+            <option value="">מצב...</option><option value="yes">יש לי</option><option value="no">אין לי</option>
+          </select>
+        </div>
+      </div>
     </div>
-    <div class="c" onclick="goSub('opt')" style="cursor:pointer;display:flex;align-items:center;gap:12px">
-      <div style="width:40px;height:40px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">⭐</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:600;color:#1E2D4A">שיפור תיק — AI</div><div style="font-size:10px;color:#6B7A96;margin-top:2px">ניתוח הקצאה אישי</div></div>
-      <div style="font-size:14px;color:#6B7A96">←</div>
+    <div id="ins-summary" style="margin-top:10px;padding:10px;background:rgba(160,120,64,.05);border-radius:10px;font-size:10.5px;color:#64646A">מלא את הפרטים לסיכום אישי</div>
+    <div class="aib" style="margin-top:8px">💡 השוואת מחירי ביטוחים יכולה לחסוך ₪2,000–8,000/שנה — רוב האנשים לא עשו זאת בשלוש השנים האחרונות</div>
+  </div>
+  <!-- Tinder cards — ביטוחים -->
+  <div>
+    <div style="font-size:10px;font-weight:700;color:#A8A8B0;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">🎓 ידע על ביטוחים</div>
+    <div class="tinder-wrap" id="tinder-ins">
+      <div class="tcard" style="background:linear-gradient(135deg,#001430,#003060)">
+        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">ביטוח חיים</div>
+        <div class="tcard-title" style="color:#fff">כיסוי = 10× השכר השנתי שלך</div>
+        <div class="tcard-body" style="color:rgba(255,255,255,.85)">שכר ₪20K/חודש = ₪240K/שנה. כיסוי מומלץ: ₪2.4M. בודק אם יש לך מספיק?</div>
+        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">1 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-ins')">הבא ›</button></div>
+      </div>
+      <div class="tcard" style="background:linear-gradient(135deg,#1E2D4A,#3D5278)">
+        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">אובדן כושר עבודה</div>
+        <div class="tcard-title" style="color:#fff">1 מ-3 אנשים יאבד כושר עבודה לתקופה</div>
+        <div class="tcard-body" style="color:rgba(255,255,255,.85)">זה הביטוח הכי חשוב שאנשים מדלגים עליו. ביטוח חיים = למוות. אכ"ע = לחיים קשים.</div>
+        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">2 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-ins')">הבא ›</button></div>
+      </div>
+      <div class="tcard" style="background:linear-gradient(135deg,#0d2000,#2a5500)">
+        <div class="tcard-tag" style="color:rgba(255,255,255,.65)">חיסכון על ביטוח</div>
+        <div class="tcard-title" style="color:#fff">השוואת מחירים חוסכת ₪2,000–8,000/שנה</div>
+        <div class="tcard-body" style="color:rgba(255,255,255,.85)">80% מהישראלים לא השוו ביטוח בשלוש השנים האחרונות. זה אחד הצעדים הקלים ביותר לחסוך.</div>
+        <div class="tcard-footer"><span class="tcard-hint" style="color:rgba(255,255,255,.45)">3 מתוך 3</span><button class="tnext" onclick="tinderNext('tinder-ins')">הבא ›</button></div>
+      </div>
     </div>
+    <div class="tinder-dots" id="dots-ins"><div class="tdot on"></div><div class="tdot"></div><div class="tdot"></div></div>
+  </div>
+
+  <!-- ═══ Section: עיזבון ═══ -->
+  <div class="sec-div" id="section-legacy"><span class="sec-div-label">עיזבון</span><div class="sec-div-line"></div></div>
+
+  <div class="c">
+    <div class="ch"><div class="ct">📜 מצב עיזבון
+      <span class="hq">?<div class="hq-box">עיזבון = מה קורה לרכוש שלך אחרי מותך. בלי צוואה, המדינה מחליטה — לא תמיד כפי שרצית.</div></span>
+    </div></div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:.5px solid rgba(30,45,74,.12)">
+        <div style="font-size:11px;font-weight:600">📄 צוואה
+          <span class="hq">?<div class="hq-box">צוואה = מסמך שקובע מי מקבל מה. ללא צוואה — חוק הירושה קובע. עלות ממוצעת: ₪1,500–3,000 אצל עורך דין.</div></span>
+        </div>
+        <select id="leg-will" class="inp" style="width:100px;margin:0;font-size:10px;padding:4px 6px" onchange="saveLegacy()">
+          <option value="">מצב...</option><option value="yes">יש צוואה</option><option value="no">אין צוואה</option><option value="old">ישנה/לעדכן</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:.5px solid rgba(30,45,74,.12)">
+        <div style="font-size:11px;font-weight:600">🏛️ מינוי מוטבים בפנסיה
+          <span class="hq">?<div class="hq-box">ללא מינוי מוטב, כספי הפנסיה עוברים לפי חוק — לא בהכרח לפי רצונך. בדוק מול קרן הפנסיה שלך.</div></span>
+        </div>
+        <select id="leg-ben" class="inp" style="width:100px;margin:0;font-size:10px;padding:4px 6px" onchange="saveLegacy()">
+          <option value="">מצב...</option><option value="yes">מעודכן</option><option value="no">לא הוגדר</option><option value="check">לבדוק</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:.5px solid rgba(30,45,74,.12)">
+        <div style="font-size:11px;font-weight:600">⚖️ ייפוי כוח מתמשך
+          <span class="hq">?<div class="hq-box">מסמך שמאפשר למישהו שסמכת עליו לנהל ענייניך אם אינך מסוגל. חיוני יותר מצוואה לדעת רבים.</div></span>
+        </div>
+        <select id="leg-poa" class="inp" style="width:100px;margin:0;font-size:10px;padding:4px 6px" onchange="saveLegacy()">
+          <option value="">מצב...</option><option value="yes">יש</option><option value="no">אין</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0">
+        <div style="font-size:11px;font-weight:600">💍 הסכם ממון
+          <span class="hq">?<div class="hq-box">הסכם ממון קובע מה שייך לכל אחד מבני הזוג. בלי הסכם — חוק יחסי הממון חל אוטומטית.</div></span>
+        </div>
+        <select id="leg-pre" class="inp" style="width:100px;margin:0;font-size:10px;padding:4px 6px" onchange="saveLegacy()">
+          <option value="">מצב...</option><option value="yes">יש</option><option value="no">אין</option><option value="na">לא רלוונטי</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="c">
+    <div class="ch"><div class="ct">חלוקת עיזבון</div></div>
+    <div class="fi2" style="gap:6px">
+      <div><div class="il">% לבן/בת זוג</div><input class="inp" id="leg-spouse-pct" type="number" placeholder="60" style="margin:0" oninput="saveLegacy()"/></div>
+      <div><div class="il">% לילדים</div><input class="inp" id="leg-kids-pct" type="number" placeholder="40" style="margin:0" oninput="saveLegacy()"/></div>
+    </div>
+    <div style="margin-top:10px;padding:10px;background:#E8DCC8;border-radius:10px" id="leg-estate-val">
+      <div style="font-size:10px;color:#A8A8B0;margin-bottom:3px">שווי עיזבון מוערך (לפי נתוניך)</div>
+      <div style="font-size:18px;font-weight:800;color:#A07840" id="leg-val">—</div>
+      <div style="font-size:10px;color:#64646A;margin-top:2px" id="leg-breakdown">הזן נכסים בדף השקעות לחישוב</div>
+    </div>
+  </div>
+  <div class="aib">💡 מומלץ להסדיר צוואה. עלות ממוצעת: ₪1,500. ערך רגשי ומשפטי: אין מחיר.</div>
+
+  <!-- ═══ Section: שיפור תיק — AI ═══ -->
+  <div class="sec-div" id="section-opt"><span class="sec-div-label">שיפור תיק — AI</span><div class="sec-div-line"></div></div>
+
+  <div class="c" style="background:#E8DCC8;border-color:rgba(160,120,64,.2)">
+    <div class="ch">
+      <div>
+        <div class="ct">⭐ ניתוח תיק חכם — AI
+          <span class="hq">?<div class="hq-box">Numa מנתחת את הרכב התיק שלך — פנסיה, השקעות, נדל"ן — ומשווה להקצאה האידיאלית לגיל ורמת סיכון. <strong>מבוסס על הנתונים האמיתיים שהזנת.</strong></div></span>
+        </div>
+        <div style="font-size:10px;color:#A8A8B0;margin-top:2px">ניתוח אישי לפי הנתונים שהזנת</div>
+      </div>
+      <button id="opt-analyze-btn" onclick="runOptAnalysis()" style="background:#A07840;color:#fff;border:none;border-radius:9px;padding:7px 12px;font-size:10.5px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">נתח עכשיו ✨</button>
+    </div>
+    <div id="opt-result" style="font-size:10.5px;color:#64646A;line-height:1.7;margin-top:4px">
+      לחץ "נתח עכשיו" לניתוח אישי של התיק שלך.
+    </div>
+  </div>
+  <div class="c">
+    <div class="ch"><div class="ct">הקצאה מקובלת לפי גיל
+      <span class="hq">?<div class="hq-box">כלל האצבע: גיל שלך = % באג"ח. גיל 35 → 35% אג"ח, 65% מניות. Numa מתאמת לך אישית לפי המצב שלך.</div></span>
+    </div></div>
+    <div id="opt-allocation"></div>
+    <div class="aib" style="margin-top:8px">🎓 דוגמה: גיל 35 — 65% מניות גלובלי, 25% אג"ח ממשלתי, 10% מזומן/קרן כספית<br>גיל 55 — 40% מניות, 45% אג"ח, 15% מזומן</div>
   </div>
 </div>
 
@@ -3397,6 +3343,18 @@ function goP(id){
   prev=id;closeAI();
   if(id==='ov')setTimeout(startCountUp,80);
   if(id==='assets')setTimeout(renderAssetsHub,80);
+  if(id==='plan')setTimeout(renderPlanHub,80);
+}
+function renderPlanHub(){
+  try{renderFIREPage();}catch(e){}
+  try{initLegacyPage();}catch(e){}
+  try{renderScenarios();}catch(e){}
+  try{runMonteCarlo();}catch(e){}
+  var c2=calc();
+  var alloc=document.getElementById('opt-allocation');
+  if(alloc&&c2.totalAssets===0){
+    alloc.innerHTML='<div class="aib">דוגמה — גיל 35: 65% מניות · 25% אג"ח · 10% מזומן<br>דוגמה — גיל 55: 40% מניות · 45% אג"ח · 15% מזומן<br><br>לחץ "נתח עכשיו" לניתוח אישי של התיק שלך</div>';
+  }
 }
 function renderAssetsHub(){
   var c=calc();
@@ -3404,34 +3362,61 @@ function renderAssetsHub(){
   if(at) at.textContent=c.totalAssets>0?fmt(c.totalAssets):'—';
   if(dt) dt.textContent=c.totalLiabilities>0?fmt(c.totalLiabilities):'₪0';
   if(nt) nt.textContent=c.netWorth!==0?fmt(c.netWorth):'—';
+  // Initialize merged st content
+  renderSTFull();
+  try{drawInvChart();}catch(e){}
+  updateInvMiniChart();
+  var simStart=document.getElementById('sim-start');
+  var simMo=document.getElementById('sim-mo');
+  if(simStart && !simStart.value && c.totalAssets>0) simStart.value=Math.round(c.totalAssets);
+  if(simMo && !simMo.value && c.monthlyDeposits>0) simMo.value=Math.round(c.monthlyDeposits);
+  try{calcPortfolio();}catch(e){}
 }
 function goSub(id){
+  // Map sub-pages to their parent tab + section
+  var map = {
+    'st':'assets', 'lo':'assets',
+    'fire':'plan', 'mc':'plan', 'sc':'plan', 'ins':'plan', 'legacy':'plan', 'opt':'plan'
+  };
+  var parent = map[id];
+  if(parent){
+    goP(parent);
+    // Run initialization for merged sections
+    setTimeout(function(){
+      // Assets page initializations
+      if(parent==='assets'){
+        renderSTFull();
+        try{drawInvChart();}catch(e){}
+        updateInvMiniChart();
+        var cv=calc();
+        var simStart=document.getElementById('sim-start');
+        var simMo=document.getElementById('sim-mo');
+        if(simStart && !simStart.value && cv.totalAssets>0) simStart.value=Math.round(cv.totalAssets);
+        if(simMo && !simMo.value && cv.monthlyDeposits>0) simMo.value=Math.round(cv.monthlyDeposits);
+        calcPortfolio();
+      }
+      // Plan page initializations
+      if(parent==='plan'){
+        try{renderFIREPage();}catch(e){}
+        try{initLegacyPage();}catch(e){}
+        try{renderScenarios();}catch(e){}
+        try{runMonteCarlo();}catch(e){}
+        var c2=calc();
+        var alloc=document.getElementById('opt-allocation');
+        if(alloc&&c2.totalAssets===0){
+          alloc.innerHTML='<div class="aib">דוגמה — גיל 35: 65% מניות · 25% אג"ח · 10% מזומן<br>דוגמה — גיל 55: 40% מניות · 45% אג"ח · 15% מזומן<br><br>לחץ "נתח עכשיו" לניתוח אישי של התיק שלך</div>';
+        }
+      }
+      // Scroll to section after page shows
+      var section = document.getElementById('section-'+id);
+      if(section) section.scrollIntoView({behavior:'smooth',block:'start'});
+    }, 100);
+    return;
+  }
+  // Original behavior for other pages (salary, mkt, cmp, wmap, alloc, settings)
   document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on')});
   var pg=document.getElementById('pg-'+id);if(pg)pg.classList.add('on');
   document.getElementById('scr').scrollTop=0;closeAI();
-  if(id==='st') setTimeout(function(){
-    renderSTFull();
-    try{drawInvChart();}catch(e){};
-    updateInvMiniChart();
-    // Pre-fill simulator with real ND data
-    var cv=calc();
-    var simStart=document.getElementById('sim-start');
-    var simMo=document.getElementById('sim-mo');
-    if(simStart && !simStart.value && cv.totalAssets>0) simStart.value=Math.round(cv.totalAssets);
-    if(simMo && !simMo.value && cv.monthlyDeposits>0) simMo.value=Math.round(cv.monthlyDeposits);
-    calcPortfolio();
-  }, 60);
-  if(id==='fire') setTimeout(renderFIREPage, 80);
-  if(id==='legacy') setTimeout(initLegacyPage, 80);
-  if(id==='sc') setTimeout(renderScenarios, 80);
-  if(id==='mc') setTimeout(runMonteCarlo, 80);
-  if(id==='opt') setTimeout(function(){
-    var c2=calc();
-    var alloc=document.getElementById('opt-allocation');
-    if(alloc&&c2.totalAssets===0){
-      alloc.innerHTML='<div class="aib">דוגמה — גיל 35: 65% מניות · 25% אג"ח · 10% מזומן<br>דוגמה — גיל 55: 40% מניות · 45% אג"ח · 15% מזומן<br><br>לחץ "נתח עכשיו" לניתוח אישי של התיק שלך</div>';
-    }
-  }, 80);
 }
 function goB(){
   document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on')});
@@ -4961,34 +4946,34 @@ function addMilestone(){
   showToast('✓ אירוע נוסף','יופיע על ציר הזמן שלך');
 }
 function renderNWTimelineSVG(){
-  // If user has real NW data, update the timeline bars
   var cv=calc();
-  if(cv.netWorth<=0) return;
-  // Simple: just update "אתה כאן" label with real value
-  // Render line chart on both SVG instances
+  // Always draw — use demo data if no real data
   _drawNWLine('nw-timeline-svg','nw-line-solid','nw-area-solid','nw-line-proj','nw-area-proj','nw-milestones','nw-today-marker','nw-x-labels','nwFillGrad',cv);
-  _drawNWLine('nw-timeline-svg-2','nw-line-solid-2','nw-area-solid-2','nw-line-proj-2','nw-area-proj-2','nw-milestones-2','nw-today-marker-2','nw-x-labels-2','nwFillGrad2',cv);
 }
 function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,todayId,xlabelsId,gradId,cv){
   var svg=document.getElementById(svgId);
   if(!svg) return;
   var W=300,H=120,padL=25,padR=20,padT=15,padB=30;
   var chartW=W-padL-padR,chartH=H-padT-padB;
-  // Data points: simulate history + projected
   var nw=cv.netWorth||0;
   var savY=Math.max(cv.monthlySavings||0,0)*12;
   var rate=0.07;
   var currentYear=new Date().getFullYear();
   var startYear=currentYear-6;
+  // Demo data when no real data
+  var demoMode=nw<=0;
+  var demoVals=[200000,280000,350000,520000,680000,1100000,1847000];
+  if(demoMode) nw=1847000;
   // Historical points (simulated growth backwards)
   var pts=[];
   for(var i=0;i<=6;i++){
-    var factor=Math.pow(1+rate,i-6);
-    pts.push({year:startYear+i,val:Math.max(nw*factor,0),proj:false});
+    var val=demoMode?demoVals[i]:Math.max(nw*Math.pow(1+rate,i-6),0);
+    pts.push({year:startYear+i,val:val,proj:false});
   }
   // Projected 3 years forward
+  var lastVal=pts[pts.length-1].val;
   for(var j=1;j<=3;j++){
-    pts.push({year:currentYear+j,val:nw*Math.pow(1+rate,j)+savY*j,proj:true});
+    pts.push({year:currentYear+j,val:lastVal*Math.pow(1+rate,j)+(demoMode?0:savY*j),proj:true});
   }
   var maxVal=Math.max.apply(null,pts.map(function(p){return p.val;}))||1;
   // Scale function
@@ -5038,7 +5023,7 @@ function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,toda
       '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="10" fill="#1E2D4A" opacity=".08"/>'+
       '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="5" fill="#1E2D4A"/>'+
       '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="2.5" fill="#F5F2EC"/>'+
-      '<text x="'+tp.x+'" y="'+(padT+chartH+20)+'" text-anchor="middle" font-size="10" fill="#1E2D4A" font-family="inherit" font-weight="600">'+fmt(nw)+'</text>';
+      '<text x="'+tp.x+'" y="'+(padT+chartH+20)+'" text-anchor="middle" font-size="10" fill="#1E2D4A" font-family="inherit" font-weight="600">'+(demoMode?'דוגמה':fmt(nw))+'</text>';
   }
   // X axis labels
   var xlG=document.getElementById(xlabelsId);
