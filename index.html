@@ -1173,37 +1173,22 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 <!-- ══════════════════ נכסים — Hub (merged pg-st + pg-lo) ══════════════════ -->
 <div class="pg" id="pg-assets">
-  <!-- Sticky Summary Header -->
-  <div style="background:#fff;border:.5px solid rgba(0,0,0,.13);border-radius:14px;padding:14px;position:sticky;top:0;z-index:10;overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:2.5px;background:#A07840"></div>
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-      <div>
-        <div style="font-size:10px;color:#A8A8B0;font-weight:600;margin-bottom:2px">תיק כולל
-          <span class="hq">?<div class="hq-box">סה"כ כל הנכסים הפיננסיים: פנסיה, קה"ש, גמל, השקעות. <strong>לא כולל נדל"ן.</strong></div></span>
-        </div>
-        <div style="font-size:26px;font-weight:800;letter-spacing:-1px" id="inv-total">—</div>
-      </div>
-      <div class="g2" style="gap:5px">
-        <div style="background:#fff;border-radius:8px;padding:6px 8px;text-align:center">
-          <div style="font-size:10px;color:#A8A8B0;margin-bottom:3px">הפקדה חודשית</div>
-          <input id="inv-deposit-inp" type="number" style="width:80px;border:none;border-bottom:.5px solid rgba(160,120,64,.3);background:transparent;font-size:12px;font-weight:800;color:#A07840;text-align:center;outline:none;font-family:inherit" placeholder="₪/חודש" oninput="ND._extraDeposit=parseFloat(this.value)||0;saveToStorage();try{drawInvChart();}catch(e){}"/>
-        </div>
-        <div style="background:#fff;border-radius:8px;padding:6px 8px;text-align:center"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">בעוד <span id="inv-yrs-lbl">25</span> שנה</div><div style="font-size:12px;font-weight:800;color:#A07840" id="inv-future-val">—</div></div>
-      </div>
+  <!-- Compact sticky header -->
+  <div style="background:#1E2D4A;border-radius:12px;padding:10px 14px;position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;max-height:60px">
+    <div>
+      <div style="font-size:10px;color:rgba(255,255,255,.45)">תיק כולל</div>
+      <div style="font-size:20px;font-weight:800;color:#F5F2EC;letter-spacing:-.5px" id="inv-total">—</div>
     </div>
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-      <span style="font-size:10px;color:#A8A8B0">5 שנה</span>
-      <input type="range" id="inv-yrs-sl" min="5" max="50" step="5" value="25" style="flex:1;accent-color:#A07840" oninput="document.getElementById('inv-yrs-lbl').textContent=this.value;try{drawInvChart();}catch(e){}"/>
-      <span style="font-size:10px;color:#A8A8B0">50 שנה</span>
+    <div style="text-align:left">
+      <div style="font-size:10px;color:rgba(255,255,255,.45)">בעוד <span id="inv-yrs-lbl">25</span> שנה</div>
+      <div style="font-size:16px;font-weight:800;color:#C9A96E;letter-spacing:-.5px" id="inv-future-val">—</div>
     </div>
-    <div id="inv-mini-chart" style="margin-top:6px"><svg width="100%" viewBox="0 0 200 56" style="display:block;margin:0 -4px"><rect x="4" y="46" width="28" height="10" rx="4" fill="#E8DCC8"/><rect x="36" y="38" width="28" height="18" rx="4" fill="#E8DCC8"/><rect x="68" y="28" width="28" height="28" rx="4" fill="#C9A96E"/><rect x="100" y="19" width="28" height="37" rx="4" fill="#A07840"/><rect x="132" y="11" width="28" height="45" rx="4" fill="#A07840"/><rect x="164" y="4" width="28" height="52" rx="4" fill="#1E2D4A"/><line x1="0" y1="56" x2="200" y2="56" stroke="rgba(30,45,74,.08)" stroke-width=".5"/></svg></div>
-    <div style="display:flex;justify-content:space-around;margin-top:10px;padding-top:8px;border-top:.5px solid rgba(30,45,74,.12)">
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">נכסים</div><div style="font-size:13px;font-weight:800;color:#A07840" id="hub-assets-total">—</div></div>
-      <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">חובות</div><div style="font-size:13px;font-weight:800;color:#A32D2D" id="hub-debt-total">—</div></div>
-      <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">שווי נטו</div><div style="font-size:13px;font-weight:800;color:#1E2D4A" id="hub-nw-total">—</div></div>
-    </div>
+  </div>
+  <!-- Quick stats row -->
+  <div style="display:flex;justify-content:space-around;padding:8px 0">
+    <div style="text-align:center"><div style="font-size:10px;color:#6B7A96">נכסים</div><div style="font-size:12px;font-weight:700;color:#A07840" id="hub-assets-total">—</div></div>
+    <div style="text-align:center"><div style="font-size:10px;color:#6B7A96">חובות</div><div style="font-size:12px;font-weight:700;color:#6B7A96" id="hub-debt-total">—</div></div>
+    <div style="text-align:center"><div style="font-size:10px;color:#6B7A96">שווי נטו</div><div style="font-size:12px;font-weight:700;color:#1E2D4A" id="hub-nw-total">—</div></div>
   </div>
 
   <!-- ═══ Section: פנסיה וקה"ש ═══ -->
@@ -1268,22 +1253,27 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <!-- ═══ Section: סימולטור ═══ -->
   <div class="sec-div"><span class="sec-div-label">סימולטור</span><div class="sec-div-line"></div></div>
 
-  <div class="c">
-    <div class="ch"><div class="ct">סימולטור תיק אישי <span class="hq">?<div class="hq-box">חשב כמה יהיה לך בעוד X שנים. מחשב ריבית דריבית על ההשקעה + הפקדות חודשיות.</div></span></div></div>
-    <div class="fi2">
-      <div><div class="il">השקעה כיום ₪</div><input class="inp" id="sim-start" type="number" placeholder="₪ סכום" oninput="calcPortfolio()"/></div>
-      <div><div class="il">הפקדה חודשית ₪</div><input class="inp" id="sim-mo" type="number" placeholder="₪/חודש" oninput="calcPortfolio()"/></div>
+  <div class="c" style="padding:12px">
+    <div class="ch"><div class="ct">סימולטור תיק</div></div>
+    <!-- Result + chart first -->
+    <div id="sim-result" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <div><div style="font-size:10px;color:#6B7A96">תוצאה</div><div id="sim-val" style="font-size:22px;font-weight:800;color:#1E2D4A;letter-spacing:-1px">—</div></div>
+      <div id="sim-sub" style="font-size:10px;color:#6B7A96;text-align:left"></div>
     </div>
-    <div class="fi2">
-      <div><div class="il">תשואה שנתית %</div><input class="inp" id="sim-rate" type="number" value="7" oninput="calcPortfolio()"/></div>
-      <div><div class="il">שנים</div><input class="inp" id="sim-yrs" type="number" placeholder="20" value="20" oninput="calcPortfolio()"/></div>
+    <div id="sim-chart-wrap"></div>
+    <!-- Slider below chart -->
+    <div style="display:flex;align-items:center;gap:8px;margin:8px 0">
+      <span style="font-size:10px;color:#6B7A96">5</span>
+      <input type="range" id="inv-yrs-sl" min="5" max="50" step="5" value="25" style="flex:1;accent-color:#A07840" oninput="document.getElementById('inv-yrs-lbl').textContent=this.value;document.getElementById('sim-yrs').value=this.value;calcPortfolio();try{drawInvChart();}catch(e){}"/>
+      <span style="font-size:10px;color:#6B7A96">50 שנה</span>
     </div>
-    <div id="sim-result" style="background:#E8DCC8;border-radius:9px;padding:12px;margin-top:6px;text-align:center">
-      <div style="font-size:10px;color:#888;margin-bottom:3px">הזן נתונים לחישוב</div>
-      <div id="sim-val" style="font-size:28px;font-weight:800;color:#888;letter-spacing:-1.5px">—</div>
-      <div id="sim-sub" style="font-size:10px;color:#888;margin-top:2px"></div>
+    <!-- Compact inputs -->
+    <div style="display:flex;gap:6px">
+      <div style="flex:1"><div class="il">השקעה ₪</div><input class="inp" id="sim-start" type="number" placeholder="₪ סכום" style="padding:8px 10px;font-size:12px" oninput="calcPortfolio()"/></div>
+      <div style="flex:1"><div class="il">חודשי ₪</div><input class="inp" id="sim-mo" type="number" placeholder="₪/חודש" style="padding:8px 10px;font-size:12px" oninput="calcPortfolio()"/></div>
+      <div style="width:60px"><div class="il">תשואה%</div><input class="inp" id="sim-rate" type="number" value="7" style="padding:8px 10px;font-size:12px" oninput="calcPortfolio()"/></div>
+      <input type="hidden" id="sim-yrs" value="20"/>
     </div>
-    <div id="sim-chart-wrap" style="margin-top:8px"></div>
   </div>
 
   <!-- צמיחה עתידית 4 קווים -->
