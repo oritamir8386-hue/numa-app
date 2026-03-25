@@ -2128,8 +2128,43 @@ function loadFromStorage(){
     } else { ND = JSON.parse(JSON.stringify(ND_DEFAULT)); }
   } catch(e){ ND = JSON.parse(JSON.stringify(ND_DEFAULT)); }
 }
+// Load from Supabase cloud (called after auth)
+async function loadFromCloud(){
+  if(!_sb || !currentUser) return;
+  try{
+    var res = await _sb.from('user_data').select('data').eq('id', currentUser.id).single();
+    if(res.data && res.data.data){
+      ND = Object.assign(JSON.parse(JSON.stringify(ND_DEFAULT)), res.data.data);
+      // Sync to localStorage as cache
+      try{ localStorage.setItem(window.STORAGE_KEY, JSON.stringify(ND)); }catch(e){}
+      console.log('[Numa] Loaded from cloud');
+    } else {
+      // No cloud data — upload current localStorage data
+      loadFromStorage();
+      _saveToCloud();
+      console.log('[Numa] No cloud data — uploaded local');
+    }
+  } catch(e){ console.log('[Numa] Cloud load fallback to local', e); loadFromStorage(); }
+}
 function saveToStorage(){
   try{ localStorage.setItem(window.STORAGE_KEY, JSON.stringify(ND)); } catch(e){}
+  _debounceSaveCloud();
+}
+// Debounced cloud save — waits 2s after last change to avoid spamming
+var _cloudTimer=null;
+function _debounceSaveCloud(){
+  if(_cloudTimer) clearTimeout(_cloudTimer);
+  _cloudTimer = setTimeout(_saveToCloud, 2000);
+}
+async function _saveToCloud(){
+  if(!_sb || !currentUser) return;
+  try{
+    await _sb.from('user_data').upsert({
+      id: currentUser.id,
+      data: ND,
+      updated_at: new Date().toISOString()
+    });
+  } catch(e){ console.error('[Numa] Cloud save error:', e); }
 }
 
 /* ── CALCULATIONS ── */
@@ -4473,18 +4508,10 @@ function _showApp(isNewLogin=false){
     }
     const uid=(currentUser.id||'').slice(0,8);
     const key='numa_v2_'+uid;
-    // Always load user data and render on show
-    if(window.STORAGE_KEY!==key){
-      window.STORAGE_KEY=key;
-      loadFromStorage();
-    }
-    // Sync auth name → ND.profile.name (if empty)
-    if(name && !ND.profile.name){
-      ND.profile.name = name;
-      saveToStorage();
-    }
-    // Render after app is visible
-    setTimeout(function(){
+    window.STORAGE_KEY=key;
+    // Load from cloud first, fallback to localStorage
+    function _afterLoad(){
+      if(name && !ND.profile.name){ ND.profile.name=name; saveToStorage(); }
       if(!ND.milestones) ND.milestones=[];
       render();
       renderST();
@@ -4492,7 +4519,13 @@ function _showApp(isNewLogin=false){
       bindSettings();
       bindCashInput();
       try{drawProj();drawInvChart();startCountUp();}catch(e){}
-    }, 80);
+    }
+    if(_sb){
+      loadFromCloud().then(_afterLoad).catch(function(){ loadFromStorage(); _afterLoad(); });
+    } else {
+      loadFromStorage();
+      setTimeout(_afterLoad, 80);
+    }
     // הצג אונבורדינג רק פעם אחת — ורק בכניסה ממש (לא רענון טוקן)
     if(isNewLogin){
       const obKey='numa_onboarded_'+uid;
