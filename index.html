@@ -604,12 +604,12 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div class="hc" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
     <div style="flex:1">
       <div style="font-size:10px;color:#A8A8B0;font-weight:600;margin-bottom:4px">שווי נטו כולל</div>
-      <div style="font-size:34px;font-weight:800;letter-spacing:-2px;color:#1E2D4A;line-height:1" id="hero-nw" data-target="0">—</div>
-      <div style="font-size:10px;color:#A8A8B0;margin-top:4px" id="nw-trend">הזן נתונים לחישוב</div>
+      <div style="font-size:34px;font-weight:800;letter-spacing:-2px;color:#1E2D4A;line-height:1" id="hero-nw" data-target="0">₪0</div>
+      <div style="font-size:10px;color:#A8A8B0;margin-top:4px" id="nw-trend"><a onclick="goP('assets')" style="color:#A07840;cursor:pointer;font-weight:600;text-decoration:none">📈 הוסף נכסים לראות את הצמיחה שלך → התחל</a></div>
       <div id="fire-hero-pill" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;padding:4px 10px;background:rgba(217,119,6,.08);border-radius:8px">
         <span style="font-size:11px">🔥</span>
-        <span style="font-size:11px;font-weight:600;color:#BA7517" id="mv-fire">—</span>
-        <span style="font-size:10px;color:#A8A8B0" id="ms-fire">הזן נתונים</span>
+        <span style="font-size:11px;font-weight:600;color:#BA7517" id="mv-fire">הגדר יעד</span>
+        <span style="font-size:10px;color:#A8A8B0" id="ms-fire">גלה מתי תהיה חופשי</span>
       </div>
     </div>
     <!-- Score circle on the right -->
@@ -619,7 +619,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
         <circle cx="36" cy="36" r="30" fill="none" stroke="#A07840" stroke-width="5" stroke-dasharray="0 188" stroke-dashoffset="47" stroke-linecap="round" transform="rotate(-90 36 36)" class="score-arc-anim"/>
       </svg>
       <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-        <div style="font-size:20px;font-weight:800;color:#A07840;line-height:1" id="score-num">—</div>
+        <div style="font-size:20px;font-weight:800;color:#A07840;line-height:1" id="score-num">0</div>
         <div style="font-size:8px;color:#A8A8B0;margin-top:1px">Score</div>
       </div>
     </div>
@@ -634,23 +634,23 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <!-- ② FIRE card (dark) -->
   <div id="vis-wrap-fire-ov" class="c" style="background:#1E2D4A;border-color:rgba(30,45,74,.3)" onclick="goP('plan')">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
-      <div><div style="font-size:12px;font-weight:600;color:#F5F2EC">🔥 מסלול FIRE</div><div style="font-size:10px;color:rgba(255,255,255,.45)" id="fire-card-sub">הזן נתונים לחישוב</div></div>
-      <div style="font-size:14px;font-weight:800;color:#C9A96E" id="fire-card-pct">—</div>
+      <div><div style="font-size:12px;font-weight:600;color:#F5F2EC">🔥 מסלול FIRE</div><div style="font-size:10px;color:rgba(255,255,255,.45)" id="fire-card-sub">גלה מתי תוכל להיות חופשי כלכלית</div></div>
+      <div style="font-size:14px;font-weight:800;color:#C9A96E" id="fire-card-pct">הגדר יעד</div>
     </div>
     <div class="pw" style="background:rgba(255,255,255,.1)"><div class="pb" id="fire-card-bar" style="width:0%;background:#A07840"></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35);margin-top:3px"><span id="fire-card-have">יש: —</span><span id="fire-card-goal">יעד: —</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35);margin-top:3px"><span id="fire-card-have">יש: ₪0</span><span id="fire-card-goal">יעד: ₪0</span></div>
   </div>
 
   <!-- ③ 4 Quick Stats (metrics row) -->
   <div class="c" style="padding:10px">
     <div style="display:flex;justify-content:space-around">
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">הכנסה</div><div style="font-size:13px;font-weight:800;color:#A07840" id="qs-inc">—</div></div>
+      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">הכנסה</div><div style="font-size:13px;font-weight:800;color:#A07840" id="qs-inc">₪0</div></div>
       <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">הוצאה</div><div style="font-size:13px;font-weight:800;color:#64646A" id="qs-exp">—</div></div>
+      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">הוצאה</div><div style="font-size:13px;font-weight:800;color:#64646A" id="qs-exp">₪0</div></div>
       <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">חוב</div><div style="font-size:13px;font-weight:800;color:#6B7A96" id="qs-debt">—</div></div>
+      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">חוב</div><div style="font-size:13px;font-weight:800;color:#6B7A96" id="qs-debt">₪0</div></div>
       <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">חיסכון%</div><div style="font-size:13px;font-weight:800;color:#A07840" id="qs-rate">—</div></div>
+      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">חיסכון%</div><div style="font-size:13px;font-weight:800;color:#A07840" id="qs-rate">0%</div></div>
     </div>
   </div>
 
@@ -693,7 +693,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- ⑤ ASSETS — donut breakdown -->
   <div class="c">
-    <div class="ch"><div class="ct">פירוט נכסים</div><span class="bdg Bb" id="assets-total">—</span></div>
+    <div class="ch"><div class="ct">פירוט נכסים</div><span class="bdg Bb" id="assets-total">₪0</span></div>
     <svg id="assets-donut" width="88" height="88" viewBox="0 0 88 88" style="display:block;margin:4px auto 8px">
       <style>
         @keyframes donutFadeIn{from{opacity:0;stroke-dasharray:0 214}to{opacity:1}}
@@ -707,24 +707,24 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <circle id="donut-cash" cx="44" cy="44" r="34" fill="none" stroke="#6B7A96" stroke-width="12" stroke-dasharray="0 214" stroke-linecap="butt" transform="rotate(-90 44 44)"/>
       <text x="44" y="48" text-anchor="middle" font-size="10" font-weight="500" fill="#444" font-family="inherit" id="donut-total-lbl">נכסים</text>
     </svg>
-    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#A07840"></div>פנסיה+קה"ש</div><div class="dv" style="font-size:10px" id="ap-pen">—</div></div>
-    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#1E2D4A"></div>נדל"ן</div><div class="dv" style="font-size:10px" id="ap-re">—</div></div>
-    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#C9A96E"></div>השקעות</div><div class="dv" style="font-size:10px" id="ap-inv">—</div></div>
-    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#6B7A96"></div>נזיל</div><div class="dv" style="font-size:10px" id="ap-cash">—</div></div>
+    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#A07840"></div>פנסיה+קה"ש</div><div class="dv" style="font-size:10px" id="ap-pen">₪0</div></div>
+    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#1E2D4A"></div>נדל"ן</div><div class="dv" style="font-size:10px" id="ap-re">₪0</div></div>
+    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#C9A96E"></div>השקעות</div><div class="dv" style="font-size:10px" id="ap-inv">₪0</div></div>
+    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#6B7A96"></div>נזיל</div><div class="dv" style="font-size:10px" id="ap-cash">₪0</div></div>
   </div>
 
   <!-- ⑥ CASHFLOW — monthly summary (compact) -->
   <div class="c" id="cashflow-unified" style="padding:10px 13px">
-    <div class="ch"><div class="ct">תזרים חודשי</div><span class="bdg Ba" id="mir-ratio">—</span></div>
-    <div id="mir-chart-wrap" style="padding:4px 0 6px;text-align:center;color:#A8A8B0;font-size:10px">הזן נתונים לתצוגה</div>
+    <div class="ch"><div class="ct">תזרים חודשי</div><span class="bdg Ba" id="mir-ratio">0%</span></div>
+    <div id="mir-chart-wrap" style="padding:4px 0 6px;text-align:center;color:#A8A8B0;font-size:10px"><div style="text-align:center;padding:16px 0"><div style="font-size:24px;margin-bottom:6px">📊</div><div style="font-size:11px;color:#6B7A96;margin-bottom:8px">גלה לאן הולך הכסף שלך כל חודש</div><button onclick="goP('cf')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">הוסף הכנסה →</button></div></div>
     <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0 0;border-top:.5px solid rgba(30,45,74,.12)">
-      <div style="text-align:center;flex:1"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">הכנסה</div><div style="font-size:13px;font-weight:700;color:#A07840" id="mir-inc">—</div></div>
+      <div style="text-align:center;flex:1"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">הכנסה</div><div style="font-size:13px;font-weight:700;color:#A07840" id="mir-inc">₪0</div></div>
       <div style="width:.5px;height:24px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center;flex:1"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">הוצאות</div><div style="font-size:13px;font-weight:700;color:#64646A" id="mir-exp">—</div></div>
+      <div style="text-align:center;flex:1"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">הוצאות</div><div style="font-size:13px;font-weight:700;color:#64646A" id="mir-exp">₪0</div></div>
       <div style="width:.5px;height:24px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center;flex:1"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">חיסכון</div><div style="font-size:13px;font-weight:700;color:#A07840" id="mir-sav">—</div></div>
+      <div style="text-align:center;flex:1"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">חיסכון</div><div style="font-size:13px;font-weight:700;color:#A07840" id="mir-sav">₪0</div></div>
     </div>
-    <div style="font-size:10px;font-weight:600;text-align:center;margin-top:4px;color:#64646A" id="mir-avg">—</div>
+    <div style="font-size:10px;font-weight:600;text-align:center;margin-top:4px;color:#64646A" id="mir-avg">₪0</div>
   </div>
 
   <!-- Hidden elements for JS compatibility -->
@@ -755,12 +755,12 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div style="position:absolute;top:0;left:0;right:0;height:2.5px;background:#A07840"></div>
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
       <div style="font-size:24px">💸</div>
-      <div><div style="font-size:13px;font-weight:800">תזרים חודשי</div><div style="font-size:10px;color:#64646A">הזן נתונים לחישוב חי</div></div>
+      <div><div style="font-size:13px;font-weight:800">תזרים חודשי</div><div style="font-size:10px;color:#64646A">הוסף הכנסות והוצאות למעקב</div></div>
     </div>
     <div class="g3">
-      <div style="background:#fff;border-radius:9px;padding:8px;text-align:center"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">הכנסה</div><div style="font-size:13px;font-weight:800;color:#A07840" id="cf-hdr-inc">—</div></div>
-      <div style="background:#fff;border-radius:9px;padding:8px;text-align:center"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">הוצאה</div><div style="font-size:13px;font-weight:800;color:#6B7A96" id="cf-hdr-exp">—</div></div>
-      <div style="background:#fff;border-radius:9px;padding:8px;text-align:center"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">נשאר</div><div style="font-size:13px;font-weight:800" id="cf-hdr-sav">—</div></div>
+      <div style="background:#fff;border-radius:9px;padding:8px;text-align:center"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">הכנסה</div><div style="font-size:13px;font-weight:800;color:#A07840" id="cf-hdr-inc">₪0</div></div>
+      <div style="background:#fff;border-radius:9px;padding:8px;text-align:center"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">הוצאה</div><div style="font-size:13px;font-weight:800;color:#6B7A96" id="cf-hdr-exp">₪0</div></div>
+      <div style="background:#fff;border-radius:9px;padding:8px;text-align:center"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">נשאר</div><div style="font-size:13px;font-weight:800" id="cf-hdr-sav">₪0</div></div>
     </div>
   </div>
 
@@ -768,14 +768,14 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div id="cf-fl">
     <div class="hc">
       <div style="font-size:10px;color:#A8A8B0;font-weight:600;margin-bottom:2px">תזרים נטו חודשי</div>
-      <div style="font-size:28px;font-weight:800;letter-spacing:-1px" id="cf-fl-hero">—</div>
-      <div style="font-size:10px;color:#64646A;margin-top:2px" id="cf-fl-sub">הזן נתונים לחישוב</div>
+      <div style="font-size:28px;font-weight:800;letter-spacing:-1px" id="cf-fl-hero">₪0</div>
+      <div style="font-size:10px;color:#64646A;margin-top:2px" id="cf-fl-sub">💸 ראה כמה נשאר לך בסוף כל חודש</div>
     </div>
     <div class="c">
       <div class="ch"><div class="ct">פירוט</div></div>
-      <div class="dr"><div class="dl">הכנסה חודשית</div><div class="dv" id="fl-inc">—</div></div>
-      <div class="dr"><div class="dl">הוצאות</div><div class="dv" id="fl-exp">—</div></div>
-      <div class="dr"><div class="dl">לחיסכון / השקעה</div><div class="dv" id="fl-sav">—</div></div>
+      <div class="dr"><div class="dl">הכנסה חודשית</div><div class="dv" id="fl-inc">₪0</div></div>
+      <div class="dr"><div class="dl">הוצאות</div><div class="dv" id="fl-exp">₪0</div></div>
+      <div class="dr"><div class="dl">לחיסכון / השקעה</div><div class="dv" id="fl-sav">₪0</div></div>
     </div>
   </div>
 
@@ -792,14 +792,14 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </div>
     <div class="c">
       <div class="ch"><div class="ct">סיכום תזרים</div></div>
-      <div class="dr"><div class="dl">הכנסה כוללת</div><div class="dv" style="color:#A07840" id="sum-inc">—</div></div>
-      <div class="dr"><div class="dl">הוצאות</div><div class="dv" style="color:#6B7A96" id="sum-exp">—</div></div>
-      <div class="dr"><div class="dl">עודף לחיסכון</div><div class="dv" id="sum-sav">—</div></div>
-      <div class="dr"><div class="dl">יחס הוצאה/הכנסה</div><div class="dv" id="sum-ratio">—</div></div>
+      <div class="dr"><div class="dl">הכנסה כוללת</div><div class="dv" style="color:#A07840" id="sum-inc">₪0</div></div>
+      <div class="dr"><div class="dl">הוצאות</div><div class="dv" style="color:#6B7A96" id="sum-exp">₪0</div></div>
+      <div class="dr"><div class="dl">עודף לחיסכון</div><div class="dv" id="sum-sav">₪0</div></div>
+      <div class="dr"><div class="dl">יחס הוצאה/הכנסה</div><div class="dv" id="sum-ratio">0%</div></div>
     </div>
     <div class="c" style="background:rgba(160,120,64,.04);border-color:rgba(160,120,64,.12)" id="rule-card">
       <div style="font-size:10.5px;font-weight:700;color:#A07840;margin-bottom:3px">💡 כלל 50/30/20</div>
-      <div style="font-size:10.5px;color:#64646A;line-height:1.6" id="rule-text">הזן הכנסות והוצאות לחישוב</div>
+      <div style="font-size:10.5px;color:#64646A;line-height:1.6" id="rule-text"><div style="text-align:center;padding:16px 0"><div style="font-size:24px;margin-bottom:6px">📐</div><div style="font-size:11px;color:#6B7A96;margin-bottom:8px">בדוק אם אתה עומד בכלל 50/30/20</div><button onclick="goP('cf')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">הזן נתונים →</button></div></div>
     </div>
   </div>
 
@@ -817,24 +817,24 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div class="dr">
         <div class="dl">🏠 הכרחי (50%)</div>
         <div style="flex:1;margin:0 8px"><div style="height:4px;background:#EEE;border-radius:2px"><div id="bar-nec" style="height:4px;width:0%;max-width:100%;background:#1E2D4A;border-radius:2px;transition:width .4s"></div></div></div>
-        <div class="dv" style="font-size:10px" id="pct-nec">—</div>
+        <div class="dv" style="font-size:10px" id="pct-nec">0%</div>
       </div>
       <div class="dr">
         <div class="dl">🎉 רצוני (30%)</div>
         <div style="flex:1;margin:0 8px"><div style="height:4px;background:#EEE;border-radius:2px"><div id="bar-want" style="height:4px;width:0%;max-width:100%;background:#A07840;border-radius:2px;transition:width .4s"></div></div></div>
-        <div class="dv" style="font-size:10px" id="pct-want">—</div>
+        <div class="dv" style="font-size:10px" id="pct-want">0%</div>
       </div>
       <div class="dr">
         <div class="dl">💰 חיסכון (20%)</div>
         <div style="flex:1;margin:0 8px"><div style="height:4px;background:#EEE;border-radius:2px"><div id="bar-sav" style="height:4px;width:0%;max-width:100%;background:#2D6A3F;border-radius:2px;transition:width .4s"></div></div></div>
-        <div class="dv" style="font-size:10px" id="pct-sav">—</div>
+        <div class="dv" style="font-size:10px" id="pct-sav">0%</div>
       </div>
     </div>
 
     <!-- ⑤ AI Insights -->
     <div class="c">
       <div class="ch"><div class="ct">תובנות</div><span class="bdg Bg">לפי הנתונים שלך</span></div>
-      <div id="cf-insights"><div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">הזן הכנסות והוצאות לקבלת תובנות אישיות</div></div>
+      <div id="cf-insights"><div style="text-align:center;padding:16px 0"><div style="font-size:24px;margin-bottom:6px">💡</div><div style="font-size:11px;color:#6B7A96;margin-bottom:8px">תובנות חכמות לפי ההוצאות שלך</div><button onclick="goP('cf')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">הזן הוצאות →</button></div></div>
     </div>
   </div>
 
@@ -947,16 +947,16 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div style="display:flex;justify-content:space-between;align-items:center">
       <div>
         <div style="font-size:10px;color:rgba(255,255,255,.45)">סה"כ נכסים</div>
-        <div style="font-size:24px;font-weight:800;color:#F5F2EC;letter-spacing:-1px" id="inv-total">—</div>
+        <div style="font-size:24px;font-weight:800;color:#F5F2EC;letter-spacing:-1px" id="inv-total">₪0</div>
       </div>
       <div style="display:flex;gap:16px">
-        <div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.35)">חובות</div><div style="font-size:14px;font-weight:700;color:#6B7A96" id="hub-debt-total">—</div></div>
-        <div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.35)">שווי נטו</div><div style="font-size:14px;font-weight:700;color:#C9A96E" id="hub-nw-total">—</div></div>
+        <div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.35)">חובות</div><div style="font-size:14px;font-weight:700;color:#6B7A96" id="hub-debt-total">₪0</div></div>
+        <div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.35)">שווי נטו</div><div style="font-size:14px;font-weight:700;color:#C9A96E" id="hub-nw-total">₪0</div></div>
       </div>
     </div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:8px;border-top:.5px solid rgba(255,255,255,.1)">
       <div style="font-size:10px;color:rgba(255,255,255,.4)">בעוד <span id="inv-yrs-lbl">25</span> שנה</div>
-      <div style="font-size:14px;font-weight:700;color:#C9A96E" id="inv-future-val">—</div>
+      <div style="font-size:14px;font-weight:700;color:#C9A96E" id="inv-future-val">₪0</div>
     </div>
   </div>
   <!-- hidden hub-assets-total for JS compatibility -->
@@ -1051,7 +1051,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div style="display:flex;align-items:center;gap:8px">
       <div style="text-align:left">
         <div style="font-size:10px;color:#6B7A96">סה"כ חוב</div>
-        <div style="font-size:12px;font-weight:700;color:#6B7A96" id="lo-total">—</div>
+        <div style="font-size:12px;font-weight:700;color:#6B7A96" id="lo-total">₪0</div>
       </div>
       <button style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit" onclick="openAddModal('loan')">+ הוסף</button>
     </div>
@@ -1060,7 +1060,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div class="c">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
       <div style="font-size:11px;font-weight:600;color:#1E2D4A">ההלוואות שלי</div>
-      <div style="font-size:10px;color:#6B7A96">חודשי: <span style="font-weight:700" id="lo-monthly">—</span></div>
+      <div style="font-size:10px;color:#6B7A96">חודשי: <span style="font-weight:700" id="lo-monthly">₪0</span></div>
     </div>
     <div id="lo-list"><div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין הלוואות — לחץ + הוסף</div></div>
   </div>
@@ -1116,16 +1116,16 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <!-- FIRE Hero -->
   <div id="section-fire" style="background:#1E2D4A;border-radius:14px;padding:18px;text-align:center;position:sticky;top:0;z-index:10">
     <div style="font-size:10px;color:rgba(255,255,255,.45);margin-bottom:4px">עצמאות כלכלית בגיל</div>
-    <div style="font-size:42px;font-weight:800;color:#C9A96E;letter-spacing:-2px;line-height:1" id="fire-number">—</div>
-    <div style="font-size:11px;color:rgba(255,255,255,.5);margin:8px 0" id="fire-subtitle">הזן הכנסות והוצאות לחישוב</div>
+    <div style="font-size:42px;font-weight:800;color:#C9A96E;letter-spacing:-2px;line-height:1" id="fire-number">🔥</div>
+    <div style="font-size:11px;color:rgba(255,255,255,.5);margin:8px 0" id="fire-subtitle">גלה מתי תוכל להיות חופשי כלכלית</div>
     <div style="max-width:240px;margin:0 auto">
       <div class="pw" style="background:rgba(255,255,255,.1)"><div class="pb" id="fire-bar" style="width:0%;background:#A07840"></div></div>
     </div>
     <div style="display:flex;justify-content:space-between;max-width:240px;margin:6px auto 0;font-size:10px;color:rgba(255,255,255,.35)">
-      <span id="fire-have-plan">יש: —</span>
-      <span id="fire-goal-plan">יעד: —</span>
+      <span id="fire-have-plan">יש: ₪0</span>
+      <span id="fire-goal-plan">יעד: ₪0</span>
     </div>
-    <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:4px" id="fire-progress">הזן נתונים לחישוב</div>
+    <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:4px" id="fire-progress">הוסף הכנסות והוצאות כדי לחשב</div>
   </div>
 
   <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:6px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.4;margin-top:8px">התחזיות מבוססות על הנחות בלבד ואינן מהוות ייעוץ השקעות.</div>
@@ -1141,8 +1141,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </div>
   </div>
   <div class="g3" style="margin-bottom:6px">
-    <div class="m"><div class="ml">הוצ' חודשית</div><div class="mv" style="font-size:14px" id="fire-exp">—</div></div>
-    <div class="m"><div class="ml">הכנסה פסיבית</div><div class="mv" style="font-size:14px" id="fire-passive">—</div></div>
+    <div class="m"><div class="ml">הוצ' חודשית</div><div class="mv" style="font-size:14px" id="fire-exp">₪0</div></div>
+    <div class="m"><div class="ml">הכנסה פסיבית</div><div class="mv" style="font-size:14px" id="fire-passive">₪0</div></div>
     <div class="m"><div class="ml">שיעור חיסכון</div><div class="mv" style="font-size:14px;color:#A07840" id="fire-rate">0%</div></div>
   </div>
   <div class="c">
@@ -1223,10 +1223,10 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </div>
   </div>
   <div class="g2" id="sc-cards">
-    <div class="scc on"><div style="font-size:10px;color:#A07840;font-weight:700;margin-bottom:3px">📊 בסיס</div><div style="font-size:17px;font-weight:800" id="sc-base">—</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">7% · גיל 65</div></div>
-    <div class="scc"><div style="font-size:10px;color:#A07840;font-weight:700;margin-bottom:3px">📈 אופטימי</div><div style="font-size:17px;font-weight:800" id="sc-opt">—</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">9% · גיל 65</div></div>
-    <div class="scc"><div style="font-size:10px;color:#BA7517;font-weight:700;margin-bottom:3px">📉 שמרני</div><div style="font-size:17px;font-weight:800" id="sc-con">—</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">4% · גיל 65</div></div>
-    <div class="scc"><div style="font-size:10px;color:#C9A96E;font-weight:700;margin-bottom:3px">🔥 FIRE מהיר</div><div style="font-size:17px;font-weight:800" id="sc-fire">—</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">8% · גיל 52</div></div>
+    <div class="scc on"><div style="font-size:10px;color:#A07840;font-weight:700;margin-bottom:3px">📊 בסיס</div><div style="font-size:17px;font-weight:800" id="sc-base">₪0</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">7% · גיל 65</div></div>
+    <div class="scc"><div style="font-size:10px;color:#A07840;font-weight:700;margin-bottom:3px">📈 אופטימי</div><div style="font-size:17px;font-weight:800" id="sc-opt">₪0</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">9% · גיל 65</div></div>
+    <div class="scc"><div style="font-size:10px;color:#BA7517;font-weight:700;margin-bottom:3px">📉 שמרני</div><div style="font-size:17px;font-weight:800" id="sc-con">₪0</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">4% · גיל 65</div></div>
+    <div class="scc"><div style="font-size:10px;color:#C9A96E;font-weight:700;margin-bottom:3px">🔥 FIRE מהיר</div><div style="font-size:17px;font-weight:800" id="sc-fire">₪0</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">8% · גיל 52</div></div>
   </div>
   <div class="c">
     <div class="ch"><div class="ct">השוואה 30 שנה</div></div>
@@ -1377,18 +1377,19 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 <!-- ══════════════════ כלים — Hub ══════════════════ -->
 <div class="pg" id="pg-tools">
-  <div style="font-size:14px;font-weight:700;color:#1E2D4A;margin-bottom:12px">כלים ומחשבונים</div>
+  <div style="font-size:18px;font-weight:800;color:#1E2D4A;margin-bottom:4px">כלים ומחשבונים</div>
+  <div style="font-size:11px;color:#6B7A96;margin-bottom:8px">כלים חכמים לקבלת החלטות</div>
 
   <!-- 1. שכר נטו -->
   <div class="c" style="padding:0;overflow:hidden">
-    <div class="sec-toggle" style="padding:12px 14px" onclick="toggleTool(this)">
+    <div class="sec-toggle" style="padding:16px 16px" onclick="toggleTool(this)">
       <div style="display:flex;align-items:center;gap:10px;flex:1">
-        <div style="width:36px;height:36px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💰</div>
-        <div><div style="font-size:12px;font-weight:600;color:#1E2D4A">מחשבון שכר נטו</div><div style="font-size:10px;color:#6B7A96">ברוטו → נטו + הפרשות</div></div>
+        <div style="width:44px;height:44px;background:#E8DCC8;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">💰</div>
+        <div><div style="font-size:14px;font-weight:600;color:#1E2D4A">מחשבון שכר נטו</div><div style="font-size:10px;color:#6B7A96">ברוטו → נטו + הפרשות</div></div>
       </div>
       <span class="sec-arr" style="transition:transform .2s">▾</span>
     </div>
-    <div class="sec-body closed" style="max-height:2000px;padding:0 14px 14px">
+    <div class="sec-body closed" style="max-height:2000px;padding:4px 16px 18px">
       <div class="hc" style="margin-bottom:10px">
         <div style="font-size:10px;color:#6B7A96;margin-bottom:2px">שכר נטו חודשי</div>
         <div style="font-size:24px;font-weight:800;color:#A07840;letter-spacing:-1px" id="sal-net-hero">—</div>
@@ -1425,14 +1426,14 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- 2. שוק ההון -->
   <div class="c" style="padding:0;overflow:hidden">
-    <div class="sec-toggle" style="padding:12px 14px" onclick="toggleTool(this)">
+    <div class="sec-toggle" style="padding:16px 16px" onclick="toggleTool(this)">
       <div style="display:flex;align-items:center;gap:10px;flex:1">
-        <div style="width:36px;height:36px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📈</div>
-        <div><div style="font-size:12px;font-weight:600;color:#1E2D4A">שוק ההון</div><div style="font-size:10px;color:#6B7A96">מדדים, ריבית דריבית, כלל 72</div></div>
+        <div style="width:44px;height:44px;background:#E8DCC8;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📈</div>
+        <div><div style="font-size:14px;font-weight:600;color:#1E2D4A">שוק ההון</div><div style="font-size:10px;color:#6B7A96">מדדים, ריבית דריבית, כלל 72</div></div>
       </div>
       <span class="sec-arr" style="transition:transform .2s">▾</span>
     </div>
-    <div class="sec-body closed" style="max-height:4000px;padding:0 14px 14px">
+    <div class="sec-body closed" style="max-height:4000px;padding:4px 16px 18px">
       <div class="g2" style="gap:6px;margin-bottom:10px">
         <div style="background:#1E2D4A;border-radius:10px;padding:10px;text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.5)">S&P 500</div><div style="font-size:20px;font-weight:800;color:#C9A96E">10.5%</div><div style="font-size:10px;color:rgba(255,255,255,.4)">שנתי 1928–2024</div></div>
         <div style="background:#1E2D4A;border-radius:10px;padding:10px;text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.5)">ת"א 125</div><div style="font-size:20px;font-weight:800;color:#C9A96E">7.1%</div><div style="font-size:10px;color:rgba(255,255,255,.4)">שנתי 20 שנה</div></div>
@@ -1451,14 +1452,14 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- 3. השוואת השקעות -->
   <div class="c" style="padding:0;overflow:hidden">
-    <div class="sec-toggle" style="padding:12px 14px" onclick="toggleTool(this)">
+    <div class="sec-toggle" style="padding:16px 16px" onclick="toggleTool(this)">
       <div style="display:flex;align-items:center;gap:10px;flex:1">
-        <div style="width:36px;height:36px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📊</div>
-        <div><div style="font-size:12px;font-weight:600;color:#1E2D4A">השוואת השקעות</div><div style="font-size:10px;color:#6B7A96">סימולטור כל המסלולים</div></div>
+        <div style="width:44px;height:44px;background:#E8DCC8;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📊</div>
+        <div><div style="font-size:14px;font-weight:600;color:#1E2D4A">השוואת השקעות</div><div style="font-size:10px;color:#6B7A96">סימולטור כל המסלולים</div></div>
       </div>
       <span class="sec-arr" style="transition:transform .2s">▾</span>
     </div>
-    <div class="sec-body closed" style="max-height:3000px;padding:0 14px 14px">
+    <div class="sec-body closed" style="max-height:3000px;padding:4px 16px 18px">
       <div class="fi2" style="margin-bottom:8px"><div><div class="il">סכום ₪</div><input class="inp" id="cmp-amount" type="number" placeholder="₪ סכום" style="padding:8px 10px;font-size:12px" oninput="calcComparison()"/></div><div><div class="il">שנים</div><input class="inp" id="cmp-years" type="number" value="20" style="padding:8px 10px;font-size:12px" oninput="calcComparison()"/></div></div>
       <div id="cmp-results"><div style="font-size:10px;color:#6B7A96;padding:8px 0;text-align:center">הזן סכום להשוואה</div></div>
       <div id="cmp-chart" style="margin-top:8px"></div>
@@ -1467,36 +1468,36 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- 4. מפת עושר -->
   <div class="c" style="padding:0;overflow:hidden">
-    <div class="sec-toggle" style="padding:12px 14px" onclick="toggleTool(this)">
+    <div class="sec-toggle" style="padding:16px 16px" onclick="toggleTool(this)">
       <div style="display:flex;align-items:center;gap:10px;flex:1">
-        <div style="width:36px;height:36px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🗺️</div>
-        <div><div style="font-size:12px;font-weight:600;color:#1E2D4A">מפת עושר</div><div style="font-size:10px;color:#6B7A96">כל הנכסים וההתחייבויות</div></div>
+        <div style="width:44px;height:44px;background:#E8DCC8;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🗺️</div>
+        <div><div style="font-size:14px;font-weight:600;color:#1E2D4A">מפת עושר</div><div style="font-size:10px;color:#6B7A96">כל הנכסים וההתחייבויות</div></div>
       </div>
       <span class="sec-arr" style="transition:transform .2s">▾</span>
     </div>
-    <div class="sec-body closed" style="max-height:2000px;padding:0 14px 14px">
-      <div class="dr"><div class="dl">💰 נזיל</div><div class="dv" style="color:#A07840" id="wmap-cash">—</div></div>
-      <div class="dr"><div class="dl">📈 השקעות</div><div class="dv" style="color:#A07840" id="wmap-inv">—</div></div>
-      <div class="dr"><div class="dl">🏦 פנסיה + קה"ש</div><div class="dv" style="color:#3D5278" id="wmap-pen">—</div></div>
-      <div class="dr"><div class="dl">🏠 נדל"ן</div><div class="dv" style="color:#3D5278" id="wmap-re">—</div></div>
+    <div class="sec-body closed" style="max-height:2000px;padding:4px 16px 18px">
+      <div class="dr"><div class="dl">💰 נזיל</div><div class="dv" style="color:#A07840" id="wmap-cash">₪0</div></div>
+      <div class="dr"><div class="dl">📈 השקעות</div><div class="dv" style="color:#A07840" id="wmap-inv">₪0</div></div>
+      <div class="dr"><div class="dl">🏦 פנסיה + קה"ש</div><div class="dv" style="color:#3D5278" id="wmap-pen">₪0</div></div>
+      <div class="dr"><div class="dl">🏠 נדל"ן</div><div class="dv" style="color:#3D5278" id="wmap-re">₪0</div></div>
       <div style="height:.5px;background:rgba(30,45,74,.12);margin:6px 0"></div>
-      <div class="dr"><div class="dl" style="font-weight:700">סה"כ נכסים</div><div class="dv" style="color:#A07840;font-weight:700" id="wmap-total">—</div></div>
-      <div class="dr"><div class="dl">פחות: חובות</div><div class="dv" style="color:#6B7A96" id="wmap-debt">—</div></div>
+      <div class="dr"><div class="dl" style="font-weight:700">סה"כ נכסים</div><div class="dv" style="color:#A07840;font-weight:700" id="wmap-total">₪0</div></div>
+      <div class="dr"><div class="dl">פחות: חובות</div><div class="dv" style="color:#6B7A96" id="wmap-debt">₪0</div></div>
       <div style="height:.5px;background:rgba(30,45,74,.12);margin:6px 0"></div>
-      <div class="dr"><div class="dl" style="font-weight:800;color:#1E2D4A">שווי נטו</div><div class="dv" style="color:#A07840;font-size:14px;font-weight:800" id="wmap-nw">—</div></div>
+      <div class="dr"><div class="dl" style="font-weight:800;color:#1E2D4A">שווי נטו</div><div class="dv" style="color:#A07840;font-size:14px;font-weight:800" id="wmap-nw">₪0</div></div>
     </div>
   </div>
 
   <!-- 5. הקצאת נכסים -->
   <div class="c" style="padding:0;overflow:hidden">
-    <div class="sec-toggle" style="padding:12px 14px" onclick="toggleTool(this)">
+    <div class="sec-toggle" style="padding:16px 16px" onclick="toggleTool(this)">
       <div style="display:flex;align-items:center;gap:10px;flex:1">
-        <div style="width:36px;height:36px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥧</div>
-        <div><div style="font-size:12px;font-weight:600;color:#1E2D4A">הקצאת נכסים</div><div style="font-size:10px;color:#6B7A96">חלוקה מומלצת לפי גיל</div></div>
+        <div style="width:44px;height:44px;background:#E8DCC8;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🥧</div>
+        <div><div style="font-size:14px;font-weight:600;color:#1E2D4A">הקצאת נכסים</div><div style="font-size:10px;color:#6B7A96">חלוקה מומלצת לפי גיל</div></div>
       </div>
       <span class="sec-arr" style="transition:transform .2s">▾</span>
     </div>
-    <div class="sec-body closed" style="max-height:2000px;padding:0 14px 14px">
+    <div class="sec-body closed" style="max-height:2000px;padding:4px 16px 18px">
       <div class="dr"><div class="dl"><div class="dot" style="background:#A07840"></div>מניות</div><div class="dv">55%</div></div>
       <div class="dr"><div class="dl"><div class="dot" style="background:#6B7A96"></div>אג"ח</div><div class="dv">10%</div></div>
       <div class="dr"><div class="dl"><div class="dot" style="background:#D97706"></div>נדל"ן</div><div class="dv">30%</div></div>
@@ -1509,8 +1510,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- הגדרות -->
   <div class="c" onclick="goSub('settings')" style="cursor:pointer;display:flex;align-items:center;gap:12px;padding:12px 14px">
-    <div style="width:36px;height:36px;background:#E8DCC8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">⚙️</div>
-    <div style="flex:1"><div style="font-size:12px;font-weight:600;color:#1E2D4A">הגדרות</div><div style="font-size:10px;color:#6B7A96">פרופיל, חישוב, נראות</div></div>
+    <div style="width:44px;height:44px;background:#E8DCC8;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">⚙️</div>
+    <div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">הגדרות</div><div style="font-size:10px;color:#6B7A96">פרופיל, חישוב, נראות</div></div>
     <div style="font-size:14px;color:#6B7A96">←</div>
   </div>
 </div>
@@ -1942,14 +1943,14 @@ function renderOvCards(c){
 
   // FIRE hero pill + metric cards
   var mvf=$('mv-fire'),msf=$('ms-fire');
-  if(mvf) mvf.textContent=c.totalIncome>0?'עצמאות בגיל '+c.fireAge:'—';
-  if(msf) msf.textContent=c.totalIncome>0?((c.fireAge-ND.profile.age)<=0?'הגעת ליעד!':'· עוד '+(c.fireAge-ND.profile.age)+' שנים'):'הזן נתונים';
+  if(mvf) mvf.textContent=c.totalIncome>0?'עצמאות בגיל '+c.fireAge:'הגדר יעד';
+  if(msf) msf.textContent=c.totalIncome>0?((c.fireAge-ND.profile.age)<=0?'הגעת ליעד!':'· עוד '+(c.fireAge-ND.profile.age)+' שנים'):'גלה מתי תהיה חופשי';
 
   // Asset breakdown
   var total=c.totalAssets;
   var atEl=$('assets-total');
-  if(atEl) atEl.textContent=total>0?fmt(total):'—';
-  var pct=function(v){return total>0?Math.round(v/total*100)+'%':'—';};
+  if(atEl) atEl.textContent=total>0?fmt(total):'₪0';
+  var pct=function(v){return total>0?Math.round(v/total*100)+'%':'0%';};
   var pen=$('ap-pen'),re=$('ap-re'),inv=$('ap-inv'),cash=$('ap-cash');
   if(pen) pen.textContent=pct(c.penT+c.hshT)+' · '+fmt(c.penT+c.hshT);
   if(re)  re.textContent=pct(c.reV)+' · '+fmt(c.reV);
@@ -1980,22 +1981,22 @@ function renderOvCards(c){
 
   // Projection start label
   var psl=$('proj-start-lbl');
-  if(psl) psl.textContent='היום: '+(c.netWorth>0?fmt(c.netWorth):'—');
+  if(psl) psl.textContent='היום: '+(c.netWorth>0?fmt(c.netWorth):'₪0');
 
   // Quick stats
   var qi=$('qs-inc'),qe=$('qs-exp'),qd=$('qs-debt'),qr=$('qs-rate');
-  if(qi) qi.textContent=c.totalIncome>0?fmt(c.totalIncome):'—';
-  if(qe) qe.textContent=c.totalExpenses>0?fmt(c.totalExpenses):'—';
-  if(qd){var debt=c.reMrt+c.lnT;qd.textContent=debt>0?fmt(debt):'—';}
-  if(qr) qr.textContent=c.totalIncome>0?c.savingsRate+'%':'—';
+  if(qi) qi.textContent=c.totalIncome>0?fmt(c.totalIncome):'₪0';
+  if(qe) qe.textContent=c.totalExpenses>0?fmt(c.totalExpenses):'₪0';
+  if(qd){var debt=c.reMrt+c.lnT;qd.textContent=debt>0?fmt(debt):'₪0';}
+  if(qr) qr.textContent=c.totalIncome>0?c.savingsRate+'%':'0%';
 
   // MiR unified card
   var mi=$('mir-inc'),me=$('mir-exp'),ms=$('mir-sav'),mr=$('mir-ratio'),ma=$('mir-avg');
-  if(mi) mi.textContent=c.totalIncome>0?fmt(c.totalIncome):'—';
-  if(me) me.textContent=c.totalExpenses>0?fmt(c.totalExpenses):'—';
-  if(ms){ms.textContent=c.totalIncome>0?fmt(c.monthlySavings):'—';ms.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
-  if(mr) mr.textContent=c.totalIncome>0?c.savingsRate+'% חיסכון':'—';
-  if(ma){ma.textContent=c.totalIncome>0?(c.monthlySavings>=0?'חוסך ':'מפסיד ')+fmt(Math.abs(c.monthlySavings))+' בחודש':'—';ma.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
+  if(mi) mi.textContent=c.totalIncome>0?fmt(c.totalIncome):'₪0';
+  if(me) me.textContent=c.totalExpenses>0?fmt(c.totalExpenses):'₪0';
+  if(ms){ms.textContent=c.totalIncome>0?fmt(c.monthlySavings):'₪0';ms.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
+  if(mr) mr.textContent=c.totalIncome>0?c.savingsRate+'% חיסכון':'0%';
+  if(ma){ma.textContent=c.totalIncome>0?(c.monthlySavings>=0?'חוסך ':'מפסיד ')+fmt(Math.abs(c.monthlySavings))+' בחודש':'₪0';ma.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
 
   // Cashflow chart — 3 bars per month (income/expense/savings)
   var mw=$('mir-chart-wrap');
@@ -2048,7 +2049,7 @@ function renderOvCards(c){
     });
     mw.innerHTML='<svg width="100%" viewBox="0 0 '+W+' '+(H+14)+'" style="overflow:visible;display:block">'+svg+'</svg>';
   } else if(mw){
-    mw.innerHTML='<div style="text-align:center;color:#A8A8B0;font-size:10px;padding:16px 0">הזן נתונים לתצוגה</div>';
+    mw.innerHTML='<div style="text-align:center;padding:16px 0"><div style="font-size:24px;margin-bottom:6px">📊</div><div style="font-size:11px;color:#6B7A96;margin-bottom:8px">גלה לאן הולך הכסף שלך כל חודש</div><button onclick="goP(\'cf\')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">הוסף הכנסה →</button></div>';
   }
 
   // FIRE progress card
@@ -2058,11 +2059,11 @@ function renderOvCards(c){
   var fireN=annExp>0?annExp*25:0;
   var nw0=Math.max(c.netWorth,0);
   var pct2=fireN>0?Math.min(100,Math.round(nw0/fireN*100)):0;
-  if(fc) fc.textContent=fireN>0?pct2+'%':'—';
+  if(fc) fc.textContent=fireN>0?pct2+'%':'הגדר יעד';
   if(fb) fb.style.width=(fireN>0?pct2:0)+'%';
-  if(fs) fs.textContent=c.totalIncome>0?((c.fireAge-ND.profile.age)<=0?'הגעת ליעד!':'פרישה בגיל '+c.fireAge+' · עוד '+(c.fireAge-ND.profile.age)+' שנים'):'הזן נתונים לחישוב';
-  if(fh) fh.textContent='יש: '+(nw0>0?fmt(nw0):'—');
-  if(fg) fg.textContent='יעד: '+(fireN>0?fmt(fireN):'—');
+  if(fs) fs.textContent=c.totalIncome>0?((c.fireAge-ND.profile.age)<=0?'הגעת ליעד!':'פרישה בגיל '+c.fireAge+' · עוד '+(c.fireAge-ND.profile.age)+' שנים'):'גלה מתי תוכל להיות חופשי כלכלית';
+  if(fh) fh.textContent='יש: '+(nw0>0?fmt(nw0):'₪0');
+  if(fg) fg.textContent='יעד: '+(fireN>0?fmt(fireN):'₪0');
 
   // Spend DNA
   var dnaRows=$('spend-dna-rows');
@@ -2073,7 +2074,7 @@ function renderOvCards(c){
     ];
     var hasExp=c.totalExpenses>0;
     if(!hasExp){
-      dnaRows.innerHTML='<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">הזן הוצאות בדף תזרים לביחס אישי</div>';
+      dnaRows.innerHTML='<div style="text-align:center;padding:12px 0"><div style="font-size:20px;margin-bottom:4px">🧬</div><div style="font-size:11px;color:#6B7A96;margin-bottom:6px">גלה את הרגלי ההוצאה שלך</div><button onclick="goP(\'cf\')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:5px 12px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit">הזן הוצאות →</button></div>';
     } else {
       dnaRows.innerHTML=cats.map(function(cat){
         var userPct=c.totalIncome>0?(ND.expenses[cat.k]||0)/c.totalIncome:0;
@@ -2108,7 +2109,7 @@ function renderOvCards(c){
   if(rec){
     var recs=[];
     if(c.totalIncome===0){
-      rec.innerHTML='<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">הזן נתונים לקבלת המלצות אישיות</div>';
+      rec.innerHTML='<div style="text-align:center;padding:12px 0"><div style="font-size:20px;margin-bottom:4px">🎯</div><div style="font-size:11px;color:#6B7A96;margin-bottom:6px">קבל המלצות מותאמות אישית</div><button onclick="goP(\'cf\')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:5px 12px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit">הזן נתונים →</button></div>';
     } else {
       if(ND.cash<c.totalExpenses*3) recs.push({cls:'opt w',t:'⚠️ קרן חירום נמוכה',b:'יש '+fmt(ND.cash)+' · מומלץ '+fmt(c.totalExpenses*6)+' (6 חודשים). השלם '+fmt(c.totalExpenses*6-ND.cash)});
       if(c.savingsRate<10) recs.push({cls:'opt r',t:'📉 שיעור חיסכון נמוך',b:'אתה חוסך '+c.savingsRate+'%. יעד: 20%. הגדל ב-'+fmt(c.totalIncome*0.2-c.monthlySavings)+'/חודש.'});
@@ -2180,10 +2181,10 @@ function renderOvCards(c){
 /* ── RENDER: LOANS PAGE ── */
 function renderLoans(c){
   var lt=$('lo-total'),lm=$('lo-monthly');
-  if(lt) lt.textContent=c.lnT>0?fmt(c.lnT):'—';
+  if(lt) lt.textContent=c.lnT>0?fmt(c.lnT):'₪0';
   if(lm){
     var lnPay=ND.loans.reduce(function(s,x){return s+x.monthlyPayment;},0);
-    lm.textContent=lnPay>0?fmt(lnPay)+'/חודש':'—';
+    lm.textContent=lnPay>0?fmt(lnPay)+'/חודש':'₪0';
   }
   // Loan list (mortgage comes from realEstate, additional loans from ND.loans)
   var ll=$('lo-list');
@@ -2267,7 +2268,7 @@ function renderOvSummaries(c){
 function renderNWTrend(c){
   var el = document.getElementById('nw-trend');
   if(!el) return;
-  if(c.totalIncome === 0){ el.textContent = 'הזן הכנסות לחישוב'; return; }
+  if(c.totalIncome === 0){ el.innerHTML = '<a onclick="goP(\'assets\')" style="color:#A07840;cursor:pointer;font-weight:600;text-decoration:none">📈 הוסף נכסים לראות את הצמיחה שלך → התחל</a>'; return; }
   var mo = c.monthlySavings;
   el.textContent = (mo >= 0 ? '↑ ' : '↓ ') + fmt(Math.abs(mo)) + ' חיסכון חודשי · ' + c.savingsRate + '%';
   el.style.color = mo >= 0 ? '#A07840' : '#D93025';
@@ -2279,7 +2280,7 @@ function renderDigest(c){
   if(!el) return;
   var months=['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
   if(dm) dm.textContent = months[new Date().getMonth()];
-  if(c.totalIncome === 0){ el.textContent = '—'; return; }
+  if(c.totalIncome === 0){ el.textContent = '₪0'; return; }
   var sav = Math.max(c.monthlySavings, 0);
   el.textContent = sav > 0 ? '+'+fmt(sav) : '₪0';
 }
@@ -2397,16 +2398,20 @@ function renderCF(c){
 
   // Summary rows
   var sInc=$('sum-inc'),sExp=$('sum-exp'),sSav=$('sum-sav'),sRatio=$('sum-ratio');
-  if(sInc) sInc.textContent = c.totalIncome>0?fmt(c.totalIncome):'—';
-  if(sExp) sExp.textContent = c.totalExpenses>0?fmt(c.totalExpenses):'—';
-  if(sSav){ sSav.textContent=c.totalIncome>0?fmt(c.monthlySavings):'—'; sSav.style.color=c.monthlySavings>=0?'#A07840':'#D93025'; }
-  if(sRatio) sRatio.textContent=c.totalIncome>0?Math.round(c.totalExpenses/c.totalIncome*100)+'%':'—';
+  if(sInc) sInc.textContent = c.totalIncome>0?fmt(c.totalIncome):'₪0';
+  if(sExp) sExp.textContent = c.totalExpenses>0?fmt(c.totalExpenses):'₪0';
+  if(sSav){ sSav.textContent=c.totalIncome>0?fmt(c.monthlySavings):'₪0'; sSav.style.color=c.monthlySavings>=0?'#A07840':'#D93025'; }
+  if(sRatio) sRatio.textContent=c.totalIncome>0?Math.round(c.totalExpenses/c.totalIncome*100)+'%':'0%';
 
   // 50/30/20 rule text
   var ruleText=$('rule-text');
-  if(ruleText && c.totalIncome>0){
-    var status = c.savingsRate>=20?'מעולה! ✓':c.savingsRate>=10?'טוב, אפשר לשפר':'מתחת ליעד';
-    ruleText.innerHTML='50% צרכים · 30% רצונות · <strong>20% חיסכון</strong><br>אתה ב-<strong>'+c.savingsRate+'%</strong> חיסכון — '+status;
+  if(ruleText){
+    if(c.totalIncome>0){
+      var status = c.savingsRate>=20?'מעולה! ✓':c.savingsRate>=10?'טוב, אפשר לשפר':'מתחת ליעד';
+      ruleText.innerHTML='50% צרכים · 30% רצונות · <strong>20% חיסכון</strong><br>אתה ב-<strong>'+c.savingsRate+'%</strong> חיסכון — '+status;
+    } else {
+      ruleText.innerHTML='<div style="text-align:center;padding:16px 0"><div style="font-size:24px;margin-bottom:6px">📐</div><div style="font-size:11px;color:#6B7A96;margin-bottom:8px">בדוק אם אתה עומד בכלל 50/30/20</div><button onclick="goP(\'cf\')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">הזן נתונים →</button></div>';
+    }
   }
 
   // Expense categories
@@ -2449,9 +2454,9 @@ function renderCF(c){
     if(bn) bn.style.width=lowExpenses?'0%':Math.min(necPct*2,100)+'%';
     if(bw) bw.style.width=lowExpenses?'0%':Math.min(wantPct*2,100)+'%';
     if(bs) bs.style.width=lowExpenses?'0%':Math.min(savPct*5,100)+'%';
-    if(pn) pn.textContent=lowExpenses?'הזן הוצאות לחישוב':necPct+'%'+(necPct<=50?' ✓':' ⚠');
-    if(pw) pw.textContent=lowExpenses?'—':wantPct+'%'+(wantPct<=30?' ✓':' ⚠');
-    if(ps) ps.textContent=lowExpenses?'—':savPct+'%'+(savPct>=20?' ✓':' ⚠');
+    if(pn) pn.textContent=lowExpenses?'0%':necPct+'%'+(necPct<=50?' ✓':' ⚠');
+    if(pw) pw.textContent=lowExpenses?'0%':wantPct+'%'+(wantPct<=30?' ✓':' ⚠');
+    if(ps) ps.textContent=lowExpenses?'0%':savPct+'%'+(savPct>=20?' ✓':' ⚠');
     var badge=$('rule-badge');
     if(badge){
       var ok=(necPct<=50&&wantPct<=30&&savPct>=20);
@@ -2465,7 +2470,7 @@ function renderCF(c){
   var insEl=$('cf-insights');
   if(insEl){
     if(c.totalIncome===0){
-      insEl.innerHTML='<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">הזן הכנסות והוצאות לקבלת תובנות אישיות</div>';
+      insEl.innerHTML='<div style="text-align:center;padding:16px 0"><div style="font-size:24px;margin-bottom:6px">💡</div><div style="font-size:11px;color:#6B7A96;margin-bottom:8px">תובנות חכמות לפי ההוצאות שלך</div><button onclick="goP(\'cf\')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">הזן הוצאות →</button></div>';
     } else {
       var tips=[];
       if(c.savingsRate<10) tips.push('⚠️ שיעור חיסכון '+c.savingsRate+'% נמוך מהמומלץ (20%). נסה לחסוך עוד '+fmt(c.totalIncome*0.2-c.monthlySavings)+' בחודש.');
@@ -2481,8 +2486,8 @@ function renderCF(c){
   // Cashflow tab
   var hero=$('cf-fl-hero'),sub=$('cf-fl-sub');
   var flInc=$('fl-inc'),flExp=$('fl-exp'),flSav=$('fl-sav');
-  if(hero){hero.textContent=c.totalIncome>0?(c.monthlySavings>=0?'+':'')+fmt(c.monthlySavings):'—';hero.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
-  if(sub) sub.textContent=c.totalIncome>0?'הכנסה פחות הוצאות':'הזן נתונים לחישוב';
+  if(hero){hero.textContent=c.totalIncome>0?(c.monthlySavings>=0?'+':'')+fmt(c.monthlySavings):'₪0';hero.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
+  if(sub) sub.innerHTML=c.totalIncome>0?'הכנסה פחות הוצאות':'💸 ראה כמה נשאר לך בסוף כל חודש';
   if(flInc) flInc.textContent=fmt(c.totalIncome);
   if(flExp){flExp.textContent=fmt(c.totalExpenses);flExp.style.color='#64646A';}
   if(flSav){flSav.textContent=fmt(c.monthlySavings);flSav.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
@@ -2492,7 +2497,7 @@ function renderCF(c){
 function renderSTHeader(c){
   var total = c.penT + c.hshT + c.gmT + c.invT;
   var itEl = document.getElementById('inv-total');
-  if(itEl) itEl.textContent = total > 0 ? fmt(total) : '—';
+  if(itEl) itEl.textContent = total > 0 ? fmt(total) : '₪0';
 
   // ── ALL investment lists render on every render() cycle ──
   _renderList('pen-list', ND.pension, function(x){
@@ -2619,21 +2624,21 @@ function renderFIREPage(){
 
   // Update DOM
   var fn = document.getElementById('fire-number');
-  if(fn) fn.textContent = fireNumber > 0 ? fmt(fireNumber) : '—';
+  if(fn) fn.textContent = fireNumber > 0 ? fmt(fireNumber) : '🔥';
   var fs = document.getElementById('fire-subtitle');
   if(fs) fs.textContent = fireNumber > 0
     ? 'פרישה בגיל '+actualFireAge+' · עוד '+yearsLeft+' שנים'
-    : 'הזן הכנסות והוצאות לחישוב';
+    : 'גלה מתי תוכל להיות חופשי כלכלית';
   var fb = document.getElementById('fire-bar');
   if(fb) fb.style.width = pct+'%';
   var fp = document.getElementById('fire-progress');
   if(fp) fp.textContent = pct > 0
     ? pct+'% מהיעד · '+fmt(nw0)+' מתוך '+fmt(fireNumber)
-    : 'הזן נתונים לחישוב';
+    : 'הוסף הכנסות והוצאות כדי לחשב';
   var fe = document.getElementById('fire-exp');
-  if(fe) fe.textContent = c.totalExpenses > 0 ? fmt(c.totalExpenses) : '—';
+  if(fe) fe.textContent = c.totalExpenses > 0 ? fmt(c.totalExpenses) : '₪0';
   var fpa = document.getElementById('fire-passive');
-  if(fpa) fpa.textContent = passiveIncome > 0 ? fmt(passiveIncome) : '—';
+  if(fpa) fpa.textContent = passiveIncome > 0 ? fmt(passiveIncome) : '₪0';
   var fr = document.getElementById('fire-rate');
   if(fr){ fr.textContent = c.savingsRate+'%'; fr.style.color = c.savingsRate>=20?'#A07840':c.savingsRate>=10?'#D97706':'#D93025'; }
   // 4% rule explanation
@@ -3019,9 +3024,9 @@ function renderPlanHub(){
 function renderAssetsHub(){
   var c=calc();
   var at=$('hub-assets-total'),dt=$('hub-debt-total'),nt=$('hub-nw-total');
-  if(at) at.textContent=c.totalAssets>0?fmt(c.totalAssets):'—';
+  if(at) at.textContent=c.totalAssets>0?fmt(c.totalAssets):'₪0';
   if(dt) dt.textContent=c.totalLiabilities>0?fmt(c.totalLiabilities):'₪0';
-  if(nt) nt.textContent=c.netWorth!==0?fmt(c.netWorth):'—';
+  if(nt) nt.textContent=c.netWorth!==0?fmt(c.netWorth):'₪0';
   // Initialize merged st content
   renderSTFull();
   try{drawInvChart();}catch(e){}
@@ -5220,10 +5225,10 @@ function renderScenarios(){
   var oEl=document.getElementById('sc-opt');
   var cEl=document.getElementById('sc-con');
   var fEl=document.getElementById('sc-fire');
-  if(bEl) bEl.textContent=start>0||monthlyDep>0?fmt(Math.round(base)):'—';
-  if(oEl) oEl.textContent=start>0||monthlyDep>0?fmt(Math.round(optimistic)):'—';
-  if(cEl) cEl.textContent=start>0||monthlyDep>0?fmt(Math.round(conservative)):'—';
-  if(fEl) fEl.textContent=start>0||monthlyDep>0?fmt(Math.round(fireFast)):'—';
+  if(bEl) bEl.textContent=start>0||monthlyDep>0?fmt(Math.round(base)):'₪0';
+  if(oEl) oEl.textContent=start>0||monthlyDep>0?fmt(Math.round(optimistic)):'₪0';
+  if(cEl) cEl.textContent=start>0||monthlyDep>0?fmt(Math.round(conservative)):'₪0';
+  if(fEl) fEl.textContent=start>0||monthlyDep>0?fmt(Math.round(fireFast)):'₪0';
   // Chart
   var chartEl=document.getElementById('sc-chart');
   if(chartEl&&(start>0||monthlyDep>0)){
