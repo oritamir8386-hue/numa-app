@@ -592,31 +592,74 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- ══ סקירה — above the fold: hero → action → stats ══ -->
 
-  <!-- ① HERO — Net Worth + Score combined -->
-  <div class="hc" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-    <div style="flex:1">
-      <div style="font-size:10px;color:#A8A8B0;font-weight:600;margin-bottom:4px">שווי נטו כולל</div>
-      <div style="font-size:34px;font-weight:800;letter-spacing:-2px;color:#1E2D4A;line-height:1" id="hero-nw" data-target="0">₪0</div>
-      <div style="font-size:10px;color:#A8A8B0;margin-top:4px" id="nw-trend"><a onclick="goP('assets')" style="color:#A07840;cursor:pointer;font-weight:600;text-decoration:none">📈 הוסף נכסים לראות את הצמיחה שלך → התחל</a></div>
-      <div id="fire-hero-pill" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;padding:4px 10px;background:rgba(217,119,6,.08);border-radius:8px">
-        <span style="font-size:11px">🔥</span>
-        <span style="font-size:11px;font-weight:600;color:#BA7517" id="mv-fire">הגדר יעד</span>
-        <span style="font-size:10px;color:#A8A8B0" id="ms-fire">גלה מתי תהיה חופשי</span>
+  <!-- ① HERO — Net Worth -->
+  <div class="hc">
+    <div style="font-size:10px;color:#A8A8B0;font-weight:600;margin-bottom:4px">שווי נטו כולל</div>
+    <div style="font-size:34px;font-weight:800;letter-spacing:-2px;color:#1E2D4A;line-height:1" id="hero-nw" data-target="0">₪0</div>
+    <div style="font-size:10px;color:#A8A8B0;margin-top:4px" id="nw-trend"><a onclick="goP('assets')" style="color:#A07840;cursor:pointer;font-weight:600;text-decoration:none">📈 הוסף נכסים לראות את הצמיחה שלך → התחל</a></div>
+    <div id="fire-hero-pill" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;padding:4px 10px;background:rgba(217,119,6,.08);border-radius:8px">
+      <span style="font-size:11px">🔥</span>
+      <span style="font-size:11px;font-weight:600;color:#BA7517" id="mv-fire">הגדר יעד</span>
+      <span style="font-size:10px;color:#A8A8B0" id="ms-fire">גלה מתי תהיה חופשי</span>
+    </div>
+  </div>
+
+  <!-- NUMA SCORE — Activity Ring -->
+  <div class="c" style="text-align:center;padding:16px" onclick="var bd=document.getElementById('score-breakdown');if(bd)bd.style.display=bd.style.display==='none'?'block':'none'">
+    <div style="position:relative;width:200px;height:200px;margin:0 auto">
+      <svg width="200" height="200" viewBox="0 0 200 200">
+        <style>
+          @keyframes ringDraw{from{stroke-dasharray:0 565}to{}}
+          .ring-seg{animation:ringDraw 1s ease-out both;stroke-linecap:round}
+        </style>
+        <!-- Background tracks -->
+        <circle cx="100" cy="100" r="88" fill="none" stroke="#E8DCC8" stroke-width="8" opacity=".4"/>
+        <circle cx="100" cy="100" r="76" fill="none" stroke="#E8DCC8" stroke-width="8" opacity=".4"/>
+        <circle cx="100" cy="100" r="64" fill="none" stroke="#E8DCC8" stroke-width="8" opacity=".4"/>
+        <circle cx="100" cy="100" r="52" fill="none" stroke="#E8DCC8" stroke-width="8" opacity=".4"/>
+        <!-- Active arcs (drawn by JS) -->
+        <circle id="ring-cashflow" cx="100" cy="100" r="88" fill="none" stroke="#2b3a5c" stroke-width="8" stroke-dasharray="0 553" stroke-linecap="round" transform="rotate(-90 100 100)" class="ring-seg" style="animation-delay:.1s"/>
+        <circle id="ring-savings" cx="100" cy="100" r="76" fill="none" stroke="#27ae60" stroke-width="8" stroke-dasharray="0 478" stroke-linecap="round" transform="rotate(-90 100 100)" class="ring-seg" style="animation-delay:.2s"/>
+        <circle id="ring-insurance" cx="100" cy="100" r="64" fill="none" stroke="#c8a96a" stroke-width="8" stroke-dasharray="0 402" stroke-linecap="round" transform="rotate(-90 100 100)" class="ring-seg" style="animation-delay:.3s"/>
+        <circle id="ring-planning" cx="100" cy="100" r="52" fill="none" stroke="#e07b5a" stroke-width="8" stroke-dasharray="0 327" stroke-linecap="round" transform="rotate(-90 100 100)" class="ring-seg" style="animation-delay:.4s"/>
+      </svg>
+      <!-- Center number -->
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+        <div style="font-size:42px;font-weight:800;color:#1E2D4A;line-height:1" id="score-num">0</div>
+        <div style="font-size:11px;color:#6B7A96;margin-top:4px">Numa Score</div>
       </div>
     </div>
-    <!-- Score circle on the right -->
-    <div style="position:relative;width:72px;height:72px;flex-shrink:0">
-      <svg width="72" height="72" viewBox="0 0 72 72">
-        <circle cx="36" cy="36" r="30" fill="none" stroke="#E8DCC8" stroke-width="5"/>
-        <circle cx="36" cy="36" r="30" fill="none" stroke="#A07840" stroke-width="5" stroke-dasharray="0 188" stroke-dashoffset="47" stroke-linecap="round" transform="rotate(-90 36 36)" class="score-arc-anim"/>
-      </svg>
-      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-        <div style="font-size:20px;font-weight:800;color:#A07840;line-height:1" id="score-num">0</div>
-        <div style="font-size:8px;color:#A8A8B0;margin-top:1px">Score</div>
+    <div style="font-size:10px;color:#A8A8B0;margin-top:8px">הקש לפירוט ↓</div>
+
+    <!-- Breakdown (hidden, toggled on tap) -->
+    <div id="score-breakdown" style="display:none;margin-top:14px;text-align:right">
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:.5px solid rgba(30,45,74,.08)">
+        <div style="width:10px;height:10px;border-radius:50%;background:#2b3a5c;flex-shrink:0"></div>
+        <div style="flex:1;font-size:12px;font-weight:600;color:#1E2D4A">תזרים</div>
+        <div style="font-size:12px;font-weight:700;color:#2b3a5c" id="ring-score-cf">—</div>
+        <div style="font-size:10px;color:#6B7A96;width:60px;text-align:left" id="ring-status-cf">חסר נתונים</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:.5px solid rgba(30,45,74,.08)">
+        <div style="width:10px;height:10px;border-radius:50%;background:#27ae60;flex-shrink:0"></div>
+        <div style="flex:1;font-size:12px;font-weight:600;color:#1E2D4A">חיסכון</div>
+        <div style="font-size:12px;font-weight:700;color:#27ae60" id="ring-score-sav">—</div>
+        <div style="font-size:10px;color:#6B7A96;width:60px;text-align:left" id="ring-status-sav">חסר נתונים</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:.5px solid rgba(30,45,74,.08)">
+        <div style="width:10px;height:10px;border-radius:50%;background:#c8a96a;flex-shrink:0"></div>
+        <div style="flex:1;font-size:12px;font-weight:600;color:#1E2D4A">ביטוח</div>
+        <div style="font-size:12px;font-weight:700;color:#c8a96a" id="ring-score-ins">—</div>
+        <div style="font-size:10px;color:#6B7A96;width:60px;text-align:left" id="ring-status-ins">חסר נתונים</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:.5px solid rgba(30,45,74,.08)">
+        <div style="width:10px;height:10px;border-radius:50%;background:#e07b5a;flex-shrink:0"></div>
+        <div style="flex:1;font-size:12px;font-weight:600;color:#1E2D4A">תכנון</div>
+        <div style="font-size:12px;font-weight:700;color:#e07b5a" id="ring-score-plan">—</div>
+        <div style="font-size:10px;color:#6B7A96;width:60px;text-align:left" id="ring-status-plan">חסר נתונים</div>
       </div>
     </div>
   </div>
-  <!-- Score label + digest (hidden row) -->
+  <!-- Hidden compat elements -->
   <div style="display:none">
     <span id="score-lbl">—</span>
     <span id="digest-month">—</span>
@@ -1947,11 +1990,58 @@ function render(){
 
 /* ── RENDER: ALL OVERVIEW DYNAMIC CARDS ── */
 function renderOvCards(c){
-  // Score
+  // Score + Activity Ring
   var sn=$('score-num'),sl=$('score-lbl');
   if(sn) sn.textContent=c.score;
   var lbl=c.score>=85?'מצוין':c.score>=70?'טוב מאוד':c.score>=55?'טוב':'לשיפור';
   if(sl){sl.textContent=lbl;sl.style.color=c.score>=70?'#A07840':c.score>=50?'#D97706':'#D93025';}
+  // Ring segments scoring
+  var cfScore=0,savScore=0,insScore=0,planScore=0;
+  // תזרים: income entered + expenses + savings rate >= 20
+  if(c.totalIncome>0) cfScore+=40;
+  if(c.totalExpenses>0) cfScore+=30;
+  if(c.savingsRate>=20) cfScore+=30; else if(c.savingsRate>=10) cfScore+=15;
+  // חיסכון: pension + hishtalmut + investments
+  if(c.penT>0) savScore+=35;
+  if(c.hshT>0) savScore+=35;
+  if(c.invT>0) savScore+=30;
+  // ביטוח: count filled insurance fields
+  var ins=ND.insurance||{};
+  ['life','dis','health','care'].forEach(function(k){if(ins[k+'_status']==='yes')insScore+=25;});
+  // תכנון: FIRE + will + allocation
+  if(c.totalIncome>0&&c.totalAssets>0) planScore+=35;
+  var leg=ND.legacy||{};
+  if(leg.will==='yes') planScore+=25;
+  if(leg.ben==='yes') planScore+=20;
+  if(leg.poa==='yes') planScore+=20;
+  // Draw rings
+  function drawRing(id,score,circ){
+    var el=document.getElementById(id);
+    if(!el)return;
+    var filled=circ*score/100;
+    el.setAttribute('stroke-dasharray',filled+' '+(circ-filled));
+    if(score===0) el.setAttribute('stroke','#E8DCC8');
+  }
+  drawRing('ring-cashflow',cfScore,553);
+  drawRing('ring-savings',savScore,478);
+  drawRing('ring-insurance',insScore,402);
+  drawRing('ring-planning',planScore,327);
+  // Breakdown
+  function setRing(id,score){
+    var el=document.getElementById(id);
+    if(!el)return;
+    el.textContent=score>0?score+'%':'—';
+  }
+  function setStat(id,score){
+    var el=document.getElementById(id);
+    if(!el)return;
+    el.textContent=score>=80?'טוב':score>=40?'לשיפור':'חסר נתונים';
+    el.style.color=score>=80?'#27ae60':score>=40?'#D97706':'#6B7A96';
+  }
+  setRing('ring-score-cf',cfScore);setRing('ring-score-sav',savScore);
+  setRing('ring-score-ins',insScore);setRing('ring-score-plan',planScore);
+  setStat('ring-status-cf',cfScore);setStat('ring-status-sav',savScore);
+  setStat('ring-status-ins',insScore);setStat('ring-status-plan',planScore);
 
   // FIRE hero pill + metric cards
   var mvf=$('mv-fire'),msf=$('ms-fire');
