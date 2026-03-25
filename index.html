@@ -2769,7 +2769,8 @@ function renderCF(c){
         expCats.appendChild(row);
         var inp=row.querySelector('input');
         inp.value=ND.expenses[cat.k]||'';
-        inp.addEventListener('input',function(){ND.expenses[cat.k]=parseFloat(this.value)||0;saveToStorage();render();smartToast('expense');});
+        inp.addEventListener('input',function(){ND.expenses[cat.k]=parseFloat(this.value)||0;saveToStorage();});
+        inp.addEventListener('blur',function(){render();smartToast('expense');});
       });
     } else {
       // just update values
@@ -3253,7 +3254,9 @@ function bindExpenseInputs(){
     var inp = row.querySelector('input');
     inp.addEventListener('input', function(){
       ND.expenses[key] = parseFloat(this.value)||0;
-      saveToStorage(); render();
+      saveToStorage();
+    });
+    inp.addEventListener('blur', function(){ render();
     });
     expInputsDiv.appendChild(row);
   });
