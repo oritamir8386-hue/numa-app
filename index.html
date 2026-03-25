@@ -82,6 +82,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .ai-fab{position:fixed;bottom:max(calc(env(safe-area-inset-bottom) + 58px),62px);left:14px;width:52px;height:52px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:300;border:none;font-family:inherit;box-shadow:0 4px 16px rgba(0,0,0,.35);transition:transform .1s}
 .ai-badge{position:absolute;top:-2px;right:-2px;width:14px;height:14px;background:#A07840;border-radius:50%;border:2px solid #1E2D4A;display:none}
 .ai-badge.on{display:block}
+.ai-fab-label{position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);background:#1E2D4A;color:#C9A96E;font-size:11px;font-weight:600;padding:6px 12px;border-radius:10px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.25);pointer-events:none;animation:fabLabelIn 5s .8s both forwards}
+@keyframes fabLabelIn{0%{opacity:0;transform:translateY(-50%) translateX(8px)}15%{opacity:1;transform:translateY(-50%) translateX(0)}85%{opacity:1;transform:translateY(-50%) translateX(0)}100%{opacity:0;transform:translateY(-50%) translateX(0);pointer-events:none}}
 .ai-fab:active{transform:scale(.96)}
 .ai-dot{width:7px;height:7px;border-radius:50%;background:#C9A96E;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
@@ -545,6 +547,22 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div style="display:flex;flex-direction:column;gap:1px">
     <div style="font-size:10px;color:#6B7A96;font-weight:500" id="top-greeting">שלום 👋</div>
     <div class="logo">Nu<b>ma</b></div>
+    <script>
+    // Early greeting — before full app loads
+    (function(){
+      try{
+        var h=new Date().getHours();
+        var g=h<12?'בוקר טוב':h<17?'צהריים טובים':'ערב טוב';
+        var keys=Object.keys(localStorage).filter(function(k){return k.startsWith('numa_v2_');});
+        var nm='';
+        for(var i=0;i<keys.length;i++){
+          try{var d=JSON.parse(localStorage.getItem(keys[i]));if(d&&d.profile&&d.profile.name){nm=d.profile.name;break;}}catch(e){}
+        }
+        var el=document.getElementById('top-greeting');
+        if(el) el.textContent=nm?g+', '+nm+' 👋':g+' 👋';
+      }catch(e){}
+    })();
+    </script>
   </div>
   <div class="top-right">
     <div class="notif-btn" onclick="showToast('2 תובנות חדשות ממתינות ✨')">
@@ -629,35 +647,39 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
 
   <!-- ④ NW CHART — growth timeline -->
-  <div class="c">
+  <div class="c" style="padding:13px 13px 10px">
     <div class="ch"><div class="ct">מסע הצמיחה שלך</div></div>
-    <svg id="nw-timeline-svg" width="100%" viewBox="0 0 280 100" style="display:block;margin-bottom:4px">
-      <line x1="0" y1="72" x2="280" y2="72" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-      <line x1="0" y1="48" x2="280" y2="48" stroke="rgba(30,45,74,.08)" stroke-width=".5" stroke-dasharray="3 3"/>
-      <line x1="0" y1="24" x2="280" y2="24" stroke="rgba(30,45,74,.08)" stroke-width=".5" stroke-dasharray="3 3"/>
-      <g id="nw-bars">
-        <rect x="4"   y="50" width="24" height="22" rx="4" fill="#E8DCC8"/>
-        <rect x="34"  y="44" width="24" height="28" rx="4" fill="#E8DCC8"/>
-        <rect x="64"  y="37" width="24" height="35" rx="4" fill="#C9A96E"/>
-        <rect x="94"  y="29" width="24" height="43" rx="4" fill="#C9A96E"/>
-        <rect x="124" y="20" width="24" height="52" rx="4" fill="#A07840"/>
-        <rect x="154" y="12" width="24" height="60" rx="4" fill="#A07840"/>
-        <rect x="184" y="5"  width="24" height="67" rx="4" fill="#1E2D4A"/>
-        <rect x="214" y="2"  width="24" height="70" rx="4" fill="#1E2D4A" stroke="#1E2D4A" stroke-width="1.5" stroke-dasharray="3 2" fill-opacity=".35"/>
-      </g>
-      <!-- today marker -->
-      <line x1="196" y1="2" x2="196" y2="72" stroke="#A07840" stroke-width="1" stroke-dasharray="4 3"/>
-      <line x1="76" y1="5" x2="76" y2="37" stroke="#A07840" stroke-width=".8" stroke-dasharray="2 2"/>
-      <rect x="42" y="2" width="66" height="14" rx="4" fill="#E8DCC8"/>
-      <text x="75" y="12" text-anchor="middle" font-size="9" fill="#6B7A96" font-family="inherit" font-weight="500">🏠 קניית דירה</text>
-      <line x1="166" y1="5" x2="166" y2="12" stroke="#3D5278" stroke-width=".8" stroke-dasharray="2 2"/>
-      <rect x="130" y="2" width="58" height="14" rx="4" fill="#E8DCC8"/>
-      <text x="159" y="12" text-anchor="middle" font-size="9" fill="#6B7A96" font-family="inherit" font-weight="500">🎓 קה"ש נזיל</text>
-      <text x="226" y="88" text-anchor="middle" font-size="10" fill="#1E2D4A" font-family="inherit" font-weight="500">אתה כאן ✨</text>
-      <text x="16"  y="84" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2018</text>
-      <text x="106" y="84" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2021</text>
-      <text x="196" y="84" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2024</text>
-      <text x="238" y="84" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2025→</text>
+    <svg id="nw-timeline-svg" width="100%" viewBox="0 0 300 120" preserveAspectRatio="xMidYMid meet" style="display:block">
+      <defs>
+        <linearGradient id="nwFillGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#A07840" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#A07840" stop-opacity="0.01"/>
+        </linearGradient>
+        <clipPath id="nwLineClip">
+          <rect x="0" y="0" width="300" height="120">
+            <animate attributeName="width" from="0" to="300" dur="1.2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+          </rect>
+        </clipPath>
+      </defs>
+      <!-- Grid lines -->
+      <line x1="20" y1="20" x2="280" y2="20" stroke="#E8DCC8" stroke-width=".5"/>
+      <line x1="20" y1="40" x2="280" y2="40" stroke="#E8DCC8" stroke-width=".5"/>
+      <line x1="20" y1="60" x2="280" y2="60" stroke="#E8DCC8" stroke-width=".5"/>
+      <line x1="20" y1="80" x2="280" y2="80" stroke="#E8DCC8" stroke-width=".5"/>
+      <!-- Area fill (solid part) -->
+      <path id="nw-area-solid" d="" fill="url(#nwFillGrad)" clip-path="url(#nwLineClip)"/>
+      <!-- Solid line (historical) -->
+      <path id="nw-line-solid" d="" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#nwLineClip)"/>
+      <!-- Projected area fill -->
+      <path id="nw-area-proj" d="" fill="url(#nwFillGrad)" opacity=".5" clip-path="url(#nwLineClip)"/>
+      <!-- Projected line (dashed) -->
+      <path id="nw-line-proj" d="" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 3" clip-path="url(#nwLineClip)"/>
+      <!-- Milestone pins rendered by JS -->
+      <g id="nw-milestones"></g>
+      <!-- Today marker -->
+      <g id="nw-today-marker"></g>
+      <!-- X axis labels -->
+      <g id="nw-x-labels"></g>
     </svg>
   </div>
 
@@ -812,38 +834,25 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div class="ch">
       <div><div class="ct">מסע הצמיחה שלך</div><div style="font-size:10px;color:#A8A8B0;margin-top:1px">לראות את הצמיחה שלך = emotional reward מספר 1</div></div>
     </div>
-    <!-- Net Worth Timeline SVG -->
-    <svg id="nw-timeline-svg" width="100%" viewBox="0 0 280 100" style="display:block;margin-bottom:8px">
-      <!-- grid -->
-      <line x1="0" y1="72" x2="280" y2="72" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>
-      <line x1="0" y1="48" x2="280" y2="48" stroke="rgba(30,45,74,.08)" stroke-width=".5" stroke-dasharray="3 3"/>
-      <line x1="0" y1="24" x2="280" y2="24" stroke="rgba(30,45,74,.08)" stroke-width=".5" stroke-dasharray="3 3"/>
-      <!-- bars — rendered by JS if data exists, else static placeholder -->
-      <g id="nw-bars">
-        <rect x="4"   y="50" width="24" height="22" rx="4" fill="#E8DCC8"/>
-        <rect x="34"  y="44" width="24" height="28" rx="4" fill="#E8DCC8"/>
-        <rect x="64"  y="37" width="24" height="35" rx="4" fill="#C9A96E"/>
-        <rect x="94"  y="29" width="24" height="43" rx="4" fill="#C9A96E"/>
-        <rect x="124" y="20" width="24" height="52" rx="4" fill="#A07840"/>
-        <rect x="154" y="12" width="24" height="60" rx="4" fill="#A07840"/>
-        <rect x="184" y="5"  width="24" height="67" rx="4" fill="#1E2D4A"/>
-        <rect x="214" y="2"  width="24" height="70" rx="4" fill="#1E2D4A" stroke="#1E2D4A" stroke-width="1.5" stroke-dasharray="3 2" fill-opacity=".35"/>
-      </g>
-      <!-- today marker -->
-      <line x1="196" y1="2" x2="196" y2="72" stroke="#A07840" stroke-width="1" stroke-dasharray="4 3"/>
-      <!-- milestone pins -->
-      <line x1="76" y1="5" x2="76" y2="37" stroke="#A07840" stroke-width=".8" stroke-dasharray="2 2"/>
-      <rect x="42" y="2" width="66" height="14" rx="4" fill="#E8DCC8"/>
-      <text x="75" y="12" text-anchor="middle" font-size="9" fill="#6B7A96" font-family="inherit" font-weight="500">🏠 קניית דירה</text>
-      <line x1="166" y1="5" x2="166" y2="12" stroke="#3D5278" stroke-width=".8" stroke-dasharray="2 2"/>
-      <rect x="130" y="2" width="58" height="14" rx="4" fill="#E8DCC8"/>
-      <text x="159" y="12" text-anchor="middle" font-size="9" fill="#6B7A96" font-family="inherit" font-weight="500">🎓 קה"ש נזיל</text>
-      <text x="226" y="88" text-anchor="middle" font-size="10" fill="#1E2D4A" font-family="inherit" font-weight="500">אתה כאן ✨</text>
-      <!-- year labels -->
-      <text x="16"  y="84" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2018</text>
-      <text x="106" y="84" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2021</text>
-      <text x="196" y="84" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2024</text>
-      <text x="238" y="84" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2025→</text>
+    <!-- Net Worth Timeline — uses same SVG structure as overview, rendered by JS -->
+    <svg id="nw-timeline-svg-2" width="100%" viewBox="0 0 300 120" preserveAspectRatio="xMidYMid meet" style="display:block;margin-bottom:8px">
+      <defs>
+        <linearGradient id="nwFillGrad2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#A07840" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#A07840" stop-opacity="0.01"/>
+        </linearGradient>
+      </defs>
+      <line x1="20" y1="20" x2="280" y2="20" stroke="#E8DCC8" stroke-width=".5"/>
+      <line x1="20" y1="40" x2="280" y2="40" stroke="#E8DCC8" stroke-width=".5"/>
+      <line x1="20" y1="60" x2="280" y2="60" stroke="#E8DCC8" stroke-width=".5"/>
+      <line x1="20" y1="80" x2="280" y2="80" stroke="#E8DCC8" stroke-width=".5"/>
+      <path id="nw-area-solid-2" d="" fill="url(#nwFillGrad2)"/>
+      <path id="nw-line-solid-2" d="" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="nw-area-proj-2" d="" fill="url(#nwFillGrad2)" opacity=".5"/>
+      <path id="nw-line-proj-2" d="" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 3"/>
+      <g id="nw-milestones-2"></g>
+      <g id="nw-today-marker-2"></g>
+      <g id="nw-x-labels-2"></g>
     </svg>
     <!-- CMD 03: Milestone add -->
     <div style="display:flex;gap:6px;margin-bottom:6px">
@@ -2114,9 +2123,10 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 </div><!-- /dev -->
 <!-- AI FAB -->
-<button class="ai-fab" id="ai-fab" onclick="toggleAI()">
-  <span style="font-size:18px;font-weight:800;color:#F5F2EC;line-height:1">N</span>
-  <div class="ai-badge" id="ai-badge"></div>
+<button class="ai-fab" id="ai-fab">
+  <span style="font-size:18px;font-weight:800;color:#F5F2EC;line-height:1;pointer-events:none">N</span>
+  <div class="ai-badge" id="ai-badge" style="pointer-events:none"></div>
+  <div class="ai-fab-label" id="ai-fab-label">היי, אני הסוכן שלך</div>
 </button>
 
 <!-- AI PANEL -->
@@ -4417,8 +4427,14 @@ function obEnterApp(){
     if(isDragging) setPos(fabX + dx, fabY + dy);
   }, {passive: true});
 
+  fab.addEventListener('touchend', e=>{
+    if(!isDragging && typeof toggleAI === 'function') toggleAI();
+    isDragging = false;
+  }, {passive: true});
+
   // Mouse drag
   fab.addEventListener('mousedown', e=>{
+    e.preventDefault();
     startX = e.clientX; startY = e.clientY;
     const p = getPos();
     fabX = p.x; fabY = p.y;
@@ -4432,15 +4448,12 @@ function obEnterApp(){
     const onUp = ()=>{
       document.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseup', onUp);
+      if(!isDragging && typeof toggleAI === 'function') toggleAI();
+      isDragging = false;
     };
     document.addEventListener('mousemove', onMove);
     document.addEventListener('mouseup', onUp);
   });
-
-  window.handleFabClick = function(){
-    if(isDragging){isDragging=false;return;}
-    if(typeof toggleAI === 'function') toggleAI();
-  };
 })();
 </script>
 
@@ -4984,21 +4997,111 @@ function renderNWTimelineSVG(){
   var cv=calc();
   if(cv.netWorth<=0) return;
   // Simple: just update "אתה כאן" label with real value
-  var svgEl=document.getElementById('nw-timeline-svg');
-  if(!svgEl) return;
-  var lastBar=svgEl.querySelector('rect:last-of-type');
-  // Add a text label with real NW on the last bar
-  var existing=document.getElementById('nw-here-val');
-  if(!existing){
-    var txt=document.createElementNS('http://www.w3.org/2000/svg','text');
-    txt.id='nw-here-val';
-    txt.setAttribute('x','226');txt.setAttribute('y','96');
-    txt.setAttribute('text-anchor','middle');
-    txt.setAttribute('font-size','9');txt.setAttribute('fill','#1E2D4A');
-    txt.setAttribute('font-family','inherit');txt.setAttribute('font-weight','700');
-    svgEl.appendChild(txt);
+  // Render line chart on both SVG instances
+  _drawNWLine('nw-timeline-svg','nw-line-solid','nw-area-solid','nw-line-proj','nw-area-proj','nw-milestones','nw-today-marker','nw-x-labels','nwFillGrad',cv);
+  _drawNWLine('nw-timeline-svg-2','nw-line-solid-2','nw-area-solid-2','nw-line-proj-2','nw-area-proj-2','nw-milestones-2','nw-today-marker-2','nw-x-labels-2','nwFillGrad2',cv);
+}
+function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,todayId,xlabelsId,gradId,cv){
+  var svg=document.getElementById(svgId);
+  if(!svg) return;
+  var W=300,H=120,padL=25,padR=20,padT=15,padB=30;
+  var chartW=W-padL-padR,chartH=H-padT-padB;
+  // Data points: simulate history + projected
+  var nw=cv.netWorth||0;
+  var savY=Math.max(cv.monthlySavings||0,0)*12;
+  var rate=0.07;
+  var currentYear=new Date().getFullYear();
+  var startYear=currentYear-6;
+  // Historical points (simulated growth backwards)
+  var pts=[];
+  for(var i=0;i<=6;i++){
+    var factor=Math.pow(1+rate,i-6);
+    pts.push({year:startYear+i,val:Math.max(nw*factor,0),proj:false});
   }
-  document.getElementById('nw-here-val').textContent=fmt(cv.netWorth);
+  // Projected 3 years forward
+  for(var j=1;j<=3;j++){
+    pts.push({year:currentYear+j,val:nw*Math.pow(1+rate,j)+savY*j,proj:true});
+  }
+  var maxVal=Math.max.apply(null,pts.map(function(p){return p.val;}))||1;
+  // Scale function
+  function sx(idx){return padL+idx/(pts.length-1)*chartW;}
+  function sy(val){return padT+chartH-Math.min(val/maxVal,1)*chartH;}
+  // Split into solid and projected
+  var solidPts=[],projPts=[];
+  var todayIdx=6; // index of current year
+  pts.forEach(function(p,i){
+    var x=sx(i),y=sy(p.val);
+    if(i<=todayIdx) solidPts.push({x:x,y:y});
+    if(i>=todayIdx) projPts.push({x:x,y:y});
+  });
+  // Build smooth path using cubic bezier
+  function smoothPath(points){
+    if(points.length<2) return '';
+    var d='M'+points[0].x+' '+points[0].y;
+    for(var k=1;k<points.length;k++){
+      var prev=points[k-1],curr=points[k];
+      var cpx=(prev.x+curr.x)/2;
+      d+=' C'+cpx+' '+prev.y+' '+cpx+' '+curr.y+' '+curr.x+' '+curr.y;
+    }
+    return d;
+  }
+  function areaPath(points){
+    if(points.length<2) return '';
+    var d=smoothPath(points);
+    var last=points[points.length-1],first=points[0];
+    d+=' L'+last.x+' '+(padT+chartH)+' L'+first.x+' '+(padT+chartH)+' Z';
+    return d;
+  }
+  // Draw solid line + area
+  var lineEl=document.getElementById(lineId);
+  var areaEl=document.getElementById(areaId);
+  if(lineEl) lineEl.setAttribute('d',smoothPath(solidPts));
+  if(areaEl) areaEl.setAttribute('d',areaPath(solidPts));
+  // Draw projected line + area
+  var projLine=document.getElementById(projLineId);
+  var projArea=document.getElementById(projAreaId);
+  if(projLine) projLine.setAttribute('d',smoothPath(projPts));
+  if(projArea) projArea.setAttribute('d',areaPath(projPts));
+  // Today marker
+  var todayG=document.getElementById(todayId);
+  if(todayG && solidPts.length>0){
+    var tp=solidPts[solidPts.length-1];
+    todayG.innerHTML=
+      '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="10" fill="#1E2D4A" opacity=".08"/>'+
+      '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="5" fill="#1E2D4A"/>'+
+      '<circle cx="'+tp.x+'" cy="'+tp.y+'" r="2.5" fill="#F5F2EC"/>'+
+      '<text x="'+tp.x+'" y="'+(padT+chartH+20)+'" text-anchor="middle" font-size="10" fill="#1E2D4A" font-family="inherit" font-weight="600">'+fmt(nw)+'</text>';
+  }
+  // X axis labels
+  var xlG=document.getElementById(xlabelsId);
+  if(xlG){
+    var labels='';
+    pts.forEach(function(p,i){
+      if(i%2===0||i===todayIdx){
+        var x=sx(i);
+        labels+='<text x="'+x+'" y="'+(H-5)+'" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">'+(p.year===currentYear?p.year+'*':p.year)+'</text>';
+      }
+    });
+    xlG.innerHTML=labels;
+  }
+  // Milestones
+  var msG=document.getElementById(milestonesId);
+  if(msG){
+    var ms=ND.milestones||[];
+    var pins=[{year:startYear+2,label:'🏠 קניית דירה'},{year:startYear+5,label:'🎓 קה"ש נזיל'}];
+    ms.forEach(function(m){pins.push({year:m.year||currentYear,label:m.text});});
+    var html='';
+    pins.forEach(function(pin){
+      var idx=pin.year-startYear;
+      if(idx<0||idx>=pts.length) return;
+      var x=sx(idx),y=sy(pts[idx].val);
+      html+='<line x1="'+x+'" y1="'+(y-18)+'" x2="'+x+'" y2="'+y+'" stroke="#A07840" stroke-width=".8" stroke-dasharray="2 2"/>'+
+        '<circle cx="'+x+'" cy="'+y+'" r="3" fill="#A07840"/>'+
+        '<rect x="'+(x-30)+'" y="'+(y-30)+'" width="60" height="14" rx="4" fill="#E8DCC8"/>'+
+        '<text x="'+x+'" y="'+(y-20)+'" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit" font-weight="500">'+pin.label+'</text>';
+    });
+    msG.innerHTML=html;
+  }
 }
 
 function renderMilestones(){
