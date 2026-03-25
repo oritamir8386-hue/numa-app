@@ -3860,6 +3860,7 @@ function obEnterApp(){
 .auth-bg{
   position:absolute;inset:0;
   background:#1E2D4A;
+  pointer-events:none;
 }
 .auth-glow{
   position:absolute;top:-100px;left:50%;transform:translateX(-50%);
@@ -3874,7 +3875,7 @@ function obEnterApp(){
   pointer-events:none;
 }
 .auth-card{
-  position:relative;width:100%;max-width:360px;
+  position:relative;z-index:2;width:100%;max-width:360px;
   padding:0 20px;
   animation:authIn .4s cubic-bezier(.2,0,0,1) both;
 }
