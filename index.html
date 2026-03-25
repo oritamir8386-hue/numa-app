@@ -2280,7 +2280,7 @@ function render(){
     var hour = new Date().getHours();
     var timeGreet = hour<12 ? 'בוקר טוב' : hour<17 ? 'צהריים טובים' : 'ערב טוב';
     var nm = ND.profile.name || '';
-    greetEl.textContent = nm ? 'היי ' + nm + ' 👋' : timeGreet + ' 👋';
+    greetEl.textContent = nm ? timeGreet + ', ' + nm + ' 👋' : timeGreet + ' 👋';
   }
 
   // Hero net worth
@@ -3239,7 +3239,7 @@ function bindSettings(){
       if(greetEl){
         var hour = new Date().getHours();
         var timeGreet = hour<12 ? 'בוקר טוב' : hour<17 ? 'צהריים טובים' : 'ערב טוב';
-        greetEl.textContent = this.value ? 'היי ' + this.value + ' 👋' : timeGreet + ' 👋';
+        greetEl.textContent = this.value ? timeGreet + ', ' + this.value + ' 👋' : timeGreet + ' 👋';
       }
     });
   }
@@ -4366,7 +4366,11 @@ function _showApp(isNewLogin=false){
     if(greet){
       var hour=new Date().getHours();
       var timeGreet=hour<12?'בוקר טוב':hour<17?'צהריים טובים':'ערב טוב';
-      greet.textContent=(name?'היי '+name+' 👋':timeGreet+' 👋');
+      greet.textContent=(name?timeGreet+', '+name+' 👋':timeGreet+' 👋');
+    }
+    // Welcome toast on login
+    if(isNewLogin && typeof showToast==='function'){
+      showToast('ברוך הבא'+(name?', '+name:'')+'! 👋','Numa מחשבת את המצב שלך');
     }
     const uid=(currentUser.id||'').slice(0,8);
     const key='numa_v2_'+uid;
