@@ -553,13 +553,29 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 </head>
 <body>
 <div class="dev" style="display:none">
-<div class="sb"><span>9:41</span><span>●●●</span></div>
-<div class="top">
-  <div style="display:flex;flex-direction:column;gap:1px">
-    <div style="font-size:10px;color:#6B7A96;font-weight:500" id="top-greeting">שלום</div>
-    <div class="logo">Nu<b>ma</b></div>
+<div class="sb" style="display:none"><span>9:41</span><span>●●●</span></div>
+<div class="top" style="padding:max(env(safe-area-inset-top),8px) 16px 8px;display:flex;justify-content:space-between;align-items:center">
+  <!-- LEFT: Avatar + Bell -->
+  <div style="display:flex;align-items:center;gap:8px">
+    <div style="position:relative" id="avatar-wrap">
+      <div id="user-avatar-btn" onclick="toggleAvatarMenu()" style="width:36px;height:36px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#c8a96a;cursor:pointer;letter-spacing:-.5px" id="avatar-initials">N</div>
+      <div style="position:absolute;bottom:-1px;right:-1px;width:9px;height:9px;background:#27ae60;border-radius:50%;border:2px solid #fff"></div>
+      <div id="avatar-menu" style="display:none;position:absolute;top:42px;right:0;background:#fff;border-radius:16px;width:190px;box-shadow:0 8px 30px rgba(0,0,0,.15);z-index:100;overflow:hidden">
+        <div onclick="goSub('settings');toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid rgba(0,0,0,.06)">⚙️ הגדרות</div>
+        <div onclick="goSub('profile');toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid rgba(0,0,0,.06)">👤 פרופיל אישי</div>
+        <div onclick="authSignOut();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#A32D2D;cursor:pointer;display:flex;align-items:center;gap:8px">התנתקות →</div>
+      </div>
+    </div>
+    <div class="notif-btn" onclick="showToast('2 תובנות חדשות ממתינות')" style="width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E2D4A" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+      <div class="notif-dot" style="position:absolute;top:6px;right:6px;width:7px;height:7px;background:#e07b5a;border-radius:50%;border:1.5px solid #fff"></div>
+    </div>
+  </div>
+  <!-- CENTER: Greeting -->
+  <div style="text-align:center;flex:1">
+    <div style="font-size:11px;color:#A8A8B0;letter-spacing:.04em;font-weight:500">Numa</div>
+    <div style="font-size:17px;font-weight:800;color:#1E2D4A;line-height:1.2" id="top-greeting">שלום</div>
     <script>
-    // Early greeting — before full app loads
     (function(){
       try{
         var h=new Date().getHours();
@@ -575,20 +591,10 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     })();
     </script>
   </div>
-  <div class="top-right">
-    <div class="notif-btn" onclick="showToast('2 תובנות חדשות ממתינות ✨')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64646A" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-      <div class="notif-dot"></div>
-    </div>
-    <div style="position:relative" id="avatar-wrap">
-      <div id="user-avatar-btn" onclick="toggleAvatarMenu()" style="width:36px;height:36px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#F5F2EC;cursor:pointer">N</div>
-      <div id="avatar-menu" style="display:none;position:absolute;top:42px;left:0;background:#fff;border:.5px solid #E8DCC8;border-radius:12px;width:180px;box-shadow:0 4px 16px rgba(0,0,0,.12);z-index:100;overflow:hidden">
-        <div onclick="goSub('settings');toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid #E8DCC8"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span> הגדרות</div>
-        <div onclick="goSub('profile');toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid #E8DCC8"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> פרופיל אישי</div>
-        <div onclick="authSignOut();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#A32D2D;cursor:pointer;display:flex;align-items:center;gap:8px"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span> התנתק</div>
-      </div>
-    </div>
-  </div>
+  <!-- RIGHT: Agent button -->
+  <button onclick="toggleAgent()" style="width:36px;height:36px;background:#1E2D4A;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(30,45,74,.3)">
+    <div style="width:8px;height:8px;background:#c8a96a;border-radius:50%"></div>
+  </button>
 </div>
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
@@ -1403,39 +1409,49 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 </div>
 
 </div><!-- /dev -->
-<!-- AI FAB -->
-<button class="ai-fab" id="ai-fab">
-  <span style="font-size:18px;font-weight:800;color:#C9A96E;line-height:1;pointer-events:none">N</span>
-  <div class="ai-badge" id="ai-badge" style="pointer-events:none"></div>
-  <div class="ai-fab-label" id="ai-fab-label">היי, אני הסוכן שלך</div>
-</button>
-
-<!-- AI PANEL -->
-<div class="ai-panel" id="ai-panel">
-  <div class="ai-top">
+<!-- AGENT SHEET -->
+<div id="ai-fab" style="display:none"></div>
+<div id="ai-badge" style="display:none"></div>
+<div id="ai-fab-label" style="display:none"></div>
+<div id="agent-overlay" onclick="if(event.target===this)toggleAgent()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:600"></div>
+<div id="ai-panel" class="agent-sheet" style="position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:22px 22px 0 0;z-index:601;transform:translateY(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);max-height:80vh;display:flex;flex-direction:column">
+  <!-- Handle -->
+  <div style="display:flex;justify-content:center;padding:10px 0 4px"><div style="width:36px;height:4px;background:rgba(0,0,0,.1);border-radius:2px"></div></div>
+  <!-- Header -->
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:0 20px 10px">
     <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:44px;height:44px;background:#A07840;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#F5F2EC;flex-shrink:0">N</div>
-      <div>
-        <div style="font-size:13px;font-weight:700;color:#F5F2EC">Numa</div>
-        <div style="font-size:10px;color:#6B7A96">היועצת הפיננסית שלך</div>
-      </div>
+      <div style="width:36px;height:36px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative"><div style="width:8px;height:8px;background:#c8a96a;border-radius:50%"></div></div>
+      <div><div style="font-size:14px;font-weight:800;color:#1E2D4A">הסוכן שלך</div><div style="font-size:10px;color:#6B7A96">שאל כל שאלה פיננסית</div></div>
     </div>
-    <button class="ai-close" onclick="toggleAI()">×</button>
+    <button onclick="toggleAgent()" style="width:28px;height:28px;border-radius:50%;background:#ede9e0;border:none;font-size:14px;color:#6B7A96;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
   </div>
-  <div class="ai-msgs" id="ai-msgs" id2="ai-ctx-msg">
-    <div class="ai-msg-ai" id="ai-opening-msg">שמתי לב שלא עדכנת נתונים לאחרונה — רוצה שאבדוק מה השתנה?</div>
+  <!-- Messages -->
+  <div id="ai-msgs" style="flex:1;overflow-y:auto;padding:0 20px 10px;display:flex;flex-direction:column;gap:8px;min-height:120px"></div>
+  <!-- Quick chips -->
+  <div id="agent-chips" style="display:flex;gap:6px;padding:0 20px 8px;flex-wrap:wrap">
+    <button class="agent-qchip" onclick="agentSend('כמה לפרישה?')">כמה לפרישה?</button>
+    <button class="agent-qchip" onclick="agentSend('מה ה-FIRE שלי?')">מה ה-FIRE שלי?</button>
+    <button class="agent-qchip" onclick="agentSend('לאן להשקיע?')">לאן להשקיע?</button>
   </div>
-  <div style="padding:0 14px 4px;font-size:10px;color:rgba(255,255,255,.18);text-align:center">המידע לצורך מידע בלבד ואינו ייעוץ פיננסי מורשה.</div>
-  <div class="ai-chips">
-    <button class="ai-chip" onclick="sendChip('מה הסיכון הכי גדול שלי?')">מה הסיכון הכי גדול שלי?</button>
-    <button class="ai-chip" onclick="sendChip('איך מגיע ל-FIRE מוקדם יותר?')">FIRE מוקדם יותר?</button>
-    <button class="ai-chip" onclick="sendChip('מה לעשות עם ₪50,000 נזיל?')">₪50,000 נזיל — מה לעשות?</button>
-  </div>
-  <div class="ai-ir">
-    <input class="ai-in" id="ai-inp" placeholder="שאל שאלה..." type="text" onkeydown="if(event.key==='Enter')sendMsg()"/>
-    <button class="ai-send" onclick="sendMsg()">שלח</button>
+  <!-- Input -->
+  <div style="display:flex;align-items:center;gap:8px;padding:8px 20px max(env(safe-area-inset-bottom),12px)">
+    <input id="ai-inp" type="text" placeholder="שאל שאלה..." style="flex:1;background:#ede9e0;border:none;border-radius:22px;padding:10px 16px;font-size:13px;font-family:inherit;color:#1E2D4A;direction:rtl" onkeydown="if(event.key==='Enter')agentSend()"/>
+    <button onclick="agentSend()" style="width:40px;height:40px;background:#1E2D4A;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8a96a" stroke-width="2" stroke-linecap="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+    </button>
   </div>
 </div>
+<style>
+.agent-sheet.on{transform:translateY(0)!important}
+.agent-qchip{background:#ede9e0;color:#1E2D4A;border:none;border-radius:20px;padding:6px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit}
+.agent-msg-ai{background:#1E2D4A;color:#fff;border-radius:18px 18px 18px 5px;padding:10px 14px;font-size:12px;line-height:1.6;max-width:85%;align-self:flex-start}
+.agent-msg-user{background:#A07840;color:#fff;border-radius:18px 18px 5px 18px;padding:10px 14px;font-size:12px;line-height:1.6;max-width:85%;align-self:flex-end}
+.agent-typing{display:flex;gap:4px;padding:10px 14px;align-self:flex-start}
+.agent-typing span{width:6px;height:6px;background:rgba(30,45,74,.3);border-radius:50%;animation:agentDot .6s infinite alternate}
+.agent-typing span:nth-child(2){animation-delay:.2s}
+.agent-typing span:nth-child(3){animation-delay:.4s}
+@keyframes agentDot{to{background:rgba(30,45,74,.8)}}
+</style>
 
 
 
@@ -3311,7 +3327,61 @@ function startCountUp(){
 
 /* ── AI PANEL ── */
 var _aiLoading=false;
-function toggleAI(){
+/* ── Agent Sheet ── */
+var _agentOpen=false;
+var _agentHistory=[];
+function toggleAgent(){
+  _agentOpen=!_agentOpen;
+  var sheet=document.getElementById('ai-panel');
+  var overlay=document.getElementById('agent-overlay');
+  if(_agentOpen){sheet.classList.add('on');overlay.style.display='block';}
+  else{sheet.classList.remove('on');overlay.style.display='none';}
+}
+function agentSend(txt){
+  var inp=document.getElementById('ai-inp');
+  var msg=txt||inp.value.trim();
+  if(!msg) return;
+  inp.value='';
+  // Hide chips after first message
+  var chips=document.getElementById('agent-chips');
+  if(chips) chips.style.display='none';
+  // Add user bubble
+  var msgs=document.getElementById('ai-msgs');
+  var userDiv=document.createElement('div');
+  userDiv.className='agent-msg-user';userDiv.textContent=msg;
+  msgs.appendChild(userDiv);
+  msgs.scrollTop=msgs.scrollHeight;
+  _agentHistory.push({role:'user',content:msg});
+  // Typing indicator
+  var typing=document.createElement('div');
+  typing.className='agent-typing';typing.id='agent-typing';
+  typing.innerHTML='<span></span><span></span><span></span>';
+  msgs.appendChild(typing);
+  msgs.scrollTop=msgs.scrollHeight;
+  // Build context
+  var c=typeof calc==='function'?calc():{};
+  var ctx='נתוני המשתמש: שווי נטו '+fmt(c.netWorth||0)+', הכנסה '+fmt(c.totalIncome||0)+', הוצאות '+fmt(c.totalExpenses||0)+', חיסכון '+((c.savingsRate||0))+'%, FIRE בגיל '+(c.fireAge||'לא ידוע')+', Numa Score '+(c.score||0)+'/100.';
+  // Call API
+  fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-api-key':window.ANTHROPIC_KEY||'','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,system:'אתה סוכן פיננסי של Numa. '+ctx+' ענה בעברית, בצורה קצרה וברורה. אל תמליץ על מוצרים ספציפיים.',messages:_agentHistory})
+  }).then(function(r){return r.json();}).then(function(data){
+    var t=document.getElementById('agent-typing');if(t)t.remove();
+    var reply=(data.content&&data.content[0]&&data.content[0].text)||'מצטער, לא הצלחתי לענות. נסה שוב.';
+    _agentHistory.push({role:'assistant',content:reply});
+    var aiDiv=document.createElement('div');
+    aiDiv.className='agent-msg-ai';aiDiv.textContent=reply;
+    msgs.appendChild(aiDiv);
+    msgs.scrollTop=msgs.scrollHeight;
+  }).catch(function(){
+    var t=document.getElementById('agent-typing');if(t)t.remove();
+    var aiDiv=document.createElement('div');
+    aiDiv.className='agent-msg-ai';aiDiv.textContent='לא ניתן להתחבר כרגע. ודא שמפתח API מוגדר.';
+    msgs.appendChild(aiDiv);msgs.scrollTop=msgs.scrollHeight;
+  });
+}
+function toggleAI(){toggleAgent();
   aiOpen=!aiOpen;
   var panel=document.getElementById('ai-panel');
   var fab=document.getElementById('ai-fab');
@@ -3395,16 +3465,9 @@ async function _sendToAI(userMsg){
   }
   _aiLoading=false;
 }
-function sendMsg(){
-  var inp=document.getElementById('ai-inp');
-  var msg=inp.value.trim();if(!msg||_aiLoading)return;
-  addAIMsg(msg,'u');inp.value='';
-  _sendToAI(msg);
+function sendMsg(){agentSend();
 }
-function sendChip(txt){
-  if(_aiLoading)return;
-  addAIMsg(txt,'u');
-  _sendToAI(txt);
+function sendChip(txt){agentSend(txt);
 }
 function addAIMsg(txt,type){
   var msgs=document.getElementById('ai-msgs');
