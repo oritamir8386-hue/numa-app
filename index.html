@@ -810,18 +810,14 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- ═══ Below the fold — scroll to see ═══ -->
 
-  <!-- FIRE card (dark) -->
-  <div id="vis-wrap-fire-ov" class="c" style="background:#1E2D4A;border-color:rgba(30,45,74,.3)" onclick="goP('plan')">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
-      <div><div style="font-size:12px;font-weight:600;color:#F5F2EC">🔥 מסלול FIRE</div><div style="font-size:10px;color:rgba(255,255,255,.45)" id="fire-card-sub">גלה מתי תוכל להיות חופשי כלכלית</div></div>
-      <div style="font-size:14px;font-weight:800;color:#C9A96E" id="fire-card-pct">הגדר יעד</div>
-    </div>
-    <div class="pw" style="background:rgba(255,255,255,.1)"><div class="pb" id="fire-card-bar" style="width:0%;background:#A07840"></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35);margin-top:3px"><span id="fire-card-have">יש: ₪0</span><span id="fire-card-goal">יעד: ₪0</span></div>
+  <!-- Hidden stats + elements for JS compat -->
+  <div style="display:none">
+    <span id="qs-exp">₪0</span><span id="qs-debt">₪0</span>
+    <span id="fire-card-pct"></span><span id="fire-card-bar"></span><span id="fire-card-sub"></span>
+    <span id="fire-card-have"></span><span id="fire-card-goal"></span>
+    <svg id="nw-timeline-svg" viewBox="0 0 300 130"><path id="nw-area-solid" d=""/><path id="nw-line-solid" d=""/><path id="nw-line-proj" d=""/><path id="nw-area-proj" d=""/><g id="nw-milestones"></g><g id="nw-today-marker"></g><g id="nw-x-labels"></g></svg>
+    <span id="nw-chart-range-lbl"></span>
   </div>
-
-  <!-- Hidden stats for JS compat -->
-  <div style="display:none"><span id="qs-exp">₪0</span><span id="qs-debt">₪0</span></div>
 
   <!-- Weekly digest (shows conditionally) -->
   <div id="weekly-digest-card" style="display:none;background:#1E2D4A;border-radius:14px;padding:14px;position:relative">
@@ -829,43 +825,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div style="font-size:10px;color:#C9A96E;font-weight:600;letter-spacing:.04em;margin-bottom:6px">📊 מה השתנה מאז הביקור האחרון</div>
     <div id="weekly-insights" style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.6"></div>
     <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:8px" id="weekly-timestamp"></div>
-  </div>
-
-  <!-- NW CHART -->
-  <div class="c" style="padding:10px 13px 8px;background:#fff">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-      <div style="font-size:10px;color:#6B7A96" id="nw-chart-range-lbl">6 שנים + 4 קדימה</div>
-    </div>
-    <svg id="nw-timeline-svg" width="100%" viewBox="0 0 300 130" preserveAspectRatio="xMidYMid meet" style="display:block">
-      <defs>
-        <linearGradient id="nwFillGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#A07840" stop-opacity="0.15"/>
-          <stop offset="100%" stop-color="#A07840" stop-opacity="0"/>
-        </linearGradient>
-        <clipPath id="nwLineClip">
-          <rect x="0" y="0" width="300" height="130">
-            <animate attributeName="width" from="0" to="300" dur="1.2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
-          </rect>
-        </clipPath>
-      </defs>
-      <line x1="20" y1="15" x2="280" y2="15" stroke="#E8DCC8" stroke-width=".5"/>
-      <line x1="20" y1="35" x2="280" y2="35" stroke="#E8DCC8" stroke-width=".5"/>
-      <line x1="20" y1="55" x2="280" y2="55" stroke="#E8DCC8" stroke-width=".5"/>
-      <line x1="20" y1="75" x2="280" y2="75" stroke="#E8DCC8" stroke-width=".5"/>
-      <line x1="20" y1="95" x2="280" y2="95" stroke="#E8DCC8" stroke-width=".5"/>
-      <path id="nw-area-solid" d="" fill="url(#nwFillGrad)" clip-path="url(#nwLineClip)"/>
-      <path id="nw-line-solid" d="" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#nwLineClip)"/>
-      <path id="nw-line-proj" d="" fill="none" stroke="#A07840" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5 4" clip-path="url(#nwLineClip)"/>
-      <path id="nw-area-proj" d="" fill="none"/>
-      <g id="nw-milestones"></g>
-      <g id="nw-today-marker"></g>
-      <g id="nw-x-labels"></g>
-    </svg>
-    <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
-      <span style="font-size:10px;color:#6B7A96">2</span>
-      <input type="range" id="nw-range-sl" min="2" max="50" step="1" value="10" style="flex:1;accent-color:#A07840" oninput="window._nwRange=parseInt(this.value);renderNWTimelineSVG()"/>
-      <span style="font-size:10px;color:#6B7A96">50</span>
-    </div>
   </div>
 
   <!-- ⑤ ASSETS — donut breakdown -->
