@@ -1214,272 +1214,136 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
 </div>
 
-<!-- ══════════════════ תכנון — Hub (merged pg-fire, pg-mc, pg-sc, pg-ins, pg-legacy) ══════════════════ -->
-<div class="pg" id="pg-plan">
+<!-- ══════════════════ תכנון — Hub ══════════════════ -->
+<div class="pg" id="pg-plan" style="gap:9px;padding:14px 18px 20px">
 
-  <!-- FIRE Hero -->
-  <div id="section-fire" style="background:#1E2D4A;border-radius:14px;padding:18px;text-align:center">
-    <div style="font-size:10px;color:rgba(255,255,255,.45);margin-bottom:4px">עצמאות כלכלית בגיל</div>
-    <div style="font-size:42px;font-weight:800;color:#C9A96E;letter-spacing:-2px;line-height:1" id="fire-number">—</div>
-    <div style="font-size:11px;color:rgba(255,255,255,.5);margin:8px 0" id="fire-subtitle">גלה מתי תוכל להיות חופשי כלכלית</div>
-    <div style="max-width:240px;margin:0 auto">
-      <div class="pw" style="background:rgba(255,255,255,.1)"><div class="pb" id="fire-bar" style="width:0%;background:#A07840"></div></div>
-    </div>
-    <div style="display:flex;justify-content:space-between;max-width:240px;margin:6px auto 0;font-size:10px;color:rgba(255,255,255,.35)">
-      <span id="fire-have-plan">יש: ₪0</span>
-      <span id="fire-goal-plan">יעד: ₪0</span>
-    </div>
-    <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:4px" id="fire-progress">הוסף הכנסות והוצאות כדי לחשב</div>
-  </div>
-
-  <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:6px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.4;margin-top:8px">התחזיות מבוססות על הנחות בלבד ואינן מהוות ייעוץ השקעות.</div>
-
-  <!-- ═══ 1. FIRE Settings ═══ -->
-  <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0 4px">
-    <div style="display:flex;align-items:center;gap:8px">
-      <span class="ic" style="color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.07-2.14 0-5.5 2.5-7 .52 1.51 1.2 3 2.09 3.85C15.82 7.06 17 9 17 11.5a5 5 0 11-10 0c0-.87.24-1.7.5-2.5.5 1.4 1 2.5 2 3.5z"/></svg></span>
-      <div>
-        <div style="font-size:13px;font-weight:600;color:#1E2D4A">FIRE — עצמאות כלכלית</div>
-        <div style="font-size:10px;color:#6B7A96">הגדרות פרישה וחישוב יעד</div>
+  <!-- ── CARD 1: FIRE Hero (no fixed height) ── -->
+  <div class="tc" id="section-fire" style="height:auto;background:#1E2D4A;color:#F5F2EC">
+    <div class="tc-body" style="padding:18px 20px">
+      <div style="font-size:10px;color:rgba(255,255,255,.45);margin-bottom:4px">גלה מתי תוכל להיות חופשי כלכלית</div>
+      <div style="font-size:42px;font-weight:800;color:#C9A96E;letter-spacing:-2px;line-height:1" id="fire-number">—</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.5);margin:8px 0" id="fire-subtitle">הזן הכנסות והוצאות לחישוב</div>
+      <div style="background:rgba(255,255,255,.1);border-radius:3px;height:6px;margin:8px 0"><div id="fire-bar" style="height:6px;width:0%;background:#c8a96a;border-radius:3px;transition:width .4s"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35)"><span id="fire-have-plan">יש: —</span><span id="fire-goal-plan">יעד: —</span></div>
+      <div style="display:flex;gap:6px;margin-top:10px">
+        <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#C9A96E;font-size:12px" id="fire-rate">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">שיעור חיסכון</div></div>
+        <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#C9A96E;font-size:12px" id="fire-passive">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">הכנסה פסיבית</div></div>
+        <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#C9A96E;font-size:12px" id="fire-exp">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">הוצאות חודשיות</div></div>
       </div>
-    </div>
-  </div>
-  <div class="g3" style="margin-bottom:6px">
-    <div class="m"><div class="ml">הוצ' חודשית</div><div class="mv" style="font-size:14px" id="fire-exp">₪0</div></div>
-    <div class="m"><div class="ml">הכנסה פסיבית</div><div class="mv" style="font-size:14px" id="fire-passive">₪0</div></div>
-    <div class="m"><div class="ml">שיעור חיסכון</div><div class="mv" style="font-size:14px;color:#A07840" id="fire-rate">0%</div></div>
-  </div>
-  <div class="c">
-    <div class="fi2">
-      <div><div class="il">גיל נוכחי</div><input class="inp" id="fire-age-in" placeholder="גילך" type="number" oninput="renderFIREPage()"/></div>
-      <div><div class="il">גיל פרישה רצוי</div><input class="inp" id="fire-retire-in" value="60" type="number" oninput="renderFIREPage()"/></div>
-    </div>
-    <div class="fi2">
-      <div><div class="il">כלל נסיגה %</div><input class="inp" id="fire-wr" value="4" type="number" oninput="renderFIREPage()"/></div>
-      <div><div class="il">תשואה %</div><input class="inp" id="fire-ret" value="7" type="number" oninput="renderFIREPage()"/></div>
-    </div>
-    <button class="btn-g" onclick="renderFIREPage()">עדכן חישוב ▶</button>
-    <div class="aib" style="margin-top:8px">FIRE = Financial Independence, Retire Early. יעד: נכסים = הוצאות שנתיות × 25. כלל 4% אומר שאפשר למשוך 4% בשנה מבלי שהכסף ייגמר.</div>
-  </div>
-
-  <!-- ═══ 2. FIRE Chart ═══ -->
-  <div class="c">
-    <div style="font-size:11px;font-weight:600;color:#1E2D4A;margin-bottom:6px">מסלול לפרישה</div>
-<svg width="100%" viewBox="0 0 200 105" style="display:block;margin:0 -4px">
-  <line x1="18" y1="22" x2="178" y2="22" stroke="#E8DCC8" stroke-width=".5"/>
-  <line x1="18" y1="44" x2="178" y2="44" stroke="#E8DCC8" stroke-width=".5"/>
-  <line x1="18" y1="66" x2="178" y2="66" stroke="#E8DCC8" stroke-width=".5"/>
-  <line x1="18" y1="88" x2="178" y2="88" stroke="#E8DCC8" stroke-width=".5"/>
-  <polyline points="18,80 50,72 82,58 114,42" fill="none" stroke="#1E2D4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <polyline points="114,42 146,26 178,10" fill="none" stroke="#A07840" stroke-width="2" stroke-dasharray="4 3" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="114" cy="42" r="8" fill="#A07840" opacity=".15"/>
-  <circle cx="114" cy="42" r="4" fill="#A07840"/>
-  <text x="114" y="34" text-anchor="middle" font-size="8" fill="#A07840" font-family="inherit" font-weight="700">FIRE</text>
-  <circle cx="18" cy="80" r="6" fill="#1E2D4A" opacity=".12"/>
-  <circle cx="18" cy="80" r="3" fill="#1E2D4A"/>
-  <text x="18" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2024</text>
-  <text x="50" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2028</text>
-  <text x="82" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2032</text>
-  <text x="114" y="100" text-anchor="middle" font-size="10" fill="#A07840" font-family="inherit" font-weight="600">2036</text>
-  <text x="146" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2040</text>
-  <text x="178" y="100" text-anchor="middle" font-size="10" fill="#6B7A96" font-family="inherit">2044</text>
-</svg>
-  </div>
-
-  <!-- ═══ 3. Monte Carlo ═══ -->
-  <div id="section-mc" style="display:flex;justify-content:space-between;align-items:center;padding:12px 0 4px">
-    <div style="display:flex;align-items:center;gap:8px">
-      <span class="ic" style="color:#3D5278"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="7" cy="7" r="1"/><circle cx="17" cy="7" r="1"/><circle cx="7" cy="17" r="1"/><circle cx="17" cy="17" r="1"/><circle cx="12" cy="12" r="1"/></svg></span>
-      <div>
-        <div style="font-size:13px;font-weight:600;color:#1E2D4A">Monte Carlo</div>
-        <div style="font-size:10px;color:#6B7A96">10,000 סימולציות של עתידות אפשריים</div>
-      </div>
-    </div>
-  </div>
-  <div style="background:#1E2D4A;border-radius:14px;padding:16px;text-align:center">
-    <div style="font-size:10px;color:rgba(255,255,255,.45);margin-bottom:3px">הסתברות הצלחה</div>
-    <div style="font-size:42px;font-weight:800;color:#C9A96E;letter-spacing:-2px;line-height:1" id="mc-success">78%</div>
-    <div style="font-size:10px;color:rgba(255,255,255,.4);margin-top:6px" id="mc-sub">10,000 סימולציות · יעד ₪3.2M</div>
-  </div>
-  <div class="g3" style="margin-top:6px">
-    <div class="m" style="text-align:center"><div class="ml">פסימי (10%)</div><div class="mv" style="color:#6B7A96;font-size:13px" id="mc-p10">₪1.8M</div></div>
-    <div class="m" style="text-align:center"><div class="ml">מרכזי (50%)</div><div class="mv" style="color:#D97706;font-size:13px" id="mc-p50">₪3.4M</div></div>
-    <div class="m" style="text-align:center"><div class="ml">אופטימי (90%)</div><div class="mv" style="color:#A07840;font-size:13px" id="mc-p90">₪5.8M</div></div>
-  </div>
-  <div class="c">
-    <div class="ch"><div class="ct">פיזור תוצאות</div><span class="bdg Bg" id="mc-badge">78% הצלחה</span></div>
-    <div id="mc-chart"><svg width="100%" viewBox="0 0 200 78" style="display:block;margin:0 -4px"><rect x="4" y="67" width="20" height="11" rx="4" fill="#E8DCC8"/><rect x="28" y="53" width="20" height="25" rx="4" fill="#E8DCC8"/><rect x="52" y="30" width="20" height="48" rx="4" fill="#C9A96E"/><rect x="76" y="8" width="20" height="70" rx="4" fill="#1E2D4A"/><rect x="100" y="16" width="20" height="62" rx="4" fill="#1E2D4A"/><rect x="124" y="34" width="20" height="44" rx="4" fill="#C9A96E"/><rect x="148" y="56" width="20" height="22" rx="4" fill="#E8DCC8"/><rect x="172" y="70" width="20" height="8" rx="4" fill="#E8DCC8"/><line x1="0" y1="78" x2="200" y2="78" stroke="rgba(30,45,74,.08)" stroke-width=".5"/></svg></div>
-  </div>
-  <div class="c">
-    <div style="font-size:11px;font-weight:600;color:#1E2D4A;margin-bottom:6px">פרמטרים</div>
-    <div class="fi2"><div><div class="il">תשואה ממוצעת %</div><input class="inp" id="mc-return" type="number" value="7" oninput="runMonteCarlo()"/></div><div><div class="il">סטיית תקן %</div><input class="inp" id="mc-std" type="number" value="15" oninput="runMonteCarlo()"/></div></div>
-    <div class="fi2"><div><div class="il">אינפלציה %</div><input class="inp" id="mc-inflation" type="number" value="3" oninput="runMonteCarlo()"/></div><div><div class="il">שנות השקעה</div><input class="inp" id="mc-years" type="number" value="20" oninput="runMonteCarlo()"/></div></div>
-    <button class="btn-g" onclick="runMonteCarlo()">הרץ מחדש ▶ 10,000 סימולציות</button>
-  </div>
-
-  <!-- ═══ 4. תרחישים ═══ -->
-  <div id="section-sc" style="display:flex;justify-content:space-between;align-items:center;padding:12px 0 4px">
-    <div style="display:flex;align-items:center;gap:8px">
-      <span class="ic" style="color:#A07840"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
-      <div>
-        <div style="font-size:13px;font-weight:600;color:#1E2D4A">תרחישים</div>
-        <div style="font-size:10px;color:#6B7A96">4 תרחישי צמיחה בהשוואה</div>
-      </div>
-    </div>
-  </div>
-  <div class="g2" id="sc-cards">
-    <div class="scc on"><div style="font-size:10px;color:#A07840;font-weight:700;margin-bottom:3px">בסיס</div><div style="font-size:17px;font-weight:800" id="sc-base">₪0</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">7% · גיל 65</div></div>
-    <div class="scc"><div style="font-size:10px;color:#A07840;font-weight:700;margin-bottom:3px">אופטימי</div><div style="font-size:17px;font-weight:800" id="sc-opt">₪0</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">9% · גיל 65</div></div>
-    <div class="scc"><div style="font-size:10px;color:#BA7517;font-weight:700;margin-bottom:3px">שמרני</div><div style="font-size:17px;font-weight:800" id="sc-con">₪0</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">4% · גיל 65</div></div>
-    <div class="scc"><div style="font-size:10px;color:#C9A96E;font-weight:700;margin-bottom:3px">FIRE מהיר</div><div style="font-size:17px;font-weight:800" id="sc-fire">₪0</div><div style="font-size:10px;color:#A8A8B0;margin-top:2px">8% · גיל 52</div></div>
-  </div>
-  <div class="c">
-    <div class="ch"><div class="ct">השוואה 30 שנה</div></div>
-    <div id="sc-chart"></div>
-  </div>
-
-  <!-- ═══ 5. ביטוחים (accordion) ═══ -->
-  <div class="c" id="section-ins" style="padding:0;overflow:hidden">
-    <div class="sec-toggle" style="padding:12px 13px 10px" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="ic ic-sm" style="color:#3D5278"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-        <span class="ct">ביטוחים</span>
-        <span class="bdg Bg" id="ins-completion-badge" style="font-size:9px">0/4</span>
-      </div>
-      <span class="sec-arr">▾</span>
-    </div>
-    <div class="sec-body closed" style="max-height:3000px;padding:0 13px 13px">
-      <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.15);border-radius:10px;padding:6px 12px;font-size:10px;color:#6B7A96;text-align:center;line-height:1.4;margin-bottom:10px">Numa מציגה מידע בלבד ואינה מתווכת פיננסית.</div>
-      <div style="display:flex;flex-direction:column;gap:10px" id="ins-form">
-        <!-- ביטוח חיים -->
-        <div style="background:#E8DCC8;border-radius:12px;padding:11px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-            <span class="ic" style="color:#A32D2D"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0016.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 002 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg></span>
-            <div style="font-size:11.5px;font-weight:700;flex:1">ביטוח חיים</div>
-            <select id="ins-life-status" class="inp" style="width:90px;margin:0;font-size:10px;padding:4px 6px" onchange="saveIns()">
-              <option value="">מצב...</option><option value="yes">יש לי</option><option value="no">אין לי</option><option value="partial">חלקי</option>
-            </select>
-          </div>
-          <div class="fi2" style="gap:6px" id="ins-life-details">
-            <div><div class="il" style="font-size:10px">כיסוי (₪)</div><input class="inp" id="ins-life-cover" type="number" placeholder="₪ כיסוי" style="margin:0" oninput="saveIns()"/></div>
-            <div><div class="il" style="font-size:10px">פרמיה (₪/חודש)</div><input class="inp" id="ins-life-prem" type="number" placeholder="₪/חודש" style="margin:0" oninput="saveIns()"/></div>
-          </div>
-          <div id="ins-life-insight" style="font-size:10px;color:#A8A8B0;margin-top:5px"></div>
-        </div>
-        <!-- אכ"ע -->
-        <div style="background:#E8DCC8;border-radius:12px;padding:11px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-            <span class="ic" style="color:#3D5278"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></span>
-            <div style="font-size:11.5px;font-weight:700;flex:1">אובדן כושר עבודה (אכ"ע)</div>
-            <select id="ins-dis-status" class="inp" style="width:90px;margin:0;font-size:10px;padding:4px 6px" onchange="saveIns()">
-              <option value="">מצב...</option><option value="yes">יש לי</option><option value="no">אין לי</option><option value="partial">חלקי</option>
-            </select>
-          </div>
-          <div class="fi2" style="gap:6px">
-            <div><div class="il" style="font-size:10px">כיסוי % משכר</div><input class="inp" id="ins-dis-pct" type="number" placeholder="75" style="margin:0" oninput="saveIns()"/></div>
-            <div><div class="il" style="font-size:10px">פרמיה (₪/חודש)</div><input class="inp" id="ins-dis-prem" type="number" placeholder="₪/חודש" style="margin:0" oninput="saveIns()"/></div>
-          </div>
-        </div>
-        <!-- ביטוח בריאות -->
-        <div style="background:#E8DCC8;border-radius:12px;padding:11px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
-            <div style="font-size:16px">🏥</div>
-            <div style="font-size:11.5px;font-weight:700;flex:1">ביטוח בריאות משלים</div>
-            <select id="ins-health-status" class="inp" style="width:90px;margin:0;font-size:10px;padding:4px 6px" onchange="saveIns()">
-              <option value="">מצב...</option><option value="yes">יש לי</option><option value="no">אין לי</option>
-            </select>
-          </div>
-          <div><div class="il" style="font-size:10px">פרמיה (₪/חודש)</div><input class="inp" id="ins-health-prem" type="number" placeholder="₪/חודש" style="margin-bottom:0" oninput="saveIns()"/></div>
-        </div>
-        <!-- סיעוד -->
-        <div style="background:#E8DCC8;border-radius:12px;padding:11px">
-          <div style="display:flex;align-items:center;gap:8px">
-            <span class="ic" style="color:#6B7A96"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-            <div style="font-size:11.5px;font-weight:700;flex:1">ביטוח סיעוד</div>
-            <select id="ins-care-status" class="inp" style="width:90px;margin:0;font-size:10px;padding:4px 6px" onchange="saveIns()">
-              <option value="">מצב...</option><option value="yes">יש לי</option><option value="no">אין לי</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div id="ins-summary" style="margin-top:10px;padding:10px;background:rgba(160,120,64,.05);border-radius:10px;font-size:10.5px;color:#64646A">מלא את הפרטים לסיכום אישי</div>
-      <div class="aib" style="margin-top:8px">ביטוח חיים מומלץ: כיסוי של 100× הכנסה חודשית. ביטוח אכ"ע: לפחות 75% מהשכר. סיעוד: חשוב מגיל 40+.</div>
+      <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:6px;text-align:center" id="fire-progress">התחזיות מבוססות על הנחות בלבד</div>
     </div>
   </div>
 
-  <!-- ═══ 6. עיזבון (accordion) ═══ -->
-  <div class="c" id="section-legacy" style="padding:0;overflow:hidden">
-    <div class="sec-toggle" style="padding:12px 13px 10px" onclick="var b=this.nextElementSibling;b.classList.toggle('closed');this.querySelector('.sec-arr').style.transform=b.classList.contains('closed')?'':'rotate(180deg)'">
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="ic ic-sm" style="color:#A07840"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h12a2 2 0 002-2v-2H10v2a2 2 0 11-4 0V5a2 2 0 00-2-2H4a2 2 0 00-2 2v14a2 2 0 002 2h4"/><path d="M22 3H10v14h12z"/></svg></span>
-        <span class="ct">עיזבון</span>
-        <span class="bdg Bg" id="leg-completion-badge" style="font-size:9px">0/4</span>
+  <!-- ── CARD 2: FIRE Settings ── -->
+  <div class="tc" style="height:234px">
+    <div class="tc-hdr"><div><h3>FIRE</h3><p>הגדרות פרישה וחישוב יעד</p></div><div class="tc-ico"><span style="font-size:18px">🔥</span></div></div>
+    <div class="tc-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div><div class="tc-il">גיל נוכחי</div><input class="tc-inp" id="fire-age-in" type="number" value="35" oninput="renderFIREPage()"/></div>
+        <div><div class="tc-il">גיל פרישה</div><input class="tc-inp" id="fire-retire-in" type="number" value="60" oninput="renderFIREPage()"/></div>
+        <div><div class="tc-il">הכנסה ₪</div><input class="tc-inp" id="fire-inc-in" type="number" placeholder="₪" oninput="renderFIREPage()"/></div>
+        <div><div class="tc-il">הוצאות ₪</div><input class="tc-inp" id="fire-exp-in" type="number" placeholder="₪" oninput="renderFIREPage()"/></div>
+        <div><div class="tc-il">תשואה %</div><input class="tc-inp" id="fire-ret" type="number" value="7" oninput="renderFIREPage()"/></div>
+        <div><div class="tc-il">כלל נסיגה %</div><input class="tc-inp" id="fire-wr" type="number" value="4" oninput="renderFIREPage()"/></div>
       </div>
-      <span class="sec-arr">▾</span>
-    </div>
-    <div class="sec-body closed" style="max-height:3000px;padding:0 13px 13px">
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:.5px solid rgba(30,45,74,.12)">
-          <div style="font-size:11px;font-weight:600">צוואה</div>
-          <select id="leg-will" class="inp" style="width:100px;margin:0;font-size:10px;padding:4px 6px" onchange="saveLegacy()">
-            <option value="">מצב...</option><option value="yes">יש צוואה</option><option value="no">אין צוואה</option><option value="old">ישנה/לעדכן</option>
-          </select>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:.5px solid rgba(30,45,74,.12)">
-          <div style="font-size:11px;font-weight:600">מינוי מוטבים בפנסיה</div>
-          <select id="leg-ben" class="inp" style="width:100px;margin:0;font-size:10px;padding:4px 6px" onchange="saveLegacy()">
-            <option value="">מצב...</option><option value="yes">מעודכן</option><option value="no">לא הוגדר</option><option value="check">לבדוק</option>
-          </select>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:.5px solid rgba(30,45,74,.12)">
-          <div style="font-size:11px;font-weight:600">ייפוי כוח מתמשך</div>
-          <select id="leg-poa" class="inp" style="width:100px;margin:0;font-size:10px;padding:4px 6px" onchange="saveLegacy()">
-            <option value="">מצב...</option><option value="yes">יש</option><option value="no">אין</option>
-          </select>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0">
-          <div style="font-size:11px;font-weight:600">הסכם ממון</div>
-          <select id="leg-pre" class="inp" style="width:100px;margin:0;font-size:10px;padding:4px 6px" onchange="saveLegacy()">
-            <option value="">מצב...</option><option value="yes">יש</option><option value="no">אין</option><option value="na">לא רלוונטי</option>
-          </select>
-        </div>
-      </div>
-      <div class="c" style="margin-top:10px;border:none;padding:0">
-        <div style="font-size:11px;font-weight:600;color:#1E2D4A;margin-bottom:6px">חלוקת עיזבון</div>
-        <div class="fi2" style="gap:6px">
-          <div><div class="il">% לבן/בת זוג</div><input class="inp" id="leg-spouse-pct" type="number" placeholder="60" style="margin:0" oninput="saveLegacy()"/></div>
-          <div><div class="il">% לילדים</div><input class="inp" id="leg-kids-pct" type="number" placeholder="40" style="margin:0" oninput="saveLegacy()"/></div>
-        </div>
-        <div style="margin-top:10px;padding:10px;background:#E8DCC8;border-radius:10px" id="leg-estate-val">
-          <div style="font-size:10px;color:#A8A8B0;margin-bottom:3px">שווי עיזבון מוערך (לפי נתוניך)</div>
-          <div style="font-size:18px;font-weight:800;color:#A07840" id="leg-val">—</div>
-          <div style="font-size:10px;color:#64646A;margin-top:2px" id="leg-breakdown">הזן נכסים בדף השקעות לחישוב</div>
-        </div>
-      </div>
-      <div class="aib" style="margin-top:8px">ללא צוואה, העיזבון מתחלק לפי חוק הירושה — לא בהכרח לפי רצונך. עדכון מוטבים בפנסיה חשוב לא פחות מצוואה.</div>
+      <button onclick="renderFIREPage()" style="width:100%;background:#A07840;color:#fff;border:none;border-radius:10px;padding:9px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px">▶ עדכן חישוב</button>
     </div>
   </div>
 
-  <!-- ═══ 7. שיפור תיק — AI ═══ -->
-  <div id="section-opt" style="display:flex;justify-content:space-between;align-items:center;padding:12px 0 4px">
-    <div style="display:flex;align-items:center;gap:8px">
-      <span class="ic" style="color:#C9A96E"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
-      <div>
-        <div style="font-size:13px;font-weight:600;color:#1E2D4A">שיפור תיק — AI</div>
-        <div style="font-size:10px;color:#6B7A96">ניתוח אישי לפי הנתונים שהזנת</div>
+  <!-- ── CARD 3: Monte Carlo ── -->
+  <div class="tc" style="height:234px">
+    <div class="tc-hdr"><div><h3>Monte Carlo</h3><p>10,000 סימולציות</p></div><div class="tc-ico"><span style="font-size:18px">🎲</span></div></div>
+    <div class="tc-body">
+      <div style="background:#1E2D4A;border-radius:12px;padding:10px;text-align:center;margin-bottom:8px">
+        <div style="font-size:28px;font-weight:800;color:#C9A96E;letter-spacing:-1px" id="mc-success">—</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.4)" id="mc-sub">הזן נתוני FIRE לחישוב</div>
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:8px">
+        <div class="tc-chip" style="background:rgba(39,174,96,.12);flex:1"><div class="val" style="color:#2D6A3F;font-size:11px" id="mc-p90">—</div><div class="lbl" style="color:#6B7A96">אופטימי 90%</div></div>
+        <div class="tc-chip" style="background:rgba(160,120,64,.12);flex:1"><div class="val" style="color:#A07840;font-size:11px" id="mc-p50">—</div><div class="lbl" style="color:#6B7A96">מרכזי 50%</div></div>
+        <div class="tc-chip" style="background:rgba(30,45,74,.08);flex:1"><div class="val" style="color:#1E2D4A;font-size:11px" id="mc-p10">—</div><div class="lbl" style="color:#6B7A96">פסימי 10%</div></div>
+      </div>
+      <div class="tc-g2">
+        <div><div class="tc-il">סטיית תקן %</div><input class="tc-inp" id="mc-std" type="number" value="15" oninput="runMonteCarlo()"/></div>
+        <div><div class="tc-il">אינפלציה %</div><input class="tc-inp" id="mc-inflation" type="number" value="3" oninput="runMonteCarlo()"/></div>
+      </div>
+      <!-- hidden compat -->
+      <div style="display:none"><span id="mc-return">7</span><span id="mc-years">20</span><span id="mc-badge"></span><div id="mc-chart"></div></div>
+    </div>
+  </div>
+
+  <!-- ── CARD 4: תרחישים ── -->
+  <div class="tc" style="height:234px">
+    <div class="tc-hdr"><div><h3>תרחישים</h3><p>4 תרחישי צמיחה</p></div><div class="tc-ico"><span style="font-size:18px">📊</span></div></div>
+    <div class="tc-body">
+      <div id="sc-chart" style="margin-bottom:8px">
+        <svg width="100%" viewBox="0 0 200 66" style="display:block"><rect x="10" y="44" width="38" height="22" rx="4" fill="#d5d0c8"/><rect x="56" y="22" width="38" height="44" rx="4" fill="#c8a96a"/><rect x="102" y="10" width="38" height="56" rx="4" fill="#A07840"/><rect x="148" y="4" width="38" height="62" rx="4" fill="#1E2D4A"/><text x="29" y="62" text-anchor="middle" font-size="8" fill="#6B7A96" font-family="inherit">שמרני</text><text x="75" y="62" text-anchor="middle" font-size="8" fill="#6B7A96" font-family="inherit">בסיס</text><text x="121" y="62" text-anchor="middle" font-size="8" fill="#6B7A96" font-family="inherit">אופטימי</text><text x="167" y="62" text-anchor="middle" font-size="8" fill="#fff" font-family="inherit">FIRE</text></svg>
+      </div>
+      <div class="tc-g2" id="sc-cards" style="gap:6px">
+        <div class="tc-chip" style="background:rgba(160,120,64,.12);border:1.5px solid #A07840"><div class="val" style="color:#1E2D4A;font-size:12px" id="sc-base">—</div><div class="lbl" style="color:#6B7A96">בסיס 7% · 65</div></div>
+        <div class="tc-chip" style="background:rgba(160,120,64,.06)"><div class="val" style="color:#1E2D4A;font-size:12px" id="sc-opt">—</div><div class="lbl" style="color:#6B7A96">אופטימי 9% · 65</div></div>
+        <div class="tc-chip" style="background:rgba(160,120,64,.06)"><div class="val" style="color:#1E2D4A;font-size:12px" id="sc-con">—</div><div class="lbl" style="color:#6B7A96">שמרני 4% · 65</div></div>
+        <div class="tc-chip" style="background:rgba(30,45,74,.06)"><div class="val" style="color:#1E2D4A;font-size:12px" id="sc-fire">—</div><div class="lbl" style="color:#6B7A96">FIRE 8% · 52</div></div>
       </div>
     </div>
-    <button id="opt-analyze-btn" onclick="runOptAnalysis()" style="background:#A07840;color:#fff;border:none;border-radius:9px;padding:7px 12px;font-size:10.5px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">נתח עכשיו</button>
   </div>
-  <div class="c">
-    <div id="opt-result" style="font-size:10.5px;color:#64646A;line-height:1.7">
-      לחץ "נתח עכשיו" לניתוח אישי של התיק שלך.
+
+  <!-- ── CARD 5: ביטוחים ── -->
+  <div class="tc" id="section-ins" style="height:234px">
+    <div class="tc-hdr"><div><h3>ביטוחים</h3><p>כיסוי ופרמיות</p></div><div class="tc-ico"><span style="font-size:18px">🛡️</span></div></div>
+    <div class="tc-body" style="overflow-y:auto">
+      <div style="display:grid;grid-template-columns:20px 1fr auto;gap:6px 8px;align-items:center">
+        <span style="font-size:14px">❤️</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">ביטוח חיים</span>
+        <div style="display:flex;gap:4px"><input class="tc-inp" id="ins-life-cover" type="number" placeholder="כיסוי ₪" style="width:62px;padding:7px 8px;text-align:center" oninput="saveIns()"/><input class="tc-inp" id="ins-life-prem" type="number" placeholder="₪/חודש" style="width:76px;padding:7px 8px;text-align:center" oninput="saveIns()"/></div>
+
+        <span style="font-size:14px">💼</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">אכ"ע</span>
+        <div style="display:flex;gap:4px"><input class="tc-inp" id="ins-dis-pct" type="number" placeholder="75%" value="75" style="width:62px;padding:7px 8px;text-align:center" oninput="saveIns()"/><input class="tc-inp" id="ins-dis-prem" type="number" placeholder="₪/חודש" style="width:76px;padding:7px 8px;text-align:center" oninput="saveIns()"/></div>
+
+        <span style="font-size:14px">🏥</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">בריאות משלים</span>
+        <div><input class="tc-inp" id="ins-health-prem" type="number" placeholder="₪/חודש" style="width:76px;padding:7px 8px;text-align:center" oninput="saveIns()"/></div>
+
+        <span style="font-size:14px">🛡️</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">סיעוד</span>
+        <div><input class="tc-inp" id="ins-care-prem" type="number" placeholder="₪/חודש" style="width:76px;padding:7px 8px;text-align:center" oninput="saveIns()"/></div>
+      </div>
+      <div id="ins-summary" style="display:none"></div>
+      <!-- hidden compat -->
+      <div style="display:none"><select id="ins-life-status"><option value="yes"></option></select><select id="ins-dis-status"><option value="yes"></option></select><select id="ins-health-status"><option value="yes"></option></select><select id="ins-care-status"><option value="yes"></option></select><span id="ins-completion-badge"></span><span id="ins-life-insight"></span></div>
     </div>
   </div>
-  <div class="c">
-    <div style="font-size:11px;font-weight:600;color:#1E2D4A;margin-bottom:6px">הקצאה מקובלת לפי גיל</div>
-    <div id="opt-allocation"></div>
+
+  <!-- ── CARD 6: עיזבון ── -->
+  <div class="tc" id="section-legacy" style="height:234px">
+    <div class="tc-hdr"><div><h3>עיזבון</h3><p>צוואה, מוטבים, ייפוי כוח</p></div><div class="tc-ico"><span style="font-size:18px">📋</span></div></div>
+    <div class="tc-body" style="overflow-y:auto">
+      <div style="display:grid;grid-template-columns:20px 1fr auto;gap:6px 8px;align-items:center" id="legacy-rows">
+        <span style="font-size:14px">📜</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">צוואה</span>
+        <button class="leg-btn" id="leg-will-btn" onclick="cycleLeg('will')" style="background:rgba(0,0,0,.06);color:#6B7A96;border:none;border-radius:8px;padding:5px 10px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;min-width:70px">לא קיים</button>
+
+        <span style="font-size:14px">🏦</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">מוטבים בפנסיה</span>
+        <button class="leg-btn" id="leg-ben-btn" onclick="cycleLeg('ben')" style="background:rgba(0,0,0,.06);color:#6B7A96;border:none;border-radius:8px;padding:5px 10px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;min-width:70px">לא קיים</button>
+
+        <span style="font-size:14px">✍️</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">ייפוי כוח</span>
+        <button class="leg-btn" id="leg-poa-btn" onclick="cycleLeg('poa')" style="background:rgba(0,0,0,.06);color:#6B7A96;border:none;border-radius:8px;padding:5px 10px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;min-width:70px">לא קיים</button>
+
+        <span style="font-size:14px">🤝</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">הסכם ממון</span>
+        <button class="leg-btn" id="leg-pre-btn" onclick="cycleLeg('pre')" style="background:rgba(0,0,0,.06);color:#6B7A96;border:none;border-radius:8px;padding:5px 10px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;min-width:70px">לא קיים</button>
+      </div>
+      <!-- hidden compat -->
+      <div style="display:none"><select id="leg-will"><option value=""></option><option value="yes"></option><option value="no"></option></select><select id="leg-ben"><option value=""></option><option value="yes"></option><option value="no"></option></select><select id="leg-poa"><option value=""></option><option value="yes"></option><option value="no"></option></select><select id="leg-pre"><option value=""></option><option value="yes"></option><option value="no"></option></select><input id="leg-spouse-pct"/><input id="leg-kids-pct"/><span id="leg-val"></span><span id="leg-breakdown"></span><span id="leg-completion-badge"></span><span id="leg-estate-val"></span></div>
+    </div>
   </div>
+
+  <!-- ── CARD 7: שיפור תיק AI ── -->
+  <div class="tc" id="section-opt" style="height:234px">
+    <div class="tc-hdr"><div><h3>שיפור תיק — AI</h3><p>ניתוח אישי לפי הנתונים שלך</p></div><div class="tc-ico"><span style="font-size:18px">⭐</span></div></div>
+    <div class="tc-body">
+      <div id="opt-result" style="font-size:11px;color:#64646A;line-height:1.6;margin-bottom:10px">לחץ "נתח עכשיו" לניתוח אישי של התיק שלך.</div>
+      <button id="opt-analyze-btn" onclick="runOptAnalysis()" style="width:100%;background:#A07840;color:#fff;border:none;border-radius:12px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">נתח עכשיו</button>
+      <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.18);border-radius:10px;padding:8px 10px;font-size:10.5px;color:#A07840;line-height:1.55;margin-top:8px">הקצאה מקובלת לפי גיל — מניות 55% · אג"ח 10% · נדל"ן 30% · מזומן 5%</div>
+      <div id="opt-allocation" style="display:none"></div>
+    </div>
+  </div>
+
 </div>
 
 <!-- ══════════════════ כלים — Hub ══════════════════ -->
@@ -4871,6 +4735,23 @@ function renderInsSummary(){
 }
 
 /* ── LEGACY SAVE ── */
+function cycleLeg(key){
+  if(!ND.legacy) ND.legacy={};
+  var states=['','partial','yes'];
+  var labels=['לא קיים','בתהליך','קיים'];
+  var bgs=['rgba(0,0,0,.06)','rgba(160,120,64,.12)','rgba(39,174,96,.12)'];
+  var cols=['#6B7A96','#A07840','#2D6A3F'];
+  var cur=ND.legacy[key+'_status']||'';
+  var idx=states.indexOf(cur);
+  var next=(idx+1)%states.length;
+  ND.legacy[key+'_status']=states[next];
+  var btn=document.getElementById('leg-'+key+'-btn');
+  if(btn){btn.textContent=labels[next];btn.style.background=bgs[next];btn.style.color=cols[next];}
+  // sync hidden select
+  var sel=document.getElementById('leg-'+key);
+  if(sel) sel.value=states[next]==='partial'?'old':states[next]||'';
+  saveToStorage();saveLegacy();
+}
 function saveLegacy(){
   if(!ND.legacy) ND.legacy={};
   var legFilled=0;
