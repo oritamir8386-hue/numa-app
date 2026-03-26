@@ -848,106 +848,94 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 
 
-<div class="pg" id="pg-cf">
+<div class="pg" id="pg-cf" style="gap:9px;padding:14px 18px 20px">
 
-  <!-- ═══ 1. תזרים (סיכום למעלה — לא sticky) ═══ -->
-  <div style="background:#E8DCC8;border:.5px solid rgba(160,120,64,.1);border-radius:14px;padding:12px;overflow:hidden;position:relative">
-    <div style="position:absolute;top:0;left:0;right:0;height:2.5px;background:#A07840"></div>
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-      <div class="ic-box"><span class="ic" style="color:#A07840"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 100 4h4v-4z"/></svg></span></div>
-      <div><div style="font-size:13px;font-weight:800">תזרים חודשי</div><div style="font-size:10px;color:#64646A">הוסף הכנסות והוצאות למעקב</div></div>
-    </div>
-    <div class="g3">
-      <div style="background:#fff;border-radius:9px;padding:8px;text-align:center"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">הכנסה</div><div style="font-size:13px;font-weight:800;color:#A07840" id="cf-hdr-inc">₪0</div></div>
-      <div style="background:#fff;border-radius:9px;padding:8px;text-align:center"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">הוצאה</div><div style="font-size:13px;font-weight:800;color:#6B7A96" id="cf-hdr-exp">₪0</div></div>
-      <div style="background:#fff;border-radius:9px;padding:8px;text-align:center"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">נשאר</div><div style="font-size:13px;font-weight:800" id="cf-hdr-sav">₪0</div></div>
-    </div>
-  </div>
-
-  <div id="cf-fl">
-    <div class="hc">
-      <div style="font-size:10px;color:#A8A8B0;font-weight:600;margin-bottom:2px">תזרים נטו חודשי</div>
-      <div style="font-size:28px;font-weight:800;letter-spacing:-1px" id="cf-fl-hero">₪0</div>
-      <div style="font-size:10px;color:#64646A;margin-top:2px" id="cf-fl-sub">ראה כמה נשאר לך בסוף כל חודש</div>
-    </div>
-    <div class="c">
-      <div class="ch"><div class="ct">פירוט</div></div>
-      <div class="dr"><div class="dl">הכנסה חודשית</div><div class="dv" id="fl-inc">₪0</div></div>
-      <div class="dr"><div class="dl">הוצאות</div><div class="dv" id="fl-exp">₪0</div></div>
-      <div class="dr"><div class="dl">לחיסכון / השקעה</div><div class="dv" id="fl-sav">₪0</div></div>
-    </div>
-  </div>
-
-  <!-- ═══ 2. הכנסות ═══ -->
-  <div class="sec-div"><span class="sec-div-label">הכנסות</span><div class="sec-div-line"></div></div>
-  <div id="cf-inc">
-    <div class="c">
-      <div class="ch"><div class="ct">הכנסות חודשיות (נטו)</div></div>
-      <div class="fi2">
-        <div><div class="il">הכנסה שלי</div><input class="inp" id="inc-my" placeholder="₪ 0" type="number"/></div>
-        <div><div class="il">בן/בת זוג</div><input class="inp" id="inc-partner" placeholder="₪ 0" type="number"/></div>
+  <!-- ── HERO (navy) ── -->
+  <div class="tc" style="height:auto;background:#1E2D4A;color:#F5F2EC">
+    <div class="tc-body" style="padding:16px 20px;text-align:center">
+      <div style="font-size:10px;color:rgba(255,255,255,.45);margin-bottom:4px">תזרים נטו חודשי</div>
+      <div style="font-size:36px;font-weight:800;letter-spacing:-2px;line-height:1" id="cf-fl-hero">—</div>
+      <div style="font-size:10px;color:rgba(255,255,255,.4);margin-top:4px" id="cf-fl-sub">הזן הכנסות והוצאות לחישוב</div>
+      <div style="display:flex;gap:6px;margin-top:10px">
+        <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#c8a96a;font-size:12px" id="cf-hdr-inc">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">הכנסה</div></div>
+        <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#e07b5a;font-size:12px" id="cf-hdr-exp">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">הוצאות</div></div>
+        <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#27ae60;font-size:12px" id="cf-hdr-sav">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">לחיסכון</div></div>
       </div>
-      <div><div class="il">הכנסות נוספות (שכ"ד / פרילנס)</div><input class="inp" id="inc-extra" placeholder="₪ אופציונלי" type="number"/></div>
+    </div>
+  </div>
+  <!-- hidden compat -->
+  <div style="display:none"><span id="fl-inc"></span><span id="fl-exp"></span><span id="fl-sav"></span></div>
+
+  <!-- ── CARD 1: הכנסות ── -->
+  <div class="tc" id="cf-inc" style="height:234px">
+    <div class="tc-hdr"><div><h3>הכנסות</h3><p>הכנסות חודשיות נטו</p></div><div class="tc-ico"><span style="font-size:18px">💰</span></div></div>
+    <div class="tc-body">
+      <div class="tc-g2">
+        <div><div class="tc-il">הכנסה שלי ₪</div><input class="tc-inp" id="inc-my" type="number" placeholder="₪ 0" oninput="cfCalc()"/></div>
+        <div><div class="tc-il">בן/בת זוג ₪</div><input class="tc-inp" id="inc-partner" type="number" placeholder="₪ 0" oninput="cfCalc()"/></div>
+      </div>
+      <div style="margin-top:8px"><div class="tc-il">הכנסות נוספות (שכ"ד / פרילנס)</div><input class="tc-inp" id="inc-extra" type="number" placeholder="₪ 0" oninput="cfCalc()"/></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:8px;border-top:.5px solid rgba(0,0,0,.06)">
+        <div style="font-size:12px;font-weight:700;color:#1E2D4A">סה"כ הכנסה</div>
+        <div style="font-size:14px;font-weight:800;color:#A07840" id="sum-inc">—</div>
+      </div>
     </div>
   </div>
 
-  <!-- ═══ 3. הוצאות ═══ -->
-  <div class="sec-div"><span class="sec-div-label">הוצאות</span><div class="sec-div-line"></div></div>
-  <div id="cf-exp">
-    <div class="c">
-      <div class="ch"><div class="ct">הוצאות לפי קטגוריה</div></div>
-      <div id="exp-cats"></div>
+  <!-- ── CARD 2: הוצאות (scrollable) ── -->
+  <div class="tc" id="cf-exp" style="height:234px;display:flex;flex-direction:column">
+    <div class="tc-hdr"><div><h3>הוצאות</h3><p>הוצאות לפי קטגוריה</p></div><div class="tc-ico"><span style="font-size:18px">🧾</span></div></div>
+    <div class="tc-body" style="flex:1;overflow-y:auto;padding-bottom:0" id="exp-cats">
+      <div class="exp-row" data-cat="housing"><span style="font-size:14px;width:20px;text-align:center">🏠</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">דיור</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="housing" oninput="cfCalc()"/></div>
+      <div class="exp-row" data-cat="food"><span style="font-size:14px;width:20px;text-align:center">🍔</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">מזון</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="food" oninput="cfCalc()"/></div>
+      <div class="exp-row" data-cat="transport"><span style="font-size:14px;width:20px;text-align:center">🚗</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">תחבורה</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="transport" oninput="cfCalc()"/></div>
+      <div class="exp-row" data-cat="health"><span style="font-size:14px;width:20px;text-align:center">🏥</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">בריאות</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="health" oninput="cfCalc()"/></div>
+      <div class="exp-row" data-cat="fun"><span style="font-size:14px;width:20px;text-align:center">🎬</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">בילויים</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="fun" oninput="cfCalc()"/></div>
+      <div class="exp-row" data-cat="subs"><span style="font-size:14px;width:20px;text-align:center">📱</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">מנויים</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="subs" oninput="cfCalc()"/></div>
+      <div class="exp-row" data-cat="other"><span style="font-size:14px;width:20px;text-align:center">📦</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">אחר</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="other" oninput="cfCalc()"/></div>
+    </div>
+    <div style="padding:8px 20px 12px;text-align:center">
+      <button onclick="addExpRow()" style="background:#ede9e0;color:#A07840;border:none;border-radius:10px;padding:7px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">+ הוסף הוצאה</button>
+    </div>
+  </div>
+  <style>
+  .exp-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:.5px solid rgba(0,0,0,.05)}
+  .exp-del{width:22px;height:22px;border-radius:6px;background:rgba(220,53,53,.08);border:none;color:#D93025;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  </style>
+
+  <!-- ── CARD 3: סיכום תזרים ── -->
+  <div class="tc" style="height:234px">
+    <div class="tc-hdr"><div><h3>סיכום תזרים</h3><p>הכנסות מול הוצאות</p></div><div class="tc-ico"><span style="font-size:18px">📈</span></div></div>
+    <div class="tc-body">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:#1E2D4A">הכנסה כוללת</span><span style="font-size:13px;font-weight:700;color:#1E2D4A" id="sum-inc2">—</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:#1E2D4A">הוצאות</span><span style="font-size:13px;font-weight:700;color:#e07b5a" id="sum-exp">—</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;font-weight:700;color:#1E2D4A">עודף לחיסכון</span><span style="font-size:13px;font-weight:800;color:#2D6A3F" id="sum-sav">—</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:#1E2D4A">יחס הוצאה/הכנסה</span><span style="font-size:13px;font-weight:700;color:#A07840" id="sum-ratio">—</span></div>
+      </div>
     </div>
   </div>
 
-  <!-- ═══ 4. כללים ותובנות ═══ -->
-  <div class="sec-div"><span class="sec-div-label">כללים ותובנות</span><div class="sec-div-line"></div></div>
-
-  <!-- סיכום תזרים -->
-  <div class="c">
-    <div class="ch"><div class="ct">סיכום תזרים</div></div>
-    <div class="dr"><div class="dl">הכנסה כוללת</div><div class="dv" style="color:#A07840" id="sum-inc">₪0</div></div>
-    <div class="dr"><div class="dl">הוצאות</div><div class="dv" style="color:#6B7A96" id="sum-exp">₪0</div></div>
-    <div class="dr"><div class="dl">עודף לחיסכון</div><div class="dv" id="sum-sav">₪0</div></div>
-    <div class="dr"><div class="dl">יחס הוצאה/הכנסה</div><div class="dv" id="sum-ratio">0%</div></div>
-  </div>
-
-  <!-- כלל 50/30/20 -->
-  <div class="c" style="background:rgba(160,120,64,.04);border-color:rgba(160,120,64,.12)" id="rule-card">
-    <div style="font-size:10.5px;font-weight:700;color:#A07840;margin-bottom:3px">כלל 50/30/20</div>
-    <div style="font-size:10.5px;color:#64646A;line-height:1.6" id="rule-text"></div>
-  </div>
-
-  <div class="c" id="rule-2020-card">
-    <div class="ch"><div class="ct">חלוקת הוצאות</div><span class="bdg" id="rule-badge" style="background:rgba(160,120,64,.1);color:#A07840;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px">ממתין לנתונים</span></div>
-    <div class="dr">
-      <div class="dl">הכרחי (50%)</div>
-      <div style="flex:1;margin:0 8px"><div style="height:4px;background:#EEE;border-radius:2px"><div id="bar-nec" style="height:4px;width:0%;max-width:100%;background:#1E2D4A;border-radius:2px;transition:width .4s"></div></div></div>
-      <div class="dv" style="font-size:10px" id="pct-nec">0%</div>
-    </div>
-    <div class="dr">
-      <div class="dl">רצוני (30%)</div>
-      <div style="flex:1;margin:0 8px"><div style="height:4px;background:#EEE;border-radius:2px"><div id="bar-want" style="height:4px;width:0%;max-width:100%;background:#A07840;border-radius:2px;transition:width .4s"></div></div></div>
-      <div class="dv" style="font-size:10px" id="pct-want">0%</div>
-    </div>
-    <div class="dr">
-      <div class="dl">חיסכון (20%)</div>
-      <div style="flex:1;margin:0 8px"><div style="height:4px;background:#EEE;border-radius:2px"><div id="bar-sav" style="height:4px;width:0%;max-width:100%;background:#2D6A3F;border-radius:2px;transition:width .4s"></div></div></div>
-      <div class="dv" style="font-size:10px" id="pct-sav">0%</div>
+  <!-- ── CARD 4: תובנות וניתוח ── -->
+  <div class="tc" id="rule-2020-card" style="height:234px;display:flex;flex-direction:column">
+    <div class="tc-hdr"><div><h3>תובנות וניתוח</h3><p>כלל 50/30/20</p></div><div class="tc-ico"><span style="font-size:18px">💡</span></div></div>
+    <div class="tc-body" style="flex:1;overflow-y:auto">
+      <!-- 50/30/20 bars -->
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px">
+        <div style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;font-weight:600;color:#1E2D4A;width:88px;text-align:right">הכרחי (50%)</span><div style="flex:1;height:6px;background:#ede9e0;border-radius:3px"><div id="bar-nec" style="height:6px;width:0%;max-width:100%;background:#1E2D4A;border-radius:3px;transition:width .4s"></div></div><span style="font-size:11px;font-weight:700;color:#1E2D4A;width:32px;text-align:left" id="pct-nec">—</span></div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;font-weight:600;color:#1E2D4A;width:88px;text-align:right">רצוני (30%)</span><div style="flex:1;height:6px;background:#ede9e0;border-radius:3px"><div id="bar-want" style="height:6px;width:0%;max-width:100%;background:#A07840;border-radius:3px;transition:width .4s"></div></div><span style="font-size:11px;font-weight:700;color:#A07840;width:32px;text-align:left" id="pct-want">—</span></div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;font-weight:600;color:#1E2D4A;width:88px;text-align:right">חיסכון (20%)</span><div style="flex:1;height:6px;background:#ede9e0;border-radius:3px"><div id="bar-sav" style="height:6px;width:0%;max-width:100%;background:#2D6A3F;border-radius:3px;transition:width .4s"></div></div><span style="font-size:11px;font-weight:700;color:#2D6A3F;width:32px;text-align:left" id="pct-sav">—</span></div>
+      </div>
+      <div style="height:.5px;background:rgba(0,0,0,.06);margin:6px 0"></div>
+      <!-- Insights -->
+      <div id="cf-insights" style="display:flex;flex-direction:column;gap:4px">
+        <div style="font-size:10px;color:#A8A8B0;text-align:center;padding:4px 0">הזן הכנסות לקבלת תובנות</div>
+      </div>
     </div>
   </div>
+  <!-- hidden compat -->
+  <div style="display:none"><div id="rule-card"><div id="rule-text"></div></div><span id="rule-badge"></span></div>
 
-  <!-- תובנות -->
-  <div class="c">
-    <div class="ch"><div class="ct">תובנות</div><span class="bdg Bg">לפי הנתונים שלך</span></div>
-    <div id="cf-insights"><div style="text-align:center;padding:16px 0"><div style="margin-bottom:6px"><span class="ic ic-lg" style="color:#A07840"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 006 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></span></div><div style="font-size:11px;color:#6B7A96;margin-bottom:8px">תובנות חכמות לפי ההוצאות שלך</div><button onclick="goP('cf')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">הזן הוצאות →</button></div></div>
-  </div>
-
-  <!-- מה זה תזרים -->
-  <div class="c" style="background:rgba(61,82,120,.04);border-color:rgba(61,82,120,.12)">
-    <div style="font-size:10.5px;font-weight:700;color:#A07840;margin-bottom:4px">מה זה תזרים ולמה זה חשוב?</div>
-    <div style="font-size:10.5px;color:#64646A;line-height:1.65"><strong style="color:#111">תזרים חיובי</strong> = יש עודף — השקע אותו.<br><strong style="color:#111">תזרים שלילי</strong> = אתה מוציא יותר ממה שנכנס — סכנה.<br>הדבר הכי חשוב: לדעת <em>לאן</em> הולך הכסף.</div>
-  </div>
 </div>
 
 <!-- pg-st removed — merged into pg-assets -->
@@ -2569,6 +2557,72 @@ function launchConfetti(){
 }
 
 /* ── RENDER: CASHFLOW PAGE ── */
+/* ── New CF calc (standalone, design-system cards) ── */
+function cfCalc(){
+  var v=function(id){return parseFloat(document.getElementById(id)?.value)||0;};
+  var f=function(n){return n>=1e6?'₪'+(n/1e6).toFixed(1)+'M':n>=1000?'₪'+Math.round(n/1000)+'k':'₪'+Math.round(n);};
+  var inc=v('inc-my')+v('inc-partner')+v('inc-extra');
+  var exp=0,needs=0,wants=0;
+  document.querySelectorAll('.exp-fi').forEach(function(inp){
+    var val=parseFloat(inp.value)||0;exp+=val;
+    var cat=inp.getAttribute('data-cat')||'';
+    if(['housing','food','transport','health'].indexOf(cat)>=0) needs+=val;
+    else wants+=val;
+  });
+  var net=inc-exp,sav=Math.max(0,net);
+  // sync ND
+  ND.income.my=v('inc-my');ND.income.partner=v('inc-partner');ND.income.extra=v('inc-extra');
+  // Hero
+  var hero=document.getElementById('cf-fl-hero');
+  if(hero){
+    if(inc>0||exp>0){hero.textContent=f(net);hero.style.color=net>=0?'#c8a96a':'#e07b5a';}
+    else{hero.textContent='—';hero.style.color='#c8a96a';}
+  }
+  var sub=document.getElementById('cf-fl-sub');
+  if(sub) sub.textContent=inc>0?(net>=0?'עודף חודשי — כל הכבוד':'הוצאות עולות על ההכנסה'):'הזן הכנסות והוצאות';
+  // Chips
+  var ci=document.getElementById('cf-hdr-inc');if(ci)ci.textContent=inc>0?f(inc):'—';
+  var ce=document.getElementById('cf-hdr-exp');if(ce)ce.textContent=exp>0?f(exp):'—';
+  var cs=document.getElementById('cf-hdr-sav');if(cs)cs.textContent=inc>0?f(sav):'—';
+  // Summary
+  var si=document.getElementById('sum-inc');if(si)si.textContent=inc>0?f(inc):'—';
+  var si2=document.getElementById('sum-inc2');if(si2)si2.textContent=inc>0?f(inc):'—';
+  var se=document.getElementById('sum-exp');if(se)se.textContent=exp>0?f(exp):'—';
+  var ss=document.getElementById('sum-sav');if(ss)ss.textContent=inc>0?f(sav):'—';
+  var sr=document.getElementById('sum-ratio');if(sr)sr.textContent=inc>0?Math.round(exp/inc*100)+'%':'—';
+  // 50/30/20
+  var needsPct=inc>0?Math.round(needs/inc*100):0;
+  var wantsPct=inc>0?Math.round(wants/inc*100):0;
+  var savPct=inc>0?Math.round(sav/inc*100):0;
+  var bn=document.getElementById('bar-nec');if(bn)bn.style.width=Math.min(needsPct,100)+'%';
+  var bw=document.getElementById('bar-want');if(bw)bw.style.width=Math.min(wantsPct,100)+'%';
+  var bs=document.getElementById('bar-sav');if(bs)bs.style.width=Math.min(savPct,100)+'%';
+  var pn=document.getElementById('pct-nec');if(pn)pn.textContent=inc>0?needsPct+'%':'—';
+  var pw=document.getElementById('pct-want');if(pw)pw.textContent=inc>0?wantsPct+'%':'—';
+  var ps=document.getElementById('pct-sav');if(ps)ps.textContent=inc>0?savPct+'%':'—';
+  // Insights
+  var ins=document.getElementById('cf-insights');
+  if(ins){
+    if(inc<=0){ins.innerHTML='<div style="font-size:10px;color:#A8A8B0;text-align:center;padding:4px 0">הזן הכנסות לקבלת תובנות</div>';return;}
+    var html='';
+    if(savPct>=20) html+='<div style="background:rgba(39,174,96,.08);border-radius:8px;padding:6px 8px;font-size:10px;color:#2D6A3F">שיעור חיסכון '+savPct+'% — מצוין, אתה על המסלול הנכון.</div>';
+    else if(sav>0) html+='<div style="background:rgba(160,120,64,.08);border-radius:8px;padding:6px 8px;font-size:10px;color:#A07840">חיסכון '+savPct+'% — יעד הוא 20%. חסרים '+f(inc*0.2-sav)+'/חודש.</div>';
+    else html+='<div style="background:rgba(160,120,64,.08);border-radius:8px;padding:6px 8px;font-size:10px;color:#A07840">אין חיסכון — הוצאות שוות או עולות על ההכנסה.</div>';
+    if(needsPct>50) html+='<div style="background:rgba(160,120,64,.08);border-radius:8px;padding:6px 8px;font-size:10px;color:#A07840;margin-top:4px">הוצאות הכרחיות '+needsPct+'% — מעל 50% המומלץ.</div>';
+    if(sav>0){var fv25=sav*12*((Math.pow(1.07,25)-1)/0.07);html+='<div style="background:rgba(30,45,74,.06);border-radius:8px;padding:6px 8px;font-size:10px;color:#1E2D4A;margin-top:4px">'+f(sav*12)+'/שנה לחיסכון · בעוד 25 שנה ב-7% = '+f(fv25)+'</div>';}
+    ins.innerHTML=html;
+  }
+}
+function addExpRow(){
+  var name=prompt('שם ההוצאה:');
+  if(!name||!name.trim()) return;
+  var container=document.getElementById('exp-cats');
+  var row=document.createElement('div');
+  row.className='exp-row';row.setAttribute('data-cat','custom');
+  row.innerHTML='<span style="font-size:14px;width:20px;text-align:center">📌</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">'+name.trim()+'</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="custom" oninput="cfCalc()"/><button class="exp-del" onclick="this.parentElement.remove();cfCalc()">×</button>';
+  container.appendChild(row);
+  row.querySelector('input').focus();
+}
 function renderCF(c){
   // Header tiles
   var hInc=$('cf-hdr-inc'),hExp=$('cf-hdr-exp'),hSav=$('cf-hdr-sav');
