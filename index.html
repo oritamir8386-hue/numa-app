@@ -1077,13 +1077,13 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div class="tc" id="section-lo" style="height:auto">
     <div class="tc-hdr">
       <div><h3>הלוואות</h3><p>הלוואות, חובות ולוח סילוקין</p></div>
-      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;font-weight:700;color:#A32D2D" id="lo-total">₪0</span><div class="tc-ico"><span style="font-size:18px">💳</span></div></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;font-weight:700;color:#A32D2D" id="lo-total">—</span><div class="tc-ico"><span style="font-size:18px">💳</span></div></div>
     </div>
     <div class="tc-body">
       <div style="max-height:190px;overflow-y:auto;margin-bottom:8px">
         <div id="lo-list"><div style="font-size:10.5px;color:#A8A8B0;padding:12px 0;text-align:center">אין הלוואות פעילות</div></div>
       </div>
-      <div style="font-size:10px;color:#6B7A96;text-align:center;margin-bottom:6px">חודשי: <span style="font-weight:700" id="lo-monthly">₪0</span></div>
+      <div style="font-size:10px;color:#6B7A96;text-align:center;margin-bottom:6px">חודשי: <span style="font-weight:700" id="lo-monthly">—</span></div>
       <button onclick="openAddModal('loan')" style="display:block;width:100%;background:#ede9e0;color:#A07840;border:none;border-radius:10px;padding:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;text-align:center">+ הוסף הלוואה</button>
     </div>
   </div>
@@ -1968,8 +1968,8 @@ function renderOvCards(c){
   // Asset breakdown
   var total=c.totalAssets;
   var atEl=$('assets-total');
-  if(atEl) atEl.textContent=total>0?fmt(total):'₪0';
-  var pct=function(v){return total>0?Math.round(v/total*100)+'%':'0%';};
+  if(atEl) atEl.textContent=total>0?fmt(total):'—';
+  var pct=function(v){return total>0?Math.round(v/total*100)+'%':'—';};
   var pen=$('ap-pen'),re=$('ap-re'),inv=$('ap-inv'),cash=$('ap-cash');
   if(pen) pen.textContent=pct(c.penT+c.hshT)+' · '+fmt(c.penT+c.hshT);
   if(re)  re.textContent=pct(c.reV)+' · '+fmt(c.reV);
@@ -2000,22 +2000,22 @@ function renderOvCards(c){
 
   // Projection start label
   var psl=$('proj-start-lbl');
-  if(psl) psl.textContent='היום: '+(c.netWorth>0?fmt(c.netWorth):'₪0');
+  if(psl) psl.textContent='היום: '+(c.netWorth>0?fmt(c.netWorth):'—');
 
   // Quick stats
   var qi=$('qs-inc'),qe=$('qs-exp'),qd=$('qs-debt'),qr=$('qs-rate');
-  if(qi) qi.textContent=c.totalIncome>0?(c.monthlySavings>=0?'+':'')+fmt(c.monthlySavings):'₪0';
-  if(qe) qe.textContent=c.totalExpenses>0?fmt(c.totalExpenses):'₪0';
-  if(qd){var debt=c.reMrt+c.lnT;qd.textContent=debt>0?fmt(debt):'₪0';}
-  if(qr) qr.textContent=c.totalIncome>0?c.savingsRate+'%':'0%';
+  if(qi) qi.textContent=c.totalIncome>0?(c.monthlySavings>=0?'+':'')+fmt(c.monthlySavings):'—';
+  if(qe) qe.textContent=c.totalExpenses>0?fmt(c.totalExpenses):'—';
+  if(qd){var debt=c.reMrt+c.lnT;qd.textContent=debt>0?fmt(debt):'—';}
+  if(qr) qr.textContent=c.totalIncome>0?c.savingsRate+'%':'—';
 
   // MiR unified card
   var mi=$('mir-inc'),me=$('mir-exp'),ms=$('mir-sav'),mr=$('mir-ratio'),ma=$('mir-avg');
-  if(mi) mi.textContent=c.totalIncome>0?fmt(c.totalIncome):'₪0';
-  if(me) me.textContent=c.totalExpenses>0?fmt(c.totalExpenses):'₪0';
-  if(ms){ms.textContent=c.totalIncome>0?fmt(c.monthlySavings):'₪0';ms.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
-  if(mr) mr.textContent=c.totalIncome>0?c.savingsRate+'% חיסכון':'0%';
-  if(ma){ma.textContent=c.totalIncome>0?(c.monthlySavings>=0?'חוסך ':'מפסיד ')+fmt(Math.abs(c.monthlySavings))+' בחודש':'₪0';ma.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
+  if(mi) mi.textContent=c.totalIncome>0?fmt(c.totalIncome):'—';
+  if(me) me.textContent=c.totalExpenses>0?fmt(c.totalExpenses):'—';
+  if(ms){ms.textContent=c.totalIncome>0?fmt(c.monthlySavings):'—';ms.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
+  if(mr) mr.textContent=c.totalIncome>0?c.savingsRate+'% חיסכון':'—';
+  if(ma){ma.textContent=c.totalIncome>0?(c.monthlySavings>=0?'חוסך ':'מפסיד ')+fmt(Math.abs(c.monthlySavings))+' בחודש':'—';ma.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
 
   // Cashflow chart — 3 bars per month (income/expense/savings)
   var mw=$('mir-chart-wrap');
@@ -2081,8 +2081,8 @@ function renderOvCards(c){
   if(fc) fc.textContent=fireN>0?pct2+'%':'הגדר יעד';
   if(fb) fb.style.width=(fireN>0?pct2:0)+'%';
   if(fs) fs.textContent=c.totalIncome>0?((c.fireAge-ND.profile.age)<=0?'הגעת ליעד!':'פרישה בגיל '+c.fireAge+' · עוד '+(c.fireAge-ND.profile.age)+' שנים'):'גלה מתי תוכל להיות חופשי כלכלית';
-  if(fh) fh.textContent='יש: '+(nw0>0?fmt(nw0):'₪0');
-  if(fg) fg.textContent='יעד: '+(fireN>0?fmt(fireN):'₪0');
+  if(fh) fh.textContent='יש: '+(nw0>0?fmt(nw0):'—');
+  if(fg) fg.textContent='יעד: '+(fireN>0?fmt(fireN):'—');
 
   // Spend DNA
   var dnaRows=$('spend-dna-rows');
@@ -2200,10 +2200,10 @@ function renderOvCards(c){
 /* ── RENDER: LOANS PAGE ── */
 function renderLoans(c){
   var lt=$('lo-total'),lm=$('lo-monthly');
-  if(lt) lt.textContent=c.lnT>0?fmt(c.lnT):'₪0';
+  if(lt) lt.textContent=c.lnT>0?fmt(c.lnT):'—';
   if(lm){
     var lnPay=ND.loans.reduce(function(s,x){return s+x.monthlyPayment;},0);
-    lm.textContent=lnPay>0?fmt(lnPay)+'/חודש':'₪0';
+    lm.textContent=lnPay>0?fmt(lnPay)+'/חודש':'—';
   }
   // Loan list (mortgage comes from realEstate, additional loans from ND.loans)
   var ll=$('lo-list');
@@ -2231,14 +2231,14 @@ function renderOvSummaries(c){
   var olt=$('ov-lo-total'),olm=$('ov-lo-monthly');
   if(olt){
     var totalDebt=c.reMrt+c.lnT;
-    olt.textContent=totalDebt>0?fmt(totalDebt):'₪0';
+    olt.textContent=totalDebt>0?fmt(totalDebt):'—';
     olt.style.color=totalDebt>0?'#6B7A96':'#A07840';
   }
   if(olm){
     var lnPay=ND.loans.reduce(function(s,x){return s+x.monthlyPayment;},0);
     var rePay=ND.realEstate.reduce(function(s,x){return s+x.monthlyPayment;},0);
     var totalPay=lnPay+rePay;
-    olm.textContent=totalPay>0?fmt(totalPay):'₪0';
+    olm.textContent=totalPay>0?fmt(totalPay):'—';
     olm.style.color=totalPay>0?'#6B7A96':'#A07840';
   }
   // Insurance
@@ -2299,9 +2299,9 @@ function renderDigest(c){
   if(!el) return;
   var months=['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
   if(dm) dm.textContent = months[new Date().getMonth()];
-  if(c.totalIncome === 0){ el.textContent = '₪0'; return; }
+  if(c.totalIncome === 0){ el.textContent = '—'; return; }
   var sav = Math.max(c.monthlySavings, 0);
-  el.textContent = sav > 0 ? '+'+fmt(sav) : '₪0';
+  el.textContent = sav > 0 ? '+'+fmt(sav) : '—';
 }
 
 /* ── WEEKLY DIGEST ── */
@@ -2592,10 +2592,10 @@ function renderCF(c){
 
   // Summary rows
   var sInc=$('sum-inc'),sExp=$('sum-exp'),sSav=$('sum-sav'),sRatio=$('sum-ratio');
-  if(sInc) sInc.textContent = c.totalIncome>0?fmt(c.totalIncome):'₪0';
-  if(sExp) sExp.textContent = c.totalExpenses>0?fmt(c.totalExpenses):'₪0';
-  if(sSav){ sSav.textContent=c.totalIncome>0?fmt(c.monthlySavings):'₪0'; sSav.style.color=c.monthlySavings>=0?'#A07840':'#D93025'; }
-  if(sRatio) sRatio.textContent=c.totalIncome>0?Math.round(c.totalExpenses/c.totalIncome*100)+'%':'0%';
+  if(sInc) sInc.textContent = c.totalIncome>0?fmt(c.totalIncome):'—';
+  if(sExp) sExp.textContent = c.totalExpenses>0?fmt(c.totalExpenses):'—';
+  if(sSav){ sSav.textContent=c.totalIncome>0?fmt(c.monthlySavings):'—'; sSav.style.color=c.monthlySavings>=0?'#2D6A3F':'#e07b5a'; }
+  if(sRatio) sRatio.textContent=c.totalIncome>0?Math.round(c.totalExpenses/c.totalIncome*100)+'%':'—';
 
   // 50/30/20 rule text
   var ruleText=$('rule-text');
@@ -2681,7 +2681,7 @@ function renderCF(c){
   // Cashflow tab
   var hero=$('cf-fl-hero'),sub=$('cf-fl-sub');
   var flInc=$('fl-inc'),flExp=$('fl-exp'),flSav=$('fl-sav');
-  if(hero){hero.textContent=c.totalIncome>0?(c.monthlySavings>=0?'+':'')+fmt(c.monthlySavings):'₪0';hero.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
+  if(hero){hero.textContent=c.totalIncome>0?(c.monthlySavings>=0?'+':'')+fmt(c.monthlySavings):'—';hero.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
   if(sub) sub.innerHTML=c.totalIncome>0?'הכנסה פחות הוצאות':'ראה כמה נשאר לך בסוף כל חודש';
   if(flInc) flInc.textContent=fmt(c.totalIncome);
   if(flExp){flExp.textContent=fmt(c.totalExpenses);flExp.style.color='#64646A';}
@@ -2692,7 +2692,7 @@ function renderCF(c){
 function renderSTHeader(c){
   var total = c.penT + c.hshT + c.gmT + c.invT;
   var itEl = document.getElementById('inv-total');
-  if(itEl) itEl.textContent = total > 0 ? fmt(total) : '₪0';
+  if(itEl) itEl.textContent = total > 0 ? fmt(total) : '—';
 
   // ── ALL investment lists render on every render() cycle ──
   _renderList('pen-list', ND.pension, function(x){
@@ -2831,9 +2831,9 @@ function renderFIREPage(){
     ? pct+'% מהיעד · '+fmt(nw0)+' מתוך '+fmt(fireNumber)
     : 'הוסף הכנסות והוצאות כדי לחשב';
   var fe = document.getElementById('fire-exp');
-  if(fe) fe.textContent = c.totalExpenses > 0 ? fmt(c.totalExpenses) : '₪0';
+  if(fe) fe.textContent = c.totalExpenses > 0 ? fmt(c.totalExpenses) : '—';
   var fpa = document.getElementById('fire-passive');
-  if(fpa) fpa.textContent = passiveIncome > 0 ? fmt(passiveIncome) : '₪0';
+  if(fpa) fpa.textContent = passiveIncome > 0 ? fmt(passiveIncome) : '—';
   var fr = document.getElementById('fire-rate');
   if(fr){ fr.textContent = c.savingsRate+'%'; fr.style.color = c.savingsRate>=20?'#A07840':c.savingsRate>=10?'#D97706':'#D93025'; }
   // 4% rule explanation
@@ -3221,9 +3221,9 @@ function renderPlanHub(){
 function renderAssetsHub(){
   var c=calc();
   var at=$('hub-assets-total'),dt=$('hub-debt-total'),nt=$('hub-nw-total');
-  if(at) at.textContent=c.totalAssets>0?fmt(c.totalAssets):'₪0';
-  if(dt) dt.textContent=c.totalLiabilities>0?fmt(c.totalLiabilities):'₪0';
-  if(nt) nt.textContent=c.netWorth!==0?fmt(c.netWorth):'₪0';
+  if(at) at.textContent=c.totalAssets>0?fmt(c.totalAssets):'—';
+  if(dt) dt.textContent=c.totalLiabilities>0?fmt(c.totalLiabilities):'—';
+  if(nt) nt.textContent=c.netWorth!==0?fmt(c.netWorth):'—';
   // Initialize merged st content
   renderSTFull();
   try{drawInvChart();}catch(e){}
@@ -5476,9 +5476,9 @@ function calcCompound(){
   var totalEl=document.getElementById('ci-total');
   var chartEl=document.getElementById('ci-chart');
   if((!start&&!monthly)||!years){
-    if(investedEl) investedEl.textContent='₪0';
-    if(gainEl) gainEl.textContent='₪0';
-    if(totalEl) totalEl.textContent='₪0';
+    if(investedEl) investedEl.textContent='—';
+    if(gainEl) gainEl.textContent='—';
+    if(totalEl) totalEl.textContent='—';
     if(chartEl) chartEl.innerHTML='<div style="text-align:center;padding:10px 0"><div style="margin-bottom:3px">'+ic('coins')+'</div><div style="font-size:10px;color:#6B7A96">הזן סכום ושנים כדי לראות את כוח הריבית דריבית</div></div>';
     return;
   }
@@ -5620,10 +5620,10 @@ function renderScenarios(){
   var oEl=document.getElementById('sc-opt');
   var cEl=document.getElementById('sc-con');
   var fEl=document.getElementById('sc-fire');
-  if(bEl) bEl.textContent=start>0||monthlyDep>0?fmt(Math.round(base)):'₪0';
-  if(oEl) oEl.textContent=start>0||monthlyDep>0?fmt(Math.round(optimistic)):'₪0';
-  if(cEl) cEl.textContent=start>0||monthlyDep>0?fmt(Math.round(conservative)):'₪0';
-  if(fEl) fEl.textContent=start>0||monthlyDep>0?fmt(Math.round(fireFast)):'₪0';
+  if(bEl) bEl.textContent=start>0||monthlyDep>0?fmt(Math.round(base)):'—';
+  if(oEl) oEl.textContent=start>0||monthlyDep>0?fmt(Math.round(optimistic)):'—';
+  if(cEl) cEl.textContent=start>0||monthlyDep>0?fmt(Math.round(conservative)):'—';
+  if(fEl) fEl.textContent=start>0||monthlyDep>0?fmt(Math.round(fireFast)):'—';
   // Chart
   var chartEl=document.getElementById('sc-chart');
   if(chartEl&&(start>0||monthlyDep>0)){
