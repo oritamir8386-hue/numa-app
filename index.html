@@ -5051,17 +5051,11 @@ async function auForgot(){
 }
 
 document.addEventListener('DOMContentLoaded',function(){
-  document.body.style.overflow='';
-  loadFromStorage();
-  // Always hide ob-overlay — never block the app
+  // Hide ob-overlay — never block the app
   var ov=document.getElementById('ob-overlay');
   if(ov){ov.style.display='none';ov.style.pointerEvents='none';}
-  setTimeout(function(){
-    try{ render(); }catch(e){}
-    try{ renderST(); }catch(e){}
-    try{ bindExpenseInputs(); bindSettings(); bindCashInput(); }catch(e){}
-    try{ drawProj(); drawInvChart(); startCountUp(); }catch(e){}
-  }, 60);
+  // Start auth — will show landing or app based on session
+  initSupabase();
 });
 
 /* ══════════════════════════════════════════
