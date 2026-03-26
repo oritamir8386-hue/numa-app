@@ -4705,7 +4705,10 @@ function initSupabase(){
   }
 }
 
+var _appShown=false;
 function _showApp(isNewLogin=false){
+  if(_appShown) return;
+  _appShown=true;
   // Hide auth
   const as=$('auth-screen');if(as)as.style.display='none';document.body.style.overflow='';
   const vs=$('verify-screen');if(vs)vs.style.display='none';
@@ -4751,6 +4754,7 @@ function _showApp(isNewLogin=false){
 
 function _showAuth(){
   if(window.PREVIEW_MODE)return;
+  _appShown=false;
   const as=$('auth-screen');if(as)as.style.display='flex';
   // Hide app
   var dev=document.querySelector('.dev');if(dev)dev.style.display='none';
