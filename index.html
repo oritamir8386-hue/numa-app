@@ -193,6 +193,28 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .cat-toggle.on::after{transform:translateX(-18px)}
 .emp-opt{background:#ede9e0;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:500;color:#1E2D4A;cursor:pointer;font-family:inherit;text-align:center;transition:background .15s}
 .emp-opt:active{background:#d0ccc6}
+/* ── ONBOARDING ── */
+#onboarding-overlay{position:fixed;inset:0;z-index:1000;background:#f0ece4;overflow-y:auto;display:none}
+.ob2-screen{display:none;padding:56px 28px 40px;min-height:100vh;flex-direction:column}
+.ob2-screen.active{display:flex}
+.ob2-dots{display:flex;gap:6px;justify-content:center;margin-bottom:44px}
+.ob2-dot{width:6px;height:6px;border-radius:3px;background:rgba(30,45,74,.15);transition:all .3s}
+.ob2-dot.on{width:20px;background:#1E2D4A}
+.ob2-inp{width:100%;background:#fff;border:none;border-radius:16px;padding:17px 20px;font-size:17px;font-family:inherit;color:#1E2D4A;box-shadow:0 2px 10px rgba(0,0,0,.05);direction:rtl}
+.ob2-inp::placeholder{color:#bbb}
+.ob2-inp:focus{outline:2px solid #A07840;outline-offset:-1px}
+.ob2-chips{display:flex;flex-wrap:wrap;gap:8px}
+.ob2-chip{border-radius:22px;padding:10px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;background:#fff;color:#1E2D4A;border:1.5px solid #1E2D4A}
+.ob2-chip.on{background:#1E2D4A;color:#fff;border-color:#1E2D4A}
+.ob2-btn{width:100%;border:none;border-radius:16px;padding:17px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .1s}
+.ob2-btn:active{transform:scale(.97)}
+.ob2-trow{background:#fff;border-radius:16px;padding:15px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.ob2-toggle{width:44px;height:26px;background:#d0ccc6;border-radius:13px;position:relative;cursor:pointer;transition:background .2s;border:none;flex-shrink:0}
+.ob2-toggle.on{background:#A07840}
+.ob2-toggle::after{content:'';position:absolute;top:3px;right:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.ob2-toggle.on::after{transform:translateX(-18px)}
+.ob2-fcard{background:#fff;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.ob2-fcard .ob2-fico{font-size:24px;width:44px;height:44px;border-radius:12px;background:#ede9e0;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 /* ── TYPOGRAPHY HIERARCHY ── */
 .hero-num{font-size:30px!important;font-weight:800!important;letter-spacing:-1.5px!important}
 .label-sm{font-size:10px!important;font-weight:600!important;text-transform:uppercase;letter-spacing:.04em;color:#A8A8B0!important}
@@ -767,45 +789,14 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </div>
   </div>
 
-  <!-- ── CARD 6: מה השתנה ── -->
-  <div class="tc" style="height:234px">
-    <div class="tc-hdr"><div><h3>מה השתנה</h3><p>סיכום המצב שלך</p></div><div class="tc-ico"><span style="font-size:18px">🕐</span></div></div>
-    <div class="tc-body">
-      <div class="ov-snap"><span style="font-size:12px;color:#1E2D4A">שווי נטו</span><span style="font-size:13px;font-weight:700;color:#8a8a8a" id="ov-snap-nw">—</span></div>
-      <div class="ov-snap"><span style="font-size:12px;color:#1E2D4A">חיסכון חודשי</span><span style="font-size:13px;font-weight:700;color:#8a8a8a" id="ov-snap-sav">—</span></div>
-      <div class="ov-snap"><span style="font-size:12px;color:#1E2D4A">Numa Score</span><span style="font-size:13px;font-weight:700;color:#8a8a8a" id="ov-snap-score">—</span></div>
-      <div class="ov-snap"><span style="font-size:12px;font-weight:700;color:#1E2D4A">FIRE צפוי</span><span style="font-size:13px;font-weight:800;color:#8a8a8a" id="ov-snap-fire">—</span></div>
-      <div style="font-size:9px;color:#A8A8B0;text-align:center;margin-top:8px" id="ov-snap-date"></div>
-    </div>
-  </div>
-
   <!-- Hidden compat elements -->
   <div style="display:none">
-    <span id="score-lbl">—</span>
-    <span id="digest-month">—</span>
-    <span id="digest-val">—</span>
+    <span id="score-lbl">—</span><span id="digest-month">—</span><span id="digest-val">—</span>
     <span id="nw-trend"></span><span id="mir-ratio"></span>
     <div id="fire-hero-pill"><span id="mv-fire"></span><span id="ms-fire"></span></div>
-  </div>
-
-  <!-- ② Recommended action (1 card) -->
-  <div id="ov-action-card" style="background:#E8DCC8;border-radius:12px;padding:10px 13px;border:.5px solid rgba(160,120,64,.15)">
-    <div style="display:flex;align-items:center;gap:8px">
-      <div style="font-size:14px">⚡</div>
-      <div style="flex:1;font-size:11.5px;font-weight:600;color:#1E2D4A;line-height:1.4" id="ov-action-text">הוסף הכנסה חודשית — הבסיס לכל חישוב</div>
-      <button id="ov-action-btn" onclick="goP('cf')" style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:5px 10px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">בצע →</button>
-    </div>
-  </div>
-
-  <!-- ③ 3 Stats summary -->
-  <div class="c" style="padding:10px">
-    <div style="display:flex;justify-content:space-around">
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">תזרים</div><div style="font-size:13px;font-weight:800;color:#A07840" id="qs-inc">₪0</div></div>
-      <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">חיסכון</div><div style="font-size:13px;font-weight:800;color:#A07840" id="qs-rate">0%</div></div>
-      <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">FIRE</div><div style="font-size:13px;font-weight:800;color:#1E2D4A" id="qs-fire-age">—</div></div>
-    </div>
+    <span id="ov-snap-nw"></span><span id="ov-snap-sav"></span><span id="ov-snap-score"></span><span id="ov-snap-fire"></span><span id="ov-snap-date"></span>
+    <span id="qs-inc"></span><span id="qs-rate"></span><span id="qs-fire-age"></span>
+    <span id="ov-action-text"></span><span id="ov-action-btn"></span><span id="ov-action-card"></span>
   </div>
 
   <!-- ═══ Below the fold — scroll to see ═══ -->
@@ -4663,6 +4654,10 @@ function _showApp(isNewLogin=false){
     function _afterLoad(){
       if(name && !ND.profile.name){ ND.profile.name=name; saveToStorage(); }
       if(!ND.milestones) ND.milestones=[];
+      // Show onboarding if not done
+      if(!ND.onboardingDone){
+        showOnboarding();
+      }
       render();
       renderST();
       bindExpenseInputs();
@@ -4677,13 +4672,7 @@ function _showApp(isNewLogin=false){
       loadFromStorage();
       setTimeout(_afterLoad, 80);
     }
-    // הצג אונבורדינג רק פעם אחת — ורק בכניסה ממש (לא רענון טוקן)
-    if(isNewLogin){
-      const obKey='numa_onboarded_'+uid;
-      if(!localStorage.getItem(obKey)){
-        setTimeout(function(){var ov=document.getElementById('ob-overlay');if(ov){ov.style.display='flex';document.body.style.overflow='hidden';}},400);
-      }
-    }
+    // Old onboarding disabled — replaced by onboarding-overlay V2
   }
 }
 
@@ -6143,5 +6132,169 @@ function renderAllocPlan(){
 })();
 
 </script>
+
+<!-- ══════════════════ ONBOARDING V2 ══════════════════ -->
+<div id="onboarding-overlay">
+
+  <!-- SCREEN 0 — Intro -->
+  <div class="ob2-screen active" id="ob2-s0">
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:16px">
+      <div style="font-size:36px;font-weight:800;color:#1E2D4A;letter-spacing:-1px">Nu<span style="color:#A07840">ma</span></div>
+      <div style="font-size:13px;color:#8a8a8a">הכלכלה שלך, בשליטה מלאה</div>
+      <div style="height:16px"></div>
+      <div style="font-size:28px;font-weight:800;color:#1E2D4A;line-height:1.3;max-width:300px">הכסף שלך ראוי לניהול חכם</div>
+      <div style="font-size:15px;color:#8a8a8a;max-width:280px;line-height:1.5">Numa מאחדת את כל התמונה הפיננסית שלך במקום אחד</div>
+      <div style="height:12px"></div>
+      <div style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:340px">
+        <div class="ob2-fcard"><div class="ob2-fico">🔗</div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#1E2D4A">תמונה מלאה</div><div style="font-size:12px;color:#8a8a8a">פנסיה, השקעות, תזרים ונדל"ן — הכל ביחד</div></div></div>
+        <div class="ob2-fcard"><div class="ob2-fico">🔥</div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#1E2D4A">מסלול FIRE</div><div style="font-size:12px;color:#8a8a8a">גלה מתי תוכל להיות עצמאי כלכלית</div></div></div>
+        <div class="ob2-fcard"><div class="ob2-fico">✦</div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#1E2D4A">סוכן AI אישי</div><div style="font-size:12px;color:#8a8a8a">שאל כל שאלה פיננסית לפי הנתונים שלך</div></div></div>
+        <div class="ob2-fcard"><div class="ob2-fico">🔒</div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#1E2D4A">פרטי ומאובטח</div><div style="font-size:12px;color:#8a8a8a">הנתונים שלך מוצפנים ושמורים רק אצלך</div></div></div>
+      </div>
+    </div>
+    <button class="ob2-btn" style="background:#1E2D4A;color:#fff;margin-top:24px" onclick="ob2Go(1)">בוא נתחיל →</button>
+  </div>
+
+  <!-- SCREEN 1 — Profile -->
+  <div class="ob2-screen" id="ob2-s1">
+    <div class="ob2-dots"><div class="ob2-dot on"></div><div class="ob2-dot"></div><div class="ob2-dot"></div></div>
+    <div style="font-size:52px;margin-bottom:8px">👋</div>
+    <div style="font-size:28px;font-weight:800;color:#1E2D4A;margin-bottom:4px">היי, מה שמך?</div>
+    <div style="font-size:15px;color:#8a8a8a;margin-bottom:24px">נתאים את Numa בדיוק לך</div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <input class="ob2-inp" id="ob2-name" type="text" placeholder="שם פרטי"/>
+      <input class="ob2-inp" id="ob2-age" type="number" placeholder="גיל" style="width:50%"/>
+    </div>
+    <div style="font-size:13px;font-weight:600;color:#1E2D4A;margin:20px 0 8px">תעסוקה</div>
+    <div class="ob2-chips" id="ob2-emp">
+      <button class="ob2-chip on" data-v="שכיר">שכיר/ת</button>
+      <button class="ob2-chip" data-v="עצמאי">עצמאי/ת</button>
+      <button class="ob2-chip" data-v="גמלאי">גמלאי/ת</button>
+    </div>
+    <div style="font-size:13px;font-weight:600;color:#1E2D4A;margin:20px 0 8px">מצב משפחתי</div>
+    <div class="ob2-chips" id="ob2-fam">
+      <button class="ob2-chip" data-v="single">יחיד/ה</button>
+      <button class="ob2-chip" data-v="couple">זוג</button>
+      <button class="ob2-chip" data-v="family">זוג + ילדים</button>
+    </div>
+    <div style="flex:1"></div>
+    <button class="ob2-btn" style="background:#1E2D4A;color:#fff;margin-top:24px" onclick="ob2Save1()">המשך →</button>
+  </div>
+
+  <!-- SCREEN 2 — Relevance -->
+  <div class="ob2-screen" id="ob2-s2">
+    <div class="ob2-dots"><div class="ob2-dot"></div><div class="ob2-dot on"></div><div class="ob2-dot"></div></div>
+    <div style="font-size:52px;margin-bottom:8px">🎯</div>
+    <div style="font-size:28px;font-weight:800;color:#1E2D4A;margin-bottom:4px">מה רלוונטי אליך?</div>
+    <div style="font-size:15px;color:#8a8a8a;margin-bottom:24px">נציג רק את מה שמתאים לך</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="ob2-trow"><span style="font-size:20px">🏛️</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">פנסיה וקה"ש</div></div><button class="ob2-toggle on" data-k="show_pension" onclick="this.classList.toggle('on')"></button></div>
+      <div class="ob2-trow"><span style="font-size:20px">📈</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">השקעות בשוק ההון</div></div><button class="ob2-toggle on" data-k="show_investments" onclick="this.classList.toggle('on')"></button></div>
+      <div class="ob2-trow"><span style="font-size:20px">🏠</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">נדל"ן ומשכנתא</div></div><button class="ob2-toggle" data-k="show_realestate" onclick="this.classList.toggle('on')"></button></div>
+      <div class="ob2-trow"><span style="font-size:20px">🛡️</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">ביטוחים</div></div><button class="ob2-toggle on" data-k="show_insurance" onclick="this.classList.toggle('on')"></button></div>
+      <div class="ob2-trow"><span style="font-size:20px">💳</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">הלוואות וחובות</div></div><button class="ob2-toggle" data-k="show_loans" onclick="this.classList.toggle('on')"></button></div>
+      <div class="ob2-trow"><span style="font-size:20px">🔥</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">FIRE — עצמאות כלכלית</div></div><button class="ob2-toggle on" data-k="show_fire" onclick="this.classList.toggle('on')"></button></div>
+      <div class="ob2-trow"><span style="font-size:20px">📋</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">עיזבון וצוואה</div></div><button class="ob2-toggle" data-k="show_estate" onclick="this.classList.toggle('on')"></button></div>
+    </div>
+    <div style="flex:1"></div>
+    <button class="ob2-btn" style="background:#1E2D4A;color:#fff;margin-top:24px" onclick="ob2Save2()">המשך →</button>
+  </div>
+
+  <!-- SCREEN 3 — Language + Currency + Finish -->
+  <div class="ob2-screen" id="ob2-s3">
+    <div class="ob2-dots"><div class="ob2-dot"></div><div class="ob2-dot"></div><div class="ob2-dot on"></div></div>
+    <div style="font-size:52px;margin-bottom:8px">🌍</div>
+    <div style="font-size:28px;font-weight:800;color:#1E2D4A;margin-bottom:4px">העדפות תצוגה</div>
+    <div style="font-size:15px;color:#8a8a8a;margin-bottom:24px">תמיד אפשר לשנות בהגדרות</div>
+
+    <div style="font-size:13px;font-weight:600;color:#1E2D4A;margin-bottom:8px">שפה</div>
+    <div class="ob2-chips" id="ob2-lang">
+      <button class="ob2-chip on" data-v="he">עברית 🇮🇱</button>
+      <button class="ob2-chip" data-v="en">English 🇺🇸</button>
+    </div>
+
+    <div style="font-size:13px;font-weight:600;color:#1E2D4A;margin:20px 0 8px">מטבע</div>
+    <div class="ob2-chips" id="ob2-curr">
+      <button class="ob2-chip on" data-v="ILS">₪ שקל</button>
+      <button class="ob2-chip" data-v="USD">$ דולר</button>
+    </div>
+
+    <div style="background:#1E2D4A;border-radius:22px;padding:24px;text-align:center;margin-top:28px">
+      <div style="font-size:36px;margin-bottom:8px">✨</div>
+      <div style="font-size:20px;font-weight:800;color:#F5F2EC;margin-bottom:6px">Numa מוכנה לך</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.5">הכל שמור ומסונכרן אוטומטית.<br>תוסיף נתונים בקצב שלך.</div>
+    </div>
+
+    <div style="flex:1"></div>
+    <button class="ob2-btn" style="background:#A07840;color:#fff;margin-top:24px" onclick="ob2Finish()">בוא נתחיל 🚀</button>
+  </div>
+</div>
+
+<script>
+/* ══ ONBOARDING V2 LOGIC ══ */
+(function(){
+  // Chip selection for all ob2-chips groups
+  document.querySelectorAll('.ob2-chips').forEach(function(group){
+    group.addEventListener('click',function(e){
+      var chip=e.target.closest('.ob2-chip');
+      if(!chip)return;
+      group.querySelectorAll('.ob2-chip').forEach(function(c){c.classList.remove('on')});
+      chip.classList.add('on');
+    });
+  });
+})();
+
+function ob2Go(n){
+  document.querySelectorAll('.ob2-screen').forEach(function(s){s.classList.remove('active')});
+  var s=document.getElementById('ob2-s'+n);
+  if(s) s.classList.add('active');
+}
+
+function ob2Save1(){
+  var name=(document.getElementById('ob2-name').value||'').trim();
+  var age=parseInt(document.getElementById('ob2-age').value)||0;
+  var empEl=document.querySelector('#ob2-emp .ob2-chip.on');
+  var famEl=document.querySelector('#ob2-fam .ob2-chip.on');
+  if(name) ND.profile.name=name;
+  if(age>0) ND.profile.age=age;
+  if(empEl) ND.profile.employment=empEl.dataset.v;
+  if(famEl) ND.profile.family=famEl.dataset.v;
+  saveToStorage();
+  ob2Go(2);
+}
+
+function ob2Save2(){
+  if(!ND.settings) ND.settings={};
+  document.querySelectorAll('#ob2-s2 .ob2-toggle').forEach(function(t){
+    ND.settings[t.dataset.k]=t.classList.contains('on')?1:0;
+  });
+  saveToStorage();
+  ob2Go(3);
+}
+
+function ob2Finish(){
+  if(!ND.settings) ND.settings={};
+  var langEl=document.querySelector('#ob2-lang .ob2-chip.on');
+  var currEl=document.querySelector('#ob2-curr .ob2-chip.on');
+  if(langEl) ND.settings.language=langEl.dataset.v;
+  if(currEl) ND.settings.currency=currEl.dataset.v;
+  ND.onboardingDone=true;
+  saveToStorage();
+  var ov=document.getElementById('onboarding-overlay');
+  if(ov) ov.style.display='none';
+  document.body.style.overflow='';
+  try{applyLanguage();}catch(e){}
+  render();
+}
+
+function showOnboarding(){
+  var ov=document.getElementById('onboarding-overlay');
+  if(!ov) return;
+  ov.style.display='block';
+  document.body.style.overflow='hidden';
+  ob2Go(0);
+}
+</script>
+
 </body>
 </html>
