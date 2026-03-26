@@ -2681,11 +2681,8 @@ function renderCF(c){
   // Cashflow tab
   var hero=$('cf-fl-hero'),sub=$('cf-fl-sub');
   var flInc=$('fl-inc'),flExp=$('fl-exp'),flSav=$('fl-sav');
-  if(hero){hero.textContent=c.totalIncome>0?(c.monthlySavings>=0?'+':'')+fmt(c.monthlySavings):'—';hero.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
-  if(sub) sub.innerHTML=c.totalIncome>0?'הכנסה פחות הוצאות':'ראה כמה נשאר לך בסוף כל חודש';
-  if(flInc) flInc.textContent=fmt(c.totalIncome);
-  if(flExp){flExp.textContent=fmt(c.totalExpenses);flExp.style.color='#64646A';}
-  if(flSav){flSav.textContent=fmt(c.monthlySavings);flSav.style.color=c.monthlySavings>=0?'#A07840':'#D93025';}
+  // Sync cfCalc from stored data
+  if(typeof cfCalc==='function') cfCalc();
 }
 
 /* ── RENDER: INVESTMENTS PAGE HEADER ── */
