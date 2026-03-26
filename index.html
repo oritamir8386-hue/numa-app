@@ -4756,38 +4756,29 @@ function initSupabase(){
     _sb=window.supabase.createClient(SUPA_URL,SUPA_KEY,{
       auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}
     });
-    // Detect OAuth redirect (hash contains access_token)
-    var _isOAuthReturn=window.location.hash&&window.location.hash.includes('access_token');
-
-    _sb.auth.onAuthStateChange((event,session)=>{
+    // Single auth handler for ALL cases
+    _sb.auth.onAuthStateChange(function(event,session){
       console.log('[Numa Auth]',event,session?.user?.email||'');
       if(event==='SIGNED_OUT'){
         currentUser=null;
         _showApp_done=false;
         _showAuth();
-      } else if(session && !_showApp_done){
-        // Any event with a valid session → show app
+        return;
+      }
+      if(session && !_showApp_done){
         currentUser=session.user;
+        // Clean OAuth hash if present
+        if(window.location.hash&&window.location.hash.includes('access_token')){
+          history.replaceState(null,'',window.location.pathname);
+        }
         _showApp(event==='SIGNED_IN');
+        return;
+      }
+      // INITIAL_SESSION with no session = not logged in
+      if(event==='INITIAL_SESSION'&&!session&&!_showApp_done){
+        _showAuth();
       }
     });
-
-    // If NOT an OAuth return, also check getSession as fallback
-    // (OAuth return is handled by onAuthStateChange after token processing)
-    if(!_isOAuthReturn){
-      _sb.auth.getSession().then(({data:{session}})=>{
-        if(session && !_showApp_done){
-          currentUser=session.user;
-          _showApp(false);
-        } else if(!session && !_showApp_done){
-          _showAuth();
-        }
-      });
-    }
-    // Clean hash after Supabase has read it
-    if(_isOAuthReturn){
-      setTimeout(function(){history.replaceState(null,'',window.location.pathname+window.location.search);},500);
-    }
   }catch(e){
     console.error('[Numa Auth] Init failed:',e);
     _showAuth();
