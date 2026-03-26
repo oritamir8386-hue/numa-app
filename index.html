@@ -4340,9 +4340,80 @@ function obEnterApp(){
   transition:transform .12s;
 }
 .verify-btn:active{transform:scale(.97)}
+/* ── LANDING + AUTH V2 ── */
+#landing-overlay{position:fixed;inset:0;z-index:999;background:#1E2D4A;overflow-y:auto;display:none}
+.la-wrap{padding:60px 28px 40px;display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+.la-logo{font-size:42px;font-weight:800;color:#fff;letter-spacing:-1px;text-align:center}.la-logo span{color:#c8a96a}
+.la-tag{font-size:14px;color:rgba(255,255,255,.4);text-align:center;margin-top:4px}
+.la-cards{flex:1;display:flex;flex-direction:column;gap:12px;margin-top:32px}
+.la-card{background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.08);border-radius:16px;padding:16px;display:flex;align-items:flex-start;gap:14px}
+.la-card-ico{font-size:22px;flex-shrink:0;margin-top:2px}
+.la-card-t{font-size:14px;font-weight:700;color:#fff}
+.la-card-s{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px;line-height:1.4}
+.la-btn{width:100%;background:#A07840;color:#fff;border:none;border-radius:16px;padding:17px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:24px;transition:transform .1s}
+.la-btn:active{transform:scale(.97)}
+.la-link{text-align:center;margin-top:14px;font-size:13px;color:rgba(255,255,255,.4)}.la-link a{color:#c8a96a;cursor:pointer;text-decoration:none;font-weight:600}
+#auth-overlay{position:fixed;inset:0;z-index:998;background:#f0ece4;overflow-y:auto;display:none}
+.au-wrap{padding:56px 28px 40px;direction:rtl}
+.au-logo{font-size:32px;font-weight:800;color:#1E2D4A;text-align:center}.au-logo span{color:#A07840}
+.au-sub{font-size:14px;color:#8a8a8a;text-align:center;margin-top:4px;margin-bottom:24px}
+.au-tabs{display:flex;background:#ede9e0;border-radius:12px;padding:4px;margin-bottom:20px}
+.au-tab{flex:1;padding:10px;text-align:center;font-size:14px;font-weight:600;color:#8a8a8a;border:none;background:none;cursor:pointer;border-radius:9px;font-family:inherit;transition:all .15s}
+.au-tab.on{background:#fff;color:#1E2D4A;box-shadow:0 1px 4px rgba(0,0,0,.1);font-weight:700}
+.au-google{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1E2D4A;border:1.5px solid rgba(0,0,0,.1);border-radius:13px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .1s}
+.au-google:active{transform:scale(.97)}
+.au-div{display:flex;align-items:center;gap:12px;margin:18px 0}.au-div-line{flex:1;height:.5px;background:rgba(0,0,0,.1)}.au-div-or{font-size:11px;color:#8a8a8a}
+.au-inp{width:100%;background:#ede9e0;border:none;border-radius:13px;padding:16px 18px;font-size:15px;color:#1E2D4A;font-family:inherit;margin-bottom:10px;direction:ltr;text-align:left}
+.au-inp::placeholder{color:#bbb}
+.au-inp:focus{outline:2px solid #A07840;outline-offset:-1px}
+.au-submit{width:100%;background:#1E2D4A;color:#fff;border:none;border-radius:13px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px;transition:transform .1s}
+.au-submit:active{transform:scale(.97)}
+.au-forgot{text-align:center;margin-top:12px;font-size:12px;color:#8a8a8a}.au-forgot a{color:#A07840;cursor:pointer;text-decoration:none;font-weight:600}
+.au-back{text-align:center;margin-top:20px;font-size:13px;color:#8a8a8a;cursor:pointer}.au-back:hover{color:#1E2D4A}
+.au-err{background:rgba(231,76,60,.08);color:#e74c3c;border-radius:10px;padding:10px 14px;font-size:12px;font-weight:600;text-align:center;margin-bottom:12px;display:none}
 </style>
 
-<div id="auth-screen">
+<!-- ══════ LANDING PAGE ══════ -->
+<div id="landing-overlay">
+  <div class="la-wrap">
+    <div class="la-logo">Nu<span>ma</span></div>
+    <div class="la-tag">הכלכלה שלך, בשליטה מלאה</div>
+    <div class="la-cards">
+      <div class="la-card"><div class="la-card-ico">🔗</div><div><div class="la-card-t">תמונה פיננסית מלאה</div><div class="la-card-s">פנסיה, השקעות, תזרים — הכל ביחד</div></div></div>
+      <div class="la-card"><div class="la-card-ico">🔥</div><div><div class="la-card-t">מסלול FIRE</div><div class="la-card-s">גלה מתי תוכל להיות עצמאי כלכלית</div></div></div>
+      <div class="la-card"><div class="la-card-ico">✦</div><div><div class="la-card-t">סוכן AI אישי</div><div class="la-card-s">שאל כל שאלה פיננסית לפי הנתונים שלך</div></div></div>
+      <div class="la-card"><div class="la-card-ico">🔒</div><div><div class="la-card-t">פרטי ומאובטח</div><div class="la-card-s">הנתונים שלך מוצפנים ושמורים רק אצלך</div></div></div>
+    </div>
+    <button class="la-btn" onclick="showAuthScreen2('signup')">התחל בחינם →</button>
+    <div class="la-link">כבר יש לך חשבון? <a onclick="showAuthScreen2('login')">כניסה</a></div>
+  </div>
+</div>
+
+<!-- ══════ AUTH SCREEN V2 ══════ -->
+<div id="auth-overlay">
+  <div class="au-wrap">
+    <div class="au-logo">Nu<span>ma</span></div>
+    <div class="au-sub">ברוך הבא — כניסה או הרשמה</div>
+    <div class="au-tabs">
+      <button class="au-tab on" id="au-tab-login" onclick="auTab('login')">כניסה</button>
+      <button class="au-tab" id="au-tab-signup" onclick="auTab('signup')">הרשמה</button>
+    </div>
+    <div id="au-err" class="au-err"></div>
+    <button class="au-google" onclick="signInWithGoogle()">
+      <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      המשך עם Google
+    </button>
+    <div class="au-div"><div class="au-div-line"></div><span class="au-div-or">או</span><div class="au-div-line"></div></div>
+    <input class="au-inp" id="au-email" type="email" placeholder="אימייל"/>
+    <input class="au-inp" id="au-pass" type="password" placeholder="סיסמה"/>
+    <input class="au-inp" id="au-pass2" type="password" placeholder="אימות סיסמה" style="display:none"/>
+    <button class="au-submit" id="au-btn" onclick="auSubmit()">כניסה ←</button>
+    <div class="au-forgot" id="au-forgot"><a onclick="auForgot()">שכחת סיסמה? איפוס</a></div>
+    <div class="au-back" onclick="hideAuth2()">← חזרה</div>
+  </div>
+</div>
+
+<div id="auth-screen" style="display:none">
   <div class="auth-bg"></div>
   <div class="auth-glow"></div>
   <div class="auth-glow2"></div>
@@ -4422,7 +4493,7 @@ function obEnterApp(){
     <div class="verify-title">בדוק את האימייל שלך</div>
     <div class="verify-sub">שלחנו לך קישור אישור.<br>לחץ עליו ואז חזור לכאן.</div>
     <button class="verify-btn"
-      onclick="document.getElementById('verify-screen').style.display='none';document.getElementById('auth-screen').style.display='flex';document.body.style.overflow='hidden';authTab('login')">
+      onclick="document.getElementById('verify-screen').style.display='none';showAuthScreen2('login')">
       חזרה לכניסה
     </button>
   </div>
@@ -4724,9 +4795,11 @@ function _showApp(isNewLogin=false){
   // Prevent double initialization
   if(_showApp_done) return;
   _showApp_done=true;
-  // Hide auth screens
+  // Hide all auth/landing screens
   var as=$('auth-screen');if(as)as.style.display='none';
   var vs=$('verify-screen');if(vs)vs.style.display='none';
+  var lo=$('landing-overlay');if(lo)lo.style.display='none';
+  var ao=$('auth-overlay');if(ao)ao.style.display='none';
   document.body.style.overflow='';
   // Show app shell
   var dev=document.querySelector('.dev');if(dev)dev.style.removeProperty('display');
@@ -4766,8 +4839,9 @@ function _showApp(isNewLogin=false){
 function _showAuth(){
   if(window.PREVIEW_MODE)return;
   _showApp_done=false;
-  var as=$('auth-screen');if(as)as.style.display='flex';
   var dev=document.querySelector('.dev');if(dev)dev.style.display='none';
+  // Show new landing page instead of old auth
+  showLanding();
 }
 
 // Compatibility aliases
@@ -4913,6 +4987,68 @@ async function authSignOut(){
   // onAuthStateChange handles _showAuth()
 }
 
+/* ══ LANDING + AUTH V2 LOGIC ══ */
+var _auMode='login';
+function showLanding(){
+  var l=$('landing-overlay');if(l)l.style.display='block';
+  var a=$('auth-overlay');if(a)a.style.display='none';
+  document.body.style.overflow='hidden';
+}
+function showAuthScreen2(mode){
+  var l=$('landing-overlay');if(l)l.style.display='none';
+  var a=$('auth-overlay');if(a)a.style.display='block';
+  auTab(mode||'login');
+}
+function hideAuth2(){
+  var a=$('auth-overlay');if(a)a.style.display='none';
+  showLanding();
+}
+function auTab(mode){
+  _auMode=mode||'login';
+  var tl=$('au-tab-login'),ts=$('au-tab-signup');
+  if(tl)tl.classList.toggle('on',_auMode==='login');
+  if(ts)ts.classList.toggle('on',_auMode==='signup');
+  var p2=$('au-pass2');if(p2)p2.style.display=_auMode==='signup'?'block':'none';
+  var btn=$('au-btn');if(btn)btn.textContent=_auMode==='signup'?'הרשמה ←':'כניסה ←';
+  var fg=$('au-forgot');if(fg)fg.style.display=_auMode==='login'?'block':'none';
+  var err=$('au-err');if(err)err.style.display='none';
+}
+function auShowErr(msg){var e=$('au-err');if(e){e.textContent=msg;e.style.display='block';}}
+async function auSubmit(){
+  var email=($('au-email')?.value||'').trim();
+  var pass=$('au-pass')?.value||'';
+  var pass2=$('au-pass2')?.value||'';
+  var err=$('au-err');if(err)err.style.display='none';
+  if(!email){auShowErr('נא להכניס אימייל');return;}
+  if(!pass||pass.length<6){auShowErr('סיסמה: לפחות 6 תווים');return;}
+  if(_auMode==='signup'&&pass!==pass2){auShowErr('הסיסמאות לא תואמות');return;}
+  if(!_sb){auShowErr('מתחבר... נסה שוב');initSupabase();return;}
+  var btn=$('au-btn');if(btn){btn.textContent='רגע...';btn.disabled=true;}
+  try{
+    if(_auMode==='signup'){
+      var res=await _sb.auth.signUp({email:email,password:pass,options:{emailRedirectTo:window.location.href.split('?')[0],data:{name:email.split('@')[0]}}});
+      if(res.error)throw res.error;
+      if(res.data.session){/* auto confirmed — onAuthStateChange handles it */}
+      else{var a=$('auth-overlay');if(a)a.style.display='none';var v=$('verify-screen');if(v)v.style.display='flex';}
+    } else {
+      var res=await _sb.auth.signInWithPassword({email:email,password:pass});
+      if(res.error)throw res.error;
+      // onAuthStateChange handles _showApp
+    }
+  }catch(e){
+    var msgs={'Invalid login credentials':'אימייל או סיסמה שגויים','Email not confirmed':'האימייל טרם אומת','User already registered':'משתמש קיים — לחץ על כניסה','Email rate limit exceeded':'יותר מדי ניסיונות — נסה שוב בעוד דקה'};
+    auShowErr(msgs[e.message]||e.message);
+  }
+  if(btn){btn.textContent=_auMode==='signup'?'הרשמה ←':'כניסה ←';btn.disabled=false;}
+}
+async function auForgot(){
+  var email=($('au-email')?.value||'').trim();
+  if(!email){auShowErr('הכנס אימייל קודם');return;}
+  if(!_sb)return;
+  var res=await _sb.auth.resetPasswordForEmail(email,{redirectTo:window.location.href.split('?')[0]});
+  if(res.error){auShowErr(res.error.message);}
+  else{var e=$('au-err');if(e){e.textContent='✓ שלחנו קישור לאיפוס — בדוק את המייל';e.style.color='#27ae60';e.style.display='block';}}
+}
 
 document.addEventListener('DOMContentLoaded',function(){
   document.body.style.overflow='';
