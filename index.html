@@ -4735,16 +4735,16 @@ function _showApp(isNewLogin=false){
       bindCashInput();
       try{drawProj();drawInvChart();startCountUp();}catch(e){}
       try{fetchExchangeRate();}catch(e){}
+      // Show onboarding only after data loaded, only on first signup
+      if(isNewLogin && !ND.onboardingDone){
+        setTimeout(showOnboarding, 300);
+      }
     }
     if(_sb){
       loadFromCloud().then(_afterLoad).catch(function(){ loadFromStorage(); _afterLoad(); });
     } else {
       loadFromStorage();
       setTimeout(_afterLoad, 80);
-    }
-    // Show onboarding only on first signup/login, never on token refresh
-    if(isNewLogin && !ND.onboardingDone){
-      setTimeout(showOnboarding, 300);
     }
   }
 }
