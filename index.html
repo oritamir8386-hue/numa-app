@@ -1889,7 +1889,8 @@ var ND_DEFAULT = {
   angel:       [],  // [{id,name,value,costBasis,stage}]
   realEstate:  [],  // [{id,name,marketValue,mortgageBalance,monthlyPayment}]
   loans:       [],  // [{id,name,balance,rate,monthlyPayment}]
-  cash: 0
+  cash: 0,
+  settings: {}   // {returnRate,withdrawalRate,inflation,capitalGainsTax,family,categories}
 };
 
 // Per-device storage key — ensures each browser is independent
@@ -1924,6 +1925,8 @@ async function loadFromCloud(){
       ND = Object.assign(JSON.parse(JSON.stringify(ND_DEFAULT)), res.data.data);
       // Sync to localStorage as cache
       try{ localStorage.setItem(window.STORAGE_KEY, JSON.stringify(ND)); }catch(e){}
+      // Sync settings from cloud to localStorage
+      if(ND.settings) try{ var ls=JSON.parse(localStorage.getItem('numa_settings')||'{}'); localStorage.setItem('numa_settings',JSON.stringify(Object.assign(ls,ND.settings))); }catch(e){}
       console.log('[Numa] Loaded from cloud');
     } else {
       // No cloud data — upload current localStorage data
@@ -2788,8 +2791,7 @@ function renderCF(c){
   function _bindInc(id,key){
     var el=$( id);if(!el)return;
     if(!el._bound){el._bound=true;el.value=ND.income[key]||'';}
-    el.oninput=function(){ND.income[key]=parseNum(this.value);saveToStorage();};
-    el.onblur=function(){render();};
+    el.oninput=function(){ND.income[key]=parseNum(this.value);saveToStorage();render();};
   }
 
   // Summary rows
@@ -2829,8 +2831,7 @@ function renderCF(c){
         expCats.appendChild(row);
         var inp=row.querySelector('input');
         inp.value=ND.expenses[cat.k]||'';
-        inp.addEventListener('input',function(){ND.expenses[cat.k]=parseFloat(this.value)||0;saveToStorage();});
-        inp.addEventListener('blur',function(){render();smartToast('expense');});
+        inp.addEventListener('input',function(){ND.expenses[cat.k]=parseFloat(this.value)||0;saveToStorage();render();});
       });
     } else {
       // just update values
@@ -2991,15 +2992,22 @@ function renderMissions(c){
 /* ── RENDER: FIRE PAGE ── */
 function renderFIREPage(){
   var c = calc();
-  // Sync age input from profile
+  // Sync inputs from profile and persist changes back
   var ageIn = document.getElementById('fire-age-in');
-  if(ageIn && !ageIn._synced){ ageIn._synced=true; ageIn.value = ND.profile.age||''; }
+  if(ageIn && !ageIn._synced){
+    ageIn._synced=true; ageIn.value = ND.profile.age||'';
+    ageIn.addEventListener('input',function(){ND.profile.age=parseInt(this.value)||35;saveToStorage();});
+  }
   var retireIn = document.getElementById('fire-retire-in');
+  if(retireIn && !retireIn._synced){
+    retireIn._synced=true;
+    retireIn.addEventListener('input',function(){ND.profile.retireAge=parseInt(this.value)||60;saveToStorage();});
+  }
   var wrIn = document.getElementById('fire-wr');
   var retIn = document.getElementById('fire-ret');
   var withdrawRate = parseFloat((wrIn&&wrIn.value)||4)/100;
   var returnRate   = parseFloat((retIn&&retIn.value)||7)/100;
-  var retireAge    = parseInt((retireIn&&retireIn.value)||60);
+  var retireAge    = parseInt((retireIn&&retireIn.value)||ND.profile.retireAge||60);
   var currentAge   = parseInt((ageIn&&ageIn.value)||ND.profile.age||35);
 
   var annualExp  = c.totalExpenses * 12;
@@ -3168,6 +3176,7 @@ function saveAddModal(type){
   closeS('add');
   render();
   renderSTFull();
+  try{renderAssetsHub();}catch(e){}
   try{drawInvChart();}catch(e){}
   try{updateInvMiniChart();}catch(e){}
   setTimeout(function(){
@@ -3180,6 +3189,8 @@ function deleteND(type, id){
   if(!confirm('למחוק?')) return;
   ND[type] = ND[type].filter(function(x){return x.id!==id;});
   saveToStorage(); render(); renderSTFull();
+  try{renderAssetsHub();}catch(e){}
+  try{syncSimFromInvestments();}catch(e){}
   showToast('נמחק');
 }
 
@@ -3213,6 +3224,15 @@ function renderSTFull(){
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.balance)+'</div>'+
       '<div style="font-size:10px;color:#6B7A96;cursor:pointer" onclick="deleteND(\'hishtalmut\',\''+x.id+'\')">מחק</div></div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין קרן השתלמות — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'hishtalmut\')">+ הוסף</span></div>');
+
+  // Gamel list
+  _renderList('gamel-list', ND.gamel, function(x){
+    return '<div class="ar"><div class="aic" style="background:rgba(160,120,64,.1)">💰</div>'+
+      '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
+      '<div style="font-size:10px;color:#A8A8B0">הפקדה ₪'+Math.round(x.monthlyDeposit).toLocaleString()+'/חודש</div></div>'+
+      '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.balance)+'</div>'+
+      '<span style="font-size:10px;color:#6B7A96;cursor:pointer" onclick="deleteND(\'gamel\',\''+x.id+'\')">מחק</span></div></div>';
+  }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין גמל להשקעה — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'gamel\')">+ הוסף</span></div>');
 
   // Investments list
   _renderList('inv-list', ND.investments, function(x){
@@ -3309,9 +3329,7 @@ function bindExpenseInputs(){
     var inp = row.querySelector('input');
     inp.addEventListener('input', function(){
       ND.expenses[key] = parseFloat(this.value)||0;
-      saveToStorage();
-    });
-    inp.addEventListener('blur', function(){ render();
+      saveToStorage(); render();
     });
     expInputsDiv.appendChild(row);
   });
@@ -3355,10 +3373,9 @@ function bindCashInput(){
   if(cashInp && !cashInp._bound){
     cashInp._bound = true;
     cashInp.value = ND.cash || '';
-    cashInp.addEventListener('change', function(){
+    cashInp.addEventListener('input', function(){
       ND.cash = parseNum(this.value);
-      saveToStorage(); render();
-      smartToast('cash');
+      saveToStorage(); render(); try{renderAssetsHub();}catch(e){}
     });
   }
 }
@@ -5478,13 +5495,25 @@ function applyVis(key, show){
 /* ══ SETTINGS PAGE ══ */
 var SETTINGS_DEFAULTS={returnRate:7,withdrawalRate:4,inflation:3,capitalGainsTax:25,employment:'שכיר',family:'family',categories:{pension:1,investments:1,realestate:0,insurance:1,loans:1,legacy:0,fire:1,sync:1}};
 function getSettings(){
-  try{var s=JSON.parse(localStorage.getItem('numa_settings')||'{}');return Object.assign(JSON.parse(JSON.stringify(SETTINGS_DEFAULTS)),s);}catch(e){return JSON.parse(JSON.stringify(SETTINGS_DEFAULTS));}
+  try{
+    var base=JSON.parse(JSON.stringify(SETTINGS_DEFAULTS));
+    // Merge from ND.settings (cloud-synced) then localStorage (local overrides)
+    if(ND.settings) Object.assign(base,ND.settings);
+    var local=JSON.parse(localStorage.getItem('numa_settings')||'{}');
+    Object.assign(base,local);
+    return base;
+  }catch(e){return JSON.parse(JSON.stringify(SETTINGS_DEFAULTS));}
 }
 function saveSetting(key,val){
   var s=getSettings();
   if(typeof val==='object') s[key]=Object.assign(s[key]||{},val);
   else s[key]=val;
   localStorage.setItem('numa_settings',JSON.stringify(s));
+  // Also persist to ND so it syncs to Supabase
+  if(!ND.settings) ND.settings={};
+  if(typeof val==='object') ND.settings[key]=Object.assign(ND.settings[key]||{},val);
+  else ND.settings[key]=val;
+  saveToStorage();
 }
 function openSettings(){
   var ov=document.getElementById('settings-overlay');if(!ov)return;
@@ -5507,8 +5536,8 @@ function openSettings(){
 }
 function closeSettings(){
   var ov=document.getElementById('settings-overlay');if(ov)ov.style.display='none';
-  // Re-apply categories
   applyCategoryToggles();
+  render();
 }
 function openSetPicker(type){
   if(type==='employment'){document.getElementById('set-emp-picker').style.display='block';}
@@ -5521,13 +5550,13 @@ function pickEmployment(val){
 }
 function setFamily(val){
   document.querySelectorAll('#set-family-chips .set-chip').forEach(function(c){c.classList.toggle('on',c.dataset.val===val);});
+  ND.profile.family=val;
   saveSetting('family',val);
 }
 function toggleCat(btn){
   btn.classList.toggle('on');
   var cat=btn.dataset.cat;var on=btn.classList.contains('on');
-  var s=getSettings();if(!s.categories)s.categories={};s.categories[cat]=on?1:0;
-  localStorage.setItem('numa_settings',JSON.stringify(s));
+  saveSetting('categories',{[cat]:on?1:0});
   applyCategoryToggles();
 }
 function applyCategoryToggles(){
