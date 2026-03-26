@@ -2616,7 +2616,7 @@ function renderAIInsights(c){
     }
   }
 }
-function checkCelebrations(c){
+function checkCelebrations(c){ return; /* disabled — popups removed */
   var celebrated = JSON.parse(localStorage.getItem('numa_celebrated')||'{}');
   var show = null;
 
@@ -3434,7 +3434,7 @@ function showToast(msg,sub){
   t.classList.add('show');
   setTimeout(function(){t.classList.remove('show')},3000);
 }
-function smartToast(type){
+function smartToast(type){ return; /* disabled — popups removed */
   var cv=calc();
   var m={
     income:['✓ הכנסה עודכנה',cv.totalIncome>0?'Numa מחשבת מחדש את כל התחזיות':''],
@@ -4066,7 +4066,7 @@ function obEnterApp(){
   setTimeout(function(){try{drawProj();drawInvChart();startCountUp();}catch(e){}},600);
   var nm = ND.profile.name || '';
   setTimeout(function(){
-    showToast(nm ? 'ברוך הבא, '+nm+'! 🎉' : 'ברוך הבא ל-Numa! 🎉');
+    // welcome toast disabled
     // Update greeting immediately
     var greetEl = document.getElementById('top-greeting');
     if(greetEl && nm){
@@ -4655,10 +4655,7 @@ function _showApp(isNewLogin=false){
     if(avBtn) avBtn.textContent=(name[0]||'N').toUpperCase();
     // Personalized greeting in topbar (uses t() for language)
     try{applyLanguage();}catch(e){}
-    // Welcome toast on login
-    if(isNewLogin && typeof showToast==='function'){
-      showToast('ברוך הבא'+(name?', '+name:'')+'!','Numa מחשבת את המצב שלך');
-    }
+    // Welcome toast disabled
     const uid=(currentUser.id||'').slice(0,8);
     const key='numa_v2_'+uid;
     window.STORAGE_KEY=key;
