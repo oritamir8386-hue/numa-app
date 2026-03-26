@@ -1810,27 +1810,7 @@ function render(){
   var nwEl = document.getElementById('hero-nw');
   if(nwEl){ nwEl.dataset.target = Math.round(c.netWorth); nwEl._counted = false; nwEl.textContent = fmt(c.netWorth); }
 
-  // Demo mode for empty state
-  var demoMode = c.totalIncome === 0 && c.totalAssets === 0;
-  var demoBanner = document.getElementById('demo-banner');
-  if(demoMode){
-    if(nwEl) nwEl.textContent = '₪1,847,320';
-    var scoreNum = document.getElementById('score-num');
-    if(scoreNum) scoreNum.textContent = '74';
-    var scoreLbl = document.getElementById('score-lbl');
-    if(scoreLbl) scoreLbl.textContent = 'טוב מאוד';
-    if(!demoBanner){
-      var b = document.createElement('div');
-      b.id = 'demo-banner';
-      b.style.cssText = 'background:rgba(160,120,64,.08);border:.5px solid rgba(160,120,64,.2);border-radius:10px;padding:8px 12px;text-align:center;font-size:11px;color:#A07840;font-weight:600;cursor:pointer';
-      b.innerHTML = '👆 זו דוגמה — הוסף נתונים לראות את המצב האמיתי שלך';
-      b.onclick = function(){ document.getElementById('gs-cashflow')?.scrollIntoView({behavior:'smooth'}); };
-      var heroCard = nwEl?.closest('.hc');
-      if(heroCard) heroCard.parentNode.insertBefore(b, heroCard.nextSibling);
-    }
-  } else if(demoBanner){
-    demoBanner.remove();
-  }
+  // No fake data — show — when empty
 
   // Score arc (circumference = 2π×30 ≈ 188.5)
   var arcEl = document.querySelector('.score-arc-anim');
@@ -5033,17 +5013,25 @@ function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,toda
   // Update label
   var rangeLbl=document.getElementById('nw-chart-range-lbl');
   if(rangeLbl) rangeLbl.textContent=totalRange+' שנים קדימה';
-  // Demo data
-  var demoMode=nw<=0;
-  if(demoMode) nw=1847000;
+  // No fake data — if no NW, show empty chart with grid only
+  if(nw<=0 && savY<=0){
+    var lineEl=document.getElementById(lineId);if(lineEl)lineEl.setAttribute('d','');
+    var areaEl=document.getElementById(areaId);if(areaEl)areaEl.setAttribute('d','');
+    var projLine=document.getElementById(projLineId);if(projLine)projLine.setAttribute('d','');
+    var todayG=document.getElementById(todayId);if(todayG)todayG.innerHTML='';
+    var xlG=document.getElementById(xlabelsId);
+    if(xlG){xlG.innerHTML='<text x="20" y="'+(H-4)+'" text-anchor="start" font-size="8" fill="#A8A8B0" font-family="inherit">'+startYear+'</text><text x="'+(W/2)+'" y="'+(H-4)+'" text-anchor="middle" font-size="8" fill="#A8A8B0" font-family="inherit">'+currentYear+'</text><text x="'+(W-20)+'" y="'+(H-4)+'" text-anchor="end" font-size="8" fill="#A8A8B0" font-family="inherit">'+(currentYear+projYears)+'</text>';}
+    window._nwChartData={pts:[],startYear:startYear,todayIdx:0,nw:0};
+    return;
+  }
   var pts=[];
   for(var i=0;i<=histYears;i++){
-    var val=demoMode?Math.round(200000+1647000*(i/histYears)):Math.max(nw*Math.pow(1+rate,i-histYears),0);
+    var val=Math.max(nw*Math.pow(1+rate,i-histYears),0);
     pts.push({year:startYear+i,val:val,proj:false});
   }
   var lastVal=pts[pts.length-1].val;
   for(var j=1;j<=projYears;j++){
-    pts.push({year:currentYear+j,val:lastVal*Math.pow(1+rate,j)+(demoMode?0:savY*j),proj:true});
+    pts.push({year:currentYear+j,val:lastVal*Math.pow(1+rate,j)+savY*j,proj:true});
   }
   var maxVal=Math.max.apply(null,pts.map(function(p){return p.val;}))||1;
   // Store for tap handler
