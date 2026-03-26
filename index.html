@@ -584,7 +584,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div id="user-avatar-btn" onclick="toggleAvatarMenu()" style="width:36px;height:36px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#F5F2EC;cursor:pointer">N</div>
       <div id="avatar-menu" style="display:none;position:absolute;top:42px;left:0;background:#fff;border:.5px solid #E8DCC8;border-radius:12px;width:180px;box-shadow:0 4px 16px rgba(0,0,0,.12);z-index:100;overflow:hidden">
         <div onclick="goSub('settings');toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid #E8DCC8"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span> הגדרות</div>
-        <div onclick="goP('tools');toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid #E8DCC8"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> פרופיל</div>
+        <div onclick="goP('tools');toggleAvatarMenu();setTimeout(function(){document.getElementById('set-name-inp')?.focus()},300)" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid #E8DCC8"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> פרופיל</div>
         <div onclick="authSignOut();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#A32D2D;cursor:pointer;display:flex;align-items:center;gap:8px"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span> התנתק</div>
       </div>
     </div>
@@ -978,12 +978,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <!-- הגדרות -->
 <div class="pg" id="pg-settings">
   <button class="bk" onclick="goB()">← חזרה</button>
-  <div class="c">
-    <div class="ch"><div class="ct">פרופיל אישי</div></div>
-    <div class="fi2"><div><div class="il">שם</div><input class="inp" id="set-name-inp" placeholder="שמך"/></div><div><div class="il">גיל</div><input class="inp" placeholder="גילך" type="number"/></div></div>
-    <div><div class="il">מצב תעסוקה</div><select class="inp" style="margin-bottom:7px"><option>שכיר</option><option>הייטק</option><option>עצמאי</option><option>גמלאי</option></select></div>
-    <div class="fi2"><div><div class="il">מצב משפחתי</div><select class="inp"><option>נשוי/ה</option><option>רווק/ה</option></select></div><div><div class="il">ילדים</div><input class="inp" placeholder="מס׳"  type="number"/></div></div>
-  </div>
   <div class="c">
     <div class="ch"><div class="ct">הגדרות חישוב</div></div>
     <div class="fi2"><div><div class="il">תשואה ברירת מחדל %</div><input class="inp" value="7"/></div><div><div class="il">אינפלציה %</div><input class="inp" value="3.5"/></div></div>
@@ -1509,6 +1503,23 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .tc-chip .lbl{font-size:9px;margin-top:2px}
 </style>
 <div class="pg" id="pg-tools" style="gap:14px;padding:14px 18px 20px">
+
+  <!-- ── פרופיל אישי ── -->
+  <div class="tc" style="height:auto">
+    <div class="tc-hdr">
+      <div><h3>פרופיל אישי</h3><p>הפרטים שלך</p></div>
+      <div class="tc-ico" onclick="goSub('settings')"><span class="ic" style="color:#6B7A96"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span></div>
+    </div>
+    <div class="tc-body">
+      <div class="tc-g2">
+        <div><div class="tc-il">שם</div><input class="tc-inp" id="set-name-inp" placeholder="שמך" style="direction:rtl;text-align:right"/></div>
+        <div><div class="tc-il">גיל</div><input class="tc-inp" placeholder="גילך" type="number"/></div>
+        <div><div class="tc-il">מצב תעסוקה</div><select class="tc-inp" style="direction:rtl"><option>שכיר</option><option>הייטק</option><option>עצמאי</option><option>גמלאי</option></select></div>
+        <div><div class="tc-il">מצב משפחתי</div><select class="tc-inp" style="direction:rtl"><option>נשוי/ה</option><option>רווק/ה</option></select></div>
+      </div>
+      <div style="margin-top:8px"><div class="tc-il">ילדים</div><input class="tc-inp" placeholder="מספר ילדים" type="number" style="width:100px"/></div>
+    </div>
+  </div>
 
   <!-- ── CARD 1: מחשבון שכר נטו ── -->
   <div class="tc">
