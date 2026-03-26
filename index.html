@@ -827,55 +827,14 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:8px" id="weekly-timestamp"></div>
   </div>
 
-  <!-- ⑤ ASSETS — donut breakdown -->
-  <div class="c">
-    <div class="ch"><div class="ct">פירוט נכסים</div><span class="bdg Bb" id="assets-total">₪0</span></div>
-    <svg id="assets-donut" width="88" height="88" viewBox="0 0 88 88" style="display:block;margin:4px auto 8px">
-      <style>
-        @keyframes donutFadeIn{from{opacity:0;stroke-dasharray:0 214}to{opacity:1}}
-        #donut-pen,#donut-re,#donut-inv,#donut-cash{animation:donutFadeIn .6s ease-out both}
-        #donut-pen{animation-delay:.1s}#donut-re{animation-delay:.2s}#donut-inv{animation-delay:.3s}#donut-cash{animation-delay:.4s}
-      </style>
-      <circle cx="44" cy="44" r="34" fill="none" stroke="rgba(30,45,74,.12)" stroke-width="12"/>
-      <circle id="donut-pen" cx="44" cy="44" r="34" fill="none" stroke="#A07840" stroke-width="12" stroke-dasharray="0 214" stroke-linecap="butt" transform="rotate(-90 44 44)"/>
-      <circle id="donut-re"  cx="44" cy="44" r="34" fill="none" stroke="#1E2D4A" stroke-width="12" stroke-dasharray="0 214" stroke-linecap="butt" transform="rotate(-90 44 44)"/>
-      <circle id="donut-inv" cx="44" cy="44" r="34" fill="none" stroke="#C9A96E" stroke-width="12" stroke-dasharray="0 214" stroke-linecap="butt" transform="rotate(-90 44 44)"/>
-      <circle id="donut-cash" cx="44" cy="44" r="34" fill="none" stroke="#6B7A96" stroke-width="12" stroke-dasharray="0 214" stroke-linecap="butt" transform="rotate(-90 44 44)"/>
-      <text x="44" y="48" text-anchor="middle" font-size="10" font-weight="500" fill="#444" font-family="inherit" id="donut-total-lbl">נכסים</text>
-    </svg>
-    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#A07840"></div>פנסיה+קה"ש</div><div class="dv" style="font-size:10px" id="ap-pen">₪0</div></div>
-    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#1E2D4A"></div>נדל"ן</div><div class="dv" style="font-size:10px" id="ap-re">₪0</div></div>
-    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#C9A96E"></div>השקעות</div><div class="dv" style="font-size:10px" id="ap-inv">₪0</div></div>
-    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#6B7A96"></div>נזיל</div><div class="dv" style="font-size:10px" id="ap-cash">₪0</div></div>
-  </div>
-
-  <!-- ⑥ CASHFLOW — monthly summary (compact) -->
-  <div class="c" id="cashflow-unified" style="height:234px;overflow:hidden;padding:12px 20px 18px;display:flex;flex-direction:column;gap:10px">
-    <div style="display:flex;align-items:center;gap:8px">
-      <span style="font-size:16px">📊</span>
-      <div>
-        <div style="font-size:13px;font-weight:600;color:#1E2D4A">תזרים חודשי</div>
-        <div style="font-size:10px;color:#6B7A96">הכנסה · הוצאה · חיסכון</div>
-      </div>
-    </div>
-    <div style="height:0.5px;background:rgba(0,0,0,0.06)"></div>
-    <div id="mir-chart-wrap" style="display:flex;flex-direction:row;justify-content:space-around;align-items:flex-end;height:72px;flex-shrink:0">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="display:flex;flex-direction:row;gap:3px;align-items:flex-end"><div style="width:13px;height:4px;background:rgba(30,45,74,0.12);border-radius:4px 4px 0 0"></div><div style="width:13px;height:4px;background:rgba(200,169,106,0.15);border-radius:4px 4px 0 0"></div></div><span style="font-size:9px;color:#8a8a8a">—</span></div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="display:flex;flex-direction:row;gap:3px;align-items:flex-end"><div style="width:13px;height:4px;background:rgba(30,45,74,0.12);border-radius:4px 4px 0 0"></div><div style="width:13px;height:4px;background:rgba(200,169,106,0.15);border-radius:4px 4px 0 0"></div></div><span style="font-size:9px;color:#8a8a8a">—</span></div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="display:flex;flex-direction:row;gap:3px;align-items:flex-end"><div style="width:13px;height:4px;background:rgba(30,45,74,0.12);border-radius:4px 4px 0 0"></div><div style="width:13px;height:4px;background:rgba(200,169,106,0.15);border-radius:4px 4px 0 0"></div></div><span style="font-size:9px;color:#8a8a8a">—</span></div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="display:flex;flex-direction:row;gap:3px;align-items:flex-end"><div style="width:13px;height:4px;background:rgba(30,45,74,0.12);border-radius:4px 4px 0 0"></div><div style="width:13px;height:4px;background:rgba(200,169,106,0.15);border-radius:4px 4px 0 0"></div></div><span style="font-size:9px;color:#8a8a8a">—</span></div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="display:flex;flex-direction:row;gap:3px;align-items:flex-end"><div style="width:13px;height:4px;background:rgba(30,45,74,0.12);border-radius:4px 4px 0 0"></div><div style="width:13px;height:4px;background:rgba(200,169,106,0.15);border-radius:4px 4px 0 0"></div></div><span style="font-size:9px;color:#8a8a8a">—</span></div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="display:flex;flex-direction:row;gap:3px;align-items:flex-end"><div style="width:13px;height:4px;background:rgba(30,45,74,0.12);border-radius:4px 4px 0 0"></div><div style="width:13px;height:4px;background:rgba(200,169,106,0.15);border-radius:4px 4px 0 0"></div></div><span style="font-size:9px;color:#8a8a8a">—</span></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;flex-shrink:0">
-      <div style="background:#ede9e0;border-radius:12px;padding:10px 8px;text-align:center"><div style="font-size:10px;color:#8a8a8a;margin-bottom:2px">הכנסה</div><div style="font-size:14px;font-weight:700;color:#8a8a8a" id="mir-inc">—</div></div>
-      <div style="background:#ede9e0;border-radius:12px;padding:10px 8px;text-align:center"><div style="font-size:10px;color:#8a8a8a;margin-bottom:2px">הוצאות</div><div style="font-size:14px;font-weight:700;color:#8a8a8a" id="mir-exp">—</div></div>
-      <div style="background:#ede9e0;border-radius:12px;padding:10px 8px;text-align:center"><div style="font-size:10px;color:#8a8a8a;margin-bottom:2px">חיסכון</div><div style="font-size:14px;font-weight:700;color:#8a8a8a" id="mir-sav">—</div></div>
-    </div>
-    <div style="text-align:center;font-size:11px;color:#8a8a8a" id="mir-avg">הזן תזרים לצפייה</div>
-  </div>
-
   <!-- Hidden elements for JS compatibility -->
+  <div style="display:none">
+    <span id="assets-total"></span><span id="donut-total-lbl"></span>
+    <span id="ap-pen"></span><span id="ap-re"></span><span id="ap-inv"></span><span id="ap-cash"></span>
+    <svg id="assets-donut"><circle id="donut-pen"/><circle id="donut-re"/><circle id="donut-inv"/><circle id="donut-cash"/></svg>
+    <span id="mir-inc"></span><span id="mir-exp"></span><span id="mir-sav"></span><span id="mir-avg"></span>
+    <div id="mir-chart-wrap"></div><div id="cashflow-unified"></div>
+  </div>
   <div style="display:none">
     <div id="action-cards">
       <div id="focus-action-card"><div id="focus-action-text">—</div><button id="focus-action-btn"></button></div>
