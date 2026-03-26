@@ -4685,21 +4685,33 @@ function initSupabase(){
     _sb=window.supabase.createClient(SUPA_URL,SUPA_KEY,{
       auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}
     });
+    // Detect OAuth redirect (hash contains access_token)
+    var _isOAuthReturn=window.location.hash&&window.location.hash.includes('access_token');
+    // Clean hash immediately to prevent loops
+    if(_isOAuthReturn){
+      history.replaceState(null,'',window.location.pathname+window.location.search);
+    }
+    var _initialSessionHandled=false;
     _sb.auth.onAuthStateChange((event,session)=>{
       console.log('[Numa Auth]',event,session?.user?.email||'');
       if(event==='SIGNED_OUT'){
         currentUser=null;
         _showApp_done=false;
         _showAuth();
-      } else if(session){
+      } else if(event==='SIGNED_IN'&&session&&_initialSessionHandled){
+        // Email/password login (not initial page load)
         currentUser=session.user;
-        // SIGNED_IN = real login (not refresh). Show app if not already shown.
-        _showApp(event==='SIGNED_IN');
+        _showApp(true);
       }
     });
     _sb.auth.getSession().then(({data:{session}})=>{
-      if(session){currentUser=session.user;_showApp(false);}
-      else{_showAuth();}
+      _initialSessionHandled=true;
+      if(session){
+        currentUser=session.user;
+        _showApp(_isOAuthReturn);
+      } else {
+        _showAuth();
+      }
     });
   }catch(e){
     console.error('[Numa Auth] Init failed:',e);
