@@ -595,253 +595,177 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <div class="scr" id="scr">
 
 <!-- ══════════════════ סקירה ══════════════════ -->
-<div class="pg on" id="pg-ov" style="gap:10px">
+<div class="pg on" id="pg-ov" style="gap:9px;padding:14px 18px 20px">
 
-  <!-- ══ סקירה — above the fold: hero → action → stats ══ -->
-
-  <!-- ① HERO — Net Worth -->
-  <div class="hc" style="padding:12px 14px 10px">
-    <div style="font-size:10px;color:#A8A8B0;font-weight:600;margin-bottom:2px">שווי נטו כולל</div>
-    <div style="font-size:34px;font-weight:800;letter-spacing:-2px;color:#1E2D4A;line-height:1" id="hero-nw" data-target="0">₪0</div>
-    <div style="font-size:10px;color:#A8A8B0;margin-top:3px" id="nw-trend"><a onclick="goP('assets')" style="color:#A07840;cursor:pointer;font-weight:600;text-decoration:none">הוסף נכסים לראות את הצמיחה שלך → התחל</a></div>
+  <!-- ── HERO (navy) ── -->
+  <div class="tc" style="height:auto;background:#1E2D4A;color:#F5F2EC">
+    <div class="tc-body" style="padding:16px 20px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div><div style="font-size:10px;color:rgba(255,255,255,.45)">שווי נטו כולל</div><div style="font-size:32px;font-weight:800;color:#F5F2EC;letter-spacing:-2px;line-height:1" id="hero-nw">—</div></div>
+        <div style="text-align:left"><div style="font-size:9px;color:rgba(255,255,255,.3)">תחזית 25 שנה</div><div style="font-size:14px;font-weight:700;color:#8a8a8a" id="hero-proj">—</div></div>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:10px">
+        <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#8a8a8a;font-size:11px" id="qs-inc">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">תזרים חודשי</div></div>
+        <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#8a8a8a;font-size:11px" id="qs-rate">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">שיעור חיסכון</div></div>
+        <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#8a8a8a;font-size:11px" id="qs-fire-age">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">FIRE בגיל</div></div>
+      </div>
+    </div>
   </div>
-  <!-- FIRE pill — moved below fold -->
-  <div style="display:none">
-    <div id="fire-hero-pill"><span id="mv-fire">הגדר יעד</span><span id="ms-fire">גלה מתי תהיה חופשי</span></div>
+
+  <!-- ── CARD 1: Numa Score ── -->
+  <div class="tc" style="height:234px">
+    <div class="tc-hdr"><div><h3>Numa Score</h3><p>מדד הבריאות הפיננסית שלך</p></div><div class="tc-ico"><span style="font-size:18px">⚡</span></div></div>
+    <div class="tc-body">
+      <div style="display:flex;align-items:center;gap:14px;direction:ltr">
+        <div style="position:relative;width:110px;height:110px;flex-shrink:0">
+          <svg width="110" height="110" viewBox="0 0 110 110">
+            <circle cx="55" cy="55" r="46" fill="none" stroke="#eee" stroke-width="11"/>
+            <circle id="ring-cashflow" cx="55" cy="55" r="46" fill="none" stroke="#1E2D4A" stroke-width="11" stroke-dasharray="0 289" stroke-dashoffset="0" transform="rotate(-90 55 55)"/>
+            <circle id="ring-savings" cx="55" cy="55" r="46" fill="none" stroke="#27ae60" stroke-width="11" stroke-dasharray="0 289" stroke-dashoffset="-72.26" transform="rotate(-90 55 55)"/>
+            <circle id="ring-insurance" cx="55" cy="55" r="46" fill="none" stroke="#c8a96a" stroke-width="11" stroke-dasharray="0 289" stroke-dashoffset="-144.51" transform="rotate(-90 55 55)"/>
+            <circle id="ring-planning" cx="55" cy="55" r="46" fill="none" stroke="#e07b5a" stroke-width="11" stroke-dasharray="0 289" stroke-dashoffset="-216.77" transform="rotate(-90 55 55)"/>
+          </svg>
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+            <div style="font-size:28px;font-weight:800;color:#8a8a8a;line-height:1" id="score-num">—</div>
+            <div style="font-size:8px;color:#8a8a8a;margin-top:2px">Numa Score</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;direction:rtl;flex:1">
+          <div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:#1E2D4A;flex-shrink:0"></div><div style="flex:1;font-size:10px;font-weight:600;color:#1E2D4A">תזרים</div><div style="font-size:10px;font-weight:700;color:#8a8a8a" id="ring-score-cf">—</div></div>
+          <div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:#27ae60;flex-shrink:0"></div><div style="flex:1;font-size:10px;font-weight:600;color:#1E2D4A">חיסכון</div><div style="font-size:10px;font-weight:700;color:#8a8a8a" id="ring-score-sav">—</div></div>
+          <div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:#c8a96a;flex-shrink:0"></div><div style="flex:1;font-size:10px;font-weight:600;color:#1E2D4A">ביטוח</div><div style="font-size:10px;font-weight:700;color:#8a8a8a" id="ring-score-ins">—</div></div>
+          <div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:#e07b5a;flex-shrink:0"></div><div style="flex:1;font-size:10px;font-weight:600;color:#1E2D4A">תכנון</div><div style="font-size:10px;font-weight:700;color:#8a8a8a" id="ring-score-plan">—</div></div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- NUMA SCORE — Compact Donut -->
-  <div class="c" style="padding:10px 14px" onclick="var bd=document.getElementById('score-breakdown');if(bd)bd.style.display=bd.style.display==='none'?'block':'none'">
-    <div style="display:flex;align-items:center;gap:14px;direction:ltr">
-      <div style="position:relative;width:96px;height:96px;flex-shrink:0">
-        <svg width="96" height="96" viewBox="0 0 200 200">
-          <style>
-            @keyframes arcDraw{from{stroke-dasharray:0 565.49}to{}}
-            .ring-arc{animation:arcDraw .8s ease-out both}
-          </style>
-          <circle cx="100" cy="100" r="90" fill="none" stroke="#E8DCC8" stroke-width="18" opacity=".25"/>
-          <circle id="ring-cashflow" cx="100" cy="100" r="90" fill="none" stroke="#2b3a5c" stroke-width="18" stroke-dasharray="0 565.49" stroke-dashoffset="0" transform="rotate(-90 100 100)" class="ring-arc" style="animation-delay:.1s"/>
-          <circle id="ring-savings" cx="100" cy="100" r="90" fill="none" stroke="#27ae60" stroke-width="18" stroke-dasharray="0 565.49" stroke-dashoffset="-141.37" transform="rotate(-90 100 100)" class="ring-arc" style="animation-delay:.2s"/>
-          <circle id="ring-insurance" cx="100" cy="100" r="90" fill="none" stroke="#c8a96a" stroke-width="18" stroke-dasharray="0 565.49" stroke-dashoffset="-282.74" transform="rotate(-90 100 100)" class="ring-arc" style="animation-delay:.3s"/>
-          <circle id="ring-planning" cx="100" cy="100" r="90" fill="none" stroke="#e07b5a" stroke-width="18" stroke-dasharray="0 565.49" stroke-dashoffset="-424.12" transform="rotate(-90 100 100)" class="ring-arc" style="animation-delay:.4s"/>
+  <!-- ── GROWTH CHART (no fixed height) ── -->
+  <div class="tc" style="height:auto">
+    <div class="tc-hdr">
+      <div><h3>מסע הצמיחה שלך</h3><p id="nw-chart-range-lbl">10 שנים קדימה</p></div>
+    </div>
+    <div class="tc-body" style="position:relative">
+      <div id="nw-tooltip" style="display:none;position:absolute;background:#1E2D4A;color:#F5F2EC;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:600;white-space:nowrap;z-index:10;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.2);transform:translateX(-50%)">
+        <div id="nw-tooltip-year" style="font-size:9px;color:#C9A96E;margin-bottom:1px"></div>
+        <div id="nw-tooltip-val"></div>
+        <div id="nw-tooltip-diff" style="font-size:9px;color:rgba(255,255,255,.5);margin-top:1px"></div>
+      </div>
+      <div id="nw-scroll-wrap" style="overflow-x:auto;overflow-y:hidden;margin:0 -20px;padding:0 20px">
+        <svg id="nw-timeline-svg" width="100%" viewBox="0 0 320 110" preserveAspectRatio="xMidYMid meet" style="display:block;min-width:320px;cursor:crosshair" onclick="handleNWTap(event)" ontouchmove="handleNWTap(event)">
+          <defs>
+            <linearGradient id="nwFillGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#A07840" stop-opacity="0.1"/><stop offset="100%" stop-color="#A07840" stop-opacity="0"/></linearGradient>
+            <clipPath id="nwLineClip"><rect x="0" y="0" width="320" height="110"><animate attributeName="width" from="0" to="320" dur="1.2s" fill="freeze"/></rect></clipPath>
+          </defs>
+          <line x1="20" y1="25" x2="300" y2="25" stroke="rgba(0,0,0,.05)" stroke-width=".5"/>
+          <line x1="20" y1="50" x2="300" y2="50" stroke="rgba(0,0,0,.05)" stroke-width=".5"/>
+          <line x1="20" y1="75" x2="300" y2="75" stroke="rgba(0,0,0,.05)" stroke-width=".5"/>
+          <path id="nw-area-solid" d="" fill="url(#nwFillGrad)" clip-path="url(#nwLineClip)"/>
+          <path id="nw-line-solid" d="" fill="none" stroke="#1E2D4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#nwLineClip)"/>
+          <path id="nw-line-proj" d="" fill="none" stroke="#A07840" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5 4" clip-path="url(#nwLineClip)"><animate attributeName="stroke-dashoffset" from="9" to="0" dur="1.5s" repeatCount="indefinite"/></path>
+          <path id="nw-area-proj" d="" fill="none"/>
+          <g id="nw-milestones"></g>
+          <g id="nw-today-marker"></g>
+          <g id="nw-x-labels"></g>
+          <g id="nw-tap-marker" style="display:none"></g>
         </svg>
-        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-          <div style="font-size:26px;font-weight:800;color:#1E2D4A;line-height:1" id="score-num">0</div>
-          <div style="font-size:8px;color:#6B7A96;margin-top:2px">Numa Score</div>
-        </div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:7px;direction:rtl;flex:1">
-        <div style="display:flex;align-items:center;gap:6px">
-          <div style="width:8px;height:8px;border-radius:50%;background:#2b3a5c;flex-shrink:0"></div>
-          <div style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">תזרים</div>
-          <div style="font-size:10px;font-weight:700;color:#2b3a5c" id="ring-score-cf">—</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <div style="width:8px;height:8px;border-radius:50%;background:#27ae60;flex-shrink:0"></div>
-          <div style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">חיסכון</div>
-          <div style="font-size:10px;font-weight:700;color:#27ae60" id="ring-score-sav">—</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <div style="width:8px;height:8px;border-radius:50%;background:#c8a96a;flex-shrink:0"></div>
-          <div style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">ביטוח</div>
-          <div style="font-size:10px;font-weight:700;color:#c8a96a" id="ring-score-ins">—</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <div style="width:8px;height:8px;border-radius:50%;background:#e07b5a;flex-shrink:0"></div>
-          <div style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">תכנון</div>
-          <div style="font-size:10px;font-weight:700;color:#e07b5a" id="ring-score-plan">—</div>
-        </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
+        <span style="font-size:9px;color:#6B7A96">2</span>
+        <input type="range" id="nw-range-sl" min="2" max="30" step="1" value="10" style="flex:1;accent-color:#A07840" oninput="window._nwRange=parseInt(this.value);renderNWTimelineSVG()"/>
+        <span style="font-size:9px;color:#6B7A96">30</span>
       </div>
+      <div style="display:flex;gap:6px;margin-top:8px;padding-top:8px;border-top:.5px solid rgba(0,0,0,.06)">
+        <input class="tc-inp" id="milestone-inp" placeholder="אירוע חיים" style="flex:1;direction:rtl;text-align:right"/>
+        <input class="tc-inp" id="milestone-year" type="number" placeholder="שנה" style="width:60px;text-align:center"/>
+        <button onclick="addMilestoneWithYear()" style="background:#1E2D4A;color:#fff;border:none;border-radius:9px;padding:7px 10px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">+ הוסף</button>
+      </div>
+      <div id="milestone-list" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px"></div>
     </div>
+  </div>
 
-    <!-- Breakdown (hidden, toggled on tap) -->
-    <div id="score-breakdown" style="display:none;margin-top:10px;text-align:right">
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-top:.5px solid rgba(30,45,74,.08)">
-        <div style="width:8px;height:8px;border-radius:50%;background:#2b3a5c;flex-shrink:0"></div>
-        <div style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">תזרים</div>
-        <div style="font-size:10px;color:#6B7A96;width:60px;text-align:left" id="ring-status-cf">חסר נתונים</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-top:.5px solid rgba(30,45,74,.08)">
-        <div style="width:8px;height:8px;border-radius:50%;background:#27ae60;flex-shrink:0"></div>
-        <div style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">חיסכון</div>
-        <div style="font-size:10px;color:#6B7A96;width:60px;text-align:left" id="ring-status-sav">חסר נתונים</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-top:.5px solid rgba(30,45,74,.08)">
-        <div style="width:8px;height:8px;border-radius:50%;background:#c8a96a;flex-shrink:0"></div>
-        <div style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">ביטוח</div>
-        <div style="font-size:10px;color:#6B7A96;width:60px;text-align:left" id="ring-status-ins">חסר נתונים</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-top:.5px solid rgba(30,45,74,.08)">
-        <div style="width:8px;height:8px;border-radius:50%;background:#e07b5a;flex-shrink:0"></div>
-        <div style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">תכנון</div>
-        <div style="font-size:10px;color:#6B7A96;width:60px;text-align:left" id="ring-status-plan">חסר נתונים</div>
+  <!-- ── CARD 2: פירוט נכסים ── -->
+  <div class="tc" style="height:234px">
+    <div class="tc-hdr"><div><h3>פירוט נכסים</h3><p>חלוקה לפי סוג</p></div><div class="tc-ico"><span style="font-size:18px">🥧</span></div></div>
+    <div class="tc-body">
+      <div style="display:flex;align-items:center;gap:14px;direction:ltr">
+        <svg id="assets-donut" width="96" height="96" viewBox="0 0 96 96" style="flex-shrink:0">
+          <circle cx="48" cy="48" r="42" fill="none" stroke="#eee" stroke-width="13"/>
+          <circle id="donut-pen" cx="48" cy="48" r="42" fill="none" stroke="#1E2D4A" stroke-width="13" stroke-dasharray="0 264" transform="rotate(-90 48 48)"/>
+          <circle id="donut-inv" cx="48" cy="48" r="42" fill="none" stroke="#A07840" stroke-width="13" stroke-dasharray="0 264" transform="rotate(-90 48 48)"/>
+          <circle id="donut-re" cx="48" cy="48" r="42" fill="none" stroke="#4a90d9" stroke-width="13" stroke-dasharray="0 264" transform="rotate(-90 48 48)"/>
+          <circle id="donut-cash" cx="48" cy="48" r="42" fill="none" stroke="#ccc" stroke-width="13" stroke-dasharray="0 264" transform="rotate(-90 48 48)"/>
+          <text x="48" y="51" text-anchor="middle" font-size="10" font-weight="600" fill="#8a8a8a" font-family="inherit" id="donut-total-lbl">—</text>
+        </svg>
+        <div style="display:flex;flex-direction:column;gap:5px;direction:rtl;flex:1">
+          <div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:#1E2D4A"></div><span style="flex:1;font-size:10px;color:#1E2D4A">פנסיה+קה"ש</span><span style="font-size:10px;font-weight:700;color:#8a8a8a" id="ap-pen">—</span></div>
+          <div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:#A07840"></div><span style="flex:1;font-size:10px;color:#1E2D4A">השקעות</span><span style="font-size:10px;font-weight:700;color:#8a8a8a" id="ap-inv">—</span></div>
+          <div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:#4a90d9"></div><span style="flex:1;font-size:10px;color:#1E2D4A">נדל"ן</span><span style="font-size:10px;font-weight:700;color:#8a8a8a" id="ap-re">—</span></div>
+          <div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:#ccc"></div><span style="flex:1;font-size:10px;color:#1E2D4A">נזיל</span><span style="font-size:10px;font-weight:700;color:#8a8a8a" id="ap-cash">—</span></div>
+          <div style="height:.5px;background:rgba(0,0,0,.06);margin:2px 0"></div>
+          <div style="display:flex;justify-content:space-between"><span style="font-size:10px;font-weight:700;color:#1E2D4A">שווי נטו</span><span style="font-size:11px;font-weight:800;color:#8a8a8a" id="assets-total">—</span></div>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- ── CARD 3: תזרים חודשי ── -->
+  <div class="tc" id="cashflow-unified" style="height:234px">
+    <div class="tc-hdr"><div><h3>תזרים חודשי</h3><p>6 חודשים אחרונים</p></div><div class="tc-ico"><span style="font-size:18px">📊</span></div></div>
+    <div class="tc-body">
+      <div id="mir-chart-wrap" style="height:66px;margin-bottom:6px">
+        <svg width="100%" viewBox="0 0 240 66" style="display:block">
+          <rect x="8" y="62" width="16" height="4" rx="2" fill="rgba(30,45,74,.08)"/><rect x="26" y="62" width="16" height="4" rx="2" fill="rgba(200,169,106,.08)"/>
+          <rect x="50" y="62" width="16" height="4" rx="2" fill="rgba(30,45,74,.08)"/><rect x="68" y="62" width="16" height="4" rx="2" fill="rgba(200,169,106,.08)"/>
+          <rect x="92" y="62" width="16" height="4" rx="2" fill="rgba(30,45,74,.08)"/><rect x="110" y="62" width="16" height="4" rx="2" fill="rgba(200,169,106,.08)"/>
+          <rect x="134" y="62" width="16" height="4" rx="2" fill="rgba(30,45,74,.08)"/><rect x="152" y="62" width="16" height="4" rx="2" fill="rgba(200,169,106,.08)"/>
+          <rect x="176" y="62" width="16" height="4" rx="2" fill="rgba(30,45,74,.08)"/><rect x="194" y="62" width="16" height="4" rx="2" fill="rgba(200,169,106,.08)"/>
+          <rect x="218" y="62" width="16" height="4" rx="2" fill="rgba(30,45,74,.1)"/><rect x="236" y="62" width="16" height="4" rx="2" fill="rgba(200,169,106,.1)"/>
+          <text x="25" y="56" text-anchor="middle" font-size="8" fill="#A8A8B0" font-family="inherit">אוק</text>
+          <text x="67" y="56" text-anchor="middle" font-size="8" fill="#A8A8B0" font-family="inherit">נוב</text>
+          <text x="109" y="56" text-anchor="middle" font-size="8" fill="#A8A8B0" font-family="inherit">דצמ</text>
+          <text x="151" y="56" text-anchor="middle" font-size="8" fill="#A8A8B0" font-family="inherit">ינו</text>
+          <text x="193" y="56" text-anchor="middle" font-size="8" fill="#A8A8B0" font-family="inherit">פבר</text>
+          <text x="235" y="56" text-anchor="middle" font-size="8" fill="#c8a96a" font-family="inherit" font-weight="700">מרץ</text>
+        </svg>
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:6px">
+        <div class="tc-chip" style="background:rgba(30,45,74,.06);flex:1"><div class="val" style="color:#8a8a8a;font-size:11px" id="mir-inc">—</div><div class="lbl" style="color:#6B7A96">הכנסה</div></div>
+        <div class="tc-chip" style="background:rgba(224,123,90,.06);flex:1"><div class="val" style="color:#8a8a8a;font-size:11px" id="mir-exp">—</div><div class="lbl" style="color:#6B7A96">הוצאות</div></div>
+        <div class="tc-chip" style="background:rgba(39,174,96,.06);flex:1"><div class="val" style="color:#8a8a8a;font-size:11px" id="mir-sav">—</div><div class="lbl" style="color:#6B7A96">חיסכון</div></div>
+      </div>
+      <div style="font-size:9px;color:#8a8a8a;text-align:center" id="mir-avg">הזן תזרים לצפייה</div>
+    </div>
+  </div>
+
+  <!-- ── CARD 4: מה השתנה ── -->
+  <div class="tc" style="height:234px">
+    <div class="tc-hdr"><div><h3>מה השתנה</h3><p>סיכום המצב שלך</p></div><div class="tc-ico"><span style="font-size:18px">🕐</span></div></div>
+    <div class="tc-body">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:#1E2D4A">שווי נטו</span><span style="font-size:13px;font-weight:700;color:#8a8a8a" id="ov-snap-nw">—</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:#1E2D4A">חיסכון חודשי</span><span style="font-size:13px;font-weight:700;color:#8a8a8a" id="ov-snap-sav">—</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:#1E2D4A">Numa Score</span><span style="font-size:13px;font-weight:700;color:#8a8a8a" id="ov-snap-score">—</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;font-weight:700;color:#1E2D4A">FIRE צפוי</span><span style="font-size:13px;font-weight:800;color:#8a8a8a" id="ov-snap-fire">—</span></div>
+      </div>
+      <div style="font-size:9px;color:#A8A8B0;text-align:center;margin-top:10px" id="ov-snap-date"></div>
+    </div>
+  </div>
+
   <!-- Hidden compat elements -->
   <div style="display:none">
-    <span id="score-lbl">—</span>
-    <span id="digest-month">—</span>
-    <span id="digest-val">—</span>
-  </div>
-
-  <!-- ② Recommended action (1 card) -->
-  <div id="ov-action-card" style="background:#E8DCC8;border-radius:12px;padding:10px 13px;border:.5px solid rgba(160,120,64,.15)">
-    <div style="display:flex;align-items:center;gap:8px">
-      <span class="ic ic-sm" style="color:#A07840"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
-      <div style="flex:1;font-size:11.5px;font-weight:600;color:#1E2D4A;line-height:1.4" id="ov-action-text">הוסף הכנסה חודשית — הבסיס לכל חישוב</div>
-      <button id="ov-action-btn" onclick="goP('cf')" style="background:#A07840;color:#fff;border:none;border-radius:7px;padding:5px 10px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">בצע →</button>
-    </div>
-  </div>
-
-  <!-- ③ 3 Stats summary -->
-  <div class="c" style="padding:10px">
-    <div style="display:flex;justify-content:space-around">
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">תזרים</div><div style="font-size:13px;font-weight:800;color:#A07840" id="qs-inc">₪0</div></div>
-      <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">חיסכון</div><div style="font-size:13px;font-weight:800;color:#A07840" id="qs-rate">0%</div></div>
-      <div style="width:.5px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center"><div style="font-size:10px;color:#6B7A96;margin-bottom:2px">FIRE</div><div style="font-size:13px;font-weight:800;color:#1E2D4A" id="qs-fire-age">—</div></div>
-    </div>
-  </div>
-
-  <!-- ═══ Below the fold ═══ -->
-  <div style="display:flex;align-items:center;gap:10px;padding:4px 0 2px">
-    <div style="flex:1;height:.5px;background:rgba(30,45,74,.1)"></div>
-    <div style="font-size:9px;color:#A8A8B0;white-space:nowrap">גלול למטה לעוד ↓</div>
-    <div style="flex:1;height:.5px;background:rgba(30,45,74,.1)"></div>
-  </div>
-
-  <!-- FIRE card (dark) -->
-  <div id="vis-wrap-fire-ov" class="c" style="background:#1E2D4A;border-color:rgba(30,45,74,.3)" onclick="goP('plan')">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
-      <div><div style="font-size:12px;font-weight:600;color:#F5F2EC">מסלול FIRE</div><div style="font-size:10px;color:rgba(255,255,255,.45)" id="fire-card-sub">גלה מתי תוכל להיות חופשי כלכלית</div></div>
-      <div style="font-size:14px;font-weight:800;color:#C9A96E" id="fire-card-pct">הגדר יעד</div>
-    </div>
-    <div class="pw" style="background:rgba(255,255,255,.1)"><div class="pb" id="fire-card-bar" style="width:0%;background:#A07840"></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35);margin-top:3px"><span id="fire-card-have">יש: ₪0</span><span id="fire-card-goal">יעד: ₪0</span></div>
-  </div>
-
-  <!-- Hidden stats for JS compat -->
-  <div style="display:none"><span id="qs-exp">₪0</span><span id="qs-debt">₪0</span></div>
-
-  <!-- Weekly digest (shows conditionally) -->
-  <div id="weekly-digest-card" style="display:none;background:#1E2D4A;border-radius:14px;padding:14px;position:relative">
-    <button onclick="dismissWeekly()" style="position:absolute;top:8px;left:8px;background:none;border:none;color:rgba(255,255,255,.4);font-size:14px;cursor:pointer">×</button>
-    <div style="font-size:10px;color:#C9A96E;font-weight:600;letter-spacing:.04em;margin-bottom:6px">מה השתנה מאז הביקור האחרון</div>
-    <div id="weekly-insights" style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.6"></div>
-    <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:8px" id="weekly-timestamp"></div>
-  </div>
-
-  <!-- NW CHART — Growth Timeline -->
-  <div class="c" style="padding:12px 13px 10px;background:#fff">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-      <div style="font-size:12px;font-weight:700;color:#1E2D4A">מסע הצמיחה שלך</div>
-      <div style="font-size:10px;color:#6B7A96" id="nw-chart-range-lbl">6 שנים + 4 קדימה</div>
-    </div>
-    <!-- Tap tooltip -->
-    <div id="nw-tooltip" style="display:none;position:absolute;background:#1E2D4A;color:#F5F2EC;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:600;white-space:nowrap;z-index:10;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.2);transform:translateX(-50%)">
-      <div id="nw-tooltip-year" style="font-size:9px;color:#C9A96E;margin-bottom:1px"></div>
-      <div id="nw-tooltip-val"></div>
-      <div id="nw-tooltip-diff" style="font-size:9px;color:rgba(255,255,255,.5);margin-top:1px"></div>
-    </div>
-    <div style="position:relative;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;margin:0 -13px;padding:0 13px" id="nw-scroll-wrap">
-      <svg id="nw-timeline-svg" width="100%" viewBox="0 0 300 170" preserveAspectRatio="xMidYMid meet" style="display:block;min-width:300px;cursor:crosshair" onclick="handleNWTap(event)" ontouchmove="handleNWTap(event)">
-        <defs>
-          <linearGradient id="nwFillGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#A07840" stop-opacity="0.15"/>
-            <stop offset="100%" stop-color="#A07840" stop-opacity="0"/>
-          </linearGradient>
-          <clipPath id="nwLineClip">
-            <rect x="0" y="0" width="300" height="170">
-              <animate attributeName="width" from="0" to="300" dur="1.2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
-            </rect>
-          </clipPath>
-        </defs>
-        <line x1="20" y1="15" x2="280" y2="15" stroke="#E8DCC8" stroke-width=".5"/>
-        <line x1="20" y1="35" x2="280" y2="35" stroke="#E8DCC8" stroke-width=".5"/>
-        <line x1="20" y1="55" x2="280" y2="55" stroke="#E8DCC8" stroke-width=".5"/>
-        <line x1="20" y1="75" x2="280" y2="75" stroke="#E8DCC8" stroke-width=".5"/>
-        <line x1="20" y1="95" x2="280" y2="95" stroke="#E8DCC8" stroke-width=".5"/>
-        <line x1="20" y1="115" x2="280" y2="115" stroke="#E8DCC8" stroke-width=".5"/>
-        <path id="nw-area-solid" d="" fill="url(#nwFillGrad)" clip-path="url(#nwLineClip)"/>
-        <path id="nw-line-solid" d="" fill="none" stroke="#A07840" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#nwLineClip)"/>
-        <path id="nw-line-proj" d="" fill="none" stroke="#A07840" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5 4" clip-path="url(#nwLineClip)">
-          <animate attributeName="stroke-dashoffset" from="9" to="0" dur="1.5s" repeatCount="indefinite"/>
-        </path>
-        <path id="nw-area-proj" d="" fill="none"/>
-        <g id="nw-milestones"></g>
-        <g id="nw-today-marker"></g>
-        <g id="nw-x-labels"></g>
-        <g id="nw-tap-marker" style="display:none"></g>
-      </svg>
-    </div>
-    <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
-      <span style="font-size:10px;color:#6B7A96">2</span>
-      <input type="range" id="nw-range-sl" min="2" max="50" step="1" value="10" style="flex:1;accent-color:#A07840" oninput="window._nwRange=parseInt(this.value);renderNWTimelineSVG()"/>
-      <span style="font-size:10px;color:#6B7A96">50</span>
-    </div>
-    <!-- Milestone input -->
-    <div style="display:flex;gap:6px;margin-top:8px;padding-top:8px;border-top:.5px solid rgba(30,45,74,.08)">
-      <input class="inp" id="milestone-inp" placeholder="אירוע חיים (חתונה, דירה...)" style="flex:1;margin:0;padding:6px 10px;font-size:11px"/>
-      <input class="inp" id="milestone-year" type="number" placeholder="שנה" style="width:65px;margin:0;padding:6px 8px;font-size:11px;text-align:center"/>
-      <button onclick="addMilestoneWithYear()" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:6px 10px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">+ הוסף</button>
-    </div>
-    <div id="milestone-list" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px"></div>
-  </div>
-
-  <!-- ⑤ ASSETS — donut breakdown -->
-  <div class="c">
-    <div class="ch"><div class="ct">פירוט נכסים</div><span class="bdg Bb" id="assets-total">₪0</span></div>
-    <svg id="assets-donut" width="88" height="88" viewBox="0 0 88 88" style="display:block;margin:4px auto 8px">
-      <style>
-        @keyframes donutFadeIn{from{opacity:0;stroke-dasharray:0 214}to{opacity:1}}
-        #donut-pen,#donut-re,#donut-inv,#donut-cash{animation:donutFadeIn .6s ease-out both}
-        #donut-pen{animation-delay:.1s}#donut-re{animation-delay:.2s}#donut-inv{animation-delay:.3s}#donut-cash{animation-delay:.4s}
-      </style>
-      <circle cx="44" cy="44" r="34" fill="none" stroke="rgba(30,45,74,.12)" stroke-width="12"/>
-      <circle id="donut-pen" cx="44" cy="44" r="34" fill="none" stroke="#A07840" stroke-width="12" stroke-dasharray="0 214" stroke-linecap="butt" transform="rotate(-90 44 44)"/>
-      <circle id="donut-re"  cx="44" cy="44" r="34" fill="none" stroke="#1E2D4A" stroke-width="12" stroke-dasharray="0 214" stroke-linecap="butt" transform="rotate(-90 44 44)"/>
-      <circle id="donut-inv" cx="44" cy="44" r="34" fill="none" stroke="#C9A96E" stroke-width="12" stroke-dasharray="0 214" stroke-linecap="butt" transform="rotate(-90 44 44)"/>
-      <circle id="donut-cash" cx="44" cy="44" r="34" fill="none" stroke="#6B7A96" stroke-width="12" stroke-dasharray="0 214" stroke-linecap="butt" transform="rotate(-90 44 44)"/>
-      <text x="44" y="48" text-anchor="middle" font-size="10" font-weight="500" fill="#444" font-family="inherit" id="donut-total-lbl">נכסים</text>
-    </svg>
-    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#A07840"></div>פנסיה+קה"ש</div><div class="dv" style="font-size:10px" id="ap-pen">₪0</div></div>
-    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#1E2D4A"></div>נדל"ן</div><div class="dv" style="font-size:10px" id="ap-re">₪0</div></div>
-    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#C9A96E"></div>השקעות</div><div class="dv" style="font-size:10px" id="ap-inv">₪0</div></div>
-    <div class="dr" style="padding:3px 0"><div class="dl"><div class="dot" style="background:#6B7A96"></div>נזיל</div><div class="dv" style="font-size:10px" id="ap-cash">₪0</div></div>
-  </div>
-
-  <!-- ⑥ CASHFLOW — monthly summary (compact) -->
-  <div class="c" id="cashflow-unified" style="padding:10px 13px">
-    <div class="ch"><div class="ct">תזרים חודשי</div><span class="bdg Ba" id="mir-ratio">0%</span></div>
-    <div id="mir-chart-wrap" style="padding:4px 0 6px;text-align:center;color:#A8A8B0;font-size:10px"><div style="text-align:center;padding:16px 0"><div style="margin-bottom:6px"><span class="ic ic-lg" style="color:#6B7A96"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span></div><div style="font-size:11px;color:#6B7A96;margin-bottom:8px">גלה לאן הולך הכסף שלך כל חודש</div><button onclick="goP('cf')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">הוסף הכנסה →</button></div></div>
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0 0;border-top:.5px solid rgba(30,45,74,.12)">
-      <div style="text-align:center;flex:1"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">הכנסה</div><div style="font-size:13px;font-weight:700;color:#A07840" id="mir-inc">₪0</div></div>
-      <div style="width:.5px;height:24px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center;flex:1"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">הוצאות</div><div style="font-size:13px;font-weight:700;color:#64646A" id="mir-exp">₪0</div></div>
-      <div style="width:.5px;height:24px;background:rgba(30,45,74,.12)"></div>
-      <div style="text-align:center;flex:1"><div style="font-size:10px;color:#A8A8B0;margin-bottom:1px">חיסכון</div><div style="font-size:13px;font-weight:700;color:#A07840" id="mir-sav">₪0</div></div>
-    </div>
-    <div style="font-size:10px;font-weight:600;text-align:center;margin-top:4px;color:#64646A" id="mir-avg">₪0</div>
-  </div>
-
-  <!-- Hidden elements for JS compatibility -->
-  <div style="display:none">
-    <div id="action-cards">
-      <div id="focus-action-card"><div id="focus-action-text">—</div><button id="focus-action-btn"></button></div>
-      <div id="action-card-2"><div id="action-text-2">—</div></div>
-      <div id="action-card-3"><div id="action-text-3">—</div></div>
-    </div>
-    <div id="ai-insights-section">
-      <div id="insight-card-1"><div id="insight-ico-1"></div><div id="insight-text-1"></div><button id="insight-btn-1"></button></div>
-      <div id="insight-card-2"><div id="insight-ico-2"></div><div id="insight-text-2"></div><button id="insight-btn-2"></button></div>
-      <div id="insight-card-3"><div id="insight-ico-3"></div><div id="insight-text-3"></div><button id="insight-btn-3"></button></div>
-    </div>
-    <div id="gs-cashflow"></div>
-    <div id="gs-assets"></div>
-    <div id="gs-fire"></div>
+    <span id="score-lbl">—</span><span id="digest-month">—</span><span id="digest-val">—</span>
+    <span id="nw-trend"></span><span id="qs-exp"></span><span id="qs-debt"></span><span id="mir-ratio"></span>
+    <div id="fire-hero-pill"><span id="mv-fire"></span><span id="ms-fire"></span></div>
+    <div id="vis-wrap-fire-ov"><span id="fire-card-sub"></span><span id="fire-card-pct"></span><div id="fire-card-bar"></div><span id="fire-card-have"></span><span id="fire-card-goal"></span></div>
+    <div id="weekly-digest-card"><div id="weekly-insights"></div><span id="weekly-timestamp"></span></div>
+    <div id="ov-action-card"><div id="ov-action-text"></div><button id="ov-action-btn"></button></div>
+    <div id="action-cards"><div id="focus-action-card"><div id="focus-action-text"></div><button id="focus-action-btn"></button></div><div id="action-card-2"><div id="action-text-2"></div></div><div id="action-card-3"><div id="action-text-3"></div></div></div>
+    <div id="ai-insights-section"><div id="insight-card-1"><div id="insight-ico-1"></div><div id="insight-text-1"></div><button id="insight-btn-1"></button></div><div id="insight-card-2"><div id="insight-ico-2"></div><div id="insight-text-2"></div><button id="insight-btn-2"></button></div><div id="insight-card-3"><div id="insight-ico-3"></div><div id="insight-text-3"></div><button id="insight-btn-3"></button></div></div>
+    <div id="gs-cashflow"></div><div id="gs-assets"></div><div id="gs-fire"></div>
     <div id="vis-wrap-missions"><div id="miss-badge"></div><div id="miss-list"></div></div>
+    <div id="score-breakdown"><span id="ring-status-cf"></span><span id="ring-status-sav"></span><span id="ring-status-ins"></span><span id="ring-status-plan"></span></div>
+    <span id="cf-insights"></span>
   </div>
 
 </div><!-- /pg-ov -->
@@ -1931,6 +1855,34 @@ function render(){
   renderDigest(c);
   checkWeeklyDigest();
   renderOvCards(c);
+  // Snapshot card sync
+  var _f=function(n){return n>=1e6?'₪'+(n/1e6).toFixed(1)+'M':n>=1000?'₪'+Math.round(n/1000)+'k':'₪'+Math.round(n);};
+  var snw=$('ov-snap-nw');if(snw){if(c.netWorth>0){snw.textContent=_f(c.netWorth);snw.style.color='#A07840';}else{snw.textContent='—';snw.style.color='#8a8a8a';}}
+  var ssv=$('ov-snap-sav');if(ssv){if(c.totalIncome>0){ssv.textContent=c.savingsRate+'%';ssv.style.color=c.savingsRate>=20?'#2D6A3F':'#A07840';}else{ssv.textContent='—';ssv.style.color='#8a8a8a';}}
+  var ssc=$('ov-snap-score');if(ssc){if(c.score>0){ssc.textContent=c.score+'/100';ssc.style.color='#1E2D4A';}else{ssc.textContent='—';ssc.style.color='#8a8a8a';}}
+  var sfi=$('ov-snap-fire');if(sfi){if(c.fireAge>0&&c.fireAge<120){sfi.textContent='גיל '+c.fireAge;sfi.style.color='#1E2D4A';}else{sfi.textContent='—';sfi.style.color='#8a8a8a';}}
+  var sdt=$('ov-snap-date');if(sdt)sdt.textContent=new Date().toLocaleDateString('he-IL');
+  // Hero projection
+  var hpr=$('hero-proj');if(hpr){if(c.netWorth>0){var r=0.07/12,m=Math.max(c.monthlySavings||0,0),n=25*12;var fv=c.netWorth*Math.pow(1+r,n)+(m>0?m*((Math.pow(1+r,n)-1)/r):0);hpr.textContent=_f(fv);hpr.style.color='#c8a96a';}else{hpr.textContent='—';hpr.style.color='#8a8a8a';}}
+  // Hero NW
+  var hnw=$('hero-nw');if(hnw){if(c.netWorth>0){hnw.textContent=_f(c.netWorth);hnw.style.color='#F5F2EC';}else{hnw.textContent='—';hnw.style.color='#8a8a8a';}}
+  // Hero chips color
+  var qiEl=$('qs-inc');if(qiEl&&c.totalIncome>0){qiEl.style.color='#c8a96a';}
+  var qrEl=$('qs-rate');if(qrEl&&c.totalIncome>0){qrEl.style.color='#c8a96a';}
+  var qfEl=$('qs-fire-age');if(qfEl&&c.fireAge>0&&c.fireAge<120){qfEl.style.color='#c8a96a';}
+  // Score num color
+  var scn=$('score-num');if(scn&&c.score>0){scn.style.color='#1E2D4A';}
+  // Ring legend colors
+  ['ring-score-cf','ring-score-sav','ring-score-ins','ring-score-plan'].forEach(function(id){var e=$(id);if(e&&e.textContent!=='—')e.style.color=e.style.color||'#1E2D4A';});
+  // Assets legend colors
+  ['ap-pen','ap-inv','ap-re','ap-cash'].forEach(function(id){var e=$(id);if(e&&c.totalAssets>0)e.style.color='#1E2D4A';});
+  var atE=$('assets-total');if(atE&&c.totalAssets>0){atE.style.color='#A07840';}
+  var dtl=$('donut-total-lbl');if(dtl&&c.totalAssets>0)dtl.textContent=_f(c.totalAssets);
+  // MiR chip colors
+  var miE=$('mir-inc');if(miE&&c.totalIncome>0){miE.style.color='#1E2D4A';}
+  var meE=$('mir-exp');if(meE&&c.totalExpenses>0){meE.style.color='#e07b5a';}
+  var msE=$('mir-sav');if(msE&&c.monthlySavings>0){msE.style.color='#2D6A3F';}
+  var maE=$('mir-avg');if(maE&&c.totalIncome>0){maE.textContent='חיסכון '+c.savingsRate+'% · חוסך '+_f(c.monthlySavings)+' בחודש';maE.style.color='#A07840';}
   renderLoans(c);
   renderOvSummaries(c);
   if(typeof updateAIBadge==='function') updateAIBadge();
@@ -4948,9 +4900,9 @@ function handleNWTap(e){
   if(!svg||!window._nwChartData.pts.length) return;
   var rect=svg.getBoundingClientRect();
   var clientX=e.touches?e.touches[0].clientX:e.clientX;
-  var svgX=(clientX-rect.left)/rect.width*300;
+  var svgX=(clientX-rect.left)/rect.width*320;
   var cd=window._nwChartData;
-  var W=300,padL=20,padR=20,chartW=W-padL-padR;
+  var W=320,padL=20,padR=20,chartW=W-padL-padR;
   // Find closest point
   var closest=0,minDist=999;
   cd.pts.forEach(function(p,i){
@@ -4976,7 +4928,7 @@ function handleNWTap(e){
   // Draw tap marker on SVG
   var tapG=document.getElementById('nw-tap-marker');
   if(tapG){
-    var H=170,padT=12,padB=35,chartH=H-padT-padB;
+    var H=110,padT=10,padB=20,chartH=H-padT-padB;
     var maxVal=Math.max.apply(null,cd.pts.map(function(p){return p.val;}))||1;
     var y=padT+chartH-Math.min(pt.val/maxVal,1)*chartH;
     tapG.style.display='';
@@ -4998,7 +4950,7 @@ function addMilestoneWithYear(){
 function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,todayId,xlabelsId,gradId,cv){
   var svg=document.getElementById(svgId);
   if(!svg) return;
-  var W=300,H=170,padL=20,padR=20,padT=12,padB=35;
+  var W=320,H=110,padL=20,padR=20,padT=10,padB=20;
   var chartH=H-padT-padB;
   var nw=cv.netWorth||0;
   var savY=Math.max(cv.monthlySavings||0,0)*12;
@@ -5013,11 +4965,11 @@ function _drawNWLine(svgId,lineId,areaId,projLineId,projAreaId,milestonesId,toda
   var startYear=currentYear-histYears;
   // Make chart wider for more years — horizontally scrollable
   if(totalRange>15){W=Math.min(totalRange*22,800);svg.setAttribute('viewBox','0 0 '+W+' '+H);svg.style.minWidth=W+'px';}
-  else{W=300;svg.setAttribute('viewBox','0 0 300 '+H);svg.style.minWidth='300px';}
+  else{W=320;svg.setAttribute('viewBox','0 0 320 '+H);svg.style.minWidth='320px';}
   var chartW=W-padL-padR;
   // Update label
   var rangeLbl=document.getElementById('nw-chart-range-lbl');
-  if(rangeLbl) rangeLbl.textContent=histYears+' שנים + '+projYears+' קדימה';
+  if(rangeLbl) rangeLbl.textContent=totalRange+' שנים קדימה';
   // Demo data
   var demoMode=nw<=0;
   if(demoMode) nw=1847000;
