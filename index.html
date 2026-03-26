@@ -3185,7 +3185,6 @@ function renderHeatMap(){}
 function applyProfile(){}
 function celebrate(){ showToast('🎉 כל הכבוד!'); }
 function finishOnboarding(){}
-function showOnboarding(){}
 function hideOnboarding(){}
 function obNext(){}
 
@@ -4729,10 +4728,6 @@ function _showApp(isNewLogin=false){
     function _afterLoad(){
       if(name && !ND.profile.name){ ND.profile.name=name; saveToStorage(); }
       if(!ND.milestones) ND.milestones=[];
-      // Show onboarding if not done
-      if(!ND.onboardingDone){
-        showOnboarding();
-      }
       render();
       renderST();
       bindExpenseInputs();
@@ -4747,7 +4742,10 @@ function _showApp(isNewLogin=false){
       loadFromStorage();
       setTimeout(_afterLoad, 80);
     }
-    // Old onboarding disabled — replaced by onboarding-overlay V2
+    // Show onboarding only on first signup/login, never on token refresh
+    if(isNewLogin && !ND.onboardingDone){
+      setTimeout(showOnboarding, 300);
+    }
   }
 }
 
