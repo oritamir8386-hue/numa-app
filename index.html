@@ -989,172 +989,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 <!-- הקצאת נכסים -->
 
-<!-- הגדרות -->
-<!-- ══════════════════ הגדרות — Settings Modal ══════════════════ -->
-<div id="settings-overlay" style="display:none;position:fixed;inset:0;z-index:900">
-<div id="settings-modal" style="position:fixed;inset:0;background:#f0ece4;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;direction:rtl;font-family:-apple-system,'Plus Jakarta Sans',sans-serif;z-index:901">
-  <!-- STICKY HEADER -->
-  <div style="position:sticky;top:0;z-index:10;background:#f0ece4;padding:max(env(safe-area-inset-top),14px) 18px 10px;display:flex;justify-content:space-between;align-items:center;border-bottom:.5px solid rgba(0,0,0,.06)">
-    <div style="font-size:24px;font-weight:800;color:#1E2D4A">הגדרות</div>
-    <button onclick="closeSettings()" style="background:#fff;border:.5px solid rgba(0,0,0,.08);border-radius:12px;padding:8px 16px;font-size:14px;font-weight:600;color:#A07840;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px">← חזרה</button>
-  </div>
-<div style="padding:14px 18px 40px;display:flex;flex-direction:column;gap:14px">
-
-  <!-- PROFILE CARD -->
-  <div style="background:#1E2D4A;border-radius:22px;padding:20px;display:flex;align-items:center;gap:16px">
-    <div id="set-avatar" style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.1);border:2px solid #A07840;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#C9A96E;flex-shrink:0">N</div>
-    <div style="flex:1">
-      <div id="set-profile-name" style="font-size:20px;font-weight:700;color:#fff">Numa</div>
-      <div id="set-member-since" style="font-size:12px;color:rgba(255,255,255,.45);margin-top:2px">חבר מאז 2024</div>
-      <button onclick="goP('tools');closeSettings()" style="background:rgba(255,255,255,.1);border:none;border-radius:8px;padding:5px 12px;font-size:11px;font-weight:600;color:#C9A96E;cursor:pointer;font-family:inherit;margin-top:8px">ערוך פרופיל</button>
-    </div>
-  </div>
-
-  <!-- SECTION: פרופיל פיננסי -->
-  <div>
-    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px">פרופיל פיננסי</div>
-    <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px">Numa מותאמת לפי הפרופיל שלך — הכרטיסיות הרלוונטיות בלבד יוצגו</div>
-    <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <!-- Employment -->
-      <div class="set-row" onclick="openSetPicker('employment')">
-        <div style="display:flex;align-items:center;gap:12px;flex:1">
-          <div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:16px">💼</div>
-          <div><div style="font-size:15px;font-weight:500;color:#1E2D4A">סטטוס תעסוקה</div></div>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px"><span id="set-emp-val" style="font-size:13px;color:#8a8a8a">שכיר</span><span style="color:rgba(0,0,0,.18)">›</span></div>
-      </div>
-      <!-- Family -->
-      <div style="padding:13px 18px;border-bottom:none">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-          <div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">👨‍👩‍👧</div>
-          <div style="font-size:15px;font-weight:500;color:#1E2D4A">מצב משפחתי</div>
-        </div>
-        <div id="set-family-chips" style="display:flex;gap:8px">
-          <button class="set-chip" data-val="single" onclick="setFamily('single')">יחיד</button>
-          <button class="set-chip" data-val="couple" onclick="setFamily('couple')">זוג</button>
-          <button class="set-chip on" data-val="family" onclick="setFamily('family')">זוג + ילדים</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION: מה רלוונטי אליי -->
-  <div>
-    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px">מה רלוונטי אליי</div>
-    <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px">כבה קטגוריה — הכרטיסייה תיעלם מהאפליקציה</div>
-    <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🏛️</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">פנסיה וקה"ש</div><div style="font-size:11px;color:#8a8a8a">קרן פנסיה, קרן השתלמות, גמל</div></div></div><button class="cat-toggle on" data-cat="pension" onclick="toggleCat(this)"></button></div>
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:16px">📈</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">השקעות בשוק ההון</div><div style="font-size:11px;color:#8a8a8a">תיקי השקעות, מניות, קרנות</div></div></div><button class="cat-toggle on" data-cat="investments" onclick="toggleCat(this)"></button></div>
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(45,106,63,.08);display:flex;align-items:center;justify-content:center;font-size:16px">🏠</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">נדל"ן ומשכנתא</div><div style="font-size:11px;color:#8a8a8a">דירות, נכסים, הלוואות נדל"ן</div></div></div><button class="cat-toggle" data-cat="realestate" onclick="toggleCat(this)"></button></div>
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(163,45,45,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🛡️</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">ביטוחים</div><div style="font-size:11px;color:#8a8a8a">חיים, אכ"ע, בריאות, סיעוד</div></div></div><button class="cat-toggle on" data-cat="insurance" onclick="toggleCat(this)"></button></div>
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(107,122,150,.1);display:flex;align-items:center;justify-content:center;font-size:16px">💳</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">הלוואות וחובות</div><div style="font-size:11px;color:#8a8a8a">הלוואות, לוח סילוקין</div></div></div><button class="cat-toggle on" data-cat="loans" onclick="toggleCat(this)"></button></div>
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(107,122,150,.06);display:flex;align-items:center;justify-content:center;font-size:16px">📋</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">עיזבון וצוואה</div><div style="font-size:11px;color:#8a8a8a">צוואה, מוטבים, ייפוי כוח</div></div></div><button class="cat-toggle" data-cat="legacy" onclick="toggleCat(this)"></button></div>
-      <div class="set-row" style="border-bottom:none"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(217,119,6,.08);display:flex;align-items:center;justify-content:center;font-size:16px">🔥</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">FIRE ועצמאות כלכלית</div><div style="font-size:11px;color:#8a8a8a">תכנון פרישה מוקדמת</div></div></div><button class="cat-toggle on" data-cat="fire" onclick="toggleCat(this)"></button></div>
-    </div>
-  </div>
-
-  <!-- SECTION: הגדרות חישוב -->
-  <div>
-    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px">הגדרות חישוב</div>
-    <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px">ברירות מחדל לכל החישובים באפליקציה</div>
-    <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <div class="set-row" onclick="editCalcVal('returnRate','תשואה שנתית %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:16px">📊</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">תשואה שנתית ברירת מחדל</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="returnRate" style="font-size:13px;color:#8a8a8a">7%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
-      <div class="set-row" onclick="editCalcVal('withdrawalRate','כלל נסיגה %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(45,106,63,.08);display:flex;align-items:center;justify-content:center;font-size:16px">💰</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">כלל נסיגה</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="withdrawalRate" style="font-size:13px;color:#8a8a8a">4%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
-      <div class="set-row" onclick="editCalcVal('inflation','אינפלציה שנתית %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(107,122,150,.1);display:flex;align-items:center;justify-content:center;font-size:16px">📉</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">אינפלציה שנתית</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="inflation" style="font-size:13px;color:#8a8a8a">3%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
-      <div class="set-row" style="border-bottom:none" onclick="editCalcVal('capitalGainsTax','מס רווחי הון %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(163,45,45,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🧾</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">מס רווחי הון</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="capitalGainsTax" style="font-size:13px;color:#8a8a8a">25%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
-    </div>
-  </div>
-
-  <!-- SECTION: מטבע ושפה -->
-  <div>
-    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:8px" id="set-lang-title">מטבע ושפה</div>
-    <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <!-- Language -->
-      <div style="padding:13px 18px;border-bottom:.5px solid rgba(0,0,0,.05)">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-          <div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🌐</div>
-          <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-lang-label">שפה</div>
-        </div>
-        <div id="set-lang-chips" style="display:flex;gap:8px">
-          <button class="set-chip on" data-val="he" onclick="setLang('he')">עברית</button>
-          <button class="set-chip" data-val="en" onclick="setLang('en')">English</button>
-        </div>
-      </div>
-      <!-- Currency -->
-      <div style="padding:13px 18px;border-bottom:.5px solid rgba(0,0,0,.05)">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-          <div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#A07840">₪</div>
-          <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-curr-label">מטבע</div>
-        </div>
-        <div id="set-curr-chips" style="display:flex;gap:8px">
-          <button class="set-chip on" data-val="ILS" onclick="setCurrency('ILS')">₪ שקל</button>
-          <button class="set-chip" data-val="USD" onclick="setCurrency('USD')">$ Dollar</button>
-        </div>
-      </div>
-      <!-- Exchange rate (shown when USD) -->
-      <div id="set-rate-row" style="padding:13px 18px;border-bottom:none;display:none">
-        <div style="display:flex;align-items:center;justify-content:space-between">
-          <div style="display:flex;align-items:center;gap:12px">
-            <div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.06);display:flex;align-items:center;justify-content:center;font-size:14px">💱</div>
-            <div>
-              <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-rate-label">שער ₪/$</div>
-              <div style="font-size:11px;color:#8a8a8a" id="set-rate-sub">עודכן אוטומטית</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <span id="set-rate-val" style="font-size:15px;font-weight:700;color:#A07840">3.7</span>
-            <button onclick="ND.settings.rateLastFetch=0;fetchExchangeRate()" style="width:28px;height:28px;border-radius:50%;background:#ede9e0;border:none;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center">⟳</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION: גיבוי וסנכרון -->
-  <div>
-    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:8px">גיבוי וסנכרון</div>
-    <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">☁️</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">סנכרון אוטומטי</div><div style="font-size:11px;color:#8a8a8a">מסונכרן · עכשיו</div></div></div><button class="cat-toggle on" data-cat="sync" onclick="toggleCat(this)"></button></div>
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:16px">💾</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">גבה נתונים</div><div style="font-size:11px;color:#8a8a8a">גיבוי אחרון: היום</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
-      <div class="set-row" style="border-bottom:none"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(45,106,63,.08);display:flex;align-items:center;justify-content:center;font-size:16px">📤</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">ייצא נתונים</div><div style="font-size:11px;color:#8a8a8a">CSV / PDF</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
-    </div>
-  </div>
-
-  <!-- SECTION: התנתקות -->
-  <div>
-    <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <div class="set-row" style="border-bottom:none;cursor:pointer" onclick="authSignOut();closeSettings()"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(231,76,60,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🚪</div><div style="font-size:15px;font-weight:500;color:#e74c3c">התנתקות</div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
-    </div>
-  </div>
-
-  <div style="height:40px"></div>
-</div>
-</div>
-</div>
-
-<!-- Employment picker sheet -->
-<div id="set-emp-picker" style="display:none;position:fixed;inset:0;z-index:210;background:rgba(0,0,0,.4)" onclick="if(event.target===this)this.style.display='none'">
-  <div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;padding:20px;padding-bottom:max(env(safe-area-inset-bottom),20px)">
-    <div style="font-size:17px;font-weight:700;color:#1E2D4A;margin-bottom:14px;text-align:center">סטטוס תעסוקה</div>
-    <div style="display:flex;flex-direction:column;gap:6px">
-      <button class="emp-opt" onclick="pickEmployment('שכיר')">שכיר</button>
-      <button class="emp-opt" onclick="pickEmployment('עצמאי')">עצמאי</button>
-      <button class="emp-opt" onclick="pickEmployment('גמלאי')">גמלאי</button>
-      <button class="emp-opt" onclick="pickEmployment('לא עובד')">לא עובד</button>
-    </div>
-  </div>
-</div>
-
-<!-- Calc value editor sheet -->
-<div id="set-calc-editor" style="display:none;position:fixed;inset:0;z-index:210;background:rgba(0,0,0,.4)" onclick="if(event.target===this)closeCalcEditor()">
-  <div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;padding:20px;padding-bottom:max(env(safe-area-inset-bottom),20px)">
-    <div id="calc-editor-title" style="font-size:17px;font-weight:700;color:#1E2D4A;margin-bottom:14px;text-align:center"></div>
-    <input id="calc-editor-inp" class="inp" type="number" style="font-size:18px;text-align:center;padding:12px;background:#ede9e0;border-radius:12px;width:100%;border:none;font-family:inherit;margin-bottom:12px"/>
-    <button onclick="saveCalcVal()" style="width:100%;background:#A07840;color:#fff;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">שמור</button>
-  </div>
-</div>
-
-<!-- keep old pg-settings for goSub compatibility (hidden) -->
 <div class="pg" id="pg-settings" style="display:none"></div>
 
 <!-- ══════════════════ נכסים — Hub ══════════════════ -->
@@ -1600,6 +1434,172 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 </div>
 
 </div><!-- /dev -->
+
+<!-- ══════════════════ Settings Overlay (outside .dev for z-index) ══════════════════ -->
+<div id="settings-overlay" style="display:none;position:fixed;inset:0;z-index:900">
+<div id="settings-modal" style="position:fixed;inset:0;background:#f0ece4;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;direction:rtl;font-family:-apple-system,sans-serif;z-index:901">
+
+  <!-- Sticky header -->
+  <div style="position:sticky;top:0;z-index:10;background:#f0ece4;padding:calc(env(safe-area-inset-top, 0px) + 12px) 18px 12px;display:flex;justify-content:space-between;align-items:center">
+    <div style="font-size:20px;font-weight:800;color:#1E2D4A">הגדרות</div>
+    <button onclick="closeSettings()" style="background:#fff;border:none;border-radius:12px;padding:8px 16px;font-size:14px;font-weight:600;color:#1E2D4A;cursor:pointer;font-family:inherit">&larr; חזרה</button>
+  </div>
+
+  <div style="padding:0 18px;display:flex;flex-direction:column;gap:18px">
+
+  <!-- Profile card -->
+  <div style="background:#fff;border-radius:18px;padding:18px;display:flex;align-items:center;gap:14px">
+    <div id="set-avatar" style="width:48px;height:48px;border-radius:50%;background:#1E2D4A;color:#F5F2EC;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700">N</div>
+    <div>
+      <div id="set-profile-name" style="font-size:17px;font-weight:700;color:#1E2D4A"></div>
+      <div id="set-member-since" style="font-size:12px;color:#8a8a8a"></div>
+    </div>
+  </div>
+
+  <!-- SECTION: פרופיל פיננסי -->
+  <div>
+    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px">פרופיל פיננסי</div>
+    <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px">Numa מותאמת לפי הפרופיל שלך — הכרטיסיות הרלוונטיות בלבד יוצגו</div>
+    <div style="background:#fff;border-radius:18px;overflow:hidden">
+      <!-- Employment -->
+      <div class="set-row" onclick="openSetPicker('employment')">
+        <div style="display:flex;align-items:center;gap:12px;flex:1">
+          <div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:16px">💼</div>
+          <div><div style="font-size:15px;font-weight:500;color:#1E2D4A">סטטוס תעסוקה</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px"><span id="set-emp-val" style="font-size:13px;color:#8a8a8a">שכיר</span><span style="color:rgba(0,0,0,.18)">›</span></div>
+      </div>
+      <!-- Family -->
+      <div style="padding:13px 18px;border-bottom:none">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">👨‍👩‍👧</div>
+          <div style="font-size:15px;font-weight:500;color:#1E2D4A">מצב משפחתי</div>
+        </div>
+        <div id="set-family-chips" style="display:flex;gap:8px">
+          <button class="set-chip" data-val="single" onclick="setFamily('single')">יחיד</button>
+          <button class="set-chip" data-val="couple" onclick="setFamily('couple')">זוג</button>
+          <button class="set-chip on" data-val="family" onclick="setFamily('family')">זוג + ילדים</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: מה רלוונטי אליי -->
+  <div>
+    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px">מה רלוונטי אליי</div>
+    <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px">כבה קטגוריה — הכרטיסייה תיעלם מהאפליקציה</div>
+    <div style="background:#fff;border-radius:18px;overflow:hidden">
+      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🏛️</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">פנסיה וקה"ש</div><div style="font-size:11px;color:#8a8a8a">קרן פנסיה, קרן השתלמות, גמל</div></div></div><button class="cat-toggle on" data-cat="pension" onclick="toggleCat(this)"></button></div>
+      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:16px">📈</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">השקעות בשוק ההון</div><div style="font-size:11px;color:#8a8a8a">תיקי השקעות, מניות, קרנות</div></div></div><button class="cat-toggle on" data-cat="investments" onclick="toggleCat(this)"></button></div>
+      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(45,106,63,.08);display:flex;align-items:center;justify-content:center;font-size:16px">🏠</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">נדל"ן ומשכנתא</div><div style="font-size:11px;color:#8a8a8a">דירות, נכסים, הלוואות נדל"ן</div></div></div><button class="cat-toggle" data-cat="realestate" onclick="toggleCat(this)"></button></div>
+      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(163,45,45,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🛡️</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">ביטוחים</div><div style="font-size:11px;color:#8a8a8a">חיים, אכ"ע, בריאות, סיעוד</div></div></div><button class="cat-toggle on" data-cat="insurance" onclick="toggleCat(this)"></button></div>
+      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(107,122,150,.1);display:flex;align-items:center;justify-content:center;font-size:16px">💳</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">הלוואות וחובות</div><div style="font-size:11px;color:#8a8a8a">הלוואות, לוח סילוקין</div></div></div><button class="cat-toggle on" data-cat="loans" onclick="toggleCat(this)"></button></div>
+      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(107,122,150,.06);display:flex;align-items:center;justify-content:center;font-size:16px">📋</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">עיזבון וצוואה</div><div style="font-size:11px;color:#8a8a8a">צוואה, מוטבים, ייפוי כוח</div></div></div><button class="cat-toggle" data-cat="legacy" onclick="toggleCat(this)"></button></div>
+      <div class="set-row" style="border-bottom:none"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(217,119,6,.08);display:flex;align-items:center;justify-content:center;font-size:16px">🔥</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">FIRE ועצמאות כלכלית</div><div style="font-size:11px;color:#8a8a8a">תכנון פרישה מוקדמת</div></div></div><button class="cat-toggle on" data-cat="fire" onclick="toggleCat(this)"></button></div>
+    </div>
+  </div>
+
+  <!-- SECTION: הגדרות חישוב -->
+  <div>
+    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px">הגדרות חישוב</div>
+    <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px">ברירות מחדל לכל החישובים באפליקציה</div>
+    <div style="background:#fff;border-radius:18px;overflow:hidden">
+      <div class="set-row" onclick="editCalcVal('returnRate','תשואה שנתית %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:16px">📊</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">תשואה שנתית ברירת מחדל</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="returnRate" style="font-size:13px;color:#8a8a8a">7%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" onclick="editCalcVal('withdrawalRate','כלל נסיגה %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(45,106,63,.08);display:flex;align-items:center;justify-content:center;font-size:16px">💰</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">כלל נסיגה</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="withdrawalRate" style="font-size:13px;color:#8a8a8a">4%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" onclick="editCalcVal('inflation','אינפלציה שנתית %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(107,122,150,.1);display:flex;align-items:center;justify-content:center;font-size:16px">📉</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">אינפלציה שנתית</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="inflation" style="font-size:13px;color:#8a8a8a">3%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" style="border-bottom:none" onclick="editCalcVal('capitalGainsTax','מס רווחי הון %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(163,45,45,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🧾</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">מס רווחי הון</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="capitalGainsTax" style="font-size:13px;color:#8a8a8a">25%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+    </div>
+  </div>
+
+  <!-- SECTION: מטבע ושפה -->
+  <div>
+    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:8px" id="set-lang-title">מטבע ושפה</div>
+    <div style="background:#fff;border-radius:18px;overflow:hidden">
+      <!-- Language -->
+      <div style="padding:13px 18px;border-bottom:.5px solid rgba(0,0,0,.05)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🌐</div>
+          <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-lang-label">שפה</div>
+        </div>
+        <div id="set-lang-chips" style="display:flex;gap:8px">
+          <button class="set-chip on" data-val="he" onclick="setLang('he')">עברית</button>
+          <button class="set-chip" data-val="en" onclick="setLang('en')">English</button>
+        </div>
+      </div>
+      <!-- Currency -->
+      <div style="padding:13px 18px;border-bottom:.5px solid rgba(0,0,0,.05)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#A07840">₪</div>
+          <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-curr-label">מטבע</div>
+        </div>
+        <div id="set-curr-chips" style="display:flex;gap:8px">
+          <button class="set-chip on" data-val="ILS" onclick="setCurrency('ILS')">₪ שקל</button>
+          <button class="set-chip" data-val="USD" onclick="setCurrency('USD')">$ Dollar</button>
+        </div>
+      </div>
+      <!-- Exchange rate (shown when USD) -->
+      <div id="set-rate-row" style="padding:13px 18px;border-bottom:none;display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.06);display:flex;align-items:center;justify-content:center;font-size:14px">💱</div>
+            <div>
+              <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-rate-label">שער ₪/$</div>
+              <div style="font-size:11px;color:#8a8a8a" id="set-rate-sub">עודכן אוטומטית</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span id="set-rate-val" style="font-size:15px;font-weight:700;color:#A07840">3.7</span>
+            <button onclick="ND.settings.rateLastFetch=0;fetchExchangeRate()" style="width:28px;height:28px;border-radius:50%;background:#ede9e0;border:none;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center">⟳</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: גיבוי וסנכרון -->
+  <div>
+    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:8px">גיבוי וסנכרון</div>
+    <div style="background:#fff;border-radius:18px;overflow:hidden">
+      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">☁️</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">סנכרון אוטומטי</div><div style="font-size:11px;color:#8a8a8a">מסונכרן · עכשיו</div></div></div><button class="cat-toggle on" data-cat="sync" onclick="toggleCat(this)"></button></div>
+      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:16px">💾</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">גבה נתונים</div><div style="font-size:11px;color:#8a8a8a">גיבוי אחרון: היום</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
+      <div class="set-row" style="border-bottom:none"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(45,106,63,.08);display:flex;align-items:center;justify-content:center;font-size:16px">📤</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">ייצא נתונים</div><div style="font-size:11px;color:#8a8a8a">CSV / PDF</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
+    </div>
+  </div>
+
+  <!-- SECTION: התנתקות -->
+  <div>
+    <div style="background:#fff;border-radius:18px;overflow:hidden">
+      <div class="set-row" style="border-bottom:none;cursor:pointer" onclick="authSignOut();closeSettings()"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(231,76,60,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🚪</div><div style="font-size:15px;font-weight:500;color:#e74c3c">התנתקות</div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
+    </div>
+  </div>
+
+  <div style="height:40px"></div>
+  </div><!-- /padding wrapper -->
+</div><!-- /settings-modal -->
+</div><!-- /settings-overlay -->
+
+<!-- Employment picker sheet (outside .dev) -->
+<div id="set-emp-picker" style="display:none;position:fixed;inset:0;z-index:950;background:rgba(0,0,0,.4)" onclick="if(event.target===this)this.style.display='none'">
+  <div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;padding:20px;padding-bottom:max(env(safe-area-inset-bottom),20px)">
+    <div style="font-size:17px;font-weight:700;color:#1E2D4A;margin-bottom:14px;text-align:center">סטטוס תעסוקה</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <button class="emp-opt" onclick="pickEmployment('שכיר')">שכיר</button>
+      <button class="emp-opt" onclick="pickEmployment('עצמאי')">עצמאי</button>
+      <button class="emp-opt" onclick="pickEmployment('גמלאי')">גמלאי</button>
+      <button class="emp-opt" onclick="pickEmployment('לא עובד')">לא עובד</button>
+    </div>
+  </div>
+</div>
+
+<!-- Calc value editor sheet (outside .dev) -->
+<div id="set-calc-editor" style="display:none;position:fixed;inset:0;z-index:950;background:rgba(0,0,0,.4)" onclick="if(event.target===this)closeCalcEditor()">
+  <div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;padding:20px;padding-bottom:max(env(safe-area-inset-bottom),20px)">
+    <div id="calc-editor-title" style="font-size:17px;font-weight:700;color:#1E2D4A;margin-bottom:14px;text-align:center"></div>
+    <input id="calc-editor-inp" class="inp" type="number" style="font-size:18px;text-align:center;padding:12px;background:#ede9e0;border-radius:12px;width:100%;border:none;font-family:inherit;margin-bottom:12px"/>
+    <button onclick="saveCalcVal()" style="width:100%;background:#A07840;color:#fff;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">שמור</button>
+  </div>
+</div>
+
 <!-- AGENT SHEET -->
 <div id="ai-fab" style="display:none"></div>
 <div id="ai-badge" style="display:none"></div>
