@@ -4687,16 +4687,18 @@ function initSupabase(){
     });
     _sb.auth.onAuthStateChange((event,session)=>{
       console.log('[Numa Auth]',event,session?.user?.email||'');
-      if((event==='SIGNED_IN'||event==='TOKEN_REFRESHED')&&session){
-        currentUser=session.user;
-        _showApp(event==='SIGNED_IN'); // רק SIGNED_IN = כניסה אמיתית
-      } else if(event==='SIGNED_OUT'){
+      if(event==='SIGNED_OUT'){
         currentUser=null;
+        _showApp_done=false;
         _showAuth();
+      } else if(session){
+        currentUser=session.user;
+        // SIGNED_IN = real login (not refresh). Show app if not already shown.
+        _showApp(event==='SIGNED_IN');
       }
     });
     _sb.auth.getSession().then(({data:{session}})=>{
-      if(session){currentUser=session.user;_showApp();}
+      if(session){currentUser=session.user;_showApp(false);}
       else{_showAuth();}
     });
   }catch(e){
@@ -4705,58 +4707,54 @@ function initSupabase(){
   }
 }
 
-var _appShown=false;
+var _showApp_done=false;
 function _showApp(isNewLogin=false){
-  if(_appShown) return;
-  _appShown=true;
-  // Hide auth
-  const as=$('auth-screen');if(as)as.style.display='none';document.body.style.overflow='';
-  const vs=$('verify-screen');if(vs)vs.style.display='none';
-  // Show app
+  // Prevent double initialization
+  if(_showApp_done) return;
+  _showApp_done=true;
+  // Hide auth screens
+  var as=$('auth-screen');if(as)as.style.display='none';
+  var vs=$('verify-screen');if(vs)vs.style.display='none';
+  document.body.style.overflow='';
+  // Show app shell
   var dev=document.querySelector('.dev');if(dev)dev.style.removeProperty('display');
+  if(!currentUser) return;
   // Update user display
-  if(currentUser){
-    const name=currentUser.user_metadata?.name||currentUser.user_metadata?.full_name||currentUser.email?.split('@')[0]||'';
-    const nd=$('user-name-display');if(nd)nd.textContent=name;
-    const av=$('user-avatar');if(av)av.textContent=(name[0]||'N').toUpperCase();
-    var avBtn=document.getElementById('user-avatar-btn');
-    if(avBtn) avBtn.textContent=(name[0]||'N').toUpperCase();
-    // Personalized greeting in topbar (uses t() for language)
-    try{applyLanguage();}catch(e){}
-    // Welcome toast disabled
-    const uid=(currentUser.id||'').slice(0,8);
-    const key='numa_v2_'+uid;
-    window.STORAGE_KEY=key;
-    // Load from cloud first, fallback to localStorage
-    function _afterLoad(){
-      if(name && !ND.profile.name){ ND.profile.name=name; saveToStorage(); }
-      if(!ND.milestones) ND.milestones=[];
-      render();
-      renderST();
-      bindExpenseInputs();
-      bindSettings();
-      bindCashInput();
-      try{drawProj();drawInvChart();startCountUp();}catch(e){}
-      try{fetchExchangeRate();}catch(e){}
-      // Show onboarding only after data loaded, only on first signup
-      if(isNewLogin && !ND.onboardingDone){
-        setTimeout(showOnboarding, 300);
-      }
+  var name=currentUser.user_metadata?.name||currentUser.user_metadata?.full_name||currentUser.email?.split('@')[0]||'';
+  var avBtn=document.getElementById('user-avatar-btn');
+  if(avBtn) avBtn.textContent=(name[0]||'N').toUpperCase();
+  try{applyLanguage();}catch(e){}
+  // Set storage key per user
+  var uid=(currentUser.id||'').slice(0,8);
+  window.STORAGE_KEY='numa_v2_'+uid;
+  // Load data then init
+  function _afterLoad(){
+    if(name && !ND.profile.name){ ND.profile.name=name; saveToStorage(); }
+    if(!ND.milestones) ND.milestones=[];
+    render();
+    renderST();
+    bindExpenseInputs();
+    bindSettings();
+    bindCashInput();
+    try{drawProj();drawInvChart();startCountUp();}catch(e){}
+    try{fetchExchangeRate();}catch(e){}
+    // Show onboarding only on first real login AND user never completed it
+    if(isNewLogin && !ND.onboardingDone){
+      setTimeout(showOnboarding, 300);
     }
-    if(_sb){
-      loadFromCloud().then(_afterLoad).catch(function(){ loadFromStorage(); _afterLoad(); });
-    } else {
-      loadFromStorage();
-      setTimeout(_afterLoad, 80);
-    }
+  }
+  if(_sb){
+    loadFromCloud().then(_afterLoad).catch(function(){ loadFromStorage(); _afterLoad(); });
+  } else {
+    loadFromStorage();
+    setTimeout(_afterLoad, 80);
   }
 }
 
 function _showAuth(){
   if(window.PREVIEW_MODE)return;
-  _appShown=false;
-  const as=$('auth-screen');if(as)as.style.display='flex';
-  // Hide app
+  _showApp_done=false;
+  var as=$('auth-screen');if(as)as.style.display='flex';
   var dev=document.querySelector('.dev');if(dev)dev.style.display='none';
 }
 
