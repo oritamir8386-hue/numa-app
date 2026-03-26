@@ -991,8 +991,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 <!-- הגדרות -->
 <!-- ══════════════════ הגדרות — Settings Modal ══════════════════ -->
-<div id="settings-overlay" style="display:none;position:fixed;inset:0;z-index:200">
-<div id="settings-modal" style="position:fixed;inset:0;background:#f0ece4;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;direction:rtl;font-family:-apple-system,'Plus Jakarta Sans',sans-serif;animation:setIn .3s ease both">
+<div id="settings-overlay" style="display:none;position:fixed;inset:0;z-index:900">
+<div id="settings-modal" style="position:fixed;inset:0;background:#f0ece4;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;direction:rtl;font-family:-apple-system,'Plus Jakarta Sans',sans-serif;z-index:901">
   <!-- STICKY HEADER -->
   <div style="position:sticky;top:0;z-index:10;background:#f0ece4;padding:max(env(safe-area-inset-top),14px) 18px 10px;display:flex;justify-content:space-between;align-items:center;border-bottom:.5px solid rgba(0,0,0,.06)">
     <div style="font-size:24px;font-weight:800;color:#1E2D4A">הגדרות</div>
@@ -3524,6 +3524,7 @@ function goP(id){
   var ni=document.getElementById('ni-'+id);if(ni){ni.classList.add('on');var l=ni.querySelector('.nl');if(l)l.style.display='block';}
   document.getElementById('scr').scrollTop=0;
   prev=id;closeAI();
+  try{closeSettings();}catch(e){}
   if(id==='ov')setTimeout(startCountUp,80);
   if(id==='assets')setTimeout(renderAssetsHub,80);
   if(id==='plan')setTimeout(renderPlanHub,80);
