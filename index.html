@@ -849,8 +849,9 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 
 <div class="pg" id="pg-cf">
-  <!-- Header Banner — fully dynamic -->
-  <div style="background:#E8DCC8;border:.5px solid rgba(160,120,64,.1);border-radius:14px;padding:12px;position:sticky;top:0;z-index:10;overflow:hidden">
+
+  <!-- ═══ 1. תזרים (סיכום למעלה — לא sticky) ═══ -->
+  <div style="background:#E8DCC8;border:.5px solid rgba(160,120,64,.1);border-radius:14px;padding:12px;overflow:hidden">
     <div style="position:absolute;top:0;left:0;right:0;height:2.5px;background:#A07840"></div>
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
       <div class="ic-box"><span class="ic" style="color:#A07840"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 100 4h4v-4z"/></svg></span></div>
@@ -863,7 +864,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </div>
   </div>
 
-  <!-- ① Cashflow bar chart — right after sticky header -->
   <div id="cf-fl">
     <div class="hc">
       <div style="font-size:10px;color:#A8A8B0;font-weight:600;margin-bottom:2px">תזרים נטו חודשי</div>
@@ -878,7 +878,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </div>
   </div>
 
-  <!-- ② הכנסות -->
+  <!-- ═══ 2. הכנסות ═══ -->
   <div class="sec-div"><span class="sec-div-label">הכנסות</span><div class="sec-div-line"></div></div>
   <div id="cf-inc">
     <div class="c">
@@ -889,55 +889,61 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       </div>
       <div><div class="il">הכנסות נוספות (שכ"ד / פרילנס)</div><input class="inp" id="inc-extra" placeholder="₪ אופציונלי" type="number"/></div>
     </div>
-    <div class="c">
-      <div class="ch"><div class="ct">סיכום תזרים</div></div>
-      <div class="dr"><div class="dl">הכנסה כוללת</div><div class="dv" style="color:#A07840" id="sum-inc">₪0</div></div>
-      <div class="dr"><div class="dl">הוצאות</div><div class="dv" style="color:#6B7A96" id="sum-exp">₪0</div></div>
-      <div class="dr"><div class="dl">עודף לחיסכון</div><div class="dv" id="sum-sav">₪0</div></div>
-      <div class="dr"><div class="dl">יחס הוצאה/הכנסה</div><div class="dv" id="sum-ratio">0%</div></div>
-    </div>
-    <div class="c" style="background:rgba(160,120,64,.04);border-color:rgba(160,120,64,.12)" id="rule-card">
-      <div style="font-size:10.5px;font-weight:700;color:#A07840;margin-bottom:3px">כלל 50/30/20</div>
-      <div style="font-size:10.5px;color:#64646A;line-height:1.6" id="rule-text"><div style="text-align:center;padding:16px 0"><div style="margin-bottom:6px"><span class="ic ic-lg" style="color:#A07840"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l5 5-11 11-5-5z"/><path d="M10 9l-1 1"/><path d="M13 6l-1 1"/></svg></span></div><div style="font-size:11px;color:#6B7A96;margin-bottom:8px">בדוק אם אתה עומד בכלל 50/30/20</div><button onclick="goP('cf')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">הזן נתונים →</button></div></div>
-    </div>
   </div>
 
-  <!-- ③ הוצאות -->
+  <!-- ═══ 3. הוצאות ═══ -->
   <div class="sec-div"><span class="sec-div-label">הוצאות</span><div class="sec-div-line"></div></div>
   <div id="cf-exp">
     <div class="c">
       <div class="ch"><div class="ct">הוצאות לפי קטגוריה</div></div>
       <div id="exp-cats"></div>
     </div>
+  </div>
 
-    <!-- ④ 50/30/20 -->
-    <div class="c" id="rule-2020-card">
-      <div class="ch"><div class="ct">כלל 50/30/20</div><span class="bdg" id="rule-badge" style="background:rgba(160,120,64,.1);color:#A07840;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px">ממתין לנתונים</span></div>
-      <div class="dr">
-        <div class="dl">הכרחי (50%)</div>
-        <div style="flex:1;margin:0 8px"><div style="height:4px;background:#EEE;border-radius:2px"><div id="bar-nec" style="height:4px;width:0%;max-width:100%;background:#1E2D4A;border-radius:2px;transition:width .4s"></div></div></div>
-        <div class="dv" style="font-size:10px" id="pct-nec">0%</div>
-      </div>
-      <div class="dr">
-        <div class="dl">🎉 רצוני (30%)</div>
-        <div style="flex:1;margin:0 8px"><div style="height:4px;background:#EEE;border-radius:2px"><div id="bar-want" style="height:4px;width:0%;max-width:100%;background:#A07840;border-radius:2px;transition:width .4s"></div></div></div>
-        <div class="dv" style="font-size:10px" id="pct-want">0%</div>
-      </div>
-      <div class="dr">
-        <div class="dl">חיסכון (20%)</div>
-        <div style="flex:1;margin:0 8px"><div style="height:4px;background:#EEE;border-radius:2px"><div id="bar-sav" style="height:4px;width:0%;max-width:100%;background:#2D6A3F;border-radius:2px;transition:width .4s"></div></div></div>
-        <div class="dv" style="font-size:10px" id="pct-sav">0%</div>
-      </div>
+  <!-- ═══ 4. כללים ותובנות ═══ -->
+  <div class="sec-div"><span class="sec-div-label">כללים ותובנות</span><div class="sec-div-line"></div></div>
+
+  <!-- סיכום תזרים -->
+  <div class="c">
+    <div class="ch"><div class="ct">סיכום תזרים</div></div>
+    <div class="dr"><div class="dl">הכנסה כוללת</div><div class="dv" style="color:#A07840" id="sum-inc">₪0</div></div>
+    <div class="dr"><div class="dl">הוצאות</div><div class="dv" style="color:#6B7A96" id="sum-exp">₪0</div></div>
+    <div class="dr"><div class="dl">עודף לחיסכון</div><div class="dv" id="sum-sav">₪0</div></div>
+    <div class="dr"><div class="dl">יחס הוצאה/הכנסה</div><div class="dv" id="sum-ratio">0%</div></div>
+  </div>
+
+  <!-- כלל 50/30/20 -->
+  <div class="c" style="background:rgba(160,120,64,.04);border-color:rgba(160,120,64,.12)" id="rule-card">
+    <div style="font-size:10.5px;font-weight:700;color:#A07840;margin-bottom:3px">כלל 50/30/20</div>
+    <div style="font-size:10.5px;color:#64646A;line-height:1.6" id="rule-text"></div>
+  </div>
+
+  <div class="c" id="rule-2020-card">
+    <div class="ch"><div class="ct">חלוקת הוצאות</div><span class="bdg" id="rule-badge" style="background:rgba(160,120,64,.1);color:#A07840;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px">ממתין לנתונים</span></div>
+    <div class="dr">
+      <div class="dl">הכרחי (50%)</div>
+      <div style="flex:1;margin:0 8px"><div style="height:4px;background:#EEE;border-radius:2px"><div id="bar-nec" style="height:4px;width:0%;max-width:100%;background:#1E2D4A;border-radius:2px;transition:width .4s"></div></div></div>
+      <div class="dv" style="font-size:10px" id="pct-nec">0%</div>
     </div>
-
-    <!-- ⑤ AI Insights -->
-    <div class="c">
-      <div class="ch"><div class="ct">תובנות</div><span class="bdg Bg">לפי הנתונים שלך</span></div>
-      <div id="cf-insights"><div style="text-align:center;padding:16px 0"><div style="margin-bottom:6px"><span class="ic ic-lg" style="color:#A07840"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 006 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></span></div><div style="font-size:11px;color:#6B7A96;margin-bottom:8px">תובנות חכמות לפי ההוצאות שלך</div><button onclick="goP('cf')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">הזן הוצאות →</button></div></div>
+    <div class="dr">
+      <div class="dl">רצוני (30%)</div>
+      <div style="flex:1;margin:0 8px"><div style="height:4px;background:#EEE;border-radius:2px"><div id="bar-want" style="height:4px;width:0%;max-width:100%;background:#A07840;border-radius:2px;transition:width .4s"></div></div></div>
+      <div class="dv" style="font-size:10px" id="pct-want">0%</div>
+    </div>
+    <div class="dr">
+      <div class="dl">חיסכון (20%)</div>
+      <div style="flex:1;margin:0 8px"><div style="height:4px;background:#EEE;border-radius:2px"><div id="bar-sav" style="height:4px;width:0%;max-width:100%;background:#2D6A3F;border-radius:2px;transition:width .4s"></div></div></div>
+      <div class="dv" style="font-size:10px" id="pct-sav">0%</div>
     </div>
   </div>
 
-  <!-- Cashflow explainer -->
+  <!-- תובנות -->
+  <div class="c">
+    <div class="ch"><div class="ct">תובנות</div><span class="bdg Bg">לפי הנתונים שלך</span></div>
+    <div id="cf-insights"><div style="text-align:center;padding:16px 0"><div style="margin-bottom:6px"><span class="ic ic-lg" style="color:#A07840"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 006 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></span></div><div style="font-size:11px;color:#6B7A96;margin-bottom:8px">תובנות חכמות לפי ההוצאות שלך</div><button onclick="goP('cf')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">הזן הוצאות →</button></div></div>
+  </div>
+
+  <!-- מה זה תזרים -->
   <div class="c" style="background:rgba(61,82,120,.04);border-color:rgba(61,82,120,.12)">
     <div style="font-size:10.5px;font-weight:700;color:#A07840;margin-bottom:4px">מה זה תזרים ולמה זה חשוב?</div>
     <div style="font-size:10.5px;color:#64646A;line-height:1.65"><strong style="color:#111">תזרים חיובי</strong> = יש עודף — השקע אותו.<br><strong style="color:#111">תזרים שלילי</strong> = אתה מוציא יותר ממה שנכנס — סכנה.<br>הדבר הכי חשוב: לדעת <em>לאן</em> הולך הכסף.</div>
