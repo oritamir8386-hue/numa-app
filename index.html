@@ -991,15 +991,14 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 <!-- הגדרות -->
 <!-- ══════════════════ הגדרות — Settings Modal ══════════════════ -->
-<div id="settings-overlay" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.4);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">
-<div id="settings-modal" style="position:absolute;inset:0;background:#f0ece4;overflow-y:auto;-webkit-overflow-scrolling:touch;direction:rtl;font-family:-apple-system,'Plus Jakarta Sans',sans-serif;animation:setIn .3s ease both">
-<div style="padding:18px;display:flex;flex-direction:column;gap:14px">
-
-  <!-- HEADER -->
-  <div style="display:flex;justify-content:space-between;align-items:center">
-    <div style="font-size:32px;font-weight:800;color:#1E2D4A">הגדרות</div>
-    <button onclick="closeSettings()" style="background:none;border:none;font-size:14px;color:#A07840;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px">חזרה ‹</button>
+<div id="settings-overlay" style="display:none;position:fixed;inset:0;z-index:200">
+<div id="settings-modal" style="position:fixed;inset:0;background:#f0ece4;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;direction:rtl;font-family:-apple-system,'Plus Jakarta Sans',sans-serif;animation:setIn .3s ease both">
+  <!-- STICKY HEADER -->
+  <div style="position:sticky;top:0;z-index:10;background:#f0ece4;padding:max(env(safe-area-inset-top),14px) 18px 10px;display:flex;justify-content:space-between;align-items:center;border-bottom:.5px solid rgba(0,0,0,.06)">
+    <div style="font-size:24px;font-weight:800;color:#1E2D4A">הגדרות</div>
+    <button onclick="closeSettings()" style="background:#fff;border:.5px solid rgba(0,0,0,.08);border-radius:12px;padding:8px 16px;font-size:14px;font-weight:600;color:#A07840;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px">← חזרה</button>
   </div>
+<div style="padding:14px 18px 40px;display:flex;flex-direction:column;gap:14px">
 
   <!-- PROFILE CARD -->
   <div style="background:#1E2D4A;border-radius:22px;padding:20px;display:flex;align-items:center;gap:16px">
@@ -5616,6 +5615,9 @@ function saveSetting(key,val){
 function openSettings(){
   var ov=document.getElementById('settings-overlay');if(!ov)return;
   ov.style.display='block';
+  document.body.style.overflow='hidden';
+  // Scroll modal to top
+  var modal=document.getElementById('settings-modal');if(modal)modal.scrollTop=0;
   // Populate profile
   var nm=ND.profile.name||(typeof currentUser!=='undefined'&&currentUser?(currentUser.user_metadata?.name||currentUser.email?.split('@')[0]||''):'');
   var avatar=document.getElementById('set-avatar');
@@ -5642,6 +5644,7 @@ function openSettings(){
 }
 function closeSettings(){
   var ov=document.getElementById('settings-overlay');if(ov)ov.style.display='none';
+  document.body.style.overflow='';
   applyCategoryToggles();
   render();
 }
