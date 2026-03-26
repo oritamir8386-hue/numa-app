@@ -1134,10 +1134,46 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- SECTION: מטבע ושפה -->
   <div>
-    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:8px">מטבע ושפה</div>
+    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:8px" id="set-lang-title">מטבע ושפה</div>
     <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#A07840">₪</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">מטבע</div></div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:13px;color:#8a8a8a">שקל ₪</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
-      <div class="set-row" style="border-bottom:none"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🌐</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">שפה</div></div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:13px;color:#8a8a8a">עברית</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <!-- Language -->
+      <div style="padding:13px 18px;border-bottom:.5px solid rgba(0,0,0,.05)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🌐</div>
+          <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-lang-label">שפה</div>
+        </div>
+        <div id="set-lang-chips" style="display:flex;gap:8px">
+          <button class="set-chip on" data-val="he" onclick="setLang('he')">עברית</button>
+          <button class="set-chip" data-val="en" onclick="setLang('en')">English</button>
+        </div>
+      </div>
+      <!-- Currency -->
+      <div style="padding:13px 18px;border-bottom:.5px solid rgba(0,0,0,.05)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#A07840">₪</div>
+          <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-curr-label">מטבע</div>
+        </div>
+        <div id="set-curr-chips" style="display:flex;gap:8px">
+          <button class="set-chip on" data-val="ILS" onclick="setCurrency('ILS')">₪ שקל</button>
+          <button class="set-chip" data-val="USD" onclick="setCurrency('USD')">$ Dollar</button>
+        </div>
+      </div>
+      <!-- Exchange rate (shown when USD) -->
+      <div id="set-rate-row" style="padding:13px 18px;border-bottom:none;display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.06);display:flex;align-items:center;justify-content:center;font-size:14px">💱</div>
+            <div>
+              <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-rate-label">שער ₪/$</div>
+              <div style="font-size:11px;color:#8a8a8a" id="set-rate-sub">עודכן אוטומטית</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span id="set-rate-val" style="font-size:15px;font-weight:700;color:#A07840">3.7</span>
+            <button onclick="ND.settings.rateLastFetch=0;fetchExchangeRate()" style="width:28px;height:28px;border-radius:50%;background:#ede9e0;border:none;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center">⟳</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1823,7 +1859,102 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 <script>
 const $=id=>document.getElementById(id);
-const fmt=n=>'₪'+Math.round(n).toLocaleString();
+function fmt(n){
+  if(!n&&n!==0)return'—';
+  var s=(typeof ND!=='undefined'&&ND.settings)||SETTINGS_DEFAULTS||{};
+  var currency=s.currency||'ILS';
+  var rate=s.exchangeRate||3.7;
+  var symbol=currency==='USD'?'$':'₪';
+  var value=currency==='USD'?n/rate:n;
+  if(Math.abs(value)>=1e6)return symbol+(value/1e6).toFixed(1)+'M';
+  if(Math.abs(value)>=1000)return symbol+(value/1000).toFixed(0)+'k';
+  return symbol+Math.round(value).toLocaleString();
+}
+
+/* ═══ TRANSLATIONS ═══ */
+var T={
+  he:{
+    nav_overview:'סקירה',nav_cashflow:'תזרים',nav_assets:'נכסים',
+    nav_plan:'תכנון',nav_tools:'כלים',settings:'הגדרות',
+    netWorth:'שווי נטו',totalAssets:'סה"כ נכסים',
+    income:'הכנסה',expenses:'הוצאות',savings:'חיסכון',
+    pension:'פנסיה',investments:'השקעות',loans:'הלוואות',
+    realestate:'נדל"ן',cashReserve:'קרן חירום',
+    fireAge:'FIRE בגיל',savingsRate:'שיעור חיסכון',
+    netCashflow:'תזרים נטו',projection:'תחזית 25 שנה',
+    add:'+ הוסף',delete:'מחק',save:'שמור',cancel:'ביטול',
+    noData:'הזן נתונים',
+    greeting_morning:'בוקר טוב',greeting_afternoon:'צהריים טובים',greeting_evening:'ערב טוב',
+    currency_label:'מטבע',language_label:'שפה',
+    rate_label:'שער ₪/$',rate_updated:'עודכן אוטומטית',
+    pension_card:'פנסיה וקה"ש',pension_sub:'חיסכון פנסיוני + קרנות השתלמות',
+    invest_card:'השקעות',invest_sub:'תיקים, מזומן ואלטרנטיביות',
+    sim_card:'סימולטור תיק',sim_sub:'תחזית צמיחה',
+    loans_card:'הלוואות',loans_sub:'חובות ולוח סילוקין',
+    amort_card:'לוח סילוקין',amort_sub:'חישוב החזר חודשי',
+    debts:'חובות',projection_label:'תחזית',years:'שנים',
+    monthly_deposit:'הפקדה/חודש',return_rate:'תשואה %',
+    portfolio_current:'תיק נוכחי',future_value:'שווי עתידי',
+    deposits:'הפקדות',interest:'ריבית',total:'סה"כ',
+    synced:'⟳ מסונכרן',no_pension:'אין קרנות — הוסף',
+    no_invest:'אין השקעות — הוסף',no_realestate:'אין נכסי נדל"ן עדיין',
+    no_loans:'אין הלוואות פעילות',monthly_payment:'החזר חודשי',
+    total_interest:'סה"כ ריבית',total_cost:'עלות כוללת',
+    amort_note:'ריבית מעול 5% — שקול פירעון מוקדם לפני השקעה'
+  },
+  en:{
+    nav_overview:'Overview',nav_cashflow:'Cash Flow',nav_assets:'Assets',
+    nav_plan:'Planning',nav_tools:'Tools',settings:'Settings',
+    netWorth:'Net Worth',totalAssets:'Total Assets',
+    income:'Income',expenses:'Expenses',savings:'Savings',
+    pension:'Pension',investments:'Investments',loans:'Loans',
+    realestate:'Real Estate',cashReserve:'Emergency Fund',
+    fireAge:'FIRE Age',savingsRate:'Savings Rate',
+    netCashflow:'Net Cash Flow',projection:'25yr Projection',
+    add:'+ Add',delete:'Delete',save:'Save',cancel:'Cancel',
+    noData:'Enter data',
+    greeting_morning:'Good morning',greeting_afternoon:'Good afternoon',greeting_evening:'Good evening',
+    currency_label:'Currency',language_label:'Language',
+    rate_label:'₪/$ Rate',rate_updated:'Auto-updated',
+    pension_card:'Pension & Savings',pension_sub:'Pension funds + Study funds',
+    invest_card:'Investments',invest_sub:'Portfolios, cash & alternatives',
+    sim_card:'Portfolio Simulator',sim_sub:'Growth projection',
+    loans_card:'Loans',loans_sub:'Debts & amortization',
+    amort_card:'Amortization',amort_sub:'Monthly payment calculator',
+    debts:'Debts',projection_label:'Projection',years:'years',
+    monthly_deposit:'Monthly deposit',return_rate:'Return %',
+    portfolio_current:'Current portfolio',future_value:'Future value',
+    deposits:'Deposits',interest:'Interest',total:'Total',
+    synced:'⟳ Synced',no_pension:'No funds — Add',
+    no_invest:'No investments — Add',no_realestate:'No real estate yet',
+    no_loans:'No active loans',monthly_payment:'Monthly payment',
+    total_interest:'Total interest',total_cost:'Total cost',
+    amort_note:'Rate above 5% — consider early repayment before investing'
+  }
+};
+function t(key){
+  var lang=(typeof ND!=='undefined'&&ND.settings&&ND.settings.language)||SETTINGS_DEFAULTS.language||'he';
+  return(T[lang]&&T[lang][key])||(T.he[key])||key;
+}
+
+/* ═══ EXCHANGE RATE ═══ */
+async function fetchExchangeRate(){
+  var now=Date.now();
+  var lastFetch=(ND.settings&&ND.settings.rateLastFetch)||0;
+  if(now-lastFetch<86400000)return;
+  try{
+    var res=await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+    var data=await res.json();
+    var rate=data.rates&&data.rates.ILS;
+    if(rate){
+      if(!ND.settings)ND.settings={};
+      ND.settings.exchangeRate=rate;
+      ND.settings.rateLastFetch=now;
+      saveToStorage();
+      render();
+    }
+  }catch(e){}
+}
 
 
 /* ═══════════════════════════════════════════════════════════
@@ -2022,14 +2153,8 @@ function calc(){
 function render(){
   var c = calc();
 
-  // Update greeting from profile name
-  var greetEl = document.getElementById('top-greeting');
-  if(greetEl){
-    var hour = new Date().getHours();
-    var timeGreet = hour<12 ? 'בוקר טוב' : hour<17 ? 'צהריים טובים' : 'ערב טוב';
-    var nm = ND.profile.name || (typeof currentUser!=='undefined' && currentUser ? (currentUser.user_metadata?.name||currentUser.user_metadata?.full_name||currentUser.email?.split('@')[0]||'') : '');
-    greetEl.textContent = nm ? timeGreet + ', ' + nm + '' : timeGreet + '';
-  }
+  // Apply language + nav labels + greeting
+  try{applyLanguage();}catch(e){}
 
   // Hero net worth
   var nwEl = document.getElementById('hero-nw');
@@ -4610,13 +4735,8 @@ function _showApp(isNewLogin=false){
     const av=$('user-avatar');if(av)av.textContent=(name[0]||'N').toUpperCase();
     var avBtn=document.getElementById('user-avatar-btn');
     if(avBtn) avBtn.textContent=(name[0]||'N').toUpperCase();
-    // Personalized greeting in topbar
-    const greet=$('top-greeting');
-    if(greet){
-      var hour=new Date().getHours();
-      var timeGreet=hour<12?'בוקר טוב':hour<17?'צהריים טובים':'ערב טוב';
-      greet.textContent=(name?timeGreet+', '+name+'':timeGreet+'');
-    }
+    // Personalized greeting in topbar (uses t() for language)
+    try{applyLanguage();}catch(e){}
     // Welcome toast on login
     if(isNewLogin && typeof showToast==='function'){
       showToast('ברוך הבא'+(name?', '+name:'')+'!','Numa מחשבת את המצב שלך');
@@ -4634,6 +4754,7 @@ function _showApp(isNewLogin=false){
       bindSettings();
       bindCashInput();
       try{drawProj();drawInvChart();startCountUp();}catch(e){}
+      try{fetchExchangeRate();}catch(e){}
     }
     if(_sb){
       loadFromCloud().then(_afterLoad).catch(function(){ loadFromStorage(); _afterLoad(); });
@@ -5493,7 +5614,7 @@ function applyVis(key, show){
 }
 
 /* ══ SETTINGS PAGE ══ */
-var SETTINGS_DEFAULTS={returnRate:7,withdrawalRate:4,inflation:3,capitalGainsTax:25,employment:'שכיר',family:'family',categories:{pension:1,investments:1,realestate:0,insurance:1,loans:1,legacy:0,fire:1,sync:1}};
+var SETTINGS_DEFAULTS={returnRate:7,withdrawalRate:4,inflation:3,capitalGainsTax:25,employment:'שכיר',family:'family',language:typeof navigator!=='undefined'&&navigator.language.startsWith('he')?'he':'en',currency:'ILS',exchangeRate:3.7,rateLastFetch:0,categories:{pension:1,investments:1,realestate:0,insurance:1,loans:1,legacy:0,fire:1,sync:1}};
 function getSettings(){
   try{
     var base=JSON.parse(JSON.stringify(SETTINGS_DEFAULTS));
@@ -5533,6 +5654,14 @@ function openSettings(){
   document.querySelectorAll('.cat-toggle').forEach(function(t){var cat=t.dataset.cat;if(s.categories&&typeof s.categories[cat]!=='undefined')t.classList.toggle('on',!!s.categories[cat]);});
   // Calc values
   document.querySelectorAll('.calc-val').forEach(function(el){var k=el.dataset.key;if(s[k]!==undefined)el.textContent=s[k]+'%';});
+  // Language chips
+  document.querySelectorAll('#set-lang-chips .set-chip').forEach(function(c){c.classList.toggle('on',c.dataset.val===(s.language||'he'));});
+  // Currency chips
+  var curr=s.currency||'ILS';
+  document.querySelectorAll('#set-curr-chips .set-chip').forEach(function(c){c.classList.toggle('on',c.dataset.val===curr);});
+  // Exchange rate row
+  var rr=document.getElementById('set-rate-row');if(rr)rr.style.display=curr==='USD'?'block':'none';
+  var rv=document.getElementById('set-rate-val');if(rv)rv.textContent=(s.exchangeRate||3.7).toFixed(2);
 }
 function closeSettings(){
   var ov=document.getElementById('settings-overlay');if(ov)ov.style.display='none';
@@ -5566,6 +5695,45 @@ function applyCategoryToggles(){
     var el=document.getElementById(map[cat]);
     if(el) el.style.display=(cats[cat]===0)?'none':'';
   });
+}
+function setLang(val){
+  document.querySelectorAll('#set-lang-chips .set-chip').forEach(function(c){c.classList.toggle('on',c.dataset.val===val);});
+  if(!ND.settings)ND.settings={};
+  ND.settings.language=val;
+  saveSetting('language',val);
+  applyLanguage();
+  render();
+}
+function setCurrency(val){
+  document.querySelectorAll('#set-curr-chips .set-chip').forEach(function(c){c.classList.toggle('on',c.dataset.val===val);});
+  if(!ND.settings)ND.settings={};
+  ND.settings.currency=val;
+  saveSetting('currency',val);
+  // Show/hide exchange rate row
+  var rr=document.getElementById('set-rate-row');
+  if(rr) rr.style.display=val==='USD'?'block':'none';
+  render();
+  try{renderAssetsHub();}catch(e){}
+}
+function applyLanguage(){
+  var lang=(ND.settings&&ND.settings.language)||'he';
+  var html=document.documentElement;
+  html.lang=lang;html.dir=lang==='he'?'rtl':'ltr';
+  document.body.style.direction=lang==='he'?'rtl':'ltr';
+  // Nav labels
+  var navMap={ov:'nav_overview',cf:'nav_cashflow',assets:'nav_assets',plan:'nav_plan',tools:'nav_tools'};
+  Object.keys(navMap).forEach(function(id){
+    var btn=document.getElementById('ni-'+id);
+    if(btn){var sp=btn.querySelector('span');if(sp)sp.textContent=t(navMap[id]);}
+  });
+  // Topbar greeting
+  var greet=$('top-greeting');
+  if(greet){
+    var h=new Date().getHours();
+    var tg=h<12?t('greeting_morning'):h<17?t('greeting_afternoon'):t('greeting_evening');
+    var nm=ND.profile.name||(typeof currentUser!=='undefined'&&currentUser?(currentUser.user_metadata?.name||currentUser.email?.split('@')[0]||''):'');
+    greet.textContent=nm?tg+', '+nm:tg;
+  }
 }
 var _calcEditorKey='';
 function editCalcVal(key,title){
