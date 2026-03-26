@@ -215,6 +215,69 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .ob2-toggle.on::after{transform:translateX(-18px)}
 .ob2-fcard{background:#fff;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
 .ob2-fcard .ob2-fico{font-size:24px;width:44px;height:44px;border-radius:12px;background:#ede9e0;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+/* ── OVERVIEW V2 ── */
+.card{background:#fff;border-radius:22px;border:.5px solid rgba(0,0,0,.06);box-shadow:0 4px 20px rgba(0,0,0,.06);overflow:hidden}
+.cb{padding:14px 20px 18px;display:flex;flex-direction:column;gap:12px}
+.cs{font-size:10px;color:#8a8a8a;margin-top:1px}
+.ib{width:42px;height:42px;border-radius:12px;background:#ede9e0;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.sep{height:.5px;background:rgba(0,0,0,.06)}
+.ov-hero{background:#1E2D4A;border-radius:22px;padding:20px 22px;display:flex;flex-direction:column;gap:14px;border:.5px solid rgba(160,120,64,.15)}
+.ov-h-row{display:flex;justify-content:space-between;align-items:flex-end}
+.ov-h-lbl{font-size:11px;color:rgba(255,255,255,.4);font-weight:600;letter-spacing:.06em}
+.ov-h-val{font-size:26px;font-weight:700;color:rgba(255,255,255,.18);letter-spacing:-.8px;margin-top:2px}
+.ov-hchips{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.ov-hc{background:rgba(255,255,255,.07);border-radius:12px;padding:10px 7px;text-align:center}
+.ov-hc-lbl{font-size:10px;color:rgba(255,255,255,.35);margin-bottom:4px}
+.ov-hc-val{font-size:13px;font-weight:700;color:rgba(255,255,255,.18)}
+.ov-score-wrap{display:flex;align-items:center;gap:16px;flex-shrink:0}
+.ov-score-leg{flex:1;display:flex;flex-direction:column;gap:8px}
+.ov-sl-row{display:flex;align-items:center;gap:7px;direction:ltr}
+.ov-sl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ov-sl-lbl{font-size:12px;color:#1a1a1a;flex:1;direction:rtl;text-align:right}
+.ov-sl-pct{font-size:12px;font-weight:700;color:#8a8a8a}
+.ov-kpi-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;flex-shrink:0}
+.ov-kpi{background:#ede9e0;border-radius:12px;padding:10px 8px;text-align:center}
+.ov-kpi-lbl{font-size:10px;color:#8a8a8a;margin-bottom:3px}
+.ov-kpi-val{font-size:14px;font-weight:700;color:#8a8a8a}
+.ov-chart-card{background:#fff;border-radius:22px;border:.5px solid rgba(0,0,0,.06);box-shadow:0 4px 20px rgba(0,0,0,.06);padding:16px 20px;display:flex;flex-direction:column;gap:10px}
+.ov-chart-hdr{display:flex;justify-content:space-between;align-items:baseline}
+.ov-chart-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.ov-chart-sub{font-size:11px;color:#8a8a8a}
+.ov-chart-area{height:120px;flex-shrink:0}
+.ov-ev-row{display:flex;gap:7px;flex-shrink:0}
+.ov-ev-fi{flex:1;background:#ede9e0;border:none;border-radius:10px;padding:9px 12px;font-size:13px;color:#1a1a1a;direction:rtl;outline:none;font-family:inherit}
+.ov-ev-fi::placeholder{color:#bbb}
+.ov-ev-yr{width:70px;background:#ede9e0;border:none;border-radius:10px;padding:9px 10px;font-size:13px;color:#1a1a1a;outline:none;font-family:inherit;text-align:center}
+.ov-ev-add{background:#1E2D4A;color:#fff;border:none;border-radius:10px;padding:9px 13px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.ov-ev-tags{display:flex;flex-wrap:wrap;gap:5px;flex-shrink:0}
+.ov-ev-tag{display:flex;align-items:center;gap:5px;background:rgba(160,120,64,.08);border-radius:8px;padding:5px 10px;border:.5px solid rgba(160,120,64,.2)}
+.ov-et-n{font-size:11px;color:#1E2D4A;font-weight:600}
+.ov-et-y{font-size:11px;color:#8a8a8a}
+.ov-et-d{background:none;border:none;color:#bbb;font-size:12px;cursor:pointer}
+.ov-asset-wrap{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.ov-asset-leg{flex:1;display:flex;flex-direction:column;gap:6px}
+.ov-al-row{display:flex;align-items:center;gap:7px;direction:ltr}
+.ov-al-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ov-al-lbl{font-size:12px;color:#1a1a1a;flex:1;direction:rtl;text-align:right}
+.ov-al-pct{font-size:11px;color:#8a8a8a;width:26px}
+.ov-al-val{font-size:12px;font-weight:700;color:#8a8a8a}
+.ov-cf-bars{display:flex;align-items:flex-end;justify-content:space-around;height:72px;flex-shrink:0}
+.ov-cf-grp{display:flex;flex-direction:column;align-items:center;gap:4px}
+.ov-cf-pair{display:flex;gap:3px;align-items:flex-end}
+.ov-cf-bar{width:13px;border-radius:4px 4px 0 0}
+.ov-cf-mo{font-size:9px;color:#8a8a8a}
+.ov-cf-chips{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;flex-shrink:0}
+.ov-cf-chip{background:#ede9e0;border-radius:12px;padding:10px 8px;text-align:center}
+.ov-cf-chip-lbl{font-size:10px;color:#8a8a8a;margin-bottom:3px}
+.ov-cf-chip-val{font-size:14px;font-weight:700;color:#8a8a8a}
+.ov-cf-note{text-align:center;font-size:11px;color:#8a8a8a;flex-shrink:0}
+.ov-snap-rows{display:flex;flex-direction:column;flex-shrink:0}
+.ov-sn-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:.5px solid rgba(0,0,0,.05)}
+.ov-sn-row:last-child{border-bottom:none;padding-bottom:0}
+.ov-sn-lbl{font-size:14px;color:#1a1a1a}
+.ov-sn-lbl.bold{font-weight:700}
+.ov-sn-val{font-size:14px;font-weight:700;color:#8a8a8a}
+.ov-sn-date{font-size:11px;color:#8a8a8a;text-align:center;padding-top:10px;flex-shrink:0}
 /* ── TYPOGRAPHY HIERARCHY ── */
 .hero-num{font-size:30px!important;font-weight:800!important;letter-spacing:-1.5px!important}
 .label-sm{font-size:10px!important;font-weight:600!important;text-transform:uppercase;letter-spacing:.04em;color:#A8A8B0!important}
@@ -648,213 +711,164 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 </style>
 <div class="pg on" id="pg-ov" style="gap:9px;padding:14px 18px 20px">
 
-  <!-- ── CARD 1: Hero (navy) ── -->
-  <div class="tc" style="height:auto;background:#1E2D4A;color:#F5F2EC">
-    <div class="tc-body" style="padding:16px 20px">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div><div style="font-size:10px;color:rgba(255,255,255,.45)">שווי נטו כולל</div><div style="font-size:32px;font-weight:800;color:#8a8a8a;letter-spacing:-2px;line-height:1" id="hero-nw">—</div></div>
-        <div style="text-align:left"><div style="font-size:9px;color:rgba(255,255,255,.3)">תחזית 25 שנה</div><div style="font-size:14px;font-weight:700;color:#8a8a8a" id="hero-proj">—</div></div>
-      </div>
-      <div style="display:flex;gap:6px;margin-top:10px">
-        <div class="ov-chip" style="background:rgba(255,255,255,.08)"><div class="ov-v" style="color:#8a8a8a" id="qs-inc">—</div><div class="ov-l" style="color:rgba(255,255,255,.4)">תזרים חודשי</div></div>
-        <div class="ov-chip" style="background:rgba(255,255,255,.08)"><div class="ov-v" style="color:#8a8a8a" id="qs-rate">—</div><div class="ov-l" style="color:rgba(255,255,255,.4)">שיעור חיסכון</div></div>
-        <div class="ov-chip" style="background:rgba(255,255,255,.08)"><div class="ov-v" style="color:#8a8a8a" id="qs-fire-age">—</div><div class="ov-l" style="color:rgba(255,255,255,.4)">FIRE בגיל</div></div>
-      </div>
-    </div>
+<!-- HERO -->
+<div class="ov-hero">
+  <div class="ov-h-row">
+    <div><div class="ov-h-lbl">שווי נטו כולל</div><div class="ov-h-val" id="ov-net">—</div></div>
+    <div style="text-align:left"><div class="ov-h-lbl">תחזית 25 שנה</div><div class="ov-h-val" id="ov-proj">—</div></div>
   </div>
+  <div class="ov-hchips">
+    <div class="ov-hc"><div class="ov-hc-lbl">תזרים חודשי</div><div class="ov-hc-val" id="ov-cf">—</div></div>
+    <div class="ov-hc"><div class="ov-hc-lbl">שיעור חיסכון</div><div class="ov-hc-val" id="ov-sr">—</div></div>
+    <div class="ov-hc"><div class="ov-hc-lbl">FIRE בגיל</div><div class="ov-hc-val" id="ov-fire">—</div></div>
+  </div>
+</div>
 
-  <!-- ── CARD 2: Numa Score ── -->
-  <div class="tc" style="height:234px">
-    <div class="tc-hdr"><div><h3>Numa Score</h3><p>מדד הבריאות הפיננסית שלך</p></div><div class="tc-ico"><span style="font-size:18px">⚡</span></div></div>
-    <div class="tc-body">
-      <div style="display:flex;align-items:center;gap:14px;direction:ltr">
-        <div style="position:relative;width:110px;height:110px;flex-shrink:0">
-          <svg width="110" height="110" viewBox="0 0 110 110">
-            <circle cx="55" cy="55" r="46" fill="none" stroke="#eee" stroke-width="11"/>
-            <circle id="ring-cashflow" cx="55" cy="55" r="46" fill="none" stroke="#1E2D4A" stroke-width="11" stroke-dasharray="0 289" stroke-dashoffset="0" transform="rotate(-90 55 55)"/>
-            <circle id="ring-savings" cx="55" cy="55" r="46" fill="none" stroke="#27ae60" stroke-width="11" stroke-dasharray="0 289" stroke-dashoffset="-72.26" transform="rotate(-90 55 55)"/>
-            <circle id="ring-insurance" cx="55" cy="55" r="46" fill="none" stroke="#c8a96a" stroke-width="11" stroke-dasharray="0 289" stroke-dashoffset="-144.51" transform="rotate(-90 55 55)"/>
-            <circle id="ring-planning" cx="55" cy="55" r="46" fill="none" stroke="#e07b5a" stroke-width="11" stroke-dasharray="0 289" stroke-dashoffset="-216.77" transform="rotate(-90 55 55)"/>
-          </svg>
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-            <div style="font-size:28px;font-weight:800;color:#8a8a8a;line-height:1" id="score-num">—</div>
-            <div style="font-size:8px;color:#8a8a8a;margin-top:2px">Numa Score</div>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px;flex:1">
-          <div class="ov-row"><div class="ov-dot" style="background:#1E2D4A"></div><div class="ov-lbl">תזרים</div><div class="ov-val" id="ring-score-cf">—</div></div>
-          <div class="ov-row"><div class="ov-dot" style="background:#27ae60"></div><div class="ov-lbl">חיסכון</div><div class="ov-val" id="ring-score-sav">—</div></div>
-          <div class="ov-row"><div class="ov-dot" style="background:#c8a96a"></div><div class="ov-lbl">ביטוח</div><div class="ov-val" id="ring-score-ins">—</div></div>
-          <div class="ov-row"><div class="ov-dot" style="background:#e07b5a"></div><div class="ov-lbl">תכנון</div><div class="ov-val" id="ring-score-plan">—</div></div>
+<!-- NUMA SCORE -->
+<div class="card">
+  <div class="ch"><div><div class="ct">Numa Score</div><div class="cs">ציון בריאות פיננסית</div></div><div class="ib">⚡</div></div>
+  <div class="cb">
+    <div class="sep"></div>
+    <div class="ov-score-wrap">
+      <div style="position:relative;width:110px;height:110px;flex-shrink:0">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle cx="55" cy="55" r="46" fill="none" stroke="#eee" stroke-width="11"/>
+          <circle cx="55" cy="55" r="46" fill="none" stroke="#1E2D4A" stroke-width="11" id="ov-sc1" stroke-dasharray="0 289" stroke-linecap="round" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="46" fill="none" stroke="#27ae60" stroke-width="11" id="ov-sc2" stroke-dasharray="0 289" stroke-linecap="round" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="46" fill="none" stroke="#c8a96a" stroke-width="11" id="ov-sc3" stroke-dasharray="0 289" stroke-linecap="round" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="46" fill="none" stroke="#e07b5a" stroke-width="11" id="ov-sc4" stroke-dasharray="0 289" stroke-linecap="round" transform="rotate(-90 55 55)"/>
+        </svg>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
+          <div style="font-size:22px;font-weight:700;color:#8a8a8a" id="ov-score">—</div>
+          <div style="font-size:9px;color:#8a8a8a;margin-top:2px">Numa Score</div>
         </div>
       </div>
+      <div class="ov-score-leg">
+        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#1E2D4A"></div><div class="ov-sl-lbl">תזרים</div><div class="ov-sl-pct" id="ov-sp1">—</div></div>
+        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#27ae60"></div><div class="ov-sl-lbl">חיסכון</div><div class="ov-sl-pct" id="ov-sp2">—</div></div>
+        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#c8a96a"></div><div class="ov-sl-lbl">ביטוח</div><div class="ov-sl-pct" id="ov-sp3">—</div></div>
+        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#e07b5a"></div><div class="ov-sl-lbl">תכנון</div><div class="ov-sl-pct" id="ov-sp4">—</div></div>
+      </div>
+    </div>
+    <div class="ov-kpi-row">
+      <div class="ov-kpi"><div class="ov-kpi-lbl">תזרים</div><div class="ov-kpi-val" id="ov-k1">—</div></div>
+      <div class="ov-kpi"><div class="ov-kpi-lbl">חיסכון</div><div class="ov-kpi-val" id="ov-k2">—</div></div>
+      <div class="ov-kpi"><div class="ov-kpi-lbl">FIRE</div><div class="ov-kpi-val" id="ov-k3">—</div></div>
     </div>
   </div>
+</div>
 
-  <!-- ── CARD 3: מסע הצמיחה (flexible height) ── -->
-  <div class="tc" style="height:auto">
-    <div class="tc-hdr"><div><h3>מסע הצמיחה שלך</h3><p id="nw-chart-range-lbl">10 שנים קדימה</p></div></div>
-    <div class="tc-body" style="position:relative">
-      <div id="nw-tooltip" style="display:none;position:absolute;background:#1E2D4A;color:#F5F2EC;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:600;white-space:nowrap;z-index:10;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.2);transform:translateX(-50%)">
-        <div id="nw-tooltip-year" style="font-size:9px;color:#C9A96E;margin-bottom:1px"></div>
-        <div id="nw-tooltip-val"></div>
-        <div id="nw-tooltip-diff" style="font-size:9px;color:rgba(255,255,255,.5);margin-top:1px"></div>
-      </div>
-      <div id="nw-scroll-wrap" style="overflow-x:auto;overflow-y:hidden;margin:0 -20px;padding:0 20px">
-        <svg id="nw-timeline-svg" width="100%" viewBox="0 0 320 110" preserveAspectRatio="xMidYMid meet" style="display:block;min-width:320px;cursor:crosshair" onclick="handleNWTap(event)" ontouchmove="handleNWTap(event)">
-          <defs>
-            <linearGradient id="nwFillGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#A07840" stop-opacity="0.1"/><stop offset="100%" stop-color="#A07840" stop-opacity="0"/></linearGradient>
-            <clipPath id="nwLineClip"><rect x="0" y="0" width="320" height="110"><animate attributeName="width" from="0" to="320" dur="1.2s" fill="freeze"/></rect></clipPath>
-          </defs>
-          <line x1="20" y1="25" x2="300" y2="25" stroke="rgba(0,0,0,.05)" stroke-width=".5"/>
-          <line x1="20" y1="50" x2="300" y2="50" stroke="rgba(0,0,0,.06)" stroke-width=".5"/>
-          <line x1="20" y1="75" x2="300" y2="75" stroke="rgba(0,0,0,.05)" stroke-width=".5"/>
-          <line id="ov-today-line" x1="160" y1="8" x2="160" y2="90" stroke="rgba(30,45,74,.1)" stroke-width="1" stroke-dasharray="3 3"/>
-          <text id="ov-today-lbl" x="160" y="6" text-anchor="middle" font-size="8" fill="#8a8a8a" font-family="inherit">2026</text>
-          <path id="nw-area-solid" d="" fill="url(#nwFillGrad)" clip-path="url(#nwLineClip)"/>
-          <path id="nw-line-solid" d="" fill="none" stroke="#1E2D4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#nwLineClip)"/>
-          <path id="nw-line-proj" d="" fill="none" stroke="#A07840" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5 4" clip-path="url(#nwLineClip)"><animate attributeName="stroke-dashoffset" from="9" to="0" dur="1.5s" repeatCount="indefinite"/></path>
-          <path id="nw-area-proj" d="" fill="none"/>
-          <g id="nw-milestones"></g>
-          <g id="nw-today-marker"></g>
-          <g id="nw-x-labels"></g>
-          <g id="nw-tap-marker" style="display:none"></g>
-        </svg>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
-        <span style="font-size:9px;color:#6B7A96">2</span>
-        <input type="range" id="nw-range-sl" min="2" max="30" step="1" value="10" style="flex:1;accent-color:#A07840" oninput="window._nwRange=parseInt(this.value);renderNWTimelineSVG()"/>
-        <span style="font-size:9px;color:#6B7A96">30</span>
-      </div>
-      <div style="display:flex;gap:6px;margin-top:8px;padding-top:8px;border-top:.5px solid rgba(0,0,0,.06)">
-        <input class="tc-inp" id="milestone-inp" placeholder="אירוע חיים" style="flex:1;direction:rtl;text-align:right"/>
-        <input class="tc-inp" id="milestone-year" type="number" placeholder="שנה" style="width:60px;text-align:center"/>
-        <button onclick="addMilestoneWithYear()" style="background:#1E2D4A;color:#fff;border:none;border-radius:9px;padding:7px 10px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">+ הוסף</button>
-      </div>
-      <div id="milestone-list" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px"></div>
-    </div>
+<!-- מסע הצמיחה -->
+<div class="ov-chart-card">
+  <div class="ov-chart-hdr">
+    <div><div class="ov-chart-title">מסע הצמיחה שלך</div><div class="ov-chart-sub" id="ov-g-sub">— שנים קדימה</div></div>
   </div>
+  <div class="ov-chart-area"><svg id="ov-g-svg" width="100%" viewBox="0 0 320 110" preserveAspectRatio="none"></svg></div>
+  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+    <span style="font-size:10px;color:#8a8a8a">2y</span>
+    <input type="range" min="2" max="30" value="10" id="ov-g-sl" style="flex:1;accent-color:#A07840" oninput="ovDrawG()">
+    <span style="font-size:10px;color:#8a8a8a">30y</span>
+  </div>
+  <div class="ov-ev-row">
+    <input class="ov-ev-fi" id="ov-ev-n" placeholder="אירוע חיים (חתונה, דירה...)">
+    <input class="ov-ev-yr" id="ov-ev-y" placeholder="שנה" type="number">
+    <button class="ov-ev-add" onclick="ovAddEv()">+ הוסף</button>
+  </div>
+  <div class="ov-ev-tags" id="ov-ev-list"></div>
+</div>
 
-  <!-- ── CARD 4: פירוט נכסים ── -->
-  <div class="tc" style="height:234px">
-    <div class="tc-hdr"><div><h3>פירוט נכסים</h3><p>חלוקה לפי סוג</p></div><div class="tc-ico"><span style="font-size:18px">🥧</span></div></div>
-    <div class="tc-body">
-      <div style="display:flex;align-items:center;gap:14px;direction:ltr">
-        <svg id="assets-donut" width="96" height="96" viewBox="0 0 96 96" style="flex-shrink:0">
-          <circle cx="48" cy="48" r="42" fill="none" stroke="#eee" stroke-width="13"/>
-          <circle id="donut-pen" cx="48" cy="48" r="42" fill="none" stroke="#1E2D4A" stroke-width="13" stroke-dasharray="0 264" transform="rotate(-90 48 48)"/>
-          <circle id="donut-inv" cx="48" cy="48" r="42" fill="none" stroke="#A07840" stroke-width="13" stroke-dasharray="0 264" transform="rotate(-90 48 48)"/>
-          <circle id="donut-re" cx="48" cy="48" r="42" fill="none" stroke="#4a90d9" stroke-width="13" stroke-dasharray="0 264" transform="rotate(-90 48 48)"/>
-          <circle id="donut-cash" cx="48" cy="48" r="42" fill="none" stroke="#ccc" stroke-width="13" stroke-dasharray="0 264" transform="rotate(-90 48 48)"/>
-          <text x="48" y="51" text-anchor="middle" font-size="10" font-weight="600" fill="#8a8a8a" font-family="inherit" id="donut-total-lbl">—</text>
+<!-- פירוט נכסים -->
+<div class="card">
+  <div class="ch"><div><div class="ct">פירוט נכסים</div><div class="cs">חלוקת התיק שלך</div></div><div class="ib">🥧</div></div>
+  <div class="cb">
+    <div class="sep"></div>
+    <div class="ov-asset-wrap">
+      <div style="position:relative;width:96px;height:96px;flex-shrink:0">
+        <svg width="96" height="96" viewBox="0 0 100 100" id="ov-donut">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#eee" stroke-width="13"/>
         </svg>
-        <div style="display:flex;flex-direction:column;gap:5px;flex:1">
-          <div class="ov-row"><div class="ov-dot" style="background:#1E2D4A"></div><div class="ov-lbl">פנסיה+קה"ש</div><div class="ov-val" id="ap-pen">—</div></div>
-          <div class="ov-row"><div class="ov-dot" style="background:#A07840"></div><div class="ov-lbl">השקעות</div><div class="ov-val" id="ap-inv">—</div></div>
-          <div class="ov-row"><div class="ov-dot" style="background:#4a90d9"></div><div class="ov-lbl">נדל"ן</div><div class="ov-val" id="ap-re">—</div></div>
-          <div class="ov-row"><div class="ov-dot" style="background:#ccc"></div><div class="ov-lbl">נזיל</div><div class="ov-val" id="ap-cash">—</div></div>
-          <div style="height:.5px;background:rgba(0,0,0,.06);margin:2px 0"></div>
-          <div style="display:flex;justify-content:space-between;direction:rtl"><span style="font-size:10px;font-weight:700;color:#1E2D4A">שווי נטו</span><span style="font-size:11px;font-weight:800;color:#8a8a8a" id="assets-total">—</span></div>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
+          <div style="font-size:11px;font-weight:700;color:#8a8a8a" id="ov-d-total">—</div>
+          <div style="font-size:9px;color:#8a8a8a">נכסים</div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- ── CARD 5: תזרים חודשי ── -->
-  <div class="tc" id="cashflow-unified" style="height:234px">
-    <div class="tc-hdr"><div><h3>תזרים חודשי</h3><p>6 חודשים אחרונים</p></div><div class="tc-ico"><span style="font-size:18px">📊</span></div></div>
-    <div class="tc-body">
-      <div id="mir-chart-wrap" style="height:66px;margin-bottom:6px">
-        <svg width="100%" viewBox="0 0 252 66" style="display:block">
-          <rect x="4" y="62" width="13" height="4" rx="2" fill="rgba(30,45,74,.08)"/><rect x="19" y="62" width="13" height="4" rx="2" fill="rgba(200,169,106,.08)"/>
-          <rect x="46" y="62" width="13" height="4" rx="2" fill="rgba(30,45,74,.08)"/><rect x="61" y="62" width="13" height="4" rx="2" fill="rgba(200,169,106,.08)"/>
-          <rect x="88" y="62" width="13" height="4" rx="2" fill="rgba(30,45,74,.08)"/><rect x="103" y="62" width="13" height="4" rx="2" fill="rgba(200,169,106,.08)"/>
-          <rect x="130" y="62" width="13" height="4" rx="2" fill="rgba(30,45,74,.08)"/><rect x="145" y="62" width="13" height="4" rx="2" fill="rgba(200,169,106,.08)"/>
-          <rect x="172" y="62" width="13" height="4" rx="2" fill="rgba(30,45,74,.08)"/><rect x="187" y="62" width="13" height="4" rx="2" fill="rgba(200,169,106,.08)"/>
-          <rect x="214" y="62" width="13" height="4" rx="2" fill="rgba(30,45,74,.1)"/><rect x="229" y="62" width="13" height="4" rx="2" fill="rgba(200,169,106,.1)"/>
-          <text x="18" y="55" text-anchor="middle" font-size="8" fill="#A8A8B0" font-family="inherit">אוק</text>
-          <text x="60" y="55" text-anchor="middle" font-size="8" fill="#A8A8B0" font-family="inherit">נוב</text>
-          <text x="102" y="55" text-anchor="middle" font-size="8" fill="#A8A8B0" font-family="inherit">דצמ</text>
-          <text x="144" y="55" text-anchor="middle" font-size="8" fill="#A8A8B0" font-family="inherit">ינו</text>
-          <text x="186" y="55" text-anchor="middle" font-size="8" fill="#A8A8B0" font-family="inherit">פבר</text>
-          <text x="228" y="55" text-anchor="middle" font-size="8" fill="#c8a96a" font-family="inherit" font-weight="700">מרץ</text>
-        </svg>
+      <div class="ov-asset-leg">
+        <div class="ov-al-row"><div class="ov-al-dot" style="background:#1E2D4A"></div><div class="ov-al-lbl">פנסיה+קה"ש</div><div class="ov-al-pct" id="ov-ap1">—</div><div class="ov-al-val" id="ov-av1">—</div></div>
+        <div class="ov-al-row"><div class="ov-al-dot" style="background:#A07840"></div><div class="ov-al-lbl">השקעות</div><div class="ov-al-pct" id="ov-ap2">—</div><div class="ov-al-val" id="ov-av2">—</div></div>
+        <div class="ov-al-row"><div class="ov-al-dot" style="background:#4a90d9"></div><div class="ov-al-lbl">נדל"ן</div><div class="ov-al-pct" id="ov-ap3">—</div><div class="ov-al-val" id="ov-av3">—</div></div>
+        <div class="ov-al-row"><div class="ov-al-dot" style="background:#ccc"></div><div class="ov-al-lbl">נזיל</div><div class="ov-al-pct" id="ov-ap4">—</div><div class="ov-al-val" id="ov-av4">—</div></div>
       </div>
-      <div style="display:flex;gap:6px;margin-bottom:6px">
-        <div class="ov-chip" style="background:rgba(30,45,74,.06)"><div class="ov-v" style="color:#8a8a8a" id="mir-inc">—</div><div class="ov-l" style="color:#6B7A96">הכנסה</div></div>
-        <div class="ov-chip" style="background:rgba(224,123,90,.06)"><div class="ov-v" style="color:#8a8a8a" id="mir-exp">—</div><div class="ov-l" style="color:#6B7A96">הוצאות</div></div>
-        <div class="ov-chip" style="background:rgba(39,174,96,.06)"><div class="ov-v" style="color:#8a8a8a" id="mir-sav">—</div><div class="ov-l" style="color:#6B7A96">חיסכון</div></div>
-      </div>
-      <div style="font-size:9px;color:#8a8a8a;text-align:center" id="mir-avg">הזן תזרים לצפייה</div>
     </div>
+    <div class="sep"></div>
+    <div style="display:flex;justify-content:space-between"><span style="font-size:13px;color:#1a1a1a">חובות</span><span style="font-size:13px;font-weight:700;color:#8a8a8a" id="ov-debt">—</span></div>
+    <div style="display:flex;justify-content:space-between"><span style="font-size:14px;font-weight:700;color:#1a1a1a">שווי נטו</span><span style="font-size:14px;font-weight:700;color:#8a8a8a" id="ov-nw">—</span></div>
   </div>
+</div>
 
-  <!-- ── CARD: מה השתנה ── -->
-  <div class="tc" style="height:234px">
-    <div class="tc-hdr"><div><h3>מה השתנה</h3><p>סיכום המצב שלך</p></div><div class="tc-ico"><span style="font-size:18px">🕐</span></div></div>
-    <div class="tc-body">
-      <div class="ov-snap"><span style="font-size:12px;color:#1E2D4A">שווי נטו</span><span style="font-size:13px;font-weight:700;color:#8a8a8a" id="ov-snap-nw">—</span></div>
-      <div class="ov-snap"><span style="font-size:12px;color:#1E2D4A">חיסכון חודשי</span><span style="font-size:13px;font-weight:700;color:#8a8a8a" id="ov-snap-sav">—</span></div>
-      <div class="ov-snap"><span style="font-size:12px;color:#1E2D4A">Numa Score</span><span style="font-size:13px;font-weight:700;color:#8a8a8a" id="ov-snap-score">—</span></div>
-      <div class="ov-snap"><span style="font-size:12px;font-weight:700;color:#1E2D4A">FIRE צפוי</span><span style="font-size:13px;font-weight:800;color:#8a8a8a" id="ov-snap-fire">—</span></div>
-      <div style="font-size:9px;color:#A8A8B0;text-align:center;margin-top:8px" id="ov-snap-date"></div>
+<!-- תזרים חודשי -->
+<div class="card">
+  <div class="ch"><div><div class="ct">תזרים חודשי</div><div class="cs">הכנסה · הוצאה · חיסכון</div></div><div class="ib">📊</div></div>
+  <div class="cb" style="padding:12px 20px 18px;">
+    <div class="sep"></div>
+    <div class="ov-cf-bars" id="ov-bars">
+      <div class="ov-cf-grp"><div class="ov-cf-pair"><div class="ov-cf-bar" style="height:4px;background:rgba(30,45,74,0.12)"></div><div class="ov-cf-bar" style="height:4px;background:rgba(200,169,106,0.15)"></div></div><div class="ov-cf-mo">—</div></div>
+      <div class="ov-cf-grp"><div class="ov-cf-pair"><div class="ov-cf-bar" style="height:4px;background:rgba(30,45,74,0.12)"></div><div class="ov-cf-bar" style="height:4px;background:rgba(200,169,106,0.15)"></div></div><div class="ov-cf-mo">—</div></div>
+      <div class="ov-cf-grp"><div class="ov-cf-pair"><div class="ov-cf-bar" style="height:4px;background:rgba(30,45,74,0.12)"></div><div class="ov-cf-bar" style="height:4px;background:rgba(200,169,106,0.15)"></div></div><div class="ov-cf-mo">—</div></div>
+      <div class="ov-cf-grp"><div class="ov-cf-pair"><div class="ov-cf-bar" style="height:4px;background:rgba(30,45,74,0.12)"></div><div class="ov-cf-bar" style="height:4px;background:rgba(200,169,106,0.15)"></div></div><div class="ov-cf-mo">—</div></div>
+      <div class="ov-cf-grp"><div class="ov-cf-pair"><div class="ov-cf-bar" style="height:4px;background:rgba(30,45,74,0.12)"></div><div class="ov-cf-bar" style="height:4px;background:rgba(200,169,106,0.15)"></div></div><div class="ov-cf-mo">—</div></div>
+      <div class="ov-cf-grp"><div class="ov-cf-pair"><div class="ov-cf-bar" style="height:4px;background:rgba(30,45,74,0.12)"></div><div class="ov-cf-bar" style="height:4px;background:rgba(200,169,106,0.15)"></div></div><div class="ov-cf-mo">—</div></div>
     </div>
-  </div>
-
-  <!-- Hidden compat elements -->
-  <div style="display:none">
-    <span id="score-lbl">—</span><span id="digest-month">—</span><span id="digest-val">—</span>
-    <span id="nw-trend"></span><span id="mir-ratio"></span>
-    <div id="fire-hero-pill"><span id="mv-fire"></span><span id="ms-fire"></span></div>
-    <span id="qs-inc"></span><span id="qs-rate"></span><span id="qs-fire-age"></span>
-    <span id="ov-action-text"></span><span id="ov-action-btn"></span><span id="ov-action-card"></span>
-  </div>
-
-  <!-- ═══ Below the fold — scroll to see ═══ -->
-
-  <!-- Hidden stats + elements for JS compat -->
-  <div style="display:none">
-    <span id="qs-exp">₪0</span><span id="qs-debt">₪0</span>
-    <span id="fire-card-pct"></span><span id="fire-card-bar"></span><span id="fire-card-sub"></span>
-    <span id="fire-card-have"></span><span id="fire-card-goal"></span>
-    <svg id="nw-timeline-svg" viewBox="0 0 300 130"><path id="nw-area-solid" d=""/><path id="nw-line-solid" d=""/><path id="nw-line-proj" d=""/><path id="nw-area-proj" d=""/><g id="nw-milestones"></g><g id="nw-today-marker"></g><g id="nw-x-labels"></g></svg>
-    <span id="nw-chart-range-lbl"></span>
-  </div>
-
-  <!-- Weekly digest (shows conditionally) -->
-  <div id="weekly-digest-card" style="display:none;background:#1E2D4A;border-radius:14px;padding:14px;position:relative">
-    <button onclick="dismissWeekly()" style="position:absolute;top:8px;left:8px;background:none;border:none;color:rgba(255,255,255,.4);font-size:14px;cursor:pointer">×</button>
-    <div style="font-size:10px;color:#C9A96E;font-weight:600;letter-spacing:.04em;margin-bottom:6px">📊 מה השתנה מאז הביקור האחרון</div>
-    <div id="weekly-insights" style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.6"></div>
-    <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:8px" id="weekly-timestamp"></div>
-  </div>
-
-  <!-- Hidden elements for JS compatibility -->
-  <div style="display:none">
-    <span id="assets-total"></span><span id="donut-total-lbl"></span>
-    <span id="ap-pen"></span><span id="ap-re"></span><span id="ap-inv"></span><span id="ap-cash"></span>
-    <svg id="assets-donut"><circle id="donut-pen"/><circle id="donut-re"/><circle id="donut-inv"/><circle id="donut-cash"/></svg>
-    <span id="mir-inc"></span><span id="mir-exp"></span><span id="mir-sav"></span><span id="mir-avg"></span>
-    <div id="mir-chart-wrap"></div><div id="cashflow-unified"></div>
-  </div>
-  <div style="display:none">
-    <div id="action-cards">
-      <div id="focus-action-card"><div id="focus-action-text">—</div><button id="focus-action-btn"></button></div>
-      <div id="action-card-2"><div id="action-text-2">—</div></div>
-      <div id="action-card-3"><div id="action-text-3">—</div></div>
+    <div class="ov-cf-chips">
+      <div class="ov-cf-chip"><div class="ov-cf-chip-lbl">הכנסה</div><div class="ov-cf-chip-val" id="ov-ci">—</div></div>
+      <div class="ov-cf-chip"><div class="ov-cf-chip-lbl">הוצאות</div><div class="ov-cf-chip-val" id="ov-ce">—</div></div>
+      <div class="ov-cf-chip"><div class="ov-cf-chip-lbl">חיסכון</div><div class="ov-cf-chip-val" id="ov-cs">—</div></div>
     </div>
-    <div id="ai-insights-section">
-      <div id="insight-card-1"><div id="insight-ico-1"></div><div id="insight-text-1"></div><button id="insight-btn-1"></button></div>
-      <div id="insight-card-2"><div id="insight-ico-2"></div><div id="insight-text-2"></div><button id="insight-btn-2"></button></div>
-      <div id="insight-card-3"><div id="insight-ico-3"></div><div id="insight-text-3"></div><button id="insight-btn-3"></button></div>
-    </div>
-    <div id="gs-cashflow"></div>
-    <div id="gs-assets"></div>
-    <div id="gs-fire"></div>
-    <div id="vis-wrap-missions"><div id="miss-badge"></div><div id="miss-list"></div></div>
-    <div id="score-breakdown"><span id="ring-status-cf"></span><span id="ring-status-sav"></span><span id="ring-status-ins"></span><span id="ring-status-plan"></span></div>
-    <span id="cf-insights"></span>
+    <div class="ov-cf-note" id="ov-cf-note">הזן תזרים לצפייה</div>
   </div>
+</div>
+
+<!-- מה השתנה -->
+<div class="card">
+  <div class="ch"><div><div class="ct">מה השתנה</div><div class="cs">מאז הביקור האחרון</div></div><div class="ib">🕐</div></div>
+  <div class="cb">
+    <div class="sep"></div>
+    <div class="ov-snap-rows">
+      <div class="ov-sn-row"><span class="ov-sn-lbl">שווי נטו</span><span class="ov-sn-val" id="ov-sn1">—</span></div>
+      <div class="ov-sn-row"><span class="ov-sn-lbl">חיסכון חודשי</span><span class="ov-sn-val" id="ov-sn2">—</span></div>
+      <div class="ov-sn-row"><span class="ov-sn-lbl">Numa Score</span><span class="ov-sn-val" id="ov-sn3">—</span></div>
+      <div class="ov-sn-row"><span class="ov-sn-lbl bold">FIRE צפוי</span><span class="ov-sn-val" id="ov-sn4">—</span></div>
+    </div>
+    <div class="ov-sn-date" id="ov-sn-date"></div>
+  </div>
+</div>
+
+<!-- Hidden compat elements for existing JS -->
+<div style="display:none">
+  <span id="hero-nw"></span><span id="hero-proj"></span>
+  <span id="qs-inc"></span><span id="qs-rate"></span><span id="qs-fire-age"></span><span id="qs-exp"></span><span id="qs-debt"></span>
+  <span id="score-num"></span><span id="score-lbl"></span>
+  <span id="ring-cashflow"></span><span id="ring-savings"></span><span id="ring-insurance"></span><span id="ring-planning"></span>
+  <span id="ring-score-cf"></span><span id="ring-score-sav"></span><span id="ring-score-ins"></span><span id="ring-score-plan"></span>
+  <span id="ov-snap-nw"></span><span id="ov-snap-sav"></span><span id="ov-snap-score"></span><span id="ov-snap-fire"></span><span id="ov-snap-date"></span>
+  <span id="assets-total"></span><span id="donut-total-lbl"></span>
+  <span id="ap-pen"></span><span id="ap-re"></span><span id="ap-inv"></span><span id="ap-cash"></span>
+  <svg id="assets-donut"><circle id="donut-pen"/><circle id="donut-re"/><circle id="donut-inv"/><circle id="donut-cash"/></svg>
+  <span id="mir-inc"></span><span id="mir-exp"></span><span id="mir-sav"></span><span id="mir-avg"></span>
+  <div id="mir-chart-wrap"></div><div id="cashflow-unified"></div>
+  <span id="nw-trend"></span><span id="mir-ratio"></span><span id="digest-month"></span><span id="digest-val"></span>
+  <div id="fire-hero-pill"><span id="mv-fire"></span><span id="ms-fire"></span></div>
+  <span id="fire-card-pct"></span><span id="fire-card-bar"></span><span id="fire-card-sub"></span><span id="fire-card-have"></span><span id="fire-card-goal"></span>
+  <svg id="nw-timeline-svg" viewBox="0 0 300 130"><path id="nw-area-solid" d=""/><path id="nw-line-solid" d=""/><path id="nw-line-proj" d=""/><path id="nw-area-proj" d=""/><g id="nw-milestones"></g><g id="nw-today-marker"></g><g id="nw-x-labels"></g></svg>
+  <span id="nw-chart-range-lbl"></span>
+  <div id="weekly-digest-card"><div id="weekly-insights"></div><span id="weekly-timestamp"></span></div>
+  <span id="ov-action-text"></span><span id="ov-action-btn"></span><span id="ov-action-card"></span>
+  <div id="action-cards"><div id="focus-action-card"><div id="focus-action-text"></div><button id="focus-action-btn"></button></div><div id="action-card-2"><div id="action-text-2"></div></div><div id="action-card-3"><div id="action-text-3"></div></div></div>
+  <div id="ai-insights-section"><div id="insight-card-1"><div id="insight-ico-1"></div><div id="insight-text-1"></div><button id="insight-btn-1"></button></div><div id="insight-card-2"><div id="insight-ico-2"></div><div id="insight-text-2"></div><button id="insight-btn-2"></button></div><div id="insight-card-3"><div id="insight-ico-3"></div><div id="insight-text-3"></div><button id="insight-btn-3"></button></div></div>
+  <div id="gs-cashflow"></div><div id="gs-assets"></div><div id="gs-fire"></div>
+  <div id="vis-wrap-missions"><div id="miss-badge"></div><div id="miss-list"></div></div>
+  <div id="score-breakdown"><span id="ring-status-cf"></span><span id="ring-status-sav"></span><span id="ring-status-ins"></span><span id="ring-status-plan"></span></div>
+  <span id="cf-insights"></span>
+</div>
 
 </div><!-- /pg-ov -->
 
@@ -2157,6 +2171,56 @@ function render(){
   renderNWTimelineSVG();
   renderAIInsights(c);
   checkCelebrations(c);
+  try{ovRenderOverview(c);}catch(e){}
+}
+
+function ovRenderOverview(c){
+  if(!c)return;
+  var f=fmt;
+  var set=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  set('ov-net',c.netWorth>0?f(c.netWorth):'—');
+  set('ov-proj',c.netWorth>0?f(Math.round(c.netWorth*Math.pow(1.07,25))):'—');
+  set('ov-cf',c.monthlySavings!==0?f(c.monthlySavings):'—');
+  set('ov-sr',c.savingsRate>0?Math.round(c.savingsRate)+'%':'—');
+  set('ov-fire',c.fireAge>0&&c.fireAge<120?'גיל '+c.fireAge:'—');
+  set('ov-k1',c.monthlySavings!==0?f(c.monthlySavings):'—');
+  set('ov-k2',c.savingsRate>0?Math.round(c.savingsRate)+'%':'—');
+  set('ov-k3',c.fireAge>0&&c.fireAge<120?'גיל '+c.fireAge:'—');
+  set('ov-sn1',c.netWorth>0?f(c.netWorth):'—');
+  set('ov-sn2',c.savingsRate>0?Math.round(c.savingsRate)+'%':'—');
+  set('ov-sn3',c.score>0?c.score+'/100':'—');
+  set('ov-sn4',c.fireAge>0&&c.fireAge<120?'גיל '+c.fireAge:'—');
+  set('ov-score',c.score>0?c.score:'—');
+  var total=c.totalAssets||0;
+  set('ov-d-total',total>0?f(total):'—');
+  set('ov-nw',c.netWorth>0?f(c.netWorth):'—');
+  set('ov-debt',c.totalLiabilities>0?f(c.totalLiabilities):'—');
+  var penV=c.penT+c.hshT+c.gmT,invV=c.invT,reV=c.reV,cashV=ND.cash||0;
+  var cats=[
+    {p:'ov-ap1',v2:'ov-av1',val:penV},
+    {p:'ov-ap2',v2:'ov-av2',val:invV},
+    {p:'ov-ap3',v2:'ov-av3',val:reV},
+    {p:'ov-ap4',v2:'ov-av4',val:cashV}
+  ];
+  cats.forEach(function(cat){
+    set(cat.p,total>0&&cat.val>0?Math.round(cat.val/total*100)+'%':'—');
+    set(cat.v2,cat.val>0?f(cat.val):'—');
+  });
+  var inc=c.totalIncome||0,exp=c.totalExpenses||0,sav=c.monthlySavings||0;
+  set('ov-ci',inc>0?f(inc):'—');
+  set('ov-ce',exp>0?f(exp):'—');
+  set('ov-cs',sav!==0?f(sav):'—');
+  var note=document.getElementById('ov-cf-note');
+  if(note) note.textContent=inc>0?'חיסכון '+Math.round(c.savingsRate||0)+'% · חוסך '+f(Math.abs(sav))+' בחודש':'הזן תזרים לצפייה';
+  // Color active values
+  var el;
+  el=document.getElementById('ov-net');if(el&&c.netWorth>0)el.style.color='#F5F2EC';
+  el=document.getElementById('ov-proj');if(el&&c.netWorth>0)el.style.color='#c8a96a';
+  el=document.getElementById('ov-cf');if(el&&c.monthlySavings!==0)el.style.color='#c8a96a';
+  el=document.getElementById('ov-sr');if(el&&c.savingsRate>0)el.style.color='#c8a96a';
+  el=document.getElementById('ov-fire');if(el&&c.fireAge>0&&c.fireAge<120)el.style.color='#c8a96a';
+  el=document.getElementById('ov-score');if(el&&c.score>0)el.style.color='#1E2D4A';
+  if(note&&inc>0){note.style.color='#A07840';note.style.fontWeight='600';}
 }
 
 /* ── RENDER: ALL OVERVIEW DYNAMIC CARDS ── */
@@ -6107,6 +6171,64 @@ function renderAllocPlan(){
     'שאר במניות גלובליות מפוזרות. שמור '+targetCash+'% מזומן לקרן חירום.</div>'+
     '</div>';
 }
+
+/* ══ OVERVIEW CHART + DATE ══ */
+(function(){
+  var now=new Date();
+  var el=document.getElementById('ov-sn-date');
+  if(el) el.textContent=now.getDate()+'.'+(now.getMonth()+1)+'.'+now.getFullYear();
+
+  var ovEvts=[];
+  window.ovAddEv=function(){
+    var n=(document.getElementById('ov-ev-n').value||'').trim();
+    var y=parseInt(document.getElementById('ov-ev-y').value);
+    if(!n||!y||y<2026)return;
+    ovEvts.push({n:n,y:y});
+    document.getElementById('ov-ev-n').value='';
+    document.getElementById('ov-ev-y').value='';
+    ovRenderEvs();
+    ovDrawG();
+  };
+  function ovRenderEvs(){
+    document.getElementById('ov-ev-list').innerHTML=ovEvts.map(function(e,i){
+      return '<div class="ov-ev-tag"><span class="ov-et-n">'+e.n+'</span><span class="ov-et-y">'+e.y+'</span><button class="ov-et-d" onclick="ovDelEv('+i+')">×</button></div>';
+    }).join('');
+  }
+  window.ovDelEv=function(i){ovEvts.splice(i,1);ovRenderEvs();ovDrawG();};
+
+  window.ovDrawG=function(){
+    var svg=document.getElementById('ov-g-svg');
+    if(!svg)return;
+    var fwd=parseInt((document.getElementById('ov-g-sl')||{}).value)||10;
+    var W=320,H=110,PL=8,PR=8,PT=10,PB=18,cW=W-PL-PR,cH=H-PT-PB;
+    var minY=2020,maxY=2026+fwd;
+    function px(y){return PL+(y-minY)/(maxY-minY)*cW;}
+    var nowX=px(2026);
+    var yr0=minY,yrM=Math.round((minY+maxY)/2),yr1=maxY;
+    var evM='';
+    ovEvts.forEach(function(ev){
+      if(ev.y>=minY&&ev.y<=maxY){
+        var ex=px(ev.y);
+        evM+='<line x1="'+ex+'" y1="'+PT+'" x2="'+ex+'" y2="'+(PT+cH)+'" stroke="rgba(160,120,64,0.25)" stroke-width="1" stroke-dasharray="3,2"/>';
+        evM+='<circle cx="'+ex+'" cy="'+(PT+cH*0.5)+'" r="3" fill="#A07840"/>';
+        evM+='<text x="'+ex+'" y="'+(PT-1)+'" text-anchor="middle" font-size="8" fill="#A07840" font-family="-apple-system,sans-serif">'+ev.n+'</text>';
+      }
+    });
+    svg.innerHTML=
+      '<line x1="'+PL+'" y1="'+(PT+cH)+'" x2="'+(W-PR)+'" y2="'+(PT+cH)+'" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>'+
+      '<line x1="'+PL+'" y1="'+(PT+cH*0.5)+'" x2="'+(W-PR)+'" y2="'+(PT+cH*0.5)+'" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>'+
+      '<line x1="'+PL+'" y1="'+(PT+cH*0.25)+'" x2="'+(W-PR)+'" y2="'+(PT+cH*0.25)+'" stroke="rgba(0,0,0,0.04)" stroke-width="1"/>'+
+      '<line x1="'+nowX+'" y1="'+PT+'" x2="'+nowX+'" y2="'+(PT+cH)+'" stroke="rgba(30,45,74,0.1)" stroke-width="1" stroke-dasharray="3,3"/>'+
+      evM+
+      '<text x="'+px(yr0)+'" y="'+(H-2)+'" text-anchor="middle" font-size="8" fill="#bbb" font-family="-apple-system,sans-serif">'+yr0+'</text>'+
+      '<text x="'+px(yrM)+'" y="'+(H-2)+'" text-anchor="middle" font-size="8" fill="#bbb" font-family="-apple-system,sans-serif">'+yrM+'</text>'+
+      '<text x="'+px(yr1)+'" y="'+(H-2)+'" text-anchor="end" font-size="8" fill="#bbb" font-family="-apple-system,sans-serif">'+yr1+'</text>'+
+      '<text x="'+nowX+'" y="'+(PT+8)+'" text-anchor="middle" font-size="8" fill="rgba(30,45,74,0.35)" font-family="-apple-system,sans-serif">2026</text>';
+    var sub=document.getElementById('ov-g-sub');
+    if(sub) sub.textContent=fwd+' שנים קדימה';
+  };
+  ovDrawG();
+})();
 
 /* ══ CLICK GUARD: ensures ob-overlay never blocks ══ */
 (function(){
