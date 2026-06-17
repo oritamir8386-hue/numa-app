@@ -5,8 +5,13 @@
   "observability": {
     "enabled": true
   },
+  "main": "./src/worker.js",
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS"
+  },
+  "triggers": {
+    "crons": ["0 6 * * *"]
   },
   "compatibility_flags": [
     "nodejs_compat"
