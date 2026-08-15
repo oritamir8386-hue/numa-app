@@ -744,10 +744,11 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
         </div>
       </div>
       <div class="ov-score-leg">
-        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#1E2D4A"></div><div class="ov-sl-lbl">תזרים</div><div class="ov-sl-pct" id="ov-sp1">—</div></div>
-        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#27ae60"></div><div class="ov-sl-lbl">חיסכון</div><div class="ov-sl-pct" id="ov-sp2">—</div></div>
-        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#c8a96a"></div><div class="ov-sl-lbl">ביטוח</div><div class="ov-sl-pct" id="ov-sp3">—</div></div>
-        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#e07b5a"></div><div class="ov-sl-lbl">תכנון</div><div class="ov-sl-pct" id="ov-sp4">—</div></div>
+        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#1E2D4A"></div><div class="ov-sl-lbl">חיסכון</div><div class="ov-sl-pct" id="ov-sp1">—</div></div>
+        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#27ae60"></div><div class="ov-sl-lbl">קרן חירום</div><div class="ov-sl-pct" id="ov-sp2">—</div></div>
+        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#c8a96a"></div><div class="ov-sl-lbl">חוב</div><div class="ov-sl-pct" id="ov-sp3">—</div></div>
+        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#e07b5a"></div><div class="ov-sl-lbl">פיזור</div><div class="ov-sl-pct" id="ov-sp4">—</div></div>
+        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#4a90d9"></div><div class="ov-sl-lbl">FIRE</div><div class="ov-sl-pct" id="ov-sp5">—</div></div>
       </div>
     </div>
     <div class="ov-kpi-row">
@@ -880,6 +881,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
         <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#c8a96a;font-size:12px" id="cf-hdr-inc">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">הכנסה</div></div>
         <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#e07b5a;font-size:12px" id="cf-hdr-exp">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">הוצאות</div></div>
         <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#27ae60;font-size:12px" id="cf-hdr-sav">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">לחיסכון</div></div>
+        <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#A07840;font-size:12px" id="cf-hdr-ratio">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">הוצ׳/הכנ׳</div></div>
       </div>
     </div>
   </div>
@@ -922,19 +924,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   .exp-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:.5px solid rgba(0,0,0,.05)}
   .exp-del{width:22px;height:22px;border-radius:6px;background:rgba(220,53,53,.08);border:none;color:#D93025;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
   </style>
-
-  <!-- ── CARD 3: סיכום תזרים ── -->
-  <div class="tc" style="height:234px">
-    <div class="tc-hdr"><div><h3>סיכום תזרים</h3><p>הכנסות מול הוצאות</p></div><div class="tc-ico"><span style="font-size:18px">📈</span></div></div>
-    <div class="tc-body">
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:#1E2D4A">הכנסה כוללת</span><span style="font-size:13px;font-weight:700;color:#1E2D4A" id="sum-inc2">—</span></div>
-        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:#1E2D4A">הוצאות</span><span style="font-size:13px;font-weight:700;color:#e07b5a" id="sum-exp">—</span></div>
-        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;font-weight:700;color:#1E2D4A">עודף לחיסכון</span><span style="font-size:13px;font-weight:800;color:#2D6A3F" id="sum-sav">—</span></div>
-        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:#1E2D4A">יחס הוצאה/הכנסה</span><span style="font-size:13px;font-weight:700;color:#A07840" id="sum-ratio">—</span></div>
-      </div>
-    </div>
-  </div>
 
   <!-- ── CARD 4: תובנות וניתוח ── -->
   <div class="tc" id="rule-2020-card" style="height:234px;display:flex;flex-direction:column">
@@ -1897,7 +1886,7 @@ function ic(name,cls){
    ═══════════════════════════════════════════════════════════ */
 
 var ND_DEFAULT = {
-  profile: { name: '', age: 35, retireAge: 65, employment: 'שכיר' },
+  profile: { name: '', age: null, retireAge: 65, employment: 'שכיר' },
   income:  { my: 0, partner: 0, extra: 0 },
   expenses:{ housing: 0, food: 0, transport: 0, health: 0, entertainment: 0, subscriptions: 0, other: 0 },
   pension:     [],  // [{id,name,company,balance,monthlyDeposit,returnRate,fee}]
@@ -2030,12 +2019,13 @@ function calc(){
   // FIRE (25x rule)
   var annualExp  = totalExpenses * 12;
   var fireNumber = annualExp * 25;
-  var fireAge    = ND.profile.age + 35;
-  if(fireNumber > 0 && monthlyDeposits > 0){
+  var _age       = ND.profile.age;
+  var fireAge    = (_age==null) ? null : _age + 35;   // null age → no FIRE estimate (new user)
+  if(_age!=null && fireNumber > 0 && monthlyDeposits > 0){
     var nw0 = Math.max(netWorth, 0);
     for(var y = 0; y <= 50; y++){
       var fv = nw0 * Math.pow(1.07,y) + monthlyDeposits*12*((Math.pow(1.07,y)-1)/0.07);
-      if(fv >= fireNumber){ fireAge = ND.profile.age + y; break; }
+      if(fv >= fireNumber){ fireAge = _age + y; break; }
     }
   }
 
@@ -2059,9 +2049,18 @@ function calc(){
   }
   // 5. FIRE progress: netWorth / fireNumber
   var sFire = fireNumber > 0 ? clamp01(netWorth / fireNumber) : 0;
-  var score = Math.round(
-    100 * (0.25*sSavings + 0.20*sEmergency + 0.15*sDebt + 0.15*sDiversity + 0.25*sFire)
-  );
+  // Only score components the user actually has data for; renormalize weights over them.
+  var catsWithValue = cats.filter(function(v){return v>0;}).length;
+  var _scoreParts = [];
+  if(totalIncome > 0) _scoreParts.push([0.25, sSavings]);     // savings — needs income
+  if(ND.cash > 0)     _scoreParts.push([0.20, sEmergency]);   // emergency fund — needs cash entered
+  _scoreParts.push([0.15, sDebt]);                             // debt — always (0 debt is real info)
+  if(catsWithValue > 1) _scoreParts.push([0.15, sDiversity]); // diversification — needs >1 asset category
+  if(totalIncome > 0) _scoreParts.push([0.25, sFire]);        // FIRE — needs income
+  var _wSum = _scoreParts.reduce(function(a,p){return a+p[0];}, 0);
+  // A brand-new profile with no data at all has no meaningful score → 0 (shown as "—")
+  var _hasData = (totalIncome > 0 || totalAssets > 0 || totalLiabilities > 0 || ND.cash > 0);
+  var score = (_hasData && _wSum > 0) ? Math.round(100 * _scoreParts.reduce(function(a,p){return a+p[0]*p[1];}, 0) / _wSum) : 0;
   score = Math.min(100, Math.max(0, score));
 
   return {
@@ -2271,8 +2270,8 @@ function renderOvCards(c){
 
   // FIRE hero pill + metric cards
   var mvf=$('mv-fire'),msf=$('ms-fire');
-  if(mvf) mvf.textContent=c.totalIncome>0?'עצמאות בגיל '+c.fireAge:'הגדר יעד';
-  if(msf) msf.textContent=c.totalIncome>0?((c.fireAge-ND.profile.age)<=0?'הגעת ליעד!':'· עוד '+(c.fireAge-ND.profile.age)+' שנים'):'גלה מתי תהיה חופשי';
+  if(mvf) mvf.textContent=(c.totalIncome>0&&c.fireAge)?'עצמאות בגיל '+c.fireAge:'הגדר יעד';
+  if(msf) msf.textContent=(c.totalIncome>0&&c.fireAge)?((c.fireAge-ND.profile.age)<=0?'הגעת ליעד!':'· עוד '+(c.fireAge-ND.profile.age)+' שנים'):'גלה מתי תהיה חופשי';
   // FIRE stat in summary row
   var qfa=$('qs-fire-age');
   if(qfa) qfa.textContent=c.totalIncome>0?'גיל '+c.fireAge:'—';
@@ -2381,7 +2380,7 @@ function renderOvCards(c){
   var pct2=fireN>0?Math.min(100,Math.round(nw0/fireN*100)):0;
   if(fc) fc.textContent=fireN>0?pct2+'%':'הגדר יעד';
   if(fb) fb.style.width=(fireN>0?pct2:0)+'%';
-  if(fs) fs.textContent=c.totalIncome>0?((c.fireAge-ND.profile.age)<=0?'הגעת ליעד!':'פרישה בגיל '+c.fireAge+' · עוד '+(c.fireAge-ND.profile.age)+' שנים'):'גלה מתי תוכל להיות חופשי כלכלית';
+  if(fs) fs.textContent=(c.totalIncome>0&&c.fireAge)?((c.fireAge-ND.profile.age)<=0?'הגעת ליעד!':'פרישה בגיל '+c.fireAge+' · עוד '+(c.fireAge-ND.profile.age)+' שנים'):'גלה מתי תוכל להיות חופשי כלכלית';
   if(fh) fh.textContent='יש: '+(nw0>0?fmt(nw0):'—');
   if(fg) fg.textContent='יעד: '+(fireN>0?fmt(fireN):'—');
 
@@ -2812,11 +2811,11 @@ function cfCalc(){
   var f=function(n){return n>=1e6?'₪'+(n/1e6).toFixed(1)+'M':n>=1000?'₪'+Math.round(n/1000)+'k':'₪'+Math.round(n);};
   var inc=v('inc-my')+v('inc-partner')+v('inc-extra');
   var exp=0,needs=0,wants=0;
-  document.querySelectorAll('.exp-fi').forEach(function(inp){
-    var val=parseFloat(inp.value)||0;exp+=val;
-    var cat=inp.getAttribute('data-cat')||'';
-    if(['housing','food','transport','health'].indexOf(cat)>=0) needs+=val;
-    else wants+=val;
+  // Read expenses from ND (source of truth) so changes propagate to every graph/summary
+  var _needCats=['housing','food','transport','health'];
+  Object.keys(ND.expenses||{}).forEach(function(cat){
+    var val=Number(ND.expenses[cat])||0;exp+=val;
+    if(_needCats.indexOf(cat)>=0) needs+=val; else wants+=val;
   });
   var net=inc-exp,sav=Math.max(0,net);
   // Hero
@@ -2831,6 +2830,7 @@ function cfCalc(){
   var ci=document.getElementById('cf-hdr-inc');if(ci)ci.textContent=inc>0?f(inc):'—';
   var ce=document.getElementById('cf-hdr-exp');if(ce)ce.textContent=exp>0?f(exp):'—';
   var cs=document.getElementById('cf-hdr-sav');if(cs)cs.textContent=inc>0?f(sav):'—';
+  var cr=document.getElementById('cf-hdr-ratio');if(cr)cr.textContent=inc>0?Math.round(exp/inc*100)+'%':'—';
   // Summary
   var si=document.getElementById('sum-inc');if(si)si.textContent=inc>0?f(inc):'—';
   var si2=document.getElementById('sum-inc2');if(si2)si2.textContent=inc>0?f(inc):'—';
@@ -2847,17 +2847,31 @@ function cfCalc(){
   var pn=document.getElementById('pct-nec');if(pn)pn.textContent=inc>0?needsPct+'%':'—';
   var pw=document.getElementById('pct-want');if(pw)pw.textContent=inc>0?wantsPct+'%':'—';
   var ps=document.getElementById('pct-sav');if(ps)ps.textContent=inc>0?savPct+'%':'—';
-  // Insights
+  // Insights — real, rule-based from ND (max 3, only relevant). No API calls.
   var ins=document.getElementById('cf-insights');
   if(ins){
-    if(inc<=0){ins.innerHTML='<div style="font-size:10px;color:#A8A8B0;text-align:center;padding:4px 0">הזן הכנסות לקבלת תובנות</div>';return;}
-    var html='';
-    if(savPct>=20) html+='<div style="background:rgba(39,174,96,.08);border-radius:8px;padding:6px 8px;font-size:10px;color:#2D6A3F">שיעור חיסכון '+savPct+'% — מצוין, אתה על המסלול הנכון.</div>';
-    else if(sav>0) html+='<div style="background:rgba(160,120,64,.08);border-radius:8px;padding:6px 8px;font-size:10px;color:#A07840">חיסכון '+savPct+'% — יעד הוא 20%. חסרים '+f(inc*0.2-sav)+'/חודש.</div>';
-    else html+='<div style="background:rgba(160,120,64,.08);border-radius:8px;padding:6px 8px;font-size:10px;color:#A07840">אין חיסכון — הוצאות שוות או עולות על ההכנסה.</div>';
-    if(needsPct>50) html+='<div style="background:rgba(160,120,64,.08);border-radius:8px;padding:6px 8px;font-size:10px;color:#A07840;margin-top:4px">הוצאות הכרחיות '+needsPct+'% — מעל 50% המומלץ.</div>';
-    if(sav>0){var fv25=sav*12*((Math.pow(1.07,25)-1)/0.07);html+='<div style="background:rgba(30,45,74,.06);border-radius:8px;padding:6px 8px;font-size:10px;color:#1E2D4A;margin-top:4px">'+f(sav*12)+'/שנה לחיסכון · בעוד 25 שנה ב-7% = '+f(fv25)+'</div>';}
-    ins.innerHTML=html;
+    var cc=(typeof calc==='function')?calc():{};
+    var tips=[];
+    // 1. High-interest loans (>5%) — consider early payoff
+    (ND.loans||[]).forEach(function(ln){
+      if(tips.length<3 && (ln.rate||0)>5) tips.push('הלוואה'+(ln.name?' "'+ln.name+'"':'')+' בריבית '+ln.rate+'% — שקול לפרוע מוקדם כדי לחסוך בריבית.');
+    });
+    // 2. Emergency fund — should cover 3 months of expenses
+    if(tips.length<3 && exp>0 && (ND.cash||0) < exp*3){
+      tips.push('קרן חירום חסרה — 3 חודשי הוצאות = '+f(exp*3)+' (יש לך '+f(ND.cash||0)+').');
+    }
+    // 3. Asset concentration — over 50% in a single category
+    if(tips.length<3 && cc.totalAssets>0){
+      var acats=[{l:'פנסיה',v:cc.penT||0},{l:'קרן השתלמות',v:cc.hshT||0},{l:'גמל',v:cc.gmT||0},{l:'השקעות',v:cc.invT||0},{l:'נדל"ן',v:cc.reV||0},{l:'מזומן',v:ND.cash||0}];
+      var top=acats.reduce(function(a,b){return b.v>a.v?b:a;},{v:0,l:''});
+      if(top.v/cc.totalAssets > 0.5) tips.push('ריכוז נכסים — '+Math.round(top.v/cc.totalAssets*100)+'% מהנכסים ב'+top.l+'. שקול פיזור רחב יותר.');
+    }
+    if(tips.length){
+      ins.innerHTML=tips.map(function(t){return '<div style="background:rgba(160,120,64,.08);border-radius:8px;padding:6px 8px;font-size:10px;color:#A07840;margin-bottom:4px">'+t+'</div>';}).join('');
+    } else {
+      var hasData=((cc.totalIncome||0)>0 || (cc.totalAssets||0)>0 || exp>0 || (ND.loans||[]).length>0);
+      ins.innerHTML='<div style="font-size:10px;color:#A8A8B0;text-align:center;padding:4px 0">'+(hasData?'אין התראות — המצב הפיננסי שלך נראה מאוזן.':'הזן נתונים לקבלת תובנות')+'</div>';
+    }
   }
 }
 function addExpRow(){
