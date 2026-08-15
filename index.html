@@ -1984,9 +1984,10 @@ function loadFromStorage(){
 async function loadFromCloud(){
   if(!_sb || !currentUser) return;
   try{
-    var res = await _sb.from('user_data').select('data').eq('id', currentUser.id).single();
+    var res = await _sb.from('user_data').select('data,updated_at').eq('id', currentUser.id).single();
     if(res.data && res.data.data){
       ND = Object.assign(JSON.parse(JSON.stringify(ND_DEFAULT)), res.data.data);
+      _cloudLoadedAt = res.data.updated_at || null;
       // Sync to localStorage as cache
       try{ localStorage.setItem(window.STORAGE_KEY, JSON.stringify(ND)); }catch(e){}
       // Sync settings from cloud to localStorage
@@ -2006,6 +2007,8 @@ function saveToStorage(){
 }
 // Debounced cloud save — waits 2s after last change to avoid spamming
 var _cloudTimer=null;
+// Timestamp of the cloud record we last loaded — used to detect newer writes from other devices
+var _cloudLoadedAt=null;
 function _debounceSaveCloud(){
   if(_cloudTimer) clearTimeout(_cloudTimer);
   _cloudTimer = setTimeout(_saveToCloud, 2000);
@@ -2013,11 +2016,21 @@ function _debounceSaveCloud(){
 async function _saveToCloud(){
   if(!_sb || !currentUser) return;
   try{
+    // Guard: if the cloud has a newer version (saved from another device), reload instead of overwriting
+    var cur = await _sb.from('user_data').select('updated_at').eq('id', currentUser.id).single();
+    if(cur.data && cur.data.updated_at && _cloudLoadedAt && new Date(cur.data.updated_at) > new Date(_cloudLoadedAt)){
+      await loadFromCloud();
+      try{ render(); }catch(e){}
+      showToast('הנתונים עודכנו ממכשיר אחר','טענו מחדש את הגרסה העדכנית');
+      return;
+    }
+    var stamp = new Date().toISOString();
     await _sb.from('user_data').upsert({
       id: currentUser.id,
       data: ND,
-      updated_at: new Date().toISOString()
+      updated_at: stamp
     });
+    _cloudLoadedAt = stamp;
   } catch(e){ console.error('[Numa] Cloud save error:', e); }
 }
 
@@ -2847,8 +2860,6 @@ function cfCalc(){
     else wants+=val;
   });
   var net=inc-exp,sav=Math.max(0,net);
-  // sync ND
-  ND.income.my=v('inc-my');ND.income.partner=v('inc-partner');ND.income.extra=v('inc-extra');
   // Hero
   var hero=document.getElementById('cf-fl-hero');
   if(hero){
