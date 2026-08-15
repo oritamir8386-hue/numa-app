@@ -1045,42 +1045,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </div>
   </div>
 
-  <!-- ── CARD 3: סימולטור תיק ── -->
-  <div class="tc" style="height:auto">
-    <div class="tc-hdr">
-      <div><h3>סימולטור תיק</h3><p>תחזית צמיחה</p></div>
-      <div style="display:flex;align-items:center;gap:6px"><span style="background:rgba(160,120,64,.12);color:#A07840;font-size:9px;font-weight:700;padding:3px 8px;border-radius:20px">⟳ מסונכרן</span><div class="tc-ico"><span style="font-size:18px">📊</span></div></div>
-    </div>
-    <div class="tc-body" style="display:flex;flex-direction:column;gap:9px;max-height:none;overflow:hidden">
-      <!-- Top row -->
-      <div style="display:flex;justify-content:space-between;align-items:flex-end">
-        <div><div style="font-size:11px;color:#8a8a8a">שווי עתידי</div><div id="sim-val" style="font-size:28px;font-weight:800;color:#8a8a8a;letter-spacing:-1px;line-height:1">—</div></div>
-        <div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#c8a96a;line-height:1" id="sim-yrs-display">25</div><div style="font-size:11px;color:#8a8a8a">שנים</div></div>
-      </div>
-      <!-- Chart -->
-      <div id="sim-chart-wrap" style="height:80px;background:#ede9e0;border-radius:11px;overflow:hidden"></div>
-      <!-- Slider -->
-      <div style="display:flex;align-items:center;gap:8px">
-        <span style="font-size:9px;color:#8a8a8a">50y</span>
-        <input type="range" id="inv-yrs-sl" min="5" max="50" step="1" value="25" style="flex:1;accent-color:#A07840" oninput="var v=parseInt(this.value);document.getElementById('inv-yrs-lbl').textContent=v;document.getElementById('sim-yrs').value=v;var d=document.getElementById('sim-yrs-display');if(d)d.textContent=v;calcPortfolio();try{drawInvChart();}catch(e){}"/>
-        <span style="font-size:9px;color:#8a8a8a">5y</span>
-      </div>
-      <!-- Params -->
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;min-width:0">
-        <div><div class="tc-il">תיק נוכחי ₪</div><input class="tc-inp" id="sim-start" type="number" placeholder="₪" readonly style="background:rgba(160,120,64,.08);color:#A07840;font-weight:700"/></div>
-        <div><div class="tc-il">הפקדה/חודש</div><input class="tc-inp" id="sim-mo" type="number" placeholder="₪" oninput="calcPortfolio()"/></div>
-        <div><div class="tc-il">תשואה %</div><input class="tc-inp" id="sim-rate" type="number" value="7" oninput="calcPortfolio()"/></div>
-      </div>
-      <!-- Result chips -->
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
-        <div style="background:#ede9e0;border-radius:11px;padding:8px;text-align:center"><div style="display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:2px"><div style="width:6px;height:6px;border-radius:50%;background:#1E2D4A"></div><span style="font-size:9px;color:#8a8a8a">הפקדות</span></div><div id="sim-deposits" style="font-size:12px;font-weight:700;color:#1E2D4A">—</div></div>
-        <div style="background:#ede9e0;border-radius:11px;padding:8px;text-align:center"><div style="display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:2px"><div style="width:6px;height:6px;border-radius:50%;background:#A07840"></div><span style="font-size:9px;color:#8a8a8a">ריבית</span></div><div id="sim-interest" style="font-size:12px;font-weight:700;color:#A07840">—</div></div>
-        <div style="background:#ede9e0;border-radius:11px;padding:8px;text-align:center"><div style="display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:2px"><div style="width:6px;height:6px;border-radius:50%;background:#2D6A3F"></div><span style="font-size:9px;color:#8a8a8a">סה"כ</span></div><div id="sim-total" style="font-size:12px;font-weight:700;color:#2D6A3F">—</div></div>
-      </div>
-      <input type="hidden" id="sim-yrs" value="25"/>
-    </div>
-  </div>
-
   <!-- ── CARD 4: נדל"ן ── -->
   <div class="tc" style="height:auto">
     <div class="tc-hdr"><div><h3>נדל"ן</h3><p>נכסי נדל"ן ומשכנתאות</p></div><div class="tc-ico"><span style="font-size:18px">🏠</span></div></div>
@@ -1822,7 +1786,6 @@ var T={
     rate_label:'שער ₪/$',rate_updated:'עודכן אוטומטית',
     pension_card:'פנסיה וקה"ש',pension_sub:'חיסכון פנסיוני + קרנות השתלמות',
     invest_card:'השקעות',invest_sub:'תיקים, מזומן ואלטרנטיביות',
-    sim_card:'סימולטור תיק',sim_sub:'תחזית צמיחה',
     loans_card:'הלוואות',loans_sub:'חובות ולוח סילוקין',
     amort_card:'לוח סילוקין',amort_sub:'חישוב החזר חודשי',
     debts:'חובות',projection_label:'תחזית',years:'שנים',
@@ -1851,7 +1814,6 @@ var T={
     rate_label:'₪/$ Rate',rate_updated:'Auto-updated',
     pension_card:'Pension & Savings',pension_sub:'Pension funds + Study funds',
     invest_card:'Investments',invest_sub:'Portfolios, cash & alternatives',
-    sim_card:'Portfolio Simulator',sim_sub:'Growth projection',
     loans_card:'Loans',loans_sub:'Debts & amortization',
     amort_card:'Amortization',amort_sub:'Monthly payment calculator',
     debts:'Debts',projection_label:'Projection',years:'years',
@@ -2566,7 +2528,7 @@ function renderLoans(c){
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">יתרה '+fmt(x.balance)+' · ריבית '+x.rate+'%</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.monthlyPayment)+'/חודש</div>'+
-      '<div style="font-size:10px;color:#6B7A96;cursor:pointer" onclick="deleteND(\'loans\',\''+x.id+'\')">מחק</div></div></div>');
+      '<div style="font-size:10px;color:#6B7A96"><span style="cursor:pointer" onclick="openAddModal(\'loan\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer" onclick="deleteND(\'loans\',\''+x.id+'\')">מחק</span></div></div></div>');
   });
   ll.innerHTML=items.length?items.join(''):'<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין הלוואות — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'loan\')">+ הוסף</span></div>';
 }
@@ -3039,7 +3001,7 @@ function renderSTHeader(c){
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">הפקדה ₪'+Math.round(x.monthlyDeposit).toLocaleString()+'/חודש · דמי ניהול '+x.fee+'%</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.balance)+'</div>'+
-      '<div style="font-size:10px;color:#6B7A96;cursor:pointer" onclick="deleteND(\'pension\',\''+x.id+'\')">מחק</div></div></div>';
+      '<div style="font-size:10px;color:#6B7A96"><span style="cursor:pointer" onclick="openAddModal(\'pension\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer" onclick="deleteND(\'pension\',\''+x.id+'\')">מחק</span></div></div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין קרן פנסיה — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'pension\')">+ הוסף</span></div>');
 
   _renderList('hsh-list', ND.hishtalmut, function(x){
@@ -3047,7 +3009,7 @@ function renderSTHeader(c){
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">נזיל '+x.liquidYear+' · הפקדה ₪'+Math.round(x.monthlyDeposit).toLocaleString()+'</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.balance)+'</div>'+
-      '<div style="font-size:10px;color:#6B7A96;cursor:pointer" onclick="deleteND(\'hishtalmut\',\''+x.id+'\')">מחק</div></div></div>';
+      '<div style="font-size:10px;color:#6B7A96"><span style="cursor:pointer" onclick="openAddModal(\'hishtalmut\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer" onclick="deleteND(\'hishtalmut\',\''+x.id+'\')">מחק</span></div></div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין קרן השתלמות — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'hishtalmut\')">+ הוסף</span></div>');
 
   _renderList('gamel-list', ND.gamel, function(x){
@@ -3055,7 +3017,7 @@ function renderSTHeader(c){
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">הפקדה ₪'+Math.round(x.monthlyDeposit).toLocaleString()+'/חודש</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.balance)+'</div>'+
-      '<span style="font-size:10px;color:#6B7A96;cursor:pointer" onclick="deleteND(\'gamel\',\''+x.id+'\')">מחק</span></div></div>';
+      '<span style="font-size:10px;color:#6B7A96"><span style="cursor:pointer" onclick="openAddModal(\'gamel\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer" onclick="deleteND(\'gamel\',\''+x.id+'\')">מחק</span></span></div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין גמל להשקעה — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'gamel\')">+ הוסף</span></div>');
 
   _renderList('inv-list', ND.investments, function(x){
@@ -3065,7 +3027,7 @@ function renderSTHeader(c){
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+(x.ticker?' — '+x.ticker:'')+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">עלות '+fmt(x.costBasis)+' · הפקדה ₪'+Math.round(x.monthlyDeposit).toLocaleString()+'</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.value)+'</div>'+
-      '<div style="font-size:10px;color:'+(gain>=0?'#A07840':'#6B7A96')+'">'+gainPct+'% · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'investments\',\''+x.id+'\')">מחק</span></div></div></div>';
+      '<div style="font-size:10px;color:'+(gain>=0?'#A07840':'#6B7A96')+'">'+gainPct+'% · <span style="cursor:pointer;color:#6B7A96" onclick="openAddModal(\'investment\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'investments\',\''+x.id+'\')">מחק</span></div></div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין השקעות — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'investment\')">+ הוסף</span></div>');
 
   // Alt investments: REIT + Mutual Fund + Angel
@@ -3089,7 +3051,7 @@ function renderSTHeader(c){
       '<div style="text-align:left">' +
         '<div style="font-size:12px;font-weight:800">' + fmt(x.value||0) + '</div>' +
         '<div style="font-size:10px;color:' + (gain>=0?'#A07840':'#6B7A96') + '">' +
-          gainPct + '% · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'' + delType + '\',\'' + x.id + '\')">מחק</span>' +
+          gainPct + '% · <span style="cursor:pointer;color:#6B7A96" onclick="openAddModal(\'' + delType + '\',\'' + x.id + '\')">✎</span> · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'' + delType + '\',\'' + x.id + '\')">מחק</span>' +
         '</div>' +
       '</div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין נכסים אלטרנטיביים — <span style="color:#A07840;cursor:pointer" onclick="openAddAlt()">+ הוסף</span></div>');
@@ -3100,7 +3062,7 @@ function renderSTHeader(c){
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">משכנתא ₪'+Math.round(x.monthlyPayment).toLocaleString()+'/חודש</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.marketValue)+'</div>'+
-      '<div style="font-size:10px;color:#A07840">הון עצמי '+fmt(equity)+' · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'realEstate\',\''+x.id+'\')">מחק</span></div></div></div>';
+      '<div style="font-size:10px;color:#A07840">הון עצמי '+fmt(equity)+' · <span style="cursor:pointer;color:#6B7A96" onclick="openAddModal(\'realEstate\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'realEstate\',\''+x.id+'\')">מחק</span></div></div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין נדל"ן — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'realEstate\')">+ הוסף</span></div>');
 
   // Cash display
@@ -3199,7 +3161,9 @@ function hideOnboarding(){}
 function obNext(){}
 
 /* ── INVESTMENTS PAGE: ADD ITEM ── */
-function openAddModal(type){
+// Maps an add-modal type to its underlying ND array key (some differ, e.g. investment→investments)
+var ND_TYPE_ARRAY = {pension:'pension',hishtalmut:'hishtalmut',gamel:'gamel',investment:'investments',realEstate:'realEstate',reit:'reit',mutualfund:'mutualfund',angel:'angel',loan:'loans'};
+function openAddModal(type, id){
   var titles = {
     pension:'הוסף קרן פנסיה', hishtalmut:'הוסף קרן השתלמות',
     gamel:'הוסף גמל להשקעה', investment:'הוסף השקעה',
@@ -3219,17 +3183,21 @@ function openAddModal(type){
   };
   var flds = fields[type];
   if(!flds) return;
-  var html = '<div class="sh-h"><div class="sh-b"></div></div><div class="sh-t">'+titles[type]+'</div>';
+  // Edit mode: locate existing item to prefill inputs and update-in-place on save
+  var editItem = id ? ((ND[ND_TYPE_ARRAY[type]]||[]).filter(function(x){return x.id===id;})[0]) : null;
+  var modalTitle = id ? titles[type].replace('הוסף','ערוך') : titles[type];
+  var html = '<div class="sh-h"><div class="sh-b"></div></div><div class="sh-t">'+modalTitle+'</div>';
   flds.forEach(function(f){
     html += '<div><div class="il">'+f.l+'</div><input class="inp" id="nm_'+f.k+'" placeholder="'+f.p+'"'+(f.t?' type="'+f.t+'"':'')+'></div>';
   });
-  html += '<button class="btn-g" style="margin-top:12px" onclick="saveAddModal(\''+type+'\')">שמור ✓</button>';
+  html += '<button class="btn-g" style="margin-top:12px" onclick="saveAddModal(\''+type+'\''+(id?(',\''+id+'\''):'')+')">שמור ✓</button>';
   var cont = document.getElementById('add-modal-body');
   if(!cont){ // create modal if not exists
     var bg = document.createElement('div'); bg.className='sbg'; bg.id='bg-add'; bg.onclick=function(){closeS('add');}; document.body.appendChild(bg);
     var sht = document.createElement('div'); sht.className='sht'; sht.id='sht-add'; sht.innerHTML='<div id="add-modal-body"></div>'; document.body.appendChild(sht);
   }
   document.getElementById('add-modal-body').innerHTML = html;
+  if(editItem){ flds.forEach(function(f){ var el=document.getElementById('nm_'+f.k); if(el && editItem[f.k]!=null) el.value=editItem[f.k]; }); }
   openS('add');
 }
 
@@ -3255,10 +3223,10 @@ function openAddAlt() {
   openS('add');
 }
 
-function saveAddModal(type){
+function saveAddModal(type, id){
   var get = function(k){ var el=document.getElementById('nm_'+k); return el?el.value:''; };
   var num = function(k){ return parseFloat(get(k))||0; };
-  var item = {id: ndId()};
+  var item = {id: id || ndId()};
   if(type==='pension'){
     item.name=get('name');item.company='';item.balance=num('balance');item.monthlyDeposit=num('monthlyDeposit');item.returnRate=num('returnRate');item.fee=num('fee');
     ND.pension.push(item);
@@ -3290,6 +3258,10 @@ function saveAddModal(type){
     item.name=get('name');item.balance=num('balance');item.rate=num('rate');item.monthlyPayment=num('monthlyPayment');
     ND.loans.push(item);
   }
+  if(id){ // edit mode: the branch appended the edited item — move it back into the original slot (same id)
+    var _arr=ND[ND_TYPE_ARRAY[type]];
+    if(_arr){ var _ni=_arr.pop(); var _ix=_arr.findIndex(function(x){return x.id===id;}); if(_ix>=0)_arr[_ix]=_ni; else _arr.push(_ni); }
+  }
   saveToStorage();
   closeS('add');
   render();
@@ -3297,10 +3269,7 @@ function saveAddModal(type){
   try{renderAssetsHub();}catch(e){}
   try{drawInvChart();}catch(e){}
   try{updateInvMiniChart();}catch(e){}
-  setTimeout(function(){
-    try{syncSimFromInvestments();}catch(e){}
-  }, 100);
-  smartToast(type);
+  if(id) showToast('עודכן'); else smartToast(type);
 }
 
 function deleteND(type, id){
@@ -3308,7 +3277,6 @@ function deleteND(type, id){
   ND[type] = ND[type].filter(function(x){return x.id!==id;});
   saveToStorage(); render(); renderSTFull();
   try{renderAssetsHub();}catch(e){}
-  try{syncSimFromInvestments();}catch(e){}
   showToast('נמחק');
 }
 
@@ -3331,7 +3299,7 @@ function renderSTFull(){
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">הפקדה ₪'+Math.round(x.monthlyDeposit).toLocaleString()+'/חודש · דמי ניהול '+x.fee+'%</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.balance)+'</div>'+
-      '<div style="font-size:10px;color:#6B7A96;cursor:pointer" onclick="deleteND(\'pension\',\''+x.id+'\')">מחק</div></div></div>';
+      '<div style="font-size:10px;color:#6B7A96"><span style="cursor:pointer" onclick="openAddModal(\'pension\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer" onclick="deleteND(\'pension\',\''+x.id+'\')">מחק</span></div></div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין קרן פנסיה — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'pension\')">+ הוסף</span></div>');
 
   // Hishtalmut list
@@ -3340,7 +3308,7 @@ function renderSTFull(){
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">נזיל '+x.liquidYear+' · הפקדה ₪'+Math.round(x.monthlyDeposit).toLocaleString()+'</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.balance)+'</div>'+
-      '<div style="font-size:10px;color:#6B7A96;cursor:pointer" onclick="deleteND(\'hishtalmut\',\''+x.id+'\')">מחק</div></div></div>';
+      '<div style="font-size:10px;color:#6B7A96"><span style="cursor:pointer" onclick="openAddModal(\'hishtalmut\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer" onclick="deleteND(\'hishtalmut\',\''+x.id+'\')">מחק</span></div></div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין קרן השתלמות — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'hishtalmut\')">+ הוסף</span></div>');
 
   // Gamel list
@@ -3349,7 +3317,7 @@ function renderSTFull(){
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">הפקדה ₪'+Math.round(x.monthlyDeposit).toLocaleString()+'/חודש</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.balance)+'</div>'+
-      '<span style="font-size:10px;color:#6B7A96;cursor:pointer" onclick="deleteND(\'gamel\',\''+x.id+'\')">מחק</span></div></div>';
+      '<span style="font-size:10px;color:#6B7A96"><span style="cursor:pointer" onclick="openAddModal(\'gamel\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer" onclick="deleteND(\'gamel\',\''+x.id+'\')">מחק</span></span></div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין גמל להשקעה — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'gamel\')">+ הוסף</span></div>');
 
   // Investments list
@@ -3360,7 +3328,7 @@ function renderSTFull(){
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+(x.ticker?' — '+x.ticker:'')+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">עלות '+fmt(x.costBasis)+' · הפקדה ₪'+Math.round(x.monthlyDeposit).toLocaleString()+'</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.value)+'</div>'+
-      '<div style="font-size:10px;color:'+(gain>=0?'#A07840':'#6B7A96')+'">'+gainPct+'% · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'investments\',\''+x.id+'\')">מחק</span></div></div></div>';
+      '<div style="font-size:10px;color:'+(gain>=0?'#A07840':'#6B7A96')+'">'+gainPct+'% · <span style="cursor:pointer;color:#6B7A96" onclick="openAddModal(\'investment\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'investments\',\''+x.id+'\')">מחק</span></div></div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין השקעות — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'investment\')">+ הוסף</span></div>');
 
   // Alt investments: REIT + Mutual Fund + Angel
@@ -3384,7 +3352,7 @@ function renderSTFull(){
       '<div style="text-align:left">' +
         '<div style="font-size:12px;font-weight:800">' + fmt(x.value||0) + '</div>' +
         '<div style="font-size:10px;color:' + (gain>=0?'#A07840':'#6B7A96') + '">' +
-          gainPct + '% · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'' + delType + '\',\'' + x.id + '\')">מחק</span>' +
+          gainPct + '% · <span style="cursor:pointer;color:#6B7A96" onclick="openAddModal(\'' + delType + '\',\'' + x.id + '\')">✎</span> · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'' + delType + '\',\'' + x.id + '\')">מחק</span>' +
         '</div>' +
       '</div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין נכסים אלטרנטיביים — <span style="color:#A07840;cursor:pointer" onclick="openAddAlt()">+ הוסף</span></div>');
@@ -3396,7 +3364,7 @@ function renderSTFull(){
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">משכנתא ₪'+Math.round(x.monthlyPayment).toLocaleString()+'/חודש</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.marketValue)+'</div>'+
-      '<div style="font-size:10px;color:#A07840">הון עצמי '+fmt(equity)+' · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'realEstate\',\''+x.id+'\')">מחק</span></div></div></div>';
+      '<div style="font-size:10px;color:#A07840">הון עצמי '+fmt(equity)+' · <span style="cursor:pointer;color:#6B7A96" onclick="openAddModal(\'realEstate\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'realEstate\',\''+x.id+'\')">מחק</span></div></div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין נדל"ן — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'realEstate\')">+ הוסף</span></div>');
 
   // Cash
@@ -3579,7 +3547,6 @@ function renderAssetsHub(){
   renderSTFull();
   try{drawInvChart();}catch(e){}
   updateInvMiniChart();
-  try{syncSimFromInvestments();}catch(e){}
 }
 function goSub(id){
   // Map sub-pages to their parent tab + section
@@ -3597,8 +3564,6 @@ function goSub(id){
         renderSTFull();
         try{drawInvChart();}catch(e){}
         updateInvMiniChart();
-        var cv=calc();
-        syncSimFromInvestments();
       }
       // Plan page initializations
       if(parent==='plan'){
@@ -5824,7 +5789,6 @@ function saveCalcVal(){
   closeCalcEditor();
   // Update dependent inputs if applicable
   if(_calcEditorKey==='returnRate'){
-    var sr=document.getElementById('sim-rate');if(sr)sr.value=val;
     var fr=document.getElementById('fire-ret');if(fr)fr.value=val;
     var mr=document.getElementById('mc-return');if(mr)mr.value=val;
   }
@@ -5834,94 +5798,6 @@ function saveCalcVal(){
 function closeCalcEditor(){document.getElementById('set-calc-editor').style.display='none';}
 // Apply category toggles on load
 document.addEventListener('DOMContentLoaded',function(){setTimeout(applyCategoryToggles,200);});
-
-/* ══ PORTFOLIO SIMULATOR ══ */
-function syncSimFromInvestments(){
-  var cv=calc();
-  var startEl=document.getElementById('sim-start');
-  var moEl=document.getElementById('sim-mo');
-  if(!startEl) return;
-  var invTotal=cv.invT||0;
-  startEl.value=invTotal>0?invTotal:'';
-  var moTotal=ND.investments.reduce(function(s,x){return s+(x.monthlyDeposit||0)},0);
-  if(moEl && moTotal>0) moEl.value=moTotal;
-  calcPortfolio();
-}
-function calcPortfolio(){
-  var startEl=document.getElementById('sim-start');
-  var moEl=document.getElementById('sim-mo');
-  var rateEl=document.getElementById('sim-rate');
-  var yrsEl=document.getElementById('sim-yrs');
-  if(!startEl) return;
-  var balance=parseFloat(startEl.value)||0;
-  var monthly=parseFloat(moEl.value)||0;
-  var annual_rate=(parseFloat(rateEl.value)||7)/100;
-  var years=parseInt(yrsEl.value)||25;
-  var valEl=document.getElementById('sim-val');
-  var chartWrap=document.getElementById('sim-chart-wrap');
-  var depEl=document.getElementById('sim-deposits');
-  var intEl=document.getElementById('sim-interest');
-  var totEl=document.getElementById('sim-total');
-  var yrsDisp=document.getElementById('sim-yrs-display');
-  // Update year display
-  if(yrsDisp) yrsDisp.textContent=years;
-  if(!balance && !monthly){
-    if(valEl){valEl.textContent='—';valEl.style.color='#8a8a8a';}
-    if(chartWrap) chartWrap.innerHTML='';
-    if(depEl) depEl.textContent='—';
-    if(intEl) intEl.textContent='—';
-    if(totEl) totEl.textContent='—';
-    return;
-  }
-  // Formulas
-  var r=annual_rate/12;
-  var n=years*12;
-  var fv_principal=balance*Math.pow(1+r,n);
-  var fv_monthly=r>0?monthly*((Math.pow(1+r,n)-1)/r):monthly*n;
-  var total=fv_principal+fv_monthly;
-  var deposits=balance+monthly*n;
-  var interest=total-deposits;
-  var multiplier=balance>0?(total/balance):0;
-  if(valEl){valEl.textContent=fmt(Math.round(total));valEl.style.color='#A07840';}
-  if(depEl) depEl.textContent=fmt(Math.round(deposits));
-  if(intEl) intEl.textContent=fmt(Math.round(interest));
-  if(totEl) totEl.textContent=fmt(Math.round(total));
-  // Draw SVG chart
-  if(chartWrap){
-    var W=320,H=72,steps=40;
-    var pts=[],maxV=0;
-    for(var i=0;i<=steps;i++){
-      var t=i*(years/steps);
-      var rm=annual_rate/12,nm=t*12;
-      var v=balance*Math.pow(1+rm,nm)+(rm>0?monthly*((Math.pow(1+rm,nm)-1)/rm):monthly*nm);
-      pts.push({x:i*(W/steps),v:v});if(v>maxV)maxV=v;
-    }
-    if(maxV===0)maxV=1;
-    var PAD_TOP=12,PAD_BOT=18,CH=H-PAD_TOP-PAD_BOT;
-    function yPos(v){return PAD_TOP+(CH-v/maxV*CH);}
-    var line='',area='M0 '+yPos(pts[0].v);
-    for(var pi=0;pi<pts.length;pi++){
-      var px=pts[pi].x,py=yPos(pts[pi].v);
-      line+=px+','+py+(pi<pts.length-1?' ':'');
-      area+=' L'+px+' '+py;
-    }
-    area+=' L'+W+' '+(PAD_TOP+CH)+' L0 '+(PAD_TOP+CH)+' Z';
-    var lastPt=pts[pts.length-1],lastY=yPos(lastPt.v);
-    var midYr=Math.round(years/2);
-    chartWrap.innerHTML='<svg width="100%" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="display:block;height:100%">'+
-      '<line x1="0" y1="'+Math.round(PAD_TOP+CH*0.5)+'" x2="'+W+'" y2="'+Math.round(PAD_TOP+CH*0.5)+'" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>'+
-      '<line x1="0" y1="'+PAD_TOP+'" x2="'+W+'" y2="'+PAD_TOP+'" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>'+
-      '<path d="'+area+'" fill="rgba(160,120,64,0.1)"/>'+
-      '<polyline points="'+line+'" fill="none" stroke="#A07840" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'+
-      '<circle cx="0" cy="'+yPos(pts[0].v)+'" r="5" fill="#1E2D4A" stroke="#fff" stroke-width="2"/>'+
-      '<circle cx="'+W+'" cy="'+lastY+'" r="4" fill="#A07840"/>'+
-      '<text x="'+W+'" y="'+(lastY-8)+'" text-anchor="end" font-size="9" font-weight="700" fill="#A07840" font-family="inherit">'+fmt(Math.round(total))+'</text>'+
-      '<text x="4" y="'+(H-2)+'" font-size="8" fill="#bbb" font-family="inherit">0</text>'+
-      '<text x="'+Math.round(W/2)+'" y="'+(H-2)+'" text-anchor="middle" font-size="8" fill="#bbb" font-family="inherit">'+midYr+'</text>'+
-      '<text x="'+(W-4)+'" y="'+(H-2)+'" text-anchor="end" font-size="8" fill="#bbb" font-family="inherit">'+years+'</text>'+
-      '</svg>';
-  }
-}
 
 /* ══ AUTO-INIT VIS on load ══ */
 document.addEventListener('DOMContentLoaded', function(){
