@@ -3701,7 +3701,7 @@ function agentSend(txt){
   var c=typeof calc==='function'?calc():{};
   var ctx='נתוני המשתמש: שווי נטו '+fmt(c.netWorth||0)+', הכנסה '+fmt(c.totalIncome||0)+', הוצאות '+fmt(c.totalExpenses||0)+', חיסכון '+((c.savingsRate||0))+'%, FIRE בגיל '+(c.fireAge||'לא ידוע')+', Numa Score '+(c.score||0)+'/100.';
   // Call API
-  fetch('/api/chat',{
+  fetch('https://numa-app.oritamir8386.workers.dev/api/chat',{
     method:'POST',
     headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01'},
     body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:500,system:'אתה סוכן פיננסי של Numa. '+ctx+' ענה בעברית, בצורה קצרה וברורה. אל תמליץ על מוצרים ספציפיים.',messages:_agentHistory})
