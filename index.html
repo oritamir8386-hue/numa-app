@@ -1954,6 +1954,10 @@ var ND_DEFAULT = {
   realEstate:  [],  // [{id,name,marketValue,mortgageBalance,monthlyPayment}]
   loans:       [],  // [{id,name,balance,rate,monthlyPayment}]
   cash: 0,
+  insurance: {},
+  legacy: {},
+  milestones: [],
+  onboardingDone: false,
   settings: {}   // {returnRate,withdrawalRate,inflation,capitalGainsTax,family,categories}
 };
 
@@ -3112,18 +3116,6 @@ function renderSTHeader(c){
   try{ updateInvMiniChart(); }catch(e){}
 }
 
-/* ── RENDER: MISSIONS ── */
-function renderMissions(c){
-  // Update setup missions progress badge
-  var missionBadge = document.querySelector('.c [class="bdg Bg"]');
-  if(!missionBadge) return;
-  var done = 0;
-  if(c.totalIncome > 0) done++;
-  if(c.penT + c.hshT > 0) done++;
-  if(ND.realEstate.length > 0) done++;
-  missionBadge.textContent = done+'/6 — +'+(done*6)+' נקודות';
-}
-
 /* ── RENDER: FIRE PAGE ── */
 function renderFIREPage(){
   var c = calc();
@@ -3194,16 +3186,8 @@ function renderCI(){ render(); }
 function applyFeatureFlags(){}
 function renderAnalystTips(){}
 function fetchLiveData(){}
-function updateApiKeyStatus(){}
-function renderWeeklySummary(){}
-function renderProfileCompletion(){}
-function renderSpendDNA(){}
 function saveNWSnapshot(){}
-function renderNWTrend(){}
 function renderSetupMissions(){ render(); }
-function renderFeatureFlags(){}
-function renderStFacts(){}
-function renderRetireFacts(){}
 function renderMktFacts(){}
 function renderReFacts(){}
 function showFact(){}
@@ -3659,11 +3643,6 @@ function countUp(el,target,prefix,dur){
     el.textContent=prefix+Math.round(start).toLocaleString();
   },t);
 }
-function startCountUp(){
-  var nw=document.getElementById('hero-nw');
-  if(nw&&!nw._counted){nw._counted=true;countUp(nw,1847320,'₪',700);}
-}
-
 /* ── AI PANEL ── */
 var _aiLoading=false;
 /* ── Agent Sheet ── */
@@ -3753,60 +3732,6 @@ function closeAI(){
   aiOpen=false;
   document.getElementById('ai-panel').classList.remove('on');
   document.getElementById('ai-fab').style.display='flex';
-}
-function _buildContext(){
-  var c=calc();
-  var ctx='מצב פיננסי של המשתמש:\n';
-  ctx+='- שווי נטו: '+fmt(c.netWorth)+'\n';
-  ctx+='- הכנסה חודשית: '+fmt(c.totalIncome)+'\n';
-  ctx+='- הוצאות חודשיות: '+fmt(c.totalExpenses)+'\n';
-  ctx+='- חיסכון חודשי: '+fmt(c.monthlySavings)+' ('+c.savingsRate+'%)\n';
-  ctx+='- פנסיה+קה"ש: '+fmt(c.penT+c.hshT)+'\n';
-  ctx+='- השקעות: '+fmt(c.invT)+'\n';
-  ctx+='- נדל"ן (שווי): '+fmt(c.reV)+' (משכנתא: '+fmt(c.reMrt)+')\n';
-  ctx+='- מזומן: '+fmt(ND.cash)+'\n';
-  ctx+='- גיל: '+ND.profile.age+'\n';
-  ctx+='- Numa Score: '+c.score+'/100\n';
-  ctx+='- FIRE מחושב לגיל: '+c.fireAge+'\n';
-  return ctx;
-}
-async function _sendToAI(userMsg){
-  if(_aiLoading)return;
-  _aiLoading=true;
-  showTyping();
-  var ctx=_buildContext();
-  var system='את Numa — יועצת פיננסית חכמה ואכפתית. כתבי בעברית, בגוף ראשון נקבה, 2-3 משפטים בלבד. בססי על הנתונים שמסופקים. אם חסר נתון — אמרי בדיוק מה צריך להזין. אל תמציאי מספרים.';
-  var prompt=ctx+'\n\nשאלת המשתמש: '+userMsg;
-  try{
-    var resp=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:300,
-        system:system,
-        messages:[{role:'user',content:prompt}]
-      })
-    });
-    var data=await resp.json();
-    var txt=(data.content&&data.content[0]&&data.content[0].text)||'שגיאה בחיבור. נסה שוב.';
-    hideTyping();addAIMsg(txt,'ai');
-  }catch(e){
-    hideTyping();
-    // fallback local
-    var c2=calc();
-    var fb='';
-    if(c2.totalIncome===0)fb='הזן קודם את הכנסתך בדף תזרים כדי שאוכל לייעץ.';
-    else if(c2.savingsRate<10)fb='שיעור חיסכון של '+c2.savingsRate+'% נמוך — יעד מומלץ הוא 20%. נסה לצמצם הוצאות ב-'+fmt((c2.totalIncome*0.2)-c2.monthlySavings)+' בחודש.';
-    else if(c2.cash<c2.totalExpenses*3)fb='קרן חירום: יש לך '+fmt(c2.cash)+' אבל מומלץ '+fmt(c2.totalExpenses*6)+' (6 חודשי הוצאות). זה עדיפות ראשונה!';
-    else fb='Numa Score שלך: '+c2.score+'/100. FIRE צפוי לגיל '+c2.fireAge+'. ממשיך לגדול!';
-    addAIMsg(fb,'ai');
-  }
-  _aiLoading=false;
-}
-function sendMsg(){agentSend();
-}
-function sendChip(txt){agentSend(txt);
 }
 function addAIMsg(txt,type){
   var msgs=document.getElementById('ai-msgs');
@@ -4556,7 +4481,8 @@ function obEnterApp(){
   // ── רישום Service Worker
   if ('serviceWorker' in navigator && !location.hostname.includes('claudeusercontent')) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
+      // גרסת ה-SW/cache — העלה את המספר בכל דפלוי כדי לאלץ עדכון cache (numa-v<N>)
+      navigator.serviceWorker.register('./sw.js?v=v7')
         .then(reg => {
           swReg = reg;
           console.log('[Numa] Service Worker registered ✅');

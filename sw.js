@@ -3,7 +3,11 @@
    עודכן: אוטומטי עם כל דפלוי
 ═══════════════════════════════════════════ */
 
-const CACHE_NAME = 'numa-v6';
+// CACHE_NAME נגזר מהגרסה שמוזרקת דרך פרמטר ה-URL ברישום ה-SW (sw.js?v=...),
+// כך שהגרסה מנוהלת ממקום אחד ב-index.html ומתעדכנת אוטומטית בכל דפלוי.
+// Fallback ל-numa-v7 אם אין פרמטר. יש להעלות את פרמטר ה-v ברישום שב-index.html בכל דפלוי.
+const SW_VERSION = new URL(self.location.href).searchParams.get('v') || 'v7';
+const CACHE_NAME = 'numa-' + SW_VERSION;
 const STATIC_ASSETS = [
   './',
   './index.html',
