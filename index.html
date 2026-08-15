@@ -832,13 +832,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div class="ch"><div><div class="ct">מה השתנה</div><div class="cs">מאז הביקור האחרון</div></div><div class="ib">🕐</div></div>
   <div class="cb">
     <div class="sep"></div>
-    <div class="ov-snap-rows">
-      <div class="ov-sn-row"><span class="ov-sn-lbl">שווי נטו</span><span class="ov-sn-val" id="ov-sn1">—</span></div>
-      <div class="ov-sn-row"><span class="ov-sn-lbl">חיסכון חודשי</span><span class="ov-sn-val" id="ov-sn2">—</span></div>
-      <div class="ov-sn-row"><span class="ov-sn-lbl">Numa Score</span><span class="ov-sn-val" id="ov-sn3">—</span></div>
-      <div class="ov-sn-row"><span class="ov-sn-lbl bold">FIRE צפוי</span><span class="ov-sn-val" id="ov-sn4">—</span></div>
-    </div>
-    <div class="ov-sn-date" id="ov-sn-date"></div>
+    <div class="ov-snap-rows" id="nh-wc"></div>
   </div>
 </div>
 
@@ -1916,6 +1910,7 @@ var ND_DEFAULT = {
   realEstate:  [],  // [{id,name,marketValue,mortgageBalance,monthlyPayment}]
   loans:       [],  // [{id,name,balance,rate,monthlyPayment}]
   cash: 0,
+  history: [],   // [{date:'YYYY-MM', netWorth, totalAssets, totalLoans, savingsRate}] — monthly net-worth snapshots
   insurance: {},
   legacy: {},
   milestones: [],
@@ -1968,6 +1963,7 @@ async function loadFromCloud(){
   } catch(e){ console.log('[Numa] Cloud load fallback to local', e); loadFromStorage(); }
 }
 function saveToStorage(){
+  try{ saveNWSnapshot(); } catch(e){}
   try{ localStorage.setItem(window.STORAGE_KEY, JSON.stringify(ND)); } catch(e){}
   _debounceSaveCloud();
 }
@@ -2180,10 +2176,7 @@ function ovRenderOverview(c){
   set('ov-k1',c.monthlySavings!==0?f(c.monthlySavings):'—');
   set('ov-k2',c.savingsRate>0?Math.round(c.savingsRate)+'%':'—');
   set('ov-k3',c.fireAge>0&&c.fireAge<120?'גיל '+c.fireAge:'—');
-  set('ov-sn1',c.netWorth>0?f(c.netWorth):'—');
-  set('ov-sn2',c.savingsRate>0?Math.round(c.savingsRate)+'%':'—');
-  set('ov-sn3',c.score>0?c.score+'/100':'—');
-  set('ov-sn4',c.fireAge>0&&c.fireAge<120?'גיל '+c.fireAge:'—');
+  try{ if(typeof NHrenderChanged==='function') NHrenderChanged(); }catch(e){}
   set('ov-score',c.score>0?c.score:'—');
   var total=c.totalAssets||0;
   set('ov-d-total',total>0?f(total):'—');
@@ -3148,7 +3141,26 @@ function renderCI(){ render(); }
 function applyFeatureFlags(){}
 function renderAnalystTips(){}
 function fetchLiveData(){}
-function saveNWSnapshot(){}
+function saveNWSnapshot(){
+  if(!Array.isArray(ND.history)) ND.history = [];
+  var c = calc();
+  var d = new Date();
+  var month = d.getFullYear() + '-' + ('0'+(d.getMonth()+1)).slice(-2); // 'YYYY-MM'
+  var snap = {
+    date: month,
+    netWorth: Math.round(c.netWorth),
+    totalAssets: Math.round(c.totalAssets),
+    totalLoans: Math.round(c.totalLiabilities),
+    savingsRate: c.savingsRate
+  };
+  var last = ND.history[ND.history.length - 1];
+  if(last && last.date === month){
+    ND.history[ND.history.length - 1] = snap;   // keep current month reflecting the latest state
+  } else {
+    ND.history.push(snap);
+  }
+  if(ND.history.length > 36) ND.history = ND.history.slice(ND.history.length - 36);
+}
 function renderSetupMissions(){ render(); }
 function renderMktFacts(){}
 function renderReFacts(){}
@@ -6166,6 +6178,32 @@ function renderAllocPlan(){
   }
   window.ovDelEv=function(i){ovEvts.splice(i,1);ovRenderEvs();ovDrawG();};
 
+  // Net-worth curve from ND.history: solid past + dashed forward projection
+  function NH_buildLine(px, PT, cH, minY, maxY){
+    var hist=(ND.history||[]);
+    if(!hist.length) return '';
+    function yf(d){ var p=(d||'').split('-'); return (parseInt(p[0],10)||minY)+((parseInt(p[1],10)||1)-1)/12; }
+    var histPts=hist.map(function(r){ return {yy:yf(r.date), v:Math.max(r.netWorth||0,0)}; })
+                    .filter(function(p){ return p.yy>=minY && p.yy<=maxY; });
+    if(!histPts.length) return '';
+    var cv=(typeof calc==='function')?calc():{};
+    var lastPt=histPts[histPts.length-1];
+    var nw=lastPt.v, annualSave=Math.max(cv.monthlySavings||0,0)*12;
+    var projPts=[{yy:lastPt.yy, v:nw}];
+    for(var yy=Math.ceil(lastPt.yy); yy<=maxY; yy++){
+      var t=yy-lastPt.yy;
+      projPts.push({yy:yy, v:nw*Math.pow(1.07,t)+(annualSave>0?annualSave*((Math.pow(1.07,t)-1)/0.07):0)});
+    }
+    var maxV=1;
+    histPts.concat(projPts).forEach(function(p){ if(p.v>maxV) maxV=p.v; });
+    function yPos(v){ return PT+cH*(1-Math.min(v/maxV,1)); }
+    function poly(pts){ return pts.map(function(p){ return px(p.yy)+','+yPos(p.v); }).join(' '); }
+    var out='';
+    if(projPts.length>=2) out+='<polyline points="'+poly(projPts)+'" fill="none" stroke="#A07840" stroke-width="2" stroke-dasharray="4,3" stroke-linecap="round" stroke-linejoin="round"/>';
+    if(histPts.length>=2) out+='<polyline points="'+poly(histPts)+'" fill="none" stroke="#1E2D4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+    histPts.forEach(function(p){ out+='<circle cx="'+px(p.yy)+'" cy="'+yPos(p.v)+'" r="2.5" fill="#1E2D4A"/>'; });
+    return out;
+  }
   window.ovDrawG=function(){
     var svg=document.getElementById('ov-g-svg');
     if(!svg)return;
@@ -6189,6 +6227,7 @@ function renderAllocPlan(){
       '<line x1="'+PL+'" y1="'+(PT+cH*0.5)+'" x2="'+(W-PR)+'" y2="'+(PT+cH*0.5)+'" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>'+
       '<line x1="'+PL+'" y1="'+(PT+cH*0.25)+'" x2="'+(W-PR)+'" y2="'+(PT+cH*0.25)+'" stroke="rgba(0,0,0,0.04)" stroke-width="1"/>'+
       '<line x1="'+nowX+'" y1="'+PT+'" x2="'+nowX+'" y2="'+(PT+cH)+'" stroke="rgba(30,45,74,0.1)" stroke-width="1" stroke-dasharray="3,3"/>'+
+      NH_buildLine(px,PT,cH,minY,maxY)+
       evM+
       '<text x="'+px(yr0)+'" y="'+(H-2)+'" text-anchor="middle" font-size="8" fill="#bbb" font-family="-apple-system,sans-serif">'+yr0+'</text>'+
       '<text x="'+px(yrM)+'" y="'+(H-2)+'" text-anchor="middle" font-size="8" fill="#bbb" font-family="-apple-system,sans-serif">'+yrM+'</text>'+
@@ -6198,6 +6237,34 @@ function renderAllocPlan(){
     if(sub) sub.textContent=fwd+' שנים קדימה';
   };
   ovDrawG();
+})();
+
+/* ══ WHAT-CHANGED: real month-over-month from ND.history ══ */
+(function(){
+  var NH_LBL={netWorth:'שווי נטו', totalLoans:'סך הלוואות', totalAssets:'סך נכסים'};
+  function NH_fmt(a){ a=Math.abs(a); return a>=1e6?'₪'+(a/1e6).toFixed(1)+'M':a>=1000?'₪'+Math.round(a/1000)+'k':'₪'+Math.round(a); }
+  function NH_row(label, delta, goodWhenUp){
+    var flat=delta===0, up=delta>0;
+    var arrow=flat?'→':(up?'↑':'↓');
+    var good=flat?false:(goodWhenUp?up:!up);
+    var color=flat?'#8a8a8a':(good?'#2D6A3F':'#d9534f');
+    return '<div class="ov-sn-row"><span class="ov-sn-lbl">'+label+'</span>'+
+      '<span class="ov-sn-val" style="color:'+color+'">'+arrow+' '+NH_fmt(delta)+'</span></div>';
+  }
+  window.NHrenderChanged=function(){
+    var box=document.getElementById('nh-wc');
+    if(!box)return;
+    var h=(ND.history&&ND.history.length)?ND.history:[];
+    if(h.length<2){
+      box.innerHTML='<div style="padding:14px 0;text-align:center;font-size:12px;color:#8a8a8a;line-height:1.5">נתונים מצטברים — ההשוואה הראשונה תופיע בחודש הבא</div>';
+      return;
+    }
+    var cur=h[h.length-1], prev=h[h.length-2];
+    box.innerHTML=
+      NH_row(NH_LBL.netWorth,   (cur.netWorth||0)-(prev.netWorth||0),   true)+
+      NH_row(NH_LBL.totalLoans, (cur.totalLoans||0)-(prev.totalLoans||0), false)+
+      NH_row(NH_LBL.totalAssets,(cur.totalAssets||0)-(prev.totalAssets||0), true);
+  };
 })();
 
 /* ══ CLICK GUARD: ensures ob-overlay never blocks ══ */
