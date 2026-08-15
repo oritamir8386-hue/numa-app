@@ -3,6 +3,23 @@ const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsI
 
 export default {
   async fetch(request, env) {
+    const url = new URL(request.url);
+    if (request.method === 'POST' && url.pathname === '/api/chat') {
+      const body = await request.text();
+      const resp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': env.ANTHROPIC_KEY,
+          'anthropic-version': '2023-06-01',
+          'Content-Type': 'application/json'
+        },
+        body: body
+      });
+      return new Response(resp.body, {
+        status: resp.status,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
     return env.ASSETS.fetch(request);
   },
 
