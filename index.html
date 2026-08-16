@@ -739,53 +739,28 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
 </div>
 
-<!-- פירוט נכסים -->
-<div class="card">
-  <div class="ch"><div><div class="ct">פירוט נכסים</div><div class="cs">חלוקת התיק שלך</div></div><div class="ib">🥧</div></div>
-  <div class="cb">
-    <div class="sep"></div>
-    <div class="ov-asset-wrap">
-      <div style="position:relative;width:96px;height:96px;flex-shrink:0">
-        <svg width="96" height="96" viewBox="0 0 100 100" id="ov-donut">
-          <circle cx="50" cy="50" r="42" fill="none" stroke="#eee" stroke-width="13"/>
-        </svg>
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
-          <div style="font-size:11px;font-weight:700;color:#8a8a8a" id="ov-d-total">—</div>
-          <div style="font-size:9px;color:#8a8a8a">נכסים</div>
-        </div>
-      </div>
-      <div class="ov-asset-leg">
-        <div class="ov-al-row"><div class="ov-al-dot" style="background:#1E2D4A"></div><div class="ov-al-lbl">פנסיה+קה"ש</div><div class="ov-al-pct" id="ov-ap1">—</div><div class="ov-al-val" id="ov-av1">—</div></div>
-        <div class="ov-al-row"><div class="ov-al-dot" style="background:#A07840"></div><div class="ov-al-lbl">השקעות</div><div class="ov-al-pct" id="ov-ap2">—</div><div class="ov-al-val" id="ov-av2">—</div></div>
-        <div class="ov-al-row"><div class="ov-al-dot" style="background:#4a90d9"></div><div class="ov-al-lbl">נדל"ן</div><div class="ov-al-pct" id="ov-ap3">—</div><div class="ov-al-val" id="ov-av3">—</div></div>
-        <div class="ov-al-row"><div class="ov-al-dot" style="background:#ccc"></div><div class="ov-al-lbl">נזיל</div><div class="ov-al-pct" id="ov-ap4">—</div><div class="ov-al-val" id="ov-av4">—</div></div>
-      </div>
+<!-- SUMMARY CARDS (lean — pulls from the 3 pages) -->
+<div style="display:flex;gap:9px;align-items:stretch">
+  <div class="card" onclick="goP('cf')" style="flex:1;cursor:pointer;text-align:center">
+    <div style="padding:14px 6px 16px">
+      <div style="font-size:11px;font-weight:700;color:#6B7A96">תזרים</div>
+      <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;margin-top:6px;color:#1E2D4A" id="sum-cf-val">—</div>
+      <div style="font-size:9.5px;color:#8a8a8a;margin-top:5px;line-height:1.35" id="sum-cf-sub">—</div>
     </div>
-    <div class="sep"></div>
-    <div style="display:flex;justify-content:space-between"><span style="font-size:13px;color:#1a1a1a">חובות</span><span style="font-size:13px;font-weight:700;color:#8a8a8a" id="ov-debt">—</span></div>
-    <div style="display:flex;justify-content:space-between"><span style="font-size:14px;font-weight:700;color:#1a1a1a">שווי נטו</span><span style="font-size:14px;font-weight:700;color:#8a8a8a" id="ov-nw">—</span></div>
   </div>
-</div>
-
-<!-- תזרים חודשי -->
-<div class="card">
-  <div class="ch"><div><div class="ct">תזרים חודשי</div><div class="cs">הכנסה · הוצאה · חיסכון</div></div><div class="ib">📊</div></div>
-  <div class="cb" style="padding:12px 20px 18px;">
-    <div class="sep"></div>
-    <div class="ov-cf-bars" id="ov-bars">
-      <div class="ov-cf-grp"><div class="ov-cf-pair"><div class="ov-cf-bar" style="height:4px;background:rgba(30,45,74,0.12)"></div><div class="ov-cf-bar" style="height:4px;background:rgba(200,169,106,0.15)"></div></div><div class="ov-cf-mo">—</div></div>
-      <div class="ov-cf-grp"><div class="ov-cf-pair"><div class="ov-cf-bar" style="height:4px;background:rgba(30,45,74,0.12)"></div><div class="ov-cf-bar" style="height:4px;background:rgba(200,169,106,0.15)"></div></div><div class="ov-cf-mo">—</div></div>
-      <div class="ov-cf-grp"><div class="ov-cf-pair"><div class="ov-cf-bar" style="height:4px;background:rgba(30,45,74,0.12)"></div><div class="ov-cf-bar" style="height:4px;background:rgba(200,169,106,0.15)"></div></div><div class="ov-cf-mo">—</div></div>
-      <div class="ov-cf-grp"><div class="ov-cf-pair"><div class="ov-cf-bar" style="height:4px;background:rgba(30,45,74,0.12)"></div><div class="ov-cf-bar" style="height:4px;background:rgba(200,169,106,0.15)"></div></div><div class="ov-cf-mo">—</div></div>
-      <div class="ov-cf-grp"><div class="ov-cf-pair"><div class="ov-cf-bar" style="height:4px;background:rgba(30,45,74,0.12)"></div><div class="ov-cf-bar" style="height:4px;background:rgba(200,169,106,0.15)"></div></div><div class="ov-cf-mo">—</div></div>
-      <div class="ov-cf-grp"><div class="ov-cf-pair"><div class="ov-cf-bar" style="height:4px;background:rgba(30,45,74,0.12)"></div><div class="ov-cf-bar" style="height:4px;background:rgba(200,169,106,0.15)"></div></div><div class="ov-cf-mo">—</div></div>
+  <div class="card" onclick="goP('assets')" style="flex:1;cursor:pointer;text-align:center">
+    <div style="padding:14px 6px 16px">
+      <div style="font-size:11px;font-weight:700;color:#6B7A96">הון</div>
+      <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;margin-top:6px;color:#1E2D4A" id="sum-wealth-val">—</div>
+      <div style="font-size:9.5px;color:#8a8a8a;margin-top:5px;line-height:1.35" id="sum-wealth-sub">—</div>
     </div>
-    <div class="ov-cf-chips">
-      <div class="ov-cf-chip"><div class="ov-cf-chip-lbl">הכנסה</div><div class="ov-cf-chip-val" id="ov-ci">—</div></div>
-      <div class="ov-cf-chip"><div class="ov-cf-chip-lbl">הוצאות</div><div class="ov-cf-chip-val" id="ov-ce">—</div></div>
-      <div class="ov-cf-chip"><div class="ov-cf-chip-lbl">חיסכון</div><div class="ov-cf-chip-val" id="ov-cs">—</div></div>
+  </div>
+  <div class="card" onclick="goP('plan')" style="flex:1;cursor:pointer;text-align:center">
+    <div style="padding:14px 6px 16px">
+      <div style="font-size:11px;font-weight:700;color:#6B7A96">מסע</div>
+      <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;margin-top:6px;color:#A07840" id="sum-journey-val">—</div>
+      <div style="font-size:9.5px;color:#8a8a8a;margin-top:5px;line-height:1.35" id="sum-journey-sub">—</div>
     </div>
-    <div class="ov-cf-note" id="ov-cf-note">הזן תזרים לצפייה</div>
   </div>
 </div>
 
@@ -1922,6 +1897,14 @@ function ovRenderOverview(c){
   set('ov-cf',c.monthlySavings!==0?f(c.monthlySavings):'—');
   set('ov-sr',c.savingsRate>0?Math.round(c.savingsRate)+'%':'—');
   set('ov-fire',c.fireAge>0&&c.fireAge<120?'גיל '+c.fireAge:'—');
+  // Lean summary cards (data from calc() only)
+  var _scf=document.getElementById('sum-cf-val');
+  if(_scf){ if(c.totalIncome>0){ _scf.textContent=f(c.monthlySavings); _scf.style.color=c.monthlySavings>=0?'#2D6A3F':'#D93025'; } else { _scf.textContent='—'; _scf.style.color='#1E2D4A'; } }
+  set('sum-cf-sub', c.totalIncome>0 ? 'הכנסה '+f(c.totalIncome)+' · הוצאה '+f(c.totalExpenses) : 'הכנסות מול הוצאות');
+  set('sum-wealth-val', c.netWorth!==0 ? f(c.netWorth) : '—');
+  set('sum-wealth-sub', (c.totalAssets>0||c.totalLiabilities>0) ? 'נכסים '+f(c.totalAssets)+' · התח׳ '+f(c.totalLiabilities) : 'נכסים מול התחייבויות');
+  set('sum-journey-val', (c.fireAge && c.fireAge>0 && c.fireAge<120) ? 'גיל '+c.fireAge : '—');
+  set('sum-journey-sub', c.fireNumber>0 ? Math.round(Math.max(c.netWorth,0)/c.fireNumber*100)+'% מהיעד' : 'התקדמות ליעד');
   set('ov-k1',c.monthlySavings!==0?f(c.monthlySavings):'—');
   set('ov-k2',c.savingsRate>0?Math.round(c.savingsRate)+'%':'—');
   set('ov-k3',c.fireAge>0&&c.fireAge<120?'גיל '+c.fireAge:'—');
