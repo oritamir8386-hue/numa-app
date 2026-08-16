@@ -52,8 +52,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .top-right{display:flex;align-items:center;gap:8px}
 .tbtn{background:#1E2D4A;color:#F5F2EC;border:none;border-radius:9px;padding:6px 11px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:5px;transition:transform .1s,box-shadow .1s;box-shadow:0 2px 8px rgba(30,45,74,.3)}
 .tbtn:active{transform:scale(.96)}
-.notif-btn{width:28px;height:28px;border-radius:50%;background:#F5F2EC;border:.5px solid rgba(30,45,74,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
-.notif-dot{position:absolute;top:5px;right:5px;width:6px;height:6px;background:#A07840;border-radius:50%;border:1.5px solid #fff}
 #avatar-menu > div:hover{background:#F5F2EC}
 
 /* ── SCROLL ── */
@@ -73,7 +71,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .pg.on > *:nth-child(4){animation-delay:.16s}
 .pg.on > *:nth-child(5){animation-delay:.19s}
 @keyframes cardIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-
 
 /* ── SHEETS ── */
 .sbg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;display:none;pointer-events:none}
@@ -137,7 +134,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 /* ── PAGE TRANSITIONS ── */
 
-
 .pg.out{animation:pgOut .2s cubic-bezier(.4,0,1,1) both}
 @keyframes pgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pgOut{from{opacity:1}to{opacity:0}}
@@ -167,11 +163,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .tab-pane{display:none;flex-direction:column;gap:14px}
 .tab-pane.on{display:flex;animation:pgIn .22s cubic-bezier(.2,0,0,1) both}
 /* ── COLLAPSIBLE SECTIONS ── */
-.sec-toggle{display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;padding:2px 0 8px}
-.sec-toggle .ct{margin-bottom:0}
-.sec-arr{font-size:12px;color:#888;transition:transform .2s;flex-shrink:0}
-.sec-body{overflow:hidden;transition:max-height .3s cubic-bezier(.4,0,.2,1)}
-.sec-body.closed{max-height:0!important}
 /* ── VISIBILITY PANEL ── */
 .vis-panel{background:#fff;border-radius:12px;padding:12px;border:.5px solid rgba(0,0,0,.13);margin-bottom:10px}
 .vis-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:.5px solid rgba(30,45,74,.12)}
@@ -381,9 +372,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 /* ── SHEETS ── */
 
-
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
 
 .sh-h{display:flex;justify-content:center;padding:10px 0 4px}
 .sh-b{width:36px;height:4px;background:#D8D8DC;border-radius:2px}
@@ -400,7 +389,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .ai-fab:active{transform:scale(.96)}
 .ai-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
-
 
 .ai-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:#A07840}
 @keyframes flowLine{0%{background-position:0%}100%{background-position:200%}}
@@ -472,8 +460,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 /* ── TOAST ── */
 
-
-
 /* ── SCORE CIRCLE ANIMATION ── */
 @keyframes scoreArc{from{stroke-dasharray:0 188}to{stroke-dasharray:131 188}}
 .score-arc-anim{animation:scoreArc .8s .3s cubic-bezier(.4,0,.2,1) both}
@@ -482,7 +468,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .count-up{display:inline-block}
 
 /* ══ ONBOARDING OVERLAY ══ */
-
 
 .ob-screen{position:absolute;inset:0;display:flex;flex-direction:column;transform:translateX(110%);transition:transform .42s cubic-bezier(.4,0,.2,1);overflow-y:auto;overflow-x:hidden;pointer-events:none}
 .ob-screen.active{transform:translateX(0);pointer-events:auto}
@@ -652,20 +637,15 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <div class="dev" style="display:none">
 <div class="sb" style="display:none"><span>9:41</span><span>●●●</span></div>
 <div class="top" style="padding:max(env(safe-area-inset-top),8px) 16px 8px;display:flex;justify-content:space-between;align-items:center">
-  <!-- LEFT: Avatar + Bell -->
+  <!-- LEFT: Avatar -->
   <div style="display:flex;align-items:center;gap:10px">
     <div style="position:relative" id="avatar-wrap">
       <div id="user-avatar-btn" onclick="toggleAvatarMenu()" style="width:36px;height:36px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#c8a96a;cursor:pointer;letter-spacing:-.5px">N</div>
       <div style="position:absolute;bottom:-1px;right:-1px;width:9px;height:9px;background:#27ae60;border-radius:50%;border:2px solid #fff"></div>
       <div id="avatar-menu" style="display:none;position:absolute;top:42px;right:0;background:#fff;border-radius:16px;width:190px;box-shadow:0 8px 30px rgba(0,0,0,.15);z-index:100;overflow:hidden">
         <div onclick="openSettings();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid rgba(0,0,0,.06)">הגדרות ⚙️</div>
-        <div onclick="goP('tools');toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid rgba(0,0,0,.06)">פרופיל אישי 👤</div>
         <div onclick="authSignOut();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#e74c3c;cursor:pointer;display:flex;align-items:center;gap:8px">התנתקות →</div>
       </div>
-    </div>
-    <div onclick="showToast('2 תובנות חדשות ממתינות')" style="width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E2D4A" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-      <div style="position:absolute;top:6px;right:6px;width:8px;height:8px;background:#e74c3c;border-radius:50%;border:1.5px solid #fff;display:none" id="notif-badge"></div>
     </div>
   </div>
   <!-- CENTER: Greeting -->
@@ -867,8 +847,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 </div><!-- /pg-ov -->
 
-
-
 <div class="pg" id="pg-cf" style="gap:9px;padding:14px 18px 20px">
 
   <!-- ── HERO (navy) ── -->
@@ -1019,11 +997,9 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div style="max-height:190px;overflow-y:auto;margin-bottom:8px">
         <div id="inv-list"></div>
         <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:.5px solid rgba(0,0,0,.05)"><div style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">מזומן / קרן חירום</div><input class="tc-inp" id="cash-input" type="number" placeholder="₪ 0" style="width:100px;text-align:center"/></div>
-        <div id="alt-list"></div>
       </div>
       <div style="display:flex;gap:6px;justify-content:center">
         <button onclick="openAddModal('investment')" style="background:#ede9e0;color:#A07840;border:none;border-radius:10px;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">+ השקעה</button>
-        <button onclick="openAddAlt()" style="background:#ede9e0;color:#A07840;border:none;border-radius:10px;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">+ אלטרנטיבית</button>
       </div>
     </div>
   </div>
@@ -1112,28 +1088,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </div>
   </div>
 
-  <!-- ── CARD 3: Monte Carlo ── -->
-  <div class="tc" style="height:234px">
-    <div class="tc-hdr"><div><h3>Monte Carlo</h3><p>10,000 סימולציות</p></div><div class="tc-ico"><span style="font-size:18px">🎲</span></div></div>
-    <div class="tc-body">
-      <div style="background:#1E2D4A;border-radius:12px;padding:10px;text-align:center;margin-bottom:8px">
-        <div style="font-size:28px;font-weight:800;color:#C9A96E;letter-spacing:-1px" id="mc-success">—</div>
-        <div style="font-size:9px;color:rgba(255,255,255,.4)" id="mc-sub">הזן נתוני FIRE לחישוב</div>
-      </div>
-      <div style="display:flex;gap:6px;margin-bottom:8px">
-        <div class="tc-chip" style="background:rgba(39,174,96,.12);flex:1"><div class="val" style="color:#2D6A3F;font-size:11px" id="mc-p90">—</div><div class="lbl" style="color:#6B7A96">אופטימי 90%</div></div>
-        <div class="tc-chip" style="background:rgba(160,120,64,.12);flex:1"><div class="val" style="color:#A07840;font-size:11px" id="mc-p50">—</div><div class="lbl" style="color:#6B7A96">מרכזי 50%</div></div>
-        <div class="tc-chip" style="background:rgba(30,45,74,.08);flex:1"><div class="val" style="color:#1E2D4A;font-size:11px" id="mc-p10">—</div><div class="lbl" style="color:#6B7A96">פסימי 10%</div></div>
-      </div>
-      <div class="tc-g2">
-        <div><div class="tc-il">סטיית תקן %</div><input class="tc-inp" id="mc-std" type="number" value="15" oninput="runMonteCarlo()"/></div>
-        <div><div class="tc-il">אינפלציה %</div><input class="tc-inp" id="mc-inflation" type="number" value="3" oninput="runMonteCarlo()"/></div>
-      </div>
-      <!-- hidden compat -->
-      <div style="display:none"><span id="mc-return">7</span><span id="mc-years">20</span><span id="mc-badge"></span><div id="mc-chart"></div></div>
-    </div>
-  </div>
-
   <!-- ── CARD 4: תרחישים ── -->
   <div class="tc" style="height:234px">
     <div class="tc-hdr"><div><h3>תרחישים</h3><p>4 תרחישי צמיחה</p></div><div class="tc-ico"><span style="font-size:18px">📊</span></div></div>
@@ -1147,51 +1101,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
         <div class="tc-chip" style="background:rgba(160,120,64,.06)"><div class="val" style="color:#1E2D4A;font-size:12px" id="sc-con">—</div><div class="lbl" style="color:#6B7A96">שמרני 4% · 65</div></div>
         <div class="tc-chip" style="background:rgba(30,45,74,.06)"><div class="val" style="color:#1E2D4A;font-size:12px" id="sc-fire">—</div><div class="lbl" style="color:#6B7A96">FIRE 8% · 52</div></div>
       </div>
-    </div>
-  </div>
-
-  <!-- ── CARD 5: ביטוחים ── -->
-  <div class="tc" id="section-ins" style="height:234px">
-    <div class="tc-hdr"><div><h3>ביטוחים</h3><p>כיסוי ופרמיות</p></div><div class="tc-ico"><span style="font-size:18px">🛡️</span></div></div>
-    <div class="tc-body" style="overflow-y:auto">
-      <div style="display:grid;grid-template-columns:20px 1fr auto;gap:6px 8px;align-items:center">
-        <span style="font-size:14px">❤️</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">ביטוח חיים</span>
-        <div style="display:flex;gap:4px"><input class="tc-inp" id="ins-life-cover" type="number" placeholder="כיסוי ₪" style="width:62px;padding:7px 8px;text-align:center" oninput="saveIns()"/><input class="tc-inp" id="ins-life-prem" type="number" placeholder="₪/חודש" style="width:76px;padding:7px 8px;text-align:center" oninput="saveIns()"/></div>
-
-        <span style="font-size:14px">💼</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">אכ"ע</span>
-        <div style="display:flex;gap:4px"><input class="tc-inp" id="ins-dis-pct" type="number" placeholder="75%" value="75" style="width:62px;padding:7px 8px;text-align:center" oninput="saveIns()"/><input class="tc-inp" id="ins-dis-prem" type="number" placeholder="₪/חודש" style="width:76px;padding:7px 8px;text-align:center" oninput="saveIns()"/></div>
-
-        <span style="font-size:14px">🏥</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">בריאות משלים</span>
-        <div><input class="tc-inp" id="ins-health-prem" type="number" placeholder="₪/חודש" style="width:76px;padding:7px 8px;text-align:center" oninput="saveIns()"/></div>
-
-        <span style="font-size:14px">🛡️</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">סיעוד</span>
-        <div><input class="tc-inp" id="ins-care-prem" type="number" placeholder="₪/חודש" style="width:76px;padding:7px 8px;text-align:center" oninput="saveIns()"/></div>
-      </div>
-      <div id="ins-summary" style="display:none"></div>
-      <!-- hidden compat -->
-      <div style="display:none"><select id="ins-life-status"><option value="yes"></option></select><select id="ins-dis-status"><option value="yes"></option></select><select id="ins-health-status"><option value="yes"></option></select><select id="ins-care-status"><option value="yes"></option></select><span id="ins-completion-badge"></span><span id="ins-life-insight"></span></div>
-    </div>
-  </div>
-
-  <!-- ── CARD 6: עיזבון ── -->
-  <div class="tc" id="section-legacy" style="height:234px">
-    <div class="tc-hdr"><div><h3>עיזבון</h3><p>צוואה, מוטבים, ייפוי כוח</p></div><div class="tc-ico"><span style="font-size:18px">📋</span></div></div>
-    <div class="tc-body" style="overflow-y:auto">
-      <div style="display:grid;grid-template-columns:20px 1fr auto;gap:6px 8px;align-items:center" id="legacy-rows">
-        <span style="font-size:14px">📜</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">צוואה</span>
-        <button class="leg-btn" id="leg-will-btn" onclick="cycleLeg('will')" style="background:rgba(0,0,0,.06);color:#6B7A96;border:none;border-radius:8px;padding:5px 10px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;min-width:70px">לא קיים</button>
-
-        <span style="font-size:14px">🏦</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">מוטבים בפנסיה</span>
-        <button class="leg-btn" id="leg-ben-btn" onclick="cycleLeg('ben')" style="background:rgba(0,0,0,.06);color:#6B7A96;border:none;border-radius:8px;padding:5px 10px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;min-width:70px">לא קיים</button>
-
-        <span style="font-size:14px">✍️</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">ייפוי כוח</span>
-        <button class="leg-btn" id="leg-poa-btn" onclick="cycleLeg('poa')" style="background:rgba(0,0,0,.06);color:#6B7A96;border:none;border-radius:8px;padding:5px 10px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;min-width:70px">לא קיים</button>
-
-        <span style="font-size:14px">🤝</span><span style="font-size:11px;font-weight:600;color:#1E2D4A">הסכם ממון</span>
-        <button class="leg-btn" id="leg-pre-btn" onclick="cycleLeg('pre')" style="background:rgba(0,0,0,.06);color:#6B7A96;border:none;border-radius:8px;padding:5px 10px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;min-width:70px">לא קיים</button>
-      </div>
-      <!-- hidden compat -->
-      <div style="display:none"><select id="leg-will"><option value=""></option><option value="yes"></option><option value="no"></option></select><select id="leg-ben"><option value=""></option><option value="yes"></option><option value="no"></option></select><select id="leg-poa"><option value=""></option><option value="yes"></option><option value="no"></option></select><select id="leg-pre"><option value=""></option><option value="yes"></option><option value="no"></option></select><input id="leg-spouse-pct"/><input id="leg-kids-pct"/><span id="leg-val"></span><span id="leg-breakdown"></span><span id="leg-completion-badge"></span><span id="leg-estate-val"></span></div>
     </div>
   </div>
 
@@ -1228,156 +1137,14 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .tc-chip .val{font-size:13px;font-weight:800}
 .tc-chip .lbl{font-size:9px;margin-top:2px}
 </style>
-<div class="pg" id="pg-tools" style="gap:14px;padding:14px 18px 20px">
-
-  <!-- ── CARD 1: מחשבון שכר נטו ── -->
-  <div class="tc">
-    <div class="tc-hdr">
-      <div><h3>מחשבון שכר נטו</h3><p>ברוטו → נטו + הפרשות</p></div>
-      <div class="tc-ico" onclick="goSub('settings')"><span class="ic" style="color:#A07840"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1110.34 18"/><line x1="7" y1="6" x2="8" y2="10"/><line x1="5.5" y1="7.5" x2="10" y2="9"/></svg></span></div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-bar" style="margin-bottom:10px">
-        <div class="val" id="sal-net-hero">—</div>
-        <div class="lbl" id="sal-sub-hero">הכנס שכר ברוטו</div>
-      </div>
-      <div class="tc-g2">
-        <div><div class="tc-il">ברוטו ₪</div><input class="tc-inp" id="sal-gross" type="number" placeholder="₪ שכר ברוטו" oninput="calcSalary()"/></div>
-        <div><div class="tc-il">נקודות זיכוי</div><input class="tc-inp" id="sal-credits" type="number" value="2.25" oninput="calcSalary()"/></div>
-        <div><div class="tc-il">פנסיה %</div><input class="tc-inp" id="sal-pen-pct" type="number" value="6" oninput="calcSalary()"/></div>
-        <div><div class="tc-il">קה"ש %</div><input class="tc-inp" id="sal-hsh-pct" type="number" value="2.5" oninput="calcSalary()"/></div>
-      </div>
-      <div id="sal-results" style="display:none;margin-top:10px">
-        <div class="dr"><div class="dl">מס הכנסה</div><div class="dv" style="color:#6B7A96" id="sal-tax">—</div></div>
-        <div class="dr"><div class="dl">ביטוח לאומי</div><div class="dv" style="color:#6B7A96" id="sal-bituach">—</div></div>
-        <div class="dr"><div class="dl">פנסיה עובד</div><div class="dv" style="color:#6B7A96" id="sal-pen-amt">—</div></div>
-        <div class="dr"><div class="dl">קה"ש עובד</div><div class="dv" style="color:#6B7A96" id="sal-hsh-amt">—</div></div>
-        <div style="height:.5px;background:rgba(30,45,74,.1);margin:6px 0"></div>
-        <div class="dr"><div class="dl" style="font-weight:700">שכר נטו</div><div class="dv" style="color:#A07840;font-size:14px" id="sal-net">—</div></div>
-      </div>
-      <!-- hidden compat elements -->
-      <div style="display:none">
-        <svg id="sal-pie" viewBox="0 0 80 80"><circle id="sp-net" cx="40" cy="40" r="32"/><circle id="sp-tax" cx="40" cy="40" r="32"/><circle id="sp-bl" cx="40" cy="40" r="32"/><circle id="sp-ded" cx="40" cy="40" r="32"/></svg>
-        <div id="sal-legend"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── CARD 2: שוק ההון ── -->
-  <div class="tc">
-    <div class="tc-hdr">
-      <div><h3>שוק ההון</h3><p>מחשבון ריבית דריבית</p></div>
-      <div class="tc-ico"><span class="ic" style="color:#A07840"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span></div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-g2">
-        <div><div class="tc-il">השקעה ₪</div><input class="tc-inp" id="ci-start" type="number" placeholder="₪ סכום" oninput="calcCompound()"/></div>
-        <div><div class="tc-il">חודשי ₪</div><input class="tc-inp" id="ci-monthly" type="number" placeholder="₪/חודש" oninput="calcCompound()"/></div>
-        <div><div class="tc-il">תשואה %</div><input class="tc-inp" id="ci-rate" type="number" value="7" oninput="calcCompound()"/></div>
-        <div><div class="tc-il">שנים</div><input class="tc-inp" id="ci-years" type="number" value="20" oninput="calcCompound()"/></div>
-      </div>
-      <div style="display:flex;gap:6px;margin-top:10px">
-        <div class="tc-chip" style="background:#1E2D4A"><div class="val" style="color:#C9A96E" id="ci-invested">—</div><div class="lbl" style="color:rgba(255,255,255,.5)">הפקדת</div></div>
-        <div class="tc-chip" style="background:#A07840"><div class="val" style="color:#fff" id="ci-gain">—</div><div class="lbl" style="color:rgba(255,255,255,.6)">ריבית</div></div>
-        <div class="tc-chip" style="background:#2D6A3F"><div class="val" style="color:#fff" id="ci-total">—</div><div class="lbl" style="color:rgba(255,255,255,.6)">סה"כ</div></div>
-      </div>
-      <div id="ci-chart" style="margin-top:8px"></div>
-    </div>
-  </div>
-
-  <!-- ── CARD 3: השוואת השקעות ── -->
-  <div class="tc">
-    <div class="tc-hdr">
-      <div><h3>השוואת השקעות</h3><p>סימולטור מסלולים</p></div>
-      <div class="tc-ico"><span class="ic" style="color:#1E2D4A"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span></div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-g2">
-        <div><div class="tc-il">סכום ₪</div><input class="tc-inp" id="cmp-amount" type="number" placeholder="₪ סכום" oninput="calcComparison()"/></div>
-        <div><div class="tc-il">שנים</div><input class="tc-inp" id="cmp-years" type="number" value="20" oninput="calcComparison()"/></div>
-      </div>
-      <div id="cmp-results" style="display:flex;gap:6px;margin-top:10px">
-        <div class="tc-chip" style="background:#1E2D4A;flex:1"><div class="val" style="color:#C9A96E" id="cmp-stocks">—</div><div class="lbl" style="color:rgba(255,255,255,.5)">מניות 9%</div></div>
-        <div class="tc-chip" style="background:#ede9e0;flex:1"><div class="val" style="color:#1E2D4A" id="cmp-bonds">—</div><div class="lbl" style="color:#6B7A96">אג"ח 4%</div></div>
-        <div class="tc-chip" style="background:#e8f0fb;flex:1"><div class="val" style="color:#1E2D4A" id="cmp-deposit">—</div><div class="lbl" style="color:#6B7A96">פיקדון 3.5%</div></div>
-      </div>
-      <div id="cmp-chart" style="margin-top:8px"></div>
-    </div>
-  </div>
-
-  <!-- ── CARD 4: מפת עושר ── -->
-  <div class="tc">
-    <div class="tc-hdr">
-      <div><h3>מפת עושר</h3><p>כל הנכסים וההתחייבויות</p></div>
-      <div class="tc-ico"><span class="ic" style="color:#3D5278"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg></span></div>
-    </div>
-    <div class="tc-body">
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;direction:ltr">
-        <svg id="wmap-donut" width="80" height="80" viewBox="0 0 80 80" style="flex-shrink:0">
-          <circle cx="40" cy="40" r="30" fill="none" stroke="#ede9e0" stroke-width="10"/>
-          <circle id="wd-cash" cx="40" cy="40" r="30" fill="none" stroke="#A07840" stroke-width="10" stroke-dasharray="0 188.5" transform="rotate(-90 40 40)"/>
-          <circle id="wd-inv" cx="40" cy="40" r="30" fill="none" stroke="#C9A96E" stroke-width="10" stroke-dasharray="0 188.5" transform="rotate(-90 40 40)"/>
-          <circle id="wd-pen" cx="40" cy="40" r="30" fill="none" stroke="#3D5278" stroke-width="10" stroke-dasharray="0 188.5" transform="rotate(-90 40 40)"/>
-          <circle id="wd-re" cx="40" cy="40" r="30" fill="none" stroke="#1E2D4A" stroke-width="10" stroke-dasharray="0 188.5" transform="rotate(-90 40 40)"/>
-        </svg>
-        <div style="display:flex;flex-direction:column;gap:5px;direction:rtl;flex:1">
-          <div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:#A07840"></div><span style="font-size:10px;color:#1E2D4A">נזיל</span><span style="font-size:10px;font-weight:700;color:#A07840;margin-inline-start:auto" id="wmap-cash">—</span></div>
-          <div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:#C9A96E"></div><span style="font-size:10px;color:#1E2D4A">השקעות</span><span style="font-size:10px;font-weight:700;color:#A07840;margin-inline-start:auto" id="wmap-inv">—</span></div>
-          <div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:#3D5278"></div><span style="font-size:10px;color:#1E2D4A">פנסיה+קה"ש</span><span style="font-size:10px;font-weight:700;color:#3D5278;margin-inline-start:auto" id="wmap-pen">—</span></div>
-          <div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:#1E2D4A"></div><span style="font-size:10px;color:#1E2D4A">נדל"ן</span><span style="font-size:10px;font-weight:700;color:#3D5278;margin-inline-start:auto" id="wmap-re">—</span></div>
-        </div>
-      </div>
-      <div class="tc-g2">
-        <div><div class="tc-il">נזיל ₪</div><input class="tc-inp" id="wmap-cash-in" type="number" placeholder="₪ 0" oninput="calcWealthMap()"/></div>
-        <div><div class="tc-il">השקעות ₪</div><input class="tc-inp" id="wmap-inv-in" type="number" placeholder="₪ 0" oninput="calcWealthMap()"/></div>
-        <div><div class="tc-il">פנסיה ₪</div><input class="tc-inp" id="wmap-pen-in" type="number" placeholder="₪ 0" oninput="calcWealthMap()"/></div>
-        <div><div class="tc-il">נדל"ן ₪</div><input class="tc-inp" id="wmap-re-in" type="number" placeholder="₪ 0" oninput="calcWealthMap()"/></div>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:8px;border-top:.5px solid rgba(30,45,74,.1)">
-        <div style="font-size:12px;font-weight:800;color:#1E2D4A">שווי נטו</div>
-        <div style="font-size:16px;font-weight:800;color:#A07840" id="wmap-nw">—</div>
-      </div>
-      <!-- hidden compat -->
-      <div style="display:none"><span id="wmap-total">₪0</span><span id="wmap-debt">₪0</span></div>
-    </div>
-  </div>
-
-  <!-- ── CARD 5: הקצאת נכסים ── -->
-  <div class="tc">
-    <div class="tc-hdr">
-      <div><h3>הקצאת נכסים</h3><p>חלוקה מומלצת לפי גיל</p></div>
-      <div class="tc-ico"><span class="ic" style="color:#A07840"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 118 2.83"/><path d="M22 12A10 10 0 0012 2v10z"/></svg></span></div>
-    </div>
-    <div class="tc-body">
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#A07840;flex-shrink:0"></div><div style="font-size:11px;font-weight:600;color:#1E2D4A;width:50px">מניות</div><div style="flex:1;height:6px;background:#ede9e0;border-radius:3px"><div style="width:55%;height:6px;background:#A07840;border-radius:3px"></div></div><div style="font-size:11px;font-weight:700;color:#1E2D4A;width:32px;text-align:left">55%</div></div>
-        <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#6B7A96;flex-shrink:0"></div><div style="font-size:11px;font-weight:600;color:#1E2D4A;width:50px">אג"ח</div><div style="flex:1;height:6px;background:#ede9e0;border-radius:3px"><div style="width:10%;height:6px;background:#6B7A96;border-radius:3px"></div></div><div style="font-size:11px;font-weight:700;color:#1E2D4A;width:32px;text-align:left">10%</div></div>
-        <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#D97706;flex-shrink:0"></div><div style="font-size:11px;font-weight:600;color:#1E2D4A;width:50px">נדל"ן</div><div style="flex:1;height:6px;background:#ede9e0;border-radius:3px"><div style="width:30%;height:6px;background:#D97706;border-radius:3px"></div></div><div style="font-size:11px;font-weight:700;color:#1E2D4A;width:32px;text-align:left">30%</div></div>
-        <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#E8DCC8;flex-shrink:0"></div><div style="font-size:11px;font-weight:600;color:#1E2D4A;width:50px">מזומן</div><div style="flex:1;height:6px;background:#ede9e0;border-radius:3px"><div style="width:5%;height:6px;background:#E8DCC8;border-radius:3px"></div></div><div style="font-size:11px;font-weight:700;color:#1E2D4A;width:32px;text-align:left">5%</div></div>
-      </div>
-      <div style="background:rgba(160,120,64,.06);border:.5px solid rgba(160,120,64,.18);border-radius:10px;padding:8px 10px;font-size:10.5px;color:#A07840;line-height:1.55;margin-top:10px" id="alloc-tip">הגדל אג"ח ל-20% · הפחת נדל"ן ל-20%</div>
-      <button onclick="renderAllocPlan()" style="width:100%;background:#A07840;color:#fff;border:none;border-radius:12px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px">יצא תוכנית איזון</button>
-      <div id="alloc-plan" style="display:none"></div>
-    </div>
-  </div>
-
-  <!-- הגדרות -->
-  <div class="c" onclick="openSettings()" style="cursor:pointer;display:flex;align-items:center;gap:12px;padding:12px 14px">
-    <div style="width:44px;height:44px;background:#E8DCC8;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">⚙️</div>
-    <div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">הגדרות</div><div style="font-size:10px;color:#6B7A96">פרופיל, חישוב, נראות</div></div>
-    <div style="font-size:14px;color:#6B7A96">←</div>
-  </div>
-</div>
-
 </div><!-- /scr -->
 
-<!-- BOTTOM NAV — 5 tabs -->
+<!-- BOTTOM NAV — 4 tabs -->
 <div class="nav">
   <button class="ni on" id="ni-ov" onclick="goP('ov')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>סקירה</span></button>
   <button class="ni" id="ni-cf" onclick="goP('cf')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><span>תזרים</span></button>
   <button class="ni" id="ni-assets" onclick="goP('assets')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 100 4h4v-4h-4z"/></svg><span>נכסים</span></button>
   <button class="ni" id="ni-plan" onclick="goP('plan')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>תכנון</span></button>
-  <button class="ni" id="ni-tools" onclick="goP('tools')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg><span>כלים</span></button>
 </div>
 
 </div><!-- /dev -->
@@ -1439,9 +1206,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🏛️</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">פנסיה וקה"ש</div><div style="font-size:11px;color:#8a8a8a">קרן פנסיה, קרן השתלמות, גמל</div></div></div><button class="cat-toggle on" data-cat="pension" onclick="toggleCat(this)"></button></div>
       <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:16px">📈</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">השקעות בשוק ההון</div><div style="font-size:11px;color:#8a8a8a">תיקי השקעות, מניות, קרנות</div></div></div><button class="cat-toggle on" data-cat="investments" onclick="toggleCat(this)"></button></div>
       <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(45,106,63,.08);display:flex;align-items:center;justify-content:center;font-size:16px">🏠</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">נדל"ן ומשכנתא</div><div style="font-size:11px;color:#8a8a8a">דירות, נכסים, הלוואות נדל"ן</div></div></div><button class="cat-toggle" data-cat="realestate" onclick="toggleCat(this)"></button></div>
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(163,45,45,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🛡️</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">ביטוחים</div><div style="font-size:11px;color:#8a8a8a">חיים, אכ"ע, בריאות, סיעוד</div></div></div><button class="cat-toggle on" data-cat="insurance" onclick="toggleCat(this)"></button></div>
       <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(107,122,150,.1);display:flex;align-items:center;justify-content:center;font-size:16px">💳</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">הלוואות וחובות</div><div style="font-size:11px;color:#8a8a8a">הלוואות, לוח סילוקין</div></div></div><button class="cat-toggle on" data-cat="loans" onclick="toggleCat(this)"></button></div>
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(107,122,150,.06);display:flex;align-items:center;justify-content:center;font-size:16px">📋</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">עיזבון וצוואה</div><div style="font-size:11px;color:#8a8a8a">צוואה, מוטבים, ייפוי כוח</div></div></div><button class="cat-toggle" data-cat="legacy" onclick="toggleCat(this)"></button></div>
       <div class="set-row" style="border-bottom:none"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(217,119,6,.08);display:flex;align-items:center;justify-content:center;font-size:16px">🔥</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">FIRE ועצמאות כלכלית</div><div style="font-size:11px;color:#8a8a8a">תכנון פרישה מוקדמת</div></div></div><button class="cat-toggle on" data-cat="fire" onclick="toggleCat(this)"></button></div>
     </div>
   </div>
@@ -1591,10 +1356,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 @keyframes agentDot{to{background:rgba(30,45,74,.8)}}
 </style>
 
-
-
-
-
 <!-- ════════════════════════════════
      ONBOARDING OVERLAY
 ════════════════════════════════ -->
@@ -1736,7 +1497,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 </div><!-- /ob-overlay -->
 
-
 <script>
 const $=id=>document.getElementById(id);
 function fmt(n){
@@ -1834,7 +1594,6 @@ async function fetchExchangeRate(){
   }catch(e){}
 }
 
-
 /* ═══════════════════════════════════════════════════════════
    ICON SYSTEM — Lucide-style SVG icons (20px, stroke-width 2)
    ═══════════════════════════════════════════════════════════ */
@@ -1900,8 +1659,6 @@ var ND_DEFAULT = {
   loans:       [],  // [{id,name,balance,rate,monthlyPayment}]
   cash: 0,
   history: [],   // [{date:'YYYY-MM', netWorth, totalAssets, totalLoans, savingsRate}] — monthly net-worth snapshots
-  insurance: {},
-  legacy: {},
   milestones: [],
   onboardingDone: false,
   settings: {}   // {returnRate,withdrawalRate,inflation,capitalGainsTax,family,categories}
@@ -3037,32 +2794,6 @@ function renderSTHeader(c){
       '<div style="font-size:10px;color:'+(gain>=0?'#A07840':'#6B7A96')+'">'+gainPct+'% · <span style="cursor:pointer;color:#6B7A96" onclick="openAddModal(\'investment\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'investments\',\''+x.id+'\')">מחק</span></div></div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין השקעות — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'investment\')">+ הוסף</span></div>');
 
-  // Alt investments: REIT + Mutual Fund + Angel
-  var altAll = (ND.reit||[]).concat(ND.mutualfund||[]).concat(ND.angel||[]);
-  _renderList('alt-list', altAll, function(x) {
-    var gain = (x.value||0) - (x.costBasis||0);
-    var gainPct = x.costBasis > 0 ? ((gain/x.costBasis)*100).toFixed(1) : '0';
-    var icon = x.stage ? ic('trending','ic-sm') : x.dividendYield ? ic('chart','ic-sm') : ic('wallet','ic-sm');
-    var sub = x.stage
-      ? 'שלב ' + x.stage
-      : x.dividendYield
-        ? 'דיבידנד ' + x.dividendYield + '%'
-        : 'הפקדה ₪' + Math.round(x.monthlyDeposit||0).toLocaleString();
-    var delType = x.stage ? 'angel' : x.dividendYield ? 'reit' : 'mutualfund';
-    return '<div class="ar">' +
-      '<div class="aic" style="background:rgba(61,82,120,.1)">' + icon + '</div>' +
-      '<div style="flex:1">' +
-        '<div style="font-size:11.5px;font-weight:700">' + x.name + '</div>' +
-        '<div style="font-size:10px;color:#A8A8B0">' + sub + '</div>' +
-      '</div>' +
-      '<div style="text-align:left">' +
-        '<div style="font-size:12px;font-weight:800">' + fmt(x.value||0) + '</div>' +
-        '<div style="font-size:10px;color:' + (gain>=0?'#A07840':'#6B7A96') + '">' +
-          gainPct + '% · <span style="cursor:pointer;color:#6B7A96" onclick="openAddModal(\'' + delType + '\',\'' + x.id + '\')">✎</span> · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'' + delType + '\',\'' + x.id + '\')">מחק</span>' +
-        '</div>' +
-      '</div></div>';
-  }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין נכסים אלטרנטיביים — <span style="color:#A07840;cursor:pointer" onclick="openAddAlt()">+ הוסף</span></div>');
-
   _renderList('re-list', ND.realEstate, function(x){
     var equity = x.marketValue - x.mortgageBalance;
     return '<div class="ar"><div class="aic" style="background:rgba(160,120,64,.1)">'+ic('home','ic-sm')+'</div>'+
@@ -3188,12 +2919,11 @@ function obNext(){}
 
 /* ── INVESTMENTS PAGE: ADD ITEM ── */
 // Maps an add-modal type to its underlying ND array key (some differ, e.g. investment→investments)
-var ND_TYPE_ARRAY = {pension:'pension',hishtalmut:'hishtalmut',gamel:'gamel',investment:'investments',realEstate:'realEstate',reit:'reit',mutualfund:'mutualfund',angel:'angel',loan:'loans'};
+var ND_TYPE_ARRAY = {pension:'pension',hishtalmut:'hishtalmut',gamel:'gamel',investment:'investments',realEstate:'realEstate',loan:'loans'};
 function openAddModal(type, id){
   var titles = {
     pension:'הוסף קרן פנסיה', hishtalmut:'הוסף קרן השתלמות',
     gamel:'הוסף גמל להשקעה', investment:'הוסף השקעה',
-    reit:'הוסף קרן ריט', mutualfund:'הוסף קרן נאמנות', angel:'הוסף השקעת Angel / סטארטאפ',
     realEstate:'הוסף נכס נדל"ן', loan:'הוסף הלוואה'
   };
   var fields = {
@@ -3202,9 +2932,6 @@ function openAddModal(type, id){
     gamel:      [{k:'name',l:'שם הגמל',p:'אנליסט גמל'},{k:'balance',l:'יתרה (₪)',p:'0',t:'number'},{k:'monthlyDeposit',l:'הפקדה חודשית (₪)',p:'0',t:'number'}],
     investment: [{k:'name',l:'שם ההשקעה',p:'S&P 500 IVV'},{k:'ticker',l:'טיקר',p:'IVV'},{k:'value',l:'שווי כיום (₪)',p:'0',t:'number'},{k:'costBasis',l:'עלות (₪)',p:'0',t:'number'},{k:'monthlyDeposit',l:'הפקדה חודשית (₪)',p:'0',t:'number'}],
     realEstate: [{k:'name',l:'תיאור הנכס',p:'דירה ראשית — ת"א'},{k:'marketValue',l:'שווי שוק (₪)',p:'0',t:'number'},{k:'mortgageBalance',l:'יתרת משכנתא (₪)',p:'0',t:'number'},{k:'monthlyPayment',l:'תשלום חודשי (₪)',p:'0',t:'number'}],
-    reit:       [{k:'name',l:'שם הריט',p:'סלע קפיטל ריט'},{k:'value',l:'שווי כיום (₪)',p:'0',t:'number'},{k:'costBasis',l:'עלות (₪)',p:'0',t:'number'},{k:'dividendYield',l:'תשואת דיבידנד %',p:'5',t:'number'}],
-    mutualfund: [{k:'name',l:'שם הקרן',p:'מיטב מניות עולם'},{k:'value',l:'שווי כיום (₪)',p:'0',t:'number'},{k:'costBasis',l:'עלות (₪)',p:'0',t:'number'},{k:'monthlyDeposit',l:'הפקדה חודשית (₪)',p:'0',t:'number'}],
-    angel:      [{k:'name',l:'שם החברה / הסטארטאפ',p:'חברת XYZ'},{k:'value',l:'שווי מוערך (₪)',p:'0',t:'number'},{k:'costBasis',l:'סכום שהושקע (₪)',p:'0',t:'number'},{k:'stage',l:'שלב (Seed / A / B)',p:'Seed'}],
     loan:       [{k:'name',l:'שם ההלוואה',p:'הלוואת רכב'},{k:'balance',l:'יתרה (₪)',p:'0',t:'number'},{k:'rate',l:'ריבית שנתית %',p:'5',t:'number'},{k:'monthlyPayment',l:'תשלום חודשי (₪)',p:'0',t:'number'}]
   };
   var flds = fields[type];
@@ -3227,28 +2954,6 @@ function openAddModal(type, id){
   openS('add');
 }
 
-function openAddAlt() {
-  var html = '<div class="sh-h"><div class="sh-b"></div></div>' +
-    '<div class="sh-t">בחר סוג נכס</div>' +
-    '<div style="display:flex;flex-direction:column;gap:8px;padding-top:4px">' +
-    ['reit:קרן ריט ישראלית',
-     'mutualfund:📂 קרן נאמנות',
-     'angel:Angel / סטארטאפ'].map(function(item) {
-      var parts = item.split(':');
-      var type = parts[0], label = parts[1];
-      return '<button class="btn-g" style="text-align:right" onclick="closeS(\'add\');setTimeout(function(){openAddModal(\'' +
-        type + '\')},200)">' + label + '</button>';
-    }).join('') +
-    '</div>';
-  var cont = document.getElementById('add-modal-body');
-  if(!cont){
-    var bg = document.createElement('div'); bg.className='sbg'; bg.id='bg-add'; bg.onclick=function(){closeS('add');}; document.body.appendChild(bg);
-    var sht = document.createElement('div'); sht.className='sht'; sht.id='sht-add'; sht.innerHTML='<div id="add-modal-body"></div>'; document.body.appendChild(sht);
-  }
-  document.getElementById('add-modal-body').innerHTML = html;
-  openS('add');
-}
-
 function saveAddModal(type, id){
   var get = function(k){ var el=document.getElementById('nm_'+k); return el?el.value:''; };
   var num = function(k){ return parseFloat(get(k))||0; };
@@ -3268,18 +2973,6 @@ function saveAddModal(type, id){
   } else if(type==='realEstate'){
     item.name=get('name');item.marketValue=num('marketValue');item.mortgageBalance=num('mortgageBalance');item.monthlyPayment=num('monthlyPayment');
     ND.realEstate.push(item);
-  } else if(type==='reit'){
-    item.name=get('name');item.value=num('value');item.costBasis=num('costBasis');item.dividendYield=num('dividendYield');
-    if(!ND.reit) ND.reit=[];
-    ND.reit.push(item);
-  } else if(type==='mutualfund'){
-    item.name=get('name');item.value=num('value');item.costBasis=num('costBasis');item.monthlyDeposit=num('monthlyDeposit');
-    if(!ND.mutualfund) ND.mutualfund=[];
-    ND.mutualfund.push(item);
-  } else if(type==='angel'){
-    item.name=get('name');item.value=num('value');item.costBasis=num('costBasis');item.stage=get('stage');
-    if(!ND.angel) ND.angel=[];
-    ND.angel.push(item);
   } else if(type==='loan'){
     item.name=get('name');item.balance=num('balance');item.rate=num('rate');item.monthlyPayment=num('monthlyPayment');
     ND.loans.push(item);
@@ -3356,32 +3049,6 @@ function renderSTFull(){
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.value)+'</div>'+
       '<div style="font-size:10px;color:'+(gain>=0?'#A07840':'#6B7A96')+'">'+gainPct+'% · <span style="cursor:pointer;color:#6B7A96" onclick="openAddModal(\'investment\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'investments\',\''+x.id+'\')">מחק</span></div></div></div>';
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין השקעות — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'investment\')">+ הוסף</span></div>');
-
-  // Alt investments: REIT + Mutual Fund + Angel
-  var altAll2 = (ND.reit||[]).concat(ND.mutualfund||[]).concat(ND.angel||[]);
-  _renderList('alt-list', altAll2, function(x) {
-    var gain = (x.value||0) - (x.costBasis||0);
-    var gainPct = x.costBasis > 0 ? ((gain/x.costBasis)*100).toFixed(1) : '0';
-    var icon = x.stage ? ic('trending','ic-sm') : x.dividendYield ? ic('chart','ic-sm') : ic('wallet','ic-sm');
-    var sub = x.stage
-      ? 'שלב ' + x.stage
-      : x.dividendYield
-        ? 'דיבידנד ' + x.dividendYield + '%'
-        : 'הפקדה ₪' + Math.round(x.monthlyDeposit||0).toLocaleString();
-    var delType = x.stage ? 'angel' : x.dividendYield ? 'reit' : 'mutualfund';
-    return '<div class="ar">' +
-      '<div class="aic" style="background:rgba(61,82,120,.1)">' + icon + '</div>' +
-      '<div style="flex:1">' +
-        '<div style="font-size:11.5px;font-weight:700">' + x.name + '</div>' +
-        '<div style="font-size:10px;color:#A8A8B0">' + sub + '</div>' +
-      '</div>' +
-      '<div style="text-align:left">' +
-        '<div style="font-size:12px;font-weight:800">' + fmt(x.value||0) + '</div>' +
-        '<div style="font-size:10px;color:' + (gain>=0?'#A07840':'#6B7A96') + '">' +
-          gainPct + '% · <span style="cursor:pointer;color:#6B7A96" onclick="openAddModal(\'' + delType + '\',\'' + x.id + '\')">✎</span> · <span style="cursor:pointer;color:#6B7A96" onclick="deleteND(\'' + delType + '\',\'' + x.id + '\')">מחק</span>' +
-        '</div>' +
-      '</div></div>';
-  }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין נכסים אלטרנטיביים — <span style="color:#A07840;cursor:pointer" onclick="openAddAlt()">+ הוסף</span></div>');
 
   // Real estate
   _renderList('re-list', ND.realEstate, function(x){
@@ -3536,9 +3203,7 @@ function goP(id){
 }
 function renderPlanHub(){
   try{renderFIREPage();}catch(e){}
-  try{initLegacyPage();}catch(e){}
   try{renderScenarios();}catch(e){}
-  try{runMonteCarlo();}catch(e){}
   var c2=calc();
   var alloc=document.getElementById('opt-allocation');
   if(alloc&&c2.totalAssets===0){
@@ -3594,9 +3259,7 @@ function goSub(id){
       // Plan page initializations
       if(parent==='plan'){
         try{renderFIREPage();}catch(e){}
-        try{initLegacyPage();}catch(e){}
         try{renderScenarios();}catch(e){}
-        try{runMonteCarlo();}catch(e){}
         var c2=calc();
         var alloc=document.getElementById('opt-allocation');
         if(alloc&&c2.totalAssets===0){
@@ -3949,7 +3612,6 @@ function startCountUp(){
 
 /* ── INIT ── */
 // App init deferred until after onboarding
-
 
 /* ════ ONBOARDING ════ */
 var obAns={};
@@ -4442,7 +4104,6 @@ function obEnterApp(){
   </div>
 </div>
 
-
 <!-- ══ PWA Install Banner ══ -->
 <div id="pwa-install-banner" style="display:none!important">
   <div class="pwa-icon">N</div>
@@ -4787,17 +4448,6 @@ function _showAuth(){
 function showAuthScreen(){_showAuth();}
 function hideAuthScreen(){_showApp();}
 
-function toggleTool(el){
-  var body=el.nextElementSibling;
-  var arr=el.querySelector('.sec-arr');
-  var isOpen=!body.classList.contains('closed');
-  // Close all others first
-  document.querySelectorAll('#pg-tools .sec-body').forEach(function(b){
-    if(b!==body){b.classList.add('closed');var a=b.previousElementSibling.querySelector('.sec-arr');if(a)a.style.transform='';}
-  });
-  body.classList.toggle('closed');
-  if(arr) arr.style.transform=isOpen?'':'rotate(180deg)';
-}
 function toggleAvatarMenu(){
   var m=document.getElementById('avatar-menu');
   if(m) m.style.display=m.style.display==='none'?'block':'none';
@@ -5030,171 +4680,6 @@ function renderMissions(cv){
   }).join('');
 }
 
-/* ── SALARY CALCULATOR ── */
-function calcSalary(){
-  var gross=parseFloat(document.getElementById('sal-gross')?.value)||0;
-  if(gross<=0){ document.getElementById('sal-results').style.display='none'; document.getElementById('sal-net-hero').innerHTML='<span style="font-size:16px;color:#6B7A96">—</span>'; document.getElementById('sal-sub-hero').textContent='הכנס שכר ברוטו למעלה'; return; }
-  var credits=parseFloat(document.getElementById('sal-credits')?.value)||2.25;
-  var penPct=parseFloat(document.getElementById('sal-pen-pct')?.value)||6;
-  var hshPct=parseFloat(document.getElementById('sal-hsh-pct')?.value)||2.5;
-  // Tax brackets 2025 (monthly)
-  var brackets=[[7010,0.10],[10060,0.14],[16150,0.20],[21420,0.31],[56070,0.35],[Infinity,0.47]];
-  var taxableIncome=gross;
-  var tax=0,prev=0;
-  for(var i=0;i<brackets.length;i++){
-    var top=brackets[i][0],rate=brackets[i][1];
-    if(taxableIncome<=prev) break;
-    var chunk=Math.min(taxableIncome,top)-prev;
-    tax+=chunk*rate;
-    prev=top;
-    if(taxableIncome<=top) break;
-  }
-  var creditAmt=credits*242;
-  tax=Math.max(0,tax-creditAmt);
-  // Bituach Leumi (approx): 0.4% on first ₪7,522, then 7% up to ₪48,837
-  var bl=gross<=7522?gross*0.004:7522*0.004+(Math.min(gross,48837)-7522)*0.07;
-  var penAmt=gross*(penPct/100);
-  var hshAmt=gross*(hshPct/100);
-  var net=gross-tax-bl-penAmt-hshAmt;
-  // Update UI
-  document.getElementById('sal-results').style.display='block';
-  document.getElementById('sal-net-hero').textContent=fmt(Math.round(net));
-  document.getElementById('sal-sub-hero').textContent='ברוטו '+fmt(gross)+' · ניכויים '+fmt(Math.round(gross-net));
-  document.getElementById('sal-tax').textContent=fmt(Math.round(tax));
-  document.getElementById('sal-bituach').textContent=fmt(Math.round(bl));
-  document.getElementById('sal-pen-amt').textContent=fmt(Math.round(penAmt))+'  ('+penPct+'%)';
-  document.getElementById('sal-hsh-amt').textContent=fmt(Math.round(hshAmt))+'  ('+hshPct+'%)';
-  document.getElementById('sal-net').textContent=fmt(Math.round(net));
-  // Pie
-  var netPct=net/gross,taxPct=tax/gross,blPct=bl/gross,dedPct=(penAmt+hshAmt)/gross;
-  var netDeg=Math.round(netPct*360),taxDeg=Math.round(taxPct*360),blDeg=Math.round(blPct*360),dedDeg=360-netDeg-taxDeg-blDeg;
-  // SVG pie segments
-  var circ3=201.1;
-  var segs=[
-    {id:'sp-net', pct:netPct},
-    {id:'sp-tax', pct:taxPct},
-    {id:'sp-bl',  pct:blPct},
-    {id:'sp-ded', pct:dedPct}
-  ];
-  var off3=0;
-  segs.forEach(function(s){
-    var el=document.getElementById(s.id);
-    if(!el) return;
-    var filled=s.pct*circ3;
-    el.setAttribute('stroke-dasharray',filled+' '+(circ3-filled));
-    el.setAttribute('stroke-dashoffset',-off3);
-    off3+=filled;
-  });
-  var leg=document.getElementById('sal-legend');
-  if(leg) leg.innerHTML=[
-    ['#A07840','נטו '+Math.round(netPct*100)+'%'],
-    ['#D97706','מס '+Math.round(taxPct*100)+'%'],
-    ['#3D5278','ב"ל '+Math.round(blPct*100)+'%'],
-    ['#D97706','ניכויים '+Math.round(dedPct*100)+'%']
-  ].map(function(x){return'<div style="display:flex;align-items:center;gap:5px;font-size:10px"><div class="dot" style="background:'+x[0]+'"></div>'+x[1]+'</div>';}).join('');
-  window._salGross=gross;window._salNet=net;
-  calcRaise();
-}
-
-function calcRaise(){
-  var raise=parseFloat(document.getElementById('sal-raise')?.value)||0;
-  var el=document.getElementById('sal-raise-net');
-  if(!el) return;
-  if(!raise||!window._salGross){el.textContent='הזן סכום העלאה';el.style.cssText='font-size:11px;color:#6B7A96';return;}
-  var newGross=window._salGross+raise;
-  // estimate net gain (marginal rate approx)
-  var marginalRate=window._salGross>21420?0.47:window._salGross>16150?0.36:0.25;
-  var netGain=raise*(1-marginalRate);
-  el.textContent='+'+fmt(Math.round(netGain))+'/חודש';
-}
-
-/* ── INSURANCE SAVE ── */
-function saveIns(){
-  if(!ND.insurance) ND.insurance={};
-  ['life','dis','health','care'].forEach(function(k){
-    var statusEl=document.getElementById('ins-'+k+'-status');
-    if(statusEl) ND.insurance[k+'_status']=statusEl.value;
-    var coverEl=document.getElementById('ins-'+k+'-cover');
-    if(coverEl) ND.insurance[k+'_cover']=parseFloat(coverEl.value)||0;
-    var premEl=document.getElementById('ins-'+k+'-prem');
-    if(premEl) ND.insurance[k+'_prem']=parseFloat(premEl.value)||0;
-    var pctEl=document.getElementById('ins-'+k+'-pct');
-    if(pctEl) ND.insurance[k+'_pct']=parseFloat(pctEl.value)||0;
-  });
-  saveToStorage();
-  renderInsSummary();
-  renderOvSummaries(calc());
-}
-
-function renderInsSummary(){
-  var ins=ND.insurance||{};
-  var totalPrem=(ins.life_prem||0)+(ins.dis_prem||0)+(ins.health_prem||0);
-  var missing=[];
-  var filled=0;
-  ['life','dis','health','care'].forEach(function(k){
-    var st=ins[k+'_status'];
-    if(st&&st!=='') filled++;
-  });
-  if(!ins.life_status||ins.life_status==='no') missing.push('ביטוח חיים');
-  if(!ins.dis_status||ins.dis_status==='no') missing.push('אכ"ע');
-  if(!ins.health_status||ins.health_status==='no') missing.push('בריאות');
-  if(!ins.care_status||ins.care_status==='no') missing.push('סיעוד');
-  var badge=document.getElementById('ins-completion-badge');
-  if(badge) badge.textContent=filled+'/4';
-  var el=document.getElementById('ins-summary');
-  if(!el) return;
-  if(totalPrem>0||Object.keys(ins).length>0){
-    el.innerHTML='<strong>פרמיה כוללת:</strong> '+fmt(totalPrem)+'/חודש · '+fmt(totalPrem*12)+'/שנה'+
-      (missing.length?'<br>⚠️ חסר: '+missing.join(', '):'<br>✅ כל הביטוחים מכוסים');
-  }
-}
-
-/* ── LEGACY SAVE ── */
-function cycleLeg(key){
-  if(!ND.legacy) ND.legacy={};
-  var states=['','partial','yes'];
-  var labels=['לא קיים','בתהליך','קיים'];
-  var bgs=['rgba(0,0,0,.06)','rgba(160,120,64,.12)','rgba(39,174,96,.12)'];
-  var cols=['#6B7A96','#A07840','#2D6A3F'];
-  var cur=ND.legacy[key+'_status']||'';
-  var idx=states.indexOf(cur);
-  var next=(idx+1)%states.length;
-  ND.legacy[key+'_status']=states[next];
-  var btn=document.getElementById('leg-'+key+'-btn');
-  if(btn){btn.textContent=labels[next];btn.style.background=bgs[next];btn.style.color=cols[next];}
-  // sync hidden select
-  var sel=document.getElementById('leg-'+key);
-  if(sel) sel.value=states[next]==='partial'?'old':states[next]||'';
-  saveToStorage();saveLegacy();
-}
-function saveLegacy(){
-  if(!ND.legacy) ND.legacy={};
-  var legFilled=0;
-  ['will','ben','poa','pre'].forEach(function(k){
-    var el=document.getElementById('leg-'+k);
-    if(el){ ND.legacy[k]=el.value; if(el.value&&el.value!=='') legFilled++; }
-  });
-  var legBadge=document.getElementById('leg-completion-badge');
-  if(legBadge) legBadge.textContent=legFilled+'/4';
-  var sp=parseFloat(document.getElementById('leg-spouse-pct')?.value)||0;
-  var kp=parseFloat(document.getElementById('leg-kids-pct')?.value)||0;
-  ND.legacy.spouse_pct=sp; ND.legacy.kids_pct=kp;
-  saveToStorage();
-  // Update estate value from real NW
-  var c=calc();
-  var legVal=document.getElementById('leg-val');
-  var legBreak=document.getElementById('leg-breakdown');
-  if(legVal){
-    if(c.netWorth>0) legVal.textContent=fmt(c.netWorth);
-    else legVal.innerHTML='<span style="font-size:13px;color:#6B7A96">הזן נכסים</span>';
-  }
-  if(legBreak && c.netWorth>0){
-    legBreak.textContent=(sp?fmt(c.netWorth*sp/100)+' לבן/בת זוג':'')+
-      (kp?' · '+fmt(c.netWorth*kp/100)+' לילדים':'');
-  }
-  renderOvSummaries(c);
-}
-
 /* ── OPT (PORTFOLIO OPTIMIZATION) AI ── */
 async function runOptAnalysis(){
   var c=calc();
@@ -5316,22 +4801,7 @@ document.addEventListener('DOMContentLoaded',function(){
   if(dep) dep.addEventListener('input',updateInvMiniChart);
 });
 
-/* ── LEGACY ESTATE VALUE ON PAGE LOAD ── */
-function initLegacyPage(){
-  if(!ND.legacy) return;
-  ['will','ben','poa','pre'].forEach(function(k){
-    var el=document.getElementById('leg-'+k);
-    if(el&&ND.legacy[k]) el.value=ND.legacy[k];
-  });
-  var sp=document.getElementById('leg-spouse-pct');
-  if(sp&&ND.legacy.spouse_pct) sp.value=ND.legacy.spouse_pct;
-  var kp=document.getElementById('leg-kids-pct');
-  if(kp&&ND.legacy.kids_pct) kp.value=ND.legacy.kids_pct;
-  saveLegacy();
-}
-
 // Page-specific init hooks — wired into existing goSub via inline additions
-
 
 /* ══ CMD 03: MILESTONES ══ */
 if(!ND.milestones) ND.milestones = [];
@@ -5632,7 +5102,6 @@ function voteFeature(btn,feature){
   showToast('✓ הצבעת!','המשוב שלך חשוב לנו מאוד');
 }
 
-
 /* ══ TABS: overview ══ */
 function ovTab(idx, btn){
   // Tab buttons
@@ -5816,10 +5285,8 @@ function saveCalcVal(){
   // Update dependent inputs if applicable
   if(_calcEditorKey==='returnRate'){
     var fr=document.getElementById('fire-ret');if(fr)fr.value=val;
-    var mr=document.getElementById('mc-return');if(mr)mr.value=val;
   }
   if(_calcEditorKey==='withdrawalRate'){var wr=document.getElementById('fire-wr');if(wr)wr.value=val;}
-  if(_calcEditorKey==='inflation'){var mi=document.getElementById('mc-inflation');if(mi)mi.value=val;}
 }
 function closeCalcEditor(){document.getElementById('set-calc-editor').style.display='none';}
 // Apply category toggles on load
@@ -5886,214 +5353,6 @@ function calcAmort(){
   }
 }
 
-/* ══ MONTE CARLO SIMULATOR ══ */
-function runMonteCarlo(){
-  var avgReturn=(parseFloat(document.getElementById('mc-return')?.value)||7)/100;
-  var stdDev=(parseFloat(document.getElementById('mc-std')?.value)||15)/100;
-  var inflation=(parseFloat(document.getElementById('mc-inflation')?.value)||3)/100;
-  var years=parseInt(document.getElementById('mc-years')?.value)||20;
-  var cv=calc();
-  var start=cv.penT+cv.hshT+cv.gmT+cv.invT+(ND.cash||0);
-  var monthlyDep=cv.monthlyDeposits||0;
-  if(start<=0&&monthlyDep<=0){
-    var el=document.getElementById('mc-success');
-    if(el) el.innerHTML='<span style="font-size:16px;color:#6B7A96">—</span>';
-    var sub=document.getElementById('mc-sub');
-    if(sub) sub.innerHTML='<div style="font-size:18px;margin-bottom:3px">🎲</div><div style="font-size:10px;color:#6B7A96;margin-bottom:5px">גלה את סיכויי ההצלחה של התיק שלך</div><button onclick="goP(\'assets\')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:5px 12px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit">הוסף נכסים →</button>';
-    return;
-  }
-  var realReturn=avgReturn-inflation;
-  var sims=10000;
-  var target=cv.totalExpenses>0?cv.totalExpenses*12*25:start*3;
-  var results=[];
-  for(var s=0;s<sims;s++){
-    var val=start;
-    for(var y=0;y<years;y++){
-      var r=realReturn+stdDev*(Math.sqrt(-2*Math.log(Math.random()))*Math.cos(2*Math.PI*Math.random()));
-      val=val*(1+r)+monthlyDep*12;
-    }
-    results.push(val);
-  }
-  results.sort(function(a,b){return a-b;});
-  var p10=results[Math.floor(sims*0.1)];
-  var p50=results[Math.floor(sims*0.5)];
-  var p90=results[Math.floor(sims*0.9)];
-  var successCount=results.filter(function(v){return v>=target;}).length;
-  var successPct=Math.round(successCount/sims*100);
-  // Update UI
-  var el=document.getElementById('mc-success');
-  if(el) el.textContent=successPct+'%';
-  var sub=document.getElementById('mc-sub');
-  if(sub) sub.textContent='10,000 סימולציות · יעד '+fmt(Math.round(target));
-  var p10El=document.getElementById('mc-p10');
-  if(p10El) p10El.textContent=fmt(Math.round(p10));
-  var p50El=document.getElementById('mc-p50');
-  if(p50El) p50El.textContent=fmt(Math.round(p50));
-  var p90El=document.getElementById('mc-p90');
-  if(p90El) p90El.textContent=fmt(Math.round(p90));
-  var badge=document.getElementById('mc-badge');
-  if(badge) badge.textContent=successPct+'% הצלחה';
-  // Draw histogram
-  var chartEl=document.getElementById('mc-chart');
-  if(chartEl){
-    var buckets=8,min=results[0],max=results[results.length-1],range=max-min||1;
-    var counts=new Array(buckets).fill(0);
-    results.forEach(function(v){var i=Math.min(buckets-1,Math.floor((v-min)/range*buckets));counts[i]++;});
-    var maxC=Math.max.apply(null,counts);
-    var H=78,bw=20,gap=6;
-    var bars=counts.map(function(c,i){
-      var bh=Math.max(2,Math.round(c/maxC*(H-8)));
-      var x=4+i*(bw+gap);
-      var bucketMid=min+(i+0.5)*(range/buckets);
-      var frac=i/(buckets-1);
-      var col=bucketMid>=target?'#1E2D4A':frac>0.6?'#A07840':frac>0.3?'#C9A96E':'#E8DCC8';
-      if(bucketMid>=target) col='#1E2D4A';
-      return '<rect x="'+x+'" y="'+(H-bh)+'" width="'+bw+'" height="'+bh+'" rx="4" fill="'+col+'"/>';
-    }).join('');
-    var mcGrid='';for(var mg=0;mg<3;mg++){var mgy=Math.round(mg/2*(H-8));mcGrid+='<line x1="0" y1="'+mgy+'" x2="200" y2="'+mgy+'" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>';}
-    chartEl.innerHTML='<svg width="100%" viewBox="0 0 200 '+H+'" style="display:block;margin:0 -4px">'+mcGrid+bars+
-      '<line x1="0" y1="'+H+'" x2="200" y2="'+H+'" stroke="rgba(30,45,74,.08)" stroke-width=".5"/></svg>';
-  }
-}
-
-/* ══ COMPOUND INTEREST CALCULATOR (Market page) ══ */
-function calcCompound(){
-  var start=parseFloat(document.getElementById('ci-start')?.value)||0;
-  var monthly=parseFloat(document.getElementById('ci-monthly')?.value)||0;
-  var rate=(parseFloat(document.getElementById('ci-rate')?.value)||7)/100;
-  var years=parseInt(document.getElementById('ci-years')?.value)||0;
-  var investedEl=document.getElementById('ci-invested');
-  var gainEl=document.getElementById('ci-gain');
-  var totalEl=document.getElementById('ci-total');
-  var chartEl=document.getElementById('ci-chart');
-  if((!start&&!monthly)||!years){
-    if(investedEl) investedEl.textContent='—';
-    if(gainEl) gainEl.textContent='—';
-    if(totalEl) totalEl.textContent='—';
-    if(chartEl) chartEl.innerHTML='<div style="text-align:center;padding:10px 0"><div style="margin-bottom:3px">'+ic('coins')+'</div><div style="font-size:10px;color:#6B7A96">הזן סכום ושנים כדי לראות את כוח הריבית דריבית</div></div>';
-    return;
-  }
-  var future=start*Math.pow(1+rate,years)+(monthly>0?monthly*12*((Math.pow(1+rate,years)-1)/rate):0);
-  var invested=start+monthly*12*years;
-  var gain=future-invested;
-  if(investedEl) investedEl.textContent=fmt(Math.round(invested));
-  if(gainEl) gainEl.textContent=fmt(Math.round(gain));
-  if(totalEl) totalEl.textContent=fmt(Math.round(future));
-  // Chart
-  if(chartEl){
-    var n=Math.min(years,30),W=200,H=68,pts=[],maxV=0;
-    for(var i=0;i<=n;i++){
-      var t=i*(years/n);
-      var v=start*Math.pow(1+rate,t)+(monthly>0?monthly*12*((Math.pow(1+rate,t)-1)/rate):0);
-      pts.push(v);if(v>maxV) maxV=v;
-    }
-    var bw=Math.max(2,Math.round(W/(n+1))-3);
-    var bars=pts.map(function(v,i){
-      var bh=Math.max(2,Math.round(v/(maxV||1)*(H-4)));
-      var x=i*(W/(n+1));
-      var frac=i/n;
-      var col=frac>=1?'#1E2D4A':frac>0.7?'#A07840':frac>0.35?'#C9A96E':'#E8DCC8';
-      return '<rect x="'+x+'" y="'+(H-bh)+'" width="'+bw+'" height="'+bh+'" rx="4" fill="'+col+'"/>';
-    }).join('');
-    var curYear=new Date().getFullYear();
-    var ciGrid='';for(var cg=0;cg<3;cg++){var cgy=Math.round(cg/2*(H-4));ciGrid+='<line x1="0" y1="'+cgy+'" x2="'+W+'" y2="'+cgy+'" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>';}
-    chartEl.innerHTML='<svg width="100%" viewBox="0 0 '+W+' '+(H+12)+'" style="display:block;margin:0 -4px">'+ciGrid+bars+
-      '<line x1="0" y1="'+H+'" x2="'+W+'" y2="'+H+'" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>'+
-      '<text x="0" y="'+(H+10)+'" font-size="10" fill="#6B7A96" font-family="inherit">'+curYear+'</text>'+
-      '<text x="'+W+'" y="'+(H+10)+'" text-anchor="end" font-size="10" fill="#1E2D4A" font-family="inherit" font-weight="600">'+(curYear+years)+'</text>'+
-      '</svg>';
-  }
-}
-
-/* ══ INVESTMENT COMPARISON SIMULATOR ══ */
-function calcWealthMap(){
-  var cash=parseFloat(document.getElementById('wmap-cash-in')?.value)||0;
-  var inv=parseFloat(document.getElementById('wmap-inv-in')?.value)||0;
-  var pen=parseFloat(document.getElementById('wmap-pen-in')?.value)||0;
-  var re=parseFloat(document.getElementById('wmap-re-in')?.value)||0;
-  var total=cash+inv+pen+re;
-  var f=function(n){return total>0?'₪'+Math.round(n).toLocaleString():'—';};
-  var cl=document.getElementById('wmap-cash');if(cl)cl.textContent=f(cash);
-  var il=document.getElementById('wmap-inv');if(il)il.textContent=f(inv);
-  var pl=document.getElementById('wmap-pen');if(pl)pl.textContent=f(pen);
-  var rl=document.getElementById('wmap-re');if(rl)rl.textContent=f(re);
-  var nwEl=document.getElementById('wmap-nw');if(nwEl)nwEl.textContent=total>0?'₪'+Math.round(total).toLocaleString():'—';
-  // Draw donut
-  var circ=2*Math.PI*30; // 188.5
-  var segs=[
-    {id:'wd-cash',val:cash},{id:'wd-inv',val:inv},
-    {id:'wd-pen',val:pen},{id:'wd-re',val:re}
-  ];
-  var offset=0;
-  segs.forEach(function(s){
-    var el=document.getElementById(s.id);if(!el)return;
-    var arc=total>0?(s.val/total)*circ:0;
-    el.setAttribute('stroke-dasharray',arc+' '+(circ-arc));
-    el.setAttribute('stroke-dashoffset',-offset);
-    offset+=arc;
-  });
-}
-function calcComparison(){
-  var amount=parseFloat(document.getElementById('cmp-amount')?.value)||0;
-  var years=parseInt(document.getElementById('cmp-years')?.value)||0;
-  var resEl=document.getElementById('cmp-results');
-  var chartEl=document.getElementById('cmp-chart');
-  // Update new chip elements
-  var csEl=document.getElementById('cmp-stocks');
-  var cbEl=document.getElementById('cmp-bonds');
-  var cdEl=document.getElementById('cmp-deposit');
-  if(!amount||!years){
-    if(csEl)csEl.textContent='—';if(cbEl)cbEl.textContent='—';if(cdEl)cdEl.textContent='—';
-    if(chartEl) chartEl.innerHTML='';
-    return;
-  }
-  var stocksV=Math.round(amount*Math.pow(1.09,years));
-  var bondsV=Math.round(amount*Math.pow(1.04,years));
-  var depositV=Math.round(amount*Math.pow(1.035,years));
-  if(csEl)csEl.textContent=fmt(stocksV);
-  if(cbEl)cbEl.textContent=fmt(bondsV);
-  if(cdEl)cdEl.textContent=fmt(depositV);
-  var channels=[
-    {name:'גמל להשקעה',rate:0.07,taxFree:true},
-    {name:'מניות S&P 500',rate:0.105,taxFree:false},
-    {name:'MSCI World',rate:0.08,taxFree:false},
-    {name:'נדל"ן',rate:0.06,taxFree:false},
-    {name:'ריט ישראלי',rate:0.06,taxFree:false},
-    {name:'קרן כספית',rate:0.045,taxFree:false},
-    {name:'מק"מ',rate:0.04,taxFree:false},
-    {name:'פיקדון בנקאי',rate:0.035,taxFree:false}
-  ];
-  var results=channels.map(function(ch){
-    var gross=amount*Math.pow(1+ch.rate,years);
-    var gain=gross-amount;
-    var net=ch.taxFree?gross:amount+gain*0.75;
-    return {name:ch.name,net:Math.round(net),taxFree:ch.taxFree};
-  });
-  results.sort(function(a,b){return b.net-a.net;});
-  var maxVal=results[0].net;
-  if(resEl){
-    resEl.innerHTML=results.map(function(r){
-      return '<div class="dr"><div class="dl">'+r.name+'</div><div>'+
-        '<div class="dv" style="color:#A07840">'+fmt(r.net)+'</div>'+
-        (r.taxFree?'<div style="font-size:10px;color:#A07840">+מס פטור</div>':'')+
-        '</div></div>';
-    }).join('');
-  }
-  if(chartEl){
-    var H=68,W=200,bw=Math.round(W/results.length)-6;
-    var cmpColors=['#1E2D4A','#1E2D4A','#A07840','#A07840','#C9A96E','#C9A96E','#E8DCC8','#E8DCC8'];
-    var bars=results.map(function(r,i){
-      var bh=Math.max(3,Math.round(r.net/maxVal*(H-4)));
-      var x=4+i*(bw+6);
-      var col=cmpColors[i]||'#E8DCC8';
-      return '<rect x="'+x+'" y="'+(H-bh)+'" width="'+bw+'" height="'+bh+'" rx="4" fill="'+col+'"/>';
-    }).join('');
-    var cmpGrid='';for(var cmpg=0;cmpg<3;cmpg++){var cmpgy=Math.round(cmpg/2*(H-4));cmpGrid+='<line x1="0" y1="'+cmpgy+'" x2="'+W+'" y2="'+cmpgy+'" stroke="rgba(30,45,74,.08)" stroke-width=".5"/>';}
-    chartEl.innerHTML='<svg width="100%" viewBox="0 0 '+W+' '+H+'" style="display:block;margin:0 -4px">'+cmpGrid+bars+
-      '<line x1="0" y1="'+H+'" x2="'+W+'" y2="'+H+'" stroke="rgba(30,45,74,.08)" stroke-width=".5"/></svg>';
-  }
-}
-
 /* ══ SCENARIOS CALCULATOR ══ */
 function renderScenarios(){
   var cv=calc();
@@ -6133,39 +5392,6 @@ function renderScenarios(){
   }else if(chartEl){
     chartEl.innerHTML='<div style="text-align:center;padding:14px 0"><div style="margin-bottom:4px">'+ic('chart')+'</div><div style="font-size:11px;color:#6B7A96;margin-bottom:6px">הזן נתונים כדי לראות השוואת תיק</div><button onclick="goP(\'assets\')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:5px 12px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit">הוסף נכסים →</button></div>';
   }
-}
-
-/* ══ ALLOCATION REBALANCE PLAN ══ */
-function renderAllocPlan(){
-  var el=document.getElementById('alloc-plan');
-  if(!el) return;
-  var cv=calc();
-  if(cv.totalAssets<=0){
-    el.style.display='block';
-    el.innerHTML='<div class="aib" style="margin-top:8px">הוסף נכסים בדף השקעות כדי לקבל תוכנית איזון מחדש.</div>';
-    return;
-  }
-  var total=cv.totalAssets;
-  var age=ND.profile.age||35;
-  var targetStock=Math.max(30,Math.min(80,110-age));
-  var targetBond=Math.max(10,Math.min(50,age-10));
-  var targetCash=100-targetStock-targetBond;
-  var curStock=total>0?Math.round((cv.invT)/(total)*100):0;
-  var curBond=0;
-  var curRE=total>0?Math.round(cv.reV/total*100):0;
-  var curCash=total>0?Math.round((ND.cash||0)/total*100):0;
-  var curPen=total>0?Math.round((cv.penT+cv.hshT+cv.gmT)/total*100):0;
-  el.style.display='block';
-  el.innerHTML='<div class="c" style="margin-top:8px">'+
-    '<div class="ct" style="margin-bottom:8px">תוכנית איזון מחדש — גיל '+age+'</div>'+
-    '<div class="dr"><div class="dl">מניות</div><div class="dv">'+curStock+'% → '+targetStock+'%</div></div>'+
-    '<div class="dr"><div class="dl">אג"ח</div><div class="dv">'+curBond+'% → '+targetBond+'%</div></div>'+
-    '<div class="dr"><div class="dl">מזומן</div><div class="dv">'+curCash+'% → '+targetCash+'%</div></div>'+
-    '<div class="dr"><div class="dl">פנסיוני</div><div class="dv" style="color:#A8A8B0">'+curPen+'% (נעול)</div></div>'+
-    '<div class="dr"><div class="dl">נדל"ן</div><div class="dv" style="color:#A8A8B0">'+curRE+'%</div></div>'+
-    '<div class="aib" style="margin-top:8px">כלל אצבע: גיל שלך ('+age+') = '+age+'% באג"ח. '+
-    'שאר במניות גלובליות מפוזרות. שמור '+targetCash+'% מזומן לקרן חירום.</div>'+
-    '</div>';
 }
 
 /* ══ OVERVIEW CHART + DATE ══ */
@@ -6375,10 +5601,8 @@ function renderAllocPlan(){
       <div class="ob2-trow"><span style="font-size:20px">🏛️</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">פנסיה וקה"ש</div></div><button class="ob2-toggle on" data-k="show_pension" onclick="this.classList.toggle('on')"></button></div>
       <div class="ob2-trow"><span style="font-size:20px">📈</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">השקעות בשוק ההון</div></div><button class="ob2-toggle on" data-k="show_investments" onclick="this.classList.toggle('on')"></button></div>
       <div class="ob2-trow"><span style="font-size:20px">🏠</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">נדל"ן ומשכנתא</div></div><button class="ob2-toggle" data-k="show_realestate" onclick="this.classList.toggle('on')"></button></div>
-      <div class="ob2-trow"><span style="font-size:20px">🛡️</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">ביטוחים</div></div><button class="ob2-toggle on" data-k="show_insurance" onclick="this.classList.toggle('on')"></button></div>
       <div class="ob2-trow"><span style="font-size:20px">💳</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">הלוואות וחובות</div></div><button class="ob2-toggle" data-k="show_loans" onclick="this.classList.toggle('on')"></button></div>
       <div class="ob2-trow"><span style="font-size:20px">🔥</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">FIRE — עצמאות כלכלית</div></div><button class="ob2-toggle on" data-k="show_fire" onclick="this.classList.toggle('on')"></button></div>
-      <div class="ob2-trow"><span style="font-size:20px">📋</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">עיזבון וצוואה</div></div><button class="ob2-toggle" data-k="show_estate" onclick="this.classList.toggle('on')"></button></div>
     </div>
     <div style="flex:1"></div>
     <button class="ob2-btn" style="background:#1E2D4A;color:#fff;margin-top:24px" onclick="ob2Save2()">המשך →</button>
