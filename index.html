@@ -59,7 +59,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .scr::-webkit-scrollbar{display:none}
 
 /* ── BOTTOM NAV ── */
-.nav{background:rgba(255,255,255,.97);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:.5px solid rgba(30,45,74,.12);display:flex;flex-shrink:0;padding-bottom:max(env(safe-area-inset-bottom),4px);z-index:20}
+.nav{background:rgba(255,255,255,.97);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:.5px solid rgba(30,45,74,.12);display:flex;flex-shrink:0;padding:8px 10px max(env(safe-area-inset-bottom),12px);z-index:20}
 /* ── PAGES ── */
 .pg{display:none;padding:10px 14px 20px;flex-direction:column;gap:16px}
 .pg.on{display:flex;animation:pgIn .28s cubic-bezier(.2,0,0,1) both}
@@ -124,13 +124,13 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .toast{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-10px);background:#1c1c1e;color:#fff;font-size:11px;font-weight:600;padding:8px 16px;border-radius:20px;z-index:700;opacity:0;pointer-events:none;transition:all .3s;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-.ni{flex:1;display:flex;flex-direction:column;align-items:center;padding:7px 2px 3px;gap:2px;cursor:pointer;border:none;background:transparent;font-family:inherit;color:#A8A8B0;position:relative;transition:color .15s;-webkit-tap-highlight-color:transparent}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;padding:9px 4px 6px;gap:5px;cursor:pointer;border:none;background:transparent;font-family:inherit;color:#A8A8B0;position:relative;transition:color .15s;-webkit-tap-highlight-color:transparent}
 .ni.on{color:#A07840}
 .nl{position:absolute;top:0;left:15%;right:15%;height:2.5px;background:#A07840;border-radius:0 0 3px 3px;display:none}
 .ni.on .nl{display:block}
-.ni svg{width:20px;height:20px;transition:transform .15s}
+.ni svg{width:24px;height:24px;transition:transform .15s}
 .ni:active svg{transform:scale(.88)}
-.ni span{font-size:10px;font-weight:600;letter-spacing:.01em}
+.ni span{font-size:11px;font-weight:600;letter-spacing:.01em}
 
 /* ── PAGE TRANSITIONS ── */
 
@@ -643,7 +643,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div id="user-avatar-btn" onclick="toggleAvatarMenu()" style="width:36px;height:36px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#c8a96a;cursor:pointer;letter-spacing:-.5px">N</div>
       <div style="position:absolute;bottom:-1px;right:-1px;width:9px;height:9px;background:#27ae60;border-radius:50%;border:2px solid #fff"></div>
       <div id="avatar-menu" style="display:none;position:absolute;top:42px;right:0;background:#fff;border-radius:16px;width:190px;box-shadow:0 8px 30px rgba(0,0,0,.15);z-index:100;overflow:hidden">
-        <div onclick="openSettings();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid rgba(0,0,0,.06)">הגדרות ⚙️</div>
+        <div onclick="openSettings();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid rgba(0,0,0,.06)">הגדרות </div>
         <div onclick="authSignOut();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#e74c3c;cursor:pointer;display:flex;align-items:center;gap:8px">התנתקות →</div>
       </div>
     </div>
@@ -706,7 +706,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 <!-- NUMA SCORE -->
 <div class="card">
-  <div class="ch"><div><div class="ct">Numa Score</div><div class="cs">ציון בריאות פיננסית</div></div><div class="ib">⚡</div></div>
+  <div class="ch"><div><div class="ct">Numa Score</div><div class="cs">ציון בריאות פיננסית</div></div></div>
   <div class="cb">
     <div class="sep"></div>
     <div class="ov-score-wrap">
@@ -824,7 +824,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- ── CARD 1: הכנסות ── -->
   <div class="tc" id="cf-inc" style="height:234px">
-    <div class="tc-hdr"><div><h3>הכנסות</h3><p>הכנסות חודשיות נטו</p></div><div class="tc-ico"><span style="font-size:18px">💰</span></div></div>
+    <div class="tc-hdr"><div><h3>הכנסות</h3><p>הכנסות חודשיות נטו</p></div></div>
     <div class="tc-body">
       <div class="tc-g2">
         <div><div class="tc-il">הכנסה שלי ₪</div><input class="tc-inp" id="inc-my" type="number" placeholder="₪ 0" oninput="cfCalc()"/></div>
@@ -840,15 +840,15 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- ── CARD 2: הוצאות (scrollable) ── -->
   <div class="tc" id="cf-exp" style="height:234px;display:flex;flex-direction:column">
-    <div class="tc-hdr"><div><h3>הוצאות</h3><p>הוצאות לפי קטגוריה</p></div><div class="tc-ico"><span style="font-size:18px">🧾</span></div></div>
+    <div class="tc-hdr"><div><h3>הוצאות</h3><p>הוצאות לפי קטגוריה</p></div></div>
     <div class="tc-body" style="flex:1;overflow-y:auto;padding-bottom:0" id="exp-cats">
-      <div class="exp-row" data-cat="housing"><span style="font-size:14px;width:20px;text-align:center">🏠</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">דיור</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="housing" oninput="cfCalc()"/></div>
-      <div class="exp-row" data-cat="food"><span style="font-size:14px;width:20px;text-align:center">🍔</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">מזון</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="food" oninput="cfCalc()"/></div>
-      <div class="exp-row" data-cat="transport"><span style="font-size:14px;width:20px;text-align:center">🚗</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">תחבורה</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="transport" oninput="cfCalc()"/></div>
-      <div class="exp-row" data-cat="health"><span style="font-size:14px;width:20px;text-align:center">🏥</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">בריאות</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="health" oninput="cfCalc()"/></div>
-      <div class="exp-row" data-cat="fun"><span style="font-size:14px;width:20px;text-align:center">🎬</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">בילויים</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="fun" oninput="cfCalc()"/></div>
-      <div class="exp-row" data-cat="subs"><span style="font-size:14px;width:20px;text-align:center">📱</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">מנויים</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="subs" oninput="cfCalc()"/></div>
-      <div class="exp-row" data-cat="other"><span style="font-size:14px;width:20px;text-align:center">📦</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">אחר</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="other" oninput="cfCalc()"/></div>
+      <div class="exp-row" data-cat="housing"><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">דיור</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="housing" oninput="cfCalc()"/></div>
+      <div class="exp-row" data-cat="food"><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">מזון</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="food" oninput="cfCalc()"/></div>
+      <div class="exp-row" data-cat="transport"><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">תחבורה</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="transport" oninput="cfCalc()"/></div>
+      <div class="exp-row" data-cat="health"><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">בריאות</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="health" oninput="cfCalc()"/></div>
+      <div class="exp-row" data-cat="fun"><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">בילויים</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="fun" oninput="cfCalc()"/></div>
+      <div class="exp-row" data-cat="subs"><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">מנויים</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="subs" oninput="cfCalc()"/></div>
+      <div class="exp-row" data-cat="other"><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">אחר</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="other" oninput="cfCalc()"/></div>
     </div>
     <div style="padding:8px 20px 12px;text-align:center">
       <button onclick="addExpRow()" style="background:#ede9e0;color:#A07840;border:none;border-radius:10px;padding:7px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">+ הוסף הוצאה</button>
@@ -861,7 +861,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- ── CARD 4: תובנות וניתוח ── -->
   <div class="tc" id="rule-2020-card" style="height:234px;display:flex;flex-direction:column">
-    <div class="tc-hdr"><div><h3>תובנות וניתוח</h3><p>כלל 50/30/20</p></div><div class="tc-ico"><span style="font-size:18px">💡</span></div></div>
+    <div class="tc-hdr"><div><h3>תובנות וניתוח</h3><p>כלל 50/30/20</p></div></div>
     <div class="tc-body" style="flex:1;overflow-y:auto">
       <!-- 50/30/20 bars -->
       <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px">
@@ -937,7 +937,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- ── CARD 1: פנסיה וקה"ש ── -->
   <div class="tc" id="section-st" style="height:auto">
-    <div class="tc-hdr"><div><h3>פנסיה וקה"ש</h3><p>חיסכון פנסיוני + קרנות השתלמות</p></div><div class="tc-ico"><span style="font-size:18px">🏛️</span></div></div>
+    <div class="tc-hdr"><div><h3>פנסיה וקה"ש</h3><p>חיסכון פנסיוני + קרנות השתלמות</p></div></div>
     <div class="tc-body">
       <div style="max-height:190px;overflow-y:auto;margin-bottom:8px">
         <div id="pen-list"></div>
@@ -954,7 +954,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- ── CARD 2: השקעות ── -->
   <div class="tc" style="height:auto">
-    <div class="tc-hdr"><div><h3>השקעות</h3><p>תיקי השקעות, מזומן ואלטרנטיביות</p></div><div class="tc-ico"><span style="font-size:18px">📈</span></div></div>
+    <div class="tc-hdr"><div><h3>השקעות</h3><p>תיקי השקעות, מזומן ואלטרנטיביות</p></div></div>
     <div class="tc-body">
       <div style="max-height:190px;overflow-y:auto;margin-bottom:8px">
         <div id="inv-list"></div>
@@ -968,7 +968,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- ── CARD 4: נדל"ן ── -->
   <div class="tc" style="height:auto">
-    <div class="tc-hdr"><div><h3>נדל"ן</h3><p>נכסי נדל"ן ומשכנתאות</p></div><div class="tc-ico"><span style="font-size:18px">🏠</span></div></div>
+    <div class="tc-hdr"><div><h3>נדל"ן</h3><p>נכסי נדל"ן ומשכנתאות</p></div></div>
     <div class="tc-body">
       <div style="max-height:190px;overflow-y:auto;margin-bottom:8px">
         <div id="re-list"><div style="font-size:10.5px;color:#A8A8B0;padding:12px 0;text-align:center">אין נכסי נדל"ן עדיין</div></div>
@@ -987,7 +987,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div class="tc" id="section-lo" style="height:auto">
     <div class="tc-hdr">
       <div><h3>הלוואות</h3><p>הלוואות, חובות ולוח סילוקין</p></div>
-      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;font-weight:700;color:#A32D2D" id="lo-total">—</span><div class="tc-ico"><span style="font-size:18px">💳</span></div></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;font-weight:700;color:#A32D2D" id="lo-total">—</span></div>
     </div>
     <div class="tc-body">
       <div style="max-height:190px;overflow-y:auto;margin-bottom:8px">
@@ -1000,7 +1000,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- ── CARD 6: לוח סילוקין ── -->
   <div class="tc" style="height:234px">
-    <div class="tc-hdr"><div><h3>לוח סילוקין</h3><p>חישוב החזר הלוואה</p></div><div class="tc-ico"><span style="font-size:18px">📋</span></div></div>
+    <div class="tc-hdr"><div><h3>לוח סילוקין</h3><p>חישוב החזר הלוואה</p></div></div>
     <div class="tc-body">
       <div class="tc-g2" style="margin-bottom:8px">
         <div><div class="tc-il">סכום הלוואה ₪</div><input class="tc-inp" id="amort-amount" type="number" placeholder="₪ סכום" oninput="calcAmortNew()"/></div>
@@ -1055,7 +1055,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- ── CARD 2: FIRE Settings ── -->
   <div class="tc" style="height:234px">
-    <div class="tc-hdr"><div><h3>FIRE</h3><p>הגדרות פרישה וחישוב יעד</p></div><div class="tc-ico"><span style="font-size:18px">🔥</span></div></div>
+    <div class="tc-hdr"><div><h3>FIRE</h3><p>הגדרות פרישה וחישוב יעד</p></div></div>
     <div class="tc-body">
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
         <div><div class="tc-il">גיל נוכחי</div><input class="tc-inp" id="fire-age-in" type="number" value="35" oninput="renderFIREPage()"/></div>
@@ -1071,7 +1071,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- מה השתנה -->
   <div class="card">
-    <div class="ch"><div><div class="ct">מה השתנה</div><div class="cs">מאז הביקור האחרון</div></div><div class="ib">🕐</div></div>
+    <div class="ch"><div><div class="ct">מה השתנה</div><div class="cs">מאז הביקור האחרון</div></div></div>
     <div class="cb">
       <div class="sep"></div>
       <div class="ov-snap-rows" id="nh-wc"></div>
@@ -1154,7 +1154,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <!-- Employment -->
       <div class="set-row" onclick="openSetPicker('employment')">
         <div style="display:flex;align-items:center;gap:12px;flex:1">
-          <div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:16px">💼</div>
+          
           <div><div style="font-size:15px;font-weight:500;color:#1E2D4A">סטטוס תעסוקה</div></div>
         </div>
         <div style="display:flex;align-items:center;gap:6px"><span id="set-emp-val" style="font-size:13px;color:#8a8a8a">שכיר</span><span style="color:rgba(0,0,0,.18)">›</span></div>
@@ -1162,7 +1162,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <!-- Family -->
       <div style="padding:13px 18px;border-bottom:none">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-          <div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">👨‍👩‍👧</div>
+          
           <div style="font-size:15px;font-weight:500;color:#1E2D4A">מצב משפחתי</div>
         </div>
         <div id="set-family-chips" style="display:flex;gap:8px">
@@ -1179,10 +1179,10 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px">הגדרות חישוב</div>
     <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px">ברירות מחדל לכל החישובים באפליקציה</div>
     <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <div class="set-row" onclick="editCalcVal('returnRate','תשואה שנתית %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:16px">📊</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">תשואה שנתית ברירת מחדל</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="returnRate" style="font-size:13px;color:#8a8a8a">7%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
-      <div class="set-row" onclick="editCalcVal('withdrawalRate','כלל נסיגה %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(45,106,63,.08);display:flex;align-items:center;justify-content:center;font-size:16px">💰</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">כלל נסיגה</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="withdrawalRate" style="font-size:13px;color:#8a8a8a">4%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
-      <div class="set-row" onclick="editCalcVal('inflation','אינפלציה שנתית %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(107,122,150,.1);display:flex;align-items:center;justify-content:center;font-size:16px">📉</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">אינפלציה שנתית</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="inflation" style="font-size:13px;color:#8a8a8a">3%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
-      <div class="set-row" style="border-bottom:none" onclick="editCalcVal('capitalGainsTax','מס רווחי הון %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(163,45,45,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🧾</div><div style="font-size:15px;font-weight:500;color:#1E2D4A">מס רווחי הון</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="capitalGainsTax" style="font-size:13px;color:#8a8a8a">25%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" onclick="editCalcVal('returnRate','תשואה שנתית %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">תשואה שנתית ברירת מחדל</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="returnRate" style="font-size:13px;color:#8a8a8a">7%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" onclick="editCalcVal('withdrawalRate','כלל נסיגה %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">כלל נסיגה</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="withdrawalRate" style="font-size:13px;color:#8a8a8a">4%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" onclick="editCalcVal('inflation','אינפלציה שנתית %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">אינפלציה שנתית</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="inflation" style="font-size:13px;color:#8a8a8a">3%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" style="border-bottom:none" onclick="editCalcVal('capitalGainsTax','מס רווחי הון %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">מס רווחי הון</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="capitalGainsTax" style="font-size:13px;color:#8a8a8a">25%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
     </div>
   </div>
 
@@ -1193,7 +1193,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <!-- Language -->
       <div style="padding:13px 18px;border-bottom:.5px solid rgba(0,0,0,.05)">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-          <div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🌐</div>
+          
           <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-lang-label">שפה</div>
         </div>
         <div id="set-lang-chips" style="display:flex;gap:8px">
@@ -1216,7 +1216,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div id="set-rate-row" style="padding:13px 18px;border-bottom:none;display:none">
         <div style="display:flex;align-items:center;justify-content:space-between">
           <div style="display:flex;align-items:center;gap:12px">
-            <div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.06);display:flex;align-items:center;justify-content:center;font-size:14px">💱</div>
+            
             <div>
               <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-rate-label">שער ₪/$</div>
               <div style="font-size:11px;color:#8a8a8a" id="set-rate-sub">עודכן אוטומטית</div>
@@ -1235,16 +1235,16 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div>
     <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:8px">גיבוי וסנכרון</div>
     <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">☁️</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">סנכרון אוטומטי</div><div style="font-size:11px;color:#8a8a8a">מסונכרן · עכשיו</div></div></div><button class="cat-toggle on" data-cat="sync" onclick="toggleCat(this)"></button></div>
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:16px">💾</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">גבה נתונים</div><div style="font-size:11px;color:#8a8a8a">גיבוי אחרון: היום</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
-      <div class="set-row" style="border-bottom:none"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(45,106,63,.08);display:flex;align-items:center;justify-content:center;font-size:16px">📤</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">ייצא נתונים</div><div style="font-size:11px;color:#8a8a8a">CSV / PDF</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
+      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">סנכרון אוטומטי</div><div style="font-size:11px;color:#8a8a8a">מסונכרן · עכשיו</div></div></div><button class="cat-toggle on" data-cat="sync" onclick="toggleCat(this)"></button></div>
+      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">גבה נתונים</div><div style="font-size:11px;color:#8a8a8a">גיבוי אחרון: היום</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
+      <div class="set-row" style="border-bottom:none"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">ייצא נתונים</div><div style="font-size:11px;color:#8a8a8a">CSV / PDF</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
     </div>
   </div>
 
   <!-- SECTION: התנתקות -->
   <div>
     <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <div class="set-row" style="border-bottom:none;cursor:pointer" onclick="authSignOut();closeSettings()"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(231,76,60,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🚪</div><div style="font-size:15px;font-weight:500;color:#e74c3c">התנתקות</div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
+      <div class="set-row" style="border-bottom:none;cursor:pointer" onclick="authSignOut();closeSettings()"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#e74c3c">התנתקות</div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
     </div>
   </div>
 
@@ -1327,7 +1327,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <div id="celebration-overlay" style="display:none;position:fixed;inset:0;z-index:800;background:rgba(30,45,74,.97);align-items:center;justify-content:center;text-align:center;padding:24px;flex-direction:column">
   <canvas id="celeb-confetti" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas>
   <div style="animation:celebBounce .6s cubic-bezier(.2,0,0,1) both;position:relative;z-index:1">
-    <div style="font-size:64px;margin-bottom:12px" id="celeb-emoji">🎉</div>
+    <div style="font-size:64px;margin-bottom:12px" id="celeb-emoji"></div>
     <div style="font-size:28px;font-weight:800;color:#F5F2EC;letter-spacing:-.5px;margin-bottom:8px;line-height:1.3" id="celeb-title">מזל טוב!</div>
     <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:10px;max-width:280px;margin-left:auto;margin-right:auto" id="celeb-body">—</div>
     <div id="celeb-next" style="background:rgba(255,255,255,.08);border-radius:10px;padding:10px 16px;margin-bottom:20px;display:none">
@@ -1335,7 +1335,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div style="font-size:13px;color:rgba(255,255,255,.8);font-weight:600" id="celeb-next-text"></div>
     </div>
     <div style="display:flex;gap:10px;justify-content:center">
-      <button onclick="shareCelebration()" style="background:rgba(255,255,255,.1);color:#C9A96E;border:1px solid rgba(201,169,110,.3);border-radius:12px;padding:12px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">שתף 🔗</button>
+      <button onclick="shareCelebration()" style="background:rgba(255,255,255,.1);color:#C9A96E;border:1px solid rgba(201,169,110,.3);border-radius:12px;padding:12px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">שתף </button>
       <button onclick="closeCelebration()" style="background:#A07840;color:#fff;border:none;border-radius:12px;padding:12px 24px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">המשך →</button>
     </div>
   </div>
@@ -1358,12 +1358,12 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div class="ob-app-preview">
         <div class="ob-preview-label">מה מחכה לך בפנים</div>
         <div class="ob-preview-cards">
-          <div class="ob-pcard"><div class="ob-pcard-ico">🗺️</div><div class="ob-pcard-txt"><span>מפת עושר</span> — כל הנכסים שלך במקום אחד</div><div class="ob-pcard-arr">›</div></div>
-          <div class="ob-pcard"><div class="ob-pcard-ico">🤖</div><div class="ob-pcard-txt"><span>יועץ AI אישי</span> — שאל כל שאלה פיננסית</div><div class="ob-pcard-arr">›</div></div>
-          <div class="ob-pcard"><div class="ob-pcard-ico">🔥</div><div class="ob-pcard-txt"><span>יעד FIRE</span> — תכנון פרישה מותאם לך</div><div class="ob-pcard-arr">›</div></div>
+          <div class="ob-pcard"><div class="ob-pcard-ico"></div><div class="ob-pcard-txt"><span>מפת עושר</span> — כל הנכסים שלך במקום אחד</div><div class="ob-pcard-arr">›</div></div>
+          <div class="ob-pcard"><div class="ob-pcard-ico"></div><div class="ob-pcard-txt"><span>יועץ AI אישי</span> — שאל כל שאלה פיננסית</div><div class="ob-pcard-arr">›</div></div>
+          <div class="ob-pcard"><div class="ob-pcard-ico"></div><div class="ob-pcard-txt"><span>יעד FIRE</span> — תכנון פרישה מותאם לך</div><div class="ob-pcard-arr">›</div></div>
         </div>
         <div class="ob-privacy" style="margin-top:12px">
-          <span style="font-size:15px">🔐</span>
+          <span style="font-size:15px"></span>
           <div class="ob-privacy-txt"><strong>הכל נשמר אצלך בלבד</strong> — לא נשלח לשרת, לא נמכר, לא נגיש לאף אחד</div>
         </div>
       </div>
@@ -1382,16 +1382,16 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div class="ob-qtop">
       <button class="ob-back" onclick="obBack(1)">← חזרה</button>
       <div class="ob-dots"><div class="ob-dot a" id="od1-1"></div><div class="ob-dot" id="od1-2"></div><div class="ob-dot" id="od1-3"></div></div>
-      <div class="ob-qico">💼</div>
+      <div class="ob-qico"></div>
       <div class="ob-qtitle">מה הדאגה הכי גדולה שלך עם כסף?</div>
       <div class="ob-qsub">ככה נדע על מה לשים דגש בשבילך</div>
     </div>
     <div class="ob-qbody">
       <div class="ob-qopts">
-        <button class="ob-opt" onclick="obPick(1,this,'salaried')"><div class="ob-oico">💼</div><div class="ob-otxt"><div class="ob-olabel">שכיר/ה</div><div class="ob-odesc">עובד/ת אצל מעסיק</div></div><div class="ob-ocheck">✓</div></button>
-        <button class="ob-opt" onclick="obPick(1,this,'hitech')"><div class="ob-oico">💻</div><div class="ob-otxt"><div class="ob-olabel">הייטק</div><div class="ob-odesc">שכיר + אופציות / RSU</div></div><div class="ob-ocheck">✓</div></button>
-        <button class="ob-opt" onclick="obPick(1,this,'self')"><div class="ob-oico">🏢</div><div class="ob-otxt"><div class="ob-olabel">עצמאי/ת</div><div class="ob-odesc">עוסק / חברה / פרילנסר</div></div><div class="ob-ocheck">✓</div></button>
-        <button class="ob-opt" onclick="obPick(1,this,'retired')"><div class="ob-oico">🌴</div><div class="ob-otxt"><div class="ob-olabel">גמלאי/ת</div><div class="ob-odesc">בפרישה</div></div><div class="ob-ocheck">✓</div></button>
+        <button class="ob-opt" onclick="obPick(1,this,'salaried')"><div class="ob-oico"></div><div class="ob-otxt"><div class="ob-olabel">שכיר/ה</div><div class="ob-odesc">עובד/ת אצל מעסיק</div></div><div class="ob-ocheck">✓</div></button>
+        <button class="ob-opt" onclick="obPick(1,this,'hitech')"><div class="ob-oico"></div><div class="ob-otxt"><div class="ob-olabel">הייטק</div><div class="ob-odesc">שכיר + אופציות / RSU</div></div><div class="ob-ocheck">✓</div></button>
+        <button class="ob-opt" onclick="obPick(1,this,'self')"><div class="ob-oico"></div><div class="ob-otxt"><div class="ob-olabel">עצמאי/ת</div><div class="ob-odesc">עוסק / חברה / פרילנסר</div></div><div class="ob-ocheck">✓</div></button>
+        <button class="ob-opt" onclick="obPick(1,this,'retired')"><div class="ob-oico"></div><div class="ob-otxt"><div class="ob-olabel">גמלאי/ת</div><div class="ob-odesc">בפרישה</div></div><div class="ob-ocheck">✓</div></button>
       </div>
     </div>
     <div class="ob-qfoot"><button class="ob-qnext" id="obn1" onclick="obGo(2)">המשך →</button></div>
@@ -1402,16 +1402,16 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div class="ob-qtop">
       <button class="ob-back" onclick="obBack(2)">← חזרה</button>
       <div class="ob-dots"><div class="ob-dot d"></div><div class="ob-dot a"></div><div class="ob-dot"></div></div>
-      <div class="ob-qico">🎂</div>
+      <div class="ob-qico"></div>
       <div class="ob-qtitle">כמה בערך נכנס לך בחודש?</div>
       <div class="ob-qsub">לא צריך להיות מדויק — נעדכן אחר כך</div>
     </div>
     <div class="ob-qbody">
       <div class="ob-qopts">
-        <button class="ob-opt" onclick="obPick(2,this,'20s')"><div class="ob-oico">🌱</div><div class="ob-otxt"><div class="ob-olabel">20–29</div><div class="ob-odesc">הריבית דריבית היא הנשק הכי חזק שלך</div></div><div class="ob-ocheck">✓</div></button>
-        <button class="ob-opt" onclick="obPick(2,this,'30s')"><div class="ob-oico">🚀</div><div class="ob-otxt"><div class="ob-olabel">30–39</div><div class="ob-odesc">שיא הצמיחה הפיננסית</div></div><div class="ob-ocheck">✓</div></button>
-        <button class="ob-opt" onclick="obPick(2,this,'40s')"><div class="ob-oico">⚡</div><div class="ob-otxt"><div class="ob-olabel">40–49</div><div class="ob-odesc">חלון ה-FIRE עדיין פתוח לרווחה</div></div><div class="ob-ocheck">✓</div></button>
-        <button class="ob-opt" onclick="obPick(2,this,'50plus')"><div class="ob-oico">🎯</div><div class="ob-otxt"><div class="ob-olabel">50+</div><div class="ob-odesc">תכנון מואץ לפרישה</div></div><div class="ob-ocheck">✓</div></button>
+        <button class="ob-opt" onclick="obPick(2,this,'20s')"><div class="ob-oico"></div><div class="ob-otxt"><div class="ob-olabel">20–29</div><div class="ob-odesc">הריבית דריבית היא הנשק הכי חזק שלך</div></div><div class="ob-ocheck">✓</div></button>
+        <button class="ob-opt" onclick="obPick(2,this,'30s')"><div class="ob-oico"></div><div class="ob-otxt"><div class="ob-olabel">30–39</div><div class="ob-odesc">שיא הצמיחה הפיננסית</div></div><div class="ob-ocheck">✓</div></button>
+        <button class="ob-opt" onclick="obPick(2,this,'40s')"><div class="ob-oico"></div><div class="ob-otxt"><div class="ob-olabel">40–49</div><div class="ob-odesc">חלון ה-FIRE עדיין פתוח לרווחה</div></div><div class="ob-ocheck">✓</div></button>
+        <button class="ob-opt" onclick="obPick(2,this,'50plus')"><div class="ob-oico"></div><div class="ob-otxt"><div class="ob-olabel">50+</div><div class="ob-odesc">תכנון מואץ לפרישה</div></div><div class="ob-ocheck">✓</div></button>
       </div>
     </div>
     <div class="ob-qfoot"><button class="ob-qnext" id="obn2" onclick="obGo(3)">המשך →</button></div>
@@ -1422,17 +1422,17 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div class="ob-qtop">
       <button class="ob-back" onclick="obBack(3)">← חזרה</button>
       <div class="ob-dots"><div class="ob-dot d"></div><div class="ob-dot d"></div><div class="ob-dot a"></div></div>
-      <div class="ob-qico">🎯</div>
+      <div class="ob-qico"></div>
       <div class="ob-qtitle">יש לך פנסיה או קרן השתלמות?</div>
       <div class="ob-qsub">זה משנה המון בתכנון — בחר מה שמתאים</div>
     </div>
     <div class="ob-qbody">
       <div class="ob-qopts">
-        <button class="ob-opt" onclick="obMulti(this,'fire')"><div class="ob-oico">🔥</div><div class="ob-otxt"><div class="ob-olabel">פרישה מוקדמת — FIRE</div><div class="ob-odesc">עצמאות כלכלית לפני גיל 65</div></div><div class="ob-ocheck">✓</div></button>
-        <button class="ob-opt" onclick="obMulti(this,'grow')"><div class="ob-oico">📈</div><div class="ob-otxt"><div class="ob-olabel">גדילת הון והשקעות</div><div class="ob-odesc">להשקיע נכון ולצמוח</div></div><div class="ob-ocheck">✓</div></button>
-        <button class="ob-opt" onclick="obMulti(this,'home')"><div class="ob-oico">🏠</div><div class="ob-otxt"><div class="ob-olabel">קניית דירה</div><div class="ob-odesc">חיסכון להון עצמי</div></div><div class="ob-ocheck">✓</div></button>
-        <button class="ob-opt" onclick="obMulti(this,'secure')"><div class="ob-oico">🛡️</div><div class="ob-otxt"><div class="ob-olabel">ביטחון כלכלי</div><div class="ob-odesc">שקט נפשי לכל תרחיש</div></div><div class="ob-ocheck">✓</div></button>
-        <button class="ob-opt" onclick="obMulti(this,'kids')"><div class="ob-oico">👨‍👧‍👦</div><div class="ob-otxt"><div class="ob-olabel">עתיד הילדים</div><div class="ob-odesc">חינוך, ירושה, חיסכון לילדים</div></div><div class="ob-ocheck">✓</div></button>
+        <button class="ob-opt" onclick="obMulti(this,'fire')"><div class="ob-oico"></div><div class="ob-otxt"><div class="ob-olabel">פרישה מוקדמת — FIRE</div><div class="ob-odesc">עצמאות כלכלית לפני גיל 65</div></div><div class="ob-ocheck">✓</div></button>
+        <button class="ob-opt" onclick="obMulti(this,'grow')"><div class="ob-oico"></div><div class="ob-otxt"><div class="ob-olabel">גדילת הון והשקעות</div><div class="ob-odesc">להשקיע נכון ולצמוח</div></div><div class="ob-ocheck">✓</div></button>
+        <button class="ob-opt" onclick="obMulti(this,'home')"><div class="ob-oico"></div><div class="ob-otxt"><div class="ob-olabel">קניית דירה</div><div class="ob-odesc">חיסכון להון עצמי</div></div><div class="ob-ocheck">✓</div></button>
+        <button class="ob-opt" onclick="obMulti(this,'secure')"><div class="ob-oico"></div><div class="ob-otxt"><div class="ob-olabel">ביטחון כלכלי</div><div class="ob-odesc">שקט נפשי לכל תרחיש</div></div><div class="ob-ocheck">✓</div></button>
+        <button class="ob-opt" onclick="obMulti(this,'kids')"><div class="ob-oico"></div><div class="ob-otxt"><div class="ob-olabel">עתיד הילדים</div><div class="ob-odesc">חינוך, ירושה, חיסכון לילדים</div></div><div class="ob-ocheck">✓</div></button>
       </div>
       <div class="ob-mnote" id="ob-mnote">בחר לפחות יעד אחד</div>
     </div>
@@ -1442,9 +1442,9 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <!-- WELCOME RESULT -->
   <div class="ob-screen ob-resbg" id="obs-r">
     <div class="ob-res-top">
-      <div class="ob-res-hello" id="ob-r-hello">ברוך הבא ל-Numa 👋</div>
-      <div class="ob-res-title" id="ob-r-title">יופי, יש לי תמונה ראשונית! בוא נצלול פנימה 🎯</div>
-      <div class="ob-profile-pill" id="ob-r-pill"><span class="ob-pp-ico">💼</span><span class="ob-pp-txt" id="ob-r-profile">שכיר/ה חכם/ה</span></div>
+      <div class="ob-res-hello" id="ob-r-hello">ברוך הבא ל-Numa </div>
+      <div class="ob-res-title" id="ob-r-title">יופי, יש לי תמונה ראשונית! בוא נצלול פנימה </div>
+      <div class="ob-profile-pill" id="ob-r-pill"><span class="ob-pp-ico"></span><span class="ob-pp-txt" id="ob-r-profile">שכיר/ה חכם/ה</span></div>
       <div class="ob-focus-cards" id="ob-r-cards"></div>
     </div>
     <div class="ob-enter-wrap">
@@ -1886,6 +1886,10 @@ function render(){
   try{renderOvInsights();}catch(e){}
 }
 
+/* Semantic metric colors (soft) — green #2D6A3F, amber #B8860B, red #A32D2D */
+function _colNet(v){return v>=0?'#2D6A3F':'#A32D2D';}
+function _colSav(r){return r>=20?'#2D6A3F':r>=10?'#B8860B':'#A32D2D';}
+function _colDebt(ratio){return ratio<0.25?'#2D6A3F':ratio<=0.5?'#B8860B':'#A32D2D';}
 function ovRenderOverview(c){
   if(!c)return;
   var f=fmt;
@@ -1897,7 +1901,7 @@ function ovRenderOverview(c){
   set('ov-fire',c.fireAge>0&&c.fireAge<120?'גיל '+c.fireAge:'—');
   // Lean summary cards (data from calc() only)
   var _scf=document.getElementById('sum-cf-val');
-  if(_scf){ if(c.totalIncome>0){ _scf.textContent=f(c.monthlySavings); _scf.style.color=c.monthlySavings>=0?'#2D6A3F':'#D93025'; } else { _scf.textContent='—'; _scf.style.color='#1E2D4A'; } }
+  if(_scf){ if(c.totalIncome>0){ _scf.textContent=f(c.monthlySavings); _scf.style.color=_colNet(c.monthlySavings); } else { _scf.textContent='—'; _scf.style.color='#1E2D4A'; } }
   set('sum-cf-sub', c.totalIncome>0 ? 'הכנסה '+f(c.totalIncome)+' · הוצאה '+f(c.totalExpenses) : 'הכנסות מול הוצאות');
   set('sum-wealth-val', c.netWorth!==0 ? f(c.netWorth) : '—');
   set('sum-wealth-sub', (c.totalAssets>0||c.totalLiabilities>0) ? 'נכסים '+f(c.totalAssets)+' · התח׳ '+f(c.totalLiabilities) : 'נכסים מול התחייבויות');
@@ -1933,8 +1937,8 @@ function ovRenderOverview(c){
   var el;
   el=document.getElementById('ov-net');if(el&&c.netWorth>0)el.style.color='#F5F2EC';
   el=document.getElementById('ov-proj');if(el&&c.netWorth>0)el.style.color='#c8a96a';
-  el=document.getElementById('ov-cf');if(el&&c.monthlySavings!==0)el.style.color='#c8a96a';
-  el=document.getElementById('ov-sr');if(el&&c.savingsRate>0)el.style.color='#c8a96a';
+  el=document.getElementById('ov-cf');if(el&&c.monthlySavings!==0)el.style.color=_colNet(c.monthlySavings);
+  el=document.getElementById('ov-sr');if(el&&c.savingsRate>0)el.style.color=_colSav(c.savingsRate);
   el=document.getElementById('ov-fire');if(el&&c.fireAge>0&&c.fireAge<120)el.style.color='#c8a96a';
   el=document.getElementById('ov-score');if(el&&c.score>0)el.style.color='#1E2D4A';
   if(note&&inc>0){note.style.color='#A07840';note.style.fontWeight='600';}
@@ -2151,7 +2155,7 @@ function renderOvCards(c){
     ];
     var hasExp=c.totalExpenses>0;
     if(!hasExp){
-      dnaRows.innerHTML='<div style="text-align:center;padding:12px 0"><div style="font-size:20px;margin-bottom:4px">🧬</div><div style="font-size:11px;color:#6B7A96;margin-bottom:6px">גלה את הרגלי ההוצאה שלך</div><button onclick="goP(\'cf\')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:5px 12px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit">הזן הוצאות →</button></div>';
+      dnaRows.innerHTML='<div style="text-align:center;padding:12px 0"><div style="font-size:20px;margin-bottom:4px"></div><div style="font-size:11px;color:#6B7A96;margin-bottom:6px">גלה את הרגלי ההוצאה שלך</div><button onclick="goP(\'cf\')" style="background:#A07840;color:#fff;border:none;border-radius:8px;padding:5px 12px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit">הזן הוצאות →</button></div>';
     } else {
       dnaRows.innerHTML=cats.map(function(cat){
         var userPct=c.totalIncome>0?(ND.expenses[cat.k]||0)/c.totalIncome:0;
@@ -2276,7 +2280,7 @@ function renderLoans(c){
   ND.loans.forEach(function(x){
     items.push('<div class="ar"><div class="aic" style="background:rgba(217,48,37,.1)">'+ic('card','ic-sm')+'</div>'+
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
-      '<div style="font-size:10px;color:#A8A8B0">יתרה '+fmt(x.balance)+' · ריבית '+x.rate+'%</div></div>'+
+      '<div style="font-size:10px;color:#A8A8B0">יתרה '+fmt(x.balance)+' · ריבית <span style="color:'+((x.rate||0)>=5?'#A32D2D':(x.rate||0)===0?'#2D6A3F':'#A8A8B0')+';font-weight:700">'+x.rate+'%</span></div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.monthlyPayment)+'/חודש</div>'+
       '<div style="font-size:10px;color:#6B7A96"><span style="cursor:pointer" onclick="openAddModal(\'loan\',\''+x.id+'\')">✎</span> · <span style="cursor:pointer" onclick="deleteND(\'loans\',\''+x.id+'\')">מחק</span></div></div></div>');
   });
@@ -2306,8 +2310,8 @@ function renderOvSummaries(c){
     var types=[
       {key:'life',label:'חיים',ico:''},
       {key:'dis',label:'אכ"ע',ico:''},
-      {key:'health',label:'בריאות',ico:'🏥'},
-      {key:'care',label:'סיעוד',ico:'🧓'}
+      {key:'health',label:'בריאות',ico:''},
+      {key:'care',label:'סיעוד',ico:''}
     ];
     var covered=0,total=types.length;
     var chips=[];
@@ -2434,24 +2438,24 @@ function checkCelebrations(c){ return; /* disabled — popups removed */
   var prof=ND.profile||{};
   var profDone=prof.age>0&&c.totalIncome>0&&c.totalExpenses>0;
   if(profDone && !celebrated.profileDone){
-    show={emoji:'✅',title:'הפרופיל מוכן!',body:'כל הנתונים הבסיסיים במקום. עכשיו Numa יכול לחשב הכל בדיוק.',key:'profileDone',next:'הוסף פנסיה וקה"ש כדי לראות תמונה מלאה'};
+    show={emoji:'',title:'הפרופיל מוכן!',body:'כל הנתונים הבסיסיים במקום. עכשיו Numa יכול לחשב הכל בדיוק.',key:'profileDone',next:'הוסף פנסיה וקה"ש כדי לראות תמונה מלאה'};
   }
   // ── First saving ──
   if(!show && c.monthlySavings>0 && !celebrated.firstSaving){
-    show={emoji:'💰',title:'חיסכון ראשון!',body:'אתה חוסך '+fmt(c.monthlySavings)+' בחודש. ריבית דריבית עושה את השאר.',key:'firstSaving',next:'יעד: חיסכון של 20% מההכנסה'};
+    show={emoji:'',title:'חיסכון ראשון!',body:'אתה חוסך '+fmt(c.monthlySavings)+' בחודש. ריבית דריבית עושה את השאר.',key:'firstSaving',next:'יעד: חיסכון של 20% מההכנסה'};
   }
   // ── 6 months emergency fund ──
   var emergencyTarget=c.totalExpenses>0?c.totalExpenses*6:0;
   if(!show && emergencyTarget>0 && (ND.cash||0)>=emergencyTarget && !celebrated.emergency6){
-    show={emoji:'🛡️',title:'קרן חירום מלאה!',body:'יש לך '+fmt(ND.cash)+' נזיל — מספיק ל-6 חודשי הוצאות. שקט נפשי.',key:'emergency6',next:'עכשיו אפשר להשקיע את העודף'};
+    show={emoji:'',title:'קרן חירום מלאה!',body:'יש לך '+fmt(ND.cash)+' נזיל — מספיק ל-6 חודשי הוצאות. שקט נפשי.',key:'emergency6',next:'עכשיו אפשר להשקיע את העודף'};
   }
   // ── Numa Score 70 ──
   if(!show && c.score>=70 && !celebrated.score70){
-    show={emoji:'🏆',title:'הציון שלך עבר 70!',body:'Numa Score '+c.score+'/100 — אתה מעל הממוצע. המשך כך!',key:'score70',next:'יעד: הגיע ל-85 עם ביטוח ותכנון ירושה'};
+    show={emoji:'',title:'הציון שלך עבר 70!',body:'Numa Score '+c.score+'/100 — אתה מעל הממוצע. המשך כך!',key:'score70',next:'יעד: הגיע ל-85 עם ביטוח ותכנון ירושה'};
   }
   // ── FIRE set ──
   if(!show && c.fireAge>0 && c.fireAge<120 && !celebrated.fireSet){
-    show={emoji:'🔥',title:'FIRE הוגדר!',body:'עצמאות כלכלית בגיל '+c.fireAge+' — הדרך התחילה.',key:'fireSet',next:'הגדל הפקדות חודשיות כדי להקדים את היעד'};
+    show={emoji:'',title:'FIRE הוגדר!',body:'עצמאות כלכלית בגיל '+c.fireAge+' — הדרך התחילה.',key:'fireSet',next:'הגדל הפקדות חודשיות כדי להקדים את היעד'};
   }
   // ── Round NW milestones: 100K, 250K, 500K, 750K, 1M, 2M, 5M, 10M ──
   var nwMilestones=[
@@ -2468,14 +2472,14 @@ function checkCelebrations(c){ return; /* disabled — popups removed */
     for(var mi=nwMilestones.length-1;mi>=0;mi--){
       var ms=nwMilestones[mi];
       if(c.netWorth>=ms.val && !celebrated[ms.key]){
-        show={emoji:'🎯',title:'הגעת ל'+ms.lbl+'!',body:'שווי הנטו שלך עבר '+ms.lbl+'. אבן דרך משמעותית!',key:ms.key,next:ms.next};
+        show={emoji:'',title:'הגעת ל'+ms.lbl+'!',body:'שווי הנטו שלך עבר '+ms.lbl+'. אבן דרך משמעותית!',key:ms.key,next:ms.next};
         break;
       }
     }
   }
   // ── FIRE reached ──
   if(!show && c.fireAge>0 && c.fireAge<=((ND.profile||{}).age||30) && !celebrated.fireReached){
-    show={emoji:'🏝️',title:'הגעת לעצמאות כלכלית!',body:'יש לך מספיק נכסים לחיות מהם. חופש מוחלט.',key:'fireReached',next:'עכשיו אפשר לחלום בגדול'};
+    show={emoji:'',title:'הגעת לעצמאות כלכלית!',body:'יש לך מספיק נכסים לחיות מהם. חופש מוחלט.',key:'fireReached',next:'עכשיו אפשר לחלום בגדול'};
   }
 
   if(show){
@@ -2514,7 +2518,7 @@ function shareCelebration(){
   if(navigator.share){
     navigator.share({title:'Numa',text:text}).catch(function(){});
   } else {
-    navigator.clipboard.writeText(text).then(function(){showToast('הועתק! 📋');}).catch(function(){});
+    navigator.clipboard.writeText(text).then(function(){showToast('הועתק! ');}).catch(function(){});
   }
 }
 function launchConfetti(){
@@ -2579,7 +2583,7 @@ function cfCalc(){
   // Hero
   var hero=document.getElementById('cf-fl-hero');
   if(hero){
-    if(inc>0||exp>0){hero.textContent=f(net);hero.style.color=net>=0?'#c8a96a':'#e07b5a';}
+    if(inc>0||exp>0){hero.textContent=f(net);hero.style.color=_colNet(net);}
     else{hero.textContent='—';hero.style.color='#c8a96a';}
   }
   var sub=document.getElementById('cf-fl-sub');
@@ -2638,7 +2642,7 @@ function addExpRow(){
   var container=document.getElementById('exp-cats');
   var row=document.createElement('div');
   row.className='exp-row';row.setAttribute('data-cat','custom');
-  row.innerHTML='<span style="font-size:14px;width:20px;text-align:center">📌</span><span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">'+name.trim()+'</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="custom" oninput="cfCalc()"/><button class="exp-del" onclick="this.parentElement.remove();cfCalc()">×</button>';
+  row.innerHTML='<span style="flex:1;font-size:11px;font-weight:600;color:#1E2D4A">'+name.trim()+'</span><input class="tc-inp exp-fi" type="number" placeholder="₪" style="width:96px;text-align:center;padding:7px 8px" data-cat="custom" oninput="cfCalc()"/><button class="exp-del" onclick="this.parentElement.remove();cfCalc()">×</button>';
   container.appendChild(row);
   row.querySelector('input').focus();
 }
@@ -2718,9 +2722,9 @@ function renderCF(c){
     if(bn) bn.style.width=lowExpenses?'0%':Math.min(necPct*2,100)+'%';
     if(bw) bw.style.width=lowExpenses?'0%':Math.min(wantPct*2,100)+'%';
     if(bs) bs.style.width=lowExpenses?'0%':Math.min(savPct*5,100)+'%';
-    if(pn) pn.textContent=lowExpenses?'0%':necPct+'%'+(necPct<=50?' ✓':' ⚠');
-    if(pw) pw.textContent=lowExpenses?'0%':wantPct+'%'+(wantPct<=30?' ✓':' ⚠');
-    if(ps) ps.textContent=lowExpenses?'0%':savPct+'%'+(savPct>=20?' ✓':' ⚠');
+    if(pn) pn.textContent=lowExpenses?'0%':necPct+'%'+(necPct<=50?' ✓':' ');
+    if(pw) pw.textContent=lowExpenses?'0%':wantPct+'%'+(wantPct<=30?' ✓':' ');
+    if(ps) ps.textContent=lowExpenses?'0%':savPct+'%'+(savPct>=20?' ✓':' ');
     var badge=$('rule-badge');
     if(badge){
       var ok=(necPct<=50&&wantPct<=30&&savPct>=20);
@@ -2770,7 +2774,7 @@ function renderSTHeader(c){
   }, '<div style="font-size:10.5px;color:#A8A8B0;padding:4px 0">אין קרן פנסיה — <span style="color:#A07840;cursor:pointer" onclick="openAddModal(\'pension\')">+ הוסף</span></div>');
 
   _renderList('hsh-list', ND.hishtalmut, function(x){
-    return '<div class="ar"><div class="aic" style="background:rgba(160,120,64,.08)">🌿</div>'+
+    return '<div class="ar"><div class="aic" style="background:rgba(160,120,64,.08)"></div>'+
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">נזיל '+x.liquidYear+' · הפקדה ₪'+Math.round(x.monthlyDeposit).toLocaleString()+'</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.balance)+'</div>'+
@@ -2879,7 +2883,7 @@ function renderFIREPage(){
   var fpa = document.getElementById('fire-passive');
   if(fpa) fpa.textContent = passiveIncome > 0 ? fmt(passiveIncome) : '—';
   var fr = document.getElementById('fire-rate');
-  if(fr){ fr.textContent = c.savingsRate+'%'; fr.style.color = c.savingsRate>=20?'#A07840':c.savingsRate>=10?'#D97706':'#D93025'; }
+  if(fr){ fr.textContent = c.savingsRate+'%'; fr.style.color = _colSav(c.savingsRate); }
   // 4% rule explanation
   var ruleEl = document.querySelector('#pg-fire .c:last-of-type div:last-child');
   if(ruleEl && annualExp > 0){
@@ -2922,7 +2926,7 @@ function renderReFacts(){}
 function showFact(){}
 function renderHeatMap(){}
 function applyProfile(){}
-function celebrate(){ showToast('🎉 כל הכבוד!'); }
+function celebrate(){ showToast(' כל הכבוד!'); }
 function finishOnboarding(){}
 function hideOnboarding(){}
 function obNext(){}
@@ -3033,7 +3037,7 @@ function renderSTFull(){
 
   // Hishtalmut list
   _renderList('hsh-list', ND.hishtalmut, function(x){
-    return '<div class="ar"><div class="aic" style="background:rgba(160,120,64,.08)">🌿</div>'+
+    return '<div class="ar"><div class="aic" style="background:rgba(160,120,64,.08)"></div>'+
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">נזיל '+x.liquidYear+' · הפקדה ₪'+Math.round(x.monthlyDeposit).toLocaleString()+'</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.balance)+'</div>'+
@@ -3042,7 +3046,7 @@ function renderSTFull(){
 
   // Gamel list
   _renderList('gamel-list', ND.gamel, function(x){
-    return '<div class="ar"><div class="aic" style="background:rgba(160,120,64,.1)">💰</div>'+
+    return '<div class="ar"><div class="aic" style="background:rgba(160,120,64,.1)"></div>'+
       '<div style="flex:1"><div style="font-size:11.5px;font-weight:700">'+x.name+'</div>'+
       '<div style="font-size:10px;color:#A8A8B0">הפקדה ₪'+Math.round(x.monthlyDeposit).toLocaleString()+'/חודש</div></div>'+
       '<div style="text-align:left"><div style="font-size:12px;font-weight:800">'+fmt(x.balance)+'</div>'+
@@ -3225,14 +3229,14 @@ function renderAssetsHub(){
   if(at) at.textContent=c.totalAssets>0?fmt(c.totalAssets):'—';
   // Wealth section totals
   var wa=$('wealth-assets-sum'); if(wa) wa.textContent=c.totalAssets>0?fmt(c.totalAssets):'—';
-  var wl=$('wealth-liab-sum'); if(wl) wl.textContent=c.totalLiabilities>0?fmt(c.totalLiabilities):'—';
+  var wl=$('wealth-liab-sum'); if(wl){ wl.textContent=c.totalLiabilities>0?fmt(c.totalLiabilities):'—'; wl.style.color=c.totalLiabilities>0?_colDebt(c.totalAssets>0?c.totalLiabilities/c.totalAssets:1):'#A07840'; }
   // Hero chips
   var hp=$('hero-pen-total'),hi=$('hero-inv-total'),hd=$('hub-debt-total');
   var penTotal=c.penT+c.hshT+c.gmT;
   var invReTotal=c.invT+c.reV;
   if(hp) hp.textContent=penTotal>0?fmt(penTotal):'—';
   if(hi) hi.textContent=invReTotal>0?fmt(invReTotal):'—';
-  if(hd){hd.textContent=c.totalLiabilities>0?fmt(c.totalLiabilities):'—';hd.style.color=c.totalLiabilities>0?'#e74c3c':'#C9A96E';}
+  if(hd){hd.textContent=c.totalLiabilities>0?fmt(c.totalLiabilities):'—';hd.style.color=c.totalLiabilities>0?_colDebt(c.totalAssets>0?c.totalLiabilities/c.totalAssets:1):'#C9A96E';}
   // Projection & bar
   var proj25=c.totalAssets>0?Math.round(c.totalAssets*Math.pow(1.07,25)):0;
   var fv=$('inv-future-val'),pb=$('assets-proj-bar');
@@ -3650,18 +3654,18 @@ var obGoals=[];
 var obCur='w';
 
 var obProfiles={
-  salaried:{ico:'💼',title:'שכיר/ה חכם/ה',desc:'מיקסום הטבות מעסיק'},
-  hitech:{ico:'💻',title:'היי-טקיסט/ית',desc:'אופציות, RSU, FIRE מהיר'},
-  self:{ico:'🏢',title:'עצמאי/ת',desc:'מס, פנסיה, חיסכון חופשי'},
-  retired:{ico:'🌴',title:'גמלאי/ת',desc:'ניהול נכסים בפרישה'}
+  salaried:{ico:'',title:'שכיר/ה חכם/ה',desc:'מיקסום הטבות מעסיק'},
+  hitech:{ico:'',title:'היי-טקיסט/ית',desc:'אופציות, RSU, FIRE מהיר'},
+  self:{ico:'',title:'עצמאי/ת',desc:'מס, פנסיה, חיסכון חופשי'},
+  retired:{ico:'',title:'גמלאי/ת',desc:'ניהול נכסים בפרישה'}
 };
 
 var obFocusCards={
-  fire:{ico:'🔥',bg:'rgba(217,119,6,.12)',title:'יעד FIRE מחושב לך',desc:'נחשב מתי תוכל לפרוש לפי הנתונים שתזין'},
-  grow:{ico:'📈',bg:'rgba(160,120,64,.1)',title:'תיק השקעות אישי',desc:'מחשבון, Monte Carlo, השוואת מסלולים'},
+  fire:{ico:'',bg:'rgba(217,119,6,.12)',title:'יעד FIRE מחושב לך',desc:'נחשב מתי תוכל לפרוש לפי הנתונים שתזין'},
+  grow:{ico:'',bg:'rgba(160,120,64,.1)',title:'תיק השקעות אישי',desc:'מחשבון, Monte Carlo, השוואת מסלולים'},
   home:{ico:ic('home','ic-sm'),bg:'rgba(160,120,64,.1)',title:'תכנון קניית דירה',desc:'הון עצמי, משכנתא, עלויות — הכל ביחד'},
-  secure:{ico:'🛡️',bg:'rgba(160,120,64,.1)',title:'מפת סיכונים ופערים',desc:'ביטוחים, קרן חירום, הגנות'},
-  kids:{ico:'👨‍👧‍👦',bg:'rgba(160,120,64,.1)',title:'תכנון לילדים',desc:'חיסכון, ריבית דריבית, עתיד חינוכי'}
+  secure:{ico:'',bg:'rgba(160,120,64,.1)',title:'מפת סיכונים ופערים',desc:'ביטוחים, קרן חירום, הגנות'},
+  kids:{ico:'',bg:'rgba(160,120,64,.1)',title:'תכנון לילדים',desc:'חיסכון, ריבית דריבית, עתיד חינוכי'}
 };
 
 function obSlide(fromId, toId){
@@ -3727,7 +3731,7 @@ function obShowWelcome(){
   var obName = (document.getElementById('ob-name-inp')||{}).value || ND.profile.name || '';
   if(obName) ND.profile.name = obName; saveToStorage();
   document.getElementById('ob-r-hello').textContent = obName ? 'ברוך הבא, ' + obName + '!' : 'ברוך הבא ל-Numa';
-  document.getElementById('ob-r-title').textContent='יופי, יש לי תמונה ראשונית! בוא נצלול פנימה 🎯';
+  document.getElementById('ob-r-title').textContent='יופי, יש לי תמונה ראשונית! בוא נצלול פנימה ';
   document.getElementById('ob-r-pill').querySelector('.ob-pp-ico').textContent=prof.ico;
   document.getElementById('ob-r-pill').querySelector('.ob-pp-txt').textContent=prof.title+' · '+prof.desc;
 
@@ -3740,10 +3744,10 @@ function obShowWelcome(){
   });
   // Add profile-specific card
   var profileCards={
-    hitech:'<div class="ob-focus-card"><div class="ob-fc-ico" style="background:rgba(160,120,64,.1)">💻</div><div class="ob-fc-body"><div class="ob-fc-title">מעקב אופציות ו-RSU</div><div class="ob-fc-desc">Vesting, מיסוי, מימוש נכון</div></div></div>',
-    self:'<div class="ob-focus-card"><div class="ob-fc-ico" style="background:rgba(160,120,64,.1)">🧾</div><div class="ob-fc-body"><div class="ob-fc-title">חיסכון מס לעצמאי</div><div class="ob-fc-desc">פנסיה, קה"ש, ניכויים — מיקסום מלא</div></div></div>',
-    salaried:'<div class="ob-focus-card"><div class="ob-fc-ico" style="background:rgba(160,120,64,.1)">🌿</div><div class="ob-fc-body"><div class="ob-fc-title">מקסם הטבות מעסיק</div><div class="ob-fc-desc">קה"ש, פנסיה, ביטוחים — כל מה שמגיע לך</div></div></div>',
-    retired:'<div class="ob-focus-card"><div class="ob-fc-ico" style="background:rgba(160,120,64,.1)">🌿</div><div class="ob-fc-body"><div class="ob-fc-title">ניהול תזרים פרישה</div><div class="ob-fc-desc">כלל 4%, ירושה, צוואה — הכל מסודר</div></div></div>'
+    hitech:'<div class="ob-focus-card"><div class="ob-fc-ico" style="background:rgba(160,120,64,.1)"></div><div class="ob-fc-body"><div class="ob-fc-title">מעקב אופציות ו-RSU</div><div class="ob-fc-desc">Vesting, מיסוי, מימוש נכון</div></div></div>',
+    self:'<div class="ob-focus-card"><div class="ob-fc-ico" style="background:rgba(160,120,64,.1)"></div><div class="ob-fc-body"><div class="ob-fc-title">חיסכון מס לעצמאי</div><div class="ob-fc-desc">פנסיה, קה"ש, ניכויים — מיקסום מלא</div></div></div>',
+    salaried:'<div class="ob-focus-card"><div class="ob-fc-ico" style="background:rgba(160,120,64,.1)"></div><div class="ob-fc-body"><div class="ob-fc-title">מקסם הטבות מעסיק</div><div class="ob-fc-desc">קה"ש, פנסיה, ביטוחים — כל מה שמגיע לך</div></div></div>',
+    retired:'<div class="ob-focus-card"><div class="ob-fc-ico" style="background:rgba(160,120,64,.1)"></div><div class="ob-fc-body"><div class="ob-fc-title">ניהול תזרים פרישה</div><div class="ob-fc-desc">כלל 4%, ירושה, צוואה — הכל מסודר</div></div></div>'
   };
   html+=profileCards[employ]||'';
   document.getElementById('ob-r-cards').innerHTML=html;
@@ -4109,7 +4113,7 @@ function obEnterApp(){
 
     <!-- Trust -->
     <div class="auth-trust">
-      <span style="font-size:14px">🔐</span>
+      <span style="font-size:14px"></span>
       <div class="auth-trust-txt">הנתונים שלך נשארים אצלך בלבד · לא נמכרים · לא נשלחים</div>
     </div>
 
@@ -4122,7 +4126,7 @@ function obEnterApp(){
 <!-- VERIFY SCREEN -->
 <div id="verify-screen">
   <div class="verify-card">
-    <div class="verify-ico">📧</div>
+    <div class="verify-ico"></div>
     <div class="verify-title">בדוק את האימייל שלך</div>
     <div class="verify-sub">שלחנו לך קישור אישור.<br>לחץ עליו ואז חזור לכאן.</div>
     <button class="verify-btn"
@@ -4145,7 +4149,7 @@ function obEnterApp(){
 
 <!-- ══ Update Toast ══ -->
 <div id="pwa-update-toast" style="display:none!important">
-  🔄 <span>גרסה חדשה זמינה!</span>
+   <span>גרסה חדשה זמינה!</span>
   <button class="pwa-update-btn" id="pwa-update-btn">עדכן עכשיו</button>
 </div>
 
@@ -4165,7 +4169,7 @@ function obEnterApp(){
       navigator.serviceWorker.register('./sw.js?v=v7')
         .then(reg => {
           swReg = reg;
-          console.log('[Numa] Service Worker registered ✅');
+          console.log('[Numa] Service Worker registered ');
 
           // בדוק עדכונים
           reg.addEventListener('updatefound', () => {
@@ -4202,7 +4206,7 @@ function obEnterApp(){
   window.addEventListener('appinstalled', () => {
     hideInstallBanner();
     deferredPrompt = null;
-    console.log('[Numa] App installed! 🎉');
+    console.log('[Numa] App installed! ');
   });
 
   function showInstallBanner() {
@@ -4695,7 +4699,7 @@ function renderMissions(cv){
   var done=steps.filter(function(s){return s.done;}).length;
   if(mb) mb.textContent=done+'/6 — +'+(done*6)+' נקודות';
   ml.innerHTML=steps.map(function(s){
-    var ico=s.done?'✅':'○';
+    var ico=s.done?'':'○';
     var bg=s.done?'rgba(160,120,64,.1)':'rgba(30,45,74,.08)';
     var label='<div style="font-size:11px;font-weight:700'+(s.done?'':'color:#A8A8B0')+'">'+(s.done?'':'<span style="color:#A8A8B0">') +s.label+(s.done?'':'</span>')+' </div>';
     var right=s.done
@@ -5045,7 +5049,7 @@ function renderUpcoming(){
   });
   (ND.hishtalmut||[]).forEach(function(x){
     if(x.monthlyDeposit>0){
-      items.push({label:'🌿 הפקדה קה"ש — '+x.name,amount:x.monthlyDeposit,type:'saving'});
+      items.push({label:' הפקדה קה"ש — '+x.name,amount:x.monthlyDeposit,type:'saving'});
       totalMonthly+=x.monthlyDeposit;
     }
   });
@@ -5068,7 +5072,7 @@ function renderUpcoming(){
 /* ══ CMD 09: VOTE ON FEATURES — hook counter ══ */
 function voteFeature(btn,feature){
   if(!ND.votes) ND.votes={};
-  if(ND.votes[feature]){showToast('כבר הצבעת!','תודה על המשוב 🙏');return;}
+  if(ND.votes[feature]){showToast('כבר הצבעת!','תודה על המשוב ');return;}
   ND.votes[feature]=1;
   saveToStorage();
   var count=parseInt(btn.textContent.replace(/[^\d]/g,''))||0;
@@ -5496,10 +5500,10 @@ function calcAmort(){
       <div style="font-size:15px;color:#8a8a8a;max-width:280px;line-height:1.5">Numa מאחדת את כל התמונה הפיננסית שלך במקום אחד</div>
       <div style="height:12px"></div>
       <div style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:340px">
-        <div class="ob2-fcard"><div class="ob2-fico">🔗</div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#1E2D4A">תמונה מלאה</div><div style="font-size:12px;color:#8a8a8a">פנסיה, השקעות, תזרים ונדל"ן — הכל ביחד</div></div></div>
-        <div class="ob2-fcard"><div class="ob2-fico">🔥</div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#1E2D4A">מסלול FIRE</div><div style="font-size:12px;color:#8a8a8a">גלה מתי תוכל להיות עצמאי כלכלית</div></div></div>
+        <div class="ob2-fcard"><div class="ob2-fico"></div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#1E2D4A">תמונה מלאה</div><div style="font-size:12px;color:#8a8a8a">פנסיה, השקעות, תזרים ונדל"ן — הכל ביחד</div></div></div>
+        <div class="ob2-fcard"><div class="ob2-fico"></div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#1E2D4A">מסלול FIRE</div><div style="font-size:12px;color:#8a8a8a">גלה מתי תוכל להיות עצמאי כלכלית</div></div></div>
         <div class="ob2-fcard"><div class="ob2-fico">✦</div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#1E2D4A">סוכן AI אישי</div><div style="font-size:12px;color:#8a8a8a">שאל כל שאלה פיננסית לפי הנתונים שלך</div></div></div>
-        <div class="ob2-fcard"><div class="ob2-fico">🔒</div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#1E2D4A">פרטי ומאובטח</div><div style="font-size:12px;color:#8a8a8a">הנתונים שלך מוצפנים ושמורים רק אצלך</div></div></div>
+        <div class="ob2-fcard"><div class="ob2-fico"></div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#1E2D4A">פרטי ומאובטח</div><div style="font-size:12px;color:#8a8a8a">הנתונים שלך מוצפנים ושמורים רק אצלך</div></div></div>
       </div>
     </div>
     <button class="ob2-btn" style="background:#1E2D4A;color:#fff;margin-top:24px" onclick="ob2Go(1)">בוא נתחיל →</button>
@@ -5508,7 +5512,7 @@ function calcAmort(){
   <!-- SCREEN 1 — Profile -->
   <div class="ob2-screen" id="ob2-s1">
     <div class="ob2-dots"><div class="ob2-dot on"></div><div class="ob2-dot"></div><div class="ob2-dot"></div></div>
-    <div style="font-size:52px;margin-bottom:8px">👋</div>
+    <div style="font-size:52px;margin-bottom:8px"></div>
     <div style="font-size:28px;font-weight:800;color:#1E2D4A;margin-bottom:4px">היי, מה שמך?</div>
     <div style="font-size:15px;color:#8a8a8a;margin-bottom:24px">נתאים את Numa בדיוק לך</div>
     <div style="display:flex;flex-direction:column;gap:12px">
@@ -5534,15 +5538,15 @@ function calcAmort(){
   <!-- SCREEN 2 — Relevance -->
   <div class="ob2-screen" id="ob2-s2">
     <div class="ob2-dots"><div class="ob2-dot"></div><div class="ob2-dot on"></div><div class="ob2-dot"></div></div>
-    <div style="font-size:52px;margin-bottom:8px">🎯</div>
+    <div style="font-size:52px;margin-bottom:8px"></div>
     <div style="font-size:28px;font-weight:800;color:#1E2D4A;margin-bottom:4px">מה רלוונטי אליך?</div>
     <div style="font-size:15px;color:#8a8a8a;margin-bottom:24px">נציג רק את מה שמתאים לך</div>
     <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="ob2-trow"><span style="font-size:20px">🏛️</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">פנסיה וקה"ש</div></div><button class="ob2-toggle on" data-k="show_pension" onclick="this.classList.toggle('on')"></button></div>
-      <div class="ob2-trow"><span style="font-size:20px">📈</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">השקעות בשוק ההון</div></div><button class="ob2-toggle on" data-k="show_investments" onclick="this.classList.toggle('on')"></button></div>
-      <div class="ob2-trow"><span style="font-size:20px">🏠</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">נדל"ן ומשכנתא</div></div><button class="ob2-toggle" data-k="show_realestate" onclick="this.classList.toggle('on')"></button></div>
-      <div class="ob2-trow"><span style="font-size:20px">💳</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">הלוואות וחובות</div></div><button class="ob2-toggle" data-k="show_loans" onclick="this.classList.toggle('on')"></button></div>
-      <div class="ob2-trow"><span style="font-size:20px">🔥</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">FIRE — עצמאות כלכלית</div></div><button class="ob2-toggle on" data-k="show_fire" onclick="this.classList.toggle('on')"></button></div>
+      <div class="ob2-trow"><span style="font-size:20px"></span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">פנסיה וקה"ש</div></div><button class="ob2-toggle on" data-k="show_pension" onclick="this.classList.toggle('on')"></button></div>
+      <div class="ob2-trow"><span style="font-size:20px"></span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">השקעות בשוק ההון</div></div><button class="ob2-toggle on" data-k="show_investments" onclick="this.classList.toggle('on')"></button></div>
+      <div class="ob2-trow"><span style="font-size:20px"></span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">נדל"ן ומשכנתא</div></div><button class="ob2-toggle" data-k="show_realestate" onclick="this.classList.toggle('on')"></button></div>
+      <div class="ob2-trow"><span style="font-size:20px"></span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">הלוואות וחובות</div></div><button class="ob2-toggle" data-k="show_loans" onclick="this.classList.toggle('on')"></button></div>
+      <div class="ob2-trow"><span style="font-size:20px"></span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1E2D4A">FIRE — עצמאות כלכלית</div></div><button class="ob2-toggle on" data-k="show_fire" onclick="this.classList.toggle('on')"></button></div>
     </div>
     <div style="flex:1"></div>
     <button class="ob2-btn" style="background:#1E2D4A;color:#fff;margin-top:24px" onclick="ob2Save2()">המשך →</button>
@@ -5551,14 +5555,14 @@ function calcAmort(){
   <!-- SCREEN 3 — Language + Currency + Finish -->
   <div class="ob2-screen" id="ob2-s3">
     <div class="ob2-dots"><div class="ob2-dot"></div><div class="ob2-dot"></div><div class="ob2-dot on"></div></div>
-    <div style="font-size:52px;margin-bottom:8px">🌍</div>
+    <div style="font-size:52px;margin-bottom:8px"></div>
     <div style="font-size:28px;font-weight:800;color:#1E2D4A;margin-bottom:4px">העדפות תצוגה</div>
     <div style="font-size:15px;color:#8a8a8a;margin-bottom:24px">תמיד אפשר לשנות בהגדרות</div>
 
     <div style="font-size:13px;font-weight:600;color:#1E2D4A;margin-bottom:8px">שפה</div>
     <div class="ob2-chips" id="ob2-lang">
-      <button class="ob2-chip on" data-v="he">עברית 🇮🇱</button>
-      <button class="ob2-chip" data-v="en">English 🇺🇸</button>
+      <button class="ob2-chip on" data-v="he">עברית </button>
+      <button class="ob2-chip" data-v="en">English </button>
     </div>
 
     <div style="font-size:13px;font-weight:600;color:#1E2D4A;margin:20px 0 8px">מטבע</div>
@@ -5568,13 +5572,13 @@ function calcAmort(){
     </div>
 
     <div style="background:#1E2D4A;border-radius:22px;padding:24px;text-align:center;margin-top:28px">
-      <div style="font-size:36px;margin-bottom:8px">✨</div>
+      <div style="font-size:36px;margin-bottom:8px"></div>
       <div style="font-size:20px;font-weight:800;color:#F5F2EC;margin-bottom:6px">Numa מוכנה לך</div>
       <div style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.5">הכל שמור ומסונכרן אוטומטית.<br>תוסיף נתונים בקצב שלך.</div>
     </div>
 
     <div style="flex:1"></div>
-    <button class="ob2-btn" style="background:#A07840;color:#fff;margin-top:24px" onclick="ob2Finish()">בוא נתחיל 🚀</button>
+    <button class="ob2-btn" style="background:#A07840;color:#fff;margin-top:24px" onclick="ob2Finish()">בוא נתחיל </button>
   </div>
 </div>
 
