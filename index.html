@@ -1082,10 +1082,10 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <!-- ══════════════════ תכנון — Hub ══════════════════ -->
 <div class="pg" id="pg-plan" style="gap:9px;padding:14px 18px 20px">
 
-  <!-- מסע הצמיחה -->
-  <div class="ov-chart-card">
+  <!-- Card A: המסע לחופש כלכלי -->
+  <div class="ov-chart-card chart-in">
     <div class="ov-chart-hdr">
-      <div><div class="ov-chart-title">מסע הצמיחה שלך</div><div class="ov-chart-sub" id="ov-g-sub">— שנים קדימה</div></div>
+      <div><div class="ov-chart-title">המסע לחופש כלכלי</div><div class="ov-chart-sub" id="ov-g-sub">— שנים קדימה</div></div>
     </div>
     <div class="ov-chart-area"><svg id="ov-g-svg" width="100%" viewBox="0 0 320 110" preserveAspectRatio="none"></svg></div>
     <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
@@ -1093,61 +1093,23 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <input type="range" min="2" max="30" value="10" id="ov-g-sl" style="flex:1;accent-color:#A07840" oninput="ovDrawG()">
       <span style="font-size:10px;color:#8a8a8a">30y</span>
     </div>
-  </div>
-
-  <!-- ── CARD 1: FIRE Hero (no fixed height) ── -->
-  <div class="tc" id="section-fire" style="height:auto;background:#1E2D4A;color:#F5F2EC">
-    <div class="tc-body" style="padding:18px 20px">
-      <div style="font-size:10px;color:rgba(255,255,255,.45);margin-bottom:4px">גלה מתי תוכל להיות חופשי כלכלית</div>
-      <div style="font-size:42px;font-weight:800;color:#C9A96E;letter-spacing:-2px;line-height:1" id="fire-number">—</div>
-      <div style="font-size:11px;color:rgba(255,255,255,.5);margin:8px 0" id="fire-subtitle">הזן הכנסות והוצאות לחישוב</div>
-      <div style="background:rgba(255,255,255,.1);border-radius:3px;height:6px;margin:8px 0"><div id="fire-bar" style="height:6px;width:0%;background:#c8a96a;border-radius:3px;transition:width .4s"></div></div>
-      <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35)"><span id="fire-have-plan">יש: —</span><span id="fire-goal-plan">יעד: —</span></div>
-      <div style="display:flex;gap:6px;margin-top:10px">
-        <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#C9A96E;font-size:12px" id="fire-rate">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">שיעור חיסכון</div></div>
-        <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#C9A96E;font-size:12px" id="fire-passive">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">הכנסה פסיבית</div></div>
-        <div class="tc-chip" style="background:rgba(255,255,255,.08);flex:1"><div class="val" style="color:#C9A96E;font-size:12px" id="fire-exp">—</div><div class="lbl" style="color:rgba(255,255,255,.4)">הוצאות חודשיות</div></div>
-      </div>
-      <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:6px;text-align:center" id="fire-progress">התחזיות מבוססות על הנחות בלבד</div>
+    <div id="journey-summary" style="font-size:12px;color:#1E2D4A;font-weight:600;text-align:center;padding:9px 0 3px">—</div>
+    <div class="ov-ev-row" style="margin-top:2px">
+      <input class="ov-ev-fi" id="ov-ev-n" placeholder="אירוע חיים (חתונה, דירה...)">
+      <input class="ov-ev-yr" id="ov-ev-y" placeholder="שנה" type="number">
+      <button class="ov-ev-add" onclick="ovAddEv()">+ הוסף</button>
     </div>
+    <div style="font-size:9.5px;color:#A8A8B0;text-align:center;margin-top:4px">האירועים מסומנים כנקודות זהב על הגרף — לחיצה על נקודה למחיקה</div>
   </div>
 
-  <!-- ── CARD 2: FIRE Settings ── -->
-  <div class="tc" style="height:234px">
-    <div class="tc-hdr"><div><h3>FIRE</h3><p>הגדרות פרישה וחישוב יעד</p></div></div>
-    <div class="tc-body">
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-        <div><div class="tc-il">גיל נוכחי</div><input class="tc-inp" id="fire-age-in" type="number" value="35" oninput="renderFIREPage()"/></div>
-        <div><div class="tc-il">גיל פרישה</div><input class="tc-inp" id="fire-retire-in" type="number" value="60" oninput="renderFIREPage()"/></div>
-        <div><div class="tc-il">הכנסה ₪</div><input class="tc-inp" id="fire-inc-in" type="number" placeholder="₪" oninput="renderFIREPage()"/></div>
-        <div><div class="tc-il">הוצאות ₪</div><input class="tc-inp" id="fire-exp-in" type="number" placeholder="₪" oninput="renderFIREPage()"/></div>
-        <div><div class="tc-il">תשואה %</div><input class="tc-inp" id="fire-ret" type="number" value="7" oninput="renderFIREPage()"/></div>
-        <div><div class="tc-il">כלל נסיגה %</div><input class="tc-inp" id="fire-wr" type="number" value="4" oninput="renderFIREPage()"/></div>
-      </div>
-      <button onclick="renderFIREPage()" style="width:100%;background:#A07840;color:#fff;border:none;border-radius:10px;padding:9px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px">▶ עדכן חישוב</button>
-    </div>
-  </div>
-
-  <!-- מה השתנה -->
+  <!-- Card B: מה השתנה -->
   <div class="card">
     <div class="ch"><div><div class="ct">מה השתנה</div><div class="cs">מאז הביקור האחרון</div></div></div>
     <div class="cb">
       <div class="sep"></div>
       <div class="ov-snap-rows" id="nh-wc"></div>
+      <div style="font-size:10px;color:#8a8a8a;text-align:center;margin-top:2px">מתעדכן אוטומטית פעם בחודש</div>
     </div>
-  </div>
-
-  <!-- אירועי חיים -->
-  <div class="ov-chart-card">
-    <div class="ov-chart-hdr">
-      <div><div class="ov-chart-title">אירועי חיים</div><div class="ov-chart-sub">סמן אירועים על ציר הזמן</div></div>
-    </div>
-    <div class="ov-ev-row">
-      <input class="ov-ev-fi" id="ov-ev-n" placeholder="אירוע חיים (חתונה, דירה...)">
-      <input class="ov-ev-yr" id="ov-ev-y" placeholder="שנה" type="number">
-      <button class="ov-ev-add" onclick="ovAddEv()">+ הוסף</button>
-    </div>
-    <div class="ov-ev-tags" id="ov-ev-list"></div>
   </div>
 
 </div>
@@ -1241,7 +1203,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div class="set-row" onclick="editCalcVal('returnRate','תשואה שנתית %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">תשואה שנתית ברירת מחדל</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="returnRate" style="font-size:13px;color:#8a8a8a">7%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
       <div class="set-row" onclick="editCalcVal('withdrawalRate','כלל נסיגה %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">כלל נסיגה</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="withdrawalRate" style="font-size:13px;color:#8a8a8a">4%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
       <div class="set-row" onclick="editCalcVal('inflation','אינפלציה שנתית %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">אינפלציה שנתית</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="inflation" style="font-size:13px;color:#8a8a8a">3%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
-      <div class="set-row" style="border-bottom:none" onclick="editCalcVal('capitalGainsTax','מס רווחי הון %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">מס רווחי הון</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="capitalGainsTax" style="font-size:13px;color:#8a8a8a">25%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" onclick="editCalcVal('capitalGainsTax','מס רווחי הון %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">מס רווחי הון</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="capitalGainsTax" style="font-size:13px;color:#8a8a8a">25%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" style="border-bottom:none" onclick="editRetireAge()"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">גיל פרישה מתוכנן</div></div><div style="display:flex;align-items:center;gap:6px"><span id="set-retire-val" style="font-size:13px;color:#8a8a8a">65</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
     </div>
   </div>
 
@@ -1957,6 +1920,16 @@ function render(){
   try{renderOvInsights();}catch(e){}
   try{renderCashCard();}catch(e){}
   try{renderCashflowChart(c);}catch(e){}
+  try{renderJourneySummary(c);}catch(e){}
+}
+/* ── Journey summary line under the growth graph (single source: calc) ── */
+function renderJourneySummary(c){
+  var el=document.getElementById('journey-summary'); if(!el) return;
+  if(!(c.fireNumber>0) || !c.totalIncome){ el.textContent='הזן הכנסות והוצאות כדי לחשב חופש כלכלי'; el.style.color='#8a8a8a'; return; }
+  var have=Math.max(c.netWorth,0), pct=Math.round(have/c.fireNumber*100);
+  var agePart=(c.fireAge && c.fireAge>0 && c.fireAge<120) ? ('פרישה בגיל '+c.fireAge+' · ') : '';
+  el.textContent=agePart+fmt(have)+' מתוך '+fmt(c.fireNumber)+' ('+pct+'%)';
+  el.style.color='#1E2D4A';
 }
 
 /* Semantic metric colors (soft) — green #2D6A3F, amber #B8860B, red #A32D2D */
@@ -3349,6 +3322,7 @@ function renderPlanHub(){
   try{ovDrawG();}catch(e){}
   try{if(window.ovRenderEvs)ovRenderEvs();}catch(e){}
   try{if(typeof NHrenderChanged==='function')NHrenderChanged();}catch(e){}
+  try{renderJourneySummary(calc());}catch(e){}
 }
 function renderAssetsDonut(c){
   var svg=document.getElementById('ad-svg'); if(!svg) return;
@@ -5334,6 +5308,7 @@ function openSettings(){
   document.querySelectorAll('.cat-toggle').forEach(function(t){var cat=t.dataset.cat;if(s.categories&&typeof s.categories[cat]!=='undefined')t.classList.toggle('on',!!s.categories[cat]);});
   // Calc values
   document.querySelectorAll('.calc-val').forEach(function(el){var k=el.dataset.key;if(s[k]!==undefined)el.textContent=s[k]+'%';});
+  var rv=document.getElementById('set-retire-val');if(rv)rv.textContent=(ND.profile&&ND.profile.retireAge)||65;
   // Language chips
   document.querySelectorAll('#set-lang-chips .set-chip').forEach(function(c){c.classList.toggle('on',c.dataset.val===(s.language||'he'));});
   // Currency chips
@@ -5439,6 +5414,14 @@ function saveCalcVal(){
   if(_calcEditorKey==='withdrawalRate'){var wr=document.getElementById('fire-wr');if(wr)wr.value=val;}
 }
 function closeCalcEditor(){document.getElementById('set-calc-editor').style.display='none';}
+function editRetireAge(){
+  var cur=(ND.profile&&ND.profile.retireAge)||65;
+  var v=prompt('גיל פרישה מתוכנן',cur);
+  if(v===null)return;
+  var n=parseInt(v,10); if(!(n>0&&n<120))return;
+  ND.profile.retireAge=n; saveToStorage();
+  var rv=document.getElementById('set-retire-val');if(rv)rv.textContent=n;
+}
 // Apply category toggles on load
 document.addEventListener('DOMContentLoaded',function(){setTimeout(applyCategoryToggles,200);});
 
@@ -5528,6 +5511,7 @@ function calcAmort(){
     }).join('');
   };
   window.ovDelEv=function(id){ ND.milestones=(ND.milestones||[]).filter(function(m){return m.id!==id;}); saveToStorage(); ovRenderEvs(); ovDrawG(); };
+  window.ovEvClick=function(id){ var m=(ND.milestones||[]).find(function(x){return x.id===id;}); if(m&&confirm('למחוק את "'+m.text+'" ('+m.year+')?')) ovDelEv(id); };
 
   // Net-worth curve from ND.history: solid past + dashed forward projection
   function NH_buildLine(px, PT, cH, minY, maxY){
@@ -5580,8 +5564,9 @@ function calcAmort(){
       if(ev.year>=minY&&ev.year<=maxY){
         var ex=px(ev.year);
         evM+='<line x1="'+ex+'" y1="'+PT+'" x2="'+ex+'" y2="'+(PT+cH)+'" stroke="rgba(160,120,64,0.25)" stroke-width="1" stroke-dasharray="3,2"/>';
-        evM+='<circle cx="'+ex+'" cy="'+(PT+cH*0.5)+'" r="3" fill="#A07840"/>';
-        evM+='<text x="'+ex+'" y="'+(PT-1)+'" text-anchor="middle" font-size="8" fill="#A07840" font-family="-apple-system,sans-serif">'+ev.text+'</text>';
+        evM+='<circle cx="'+ex+'" cy="'+(PT+cH*0.5)+'" r="3.5" fill="#A07840"/>';
+        evM+='<circle cx="'+ex+'" cy="'+(PT+cH*0.5)+'" r="9" fill="transparent" style="cursor:pointer" onclick="ovEvClick(\''+ev.id+'\')"><title>'+ev.text+' — '+ev.year+' (לחץ למחיקה)</title></circle>';
+        evM+='<text x="'+ex+'" y="'+(PT-1)+'" text-anchor="middle" font-size="8" fill="#A07840" font-family="-apple-system,sans-serif" style="pointer-events:none">'+ev.text+'</text>';
       }
     });
     svg.innerHTML=
