@@ -1495,7 +1495,7 @@ function fmt(n){
 var T={
   he:{
     nav_overview:'סקירה',nav_cashflow:'תזרים',nav_assets:'נכסים',
-    nav_plan:'תכנון',nav_tools:'כלים',settings:'הגדרות',
+    nav_plan:'מסע',nav_tools:'כלים',settings:'הגדרות',
     netWorth:'שווי נטו',totalAssets:'סה"כ נכסים',
     income:'הכנסה',expenses:'הוצאות',savings:'חיסכון',
     pension:'פנסיה',investments:'השקעות',loans:'הלוואות',
@@ -1523,7 +1523,7 @@ var T={
   },
   en:{
     nav_overview:'Overview',nav_cashflow:'Cash Flow',nav_assets:'Assets',
-    nav_plan:'Planning',nav_tools:'Tools',settings:'Settings',
+    nav_plan:'Journey',nav_tools:'Tools',settings:'Settings',
     netWorth:'Net Worth',totalAssets:'Total Assets',
     income:'Income',expenses:'Expenses',savings:'Savings',
     pension:'Pension',investments:'Investments',loans:'Loans',
@@ -1898,6 +1898,7 @@ function render(){
   renderAIInsights(c);
   checkCelebrations(c);
   try{ovRenderOverview(c);}catch(e){}
+  try{renderFIREPage();}catch(e){}
 }
 
 function ovRenderOverview(c){
@@ -2810,6 +2811,11 @@ function renderFIREPage(){
     retireIn._synced=true;
     retireIn.addEventListener('input',function(){ND.profile.retireAge=parseInt(this.value)||60;saveToStorage();});
   }
+  // Reflect real income/expenses from ND so no double entry is needed (don't clobber while typing)
+  var incIn = document.getElementById('fire-inc-in');
+  if(incIn && document.activeElement!==incIn) incIn.value = c.totalIncome>0 ? c.totalIncome : '';
+  var expIn = document.getElementById('fire-exp-in');
+  if(expIn && document.activeElement!==expIn) expIn.value = c.totalExpenses>0 ? c.totalExpenses : '';
   var wrIn = document.getElementById('fire-wr');
   var retIn = document.getElementById('fire-ret');
   var withdrawRate = parseFloat((wrIn&&wrIn.value)||4)/100;
@@ -2834,6 +2840,10 @@ function renderFIREPage(){
   // Update DOM
   var fn = document.getElementById('fire-number');
   if(fn) fn.textContent = fireNumber > 0 ? fmt(fireNumber) : '—';
+  var fh = document.getElementById('fire-have-plan');
+  if(fh) fh.textContent = 'יש: '+(nw0 > 0 ? fmt(nw0) : '—');
+  var fg = document.getElementById('fire-goal-plan');
+  if(fg) fg.textContent = 'יעד: '+(fireNumber > 0 ? fmt(fireNumber) : '—');
   var fs = document.getElementById('fire-subtitle');
   if(fs) fs.textContent = fireNumber > 0
     ? 'פרישה בגיל '+actualFireAge+' · עוד '+yearsLeft+' שנים'
