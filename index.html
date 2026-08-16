@@ -669,8 +669,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </script>
   </div>
   <!-- RIGHT: Agent button -->
-  <div onclick="toggleAgent()" style="width:36px;height:36px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0">
-    <div style="width:8px;height:8px;background:#c8a96a;border-radius:50%"></div>
+  <div onclick="toggleAgent()" style="width:42px;height:42px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;box-shadow:0 3px 12px rgba(30,45,74,.3)">
+    <span style="color:#c8a96a;font-size:20px;font-weight:700;line-height:1">✦</span>
   </div>
 </div>
 <!-- TOAST -->
@@ -1174,19 +1174,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </div>
   </div>
 
-  <!-- SECTION: מה רלוונטי אליי -->
-  <div>
-    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px">מה רלוונטי אליי</div>
-    <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px">כבה קטגוריה — הכרטיסייה תיעלם מהאפליקציה</div>
-    <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(30,45,74,.06);display:flex;align-items:center;justify-content:center;font-size:16px">🏛️</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">פנסיה וקה"ש</div><div style="font-size:11px;color:#8a8a8a">קרן פנסיה, קרן השתלמות, גמל</div></div></div><button class="cat-toggle on" data-cat="pension" onclick="toggleCat(this)"></button></div>
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:16px">📈</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">השקעות בשוק ההון</div><div style="font-size:11px;color:#8a8a8a">תיקי השקעות, מניות, קרנות</div></div></div><button class="cat-toggle on" data-cat="investments" onclick="toggleCat(this)"></button></div>
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(45,106,63,.08);display:flex;align-items:center;justify-content:center;font-size:16px">🏠</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">נדל"ן ומשכנתא</div><div style="font-size:11px;color:#8a8a8a">דירות, נכסים, הלוואות נדל"ן</div></div></div><button class="cat-toggle" data-cat="realestate" onclick="toggleCat(this)"></button></div>
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(107,122,150,.1);display:flex;align-items:center;justify-content:center;font-size:16px">💳</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">הלוואות וחובות</div><div style="font-size:11px;color:#8a8a8a">הלוואות, לוח סילוקין</div></div></div><button class="cat-toggle on" data-cat="loans" onclick="toggleCat(this)"></button></div>
-      <div class="set-row" style="border-bottom:none"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="width:32px;height:32px;border-radius:9px;background:rgba(217,119,6,.08);display:flex;align-items:center;justify-content:center;font-size:16px">🔥</div><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">FIRE ועצמאות כלכלית</div><div style="font-size:11px;color:#8a8a8a">תכנון פרישה מוקדמת</div></div></div><button class="cat-toggle on" data-cat="fire" onclick="toggleCat(this)"></button></div>
-    </div>
-  </div>
-
   <!-- SECTION: הגדרות חישוב -->
   <div>
     <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px">הגדרות חישוב</div>
@@ -1297,20 +1284,20 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <!-- Handle -->
   <div style="display:flex;justify-content:center;padding:10px 0 4px"><div style="width:36px;height:4px;background:rgba(0,0,0,.1);border-radius:2px"></div></div>
   <!-- Header -->
-  <div style="display:flex;justify-content:space-between;align-items:center;padding:0 20px 10px">
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:36px;height:36px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative"><div style="width:8px;height:8px;background:#c8a96a;border-radius:50%"></div></div>
-      <div><div style="font-size:14px;font-weight:800;color:#1E2D4A">הסוכן שלך</div><div style="font-size:10px;color:#6B7A96">שאל כל שאלה פיננסית</div></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 22px 14px">
+    <div style="display:flex;align-items:center;gap:11px">
+      <div style="width:40px;height:40px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center"><span style="color:#c8a96a;font-size:19px;font-weight:700;line-height:1">✦</span></div>
+      <div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:15px;font-weight:800;color:#1E2D4A">Numa AI</span><span style="width:7px;height:7px;background:#27ae60;border-radius:50%;display:inline-block"></span></div><div style="font-size:10px;color:#6B7A96">היועץ הפיננסי שלך</div></div>
     </div>
-    <button onclick="toggleAgent()" style="width:28px;height:28px;border-radius:50%;background:#ede9e0;border:none;font-size:14px;color:#6B7A96;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
+    <button onclick="toggleAgent()" style="width:30px;height:30px;border-radius:50%;background:#ede9e0;border:none;font-size:14px;color:#6B7A96;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
   </div>
   <!-- Messages -->
-  <div id="ai-msgs" style="flex:1;overflow-y:auto;padding:0 20px 10px;display:flex;flex-direction:column;gap:8px;min-height:120px"></div>
+  <div id="ai-msgs" style="flex:1;overflow-y:auto;padding:4px 22px 12px;display:flex;flex-direction:column;gap:10px;min-height:200px"></div>
   <!-- Quick chips -->
   <div id="agent-chips" style="display:flex;gap:6px;padding:0 20px 8px;flex-wrap:wrap">
-    <button class="agent-qchip" onclick="agentSend('כמה לפרישה?')">כמה לפרישה?</button>
-    <button class="agent-qchip" onclick="agentSend('מה ה-FIRE שלי?')">מה ה-FIRE שלי?</button>
-    <button class="agent-qchip" onclick="agentSend('לאן להשקיע?')">לאן להשקיע?</button>
+    <button class="agent-qchip" onclick="agentSend('מתי אגיע לחופש כלכלי?')">מתי אגיע לחופש כלכלי?</button>
+    <button class="agent-qchip" onclick="agentSend('מה ההלוואה שהכי כדאי לסלק?')">מה ההלוואה שהכי כדאי לסלק?</button>
+    <button class="agent-qchip" onclick="agentSend('איך נראה החודש שלי?')">איך נראה החודש שלי?</button>
   </div>
   <!-- Input -->
   <div style="display:flex;align-items:center;gap:8px;padding:8px 20px max(env(safe-area-inset-bottom),12px)">
@@ -1323,8 +1310,9 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <style>
 .agent-sheet.on{transform:translateY(0)!important}
 .agent-qchip{background:#ede9e0;color:#1E2D4A;border:none;border-radius:20px;padding:6px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit}
-.agent-msg-ai{background:#1E2D4A;color:#fff;border-radius:18px 18px 18px 5px;padding:10px 14px;font-size:12px;line-height:1.6;max-width:85%;align-self:flex-start}
-.agent-msg-user{background:#A07840;color:#fff;border-radius:18px 18px 5px 18px;padding:10px 14px;font-size:12px;line-height:1.6;max-width:85%;align-self:flex-end}
+.agent-msg-ai{background:#1E2D4A;color:#fff;border-radius:18px 18px 18px 6px;padding:11px 15px;font-size:13px;line-height:1.6;max-width:88%;align-self:flex-start;box-shadow:0 2px 10px rgba(30,45,74,.15)}
+.agent-msg-ai strong{color:#c8a96a}
+.agent-msg-user{background:#A07840;color:#fff;border-radius:18px 18px 6px 18px;padding:11px 15px;font-size:13px;line-height:1.6;max-width:88%;align-self:flex-end}
 .agent-typing{display:flex;gap:4px;padding:10px 14px;align-self:flex-start}
 .agent-typing span{width:6px;height:6px;background:rgba(30,45,74,.3);border-radius:50%;animation:agentDot .6s infinite alternate}
 .agent-typing span:nth-child(2){animation-delay:.2s}
@@ -3324,6 +3312,25 @@ function toggleAgent(){
   if(_agentOpen){sheet.classList.add('on');overlay.style.display='block';}
   else{sheet.classList.remove('on');overlay.style.display='none';}
 }
+// Light, self-contained markdown → HTML for agent replies (bold, headers, lists). Escapes HTML first (safe).
+function mdToHtml(md){
+  var esc=function(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');};
+  var inline=function(t){return esc(t)
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/`(.+?)`/g,'<code style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 4px">$1</code>');};
+  var out='',inList=false;
+  String(md).split('\n').forEach(function(ln){
+    var li=ln.match(/^\s*[-*•]\s+(.*)$/), h=ln.match(/^\s*(#{1,4})\s+(.*)$/);
+    if(li){ if(!inList){out+='<ul style="margin:5px 0;padding-inline-start:18px">';inList=true;} out+='<li style="margin:2px 0">'+inline(li[1])+'</li>'; return; }
+    if(inList){out+='</ul>';inList=false;}
+    if(h){ out+='<div style="font-weight:800;margin:5px 0 2px">'+inline(h[2])+'</div>'; return; }
+    if(ln.trim()===''){ out+='<div style="height:5px"></div>'; return; }
+    out+='<div>'+inline(ln)+'</div>';
+  });
+  if(inList) out+='</ul>';
+  return out;
+}
 function agentSend(txt){
   var inp=document.getElementById('ai-inp');
   var msg=txt||inp.value.trim();
@@ -3358,7 +3365,7 @@ function agentSend(txt){
     var reply=(data.content&&data.content[0]&&data.content[0].text)||'מצטער, לא הצלחתי לענות. נסה שוב.';
     _agentHistory.push({role:'assistant',content:reply});
     var aiDiv=document.createElement('div');
-    aiDiv.className='agent-msg-ai';aiDiv.textContent=reply;
+    aiDiv.className='agent-msg-ai';aiDiv.innerHTML=mdToHtml(reply);
     msgs.appendChild(aiDiv);
     msgs.scrollTop=msgs.scrollHeight;
   }).catch(function(){
@@ -3963,16 +3970,15 @@ function obEnterApp(){
 /* ── LANDING + AUTH V2 ── */
 #landing-overlay{position:fixed;inset:0;z-index:999;background:#1E2D4A;overflow-y:auto;display:none}
 .la-wrap{padding:60px 28px 40px;display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
-.la-logo{font-size:42px;font-weight:800;color:#fff;letter-spacing:-1px;text-align:center}.la-logo span{color:#c8a96a}
-.la-tag{font-size:14px;color:rgba(255,255,255,.4);text-align:center;margin-top:4px}
-.la-cards{flex:1;display:flex;flex-direction:column;gap:12px;margin-top:32px}
-.la-card{background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.08);border-radius:16px;padding:16px;display:flex;align-items:flex-start;gap:14px}
-.la-card-ico{font-size:22px;flex-shrink:0;margin-top:2px}
-.la-card-t{font-size:14px;font-weight:700;color:#fff}
-.la-card-s{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px;line-height:1.4}
-.la-btn{width:100%;background:#A07840;color:#fff;border:none;border-radius:16px;padding:17px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:24px;transition:transform .1s}
+.la-hero{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;animation:laIn .7s ease both}
+.la-logo{font-size:56px;font-weight:800;color:#fff;letter-spacing:-1.5px;text-align:center}.la-logo span{color:#c8a96a}
+.la-tag{font-size:15px;color:rgba(255,255,255,.5);text-align:center;margin-top:12px}
+.la-actions{display:flex;flex-direction:column;gap:10px;animation:laIn .7s ease .15s both}
+.la-btn{width:100%;background:#A07840;color:#fff;border:none;border-radius:16px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .1s}
 .la-btn:active{transform:scale(.97)}
-.la-link{text-align:center;margin-top:14px;font-size:13px;color:rgba(255,255,255,.4)}.la-link a{color:#c8a96a;cursor:pointer;text-decoration:none;font-weight:600}
+.la-btn2{width:100%;background:transparent;color:rgba(255,255,255,.55);border:none;border-radius:14px;padding:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.la-btn2:active{opacity:.6}
+@keyframes laIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 #auth-overlay{position:fixed;inset:0;z-index:998;background:#f0ece4;overflow-y:auto;display:none}
 .au-wrap{padding:56px 28px 40px;direction:rtl}
 .au-logo{font-size:32px;font-weight:800;color:#1E2D4A;text-align:center}.au-logo span{color:#A07840}
@@ -3996,16 +4002,14 @@ function obEnterApp(){
 <!-- ══════ LANDING PAGE ══════ -->
 <div id="landing-overlay">
   <div class="la-wrap">
-    <div class="la-logo">Nu<span>ma</span></div>
-    <div class="la-tag">הכלכלה שלך, בשליטה מלאה</div>
-    <div class="la-cards">
-      <div class="la-card"><div class="la-card-ico">🔗</div><div><div class="la-card-t">תמונה פיננסית מלאה</div><div class="la-card-s">פנסיה, השקעות, תזרים — הכל ביחד</div></div></div>
-      <div class="la-card"><div class="la-card-ico">🔥</div><div><div class="la-card-t">מסלול FIRE</div><div class="la-card-s">גלה מתי תוכל להיות עצמאי כלכלית</div></div></div>
-      <div class="la-card"><div class="la-card-ico">✦</div><div><div class="la-card-t">סוכן AI אישי</div><div class="la-card-s">שאל כל שאלה פיננסית לפי הנתונים שלך</div></div></div>
-      <div class="la-card"><div class="la-card-ico">🔒</div><div><div class="la-card-t">פרטי ומאובטח</div><div class="la-card-s">הנתונים שלך מוצפנים ושמורים רק אצלך</div></div></div>
+    <div class="la-hero">
+      <div class="la-logo">Nu<span>ma</span></div>
+      <div class="la-tag">הכלכלה שלך, בשליטה מלאה</div>
     </div>
-    <button class="la-btn" onclick="showAuthScreen2('signup')">התחל בחינם →</button>
-    <div class="la-link">כבר יש לך חשבון? <a onclick="showAuthScreen2('login')">כניסה</a></div>
+    <div class="la-actions">
+      <button class="la-btn" onclick="showAuthScreen2('login')">כניסה</button>
+      <button class="la-btn2" onclick="showAuthScreen2('signup')">הרשמה</button>
+    </div>
   </div>
 </div>
 
@@ -5184,11 +5188,10 @@ function toggleCat(btn){
   applyCategoryToggles();
 }
 function applyCategoryToggles(){
-  var s=getSettings();var cats=s.categories||{};
-  var map={pension:'section-pension',investments:'section-inv',realestate:'section-re',insurance:'section-ins',loans:'section-lo',legacy:'section-legacy',fire:'section-fire'};
-  Object.keys(map).forEach(function(cat){
-    var el=document.getElementById(map[cat]);
-    if(el) el.style.display=(cats[cat]===0)?'none':'';
+  // Category-visibility toggles were removed — keep all sections visible (un-hide any left hidden).
+  ['section-st','section-inv','section-re','section-lo','section-fire'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.style.display='';
   });
 }
 function setLang(val){
