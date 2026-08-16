@@ -135,7 +135,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   .dev{max-width:1100px;margin:0 auto;box-shadow:0 0 60px rgba(0,0,0,.06)}
   .pg.on{max-width:1100px;margin-inline:auto;width:100%;padding-left:24px;padding-right:24px}
   #pg-ov.on{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-content:start}
-  #pg-ov.on > .ov-hero,#pg-ov.on > div[style*="align-items:stretch"],#pg-ov.on > div[style*="display:none"]{grid-column:1 / -1}
+  #pg-ov.on > .ov-hero,#pg-ov.on > .card,#pg-ov.on > div[style*="align-items:stretch"],#pg-ov.on > div[style*="display:none"]{grid-column:1 / -1}
 }
 
 /* ── PAGE TRANSITIONS ── */
@@ -1589,7 +1589,7 @@ var T={
   }
 };
 function t(key){
-  var lang=(typeof ND!=='undefined'&&ND.settings&&ND.settings.language)||SETTINGS_DEFAULTS.language||'he';
+  var lang=((typeof getSettings==='function'&&getSettings().language))||SETTINGS_DEFAULTS.language||'he';
   return(T[lang]&&T[lang][key])||(T.he[key])||key;
 }
 
@@ -3522,7 +3522,7 @@ function agentSend(txt){
     ctx+=' אין הלוואות.';
   }
   // Call API — system prompt in the current UI language
-  var _lang=(ND.settings&&ND.settings.language)||SETTINGS_DEFAULTS.language||'he';
+  var _lang=getSettings().language||SETTINGS_DEFAULTS.language||'he';
   var _sys=(_lang==='en')
     ? 'You are Numa, a personal financial assistant. '+ctx+' Answer in English, briefly and clearly. Do not recommend specific products. Do not use emojis. Base every recommendation only on the data provided — do not invent numbers.'
     : 'אתה סוכן פיננסי של Numa. '+ctx+' ענה בעברית, בצורה קצרה וברורה. אל תמליץ על מוצרים ספציפיים. אל תשתמש באימוג\'ים. בסס כל המלצה על הנתונים שסופקו בלבד — אל תמציא מספרים.';
@@ -5385,7 +5385,7 @@ function setCurrency(val){
   try{renderAssetsHub();}catch(e){}
 }
 function applyLanguage(){
-  var lang=(ND.settings&&ND.settings.language)||SETTINGS_DEFAULTS.language||'he';
+  var lang=getSettings().language||SETTINGS_DEFAULTS.language||'he';
   var html=document.documentElement;
   html.lang=lang;html.dir=lang==='he'?'rtl':'ltr';
   document.body.style.direction=lang==='he'?'rtl':'ltr';
@@ -5544,7 +5544,7 @@ function calcAmort(){
       var fy=yPos(cv.fireNumber);
       var ly=fy<PT+9?fy+9:fy-3;
       out+='<line x1="'+px(minY)+'" y1="'+fy+'" x2="'+px(maxY)+'" y2="'+fy+'" stroke="#2D6A3F" stroke-width="1" stroke-dasharray="5,3"/>';
-      out+='<text x="'+px(minY)+'" y="'+ly+'" font-size="8" font-weight="700" fill="#2D6A3F" font-family="-apple-system,sans-serif">חופש כלכלי</text>';
+      out+='<text x="'+((px(minY)+px(maxY))/2)+'" y="'+ly+'" text-anchor="middle" font-size="8" font-weight="700" fill="#2D6A3F" font-family="-apple-system,sans-serif">חופש כלכלי</text>';
     }
     if(projPts.length>=2) out+='<polyline points="'+poly(projPts)+'" fill="none" stroke="#A07840" stroke-width="2" stroke-dasharray="4,3" stroke-linecap="round" stroke-linejoin="round"/>';
     if(histPts.length>=2) out+='<polyline points="'+poly(histPts)+'" fill="none" stroke="#1E2D4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
