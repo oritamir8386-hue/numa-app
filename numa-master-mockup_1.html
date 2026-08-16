@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Numa — המוקאפ הסופי המלא · הרפרנס המחייב</title>
+<style>
+  :root{--bg:#f0ece4;--card:#fff;--ink:#1E2D4A;--muted:#8a8a8a;--gold:#A07840;--gold-l:#c8a96a;
+    --field:#ede9e0;--line:#e8e3d8;--green:#2D6A3F;--amber:#B8860B;--red:#A32D2D;
+    --r-card:20px;--pad:22px;--gap:12px;--shadow:0 1px 3px rgba(30,45,74,.06)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"SF Pro Display",sans-serif;background:var(--bg);color:var(--ink);
+    direction:rtl;line-height:1.5;padding-bottom:86px}
+  .wrap{max-width:420px;margin:0 auto;padding:16px 14px 0}
+
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:2px 2px 14px}
+  .avatar{width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;display:flex;
+    align-items:center;justify-content:center;font-weight:700;font-size:14px}
+  .agent{width:40px;height:40px;border-radius:50%;background:var(--ink);display:flex;align-items:center;
+    justify-content:center;box-shadow:var(--shadow)}
+  .greet{text-align:center}
+  .greet small{display:block;font-size:11px;color:var(--muted)}
+  .greet b{font-size:15px}
+
+  .card{background:var(--card);border-radius:var(--r-card);padding:var(--pad);box-shadow:var(--shadow);
+    margin-bottom:var(--gap);overflow:hidden}
+  .card.hero{background:var(--ink);color:#f4efe6}
+  .card.hero .c-label{color:var(--gold-l)}
+  .card.hero .c-sub{color:#aab4c8}
+  .c-label{font-size:12px;font-weight:600;color:var(--muted)}
+  .c-num{font-size:34px;font-weight:800;letter-spacing:-1.2px;margin-top:2px;font-variant-numeric:tabular-nums}
+  .c-num .g{color:var(--gold)} .card.hero .c-num{color:#fff}
+  .c-num.good{color:var(--green)}
+  .c-sub{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .chips{display:flex;gap:8px;margin-top:14px}
+  .chip{flex:1;background:rgba(255,255,255,.08);border-radius:12px;padding:10px 8px;text-align:center}
+  .chip b{display:block;font-size:15px;font-weight:800}
+  .chip span{font-size:10.5px;opacity:.75}
+  .chip b.good{color:#7fc493} .chip b.bad{color:#e0a9a0}
+
+  .row{display:flex;justify-content:space-between;align-items:center;padding:13px 4px;
+    border-bottom:1px solid var(--line);border-radius:10px}
+  .row:last-child{border-bottom:none}
+  .row:active{background:var(--field)}
+  .r-name{font-size:14px;font-weight:600}
+  .r-meta{font-size:11px;color:var(--muted);margin-top:2px}
+  .r-left{text-align:left;flex-shrink:0}
+  .r-val{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+  .r-delta{font-size:11px;font-weight:700;margin-top:1px}
+  .up{color:var(--green)} .down{color:var(--red)} .warn{color:var(--amber)}
+
+  .bar{height:8px;border-radius:5px;background:var(--field);overflow:hidden;display:flex;margin:12px 0 6px}
+  .bar i{display:block;height:100%}
+  .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:4px;vertical-align:middle}
+  .prog-meta{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted)}
+  .prog-meta .target{color:var(--gold);font-weight:700;cursor:pointer;border-bottom:1px dashed var(--gold-l)}
+
+  .inp{background:var(--field);border:none;border-radius:12px;padding:11px 14px;font-size:13px;
+    font-family:inherit;color:var(--ink);width:100%}
+  .inp::placeholder{color:#b3ada1}
+  .btn-add{background:none;border:none;color:var(--gold);font-size:12.5px;font-weight:700;
+    font-family:inherit;padding:10px 4px 0;cursor:pointer}
+  .sec-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+  .sec-total{font-size:13px;font-weight:700;color:var(--muted)}
+
+  /* מסלול התחנות */
+  .path{position:relative;margin:22px 4px 4px;padding-right:14px}
+  .path-line{position:absolute;right:20px;top:8px;bottom:8px;width:3px;border-radius:2px;
+    background:linear-gradient(180deg,var(--gold) 0%,var(--gold) 18%,var(--field) 18%)}
+  .station{position:relative;display:flex;align-items:flex-start;gap:16px;padding:0 0 24px}
+  .station:last-child{padding-bottom:0}
+  .st-dot{position:relative;z-index:2;width:15px;height:15px;border-radius:50%;flex-shrink:0;
+    margin-top:3px;background:var(--field);border:3px solid #d9d2c2}
+  .station.here .st-dot{width:19px;height:19px;background:var(--gold);border:4px solid #fff;
+    box-shadow:0 0 0 2px var(--gold);margin-right:-2px;margin-top:1px}
+  .station.done .st-dot{background:var(--gold);border-color:var(--gold-l)}
+  .station.goal .st-dot{background:var(--green);border-color:#bcd8c4}
+  .st-body{flex:1}
+  .st-name{font-size:14px;font-weight:700}
+  .station.here .st-name{color:var(--gold)}
+  .station.goal .st-name{color:var(--green)}
+  .st-meta{font-size:11px;color:var(--muted);margin-top:1px}
+  .st-val{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;text-align:left;flex-shrink:0}
+  .ev-pin{display:inline-block;background:var(--field);color:var(--gold);font-size:10px;font-weight:700;
+    border-radius:999px;padding:2px 9px;margin-top:4px}
+
+  /* מנופים */
+  .lever{display:flex;align-items:center;gap:12px;padding:13px 2px;border-bottom:1px solid var(--line)}
+  .lever:last-child{border-bottom:none}
+  .lever:active{background:var(--field);border-radius:10px}
+  .lv-ico{width:34px;height:34px;border-radius:10px;background:var(--field);display:flex;
+    align-items:center;justify-content:center;flex-shrink:0}
+  .lv-body{flex:1}
+  .lv-t{font-size:13.5px;font-weight:600}
+  .lv-s{font-size:11px;color:var(--muted);margin-top:1px}
+  .lv-gain{font-size:13px;font-weight:800;color:var(--green);text-align:left;flex-shrink:0;white-space:nowrap}
+  .lv-hint{font-size:10.5px;color:var(--muted);text-align:center;margin-top:10px}
+
+  /* מומנטום */
+  .mom-hero{display:flex;align-items:baseline;gap:8px;margin-top:4px}
+  .mom-hero b{font-size:24px;font-weight:800;color:var(--green)}
+  .mom-hero span{font-size:12px;color:var(--muted)}
+  .mrow{display:flex;justify-content:space-between;padding:10px 2px;border-bottom:1px solid var(--line);font-size:13px}
+  .mrow:last-child{border-bottom:none}
+  .note{text-align:center;font-size:10.5px;color:var(--muted);margin-top:10px}
+
+  .nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);
+    display:flex;justify-content:space-around;padding:10px 8px calc(12px + env(safe-area-inset-bottom));
+    box-shadow:0 -1px 0 var(--line);z-index:9}
+  .nav>div{font-size:11px;color:var(--muted);text-align:center;width:64px;cursor:pointer}
+  .nav .on{color:var(--gold);font-weight:700}
+  .nav .ic{height:22px;display:flex;align-items:center;justify-content:center;margin-bottom:3px}
+  .nav svg{stroke:#8a8a8a} .nav .on svg{stroke:var(--gold)}
+  .pg{display:none} .pg.show{display:block}
+  .proto-note{text-align:center;font-size:10.5px;color:var(--muted);padding:4px 0 10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="proto-note">המוקאפ הסופי · הטאבים למטה עובדים · המספרים לדוגמה — בקוד הכל מ-ND</div>
+  <div class="topbar">
+    <div class="agent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z" fill="#c8a96a"/></svg></div>
+    <div class="greet"><small>Numa</small><b>ערב טוב, אורי</b></div>
+    <div class="avatar">א</div>
+  </div>
+
+  <!-- ═══════════ סקירה ═══════════ -->
+  <div class="pg show" id="pg-ov">
+    <div class="card hero">
+      <div class="c-label">שווי נטו כולל</div>
+      <div class="c-num">₪633k</div>
+      <div class="c-sub">תחזית 25 שנה: ₪3.4M</div>
+      <div class="chips">
+        <div class="chip"><b class="good">₪34k</b><span>תזרים חודשי</span></div>
+        <div class="chip"><b>71%</b><span>שיעור חיסכון</span></div>
+        <div class="chip"><b>גיל 42</b><span>חופש כלכלי</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="c-label">Numa Score</div>
+      <div style="display:flex;align-items:center;gap:18px;margin-top:6px">
+        <svg width="86" height="86" viewBox="0 0 86 86">
+          <circle cx="43" cy="43" r="36" fill="none" stroke="#ede9e0" stroke-width="9"/>
+          <circle cx="43" cy="43" r="36" fill="none" stroke="#A07840" stroke-width="9" stroke-linecap="round"
+            stroke-dasharray="226" stroke-dashoffset="93" transform="rotate(-90 43 43)"/>
+          <text x="43" y="49" text-anchor="middle" font-size="22" font-weight="800" fill="#1E2D4A">59</text>
+        </svg>
+        <div style="flex:1">
+          <div class="bar" style="margin-top:0"><i style="width:71%;background:#2D6A3F"></i></div>
+          <div class="prog-meta"><span>חיסכון</span><span>71%</span></div>
+          <div class="bar"><i style="width:15%;background:#A07840"></i></div>
+          <div class="prog-meta"><span>התקדמות ליעד</span><span>15%</span></div>
+          <div class="bar"><i style="width:33%;background:#B8860B"></i></div>
+          <div class="prog-meta"><span>יחס חוב</span><span>33%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="go('cf')">
+      <div class="sec-head"><div class="c-label">תזרים</div><div class="sec-total">‹</div></div>
+      <div class="c-num good" style="font-size:26px">+₪34k</div>
+      <div class="c-sub">הכנסה ₪48k · הוצאה ₪14k</div>
+    </div>
+    <div class="card" onclick="go('as')">
+      <div class="sec-head"><div class="c-label">הון</div><div class="sec-total">‹</div></div>
+      <div class="c-num" style="font-size:26px">₪633k</div>
+      <div class="c-sub">נכסים ₪947k · התחייבויות ₪314k</div>
+    </div>
+    <div class="card" onclick="go('jr')">
+      <div class="sec-head"><div class="c-label">מסע</div><div class="sec-total">‹</div></div>
+      <div class="c-num" style="font-size:26px">גיל <span class="g">42</span></div>
+      <div class="c-sub">15% מהיעד · בעוד 12 שנים</div>
+    </div>
+
+    <div class="card">
+      <div class="c-label">תובנות</div>
+      <div class="row"><div><div class="r-name">קרן חירום חסרה</div><div class="r-meta">3 חודשי הוצאות = ₪41k · יש לך ₪0</div></div><div class="r-left"><span class="r-delta down">שים לב</span></div></div>
+      <div class="row"><div><div class="r-name">ריכוז נכסים</div><div class="r-meta">64% מהנכסים בהשקעות</div></div><div class="r-left"><span class="r-delta warn">שקול פיזור</span></div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ תזרים ═══════════ -->
+  <div class="pg" id="pg-cf">
+    <div class="card hero">
+      <div class="c-label">תזרים נטו החודש</div>
+      <div class="c-num" style="color:#7fc493">+₪34k</div>
+      <div class="c-sub">עודף חודשי — כל הכבוד</div>
+      <div class="chips">
+        <div class="chip"><b>₪48k</b><span>הכנסה</span></div>
+        <div class="chip"><b>₪14k</b><span>הוצאות</span></div>
+        <div class="chip"><b>29%</b><span>יחס הוצאה</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sec-head"><div class="c-label">עובר ושב עכשיו</div><div class="sec-total" style="color:var(--red)">−₪24.5k</div></div>
+      <div class="row"><div class="r-name">אורי</div><div class="r-left"><span class="r-val" style="color:var(--red)">−₪22,000</span></div></div>
+      <div class="row"><div class="r-name">פז</div><div class="r-left"><span class="r-val" style="color:var(--red)">−₪2,500</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="sec-head"><div class="c-label">הכנסות</div><div class="sec-total">₪48k</div></div>
+      <div class="row"><div class="r-name">משכורת אורי</div><div class="r-left"><span class="r-val">₪20,000</span></div></div>
+      <div class="row"><div class="r-name">משכורת פז</div><div class="r-left"><span class="r-val">₪16,000</span></div></div>
+      <div class="row"><div class="r-name">שכ"ד / פרילנס</div><div class="r-left"><span class="r-val">₪12,000</span></div></div>
+      <button class="btn-add">+ הוסף מקור הכנסה</button>
+    </div>
+
+    <div class="card">
+      <div class="sec-head"><div class="c-label">הוצאות</div><div class="sec-total">₪14k</div></div>
+      <div class="bar"><i style="width:52%;background:#1E2D4A"></i><i style="width:22%;background:#3A4E73"></i><i style="width:15%;background:#A07840"></i><i style="width:11%;background:#c8a96a"></i></div>
+      <div class="legend" style="margin-bottom:8px">
+        <span><span class="dot" style="background:#1E2D4A"></span>דיור 52%</span>
+        <span><span class="dot" style="background:#3A4E73"></span>מזון 22%</span>
+        <span><span class="dot" style="background:#A07840"></span>רכב 15%</span>
+      </div>
+      <div class="row"><div class="r-name">דיור</div><div class="r-left"><span class="r-val">₪7,350</span></div></div>
+      <div class="row"><div class="r-name">מזון</div><div class="r-left"><span class="r-val">₪3,100</span></div></div>
+      <div class="row"><div class="r-name">רכב ותחבורה</div><div class="r-left"><span class="r-val">₪2,150</span></div></div>
+      <button class="btn-add">+ הוסף קטגוריה</button>
+    </div>
+  </div>
+
+  <!-- ═══════════ הון ═══════════ -->
+  <div class="pg" id="pg-as">
+    <div class="card hero">
+      <div class="c-label">שווי נטו</div>
+      <div class="c-num">₪633k</div>
+      <div class="c-sub">נכסים ₪947k − התחייבויות ₪314k</div>
+      <div class="chips">
+        <div class="chip"><b>₪343k</b><span>פנסיה וקה"ש</span></div>
+        <div class="chip"><b>₪603k</b><span>השקעות</span></div>
+        <div class="chip"><b class="bad">₪314k</b><span>חובות</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="c-label">פילוח נכסים</div>
+      <div class="bar"><i style="width:36%;background:#1E2D4A"></i><i style="width:42%;background:#A07840"></i><i style="width:22%;background:#c8a96a"></i></div>
+      <div class="legend">
+        <span><span class="dot" style="background:#1E2D4A"></span>פנסיה 36%</span>
+        <span><span class="dot" style="background:#A07840"></span>השקעות 42%</span>
+        <span><span class="dot" style="background:#c8a96a"></span>קה"ש 22%</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sec-head"><div class="c-label">השקעות · לחיצה על שורה לעריכה</div><div class="sec-total">₪603k</div></div>
+      <div class="row"><div><div class="r-name">בלינק</div><div class="r-meta">עלות ₪180k</div></div><div class="r-left"><div class="r-val">₪210,000</div><div class="r-delta up">+16.7%</div></div></div>
+      <div class="row"><div><div class="r-name">אינטראקטיב</div><div class="r-meta">עלות ₪139k</div></div><div class="r-left"><div class="r-val">₪150,000</div><div class="r-delta up">+7.9%</div></div></div>
+      <div class="row"><div><div class="r-name">גמל להשקעה — הראל</div><div class="r-meta">עלות ₪120k</div></div><div class="r-left"><div class="r-val">₪138,296</div><div class="r-delta up">+15.2%</div></div></div>
+      <button class="btn-add">+ הוסף השקעה</button>
+    </div>
+
+    <div class="card">
+      <div class="sec-head"><div class="c-label">הלוואות</div><div class="sec-total" style="color:var(--red)">₪314k</div></div>
+      <div class="row"><div><div class="r-name">הלוואה חבר (פז)</div><div class="r-meta">4.7% · ₪1,046/ח׳ · אומדן 8/26</div></div><div class="r-left"><div class="r-val">₪94,050</div><div class="r-delta down">ריבית גבוהה</div></div></div>
+      <div class="row"><div><div class="r-name">הוכשטיין</div><div class="r-meta">ללא ריבית · ₪2,000/ח׳</div></div><div class="r-left"><div class="r-val">₪160,000</div><div class="r-delta up">0%</div></div></div>
+      <div class="row"><div><div class="r-name">כנגד קה"ש</div><div class="r-meta">5% · ₪1,083/ח׳</div></div><div class="r-left"><div class="r-val">₪20,000</div></div></div>
+      <button class="btn-add">+ הוסף הלוואה</button>
+    </div>
+  </div>
+
+  <!-- ═══════════ מסע — הגרסה הסופית ═══════════ -->
+  <div class="pg" id="pg-jr">
+    <div class="card">
+      <div class="c-label">המסע לחופש כלכלי</div>
+      <div class="c-num">גיל <span class="g">42</span></div>
+      <div class="c-sub">בעוד 12 שנים · בקצב הנוכחי</div>
+      <div class="bar"><i style="width:15%;background:linear-gradient(90deg,#A07840,#c8a96a)"></i></div>
+      <div class="prog-meta"><span>₪633k היום</span><span>15%</span><span class="target">יעד ₪4.1M ✎</span></div>
+
+      <div class="path">
+        <div class="path-line"></div>
+        <div class="station done">
+          <div class="st-dot"></div>
+          <div class="st-body"><div class="st-name">ההתחלה</div><div class="st-meta">2024</div></div>
+          <div class="st-val">₪0</div>
+        </div>
+        <div class="station here">
+          <div class="st-dot"></div>
+          <div class="st-body"><div class="st-name">אתה כאן</div><div class="st-meta">אוגוסט 2026 · 15% מהדרך</div></div>
+          <div class="st-val">₪633k</div>
+        </div>
+        <div class="station">
+          <div class="st-dot"></div>
+          <div class="st-body"><div class="st-name">מיליון ראשון</div><div class="st-meta">צפוי 2028 · בעוד שנתיים</div>
+            <span class="ev-pin">חתונה · 2027</span></div>
+          <div class="st-val">₪1M</div>
+        </div>
+        <div class="station">
+          <div class="st-dot"></div>
+          <div class="st-body"><div class="st-name">חצי הדרך</div><div class="st-meta">צפוי 2032</div>
+            <span class="ev-pin">דירה · 2030</span></div>
+          <div class="st-val">₪2M</div>
+        </div>
+        <div class="station goal">
+          <div class="st-dot"></div>
+          <div class="st-body"><div class="st-name">חופש כלכלי</div><div class="st-meta">צפוי 2038 · גיל 42</div></div>
+          <div class="st-val">₪4.1M</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- אירועי חיים עם עלות -->
+    <div class="card">
+      <div class="sec-head"><div class="c-label">אירועי חיים</div><div class="sec-total">לחיצה על שורה לעריכה</div></div>
+      <div class="row">
+        <div><div class="r-name">חתונה</div><div class="r-meta">2027 · עלות משוערת ₪150k</div></div>
+        <div class="r-left"><div class="r-delta warn">דוחה ב-5 חודשים</div></div>
+      </div>
+      <div class="row">
+        <div><div class="r-name">דירה — הון עצמי</div><div class="r-meta">2030 · עלות משוערת ₪400k</div></div>
+        <div class="r-left"><div class="r-delta warn">דוחה ב-16 חודשים</div></div>
+      </div>
+      <div class="row">
+        <div><div class="r-name">טיול גדול</div><div class="r-meta">2028 · עלות משוערת ₪60k</div></div>
+        <div class="r-left"><div class="r-delta">ללא השפעה מהותית</div></div>
+      </div>
+      <button class="btn-add">+ הוסף אירוע (שם · שנה · עלות)</button>
+    </div>
+
+    <!-- מנופים -->
+    <div class="card">
+      <div class="c-label">מה יזיז את התאריך</div>
+      <div class="lever">
+        <div class="lv-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+        <div class="lv-body"><div class="lv-t">עוד ₪2,000 חיסכון בחודש</div><div class="lv-s">מ-₪34k ל-₪36k</div></div>
+        <div class="lv-gain">גיל 40½</div>
+      </div>
+      <div class="lever">
+        <div class="lv-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round"><path d="M9 12l2 2 4-5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg></div>
+        <div class="lv-body"><div class="lv-t">סילוק הלוואת החבר (4.7%)</div><div class="lv-s">חוסך ₪1,046 בחודש</div></div>
+        <div class="lv-gain">−14 חודשים</div>
+      </div>
+      <div class="lever">
+        <div class="lv-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg></div>
+        <div class="lv-body"><div class="lv-t">בניית קרן חירום ₪41k</div><div class="lv-s">מגן על המסע מהפתעות</div></div>
+        <div class="lv-gain">יציבות</div>
+      </div>
+      <div class="lv-hint">לחיצה על מנוף — הסוכן מנתח לעומק</div>
+    </div>
+
+    <!-- מומנטום -->
+    <div class="card">
+      <div class="c-label">המומנטום שלך</div>
+      <div class="mom-hero"><b>+₪34k</b><span>קרוב יותר לחופש מהחודש שעבר</span></div>
+      <div style="margin-top:10px">
+        <div class="mrow"><span>שווי נטו</span><b class="up">‎+₪34,000 ↑</b></div>
+        <div class="mrow"><span>התחייבויות</span><b class="up">‎−₪5,700 ↓</b></div>
+        <div class="mrow"><span>תאריך החופש</span><b class="up">התקרב בחודש ↑</b></div>
+      </div>
+      <div class="note">מתעדכן אוטומטית פעם בחודש · ההשוואה מול יולי 2026</div>
+    </div>
+  </div>
+
+  <!-- ניווט -->
+  <div class="nav">
+    <div id="n-jr" onclick="go('jr')"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>מסע</div>
+    <div id="n-as" onclick="go('as')"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>הון</div>
+    <div id="n-cf" onclick="go('cf')"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 6H9.5a2.5 2.5 0 0 0 0 5h5a2.5 2.5 0 0 1 0 5H6"/></svg></div>תזרים</div>
+    <div id="n-ov" class="on" onclick="go('ov')"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></div>סקירה</div>
+  </div>
+</div>
+<script>
+function go(p){
+  document.querySelectorAll('.pg').forEach(e=>e.classList.remove('show'));
+  document.getElementById('pg-'+p).classList.add('show');
+  document.querySelectorAll('.nav>div').forEach(e=>e.classList.remove('on'));
+  document.getElementById('n-'+p).classList.add('on');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

@@ -649,6 +649,71 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 /* ── HERO NUMBER ── */
 #hero-nw { font-size: 38px !important; letter-spacing: -2px !important; }
+
+/* ═══ JOURNEY PAGE — per master mockup (scoped to #pg-plan) ═══ */
+#pg-plan .card{background:var(--card);border-radius:var(--r-card);padding:22px;box-shadow:var(--shadow);margin-bottom:0;border:none;overflow:hidden}
+#pg-plan .card.hero{background:var(--ink);color:#f4efe6}
+#pg-plan .card.hero .c-label{color:var(--gold-l)}
+#pg-plan .card.hero .c-sub{color:#aab4c8}
+#pg-plan .c-label{font-size:12px;font-weight:600;color:var(--muted)}
+#pg-plan .c-num{font-size:34px;font-weight:800;letter-spacing:-1.2px;margin-top:2px;font-variant-numeric:tabular-nums;color:var(--ink)}
+#pg-plan .c-num .g{color:var(--gold)}
+#pg-plan .c-num.good{color:var(--green)}
+#pg-plan .c-sub{font-size:12.5px;color:var(--muted);margin-top:3px}
+#pg-plan .chips{display:flex;gap:8px;margin-top:14px}
+#pg-plan .chip{flex:1;background:rgba(255,255,255,.08);border-radius:12px;padding:10px 8px;text-align:center}
+#pg-plan .chip b{display:block;font-size:15px;font-weight:800}
+#pg-plan .chip span{font-size:10.5px;opacity:.75}
+#pg-plan .chip b.good{color:#7fc493} #pg-plan .chip b.bad{color:#e0a9a0}
+#pg-plan .row{display:flex;justify-content:space-between;align-items:center;padding:13px 4px;border-bottom:1px solid var(--line);border-radius:10px}
+#pg-plan .row:last-child{border-bottom:none}
+#pg-plan .row:active{background:var(--field)}
+#pg-plan .r-name{font-size:14px;font-weight:600}
+#pg-plan .r-meta{font-size:11px;color:var(--muted);margin-top:2px}
+#pg-plan .r-left{text-align:left;flex-shrink:0}
+#pg-plan .r-val{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+#pg-plan .r-delta{font-size:11px;font-weight:700;margin-top:1px}
+#pg-plan .up{color:var(--green)} #pg-plan .down{color:var(--red)} #pg-plan .warn{color:var(--amber)}
+#pg-plan .bar{height:8px;border-radius:5px;background:var(--field);overflow:hidden;display:flex;margin:12px 0 6px}
+#pg-plan .bar i{display:block;height:100%}
+#pg-plan .prog-meta{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted)}
+#pg-plan .prog-meta .target{color:var(--gold);font-weight:700;cursor:pointer;border-bottom:1px dashed var(--gold-l)}
+#pg-plan .sec-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+#pg-plan .sec-total{font-size:13px;font-weight:700;color:var(--muted)}
+#pg-plan .btn-add{background:none;border:none;color:var(--gold);font-size:12.5px;font-weight:700;font-family:inherit;padding:10px 4px 0;cursor:pointer}
+/* מסלול התחנות */
+#pg-plan .path{position:relative;margin:22px 4px 4px;padding-right:14px}
+#pg-plan .path-line{position:absolute;right:20px;top:8px;bottom:8px;width:3px;border-radius:2px;background:var(--field)}
+#pg-plan .station{position:relative;display:flex;align-items:flex-start;gap:16px;padding:0 0 24px}
+#pg-plan .station:last-child{padding-bottom:0}
+#pg-plan .st-dot{position:relative;z-index:2;width:15px;height:15px;border-radius:50%;flex-shrink:0;margin-top:3px;background:var(--field);border:3px solid #d9d2c2}
+#pg-plan .station.here .st-dot{width:19px;height:19px;background:var(--gold);border:4px solid #fff;box-shadow:0 0 0 2px var(--gold);margin-right:-2px;margin-top:1px}
+#pg-plan .station.done .st-dot{background:var(--gold);border-color:var(--gold-l)}
+#pg-plan .station.goal .st-dot{background:var(--green);border-color:#bcd8c4}
+#pg-plan .st-body{flex:1}
+#pg-plan .st-name{font-size:14px;font-weight:700}
+#pg-plan .station.here .st-name{color:var(--gold)}
+#pg-plan .station.goal .st-name{color:var(--green)}
+#pg-plan .st-meta{font-size:11px;color:var(--muted);margin-top:1px}
+#pg-plan .st-val{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;text-align:left;flex-shrink:0}
+#pg-plan .ev-pin{display:inline-block;background:var(--field);color:var(--gold);font-size:10px;font-weight:700;border-radius:999px;padding:2px 9px;margin-top:4px}
+/* מנופים */
+#pg-plan .lever{display:flex;align-items:center;gap:12px;padding:13px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+#pg-plan .lever:last-child{border-bottom:none}
+#pg-plan .lever:active{background:var(--field);border-radius:10px}
+#pg-plan .lv-ico{width:34px;height:34px;border-radius:10px;background:var(--field);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#pg-plan .lv-body{flex:1}
+#pg-plan .lv-t{font-size:13.5px;font-weight:600}
+#pg-plan .lv-s{font-size:11px;color:var(--muted);margin-top:1px}
+#pg-plan .lv-gain{font-size:13px;font-weight:800;color:var(--green);text-align:left;flex-shrink:0;white-space:nowrap}
+#pg-plan .lv-hint{font-size:10.5px;color:var(--muted);text-align:center;margin-top:10px}
+/* מומנטום */
+#pg-plan .mom-hero{display:flex;align-items:baseline;gap:8px;margin-top:4px}
+#pg-plan .mom-hero b{font-size:24px;font-weight:800;color:var(--green)}
+#pg-plan .mom-hero span{font-size:12px;color:var(--muted)}
+#pg-plan .mrow{display:flex;justify-content:space-between;padding:10px 2px;border-bottom:1px solid var(--line);font-size:13px}
+#pg-plan .mrow:last-child{border-bottom:none}
+#pg-plan .note{text-align:center;font-size:10.5px;color:var(--muted);margin-top:10px}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
 </head>
@@ -1082,34 +1147,34 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <!-- ══════════════════ תכנון — Hub ══════════════════ -->
 <div class="pg" id="pg-plan" style="gap:9px;padding:14px 18px 20px">
 
-  <!-- Card A: המסע לחופש כלכלי -->
-  <div class="ov-chart-card chart-in">
-    <div class="ov-chart-hdr">
-      <div><div class="ov-chart-title">המסע לחופש כלכלי</div><div class="ov-chart-sub" id="ov-g-sub">— שנים קדימה</div></div>
-    </div>
-    <div class="ov-chart-area"><svg id="ov-g-svg" width="100%" viewBox="0 0 320 110" preserveAspectRatio="none"></svg></div>
-    <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
-      <span style="font-size:10px;color:#8a8a8a">2y</span>
-      <input type="range" min="2" max="30" value="10" id="ov-g-sl" style="flex:1;accent-color:#A07840" oninput="ovDrawG()">
-      <span style="font-size:10px;color:#8a8a8a">30y</span>
-    </div>
-    <div id="journey-summary" style="font-size:12px;color:#1E2D4A;font-weight:600;text-align:center;padding:9px 0 3px">—</div>
-    <div class="ov-ev-row" style="margin-top:2px">
-      <input class="ov-ev-fi" id="ov-ev-n" placeholder="אירוע חיים (חתונה, דירה...)">
-      <input class="ov-ev-yr" id="ov-ev-y" placeholder="שנה" type="number">
-      <button class="ov-ev-add" onclick="ovAddEv()">+ הוסף</button>
-    </div>
-    <div style="font-size:9.5px;color:#A8A8B0;text-align:center;margin-top:4px">האירועים מסומנים כנקודות זהב על הגרף — לחיצה על נקודה למחיקה</div>
+  <!-- כרטיס יעד + מסלול תחנות -->
+  <div class="card">
+    <div class="c-label">המסע לחופש כלכלי</div>
+    <div class="c-num" id="jr-age">גיל <span class="g">—</span></div>
+    <div class="c-sub" id="jr-age-sub">—</div>
+    <div class="bar"><i id="jr-prog-bar" style="width:0%;background:linear-gradient(90deg,#A07840,#c8a96a)"></i></div>
+    <div class="prog-meta"><span id="jr-prog-now">—</span><span id="jr-prog-pct">—</span><span class="target" id="jr-target" onclick="editFireTarget()">יעד — ✎</span></div>
+    <div class="path" id="jr-path"></div>
   </div>
 
-  <!-- Card B: מה השתנה -->
+  <!-- אירועי חיים עם עלות -->
   <div class="card">
-    <div class="ch"><div><div class="ct">מה השתנה</div><div class="cs">מאז הביקור האחרון</div></div></div>
-    <div class="cb">
-      <div class="sep"></div>
-      <div class="ov-snap-rows" id="nh-wc"></div>
-      <div style="font-size:10px;color:#8a8a8a;text-align:center;margin-top:2px">מתעדכן אוטומטית פעם בחודש</div>
-    </div>
+    <div class="sec-head"><div class="c-label">אירועי חיים</div><div class="sec-total">לחיצה על שורה לעריכה</div></div>
+    <div id="jr-events"></div>
+    <button class="btn-add" onclick="jrAddEvent()">+ הוסף אירוע (שם · שנה · עלות)</button>
+  </div>
+
+  <!-- מנופים מחושבים -->
+  <div class="card">
+    <div class="c-label">מה יזיז את התאריך</div>
+    <div id="jr-levers"></div>
+    <div class="lv-hint">לחיצה על מנוף — הסוכן מנתח לעומק</div>
+  </div>
+
+  <!-- מומנטום מ-history -->
+  <div class="card">
+    <div class="c-label">המומנטום שלך</div>
+    <div id="jr-momentum"></div>
   </div>
 
 </div>
@@ -1920,7 +1985,7 @@ function render(){
   try{renderOvInsights();}catch(e){}
   try{renderCashCard();}catch(e){}
   try{renderCashflowChart(c);}catch(e){}
-  try{renderJourneySummary(c);}catch(e){}
+  try{renderJourney();}catch(e){}
 }
 /* ── Journey summary line under the growth graph (single source: calc) ── */
 function renderJourneySummary(c){
@@ -1930,6 +1995,220 @@ function renderJourneySummary(c){
   var agePart=(c.fireAge && c.fireAge>0 && c.fireAge<120) ? ('פרישה בגיל '+c.fireAge+' · ') : '';
   el.textContent=agePart+fmt(have)+' מתוך '+fmt(c.fireNumber)+' ('+pct+'%)';
   el.style.color='#1E2D4A';
+}
+
+/* ═══════════════════════════════════════════════════════════
+   JOURNEY PAGE — per master mockup. UI only: reads ND/calc,
+   adds nothing to calc(). Schema additions (back-compatible):
+   ND.settings.fireTargetManual (number) · milestone.cost (number)
+   ═══════════════════════════════════════════════════════════ */
+var _JR_MONTHS=['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+function _esc(t){ return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmtK(n){ if(n===0) return '₪0'; var a=Math.abs(n), s=n<0?'−':'+'; return s+(a>=1e6?'₪'+(a/1e6).toFixed(1)+'M':a>=1000?'₪'+Math.round(a/1000)+'k':'₪'+Math.round(a)); }
+// Fractional years (7% annual, compounded monthly) for netWorth+monthly deposits to reach
+// target. Monthly granularity → sub-year precision for event delays and lever gains.
+function _jrProjYears(nw, monthlyDep, target){
+  nw=Math.max(nw,0);
+  if(target<=nw) return 0;
+  if(monthlyDep<=0) return null;
+  var mrate=Math.pow(1.07,1/12)-1, bal=nw;
+  for(var m=1;m<=720;m++){
+    bal=bal*(1+mrate)+monthlyDep;
+    if(bal>=target) return m/12;
+  }
+  return null;
+}
+function _jrY(y){ return Math.round(y); }  // fractional years → whole for display
+function _jrTarget(c){ var m=(ND.settings&&ND.settings.fireTargetManual); return (m&&m>0)?m:c.fireNumber; }
+function _jrCosts(){ return (ND.milestones||[]).reduce(function(s,e){return s+(Number(e.cost)||0);},0); }
+
+function renderJourney(){
+  if(!document.getElementById('pg-plan')) return;
+  var c=calc();
+  var now=new Date(), curYear=now.getFullYear();
+  var age=ND.profile.age;
+  var target=_jrTarget(c), costs=_jrCosts();
+  var nw=Math.max(c.netWorth,0), dep=c.monthlyDeposits;
+  var hasData=(c.totalIncome>0 && target>0);
+  var pct = target>0 ? Math.min(100, Math.round(nw/target*100)) : 0;
+
+  // ── Target card ──
+  var ageEl=document.getElementById('jr-age'), subEl=document.getElementById('jr-age-sub');
+  var barEl=document.getElementById('jr-prog-bar'), nowEl=document.getElementById('jr-prog-now');
+  var pctEl=document.getElementById('jr-prog-pct'), tgtEl=document.getElementById('jr-target');
+  if(hasData){
+    var years=_jrProjYears(nw, dep, target+costs);
+    if(years==null){ if(ageEl)ageEl.innerHTML='גיל <span class="g">—</span>'; if(subEl)subEl.textContent='הגדל חיסכון חודשי כדי להגיע ליעד'; }
+    else {
+      var yr=_jrY(years), fAge=(age!=null)?(age+yr):null;
+      if(ageEl) ageEl.innerHTML = fAge!=null ? ('גיל <span class="g">'+fAge+'</span>') : ('בעוד <span class="g">'+yr+'</span> שנים');
+      if(subEl) subEl.textContent = (yr<=0?'הגעת ליעד!':'בעוד '+yr+(yr===1?' שנה':' שנים'))+' · בקצב הנוכחי'+(costs>0?' · כולל אירועים':'');
+    }
+  } else { if(ageEl)ageEl.innerHTML='גיל <span class="g">—</span>'; if(subEl)subEl.textContent='הזן הכנסות והוצאות כדי לחשב'; }
+  if(barEl) barEl.style.width=pct+'%';
+  if(nowEl) nowEl.textContent=fmt(nw)+' היום';
+  if(pctEl) pctEl.textContent=pct+'%';
+  var manual=!!(ND.settings&&ND.settings.fireTargetManual>0);
+  if(tgtEl) tgtEl.innerHTML='יעד '+(target>0?fmt(target):'—')+(manual?' (ידני)':'')+' ✎';
+
+  renderJourneyPath(c, target, costs, nw, dep, curYear, now, pct);
+  renderJourneyEvents(c, target, costs, nw, dep);
+  renderJourneyLevers(c, target, costs, nw, dep, age);
+  renderJourneyMomentum(c);
+}
+
+function renderJourneyPath(c, target, costs, nw, dep, curYear, now, pct){
+  var box=document.getElementById('jr-path'); if(!box) return;
+  if(!(target>0 && c.totalIncome>0)){ box.innerHTML=''; return; }
+  var sts=[];
+  var h=(ND.history&&ND.history.length)?ND.history:[];
+  var startYear=h.length?parseInt(h[0].date):curYear, startVal=h.length?(h[0].netWorth||0):0;
+  sts.push({cls:'done', name:'ההתחלה', meta:String(startYear), val:startVal, year:startYear});
+  sts.push({cls:'here', name:'אתה כאן', meta:_JR_MONTHS[now.getMonth()]+' '+curYear+' · '+pct+'% מהדרך', val:nw, year:curYear});
+  function futureStation(val,name){
+    if(val<=nw || val>=target) return null;
+    var yf=_jrProjYears(nw,dep,val); if(yf==null) return null; var y=_jrY(yf);
+    return {cls:'', name:name, meta:'צפוי '+(curYear+y)+(y>0?' · בעוד '+y+(y===1?' שנה':' שנים'):''), val:val, year:curYear+y};
+  }
+  var one=1e6, half=target/2;
+  var s1=futureStation(one,'מיליון ראשון');
+  if(s1) sts.push(s1);
+  var sh=(Math.abs(half-one)>250000)?futureStation(half,'חצי הדרך'):null;
+  if(sh && (!s1 || sh.val>s1.val)) sts.push(sh);
+  var gyf=_jrProjYears(nw,dep,target+costs), gy=(gyf!=null)?_jrY(gyf):null;
+  var goalMeta = gy!=null ? ('צפוי '+(curYear+gy)+(ND.profile.age!=null?' · גיל '+(ND.profile.age+gy):'')) : 'הגדל חיסכון כדי להגיע';
+  sts.push({cls:'goal', name:'חופש כלכלי', meta:goalMeta, val:target, year:gy!=null?curYear+gy:null});
+
+  // Pin life-events onto the earliest future station whose year >= event year
+  var evs=(ND.milestones||[]).slice().filter(function(e){return e.year;}).sort(function(a,b){return a.year-b.year;});
+  var assigned={};
+  for(var i=2;i<sts.length;i++){
+    var st=sts[i]; st.pins=[]; if(!st.year) continue;
+    evs.forEach(function(e){ var k=e.id||e.text; if(!assigned[k] && e.year<=st.year){ st.pins.push(e); assigned[k]=1; } });
+  }
+  var last=sts[sts.length-1]; last.pins=last.pins||[];
+  evs.forEach(function(e){ var k=e.id||e.text; if(!assigned[k]){ last.pins.push(e); assigned[k]=1; } });
+
+  box.innerHTML='<div class="path-line"></div>'+sts.map(function(st){
+    var pins=(st.pins||[]).map(function(e){return '<span class="ev-pin">'+_esc(e.text)+' · '+e.year+'</span>';}).join(' ');
+    return '<div class="station '+st.cls+'"><div class="st-dot"></div>'+
+      '<div class="st-body"><div class="st-name">'+_esc(st.name)+'</div><div class="st-meta">'+st.meta+'</div>'+pins+'</div>'+
+      '<div class="st-val">'+fmt(st.val)+'</div></div>';
+  }).join('');
+}
+
+function renderJourneyEvents(c, target, costs, nw, dep){
+  var box=document.getElementById('jr-events'); if(!box) return;
+  var evs=(ND.milestones||[]);
+  if(!evs.length){ box.innerHTML='<div style="padding:14px 4px;font-size:12px;color:#8a8a8a">אין אירועים עדיין — הוסף חתונה, דירה, טיול...</div>'; return; }
+  var baseYears=_jrProjYears(nw,dep,target);
+  box.innerHTML=evs.map(function(e){
+    var cost=Number(e.cost)||0;
+    var meta=(e.year||'')+(cost>0?' · עלות משוערת '+fmt(cost):'');
+    var delta='';
+    if(cost>0 && dep>0){
+      var withY=_jrProjYears(nw,dep,target+cost);
+      var months=(withY!=null && baseYears!=null)?Math.round((withY-baseYears)*12):Math.round(cost/dep);
+      delta = months>=1 ? '<div class="r-delta warn">'+(months===1?'דוחה בחודש':'דוחה ב-'+months+' חודשים')+'</div>' : '<div class="r-delta">ללא השפעה מהותית</div>';
+    } else if(cost>0){ delta='<div class="r-delta warn">עלות '+fmt(cost)+'</div>'; }
+    return '<div class="row" onclick="jrEditEvent(\''+(e.id||'')+'\')"><div><div class="r-name">'+_esc(e.text||'אירוע')+'</div><div class="r-meta">'+meta+'</div></div><div class="r-left">'+delta+'</div></div>';
+  }).join('');
+}
+
+var _jrLeverQs=[];
+function _jrLever(icon,title,sub,gain,q){
+  var idx=_jrLeverQs.push(q)-1;
+  return '<div class="lever" onclick="jrLeverAsk('+idx+')">'+
+    '<div class="lv-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A07840" stroke-width="2" stroke-linecap="round">'+icon+'</svg></div>'+
+    '<div class="lv-body"><div class="lv-t">'+title+'</div><div class="lv-s">'+sub+'</div></div>'+
+    '<div class="lv-gain">'+gain+'</div></div>';
+}
+function renderJourneyLevers(c, target, costs, nw, dep, age){
+  var box=document.getElementById('jr-levers'); if(!box) return;
+  _jrLeverQs=[];
+  if(!(c.totalIncome>0 && target>0)){ box.innerHTML='<div style="padding:14px 4px;font-size:12px;color:#8a8a8a">הזן הכנסות והוצאות כדי לראות מנופים</div>'; return; }
+  var baseYears=_jrProjYears(nw,dep,target+costs);
+  var sav=Math.max(c.monthlySavings,0);
+  var out='';
+  var y1=_jrProjYears(nw,dep+2000,target+costs);
+  var g1=(age!=null&&y1!=null)?'גיל '+(age+_jrY(y1)):(y1!=null?'בעוד '+_jrY(y1)+' שנים':'—');
+  out+=_jrLever('<path d="M12 19V5M5 12l7-7 7 7"/>','עוד ₪2,000 חיסכון בחודש','מ-'+fmt(sav)+' ל-'+fmt(sav+2000),g1,
+    'איך תוספת של ₪2,000 חיסכון בחודש משפיעה על תאריך החופש הכלכלי שלי? תן ניתוח מספרי.');
+  var loans=(ND.loans||[]).filter(function(l){return (l.balance||0)>0;}).sort(function(a,b){return (b.rate||0)-(a.rate||0);});
+  var top=loans[0];
+  if(top && (top.rate||0)>0){
+    var y2=_jrProjYears(nw, dep+(top.monthlyPayment||0), target+costs);
+    var months2=(y2!=null&&baseYears!=null)?Math.round((baseYears-y2)*12):null;
+    var g2=(months2!=null&&months2>0)?'−'+months2+(months2===1?' חודש':' חודשים'):'שיפור';
+    out+=_jrLever('<path d="M9 12l2 2 4-5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/>','סילוק '+_esc(top.name||'ההלוואה')+' ('+(top.rate||0)+'%)','משחרר '+fmt(top.monthlyPayment||0)+' בחודש',g2,
+      'כדאי לי לסלק את ההלוואה "'+(top.name||'')+'" בריבית '+(top.rate||0)+'%? נתח את ההשפעה על המסע לחופש כלכלי.');
+  }
+  var emTarget=Math.round(c.totalExpenses*3);
+  if(emTarget>0){
+    out+=_jrLever('<path d="M3 17l6-6 4 4 8-8M14 7h7v7"/>','בניית קרן חירום '+fmt(emTarget),'מגן על המסע מהפתעות','יציבות',
+      'איך לבנות קרן חירום של '+fmt(emTarget)+' (3 חודשי הוצאות) ולמה היא חשובה למסע שלי?');
+  }
+  box.innerHTML=out;
+}
+function jrLeverAsk(i){
+  var q=_jrLeverQs[i]; if(!q) return;
+  if(!_agentOpen && typeof toggleAgent==='function') toggleAgent();
+  setTimeout(function(){ try{agentSend(q);}catch(e){} }, 80);
+}
+
+function _jrMrow(label, delta, goodUp){
+  var flat=delta===0, up=delta>0, good=flat?false:(goodUp?up:!up);
+  var cls=flat?'':(good?'up':'down'), arrow=flat?'→':(up?'↑':'↓');
+  return '<div class="mrow"><span>'+label+'</span><b class="'+cls+'">'+fmtK(delta)+' '+arrow+'</b></div>';
+}
+function renderJourneyMomentum(c){
+  var box=document.getElementById('jr-momentum'); if(!box) return;
+  var h=(ND.history&&ND.history.length)?ND.history:[];
+  if(h.length<2){ box.innerHTML='<div class="note" style="margin-top:8px">נתונים מצטברים — ההשוואה הראשונה תופיע בחודש הבא</div>'; return; }
+  var cur=h[h.length-1], prev=h[h.length-2];
+  var dNW=(cur.netWorth||0)-(prev.netWorth||0), dLo=(cur.totalLoans||0)-(prev.totalLoans||0);
+  var prevMonth=''; var pm=(prev.date||'').split('-'); if(pm.length===2){ prevMonth=_JR_MONTHS[parseInt(pm[1])-1]+' '+pm[0]; }
+  var heroTxt = dNW>0?'קרוב יותר לחופש מהחודש שעבר':(dNW<0?'ירידה מהחודש שעבר':'יציב מהחודש שעבר');
+  var heroCol = dNW>=0?'var(--green)':'var(--red)';
+  var dateRow = dNW>0?'<b class="up">התקרב ↑</b>':(dNW<0?'<b class="down">התרחק ↓</b>':'<b>ללא שינוי →</b>');
+  box.innerHTML=
+    '<div class="mom-hero"><b style="color:'+heroCol+'">'+fmtK(dNW)+'</b><span>'+heroTxt+'</span></div>'+
+    '<div style="margin-top:10px">'+
+      _jrMrow('שווי נטו', dNW, true)+
+      _jrMrow('התחייבויות', dLo, false)+
+      '<div class="mrow"><span>תאריך החופש</span>'+dateRow+'</div>'+
+    '</div>'+
+    '<div class="note">מתעדכן אוטומטית פעם בחודש'+(prevMonth?' · ההשוואה מול '+prevMonth:'')+'</div>';
+}
+
+/* Journey — schema-additive editors (milestone.cost · settings.fireTargetManual) */
+function jrAddEvent(){
+  var name=prompt('שם האירוע (חתונה, דירה, טיול...)'); if(name===null||!name.trim()) return;
+  var year=parseInt(prompt('שנה (למשל 2028)')); if(!(year>1900&&year<2200)) return;
+  var costS=prompt('עלות משוערת ₪ (אפשר להשאיר ריק)',''); var cost=parseInt((costS||'').replace(/[^\d]/g,''))||0;
+  if(!ND.milestones) ND.milestones=[];
+  ND.milestones.push({id:ndId(),text:name.trim(),year:year,cost:cost});
+  saveToStorage(); renderJourney();
+}
+function jrEditEvent(id){
+  var e=(ND.milestones||[]).find(function(x){return x.id===id;}); if(!e) return;
+  var name=prompt('שם האירוע (רוקן למחיקה)', e.text); if(name===null) return;
+  if(name.trim()===''){ if(confirm('למחוק את האירוע "'+e.text+'"?')){ ND.milestones=ND.milestones.filter(function(x){return x.id!==id;}); saveToStorage(); renderJourney(); } return; }
+  var year=parseInt(prompt('שנה', e.year))||e.year;
+  var costS=prompt('עלות משוערת ₪', e.cost||0); var cost=parseInt((costS||'').replace(/[^\d]/g,''))||0;
+  e.text=name.trim(); e.year=year; e.cost=cost;
+  saveToStorage(); renderJourney();
+}
+function editFireTarget(){
+  var c=calc();
+  var cur=(ND.settings&&ND.settings.fireTargetManual>0)?ND.settings.fireTargetManual:Math.round(c.fireNumber);
+  var v=prompt('יעד החופש הכלכלי (₪).\nהשאר ריק לחישוב אוטומטי לפי ההוצאות:', cur);
+  if(v===null) return;
+  if(!ND.settings) ND.settings={};
+  var clean=(v||'').replace(/[^\d]/g,'');
+  if(clean==='') delete ND.settings.fireTargetManual;
+  else ND.settings.fireTargetManual=parseInt(clean);
+  saveToStorage(); renderJourney();
 }
 
 /* Semantic metric colors (soft) — green #2D6A3F, amber #B8860B, red #A32D2D */
@@ -3318,11 +3597,7 @@ function goP(id){
   if(id==='plan')setTimeout(renderPlanHub,80);
 }
 function renderPlanHub(){
-  try{renderFIREPage();}catch(e){}
-  try{ovDrawG();}catch(e){}
-  try{if(window.ovRenderEvs)ovRenderEvs();}catch(e){}
-  try{if(typeof NHrenderChanged==='function')NHrenderChanged();}catch(e){}
-  try{renderJourneySummary(calc());}catch(e){}
+  try{renderJourney();}catch(e){}
 }
 function renderAssetsDonut(c){
   var svg=document.getElementById('ad-svg'); if(!svg) return;
