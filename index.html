@@ -774,85 +774,61 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .ov-snap{display:flex;justify-content:space-between;padding:6px 0;border-bottom:.5px solid rgba(0,0,0,.04)}
 .ov-snap:last-child{border:none}
 </style>
-<div class="pg on" id="pg-ov" style="gap:9px;padding:14px 18px 20px">
+<div class="pg on mk" id="pg-ov" style="gap:9px;padding:14px 18px 20px">
 
-<!-- HERO -->
-<div class="ov-hero">
-  <div class="ov-h-row">
-    <div><div class="ov-h-lbl">שווי נטו כולל</div><div class="ov-h-val" id="ov-net">—</div></div>
-    <div style="text-align:left"><div class="ov-h-lbl">תחזית 25 שנה</div><div class="ov-h-val" id="ov-proj">—</div></div>
-  </div>
-  <div class="ov-hchips">
-    <div class="ov-hc"><div class="ov-hc-lbl">תזרים חודשי</div><div class="ov-hc-val" id="ov-cf">—</div></div>
-    <div class="ov-hc"><div class="ov-hc-lbl">שיעור חיסכון</div><div class="ov-hc-val" id="ov-sr">—</div></div>
-    <div class="ov-hc"><div class="ov-hc-lbl">FIRE בגיל</div><div class="ov-hc-val" id="ov-fire">—</div></div>
+<!-- hero -->
+<div class="card hero">
+  <div class="c-label">שווי נטו כולל</div>
+  <div class="c-num" id="ov-net">—</div>
+  <div class="c-sub">תחזית 25 שנה: <span id="ov-proj">—</span></div>
+  <div class="chips">
+    <div class="chip"><b class="good" id="ov-cf">—</b><span>תזרים חודשי</span></div>
+    <div class="chip"><b id="ov-sr">—</b><span>שיעור חיסכון</span></div>
+    <div class="chip"><b id="ov-fire">—</b><span>חופש כלכלי</span></div>
   </div>
 </div>
 
-<!-- NUMA SCORE -->
+<!-- Numa Score: ring + 3 bars -->
 <div class="card">
-  <div class="ch"><div><div class="ct">Numa Score</div><div class="cs">ציון בריאות פיננסית</div></div></div>
-  <div class="cb">
-    <div class="sep"></div>
-    <div class="ov-score-wrap">
-      <div style="position:relative;width:110px;height:110px;flex-shrink:0">
-        <svg width="110" height="110" viewBox="0 0 110 110">
-          <circle cx="55" cy="55" r="46" fill="none" stroke="#eee" stroke-width="11"/>
-          <circle cx="55" cy="55" r="46" fill="none" stroke="#A07840" stroke-width="11" id="ov-score-arc" stroke-dasharray="0 289" stroke-linecap="round" transform="rotate(-90 55 55)" style="transition:stroke-dasharray .8s cubic-bezier(.4,0,.2,1),stroke .3s"/>
-        </svg>
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
-          <div style="font-size:22px;font-weight:700;color:#8a8a8a" id="ov-score">—</div>
-          <div style="font-size:9px;color:#8a8a8a;margin-top:2px">Numa Score</div>
-        </div>
-      </div>
-      <div class="ov-score-leg">
-        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#1E2D4A"></div><div class="ov-sl-lbl">חיסכון</div><div class="ov-sl-pct" id="ov-sp1">—</div></div>
-        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#27ae60"></div><div class="ov-sl-lbl">קרן חירום</div><div class="ov-sl-pct" id="ov-sp2">—</div></div>
-        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#c8a96a"></div><div class="ov-sl-lbl">חוב</div><div class="ov-sl-pct" id="ov-sp3">—</div></div>
-        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#e07b5a"></div><div class="ov-sl-lbl">פיזור</div><div class="ov-sl-pct" id="ov-sp4">—</div></div>
-        <div class="ov-sl-row"><div class="ov-sl-dot" style="background:#4a90d9"></div><div class="ov-sl-lbl">FIRE</div><div class="ov-sl-pct" id="ov-sp5">—</div></div>
-      </div>
-    </div>
-    <div class="ov-kpi-row">
-      <div class="ov-kpi"><div class="ov-kpi-lbl">תזרים</div><div class="ov-kpi-val" id="ov-k1">—</div></div>
-      <div class="ov-kpi"><div class="ov-kpi-lbl">חיסכון</div><div class="ov-kpi-val" id="ov-k2">—</div></div>
-      <div class="ov-kpi"><div class="ov-kpi-lbl">FIRE</div><div class="ov-kpi-val" id="ov-k3">—</div></div>
+  <div class="c-label">Numa Score</div>
+  <div style="display:flex;align-items:center;gap:18px;margin-top:6px">
+    <svg width="86" height="86" viewBox="0 0 86 86" style="flex-shrink:0">
+      <circle cx="43" cy="43" r="36" fill="none" stroke="#ede9e0" stroke-width="9"/>
+      <circle cx="43" cy="43" r="36" fill="none" stroke="#A07840" stroke-width="9" stroke-linecap="round" id="ov-score-arc" stroke-dasharray="0 226" transform="rotate(-90 43 43)" style="transition:stroke-dasharray .8s cubic-bezier(.4,0,.2,1),stroke .3s"/>
+      <text x="43" y="49" text-anchor="middle" font-size="22" font-weight="800" fill="#1E2D4A" id="ov-score">—</text>
+    </svg>
+    <div style="flex:1">
+      <div class="bar" style="margin-top:0"><i id="ovx-bs" style="width:0%;background:#2D6A3F"></i></div>
+      <div class="prog-meta"><span>חיסכון</span><span id="ovx-bsp">—</span></div>
+      <div class="bar"><i id="ovx-bf" style="width:0%;background:#A07840"></i></div>
+      <div class="prog-meta"><span>התקדמות ליעד</span><span id="ovx-bfp">—</span></div>
+      <div class="bar"><i id="ovx-bd" style="width:0%;background:#B8860B"></i></div>
+      <div class="prog-meta"><span>יחס חוב</span><span id="ovx-bdp">—</span></div>
     </div>
   </div>
 </div>
 
-<!-- SUMMARY CARDS (lean — pulls from the 3 pages) -->
-<div style="display:flex;gap:9px;align-items:stretch">
-  <div class="card" onclick="goP('cf')" style="flex:1;cursor:pointer;text-align:center">
-    <div style="padding:14px 6px 16px">
-      <div style="font-size:11px;font-weight:700;color:#6B7A96">תזרים</div>
-      <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;margin-top:6px;color:#1E2D4A" id="sum-cf-val">—</div>
-      <div style="font-size:9.5px;color:#8a8a8a;margin-top:5px;line-height:1.35" id="sum-cf-sub">—</div>
-    </div>
-  </div>
-  <div class="card" onclick="goP('assets')" style="flex:1;cursor:pointer;text-align:center">
-    <div style="padding:14px 6px 16px">
-      <div style="font-size:11px;font-weight:700;color:#6B7A96">הון</div>
-      <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;margin-top:6px;color:#1E2D4A" id="sum-wealth-val">—</div>
-      <div style="font-size:9.5px;color:#8a8a8a;margin-top:5px;line-height:1.35" id="sum-wealth-sub">—</div>
-    </div>
-  </div>
-  <div class="card" onclick="goP('plan')" style="flex:1;cursor:pointer;text-align:center">
-    <div style="padding:14px 6px 16px">
-      <div style="font-size:11px;font-weight:700;color:#6B7A96">מסע</div>
-      <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;margin-top:6px;color:#A07840" id="sum-journey-val">—</div>
-      <div style="font-size:9.5px;color:#8a8a8a;margin-top:5px;line-height:1.35" id="sum-journey-sub">—</div>
-    </div>
-  </div>
+<!-- summary cards (stacked, clickable) -->
+<div class="card" onclick="goP('cf')" style="cursor:pointer">
+  <div class="sec-head"><div class="c-label">תזרים</div><div class="sec-total">‹</div></div>
+  <div class="c-num" id="sum-cf-val" style="font-size:26px">—</div>
+  <div class="c-sub" id="sum-cf-sub">—</div>
+</div>
+<div class="card" onclick="goP('assets')" style="cursor:pointer">
+  <div class="sec-head"><div class="c-label">הון</div><div class="sec-total">‹</div></div>
+  <div class="c-num" id="sum-wealth-val" style="font-size:26px">—</div>
+  <div class="c-sub" id="sum-wealth-sub">—</div>
+</div>
+<div class="card" onclick="goP('plan')" style="cursor:pointer">
+  <div class="sec-head"><div class="c-label">מסע</div><div class="sec-total">‹</div></div>
+  <div class="c-num" id="sum-journey-val" style="font-size:26px">—</div>
+  <div class="c-sub" id="sum-journey-sub">—</div>
 </div>
 
 <!-- תובנות -->
 <div class="card">
-  <div class="ch"><div><div class="ct">תובנות</div><div class="cs">המלצות חכמות לפי הנתונים שלך</div></div></div>
-  <div class="cb">
-    <div class="sep"></div>
-    <div id="ov-insights"></div>
-  </div>
+  <div class="c-label">תובנות</div>
+  <div id="ov-insights"></div>
 </div>
 
 <!-- Hidden compat elements for existing JS -->
@@ -2104,12 +2080,24 @@ function _colDebt(ratio){return ratio<0.25?'#2D6A3F':ratio<=0.5?'#B8860B':'#A32D
 function _colScore(s){return s>70?'#2D6A3F':s>=40?'#B8860B':'#A32D2D';}
 function renderScoreRing(c){
   var arc=document.getElementById('ov-score-arc'); if(!arc)return;
-  var s=Math.max(0,Math.min(100,(c&&c.score)||0)), C=289; // 2*pi*46
+  var s=Math.max(0,Math.min(100,(c&&c.score)||0)), C=226; // 2*pi*36
   arc.setAttribute('stroke-dasharray',(C*s/100).toFixed(1)+' '+C);
   arc.setAttribute('stroke',_colScore(s));
 }
+function renderScoreBars(c){
+  var setT=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  var setW=function(id,p){var e=document.getElementById(id);if(e)e.style.width=Math.max(0,Math.min(100,p))+'%';};
+  var hasInc=c.totalIncome>0;
+  var sav=hasInc?Math.round(c.savingsRate):0;
+  setW('ovx-bs',sav); setT('ovx-bsp',hasInc?sav+'%':'—');
+  var fp=(c.fireNumber>0)?Math.round(Math.max(c.netWorth,0)/c.fireNumber*100):0;
+  setW('ovx-bf',fp); setT('ovx-bfp',(c.fireNumber>0)?fp+'%':'—');
+  var dr=(c.totalAssets>0)?Math.round(c.totalLiabilities/c.totalAssets*100):0;
+  setW('ovx-bd',dr); setT('ovx-bdp',(c.totalAssets>0||c.totalLiabilities>0)?dr+'%':'—');
+}
 function ovRenderOverview(c){
   try{renderScoreRing(c);}catch(e){}
+  try{renderScoreBars(c);}catch(e){}
   if(!c)return;
   var f=fmt;
   var set=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
@@ -2167,29 +2155,59 @@ function ovRenderOverview(c){
 function renderOvInsights(){
   var el=document.getElementById('ov-insights'); if(!el) return;
   var c=(typeof calc==='function')?calc():{};
-  var exp=c.totalExpenses||0, tips=[];
-  // 1. High-interest loans (>5%) — consider early payoff
-  (ND.loans||[]).forEach(function(ln){
-    if(tips.length<3 && (ln.rate||0)>5) tips.push('הלוואה'+(ln.name?' "'+ln.name+'"':'')+' בריבית '+ln.rate+'% — שקול לפרוע מוקדם כדי לחסוך בריבית.');
-  });
-  // 2. Emergency fund — should cover 3 months of expenses
-  if(tips.length<3 && exp>0 && (ND.cash||0) < exp*3){
-    tips.push('קרן חירום חסרה — 3 חודשי הוצאות = '+fmt(exp*3)+' (יש לך '+fmt(ND.cash||0)+').');
-  }
-  // 3. Asset concentration — over 50% in a single category
-  if(tips.length<3 && c.totalAssets>0){
-    var acats=[{l:'פנסיה',v:c.penT||0},{l:'קרן השתלמות',v:c.hshT||0},{l:'גמל',v:c.gmT||0},{l:'השקעות',v:c.invT||0},{l:'נדל"ן',v:c.reV||0},{l:'מזומן',v:ND.cash||0}];
+  var exp=c.totalExpenses||0, items=[];
+  (ND.loans||[]).forEach(function(ln){ if(items.length<3 && (ln.rate||0)>=4) items.push({name:'ריבית גבוהה'+(ln.name?' — '+ln.name:''),meta:'ריבית '+ln.rate+'% · שקול פירעון מוקדם',delta:'שים לב',cls:'down'}); });
+  if(items.length<3 && exp>0 && (ND.cash||0) < exp*3){ items.push({name:'קרן חירום חסרה',meta:'3 חודשי הוצאות = '+fmt(exp*3)+' · יש לך '+fmt(ND.cash||0),delta:'שים לב',cls:'down'}); }
+  if(items.length<3 && c.totalAssets>0){
+    var acats=[{l:'פנסיה',v:c.penT||0},{l:'קה"ש',v:c.hshT||0},{l:'גמל',v:c.gmT||0},{l:'השקעות',v:c.invT||0},{l:'נדל"ן',v:c.reV||0},{l:'מזומן',v:ND.cash||0}];
     var top=acats.reduce(function(a,b){return b.v>a.v?b:a;},{v:0,l:''});
-    if(top.v/c.totalAssets > 0.5) tips.push('ריכוז נכסים — '+Math.round(top.v/c.totalAssets*100)+'% מהנכסים ב'+top.l+'. שקול פיזור רחב יותר.');
+    if(top.v/c.totalAssets>0.5) items.push({name:'ריכוז נכסים',meta:Math.round(top.v/c.totalAssets*100)+'% מהנכסים ב'+top.l,delta:'שקול פיזור',cls:'warn'});
   }
-  if(tips.length){
-    el.innerHTML=tips.map(function(t){return '<div style="background:rgba(160,120,64,.08);border-radius:8px;padding:7px 9px;font-size:11px;color:#A07840;margin-bottom:5px;line-height:1.4">'+t+'</div>';}).join('');
+  if(items.length<3 && c.totalIncome>0 && c.savingsRate>=20){ items.push({name:'שיעור חיסכון מצוין',meta:'אתה חוסך '+Math.round(c.savingsRate)+'% מההכנסה — על המסלול',delta:'כל הכבוד',cls:'up'}); }
+  if(items.length){
+    el.innerHTML=items.map(function(t){return '<div class="row"><div><div class="r-name">'+t.name+'</div><div class="r-meta">'+t.meta+'</div></div><div class="r-left"><span class="r-delta '+t.cls+'">'+t.delta+'</span></div></div>';}).join('');
   } else {
     var hasData=((c.totalIncome||0)>0 || (c.totalAssets||0)>0 || exp>0 || (ND.loans||[]).length>0);
-    el.innerHTML='<div style="font-size:11px;color:#A8A8B0;text-align:center;padding:6px 0">'+(hasData?'אין התראות — המצב הפיננסי שלך נראה מאוזן.':t('empty_insights'))+'</div>';
+    el.innerHTML='<div style="font-size:11px;color:#A8A8B0;text-align:center;padding:12px 0">'+(hasData?'אין התראות — המצב הפיננסי שלך נראה מאוזן.':t('empty_insights'))+'</div>';
   }
 }
 
+/* ── Long-press to edit — universal gesture on every page ──
+   Any element whose onclick runs an edit action responds to a ~480ms
+   press by firing that edit; the trailing click is suppressed so a
+   long-press never opens the editor twice. Short taps are unaffected
+   (tap-to-edit still works per the mockups). Scrolling cancels it. ── */
+(function(){
+  var EDIT_RE=/openAddModal|cfEdit|cfAddIncome|cfAddExpense|jrEditEvent|jrAddEvent|editFireTarget|editRetireAge|editCalcVal/;
+  var timer=null, fired=false;
+  function editable(t){
+    while(t && t!==document.body){
+      if(t.getAttribute){ var oc=t.getAttribute('onclick')||''; if(EDIT_RE.test(oc)) return t; }
+      t=t.parentNode;
+    }
+    return null;
+  }
+  function start(e){
+    fired=false;
+    var el=editable(e.target); if(!el) return;
+    timer=setTimeout(function(){
+      fired=true;
+      try{ if(navigator.vibrate) navigator.vibrate(12); }catch(_){}
+      try{ if(typeof el.onclick==='function') el.onclick.call(el); }catch(_){}
+    }, 480);
+  }
+  function cancel(){ if(timer){ clearTimeout(timer); timer=null; } }
+  document.addEventListener('touchstart', start, {passive:true});
+  document.addEventListener('touchmove', cancel, {passive:true});
+  document.addEventListener('touchend', cancel);
+  document.addEventListener('touchcancel', cancel);
+  document.addEventListener('mousedown', start);
+  document.addEventListener('mouseup', cancel);
+  document.addEventListener('mouseleave', cancel, true);
+  document.addEventListener('scroll', cancel, true);
+  // Suppress the click that follows a fired long-press (capture phase)
+  document.addEventListener('click', function(e){ if(fired){ fired=false; e.stopPropagation(); e.preventDefault(); } }, true);
+})();
 /* ── RENDER: ALL OVERVIEW DYNAMIC CARDS ── */
 function renderOvCards(c){
   // Score + Activity Ring
