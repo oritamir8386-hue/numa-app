@@ -3355,11 +3355,20 @@ function agentSend(txt){
   // Build context
   var c=typeof calc==='function'?calc():{};
   var ctx='נתוני המשתמש: שווי נטו '+fmt(c.netWorth||0)+', הכנסה '+fmt(c.totalIncome||0)+', הוצאות '+fmt(c.totalExpenses||0)+', חיסכון '+((c.savingsRate||0))+'%, FIRE בגיל '+(c.fireAge||'לא ידוע')+', Numa Score '+(c.score||0)+'/100.';
+  // פירוט נכסים לפי קטגוריה
+  ctx+=' פירוט נכסים: פנסיה '+fmt(c.penT||0)+', קה"ש '+fmt(c.hshT||0)+', גמל '+fmt(c.gmT||0)+', השקעות '+fmt(c.invT||0)+', מזומן '+fmt(ND.cash||0)+'.';
+  // פירוט הלוואות
+  var _loans=(ND.loans||[]);
+  if(_loans.length){
+    ctx+=' הלוואות: '+_loans.map(function(l){return (l.name||'הלוואה')+' — יתרה '+fmt(l.balance||0)+', ריבית '+(l.rate||0)+'%, החזר חודשי '+fmt(l.monthlyPayment||0);}).join('; ')+'.';
+  } else {
+    ctx+=' אין הלוואות.';
+  }
   // Call API
   fetch('https://numa-app.oritamir8386.workers.dev/api/chat',{
     method:'POST',
     headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01'},
-    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:500,system:'אתה סוכן פיננסי של Numa. '+ctx+' ענה בעברית, בצורה קצרה וברורה. אל תמליץ על מוצרים ספציפיים.',messages:_agentHistory})
+    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:500,system:'אתה סוכן פיננסי של Numa. '+ctx+' ענה בעברית, בצורה קצרה וברורה. אל תמליץ על מוצרים ספציפיים. אל תשתמש באימוג\'ים. בסס כל המלצה על הנתונים שסופקו בלבד — אל תמציא מספרים.',messages:_agentHistory})
   }).then(function(r){return r.json();}).then(function(data){
     var t=document.getElementById('agent-typing');if(t)t.remove();
     var reply=(data.content&&data.content[0]&&data.content[0].text)||'מצטער, לא הצלחתי לענות. נסה שוב.';
