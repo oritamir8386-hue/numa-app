@@ -3260,6 +3260,7 @@ function goP(id){
 function renderPlanHub(){
   try{renderFIREPage();}catch(e){}
   try{ovDrawG();}catch(e){}
+  try{if(window.ovRenderEvs)ovRenderEvs();}catch(e){}
   try{if(typeof NHrenderChanged==='function')NHrenderChanged();}catch(e){}
 }
 function renderAssetsHub(){
@@ -5379,23 +5380,25 @@ function calcAmort(){
   var el=document.getElementById('ov-sn-date');
   if(el) el.textContent=now.getDate()+'.'+(now.getMonth()+1)+'.'+now.getFullYear();
 
-  var ovEvts=[];
   window.ovAddEv=function(){
     var n=(document.getElementById('ov-ev-n').value||'').trim();
     var y=parseInt(document.getElementById('ov-ev-y').value);
     if(!n||!y||y<2026)return;
-    ovEvts.push({n:n,y:y});
+    if(!ND.milestones) ND.milestones=[];
+    ND.milestones.push({id:ndId(),text:n,year:y});   // persist to ND (single source)
+    saveToStorage();
     document.getElementById('ov-ev-n').value='';
     document.getElementById('ov-ev-y').value='';
     ovRenderEvs();
     ovDrawG();
   };
-  function ovRenderEvs(){
-    document.getElementById('ov-ev-list').innerHTML=ovEvts.map(function(e,i){
-      return '<div class="ov-ev-tag"><span class="ov-et-n">'+e.n+'</span><span class="ov-et-y">'+e.y+'</span><button class="ov-et-d" onclick="ovDelEv('+i+')">×</button></div>';
+  window.ovRenderEvs=function(){
+    var list=document.getElementById('ov-ev-list'); if(!list)return;
+    list.innerHTML=(ND.milestones||[]).map(function(m){
+      return '<div class="ov-ev-tag"><span class="ov-et-n">'+m.text+'</span><span class="ov-et-y">'+m.year+'</span><button class="ov-et-d" onclick="ovDelEv(\''+m.id+'\')">×</button></div>';
     }).join('');
-  }
-  window.ovDelEv=function(i){ovEvts.splice(i,1);ovRenderEvs();ovDrawG();};
+  };
+  window.ovDelEv=function(id){ ND.milestones=(ND.milestones||[]).filter(function(m){return m.id!==id;}); saveToStorage(); ovRenderEvs(); ovDrawG(); };
 
   // Net-worth curve from ND.history: solid past + dashed forward projection
   function NH_buildLine(px, PT, cH, minY, maxY){
@@ -5440,12 +5443,12 @@ function calcAmort(){
     var nowX=px(2026);
     var yr0=minY,yrM=Math.round((minY+maxY)/2),yr1=maxY;
     var evM='';
-    ovEvts.forEach(function(ev){
-      if(ev.y>=minY&&ev.y<=maxY){
-        var ex=px(ev.y);
+    (ND.milestones||[]).forEach(function(ev){
+      if(ev.year>=minY&&ev.year<=maxY){
+        var ex=px(ev.year);
         evM+='<line x1="'+ex+'" y1="'+PT+'" x2="'+ex+'" y2="'+(PT+cH)+'" stroke="rgba(160,120,64,0.25)" stroke-width="1" stroke-dasharray="3,2"/>';
         evM+='<circle cx="'+ex+'" cy="'+(PT+cH*0.5)+'" r="3" fill="#A07840"/>';
-        evM+='<text x="'+ex+'" y="'+(PT-1)+'" text-anchor="middle" font-size="8" fill="#A07840" font-family="-apple-system,sans-serif">'+ev.n+'</text>';
+        evM+='<text x="'+ex+'" y="'+(PT-1)+'" text-anchor="middle" font-size="8" fill="#A07840" font-family="-apple-system,sans-serif">'+ev.text+'</text>';
       }
     });
     svg.innerHTML=
