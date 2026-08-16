@@ -819,6 +819,21 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       </div>
     </div>
   </div>
+  <!-- ── עובר ושב עכשיו ── -->
+  <div class="tc" style="height:auto">
+    <div class="tc-hdr"><div><h3>עובר ושב עכשיו</h3><p>יתרות מזומן נזילות</p></div></div>
+    <div class="tc-body">
+      <div class="tc-g2">
+        <div><div class="tc-il" id="cash-lbl-my">שלי</div><input class="tc-inp" id="cash-my" type="number" placeholder="₪ 0" oninput="cashUpdate()"/></div>
+        <div><div class="tc-il">פז</div><input class="tc-inp" id="cash-partner" type="number" placeholder="₪ 0" oninput="cashUpdate()"/></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:8px;border-top:.5px solid rgba(0,0,0,.06)">
+        <div style="font-size:12px;font-weight:700;color:#1E2D4A">סה"כ עו"ש</div>
+        <div style="font-size:14px;font-weight:800;color:#A07840" id="cash-total">—</div>
+      </div>
+    </div>
+  </div>
+
   <!-- hidden compat -->
   <div style="display:none"><span id="fl-inc"></span><span id="fl-exp"></span><span id="fl-sav"></span></div>
 
@@ -1621,7 +1636,8 @@ var ND_DEFAULT = {
   angel:       [],  // [{id,name,value,costBasis,stage}]
   realEstate:  [],  // [{id,name,marketValue,mortgageBalance,monthlyPayment}]
   loans:       [],  // [{id,name,balance,rate,monthlyPayment}]
-  cash: 0,
+  cash: 0,                          // derived cache = cashAccounts.my + cashAccounts.partner
+  cashAccounts: {my: 0, partner: 0},// single source for cash (checking accounts, may be negative)
   history: [],   // [{date:'YYYY-MM', netWorth, totalAssets, totalLoans, savingsRate}] — monthly net-worth snapshots
   milestones: [],
   onboardingDone: false,
@@ -1716,6 +1732,11 @@ function calc(){
   var reV   = ND.realEstate.reduce(function(s,x){return s+x.marketValue},0);
   var reMrt = ND.realEstate.reduce(function(s,x){return s+x.mortgageBalance},0);
   var lnT   = ND.loans.reduce(function(s,x){return s+x.balance},0);
+
+  // Cash — single source: cashAccounts. Migrate legacy ND.cash into 'my' once (back-compat). Negatives allowed.
+  if(!ND.cashAccounts) ND.cashAccounts = {my:0, partner:0};
+  if((ND.cash||0) > 0 && !(Number(ND.cashAccounts.my)||0) && !(Number(ND.cashAccounts.partner)||0)) ND.cashAccounts.my = ND.cash;
+  ND.cash = (Number(ND.cashAccounts.my)||0) + (Number(ND.cashAccounts.partner)||0);
 
   var totalAssets      = penT + hshT + gmT + invT + reV + ND.cash;
   var totalLiabilities = reMrt + lnT;
@@ -1884,6 +1905,7 @@ function render(){
   try{ovRenderOverview(c);}catch(e){}
   try{renderFIREPage();}catch(e){}
   try{renderOvInsights();}catch(e){}
+  try{renderCashCard();}catch(e){}
 }
 
 /* Semantic metric colors (soft) — green #2D6A3F, amber #B8860B, red #A32D2D */
@@ -2812,7 +2834,7 @@ function renderSTHeader(c){
   var cashInp = document.getElementById('cash-input');
   if(cashInp && !cashInp._bound2) {
     cashInp._bound2 = true;
-    cashInp.value = ND.cash > 0 ? ND.cash : '';
+    cashInp.value = (ND.cashAccounts&&ND.cashAccounts.my) ? ND.cashAccounts.my : '';
   }
   var cashEl = document.getElementById('cash-display');
   if(cashEl) cashEl.textContent = fmt(ND.cash||0);
@@ -3160,14 +3182,34 @@ function bindSettings(){
   }
 }
 
+/* ── עובר ושב (checking accounts) — single source ND.cashAccounts ── */
+function cashUpdate(){
+  if(!ND.cashAccounts) ND.cashAccounts={my:0,partner:0};
+  var my=document.getElementById('cash-my'), pa=document.getElementById('cash-partner');
+  if(my) ND.cashAccounts.my = parseFloat(my.value)||0;          // parseFloat (not parseNum) — keep negatives
+  if(pa) ND.cashAccounts.partner = parseFloat(pa.value)||0;
+  saveToStorage(); render();
+}
+function renderCashCard(){
+  if(!ND.cashAccounts) ND.cashAccounts={my:0,partner:0};
+  var my=document.getElementById('cash-my'), pa=document.getElementById('cash-partner');
+  if(my && document.activeElement!==my) my.value = ND.cashAccounts.my ? ND.cashAccounts.my : '';
+  if(pa && document.activeElement!==pa) pa.value = ND.cashAccounts.partner ? ND.cashAccounts.partner : '';
+  var lbl=document.getElementById('cash-lbl-my'); if(lbl) lbl.textContent=(ND.profile.name||'').trim()||'שלי';
+  var tot=document.getElementById('cash-total');
+  if(tot){ var t=(Number(ND.cashAccounts.my)||0)+(Number(ND.cashAccounts.partner)||0); tot.textContent=fmt(t); tot.style.color=_colNet(t); }
+}
+
 /* ── CASH CARD in investments ── */
 function bindCashInput(){
   var cashInp = document.getElementById('cash-input');
   if(cashInp && !cashInp._bound){
     cashInp._bound = true;
-    cashInp.value = ND.cash || '';
+    if(!ND.cashAccounts) ND.cashAccounts={my:0,partner:0};
+    cashInp.value = ND.cashAccounts.my || '';
     cashInp.addEventListener('input', function(){
-      ND.cash = parseNum(this.value);
+      if(!ND.cashAccounts) ND.cashAccounts={my:0,partner:0};
+      ND.cashAccounts.my = parseFloat(this.value)||0;   // keep negatives
       saveToStorage(); render(); try{renderAssetsHub();}catch(e){}
     });
   }
