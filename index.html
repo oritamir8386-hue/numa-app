@@ -739,25 +739,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
 </div>
 
-<!-- מסע הצמיחה -->
-<div class="ov-chart-card">
-  <div class="ov-chart-hdr">
-    <div><div class="ov-chart-title">מסע הצמיחה שלך</div><div class="ov-chart-sub" id="ov-g-sub">— שנים קדימה</div></div>
-  </div>
-  <div class="ov-chart-area"><svg id="ov-g-svg" width="100%" viewBox="0 0 320 110" preserveAspectRatio="none"></svg></div>
-  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
-    <span style="font-size:10px;color:#8a8a8a">2y</span>
-    <input type="range" min="2" max="30" value="10" id="ov-g-sl" style="flex:1;accent-color:#A07840" oninput="ovDrawG()">
-    <span style="font-size:10px;color:#8a8a8a">30y</span>
-  </div>
-  <div class="ov-ev-row">
-    <input class="ov-ev-fi" id="ov-ev-n" placeholder="אירוע חיים (חתונה, דירה...)">
-    <input class="ov-ev-yr" id="ov-ev-y" placeholder="שנה" type="number">
-    <button class="ov-ev-add" onclick="ovAddEv()">+ הוסף</button>
-  </div>
-  <div class="ov-ev-tags" id="ov-ev-list"></div>
-</div>
-
 <!-- פירוט נכסים -->
 <div class="card">
   <div class="ch"><div><div class="ct">פירוט נכסים</div><div class="cs">חלוקת התיק שלך</div></div><div class="ib">🥧</div></div>
@@ -805,15 +786,6 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div class="ov-cf-chip"><div class="ov-cf-chip-lbl">חיסכון</div><div class="ov-cf-chip-val" id="ov-cs">—</div></div>
     </div>
     <div class="ov-cf-note" id="ov-cf-note">הזן תזרים לצפייה</div>
-  </div>
-</div>
-
-<!-- מה השתנה -->
-<div class="card">
-  <div class="ch"><div><div class="ct">מה השתנה</div><div class="cs">מאז הביקור האחרון</div></div><div class="ib">🕐</div></div>
-  <div class="cb">
-    <div class="sep"></div>
-    <div class="ov-snap-rows" id="nh-wc"></div>
   </div>
 </div>
 
@@ -1055,6 +1027,19 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <!-- ══════════════════ תכנון — Hub ══════════════════ -->
 <div class="pg" id="pg-plan" style="gap:9px;padding:14px 18px 20px">
 
+  <!-- מסע הצמיחה -->
+  <div class="ov-chart-card">
+    <div class="ov-chart-hdr">
+      <div><div class="ov-chart-title">מסע הצמיחה שלך</div><div class="ov-chart-sub" id="ov-g-sub">— שנים קדימה</div></div>
+    </div>
+    <div class="ov-chart-area"><svg id="ov-g-svg" width="100%" viewBox="0 0 320 110" preserveAspectRatio="none"></svg></div>
+    <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+      <span style="font-size:10px;color:#8a8a8a">2y</span>
+      <input type="range" min="2" max="30" value="10" id="ov-g-sl" style="flex:1;accent-color:#A07840" oninput="ovDrawG()">
+      <span style="font-size:10px;color:#8a8a8a">30y</span>
+    </div>
+  </div>
+
   <!-- ── CARD 1: FIRE Hero (no fixed height) ── -->
   <div class="tc" id="section-fire" style="height:auto;background:#1E2D4A;color:#F5F2EC">
     <div class="tc-body" style="padding:18px 20px">
@@ -1086,6 +1071,28 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       </div>
       <button onclick="renderFIREPage()" style="width:100%;background:#A07840;color:#fff;border:none;border-radius:10px;padding:9px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px">▶ עדכן חישוב</button>
     </div>
+  </div>
+
+  <!-- מה השתנה -->
+  <div class="card">
+    <div class="ch"><div><div class="ct">מה השתנה</div><div class="cs">מאז הביקור האחרון</div></div><div class="ib">🕐</div></div>
+    <div class="cb">
+      <div class="sep"></div>
+      <div class="ov-snap-rows" id="nh-wc"></div>
+    </div>
+  </div>
+
+  <!-- אירועי חיים -->
+  <div class="ov-chart-card">
+    <div class="ov-chart-hdr">
+      <div><div class="ov-chart-title">אירועי חיים</div><div class="ov-chart-sub">סמן אירועים על ציר הזמן</div></div>
+    </div>
+    <div class="ov-ev-row">
+      <input class="ov-ev-fi" id="ov-ev-n" placeholder="אירוע חיים (חתונה, דירה...)">
+      <input class="ov-ev-yr" id="ov-ev-y" placeholder="שנה" type="number">
+      <button class="ov-ev-add" onclick="ovAddEv()">+ הוסף</button>
+    </div>
+    <div class="ov-ev-tags" id="ov-ev-list"></div>
   </div>
 
   <!-- ── CARD 4: תרחישים ── -->
@@ -1144,7 +1151,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <button class="ni on" id="ni-ov" onclick="goP('ov')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>סקירה</span></button>
   <button class="ni" id="ni-cf" onclick="goP('cf')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><span>תזרים</span></button>
   <button class="ni" id="ni-assets" onclick="goP('assets')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 100 4h4v-4h-4z"/></svg><span>נכסים</span></button>
-  <button class="ni" id="ni-plan" onclick="goP('plan')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>תכנון</span></button>
+  <button class="ni" id="ni-plan" onclick="goP('plan')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg><span>מסע</span></button>
 </div>
 
 </div><!-- /dev -->
@@ -3204,6 +3211,8 @@ function goP(id){
 function renderPlanHub(){
   try{renderFIREPage();}catch(e){}
   try{renderScenarios();}catch(e){}
+  try{ovDrawG();}catch(e){}
+  try{if(typeof NHrenderChanged==='function')NHrenderChanged();}catch(e){}
   var c2=calc();
   var alloc=document.getElementById('opt-allocation');
   if(alloc&&c2.totalAssets===0){
@@ -5439,6 +5448,13 @@ function renderScenarios(){
     function yPos(v){ return PT+cH*(1-Math.min(v/maxV,1)); }
     function poly(pts){ return pts.map(function(p){ return px(p.yy)+','+yPos(p.v); }).join(' '); }
     var out='';
+    // FIRE target line ("financial freedom") — shows where the projection crosses the goal
+    if(cv.fireNumber>0){
+      var fy=yPos(cv.fireNumber);
+      var ly=fy<PT+9?fy+9:fy-3;
+      out+='<line x1="'+px(minY)+'" y1="'+fy+'" x2="'+px(maxY)+'" y2="'+fy+'" stroke="#2D6A3F" stroke-width="1" stroke-dasharray="5,3"/>';
+      out+='<text x="'+px(minY)+'" y="'+ly+'" font-size="8" font-weight="700" fill="#2D6A3F" font-family="-apple-system,sans-serif">חופש כלכלי</text>';
+    }
     if(projPts.length>=2) out+='<polyline points="'+poly(projPts)+'" fill="none" stroke="#A07840" stroke-width="2" stroke-dasharray="4,3" stroke-linecap="round" stroke-linejoin="round"/>';
     if(histPts.length>=2) out+='<polyline points="'+poly(histPts)+'" fill="none" stroke="#1E2D4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
     histPts.forEach(function(p){ out+='<circle cx="'+px(p.yy)+'" cy="'+yPos(p.v)+'" r="2.5" fill="#1E2D4A"/>'; });
