@@ -1179,7 +1179,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- Sticky header -->
   <div style="position:sticky;top:0;z-index:10;background:#f0ece4;padding:calc(env(safe-area-inset-top, 0px) + 12px) 18px 12px;display:flex;justify-content:space-between;align-items:center">
-    <div style="font-size:20px;font-weight:800;color:#1E2D4A">הגדרות</div>
+    <div style="font-size:20px;font-weight:800;color:#1E2D4A" data-i18n="set_title">הגדרות</div>
     <button onclick="closeSettings()" style="background:#fff;border:none;border-radius:12px;padding:8px 16px;font-size:14px;font-weight:600;color:#1E2D4A;cursor:pointer;font-family:inherit">&larr; חזרה</button>
   </div>
 
@@ -1196,7 +1196,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- SECTION: פרופיל פיננסי -->
   <div>
-    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px">פרופיל פיננסי</div>
+    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px" data-i18n="set_profile">פרופיל פיננסי</div>
     <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px">Numa מותאמת לפי הפרופיל שלך — הכרטיסיות הרלוונטיות בלבד יוצגו</div>
     <div style="background:#fff;border-radius:18px;overflow:hidden">
       <!-- Employment -->
@@ -1224,7 +1224,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- SECTION: הגדרות חישוב -->
   <div>
-    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px">הגדרות חישוב</div>
+    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px" data-i18n="set_calc">הגדרות חישוב</div>
     <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px">ברירות מחדל לכל החישובים באפליקציה</div>
     <div style="background:#fff;border-radius:18px;overflow:hidden">
       <div class="set-row" onclick="editCalcVal('returnRate','תשואה שנתית %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">תשואה שנתית ברירת מחדל</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="returnRate" style="font-size:13px;color:#8a8a8a">7%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
@@ -1236,7 +1236,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- SECTION: מטבע ושפה -->
   <div>
-    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:8px" id="set-lang-title">מטבע ושפה</div>
+    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:8px" id="set-lang-title" data-i18n="set_currlang">מטבע ושפה</div>
     <div style="background:#fff;border-radius:18px;overflow:hidden">
       <!-- Language -->
       <div style="padding:13px 18px;border-bottom:.5px solid rgba(0,0,0,.05)">
@@ -1281,7 +1281,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- SECTION: גיבוי וסנכרון -->
   <div>
-    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:8px">גיבוי וסנכרון</div>
+    <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:8px" data-i18n="set_backup">גיבוי וסנכרון</div>
     <div style="background:#fff;border-radius:18px;overflow:hidden">
       <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">סנכרון אוטומטי</div><div style="font-size:11px;color:#8a8a8a">מסונכרן · עכשיו</div></div></div><button class="cat-toggle on" data-cat="sync" onclick="toggleCat(this)"></button></div>
       <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">גבה נתונים</div><div style="font-size:11px;color:#8a8a8a">גיבוי אחרון: היום</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
@@ -1292,7 +1292,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <!-- SECTION: התנתקות -->
   <div>
     <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <div class="set-row" style="border-bottom:none;cursor:pointer" onclick="authSignOut();closeSettings()"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#e74c3c">התנתקות</div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
+      <div class="set-row" style="border-bottom:none;cursor:pointer" onclick="authSignOut();closeSettings()"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#e74c3c" data-i18n="set_signout">התנתקות</div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
     </div>
   </div>
 
@@ -1528,6 +1528,9 @@ var T={
   he:{
     nav_overview:'סקירה',nav_cashflow:'תזרים',nav_assets:'הון',
     nav_plan:'מסע',nav_tools:'כלים',settings:'הגדרות',
+    login_tag:'הכלכלה שלך, בשליטה מלאה',login_signin:'כניסה',login_signup:'הרשמה',
+    set_title:'הגדרות',set_profile:'פרופיל פיננסי',set_calc:'הגדרות חישוב',set_currlang:'מטבע ושפה',set_backup:'גיבוי וסנכרון',set_signout:'התנתקות',
+    empty_insights:'הזן נתונים לקבלת תובנות',empty_assets:'אין נכסים עדיין',
     netWorth:'שווי נטו',totalAssets:'סה"כ נכסים',
     income:'הכנסה',expenses:'הוצאות',savings:'חיסכון',
     pension:'פנסיה',investments:'השקעות',loans:'הלוואות',
@@ -1556,6 +1559,9 @@ var T={
   en:{
     nav_overview:'Overview',nav_cashflow:'Cash Flow',nav_assets:'Wealth',
     nav_plan:'Journey',nav_tools:'Tools',settings:'Settings',
+    login_tag:'Your money, fully in control',login_signin:'Sign in',login_signup:'Sign up',
+    set_title:'Settings',set_profile:'Financial profile',set_calc:'Calculation settings',set_currlang:'Currency & language',set_backup:'Backup & sync',set_signout:'Sign out',
+    empty_insights:'Enter data for insights',empty_assets:'No assets yet',
     netWorth:'Net Worth',totalAssets:'Total Assets',
     income:'Income',expenses:'Expenses',savings:'Savings',
     pension:'Pension',investments:'Investments',loans:'Loans',
@@ -2031,7 +2037,7 @@ function renderOvInsights(){
     el.innerHTML=tips.map(function(t){return '<div style="background:rgba(160,120,64,.08);border-radius:8px;padding:7px 9px;font-size:11px;color:#A07840;margin-bottom:5px;line-height:1.4">'+t+'</div>';}).join('');
   } else {
     var hasData=((c.totalIncome||0)>0 || (c.totalAssets||0)>0 || exp>0 || (ND.loans||[]).length>0);
-    el.innerHTML='<div style="font-size:11px;color:#A8A8B0;text-align:center;padding:6px 0">'+(hasData?'אין התראות — המצב הפיננסי שלך נראה מאוזן.':'הזן נתונים לקבלת תובנות')+'</div>';
+    el.innerHTML='<div style="font-size:11px;color:#A8A8B0;text-align:center;padding:6px 0">'+(hasData?'אין התראות — המצב הפיננסי שלך נראה מאוזן.':t('empty_insights'))+'</div>';
   }
 }
 
@@ -3346,7 +3352,7 @@ function renderAssetsDonut(c){
   Array.prototype.slice.call(svg.querySelectorAll('.ad-arc')).forEach(function(a){a.remove();});
   if(total<=0){
     if(totEl) totEl.textContent='—';
-    if(leg) leg.innerHTML='<div style="font-size:11px;color:#A8A8B0;text-align:center;padding:8px 0">אין נכסים עדיין</div>';
+    if(leg) leg.innerHTML='<div style="font-size:11px;color:#A8A8B0;text-align:center;padding:8px 0">'+t('empty_assets')+'</div>';
     return;
   }
   if(totEl) totEl.textContent=fmt(total);
@@ -3515,11 +3521,15 @@ function agentSend(txt){
   } else {
     ctx+=' אין הלוואות.';
   }
-  // Call API
+  // Call API — system prompt in the current UI language
+  var _lang=(ND.settings&&ND.settings.language)||SETTINGS_DEFAULTS.language||'he';
+  var _sys=(_lang==='en')
+    ? 'You are Numa, a personal financial assistant. '+ctx+' Answer in English, briefly and clearly. Do not recommend specific products. Do not use emojis. Base every recommendation only on the data provided — do not invent numbers.'
+    : 'אתה סוכן פיננסי של Numa. '+ctx+' ענה בעברית, בצורה קצרה וברורה. אל תמליץ על מוצרים ספציפיים. אל תשתמש באימוג\'ים. בסס כל המלצה על הנתונים שסופקו בלבד — אל תמציא מספרים.';
   fetch('https://numa-app.oritamir8386.workers.dev/api/chat',{
     method:'POST',
     headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01'},
-    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:500,system:'אתה סוכן פיננסי של Numa. '+ctx+' ענה בעברית, בצורה קצרה וברורה. אל תמליץ על מוצרים ספציפיים. אל תשתמש באימוג\'ים. בסס כל המלצה על הנתונים שסופקו בלבד — אל תמציא מספרים.',messages:_agentHistory})
+    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:500,system:_sys,messages:_agentHistory})
   }).then(function(r){return r.json();}).then(function(data){
     var t=document.getElementById('agent-typing');if(t)t.remove();
     var reply=(data.content&&data.content[0]&&data.content[0].text)||'מצטער, לא הצלחתי לענות. נסה שוב.';
@@ -4164,11 +4174,11 @@ function obEnterApp(){
   <div class="la-wrap">
     <div class="la-hero">
       <div class="la-logo">Nu<span>ma</span></div>
-      <div class="la-tag">הכלכלה שלך, בשליטה מלאה</div>
+      <div class="la-tag" data-i18n="login_tag">הכלכלה שלך, בשליטה מלאה</div>
     </div>
     <div class="la-actions">
-      <button class="la-btn" onclick="showAuthScreen2('login')">כניסה</button>
-      <button class="la-btn2" onclick="showAuthScreen2('signup')">הרשמה</button>
+      <button class="la-btn" data-i18n="login_signin" onclick="showAuthScreen2('login')">כניסה</button>
+      <button class="la-btn2" data-i18n="login_signup" onclick="showAuthScreen2('signup')">הרשמה</button>
     </div>
   </div>
 </div>
@@ -4761,6 +4771,7 @@ function showLanding(){
   var l=$('landing-overlay');if(l)l.style.display='block';
   var a=$('auth-overlay');if(a)a.style.display='none';
   document.body.style.overflow='hidden';
+  try{applyLanguage();}catch(e){}   // translate login screen to default/chosen language
 }
 function showAuthScreen2(mode){
   var l=$('landing-overlay');if(l)l.style.display='none';
@@ -5374,10 +5385,13 @@ function setCurrency(val){
   try{renderAssetsHub();}catch(e){}
 }
 function applyLanguage(){
-  var lang=(ND.settings&&ND.settings.language)||'he';
+  var lang=(ND.settings&&ND.settings.language)||SETTINGS_DEFAULTS.language||'he';
   var html=document.documentElement;
   html.lang=lang;html.dir=lang==='he'?'rtl':'ltr';
   document.body.style.direction=lang==='he'?'rtl':'ltr';
+  // Declarative translations — any element with data-i18n / data-i18n-ph
+  document.querySelectorAll('[data-i18n]').forEach(function(el){ var v=t(el.getAttribute('data-i18n')); if(v) el.textContent=v; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){ var v=t(el.getAttribute('data-i18n-ph')); if(v) el.setAttribute('placeholder',v); });
   // Nav labels
   var navMap={ov:'nav_overview',cf:'nav_cashflow',assets:'nav_assets',plan:'nav_plan',tools:'nav_tools'};
   Object.keys(navMap).forEach(function(id){
