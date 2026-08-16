@@ -764,6 +764,15 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
 </div>
 
+<!-- תובנות -->
+<div class="card">
+  <div class="ch"><div><div class="ct">תובנות</div><div class="cs">המלצות חכמות לפי הנתונים שלך</div></div></div>
+  <div class="cb">
+    <div class="sep"></div>
+    <div id="ov-insights"></div>
+  </div>
+</div>
+
 <!-- Hidden compat elements for existing JS -->
 <div style="display:none">
   <span id="hero-nw"></span><span id="hero-proj"></span>
@@ -1886,6 +1895,7 @@ function render(){
   checkCelebrations(c);
   try{ovRenderOverview(c);}catch(e){}
   try{renderFIREPage();}catch(e){}
+  try{renderOvInsights();}catch(e){}
 }
 
 function ovRenderOverview(c){
@@ -1940,6 +1950,33 @@ function ovRenderOverview(c){
   el=document.getElementById('ov-fire');if(el&&c.fireAge>0&&c.fireAge<120)el.style.color='#c8a96a';
   el=document.getElementById('ov-score');if(el&&c.score>0)el.style.color='#1E2D4A';
   if(note&&inc>0){note.style.color='#A07840';note.style.fontWeight='600';}
+}
+
+/* ── RENDER: OVERVIEW INSIGHTS CARD (rule-based, max 3, only relevant) ── */
+function renderOvInsights(){
+  var el=document.getElementById('ov-insights'); if(!el) return;
+  var c=(typeof calc==='function')?calc():{};
+  var exp=c.totalExpenses||0, tips=[];
+  // 1. High-interest loans (>5%) — consider early payoff
+  (ND.loans||[]).forEach(function(ln){
+    if(tips.length<3 && (ln.rate||0)>5) tips.push('הלוואה'+(ln.name?' "'+ln.name+'"':'')+' בריבית '+ln.rate+'% — שקול לפרוע מוקדם כדי לחסוך בריבית.');
+  });
+  // 2. Emergency fund — should cover 3 months of expenses
+  if(tips.length<3 && exp>0 && (ND.cash||0) < exp*3){
+    tips.push('קרן חירום חסרה — 3 חודשי הוצאות = '+fmt(exp*3)+' (יש לך '+fmt(ND.cash||0)+').');
+  }
+  // 3. Asset concentration — over 50% in a single category
+  if(tips.length<3 && c.totalAssets>0){
+    var acats=[{l:'פנסיה',v:c.penT||0},{l:'קרן השתלמות',v:c.hshT||0},{l:'גמל',v:c.gmT||0},{l:'השקעות',v:c.invT||0},{l:'נדל"ן',v:c.reV||0},{l:'מזומן',v:ND.cash||0}];
+    var top=acats.reduce(function(a,b){return b.v>a.v?b:a;},{v:0,l:''});
+    if(top.v/c.totalAssets > 0.5) tips.push('ריכוז נכסים — '+Math.round(top.v/c.totalAssets*100)+'% מהנכסים ב'+top.l+'. שקול פיזור רחב יותר.');
+  }
+  if(tips.length){
+    el.innerHTML=tips.map(function(t){return '<div style="background:rgba(160,120,64,.08);border-radius:8px;padding:7px 9px;font-size:11px;color:#A07840;margin-bottom:5px;line-height:1.4">'+t+'</div>';}).join('');
+  } else {
+    var hasData=((c.totalIncome||0)>0 || (c.totalAssets||0)>0 || exp>0 || (ND.loans||[]).length>0);
+    el.innerHTML='<div style="font-size:11px;color:#A8A8B0;text-align:center;padding:6px 0">'+(hasData?'אין התראות — המצב הפיננסי שלך נראה מאוזן.':'הזן נתונים לקבלת תובנות')+'</div>';
+  }
 }
 
 /* ── RENDER: ALL OVERVIEW DYNAMIC CARDS ── */
