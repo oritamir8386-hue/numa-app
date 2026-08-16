@@ -131,6 +131,12 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .ni svg{width:24px;height:24px;transition:transform .15s}
 .ni:active svg{transform:scale(.88)}
 .ni span{font-size:11px;font-weight:600;letter-spacing:.01em}
+@media (min-width:900px){
+  .dev{max-width:1100px;margin:0 auto;box-shadow:0 0 60px rgba(0,0,0,.06)}
+  .pg.on{max-width:1100px;margin-inline:auto;width:100%;padding-left:24px;padding-right:24px}
+  #pg-ov.on{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-content:start}
+  #pg-ov.on > .ov-hero,#pg-ov.on > div[style*="align-items:stretch"],#pg-ov.on > div[style*="display:none"]{grid-column:1 / -1}
+}
 
 /* ── PAGE TRANSITIONS ── */
 
@@ -209,6 +215,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 /* ── OVERVIEW V2 ── */
 .card{background:#fff;border-radius:22px;border:.5px solid rgba(0,0,0,.06);box-shadow:0 4px 20px rgba(0,0,0,.06);overflow:hidden}
 .cb{padding:14px 20px 18px;display:flex;flex-direction:column;gap:12px}
+.chart-in{animation:chartIn .5s ease both}
+@keyframes chartIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .cs{font-size:10px;color:#8a8a8a;margin-top:1px}
 .ib{width:42px;height:42px;border-radius:12px;background:#ede9e0;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .sep{height:.5px;background:rgba(0,0,0,.06)}
@@ -713,10 +721,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div style="position:relative;width:110px;height:110px;flex-shrink:0">
         <svg width="110" height="110" viewBox="0 0 110 110">
           <circle cx="55" cy="55" r="46" fill="none" stroke="#eee" stroke-width="11"/>
-          <circle cx="55" cy="55" r="46" fill="none" stroke="#1E2D4A" stroke-width="11" id="ov-sc1" stroke-dasharray="0 289" stroke-linecap="round" transform="rotate(-90 55 55)"/>
-          <circle cx="55" cy="55" r="46" fill="none" stroke="#27ae60" stroke-width="11" id="ov-sc2" stroke-dasharray="0 289" stroke-linecap="round" transform="rotate(-90 55 55)"/>
-          <circle cx="55" cy="55" r="46" fill="none" stroke="#c8a96a" stroke-width="11" id="ov-sc3" stroke-dasharray="0 289" stroke-linecap="round" transform="rotate(-90 55 55)"/>
-          <circle cx="55" cy="55" r="46" fill="none" stroke="#e07b5a" stroke-width="11" id="ov-sc4" stroke-dasharray="0 289" stroke-linecap="round" transform="rotate(-90 55 55)"/>
+          <circle cx="55" cy="55" r="46" fill="none" stroke="#A07840" stroke-width="11" id="ov-score-arc" stroke-dasharray="0 289" stroke-linecap="round" transform="rotate(-90 55 55)" style="transition:stroke-dasharray .8s cubic-bezier(.4,0,.2,1),stroke .3s"/>
         </svg>
         <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
           <div style="font-size:22px;font-weight:700;color:#8a8a8a" id="ov-score">—</div>
@@ -874,6 +879,15 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   .exp-del{width:22px;height:22px;border-radius:6px;background:rgba(220,53,53,.08);border:none;color:#D93025;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
   </style>
 
+  <!-- ── תזרים חודשי (flow) ── -->
+  <div class="tc chart-in" style="height:auto">
+    <div class="tc-hdr"><div><h3>תזרים חודשי</h3><p>לאן הולכת ההכנסה</p></div></div>
+    <div class="tc-body">
+      <div id="cflow-bar" style="display:flex;height:24px;border-radius:8px;overflow:hidden;background:#ede9e0"></div>
+      <div id="cflow-legend" style="display:flex;flex-direction:column;gap:6px;margin-top:12px"></div>
+    </div>
+  </div>
+
   <!-- ── CARD 4: תובנות וניתוח ── -->
   <div class="tc" id="rule-2020-card" style="height:234px;display:flex;flex-direction:column">
     <div class="tc-hdr"><div><h3>תובנות וניתוח</h3><p>כלל 50/30/20</p></div></div>
@@ -948,6 +962,25 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div style="display:flex;justify-content:space-between;align-items:baseline;padding:2px 6px 0">
     <span style="font-size:16px;font-weight:800;color:#1E2D4A">נכסים</span>
     <span style="font-size:13px;font-weight:700;color:#A07840" id="wealth-assets-sum">—</span>
+  </div>
+
+  <!-- asset breakdown donut -->
+  <div class="tc chart-in" style="height:auto">
+    <div class="tc-hdr"><div><h3>פירוט נכסים</h3><p>חלוקת התיק לפי קטגוריה</p></div></div>
+    <div class="tc-body">
+      <div style="display:flex;align-items:center;gap:16px">
+        <div style="position:relative;width:104px;height:104px;flex-shrink:0">
+          <svg width="104" height="104" viewBox="0 0 104 104" id="ad-svg" style="transform:rotate(-90deg)">
+            <circle cx="52" cy="52" r="40" fill="none" stroke="#ede9e0" stroke-width="13"/>
+          </svg>
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
+            <div style="font-size:12px;font-weight:800;color:#1E2D4A" id="ad-total">—</div>
+            <div style="font-size:9px;color:#8a8a8a">נכסים</div>
+          </div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:7px" id="ad-legend"></div>
+      </div>
+    </div>
   </div>
 
   <!-- ── CARD 1: פנסיה וקה"ש ── -->
@@ -1906,13 +1939,22 @@ function render(){
   try{renderFIREPage();}catch(e){}
   try{renderOvInsights();}catch(e){}
   try{renderCashCard();}catch(e){}
+  try{renderCashflowChart(c);}catch(e){}
 }
 
 /* Semantic metric colors (soft) — green #2D6A3F, amber #B8860B, red #A32D2D */
 function _colNet(v){return v>=0?'#2D6A3F':'#A32D2D';}
 function _colSav(r){return r>=20?'#2D6A3F':r>=10?'#B8860B':'#A32D2D';}
 function _colDebt(ratio){return ratio<0.25?'#2D6A3F':ratio<=0.5?'#B8860B':'#A32D2D';}
+function _colScore(s){return s>70?'#2D6A3F':s>=40?'#B8860B':'#A32D2D';}
+function renderScoreRing(c){
+  var arc=document.getElementById('ov-score-arc'); if(!arc)return;
+  var s=Math.max(0,Math.min(100,(c&&c.score)||0)), C=289; // 2*pi*46
+  arc.setAttribute('stroke-dasharray',(C*s/100).toFixed(1)+' '+C);
+  arc.setAttribute('stroke',_colScore(s));
+}
 function ovRenderOverview(c){
+  try{renderScoreRing(c);}catch(e){}
   if(!c)return;
   var f=fmt;
   var set=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
@@ -3182,6 +3224,34 @@ function bindSettings(){
   }
 }
 
+/* ── תזרים חודשי chart — stacked horizontal bars: income → expense categories → savings ── */
+function renderCashflowChart(c){
+  var bar=document.getElementById('cflow-bar'); if(!bar) return;
+  var leg=document.getElementById('cflow-legend');
+  var inc=c.totalIncome||0;
+  if(inc<=0){ bar.innerHTML=''; if(leg) leg.innerHTML='<div style="font-size:11px;color:#A8A8B0;text-align:center;padding:8px 0">הזן הכנסות והוצאות עדיין</div>'; return; }
+  var exp=ND.expenses||{};
+  var expCats=[
+    {k:'housing',l:'דיור',col:'#1E2D4A'},{k:'food',l:'מזון',col:'#3A4E73'},
+    {k:'transport',l:'תחבורה',col:'#6B7A96'},{k:'health',l:'בריאות',col:'#A07840'},
+    {k:'entertainment',l:'בילויים',col:'#c8a96a'},{k:'subscriptions',l:'מנויים',col:'#8a8a8a'},
+    {k:'other',l:'אחר',col:'#B8860B'}
+  ];
+  var segs=[];
+  expCats.forEach(function(cat){ var v=Number(exp[cat.k])||0; if(v>0) segs.push({l:cat.l,v:v,col:cat.col}); });
+  var sav=Math.max(c.monthlySavings||0,0);
+  if(sav>0) segs.push({l:'חיסכון',v:sav,col:'#2D6A3F'});
+  var totalSeg=segs.reduce(function(s,x){return s+x.v;},0);
+  var base=Math.max(inc,totalSeg,1);
+  var barHtml='', legHtml='';
+  segs.forEach(function(sg){
+    barHtml+='<div style="width:'+(sg.v/base*100)+'%;background:'+sg.col+';transition:width .5s ease"></div>';
+    legHtml+='<div style="display:flex;align-items:center;gap:7px"><span style="width:9px;height:9px;border-radius:2px;background:'+sg.col+';flex-shrink:0"></span><span style="font-size:11px;color:#1E2D4A;flex:1">'+sg.l+'</span><span style="font-size:11px;font-weight:700;color:#8a8a8a">'+fmt(sg.v)+'</span></div>';
+  });
+  bar.innerHTML=barHtml || '';
+  if(leg) leg.innerHTML=legHtml || '<div style="font-size:11px;color:#A8A8B0;text-align:center;padding:8px 0">הזן הוצאות</div>';
+}
+
 /* ── עובר ושב (checking accounts) — single source ND.cashAccounts ── */
 function cashUpdate(){
   if(!ND.cashAccounts) ND.cashAccounts={my:0,partner:0};
@@ -3263,8 +3333,42 @@ function renderPlanHub(){
   try{if(window.ovRenderEvs)ovRenderEvs();}catch(e){}
   try{if(typeof NHrenderChanged==='function')NHrenderChanged();}catch(e){}
 }
+function renderAssetsDonut(c){
+  var svg=document.getElementById('ad-svg'); if(!svg) return;
+  var cats=[
+    {l:'פנסיה+קה"ש',v:(c.penT+c.hshT+c.gmT),col:'#1E2D4A'},
+    {l:'השקעות',v:c.invT,col:'#A07840'},
+    {l:'נדל"ן',v:c.reV,col:'#3A4E73'},
+    {l:'מזומן',v:Math.max(ND.cash||0,0),col:'#c8a96a'}
+  ];
+  var total=cats.reduce(function(s,x){return s+Math.max(x.v,0);},0);
+  var totEl=document.getElementById('ad-total'), leg=document.getElementById('ad-legend');
+  Array.prototype.slice.call(svg.querySelectorAll('.ad-arc')).forEach(function(a){a.remove();});
+  if(total<=0){
+    if(totEl) totEl.textContent='—';
+    if(leg) leg.innerHTML='<div style="font-size:11px;color:#A8A8B0;text-align:center;padding:8px 0">אין נכסים עדיין</div>';
+    return;
+  }
+  if(totEl) totEl.textContent=fmt(total);
+  var C=2*Math.PI*40, off=0, legHtml='';
+  cats.forEach(function(cat){
+    var v=Math.max(cat.v,0); if(v<=0) return;
+    var frac=v/total, len=frac*C;
+    var arc=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    arc.setAttribute('class','ad-arc');
+    arc.setAttribute('cx','52');arc.setAttribute('cy','52');arc.setAttribute('r','40');
+    arc.setAttribute('fill','none');arc.setAttribute('stroke',cat.col);arc.setAttribute('stroke-width','13');
+    arc.setAttribute('stroke-dasharray',len.toFixed(1)+' '+(C-len).toFixed(1));
+    arc.setAttribute('stroke-dashoffset',(-off).toFixed(1));
+    svg.appendChild(arc);
+    off+=len;
+    legHtml+='<div style="display:flex;align-items:center;gap:7px"><span style="width:9px;height:9px;border-radius:50%;background:'+cat.col+';flex-shrink:0"></span><span style="font-size:11px;color:#1E2D4A;flex:1">'+cat.l+'</span><span style="font-size:11px;font-weight:700;color:#8a8a8a">'+Math.round(frac*100)+'%</span></div>';
+  });
+  if(leg) leg.innerHTML=legHtml;
+}
 function renderAssetsHub(){
   var c=calc();
+  try{renderAssetsDonut(c);}catch(e){}
   // Hero totals
   var it=$('inv-total'),nt=$('hub-nw-total'),at=$('hub-assets-total');
   if(it) it.textContent=c.totalAssets>0?fmt(c.totalAssets):'—';
@@ -5431,6 +5535,10 @@ function calcAmort(){
     if(projPts.length>=2) out+='<polyline points="'+poly(projPts)+'" fill="none" stroke="#A07840" stroke-width="2" stroke-dasharray="4,3" stroke-linecap="round" stroke-linejoin="round"/>';
     if(histPts.length>=2) out+='<polyline points="'+poly(histPts)+'" fill="none" stroke="#1E2D4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
     histPts.forEach(function(p){ out+='<circle cx="'+px(p.yy)+'" cy="'+yPos(p.v)+'" r="2.5" fill="#1E2D4A"/>'; });
+    // "you are here" marker at the latest actual net-worth point
+    var _lp=histPts[histPts.length-1], _ly=yPos(_lp.v);
+    out+='<circle cx="'+px(_lp.yy)+'" cy="'+_ly+'" r="4" fill="#1E2D4A" stroke="#fff" stroke-width="2"/>';
+    out+='<text x="'+px(_lp.yy)+'" y="'+(_ly<20?_ly+13:_ly-8)+'" text-anchor="middle" font-size="8" font-weight="700" fill="#1E2D4A" font-family="-apple-system,sans-serif">אתה כאן</text>';
     return out;
   }
   window.ovDrawG=function(){
