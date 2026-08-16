@@ -945,6 +945,12 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
   <div id="hub-assets-total" style="display:none">—</div>
 
+  <!-- section header: assets -->
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding:2px 6px 0">
+    <span style="font-size:16px;font-weight:800;color:#1E2D4A">נכסים</span>
+    <span style="font-size:13px;font-weight:700;color:#A07840" id="wealth-assets-sum">—</span>
+  </div>
+
   <!-- ── CARD 1: פנסיה וקה"ש ── -->
   <div class="tc" id="section-st" style="height:auto">
     <div class="tc-hdr"><div><h3>פנסיה וקה"ש</h3><p>חיסכון פנסיוני + קרנות השתלמות</p></div><div class="tc-ico"><span style="font-size:18px">🏛️</span></div></div>
@@ -985,6 +991,12 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       </div>
       <button onclick="openAddModal('realEstate')" style="display:block;width:100%;background:#ede9e0;color:#A07840;border:none;border-radius:10px;padding:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;text-align:center">+ הוסף נדל"ן</button>
     </div>
+  </div>
+
+  <!-- section header: liabilities -->
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding:8px 6px 0;margin-top:4px">
+    <span style="font-size:16px;font-weight:800;color:#1E2D4A">התחייבויות</span>
+    <span style="font-size:13px;font-weight:700;color:#A32D2D" id="wealth-liab-sum">—</span>
   </div>
 
   <!-- ── CARD 5: הלוואות ── -->
@@ -1123,7 +1135,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <div class="nav">
   <button class="ni on" id="ni-ov" onclick="goP('ov')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>סקירה</span></button>
   <button class="ni" id="ni-cf" onclick="goP('cf')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><span>תזרים</span></button>
-  <button class="ni" id="ni-assets" onclick="goP('assets')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 100 4h4v-4h-4z"/></svg><span>נכסים</span></button>
+  <button class="ni" id="ni-assets" onclick="goP('assets')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 100 4h4v-4h-4z"/></svg><span>הון</span></button>
   <button class="ni" id="ni-plan" onclick="goP('plan')"><div class="nl"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg><span>מסע</span></button>
 </div>
 
@@ -1494,7 +1506,7 @@ function fmt(n){
 /* ═══ TRANSLATIONS ═══ */
 var T={
   he:{
-    nav_overview:'סקירה',nav_cashflow:'תזרים',nav_assets:'נכסים',
+    nav_overview:'סקירה',nav_cashflow:'תזרים',nav_assets:'הון',
     nav_plan:'מסע',nav_tools:'כלים',settings:'הגדרות',
     netWorth:'שווי נטו',totalAssets:'סה"כ נכסים',
     income:'הכנסה',expenses:'הוצאות',savings:'חיסכון',
@@ -1522,7 +1534,7 @@ var T={
     amort_note:'ריבית מעול 5% — שקול פירעון מוקדם לפני השקעה'
   },
   en:{
-    nav_overview:'Overview',nav_cashflow:'Cash Flow',nav_assets:'Assets',
+    nav_overview:'Overview',nav_cashflow:'Cash Flow',nav_assets:'Wealth',
     nav_plan:'Journey',nav_tools:'Tools',settings:'Settings',
     netWorth:'Net Worth',totalAssets:'Total Assets',
     income:'Income',expenses:'Expenses',savings:'Savings',
@@ -3203,6 +3215,9 @@ function renderAssetsHub(){
   if(it) it.textContent=c.totalAssets>0?fmt(c.totalAssets):'—';
   if(nt) nt.textContent=c.netWorth!==0?fmt(c.netWorth):'—';
   if(at) at.textContent=c.totalAssets>0?fmt(c.totalAssets):'—';
+  // Wealth section totals
+  var wa=$('wealth-assets-sum'); if(wa) wa.textContent=c.totalAssets>0?fmt(c.totalAssets):'—';
+  var wl=$('wealth-liab-sum'); if(wl) wl.textContent=c.totalLiabilities>0?fmt(c.totalLiabilities):'—';
   // Hero chips
   var hp=$('hero-pen-total'),hi=$('hero-inv-total'),hd=$('hub-debt-total');
   var penTotal=c.penT+c.hshT+c.gmT;
