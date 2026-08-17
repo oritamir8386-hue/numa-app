@@ -1229,7 +1229,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <div id="set-calc-editor" style="display:none;position:fixed;inset:0;z-index:950;background:rgba(0,0,0,.4)" onclick="if(event.target===this)closeCalcEditor()">
   <div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;padding:20px;padding-bottom:max(env(safe-area-inset-bottom),20px)">
     <div id="calc-editor-title" style="font-size:17px;font-weight:700;color:#1E2D4A;margin-bottom:14px;text-align:center"></div>
-    <input id="calc-editor-inp" class="inp" type="number" style="font-size:18px;text-align:center;padding:12px;background:#ede9e0;border-radius:12px;width:100%;border:none;font-family:inherit;margin-bottom:12px"/>
+    <input id="calc-editor-inp" class="inp" type="number" autocomplete="off" style="font-size:18px;text-align:center;padding:12px;background:#ede9e0;border-radius:12px;width:100%;border:none;font-family:inherit;margin-bottom:12px"/>
     <button onclick="saveCalcVal()" data-i18n="save" style="width:100%;background:#A07840;color:#fff;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">שמור</button>
   </div>
 </div>
@@ -1254,13 +1254,13 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div id="ai-msgs" style="flex:1;overflow-y:auto;padding:4px 22px 12px;display:flex;flex-direction:column;gap:10px;min-height:200px"></div>
   <!-- Quick chips -->
   <div id="agent-chips" style="display:flex;gap:6px;padding:0 20px 8px;flex-wrap:wrap">
-    <button class="agent-qchip" onclick="agentSend('מתי אגיע לחופש כלכלי?')">מתי אגיע לחופש כלכלי?</button>
-    <button class="agent-qchip" onclick="agentSend('מה ההלוואה שהכי כדאי לסלק?')">מה ההלוואה שהכי כדאי לסלק?</button>
-    <button class="agent-qchip" onclick="agentSend('איך נראה החודש שלי?')">איך נראה החודש שלי?</button>
+    <button class="agent-qchip" onclick="agentSend(t('chipq_freedom'))" data-i18n="chipq_freedom">מתי אגיע לחופש כלכלי?</button>
+    <button class="agent-qchip" onclick="agentSend(t('chipq_loan'))" data-i18n="chipq_loan">מה ההלוואה שהכי כדאי לסלק?</button>
+    <button class="agent-qchip" onclick="agentSend(t('chipq_month'))" data-i18n="chipq_month">איך נראה החודש שלי?</button>
   </div>
   <!-- Input -->
   <div style="display:flex;align-items:center;gap:8px;padding:8px 20px max(env(safe-area-inset-bottom),12px)">
-    <input id="ai-inp" type="text" placeholder="שאל כל שאלה על הכסף שלך..." style="flex:1;background:#ede9e0;border:none;border-radius:22px;padding:11px 16px;font-size:13px;font-family:inherit;color:#1E2D4A" onkeydown="if(event.key==='Enter')agentSend()" data-i18n-ph="ai_placeholder"/>
+    <input id="ai-inp" type="text" placeholder="שאל כל שאלה על הכסף שלך..." autocomplete="off" style="flex:1;background:#ede9e0;border:none;border-radius:22px;padding:11px 16px;font-size:13px;font-family:inherit;color:#1E2D4A" onkeydown="if(event.key==='Enter')agentSend()" data-i18n-ph="ai_placeholder"/>
     <button onclick="agentSend()" style="width:40px;height:40px;background:#A07840;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(160,120,64,.3)">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
     </button>
@@ -1522,7 +1522,7 @@ var T={
     ob_s1_title:'היי, מה שמך?',ob_s1_sub:'נתאים את Numa בדיוק לך',ob_ph_firstname:'שם פרטי',ob_ph_age:'גיל',ob_employment:'תעסוקה',ob_emp_employee:'שכיר/ת',ob_emp_self:'עצמאי/ת',ob_emp_retired:'גמלאי/ת',ob_family:'מצב משפחתי',ob_fam_single:'יחיד/ה',ob_fam_couple:'זוג',ob_fam_family:'זוג + ילדים',
     ob_s2_title:'מה רלוונטי אליך?',ob_s2_sub:'נציג רק את מה שמתאים לך',ob_r_pension:'פנסיה וקה"ש',ob_r_invest:'השקעות בשוק ההון',ob_r_re:'נדל"ן ומשכנתא',ob_r_loans:'הלוואות וחובות',ob_r_fire:'FIRE — עצמאות כלכלית',
     ob_s3_title:'העדפות תצוגה',ob_s3_sub:'תמיד אפשר לשנות בהגדרות',ob_language:'שפה',ob_currency:'מטבע',ob_curr_ils:'₪ שקל',ob_curr_usd:'$ דולר',ob_ready:'Numa מוכנה לך',ob_ready_sub:'הכל שמור ומסונכרן אוטומטית.<br>תוסיף נתונים בקצב שלך.',
-    au_welcome:'ברוך הבא — כניסה או הרשמה',au_ph_email:'אימייל',au_ph_pass:'סיסמה',au_ph_pass2:'אימות סיסמה',au_ph_name:'הכנס שמך',au_ph_pass_min:'לפחות 6 תווים',au_google:'המשך עם Google',toast_updated:'עודכן',toast_deleted:'נמחק',toast_saved:'נשמר',emp_notworking:'לא עובד',emp_employee:'שכיר',emp_self:'עצמאי',emp_retired:'גמלאי',app_title:'Numa — הכלכלה שלך בשליטה',ai_placeholder:'שאל כל שאלה על הכסף שלך...'
+    au_welcome:'ברוך הבא — כניסה או הרשמה',au_ph_email:'אימייל',au_ph_pass:'סיסמה',au_ph_pass2:'אימות סיסמה',au_ph_name:'הכנס שמך',au_ph_pass_min:'לפחות 6 תווים',au_google:'המשך עם Google',toast_updated:'עודכן',toast_deleted:'נמחק',toast_saved:'נשמר',emp_notworking:'לא עובד',emp_employee:'שכיר',emp_self:'עצמאי',emp_retired:'גמלאי',app_title:'Numa — הכלכלה שלך בשליטה',ai_placeholder:'שאל כל שאלה על הכסף שלך...',chipq_freedom:'מתי אגיע לחופש כלכלי?',chipq_loan:'מה ההלוואה שהכי כדאי לסלק?',chipq_month:'איך נראה החודש שלי?'
 
   },
   en:{
@@ -1598,7 +1598,7 @@ var T={
     ob_s1_title:'Hi, what\'s your name?',ob_s1_sub:'We\'ll tailor Numa just for you',ob_ph_firstname:'First name',ob_ph_age:'Age',ob_employment:'Employment',ob_emp_employee:'Employee',ob_emp_self:'Self-employed',ob_emp_retired:'Retired',ob_family:'Marital status',ob_fam_single:'Single',ob_fam_couple:'Couple',ob_fam_family:'Couple + kids',
     ob_s2_title:'What\'s relevant to you?',ob_s2_sub:'We\'ll show only what fits you',ob_r_pension:'Pension & study funds',ob_r_invest:'Market investments',ob_r_re:'Real estate & mortgage',ob_r_loans:'Loans & debts',ob_r_fire:'FIRE — financial independence',
     ob_s3_title:'Display preferences',ob_s3_sub:'You can always change this in Settings',ob_language:'Language',ob_currency:'Currency',ob_curr_ils:'₪ Shekel',ob_curr_usd:'$ Dollar',ob_ready:'Numa is ready for you',ob_ready_sub:'Everything is saved and synced automatically.<br>Add data at your own pace.',
-    au_welcome:'Welcome — sign in or sign up',au_ph_email:'Email',au_ph_pass:'Password',au_ph_pass2:'Confirm password',au_ph_name:'Enter your name',au_ph_pass_min:'At least 6 characters',au_google:'Continue with Google',toast_updated:'Updated',toast_deleted:'Deleted',toast_saved:'Saved',emp_notworking:'Not working',emp_employee:'Employee',emp_self:'Self-employed',emp_retired:'Retired',app_title:'Numa — Your money in control',ai_placeholder:'Ask anything about your money...'
+    au_welcome:'Welcome — sign in or sign up',au_ph_email:'Email',au_ph_pass:'Password',au_ph_pass2:'Confirm password',au_ph_name:'Enter your name',au_ph_pass_min:'At least 6 characters',au_google:'Continue with Google',toast_updated:'Updated',toast_deleted:'Deleted',toast_saved:'Saved',emp_notworking:'Not working',emp_employee:'Employee',emp_self:'Self-employed',emp_retired:'Retired',app_title:'Numa — Your money in control',ai_placeholder:'Ask anything about your money...',chipq_freedom:'When will I reach financial freedom?',chipq_loan:'Which loan should I pay off first?',chipq_month:'How does my month look?'
 
   }
 };
@@ -4683,15 +4683,15 @@ function obEnterApp(){
         </div>
         <div id="name-field" class="auth-field" style="display:none">
           <div class="auth-label">שם מלא</div>
-          <input id="auth-name" type="text" class="auth-input" placeholder="הכנס שמך" style="direction:rtl">
+          <input id="auth-name" type="text" class="auth-input" placeholder="הכנס שמך" data-i18n-ph="au_ph_name" autocomplete="off">
         </div>
         <div class="auth-field">
           <div class="auth-label">אימייל</div>
-          <input id="auth-email" type="email" class="auth-input" placeholder="your@email.com">
+          <input id="auth-email" type="email" class="auth-input" placeholder="your@email.com" autocomplete="off">
         </div>
         <div class="auth-field" style="margin-bottom:14px">
           <div class="auth-label">סיסמה</div>
-          <input id="auth-password" type="password" class="auth-input" placeholder="לפחות 6 תווים" onkeydown="if(event.key==='Enter')authSubmit()">
+          <input id="auth-password" type="password" class="auth-input" placeholder="לפחות 6 תווים" data-i18n-ph="au_ph_pass_min" autocomplete="off" onkeydown="if(event.key==='Enter')authSubmit()">
         </div>
         <button id="auth-btn" class="auth-submit" onclick="authSubmit()">כניסה →</button>
         <div class="auth-forgot" id="forgot-link">
@@ -6131,8 +6131,8 @@ function calcAmort(){
     <div style="font-size:28px;font-weight:800;color:#1E2D4A;margin-bottom:4px" data-i18n="ob_s1_title">היי, מה שמך?</div>
     <div style="font-size:15px;color:#8a8a8a;margin-bottom:24px" data-i18n="ob_s1_sub">נתאים את Numa בדיוק לך</div>
     <div style="display:flex;flex-direction:column;gap:12px">
-      <input class="ob2-inp" id="ob2-name" type="text" placeholder="שם פרטי" data-i18n-ph="ob_ph_firstname"/>
-      <input class="ob2-inp" id="ob2-age" type="number" placeholder="גיל" data-i18n-ph="ob_ph_age" style="width:50%"/>
+      <input class="ob2-inp" id="ob2-name" type="text" placeholder="שם פרטי" data-i18n-ph="ob_ph_firstname" autocomplete="off"/>
+      <input class="ob2-inp" id="ob2-age" type="number" placeholder="גיל" data-i18n-ph="ob_ph_age" autocomplete="off" style="width:50%"/>
     </div>
     <div style="font-size:13px;font-weight:600;color:#1E2D4A;margin:20px 0 8px" data-i18n="ob_employment">תעסוקה</div>
     <div class="ob2-chips" id="ob2-emp">
