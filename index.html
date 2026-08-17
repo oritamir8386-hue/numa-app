@@ -950,54 +950,54 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- hero -->
   <div class="card hero">
-    <div class="c-label">שווי נטו</div>
+    <div class="c-label" data-i18n="ov_net_worth">שווי נטו</div>
     <div class="c-num" id="as-nw">—</div>
     <div class="c-sub" id="as-nw-sub">—</div>
     <div class="c-sub" id="as-nw-liquid" style="margin-top:3px;color:var(--gold-l)">—</div>
     <div class="chips">
-      <div class="chip"><b id="as-chip-pen">—</b><span>פנסיה וקה"ש</span></div>
-      <div class="chip"><b id="as-chip-inv">—</b><span>השקעות ונדל"ן</span></div>
-      <div class="chip"><b class="bad" id="as-chip-debt">—</b><span>חובות</span></div>
+      <div class="chip"><b id="as-chip-pen">—</b><span data-i18n="as_pension_savings">פנסיה וקה"ש</span></div>
+      <div class="chip"><b id="as-chip-inv">—</b><span data-i18n="as_invest_re">השקעות ונדל"ן</span></div>
+      <div class="chip"><b class="bad" id="as-chip-debt">—</b><span data-i18n="as_debts">חובות</span></div>
     </div>
   </div>
 
   <!-- פילוח נכסים -->
   <div class="card">
-    <div class="c-label">פילוח נכסים</div>
+    <div class="c-label" data-i18n="as_alloc">פילוח נכסים</div>
     <div class="bar" id="as-alloc-bar"></div>
     <div id="as-alloc-legend"></div>
   </div>
 
   <!-- פנסיה וקה"ש -->
   <div class="card">
-    <div class="sec-head"><div class="c-label">פנסיה וקה"ש</div><div class="sec-total" id="as-pen-total">—</div></div>
+    <div class="sec-head"><div class="c-label" data-i18n="as_pension_savings">פנסיה וקה"ש</div><div class="sec-total" id="as-pen-total">—</div></div>
     <div id="as-pen-list"></div>
     <div style="display:flex;gap:14px">
-      <button class="btn-add" onclick="openAddModal('pension')">+ פנסיה</button>
-      <button class="btn-add" onclick="openAddModal('hishtalmut')">+ קה"ש</button>
-      <button class="btn-add" onclick="openAddModal('gamel')">+ גמל</button>
+      <button class="btn-add" onclick="openAddModal('pension')" data-i18n="as_add_pension">+ פנסיה</button>
+      <button class="btn-add" onclick="openAddModal('hishtalmut')" data-i18n="as_add_studyfund">+ קה"ש</button>
+      <button class="btn-add" onclick="openAddModal('gamel')" data-i18n="as_add_gemel">+ גמל</button>
     </div>
   </div>
 
   <!-- השקעות -->
   <div class="card">
-    <div class="sec-head"><div class="c-label">השקעות · לחיצה על שורה לעריכה</div><div class="sec-total" id="as-inv-total">—</div></div>
+    <div class="sec-head"><div class="c-label" data-i18n="as_invest_tap">השקעות · לחיצה על שורה לעריכה</div><div class="sec-total" id="as-inv-total">—</div></div>
     <div id="as-inv-list"></div>
-    <button class="btn-add" onclick="openAddModal('investment')">+ הוסף השקעה</button>
+    <button class="btn-add" onclick="openAddModal('investment')" data-i18n="as_add_invest">+ הוסף השקעה</button>
   </div>
 
   <!-- נדל"ן -->
   <div class="card">
-    <div class="sec-head"><div class="c-label">נדל"ן</div><div class="sec-total" id="as-re-total">—</div></div>
+    <div class="sec-head"><div class="c-label" data-i18n="as_realestate">נדל"ן</div><div class="sec-total" id="as-re-total">—</div></div>
     <div id="as-re-list"></div>
-    <button class="btn-add" onclick="openAddModal('realEstate')">+ הוסף נדל"ן</button>
+    <button class="btn-add" onclick="openAddModal('realEstate')" data-i18n="as_add_re">+ הוסף נדל"ן</button>
   </div>
 
   <!-- הלוואות -->
   <div class="card">
-    <div class="sec-head"><div class="c-label">הלוואות</div><div class="sec-total" style="color:var(--red)" id="as-lo-total">—</div></div>
+    <div class="sec-head"><div class="c-label" data-i18n="as_loans">הלוואות</div><div class="sec-total" style="color:var(--red)" id="as-lo-total">—</div></div>
     <div id="as-lo-list"></div>
-    <button class="btn-add" onclick="openAddModal('loan')">+ הוסף הלוואה</button>
+    <button class="btn-add" onclick="openAddModal('loan')" data-i18n="as_add_loan">+ הוסף הלוואה</button>
   </div>
 
   <!-- hidden compat: legacy ids referenced by other renderers (guarded/no-op) -->
@@ -1019,7 +1019,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- כרטיס יעד + מסלול תחנות -->
   <div class="card">
-    <div class="c-label">המסע לחופש כלכלי</div>
+    <div class="c-label" data-i18n="jr_title">המסע לחופש כלכלי</div>
     <div class="c-num" id="jr-age">גיל <span class="g">—</span></div>
     <div class="c-sub" id="jr-age-sub">—</div>
     <div class="bar"><i id="jr-prog-bar" style="width:0%;background:linear-gradient(90deg,#A07840,#c8a96a)"></i></div>
@@ -1029,21 +1029,21 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- אירועי חיים עם עלות -->
   <div class="card">
-    <div class="sec-head"><div class="c-label">אירועי חיים</div><div class="sec-total">לחיצה על שורה לעריכה</div></div>
+    <div class="sec-head"><div class="c-label" data-i18n="jr_life_events">אירועי חיים</div><div class="sec-total" data-i18n="jr_tap_edit">לחיצה על שורה לעריכה</div></div>
     <div id="jr-events"></div>
-    <button class="btn-add" onclick="jrAddEvent()">+ הוסף אירוע (שם · שנה · עלות)</button>
+    <button class="btn-add" onclick="jrAddEvent()" data-i18n="jr_add_event">+ הוסף אירוע (שם · שנה · עלות)</button>
   </div>
 
   <!-- מנופים מחושבים -->
   <div class="card">
-    <div class="c-label">מה יזיז את התאריך</div>
+    <div class="c-label" data-i18n="jr_moves_date">מה יזיז את התאריך</div>
     <div id="jr-levers"></div>
-    <div class="lv-hint">לחיצה על מנוף — הסוכן מנתח לעומק</div>
+    <div class="lv-hint" data-i18n="jr_lever_hint">לחיצה על מנוף — הסוכן מנתח לעומק</div>
   </div>
 
   <!-- מומנטום מ-history -->
   <div class="card">
-    <div class="c-label">המומנטום שלך</div>
+    <div class="c-label" data-i18n="jr_momentum">המומנטום שלך</div>
     <div id="jr-momentum"></div>
   </div>
 
@@ -1489,7 +1489,21 @@ var T={
     cf_income:'הכנסה',cf_expenses_short:'הוצאות',cf_ratio:'יחס הוצאה',
     cf_checking:'עובר ושב',cf_incomes:'הכנסות',cf_add_income:'+ הוסף מקור הכנסה',cf_expenses:'הוצאות',cf_add_category:'+ הוסף קטגוריה',
     cf_no_income:'אין הכנסות — הוסף מקור הכנסה',cf_no_expenses:'אין הוצאות — הוסף קטגוריה',
-    name_me:'שלי',name_partner:'בן/בת זוג'
+    name_me:'שלי',name_partner:'בן/בת זוג',
+    as_pension_savings:'פנסיה וקה"ש',as_invest_re:'השקעות ונדל"ן',as_debts:'חובות',as_alloc:'פילוח נכסים',
+    as_add_pension:'+ פנסיה',as_add_studyfund:'+ קה"ש',as_add_gemel:'+ גמל',as_invest_tap:'השקעות · לחיצה על שורה לעריכה',as_add_invest:'+ הוסף השקעה',
+    as_realestate:'נדל"ן',as_add_re:'+ הוסף נדל"ן',as_loans:'הלוואות',as_add_loan:'+ הוסף הלוואה',
+    as_assets_word:'נכסים',as_liab_word:'התחייבויות',as_available_checking:'זמין בעו"ש',as_checking_neg:'עו"ש',as_not_in_breakdown:'לא נכלל בפילוח',as_add_assets_hint:'הוסף נכסים כדי לראות פילוח',
+    wcat_pension:'פנסיה',wcat_studyfund:'קרנות השתלמות',wcat_gemel:'גמל להשקעה',wcat_investments:'השקעות סחירות',wcat_re:'נדל"ן',wcat_checking:'עו"ש',
+    pen_deposit:'הפקדה',pen_fee:'דמי ניהול',per_month:'/ח׳',sf_liquid:'נזיל',gemel_desc:'גמל להשקעה',inv_cost:'עלות',re_mortgage:'משכנתא',re_equity:'הון עצמי',loan_est:'אומדן',loan_updated:'עודכן',loan_high:'ריבית גבוהה',loan_zero:'0% ריבית',
+    empty_pension:'אין חיסכון פנסיוני עדיין',empty_invest2:'אין השקעות עדיין',empty_re:'אין נדל"ן עדיין',empty_loans:'אין הלוואות',loan_one:'הלוואה',event_one:'אירוע',
+    jr_title:'המסע לחופש כלכלי',jr_life_events:'אירועי חיים',jr_tap_edit:'לחיצה על שורה לעריכה',jr_add_event:'+ הוסף אירוע (שם · שנה · עלות)',jr_moves_date:'מה יזיז את התאריך',jr_lever_hint:'לחיצה על מנוף — הסוכן מנתח לעומק',jr_momentum:'המומנטום שלך',
+    jr_in:'בעוד',years_word:'שנים',year_word:'שנה',jr_at_pace:'בקצב הנוכחי',jr_incl_events:'כולל אירועים',jr_reached:'הגעת ליעד!',jr_increase_savings:'הגדל חיסכון חודשי כדי להגיע ליעד',jr_enter_calc:'הזן הכנסות והוצאות כדי לחשב',jr_target:'יעד',jr_manual:'ידני',
+    st_start:'ההתחלה',st_here:'אתה כאן',st_first_million:'מיליון ראשון',st_halfway:'חצי הדרך',st_freedom:'חופש כלכלי',st_expected:'צפוי',st_of_way:'מהדרך',jr_increase_reach:'הגדל חיסכון כדי להגיע',
+    ev_est_cost:'עלות משוערת',ev_delays_by:'דוחה ב-',ev_months:'חודשים',ev_delays_month:'דוחה בחודש',ev_no_impact:'ללא השפעה מהותית',ev_cost:'עלות',jr_no_events:'אין אירועים עדיין — הוסף חתונה, דירה, טיול...',
+    lv_add_2000:'עוד ₪2,000 חיסכון בחודש',lv_from:'מ-',lv_to:'ל-',lv_payoff:'סילוק',lv_frees:'משחרר',lv_per_month:'בחודש',lv_month_one:'חודש',lv_improve:'שיפור',lv_emergency:'בניית קרן חירום',lv_protects:'מגן על המסע מהפתעות',lv_stability:'יציבות',jr_no_levers:'הזן הכנסות והוצאות כדי לראות מנופים',
+    mom_closer:'קרוב יותר לחופש מהחודש שעבר',mom_down:'ירידה מהחודש שעבר',mom_stable:'יציב מהחודש שעבר',mom_networth:'שווי נטו',mom_liabilities:'התחייבויות',mom_freedom_date:'תאריך החופש',mom_closer_a:'התקרב ↑',mom_further:'התרחק ↓',mom_nochange:'ללא שינוי →',mom_compare:'ההשוואה מול',mom_auto:'מתעדכן אוטומטית ב-1 לחודש',mom_accumulating:'נתונים מצטברים — ההשוואה הראשונה תופיע בחודש הבא',
+    lvq_2000:'איך תוספת של ₪2,000 חיסכון בחודש משפיעה על תאריך החופש הכלכלי שלי? תן ניתוח מספרי.',lvq_payoff_a:'כדאי לי לסלק את ההלוואה "',lvq_payoff_b:'" בריבית ',lvq_payoff_c:'%? נתח את ההשפעה על המסע לחופש כלכלי.',lvq_emergency_a:'איך לבנות קרן חירום של ',lvq_emergency_b:' (3 חודשי הוצאות) ולמה היא חשובה למסע שלי?'
   },
   en:{
     nav_overview:'Overview',nav_cashflow:'Cash Flow',nav_assets:'Wealth',
@@ -1536,7 +1550,21 @@ var T={
     cf_income:'Income',cf_expenses_short:'Expenses',cf_ratio:'Expense ratio',
     cf_checking:'Checking',cf_incomes:'Income',cf_add_income:'+ Add income source',cf_expenses:'Expenses',cf_add_category:'+ Add category',
     cf_no_income:'No income yet — add a source',cf_no_expenses:'No expenses yet — add a category',
-    name_me:'Me',name_partner:'Partner'
+    name_me:'Me',name_partner:'Partner',
+    as_pension_savings:'Pension & Study funds',as_invest_re:'Investments & RE',as_debts:'Debts',as_alloc:'Asset breakdown',
+    as_add_pension:'+ Pension',as_add_studyfund:'+ Study fund',as_add_gemel:'+ Provident',as_invest_tap:'Investments · tap a row to edit',as_add_invest:'+ Add investment',
+    as_realestate:'Real estate',as_add_re:'+ Add real estate',as_loans:'Loans',as_add_loan:'+ Add loan',
+    as_assets_word:'Assets',as_liab_word:'liabilities',as_available_checking:'Available in checking',as_checking_neg:'Checking',as_not_in_breakdown:'not included',as_add_assets_hint:'Add assets to see the breakdown',
+    wcat_pension:'Pension',wcat_studyfund:'Study funds',wcat_gemel:'Provident fund',wcat_investments:'Marketable investments',wcat_re:'Real estate',wcat_checking:'Checking',
+    pen_deposit:'deposit',pen_fee:'fee',per_month:'/mo',sf_liquid:'liquid',gemel_desc:'Provident fund',inv_cost:'cost',re_mortgage:'Mortgage',re_equity:'equity',loan_est:'est.',loan_updated:'updated',loan_high:'High interest',loan_zero:'0% interest',
+    empty_pension:'No retirement savings yet',empty_invest2:'No investments yet',empty_re:'No real estate yet',empty_loans:'No loans',loan_one:'Loan',event_one:'Event',
+    jr_title:'Journey to Financial Freedom',jr_life_events:'Life events',jr_tap_edit:'tap a row to edit',jr_add_event:'+ Add event (name · year · cost)',jr_moves_date:'What Moves the Date',jr_lever_hint:'Tap a lever — the agent analyzes in depth',jr_momentum:'Your Momentum',
+    jr_in:'in',years_word:'years',year_word:'year',jr_at_pace:'at the current pace',jr_incl_events:'incl. events',jr_reached:'Goal reached!',jr_increase_savings:'Increase monthly savings to reach the goal',jr_enter_calc:'Enter income and expenses to calculate',jr_target:'Target',jr_manual:'manual',
+    st_start:'The start',st_here:'You are here',st_first_million:'First Million',st_halfway:'Halfway',st_freedom:'Financial Freedom',st_expected:'expected',st_of_way:'of the way',jr_increase_reach:'Increase savings to reach it',
+    ev_est_cost:'est. cost',ev_delays_by:'delays by ',ev_months:'months',ev_delays_month:'delays by a month',ev_no_impact:'no material impact',ev_cost:'cost',jr_no_events:'No events yet — add a wedding, home, trip...',
+    lv_add_2000:'+₪2,000 savings per month',lv_from:'from ',lv_to:'to ',lv_payoff:'Pay off',lv_frees:'frees',lv_per_month:'per month',lv_month_one:'month',lv_improve:'improvement',lv_emergency:'Build emergency fund',lv_protects:'protects your journey from surprises',lv_stability:'stability',jr_no_levers:'Enter income and expenses to see levers',
+    mom_closer:'closer to freedom than last month',mom_down:'down from last month',mom_stable:'stable vs last month',mom_networth:'Net worth',mom_liabilities:'Liabilities',mom_freedom_date:'Freedom date',mom_closer_a:'closer ↑',mom_further:'further ↓',mom_nochange:'no change →',mom_compare:'compared to',mom_auto:'auto-updates on the 1st',mom_accumulating:'Gathering data — the first comparison appears next month',
+    lvq_2000:'How does an extra ₪2,000/month in savings affect my financial freedom date? Give a numerical analysis.',lvq_payoff_a:'Should I pay off the loan "',lvq_payoff_b:'" at ',lvq_payoff_c:'% interest? Analyze the impact on my journey to financial freedom.',lvq_emergency_a:'How do I build an emergency fund of ',lvq_emergency_b:' (3 months of expenses), and why does it matter for my journey?'
   }
 };
 function t(key){
@@ -1919,6 +1947,8 @@ function renderJourneySummary(c){
    ND.settings.fireTargetManual (number) · milestone.cost (number)
    ═══════════════════════════════════════════════════════════ */
 var _JR_MONTHS=['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+var _JR_MONTHS_EN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function _jrMon(i){ return ((typeof getSettings==='function'&&getSettings().language==='en')?_JR_MONTHS_EN:_JR_MONTHS)[i]; }
 function _esc(t){ return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function fmtK(n){ if(n===0) return '₪0'; var a=Math.abs(n), s=n<0?'−':'+'; return s+(a>=1e6?'₪'+(a/1e6).toFixed(1)+'M':a>=1000?'₪'+Math.round(a/1000)+'k':'₪'+Math.round(a)); }
 // Fractional years (7% annual, compounded monthly) for netWorth+monthly deposits to reach
@@ -1954,18 +1984,18 @@ function renderJourney(){
   var pctEl=document.getElementById('jr-prog-pct'), tgtEl=document.getElementById('jr-target');
   if(hasData){
     var years=_jrProjYears(nw, dep, target+costs);
-    if(years==null){ if(ageEl)ageEl.innerHTML='גיל <span class="g">—</span>'; if(subEl)subEl.textContent='הגדל חיסכון חודשי כדי להגיע ליעד'; }
+    if(years==null){ if(ageEl)ageEl.innerHTML=t('age_word')+' <span class="g">—</span>'; if(subEl)subEl.textContent=t('jr_increase_savings'); }
     else {
       var yr=_jrY(years), fAge=(age!=null)?(age+yr):null;
-      if(ageEl) ageEl.innerHTML = fAge!=null ? ('גיל <span class="g">'+fAge+'</span>') : ('בעוד <span class="g">'+yr+'</span> שנים');
-      if(subEl) subEl.textContent = (yr<=0?'הגעת ליעד!':'בעוד '+yr+(yr===1?' שנה':' שנים'))+' · בקצב הנוכחי'+(costs>0?' · כולל אירועים':'');
+      if(ageEl) ageEl.innerHTML = fAge!=null ? (t('age_word')+' <span class="g">'+fAge+'</span>') : (t('jr_in')+' <span class="g">'+yr+'</span> '+t('years_word'));
+      if(subEl) subEl.textContent = (yr<=0?t('jr_reached'):t('jr_in')+' '+yr+' '+(yr===1?t('year_word'):t('years_word')))+' · '+t('jr_at_pace')+(costs>0?' · '+t('jr_incl_events'):'');
     }
-  } else { if(ageEl)ageEl.innerHTML='גיל <span class="g">—</span>'; if(subEl)subEl.textContent='הזן הכנסות והוצאות כדי לחשב'; }
+  } else { if(ageEl)ageEl.innerHTML=t('age_word')+' <span class="g">—</span>'; if(subEl)subEl.textContent=t('jr_enter_calc'); }
   if(barEl) barEl.style.width=pct+'%';
-  if(nowEl) nowEl.textContent=fmt(nw)+' היום';
+  if(nowEl) nowEl.textContent=fmt(nw)+' '+t('ov_today');
   if(pctEl) pctEl.textContent=pct+'%';
   var manual=!!(ND.settings&&ND.settings.fireTargetManual>0);
-  if(tgtEl) tgtEl.innerHTML='יעד '+(target>0?fmt(target):'—')+(manual?' (ידני)':'')+' ✎';
+  if(tgtEl) tgtEl.innerHTML=t('jr_target')+' '+(target>0?fmt(target):'—')+(manual?' ('+t('jr_manual')+')':'')+' ✎';
 
   renderJourneyPath(c, target, costs, nw, dep, curYear, now, pct);
   renderJourneyEvents(c, target, costs, nw, dep);
@@ -1979,21 +2009,21 @@ function renderJourneyPath(c, target, costs, nw, dep, curYear, now, pct){
   var sts=[];
   var h=(ND.history&&ND.history.length)?ND.history:[];
   var startYear=h.length?parseInt(h[0].date):curYear, startVal=h.length?(h[0].netWorth||0):0;
-  sts.push({cls:'done', name:'ההתחלה', meta:String(startYear), val:startVal, year:startYear});
-  sts.push({cls:'here', name:'אתה כאן', meta:_JR_MONTHS[now.getMonth()]+' '+curYear+' · '+pct+'% מהדרך', val:nw, year:curYear});
+  sts.push({cls:'done', name:t('st_start'), meta:String(startYear), val:startVal, year:startYear});
+  sts.push({cls:'here', name:t('st_here'), meta:_jrMon(now.getMonth())+' '+curYear+' · '+pct+'% '+t('st_of_way'), val:nw, year:curYear});
   function futureStation(val,name){
     if(val<=nw || val>=target) return null;
     var yf=_jrProjYears(nw,dep,val); if(yf==null) return null; var y=_jrY(yf);
-    return {cls:'', name:name, meta:'צפוי '+(curYear+y)+(y>0?' · בעוד '+y+(y===1?' שנה':' שנים'):''), val:val, year:curYear+y};
+    return {cls:'', name:name, meta:t('st_expected')+' '+(curYear+y)+(y>0?' · '+t('jr_in')+' '+y+' '+(y===1?t('year_word'):t('years_word')):''), val:val, year:curYear+y};
   }
   var one=1e6, half=target/2;
-  var s1=futureStation(one,'מיליון ראשון');
+  var s1=futureStation(one,t('st_first_million'));
   if(s1) sts.push(s1);
-  var sh=(Math.abs(half-one)>250000)?futureStation(half,'חצי הדרך'):null;
+  var sh=(Math.abs(half-one)>250000)?futureStation(half,t('st_halfway')):null;
   if(sh && (!s1 || sh.val>s1.val)) sts.push(sh);
   var gyf=_jrProjYears(nw,dep,target+costs), gy=(gyf!=null)?_jrY(gyf):null;
-  var goalMeta = gy!=null ? ('צפוי '+(curYear+gy)+(ND.profile.age!=null?' · גיל '+(ND.profile.age+gy):'')) : 'הגדל חיסכון כדי להגיע';
-  sts.push({cls:'goal', name:'חופש כלכלי', meta:goalMeta, val:target, year:gy!=null?curYear+gy:null});
+  var goalMeta = gy!=null ? (t('st_expected')+' '+(curYear+gy)+(ND.profile.age!=null?' · '+t('age_word')+' '+(ND.profile.age+gy):'')) : t('jr_increase_reach');
+  sts.push({cls:'goal', name:t('st_freedom'), meta:goalMeta, val:target, year:gy!=null?curYear+gy:null});
 
   // Pin life-events onto the earliest future station whose year >= event year
   var evs=(ND.milestones||[]).slice().filter(function(e){return e.year;}).sort(function(a,b){return a.year-b.year;});
@@ -2016,18 +2046,18 @@ function renderJourneyPath(c, target, costs, nw, dep, curYear, now, pct){
 function renderJourneyEvents(c, target, costs, nw, dep){
   var box=document.getElementById('jr-events'); if(!box) return;
   var evs=(ND.milestones||[]);
-  if(!evs.length){ box.innerHTML='<div style="padding:14px 4px;font-size:12px;color:#8a8a8a">אין אירועים עדיין — הוסף חתונה, דירה, טיול...</div>'; return; }
+  if(!evs.length){ box.innerHTML='<div style="padding:14px 4px;font-size:12px;color:#8a8a8a">'+t('jr_no_events')+'</div>'; return; }
   var baseYears=_jrProjYears(nw,dep,target);
   box.innerHTML=evs.map(function(e){
     var cost=Number(e.cost)||0;
-    var meta=(e.year||'')+(cost>0?' · עלות משוערת '+fmt(cost):'');
+    var meta=(e.year||'')+(cost>0?' · '+t('ev_est_cost')+' '+fmt(cost):'');
     var delta='';
     if(cost>0 && dep>0){
       var withY=_jrProjYears(nw,dep,target+cost);
       var months=(withY!=null && baseYears!=null)?Math.round((withY-baseYears)*12):Math.round(cost/dep);
-      delta = months>=1 ? '<div class="r-delta warn">'+(months===1?'דוחה בחודש':'דוחה ב-'+months+' חודשים')+'</div>' : '<div class="r-delta">ללא השפעה מהותית</div>';
-    } else if(cost>0){ delta='<div class="r-delta warn">עלות '+fmt(cost)+'</div>'; }
-    return '<div class="row" onclick="jrEditEvent(\''+(e.id||'')+'\')"><div><div class="r-name">'+_esc(e.text||'אירוע')+'</div><div class="r-meta">'+meta+'</div></div><div class="r-left">'+delta+'</div></div>';
+      delta = months>=1 ? '<div class="r-delta warn">'+(months===1?t('ev_delays_month'):t('ev_delays_by')+months+' '+t('ev_months'))+'</div>' : '<div class="r-delta">'+t('ev_no_impact')+'</div>';
+    } else if(cost>0){ delta='<div class="r-delta warn">'+t('ev_cost')+' '+fmt(cost)+'</div>'; }
+    return '<div class="row" onclick="jrEditEvent(\''+(e.id||'')+'\')"><div><div class="r-name">'+_esc(e.text||t('event_one'))+'</div><div class="r-meta">'+meta+'</div></div><div class="r-left">'+delta+'</div></div>';
   }).join('');
 }
 
@@ -2042,27 +2072,24 @@ function _jrLever(icon,title,sub,gain,q){
 function renderJourneyLevers(c, target, costs, nw, dep, age){
   var box=document.getElementById('jr-levers'); if(!box) return;
   _jrLeverQs=[];
-  if(!(c.totalIncome>0 && target>0)){ box.innerHTML='<div style="padding:14px 4px;font-size:12px;color:#8a8a8a">הזן הכנסות והוצאות כדי לראות מנופים</div>'; return; }
+  if(!(c.totalIncome>0 && target>0)){ box.innerHTML='<div style="padding:14px 4px;font-size:12px;color:#8a8a8a">'+t('jr_no_levers')+'</div>'; return; }
   var baseYears=_jrProjYears(nw,dep,target+costs);
   var sav=Math.max(c.monthlySavings,0);
   var out='';
   var y1=_jrProjYears(nw,dep+2000,target+costs);
-  var g1=(age!=null&&y1!=null)?'גיל '+(age+_jrY(y1)):(y1!=null?'בעוד '+_jrY(y1)+' שנים':'—');
-  out+=_jrLever('<path d="M12 19V5M5 12l7-7 7 7"/>','עוד ₪2,000 חיסכון בחודש','מ-'+fmt(sav)+' ל-'+fmt(sav+2000),g1,
-    'איך תוספת של ₪2,000 חיסכון בחודש משפיעה על תאריך החופש הכלכלי שלי? תן ניתוח מספרי.');
+  var g1=(age!=null&&y1!=null)?t('age_word')+' '+(age+_jrY(y1)):(y1!=null?t('jr_in')+' '+_jrY(y1)+' '+t('years_word'):'—');
+  out+=_jrLever('<path d="M12 19V5M5 12l7-7 7 7"/>',t('lv_add_2000'),t('lv_from')+fmt(sav)+' '+t('lv_to')+fmt(sav+2000),g1,t('lvq_2000'));
   var loans=(ND.loans||[]).filter(function(l){return (l.balance||0)>0;}).sort(function(a,b){return (b.rate||0)-(a.rate||0);});
   var top=loans[0];
   if(top && (top.rate||0)>0){
     var y2=_jrProjYears(nw, dep+(top.monthlyPayment||0), target+costs);
     var months2=(y2!=null&&baseYears!=null)?Math.round((baseYears-y2)*12):null;
-    var g2=(months2!=null&&months2>0)?'−'+months2+(months2===1?' חודש':' חודשים'):'שיפור';
-    out+=_jrLever('<path d="M9 12l2 2 4-5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/>','סילוק '+_esc(top.name||'ההלוואה')+' ('+(top.rate||0)+'%)','משחרר '+fmt(top.monthlyPayment||0)+' בחודש',g2,
-      'כדאי לי לסלק את ההלוואה "'+(top.name||'')+'" בריבית '+(top.rate||0)+'%? נתח את ההשפעה על המסע לחופש כלכלי.');
+    var g2=(months2!=null&&months2>0)?'−'+months2+' '+(months2===1?t('lv_month_one'):t('ev_months')):t('lv_improve');
+    out+=_jrLever('<path d="M9 12l2 2 4-5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/>',t('lv_payoff')+' '+_esc(top.name||t('loan_one'))+' ('+(top.rate||0)+'%)',t('lv_frees')+' '+fmt(top.monthlyPayment||0)+' '+t('lv_per_month'),g2,t('lvq_payoff_a')+(top.name||'')+t('lvq_payoff_b')+(top.rate||0)+t('lvq_payoff_c'));
   }
   var emTarget=Math.round(c.totalExpenses*3);
   if(emTarget>0){
-    out+=_jrLever('<path d="M3 17l6-6 4 4 8-8M14 7h7v7"/>','בניית קרן חירום '+fmt(emTarget),'מגן על המסע מהפתעות','יציבות',
-      'איך לבנות קרן חירום של '+fmt(emTarget)+' (3 חודשי הוצאות) ולמה היא חשובה למסע שלי?');
+    out+=_jrLever('<path d="M3 17l6-6 4 4 8-8M14 7h7v7"/>',t('lv_emergency')+' '+fmt(emTarget),t('lv_protects'),t('lv_stability'),t('lvq_emergency_a')+fmt(emTarget)+t('lvq_emergency_b'));
   }
   box.innerHTML=out;
 }
@@ -2080,21 +2107,21 @@ function _jrMrow(label, delta, goodUp){
 function renderJourneyMomentum(c){
   var box=document.getElementById('jr-momentum'); if(!box) return;
   var h=(ND.history&&ND.history.length)?ND.history:[];
-  if(h.length<2){ box.innerHTML='<div class="note" style="margin-top:8px">נתונים מצטברים — ההשוואה הראשונה תופיע בחודש הבא</div>'; return; }
+  if(h.length<2){ box.innerHTML='<div class="note" style="margin-top:8px">'+t('mom_accumulating')+'</div>'; return; }
   var cur=h[h.length-1], prev=h[h.length-2];
   var dNW=(cur.netWorth||0)-(prev.netWorth||0), dLo=(cur.totalLoans||0)-(prev.totalLoans||0);
-  var prevMonth=''; var pm=(prev.date||'').split('-'); if(pm.length===2){ prevMonth=_JR_MONTHS[parseInt(pm[1])-1]+' '+pm[0]; }
-  var heroTxt = dNW>0?'קרוב יותר לחופש מהחודש שעבר':(dNW<0?'ירידה מהחודש שעבר':'יציב מהחודש שעבר');
+  var prevMonth=''; var pm=(prev.date||'').split('-'); if(pm.length===2){ prevMonth=_jrMon(parseInt(pm[1])-1)+' '+pm[0]; }
+  var heroTxt = dNW>0?t('mom_closer'):(dNW<0?t('mom_down'):t('mom_stable'));
   var heroCol = dNW>=0?'var(--green)':'var(--red)';
-  var dateRow = dNW>0?'<b class="up">התקרב ↑</b>':(dNW<0?'<b class="down">התרחק ↓</b>':'<b>ללא שינוי →</b>');
+  var dateRow = dNW>0?'<b class="up">'+t('mom_closer_a')+'</b>':(dNW<0?'<b class="down">'+t('mom_further')+'</b>':'<b>'+t('mom_nochange')+'</b>');
   box.innerHTML=
     '<div class="mom-hero"><b style="color:'+heroCol+'">'+fmtK(dNW)+'</b><span>'+heroTxt+'</span></div>'+
     '<div style="margin-top:10px">'+
-      _jrMrow('שווי נטו', dNW, true)+
-      _jrMrow('התחייבויות', dLo, false)+
-      '<div class="mrow"><span>תאריך החופש</span>'+dateRow+'</div>'+
+      _jrMrow(t('mom_networth'), dNW, true)+
+      _jrMrow(t('mom_liabilities'), dLo, false)+
+      '<div class="mrow"><span>'+t('mom_freedom_date')+'</span>'+dateRow+'</div>'+
     '</div>'+
-    '<div class="note">'+(prevMonth?'ההשוואה מול '+prevMonth+' · ':'')+'מתעדכן אוטומטית ב-1 לחודש</div>';
+    '<div class="note">'+(prevMonth?t('mom_compare')+' '+prevMonth+' · ':'')+t('mom_auto')+'</div>';
 }
 
 /* Journey — schema-additive editors (milestone.cost · settings.fireTargetManual) */
@@ -3646,7 +3673,7 @@ function _asPayoff(bal, pay){
   if(!(pay>0) || !(bal>0)) return '';
   var m=Math.ceil(bal/pay); if(m>600) return '';
   var d=new Date(); d.setMonth(d.getMonth()+m);
-  return ' · אומדן '+(d.getMonth()+1)+'/'+String(d.getFullYear()).slice(-2);
+  return ' · '+t('loan_est')+' '+(d.getMonth()+1)+'/'+String(d.getFullYear()).slice(-2);
 }
 /* ── Live loans: once per calendar month, reduce each loan balance by
    (payment − interest). Stamps lastUpdated='YYYY-MM'; first sight only stamps
@@ -3680,11 +3707,11 @@ function renderWealth(){
   if(!document.getElementById('pg-assets')) return;
   var c=calc();
   _cfSet('as-nw', fmt(c.netWorth));
-  _cfSet('as-nw-sub', 'נכסים '+fmt(c.totalAssets)+' − התחייבויות '+fmt(c.totalLiabilities));
+  _cfSet('as-nw-sub', t('as_assets_word')+' '+fmt(c.totalAssets)+' − '+t('as_liab_word')+' '+fmt(c.totalLiabilities));
   var _cash=ND.cash||0, _lqEl=document.getElementById('as-nw-liquid');
   if(_lqEl){
-    if(_cash>=0){ _lqEl.textContent='זמין בעו"ש: '+fmt(_cash); _lqEl.style.color='var(--gold-l)'; }
-    else { _lqEl.textContent='עו"ש: −'+fmt(Math.abs(_cash)); _lqEl.style.color='#e0a9a0'; }
+    if(_cash>=0){ _lqEl.textContent=t('as_available_checking')+': '+fmt(_cash); _lqEl.style.color='var(--gold-l)'; }
+    else { _lqEl.textContent=t('as_checking_neg')+': −'+fmt(Math.abs(_cash)); _lqEl.style.color='#e0a9a0'; }
   }
   _cfSet('as-chip-pen', fmt(c.penT+c.hshT+c.gmT));
   _cfSet('as-chip-inv', fmt(c.invT+c.reV));
@@ -3700,12 +3727,12 @@ function renderWealthAlloc(c){
   var cash=ND.cash||0;
   // graded palette navy→gold
   var cats=[
-    {l:'פנסיה',v:c.penT||0,col:'#1E2D4A'},
-    {l:'קרנות השתלמות',v:c.hshT||0,col:'#3A4E73'},
-    {l:'גמל להשקעה',v:c.gmT||0,col:'#6B7A96'},
-    {l:'השקעות סחירות',v:c.invT||0,col:'#A07840'},
-    {l:'נדל"ן',v:c.reV||0,col:'#c8a96a'},
-    {l:'עו"ש',v:cash,col:'#8a8a8a',cash:true}
+    {l:t('wcat_pension'),v:c.penT||0,col:'#1E2D4A'},
+    {l:t('wcat_studyfund'),v:c.hshT||0,col:'#3A4E73'},
+    {l:t('wcat_gemel'),v:c.gmT||0,col:'#6B7A96'},
+    {l:t('wcat_investments'),v:c.invT||0,col:'#A07840'},
+    {l:t('wcat_re'),v:c.reV||0,col:'#c8a96a'},
+    {l:t('wcat_checking'),v:cash,col:'#8a8a8a',cash:true}
   ];
   // bar + percentages: positive values only (negative עו"ש excluded)
   var pos=cats.filter(function(x){return x.v>0;});
@@ -3713,10 +3740,10 @@ function renderWealthAlloc(c){
   if(bar) bar.innerHTML = tot>0 ? pos.map(function(x){return '<i style="width:'+(x.v/tot*100)+'%;background:'+x.col+'"></i>';}).join('') : '';
   if(!box) return;
   var rows=cats.filter(function(x){return x.v>0 || (x.cash && x.v<0);});
-  if(!rows.length){ box.innerHTML='<div style="padding:12px 4px;font-size:12px;color:#8a8a8a">הוסף נכסים כדי לראות פילוח</div>'; return; }
+  if(!rows.length){ box.innerHTML='<div style="padding:12px 4px;font-size:12px;color:#8a8a8a">'+t('as_add_assets_hint')+'</div>'; return; }
   box.innerHTML=rows.map(function(x){
     var neg=(x.v<0);
-    var meta=neg?'לא נכלל בפילוח':((tot>0)?Math.round(x.v/tot*100)+'%':'');
+    var meta=neg?t('as_not_in_breakdown'):((tot>0)?Math.round(x.v/tot*100)+'%':'');
     var val=neg?('−'+fmt(Math.abs(x.v))):fmt(x.v);
     return '<div class="row"><div style="display:flex;align-items:center;gap:8px">'+
       '<span class="dot" style="background:'+x.col+'"></span>'+
@@ -3727,10 +3754,10 @@ function renderWealthAlloc(c){
 function renderWealthPension(c){
   var box=document.getElementById('as-pen-list'); if(!box) return;
   var rows=[];
-  (ND.pension||[]).forEach(function(x){ rows.push(_asRow('pension',x.id,x.name||'פנסיה','הפקדה '+fmt(x.monthlyDeposit||0)+'/ח׳ · דמי ניהול '+(x.fee||0)+'%', fmt(x.balance||0))); });
-  (ND.hishtalmut||[]).forEach(function(x){ rows.push(_asRow('hishtalmut',x.id,x.name||'קה"ש','קה"ש'+(x.liquidYear?' · נזיל '+x.liquidYear:'')+' · הפקדה '+fmt(x.monthlyDeposit||0)+'/ח׳', fmt(x.balance||0))); });
-  (ND.gamel||[]).forEach(function(x){ rows.push(_asRow('gamel',x.id,x.name||'גמל','גמל להשקעה · הפקדה '+fmt(x.monthlyDeposit||0)+'/ח׳', fmt(x.balance||0))); });
-  box.innerHTML = rows.length ? rows.join('') : _asEmpty('אין חיסכון פנסיוני עדיין');
+  (ND.pension||[]).forEach(function(x){ rows.push(_asRow('pension',x.id,x.name||t('wcat_pension'),t('pen_deposit')+' '+fmt(x.monthlyDeposit||0)+t('per_month')+' · '+t('pen_fee')+' '+(x.fee||0)+'%', fmt(x.balance||0))); });
+  (ND.hishtalmut||[]).forEach(function(x){ rows.push(_asRow('hishtalmut',x.id,x.name||t('wcat_studyfund'),t('wcat_studyfund')+(x.liquidYear?' · '+t('sf_liquid')+' '+x.liquidYear:'')+' · '+t('pen_deposit')+' '+fmt(x.monthlyDeposit||0)+t('per_month'), fmt(x.balance||0))); });
+  (ND.gamel||[]).forEach(function(x){ rows.push(_asRow('gamel',x.id,x.name||t('wcat_gemel'),t('gemel_desc')+' · '+t('pen_deposit')+' '+fmt(x.monthlyDeposit||0)+t('per_month'), fmt(x.balance||0))); });
+  box.innerHTML = rows.length ? rows.join('') : _asEmpty(t('empty_pension'));
   _cfSet('as-pen-total', fmt(c.penT+c.hshT+c.gmT));
 }
 function renderWealthInvest(c){
@@ -3740,7 +3767,7 @@ function renderWealthInvest(c){
     var gain=(x.value||0)-(x.costBasis||0);
     var pct=(x.costBasis>0)?(gain/x.costBasis*100).toFixed(1):null;
     var delta=pct!=null?((gain>=0?'+':'')+pct+'%'):'';
-    rows.push(_asRow('investment',x.id,(x.name||'השקעה')+(x.ticker?' — '+x.ticker:''),'עלות '+fmt(x.costBasis||0), fmt(x.value||0), delta, gain>=0?'up':'down'));
+    rows.push(_asRow('investment',x.id,(x.name||t('cat_investments'))+(x.ticker?' — '+x.ticker:''),t('inv_cost')+' '+fmt(x.costBasis||0), fmt(x.value||0), delta, gain>=0?'up':'down'));
   });
   ['reit','mutualfund','angel'].forEach(function(k){
     (ND[k]||[]).forEach(function(x){
@@ -3750,33 +3777,33 @@ function renderWealthInvest(c){
         '<div class="r-left"><div class="r-val">'+fmt(x.value||0)+'</div>'+(pct!=null?'<div class="r-delta '+(gain>=0?'up':'down')+'">'+(gain>=0?'+':'')+pct+'%</div>':'')+'</div></div>');
     });
   });
-  box.innerHTML=rows.length?rows.join(''):_asEmpty('אין השקעות עדיין');
+  box.innerHTML=rows.length?rows.join(''):_asEmpty(t('empty_invest2'));
   _cfSet('as-inv-total', fmt(c.invT));
 }
 function renderWealthRE(c){
   var box=document.getElementById('as-re-list'); if(!box) return;
   var rows=(ND.realEstate||[]).map(function(x){
     var eq=(x.marketValue||0)-(x.mortgageBalance||0);
-    return _asRow('realEstate',x.id,x.name||'נדל"ן','משכנתא '+fmt(x.mortgageBalance||0)+' · '+fmt(x.monthlyPayment||0)+'/ח׳', fmt(x.marketValue||0), 'הון עצמי '+fmt(eq), '');
+    return _asRow('realEstate',x.id,x.name||t('wcat_re'),t('re_mortgage')+' '+fmt(x.mortgageBalance||0)+' · '+fmt(x.monthlyPayment||0)+t('per_month'), fmt(x.marketValue||0), t('re_equity')+' '+fmt(eq), '');
   });
-  box.innerHTML=rows.length?rows.join(''):_asEmpty('אין נדל"ן עדיין');
+  box.innerHTML=rows.length?rows.join(''):_asEmpty(t('empty_re'));
   _cfSet('as-re-total', fmt(c.reV));
 }
 function renderWealthLoans(c){
   var box=document.getElementById('as-lo-list'); if(!box) return;
   var rows=[];
   (ND.realEstate||[]).forEach(function(x){ if((x.mortgageBalance||0)>0) rows.push(
-    '<div class="row"><div><div class="r-name">משכנתא — '+_esc(x.name||'')+'</div><div class="r-meta">'+fmt(x.monthlyPayment||0)+'/ח׳'+_asPayoff(x.mortgageBalance,x.monthlyPayment)+'</div></div>'+
+    '<div class="row"><div><div class="r-name">'+t('re_mortgage')+' — '+_esc(x.name||'')+'</div><div class="r-meta">'+fmt(x.monthlyPayment||0)+t('per_month')+_asPayoff(x.mortgageBalance,x.monthlyPayment)+'</div></div>'+
     '<div class="r-left"><div class="r-val">'+fmt(x.mortgageBalance)+'</div></div></div>'); });
   (ND.loans||[]).forEach(function(x){
     var rate=x.rate||0;
     var _upd=_loanUpd(x.lastUpdated);
-    var meta=rate+'% · '+fmt(x.monthlyPayment||0)+'/ח׳'+_asPayoff(x.balance,x.monthlyPayment)+(_upd?' · עודכן '+_upd:'');
-    var delta = rate>=4?'ריבית גבוהה':(rate===0?'0% ריבית':'');
+    var meta=rate+'% · '+fmt(x.monthlyPayment||0)+t('per_month')+_asPayoff(x.balance,x.monthlyPayment)+(_upd?' · '+t('loan_updated')+' '+_upd:'');
+    var delta = rate>=4?t('loan_high'):(rate===0?t('loan_zero'):'');
     var cls = rate>=4?'down':(rate===0?'up':'');
-    rows.push(_asRow('loan',x.id,x.name||'הלוואה',meta,fmt(x.balance||0),delta,cls));
+    rows.push(_asRow('loan',x.id,x.name||t('loan_one'),meta,fmt(x.balance||0),delta,cls));
   });
-  box.innerHTML=rows.length?rows.join(''):_asEmpty('אין הלוואות');
+  box.innerHTML=rows.length?rows.join(''):_asEmpty(t('empty_loans'));
   _cfSet('as-lo-total', c.totalLiabilities>0?fmt(c.totalLiabilities):'—');
 }
 function renderAssetsHub(){ try{renderWealth();}catch(e){} }
