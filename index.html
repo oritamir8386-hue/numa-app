@@ -5088,7 +5088,7 @@ async function signInWithGoogle(){
     var _err=document.getElementById('auth-error');if(_err)_err.style.display='none';
     await _sb.auth.signInWithOAuth({
       provider:'google',
-      options:{redirectTo:window.location.href.split('?')[0]}
+      options:{redirectTo:window.location.origin + window.location.pathname}
     });
   }catch(e){
     var _err=document.getElementById('auth-error');
@@ -5146,7 +5146,7 @@ async function authSubmit(){
       const {data,error}=await _sb.auth.signUp({
         email,password,
         options:{
-          emailRedirectTo:window.location.href.split('?')[0],
+          emailRedirectTo:window.location.origin + window.location.pathname,
           data:{name:name||email.split('@')[0]}
         }
       });
@@ -5182,7 +5182,7 @@ async function authForgot(){
   if(!email){_showErr('הכנס אימייל קודם');return;}
   if(!_sb)return;
   const {error}=await _sb.auth.resetPasswordForEmail(email,{
-    redirectTo:window.location.href.split('?')[0]
+    redirectTo:window.location.origin + window.location.pathname
   });
   if(error){_showErr(error.message);}
   else{
@@ -5236,7 +5236,7 @@ async function auSubmit(){
   var btn=$('au-btn');if(btn){btn.textContent='רגע...';btn.disabled=true;}
   try{
     if(_auMode==='signup'){
-      var res=await _sb.auth.signUp({email:email,password:pass,options:{emailRedirectTo:window.location.href.split('?')[0],data:{name:email.split('@')[0]}}});
+      var res=await _sb.auth.signUp({email:email,password:pass,options:{emailRedirectTo:window.location.origin + window.location.pathname,data:{name:email.split('@')[0]}}});
       if(res.error)throw res.error;
       if(res.data.session){/* auto confirmed — onAuthStateChange handles it */}
       else{var a=$('auth-overlay');if(a)a.style.display='none';var v=$('verify-screen');if(v)v.style.display='flex';}
@@ -5255,7 +5255,7 @@ async function auForgot(){
   var email=($('au-email')?.value||'').trim();
   if(!email){auShowErr('הכנס אימייל קודם');return;}
   if(!_sb)return;
-  var res=await _sb.auth.resetPasswordForEmail(email,{redirectTo:window.location.href.split('?')[0]});
+  var res=await _sb.auth.resetPasswordForEmail(email,{redirectTo:window.location.origin + window.location.pathname});
   if(res.error){auShowErr(res.error.message);}
   else{var e=$('au-err');if(e){e.textContent='✓ שלחנו קישור לאיפוס — בדוק את המייל';e.style.color='#27ae60';e.style.display='block';}}
 }
