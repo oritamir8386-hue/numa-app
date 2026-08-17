@@ -1088,7 +1088,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <!-- Sticky header -->
   <div style="position:sticky;top:0;z-index:10;background:#f0ece4;padding:calc(env(safe-area-inset-top, 0px) + 12px) 18px 12px;display:flex;justify-content:space-between;align-items:center">
     <div style="font-size:20px;font-weight:800;color:#1E2D4A" data-i18n="set_title">הגדרות</div>
-    <button onclick="closeSettings()" style="background:#fff;border:none;border-radius:12px;padding:8px 16px;font-size:14px;font-weight:600;color:#1E2D4A;cursor:pointer;font-family:inherit">&larr; חזרה</button>
+    <button onclick="closeSettings()" style="background:#fff;border:none;border-radius:12px;padding:8px 16px;font-size:14px;font-weight:600;color:#1E2D4A;cursor:pointer;font-family:inherit">&larr; <span data-i18n="set_back">חזרה</span></button>
   </div>
 
   <div style="padding:0 18px;display:flex;flex-direction:column;gap:18px">
@@ -1105,13 +1105,13 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <!-- SECTION: פרופיל פיננסי -->
   <div>
     <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px" data-i18n="set_profile">פרופיל פיננסי</div>
-    <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px">Numa מותאמת לפי הפרופיל שלך — הכרטיסיות הרלוונטיות בלבד יוצגו</div>
+    <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px" data-i18n="set_profile_sub">Numa מותאמת לפי הפרופיל שלך — הכרטיסיות הרלוונטיות בלבד יוצגו</div>
     <div style="background:#fff;border-radius:18px;overflow:hidden">
       <!-- Employment -->
       <div class="set-row" onclick="openSetPicker('employment')">
         <div style="display:flex;align-items:center;gap:12px;flex:1">
           
-          <div><div style="font-size:15px;font-weight:500;color:#1E2D4A">סטטוס תעסוקה</div></div>
+          <div><div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="set_employment">סטטוס תעסוקה</div></div>
         </div>
         <div style="display:flex;align-items:center;gap:6px"><span id="set-emp-val" style="font-size:13px;color:#8a8a8a">שכיר</span><span style="color:rgba(0,0,0,.18)">›</span></div>
       </div>
@@ -1119,12 +1119,12 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div style="padding:13px 18px;border-bottom:none">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
           
-          <div style="font-size:15px;font-weight:500;color:#1E2D4A">מצב משפחתי</div>
+          <div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="set_family">מצב משפחתי</div>
         </div>
         <div id="set-family-chips" style="display:flex;gap:8px">
-          <button class="set-chip" data-val="single" onclick="setFamily('single')">יחיד</button>
-          <button class="set-chip" data-val="couple" onclick="setFamily('couple')">זוג</button>
-          <button class="set-chip on" data-val="family" onclick="setFamily('family')">זוג + ילדים</button>
+          <button class="set-chip" data-val="single" onclick="setFamily('single')" data-i18n="fam_single">יחיד</button>
+          <button class="set-chip" data-val="couple" onclick="setFamily('couple')" data-i18n="fam_couple">זוג</button>
+          <button class="set-chip on" data-val="family" onclick="setFamily('family')" data-i18n="fam_family">זוג + ילדים</button>
         </div>
       </div>
     </div>
@@ -1133,13 +1133,13 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <!-- SECTION: הגדרות חישוב -->
   <div>
     <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:2px" data-i18n="set_calc">הגדרות חישוב</div>
-    <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px">ברירות מחדל לכל החישובים באפליקציה</div>
+    <div style="font-size:11px;color:#8a8a8a;margin-bottom:8px" data-i18n="set_calc_sub">ברירות מחדל לכל החישובים באפליקציה</div>
     <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <div class="set-row" onclick="editCalcVal('returnRate','תשואה שנתית %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">תשואה שנתית ברירת מחדל</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="returnRate" style="font-size:13px;color:#8a8a8a">7%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
-      <div class="set-row" onclick="editCalcVal('withdrawalRate','כלל נסיגה %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">כלל נסיגה</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="withdrawalRate" style="font-size:13px;color:#8a8a8a">4%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
-      <div class="set-row" onclick="editCalcVal('inflation','אינפלציה שנתית %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">אינפלציה שנתית</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="inflation" style="font-size:13px;color:#8a8a8a">3%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
-      <div class="set-row" onclick="editCalcVal('capitalGainsTax','מס רווחי הון %',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">מס רווחי הון</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="capitalGainsTax" style="font-size:13px;color:#8a8a8a">25%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
-      <div class="set-row" style="border-bottom:none" onclick="editRetireAge()"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A">גיל פרישה מתוכנן</div></div><div style="display:flex;align-items:center;gap:6px"><span id="set-retire-val" style="font-size:13px;color:#8a8a8a">65</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" onclick="editCalcVal('returnRate','calc_return',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="calc_return">תשואה שנתית ברירת מחדל</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="returnRate" style="font-size:13px;color:#8a8a8a">7%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" onclick="editCalcVal('withdrawalRate','calc_withdrawal',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="calc_withdrawal">כלל נסיגה</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="withdrawalRate" style="font-size:13px;color:#8a8a8a">4%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" onclick="editCalcVal('inflation','calc_inflation',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="calc_inflation">אינפלציה שנתית</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="inflation" style="font-size:13px;color:#8a8a8a">3%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" onclick="editCalcVal('capitalGainsTax','calc_cgt',this)"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="calc_cgt">מס רווחי הון</div></div><div style="display:flex;align-items:center;gap:6px"><span class="calc-val" data-key="capitalGainsTax" style="font-size:13px;color:#8a8a8a">25%</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
+      <div class="set-row" style="border-bottom:none" onclick="editRetireAge()"><div style="display:flex;align-items:center;gap:12px;flex:1"><div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="calc_retire_age">גיל פרישה מתוכנן</div></div><div style="display:flex;align-items:center;gap:6px"><span id="set-retire-val" style="font-size:13px;color:#8a8a8a">65</span><span style="color:rgba(0,0,0,.18)">›</span></div></div>
     </div>
   </div>
 
@@ -1151,7 +1151,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div style="padding:13px 18px;border-bottom:.5px solid rgba(0,0,0,.05)">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
           
-          <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-lang-label">שפה</div>
+          <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-lang-label" data-i18n="language_label">שפה</div>
         </div>
         <div id="set-lang-chips" style="display:flex;gap:8px">
           <button class="set-chip on" data-val="he" onclick="setLang('he')">עברית</button>
@@ -1162,10 +1162,10 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div style="padding:13px 18px;border-bottom:.5px solid rgba(0,0,0,.05)">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
           <div style="width:32px;height:32px;border-radius:9px;background:rgba(160,120,64,.1);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#A07840">₪</div>
-          <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-curr-label">מטבע</div>
+          <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-curr-label" data-i18n="currency_label">מטבע</div>
         </div>
         <div id="set-curr-chips" style="display:flex;gap:8px">
-          <button class="set-chip on" data-val="ILS" onclick="setCurrency('ILS')">₪ שקל</button>
+          <button class="set-chip on" data-val="ILS" onclick="setCurrency('ILS')" data-i18n="curr_shekel">₪ שקל</button>
           <button class="set-chip" data-val="USD" onclick="setCurrency('USD')">$ Dollar</button>
         </div>
       </div>
@@ -1175,8 +1175,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
           <div style="display:flex;align-items:center;gap:12px">
             
             <div>
-              <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-rate-label">שער ₪/$</div>
-              <div style="font-size:11px;color:#8a8a8a" id="set-rate-sub">עודכן אוטומטית</div>
+              <div style="font-size:15px;font-weight:500;color:#1E2D4A" id="set-rate-label" data-i18n="rate_label">שער ₪/$</div>
+              <div style="font-size:11px;color:#8a8a8a" id="set-rate-sub" data-i18n="rate_updated">עודכן אוטומטית</div>
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:8px">
@@ -1192,9 +1192,9 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div>
     <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:8px" data-i18n="set_backup">גיבוי וסנכרון</div>
     <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">סנכרון אוטומטי</div><div style="font-size:11px;color:#8a8a8a">מסונכרן · עכשיו</div></div></div><button class="cat-toggle on" data-cat="sync" onclick="toggleCat(this)"></button></div>
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">גבה נתונים</div><div style="font-size:11px;color:#8a8a8a">גיבוי אחרון: היום</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
-      <div class="set-row" style="border-bottom:none"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A">ייצא נתונים</div><div style="font-size:11px;color:#8a8a8a">CSV / PDF</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
+      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="set_autosync">סנכרון אוטומטי</div><div style="font-size:11px;color:#8a8a8a" data-i18n="set_synced_now">מסונכרן · עכשיו</div></div></div><button class="cat-toggle on" data-cat="sync" onclick="toggleCat(this)"></button></div>
+      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="set_backup_data">גבה נתונים</div><div style="font-size:11px;color:#8a8a8a" data-i18n="set_last_backup">גיבוי אחרון: היום</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
+      <div class="set-row" style="border-bottom:none"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="set_export">ייצא נתונים</div><div style="font-size:11px;color:#8a8a8a">CSV / PDF</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
     </div>
   </div>
 
@@ -1503,7 +1503,14 @@ var T={
     ev_est_cost:'עלות משוערת',ev_delays_by:'דוחה ב-',ev_months:'חודשים',ev_delays_month:'דוחה בחודש',ev_no_impact:'ללא השפעה מהותית',ev_cost:'עלות',jr_no_events:'אין אירועים עדיין — הוסף חתונה, דירה, טיול...',
     lv_add_2000:'עוד ₪2,000 חיסכון בחודש',lv_from:'מ-',lv_to:'ל-',lv_payoff:'סילוק',lv_frees:'משחרר',lv_per_month:'בחודש',lv_month_one:'חודש',lv_improve:'שיפור',lv_emergency:'בניית קרן חירום',lv_protects:'מגן על המסע מהפתעות',lv_stability:'יציבות',jr_no_levers:'הזן הכנסות והוצאות כדי לראות מנופים',
     mom_closer:'קרוב יותר לחופש מהחודש שעבר',mom_down:'ירידה מהחודש שעבר',mom_stable:'יציב מהחודש שעבר',mom_networth:'שווי נטו',mom_liabilities:'התחייבויות',mom_freedom_date:'תאריך החופש',mom_closer_a:'התקרב ↑',mom_further:'התרחק ↓',mom_nochange:'ללא שינוי →',mom_compare:'ההשוואה מול',mom_auto:'מתעדכן אוטומטית ב-1 לחודש',mom_accumulating:'נתונים מצטברים — ההשוואה הראשונה תופיע בחודש הבא',
-    lvq_2000:'איך תוספת של ₪2,000 חיסכון בחודש משפיעה על תאריך החופש הכלכלי שלי? תן ניתוח מספרי.',lvq_payoff_a:'כדאי לי לסלק את ההלוואה "',lvq_payoff_b:'" בריבית ',lvq_payoff_c:'%? נתח את ההשפעה על המסע לחופש כלכלי.',lvq_emergency_a:'איך לבנות קרן חירום של ',lvq_emergency_b:' (3 חודשי הוצאות) ולמה היא חשובה למסע שלי?'
+    lvq_2000:'איך תוספת של ₪2,000 חיסכון בחודש משפיעה על תאריך החופש הכלכלי שלי? תן ניתוח מספרי.',lvq_payoff_a:'כדאי לי לסלק את ההלוואה "',lvq_payoff_b:'" בריבית ',lvq_payoff_c:'%? נתח את ההשפעה על המסע לחופש כלכלי.',lvq_emergency_a:'איך לבנות קרן חירום של ',lvq_emergency_b:' (3 חודשי הוצאות) ולמה היא חשובה למסע שלי?',
+    set_back:'חזרה',set_profile_sub:'Numa מותאמת לפי הפרופיל שלך — הכרטיסיות הרלוונטיות בלבד יוצגו',set_calc_sub:'ברירות מחדל לכל החישובים באפליקציה',
+    set_employment:'סטטוס תעסוקה',set_family:'מצב משפחתי',fam_single:'יחיד',fam_couple:'זוג',fam_family:'זוג + ילדים',
+    calc_return:'תשואה שנתית ברירת מחדל',calc_withdrawal:'כלל נסיגה',calc_inflation:'אינפלציה שנתית',calc_cgt:'מס רווחי הון',calc_retire_age:'גיל פרישה מתוכנן',
+    curr_shekel:'₪ שקל',set_autosync:'סנכרון אוטומטי',set_synced_now:'מסונכרן · עכשיו',set_backup_data:'גבה נתונים',set_last_backup:'גיבוי אחרון: היום',set_export:'ייצא נתונים',
+    modal_add:'הוסף',modal_edit:'ערוך',m_pension:'קרן פנסיה',m_hishtalmut:'קרן השתלמות',m_gamel:'גמל להשקעה',m_investment:'השקעה',m_realEstate:'נכס נדל"ן',m_loan:'הלוואה',m_income:'מקור הכנסה',m_expense:'הוצאה',m_cash:'חשבון עו"ש',m_event:'אירוע חיים',
+    f_fund_name:'שם קרן',f_balance:'יתרה (₪)',f_monthly_deposit:'הפקדה חודשית (₪)',f_return:'תשואה שנתית %',f_fee:'דמי ניהול %',f_fund_name2:'שם הקרן',f_liquid_year:'שנת נזילות',f_gemel_name:'שם הגמל',f_invest_name:'שם ההשקעה',f_ticker:'טיקר',f_value_now:'שווי כיום (₪)',f_cost:'עלות (₪)',f_re_desc:'תיאור הנכס',f_market_value:'שווי שוק (₪)',f_mortgage_bal:'יתרת משכנתא (₪)',f_monthly_payment:'תשלום חודשי (₪)',f_loan_name:'שם ההלוואה',f_rate:'ריבית שנתית %',f_income_name:'שם מקור ההכנסה',f_amount_net:'סכום חודשי נטו (₪)',f_expense_name:'שם ההוצאה',f_amount_month:'סכום חודשי (₪)',f_account_name:'שם בעל החשבון',f_balance_neg:'יתרה (₪, אפשר שלילי)',f_event_name:'שם האירוע',f_year:'שנה',f_est_cost:'עלות משוערת (₪)',
+    ph_delete_item:'למחוק?',ph_fire_target:'יעד החופש הכלכלי (₪).\nהשאר ריק לחישוב אוטומטי לפי ההוצאות:'
   },
   en:{
     nav_overview:'Overview',nav_cashflow:'Cash Flow',nav_assets:'Wealth',
@@ -1564,7 +1571,14 @@ var T={
     ev_est_cost:'est. cost',ev_delays_by:'delays by ',ev_months:'months',ev_delays_month:'delays by a month',ev_no_impact:'no material impact',ev_cost:'cost',jr_no_events:'No events yet — add a wedding, home, trip...',
     lv_add_2000:'+₪2,000 savings per month',lv_from:'from ',lv_to:'to ',lv_payoff:'Pay off',lv_frees:'frees',lv_per_month:'per month',lv_month_one:'month',lv_improve:'improvement',lv_emergency:'Build emergency fund',lv_protects:'protects your journey from surprises',lv_stability:'stability',jr_no_levers:'Enter income and expenses to see levers',
     mom_closer:'closer to freedom than last month',mom_down:'down from last month',mom_stable:'stable vs last month',mom_networth:'Net worth',mom_liabilities:'Liabilities',mom_freedom_date:'Freedom date',mom_closer_a:'closer ↑',mom_further:'further ↓',mom_nochange:'no change →',mom_compare:'compared to',mom_auto:'auto-updates on the 1st',mom_accumulating:'Gathering data — the first comparison appears next month',
-    lvq_2000:'How does an extra ₪2,000/month in savings affect my financial freedom date? Give a numerical analysis.',lvq_payoff_a:'Should I pay off the loan "',lvq_payoff_b:'" at ',lvq_payoff_c:'% interest? Analyze the impact on my journey to financial freedom.',lvq_emergency_a:'How do I build an emergency fund of ',lvq_emergency_b:' (3 months of expenses), and why does it matter for my journey?'
+    lvq_2000:'How does an extra ₪2,000/month in savings affect my financial freedom date? Give a numerical analysis.',lvq_payoff_a:'Should I pay off the loan "',lvq_payoff_b:'" at ',lvq_payoff_c:'% interest? Analyze the impact on my journey to financial freedom.',lvq_emergency_a:'How do I build an emergency fund of ',lvq_emergency_b:' (3 months of expenses), and why does it matter for my journey?',
+    set_back:'Back',set_profile_sub:'Numa adapts to your profile — only relevant sections are shown',set_calc_sub:'Defaults for all app calculations',
+    set_employment:'Employment status',set_family:'Marital status',fam_single:'Single',fam_couple:'Couple',fam_family:'Couple + kids',
+    calc_return:'Default annual return',calc_withdrawal:'Withdrawal rate',calc_inflation:'Annual inflation',calc_cgt:'Capital gains tax',calc_retire_age:'Planned retirement age',
+    curr_shekel:'₪ Shekel',set_autosync:'Auto-sync',set_synced_now:'Synced · now',set_backup_data:'Back up data',set_last_backup:'Last backup: today',set_export:'Export data',
+    modal_add:'Add',modal_edit:'Edit',m_pension:'pension fund',m_hishtalmut:'study fund',m_gamel:'provident fund',m_investment:'investment',m_realEstate:'real estate',m_loan:'loan',m_income:'income source',m_expense:'expense',m_cash:'checking account',m_event:'life event',
+    f_fund_name:'Fund name',f_balance:'Balance (₪)',f_monthly_deposit:'Monthly deposit (₪)',f_return:'Annual return %',f_fee:'Management fee %',f_fund_name2:'Fund name',f_liquid_year:'Liquidity year',f_gemel_name:'Fund name',f_invest_name:'Investment name',f_ticker:'Ticker',f_value_now:'Current value (₪)',f_cost:'Cost basis (₪)',f_re_desc:'Property description',f_market_value:'Market value (₪)',f_mortgage_bal:'Mortgage balance (₪)',f_monthly_payment:'Monthly payment (₪)',f_loan_name:'Loan name',f_rate:'Annual interest %',f_income_name:'Income source name',f_amount_net:'Monthly net amount (₪)',f_expense_name:'Expense name',f_amount_month:'Monthly amount (₪)',f_account_name:'Account holder name',f_balance_neg:'Balance (₪, can be negative)',f_event_name:'Event name',f_year:'Year',f_est_cost:'Estimated cost (₪)',
+    ph_delete_item:'Delete?',ph_fire_target:'Financial freedom target (₪).\nLeave empty to auto-calculate from expenses:'
   }
 };
 function t(key){
@@ -2130,7 +2144,7 @@ function jrEditEvent(id){ openAddModal('event', id); }
 function editFireTarget(){
   var c=calc();
   var cur=(ND.settings&&ND.settings.fireTargetManual>0)?ND.settings.fireTargetManual:Math.round(c.fireNumber);
-  var v=prompt('יעד החופש הכלכלי (₪).\nהשאר ריק לחישוב אוטומטי לפי ההוצאות:', cur);
+  var v=prompt(t('ph_fire_target'), cur);
   if(v===null) return;
   if(!ND.settings) ND.settings={};
   var clean=(v||'').replace(/[^\d]/g,'');
@@ -3263,24 +3277,18 @@ function obNext(){}
 // Maps an add-modal type to its underlying ND array key (some differ, e.g. investment→investments)
 var ND_TYPE_ARRAY = {pension:'pension',hishtalmut:'hishtalmut',gamel:'gamel',investment:'investments',realEstate:'realEstate',loan:'loans',income:'incomes',expense:'expensesList',event:'milestones'};
 function openAddModal(type, id){
-  var titles = {
-    pension:'הוסף קרן פנסיה', hishtalmut:'הוסף קרן השתלמות',
-    gamel:'הוסף גמל להשקעה', investment:'הוסף השקעה',
-    realEstate:'הוסף נכס נדל"ן', loan:'הוסף הלוואה',
-    income:'הוסף מקור הכנסה', expense:'הוסף הוצאה',
-    cash:'ערוך חשבון עו"ש', event:'הוסף אירוע חיים'
-  };
+  var _mnoun={pension:'m_pension',hishtalmut:'m_hishtalmut',gamel:'m_gamel',investment:'m_investment',realEstate:'m_realEstate',loan:'m_loan',income:'m_income',expense:'m_expense',cash:'m_cash',event:'m_event'};
   var fields = {
-    pension:    [{k:'name',l:'שם קרן',p:'הראל פנסיה'},{k:'balance',l:'יתרה (₪)',p:'0',t:'number'},{k:'monthlyDeposit',l:'הפקדה חודשית (₪)',p:'0',t:'number'},{k:'returnRate',l:'תשואה שנתית %',p:'7',t:'number'},{k:'fee',l:'דמי ניהול %',p:'0.5',t:'number'}],
-    hishtalmut: [{k:'name',l:'שם הקרן',p:'מיטב קה"ש'},{k:'balance',l:'יתרה (₪)',p:'0',t:'number'},{k:'monthlyDeposit',l:'הפקדה חודשית (₪)',p:'0',t:'number'},{k:'liquidYear',l:'שנת נזילות',p:'2027',t:'number'}],
-    gamel:      [{k:'name',l:'שם הגמל',p:'אנליסט גמל'},{k:'balance',l:'יתרה (₪)',p:'0',t:'number'},{k:'monthlyDeposit',l:'הפקדה חודשית (₪)',p:'0',t:'number'}],
-    investment: [{k:'name',l:'שם ההשקעה',p:'S&P 500 IVV'},{k:'ticker',l:'טיקר',p:'IVV'},{k:'value',l:'שווי כיום (₪)',p:'0',t:'number'},{k:'costBasis',l:'עלות (₪)',p:'0',t:'number'},{k:'monthlyDeposit',l:'הפקדה חודשית (₪)',p:'0',t:'number'}],
-    realEstate: [{k:'name',l:'תיאור הנכס',p:'דירה ראשית — ת"א'},{k:'marketValue',l:'שווי שוק (₪)',p:'0',t:'number'},{k:'mortgageBalance',l:'יתרת משכנתא (₪)',p:'0',t:'number'},{k:'monthlyPayment',l:'תשלום חודשי (₪)',p:'0',t:'number'}],
-    loan:       [{k:'name',l:'שם ההלוואה',p:'הלוואת רכב'},{k:'balance',l:'יתרה (₪)',p:'0',t:'number'},{k:'rate',l:'ריבית שנתית %',p:'5',t:'number'},{k:'monthlyPayment',l:'תשלום חודשי (₪)',p:'0',t:'number'}],
-    income:     [{k:'name',l:'שם מקור ההכנסה',p:'משכורת'},{k:'amount',l:'סכום חודשי נטו (₪)',p:'0',t:'number'}],
-    expense:    [{k:'name',l:'שם ההוצאה',p:'דיור'},{k:'amount',l:'סכום חודשי (₪)',p:'0',t:'number'}],
-    cash:       [{k:'name',l:'שם בעל החשבון',p:'אורי'},{k:'balance',l:'יתרה (₪, אפשר שלילי)',p:'0',t:'number'}],
-    event:      [{k:'text',l:'שם האירוע',p:'חתונה'},{k:'year',l:'שנה',p:'2028',t:'number'},{k:'cost',l:'עלות משוערת (₪)',p:'0',t:'number'}]
+    pension:    [{k:'name',l:t('f_fund_name'),p:'Migdal'},{k:'balance',l:t('f_balance'),p:'0',t:'number'},{k:'monthlyDeposit',l:t('f_monthly_deposit'),p:'0',t:'number'},{k:'returnRate',l:t('f_return'),p:'7',t:'number'},{k:'fee',l:t('f_fee'),p:'0.5',t:'number'}],
+    hishtalmut: [{k:'name',l:t('f_fund_name2'),p:'Meitav'},{k:'balance',l:t('f_balance'),p:'0',t:'number'},{k:'monthlyDeposit',l:t('f_monthly_deposit'),p:'0',t:'number'},{k:'liquidYear',l:t('f_liquid_year'),p:'2027',t:'number'}],
+    gamel:      [{k:'name',l:t('f_gemel_name'),p:'Analyst'},{k:'balance',l:t('f_balance'),p:'0',t:'number'},{k:'monthlyDeposit',l:t('f_monthly_deposit'),p:'0',t:'number'}],
+    investment: [{k:'name',l:t('f_invest_name'),p:'S&P 500 IVV'},{k:'ticker',l:t('f_ticker'),p:'IVV'},{k:'value',l:t('f_value_now'),p:'0',t:'number'},{k:'costBasis',l:t('f_cost'),p:'0',t:'number'},{k:'monthlyDeposit',l:t('f_monthly_deposit'),p:'0',t:'number'}],
+    realEstate: [{k:'name',l:t('f_re_desc'),p:'Main home'},{k:'marketValue',l:t('f_market_value'),p:'0',t:'number'},{k:'mortgageBalance',l:t('f_mortgage_bal'),p:'0',t:'number'},{k:'monthlyPayment',l:t('f_monthly_payment'),p:'0',t:'number'}],
+    loan:       [{k:'name',l:t('f_loan_name'),p:'Car loan'},{k:'balance',l:t('f_balance'),p:'0',t:'number'},{k:'rate',l:t('f_rate'),p:'5',t:'number'},{k:'monthlyPayment',l:t('f_monthly_payment'),p:'0',t:'number'}],
+    income:     [{k:'name',l:t('f_income_name'),p:'Salary'},{k:'amount',l:t('f_amount_net'),p:'0',t:'number'}],
+    expense:    [{k:'name',l:t('f_expense_name'),p:'Housing'},{k:'amount',l:t('f_amount_month'),p:'0',t:'number'}],
+    cash:       [{k:'name',l:t('f_account_name'),p:'Me'},{k:'balance',l:t('f_balance_neg'),p:'0',t:'number'}],
+    event:      [{k:'text',l:t('f_event_name'),p:'Wedding'},{k:'year',l:t('f_year'),p:'2028',t:'number'},{k:'cost',l:t('f_est_cost'),p:'0',t:'number'}]
   };
   var flds = fields[type];
   if(!flds) return;
@@ -3291,7 +3299,7 @@ function openAddModal(type, id){
     editItem = { name: (ND.cashAccounts&&ND.cashAccounts['name'+capK]) || (id==='my'?(((ND.profile&&ND.profile.name)||'').trim()||'שלי'):'בן/בת זוג'),
                  balance: (ND.cashAccounts&&Number(ND.cashAccounts[id]))||0 };
   }
-  var modalTitle = (id && type!=='cash') ? titles[type].replace('הוסף','ערוך') : titles[type];
+  var modalTitle = (id ? t('modal_edit') : t('modal_add'))+' '+t(_mnoun[type]||'m_event');
   var html = '<div class="sh-h"><div class="sh-b"></div></div><div class="sh-t">'+modalTitle+'</div>';
   flds.forEach(function(f){
     html += '<div class="fld"><div class="il">'+f.l+'</div><input class="inp" id="nm_'+f.k+'" placeholder="'+f.p+'"'+(f.t?' type="'+f.t+'"':'')+'></div>';
@@ -3362,7 +3370,7 @@ function saveAddModal(type, id){
 }
 
 function deleteND(type, id){
-  if(!confirm('למחוק?')) return;
+  if(!confirm(t('ph_delete_item'))) return;
   try{closeS('add');}catch(e){}
   ND[type] = ND[type].filter(function(x){return x.id!==id;});
   try{ if((type==='incomes'||type==='expensesList') && typeof cfSync==='function') cfSync(); }catch(e){}
@@ -5819,7 +5827,7 @@ var _calcEditorKey='';
 function editCalcVal(key,title){
   _calcEditorKey=key;
   var s=getSettings();
-  document.getElementById('calc-editor-title').textContent=title;
+  document.getElementById('calc-editor-title').textContent=t(title);
   document.getElementById('calc-editor-inp').value=s[key]||'';
   document.getElementById('set-calc-editor').style.display='block';
   setTimeout(function(){document.getElementById('calc-editor-inp').focus();},100);
@@ -5838,7 +5846,7 @@ function saveCalcVal(){
 function closeCalcEditor(){document.getElementById('set-calc-editor').style.display='none';}
 function editRetireAge(){
   var cur=(ND.profile&&ND.profile.retireAge)||65;
-  var v=prompt('גיל פרישה מתוכנן',cur);
+  var v=prompt(t('calc_retire_age'),cur);
   if(v===null)return;
   var n=parseInt(v,10); if(!(n>0&&n<120))return;
   ND.profile.retireAge=n; saveToStorage();
