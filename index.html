@@ -788,16 +788,14 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 </style>
 <div class="pg on mk" id="pg-ov" style="gap:9px;padding:14px 18px 20px">
 
-<!-- hero -->
+<!-- hero — the bottom line -->
 <div class="card hero">
-  <div class="c-label">שווי נטו כולל</div>
-  <div class="c-num" id="ov-net">—</div>
-  <div class="c-sub">תחזית 25 שנה: <span id="ov-proj">—</span></div>
-  <div class="chips">
-    <div class="chip"><b class="good" id="ov-cf">—</b><span>תזרים חודשי</span></div>
-    <div class="chip"><b id="ov-sr">—</b><span>שיעור חיסכון</span></div>
-    <div class="chip"><b id="ov-fire">—</b><span>חופש כלכלי</span></div>
-  </div>
+  <div class="c-label">שווי נטו</div>
+  <div class="c-num" id="ov-net" style="font-size:40px">—</div>
+  <div id="ov-hero-delta" style="display:none;align-items:center;gap:5px;margin-top:8px;font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px;width:fit-content"></div>
+  <div class="c-sub" style="margin-top:8px">נכסים פחות התחייבויות</div>
+  <div class="bar" style="background:rgba(255,255,255,.14);height:6px;margin:12px 0 6px"><i id="ov-hero-bar" style="width:0%;background:linear-gradient(90deg,#A07840,#c8a96a)"></i></div>
+  <div class="prog-meta" style="color:#aab4c8"><span>היום</span><span id="ov-hero-goal">—</span></div>
 </div>
 
 <!-- Numa Score: ring + 3 bars -->
@@ -1865,6 +1863,7 @@ function render(){
   renderAIInsights(c);
   checkCelebrations(c);
   try{ovRenderOverview(c);}catch(e){}
+  try{renderOvHero(c);}catch(e){}
   try{renderFIREPage();}catch(e){}
   try{renderOvInsights();}catch(e){}
   try{renderCashCard();}catch(e){}
@@ -2102,6 +2101,29 @@ function renderScoreBars(c){
   setW('ovx-bf',fp); setT('ovx-bfp',(c.fireNumber>0)?fp+'%':'—');
   var dr=(c.totalAssets>0)?Math.round(c.totalLiabilities/c.totalAssets*100):0;
   setW('ovx-bd',dr); setT('ovx-bdp',(c.totalAssets>0||c.totalLiabilities>0)?dr+'%':'—');
+}
+/* Overview hero — the bottom line: net worth + monthly motion + goal bar */
+function renderOvHero(c){
+  var cap=document.getElementById('ov-hero-delta');
+  if(cap){
+    var h=(ND.history&&ND.history.length)?ND.history:[];
+    if(h.length<2){ cap.style.display='none'; }
+    else {
+      var cur=h[h.length-1], prev=h[h.length-2];
+      var d=(cur.netWorth||0)-(prev.netWorth||0), up=d>=0;
+      cap.style.display='flex';
+      cap.style.background=up?'rgba(127,196,147,.15)':'rgba(224,169,160,.15)';
+      cap.style.color=up?'#7fc493':'#e0a9a0';
+      cap.textContent=(up?'↑ +':'↓ −')+fmt(Math.abs(d))+' החודש';
+    }
+  }
+  var pct=(c.fireNumber>0)?Math.min(100,Math.round(Math.max(c.netWorth,0)/c.fireNumber*100)):0;
+  var bar=document.getElementById('ov-hero-bar'); if(bar) bar.style.width=pct+'%';
+  var goal=document.getElementById('ov-hero-goal');
+  if(goal){
+    var age=(c.fireAge>0&&c.fireAge<120)?(' · גיל '+c.fireAge):'';
+    goal.textContent=(c.fireNumber>0)?(pct+'% מהדרך לחופש'+age):'—';
+  }
 }
 function ovRenderOverview(c){
   try{renderScoreRing(c);}catch(e){}
