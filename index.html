@@ -967,7 +967,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div class="card">
     <div class="c-label">פילוח נכסים</div>
     <div class="bar" id="as-alloc-bar"></div>
-    <div class="legend" id="as-alloc-legend"></div>
+    <div id="as-alloc-legend"></div>
   </div>
 
   <!-- פנסיה וקה"ש -->
@@ -3599,8 +3599,11 @@ function renderWealth(){
   var c=calc();
   _cfSet('as-nw', fmt(c.netWorth));
   _cfSet('as-nw-sub', 'נכסים '+fmt(c.totalAssets)+' − התחייבויות '+fmt(c.totalLiabilities));
-  var _liquid=(c.invT||0)+Math.max(ND.cash||0,0)+(c.hshT||0);
-  _cfSet('as-nw-liquid', _liquid>0?'מתוכו נזיל: '+fmt(_liquid):'מתוכו נזיל: ₪0');
+  var _cash=ND.cash||0, _lqEl=document.getElementById('as-nw-liquid');
+  if(_lqEl){
+    if(_cash>=0){ _lqEl.textContent='זמין בעו"ש: '+fmt(_cash); _lqEl.style.color='var(--gold-l)'; }
+    else { _lqEl.textContent='עו"ש: −'+fmt(Math.abs(_cash)); _lqEl.style.color='#e0a9a0'; }
+  }
   _cfSet('as-chip-pen', fmt(c.penT+c.hshT+c.gmT));
   _cfSet('as-chip-inv', fmt(c.invT+c.reV));
   _cfSet('as-chip-debt', fmt(c.totalLiabilities));
@@ -3611,19 +3614,33 @@ function renderWealth(){
   renderWealthLoans(c);
 }
 function renderWealthAlloc(c){
-  var bar=document.getElementById('as-alloc-bar'), leg=document.getElementById('as-alloc-legend');
+  var bar=document.getElementById('as-alloc-bar'), box=document.getElementById('as-alloc-legend');
+  var cash=ND.cash||0;
+  // graded palette navy→gold
   var cats=[
-    {l:'פנסיה',v:c.penT,col:'#1E2D4A'},
-    {l:'קה"ש+גמל',v:c.hshT+c.gmT,col:'#3A4E73'},
-    {l:'השקעות',v:c.invT,col:'#A07840'},
-    {l:'נדל"ן',v:c.reV,col:'#c8a96a'},
-    {l:'מזומן',v:Math.max(ND.cash||0,0),col:'#6B7A96'}
-  ].filter(function(x){return x.v>0;});
-  var tot=cats.reduce(function(s,x){return s+x.v;},0);
-  if(!bar) return;
-  if(tot<=0){ bar.innerHTML=''; if(leg) leg.innerHTML='<span style="font-size:11px;color:#8a8a8a">הוסף נכסים כדי לראות פילוח</span>'; return; }
-  bar.innerHTML=cats.map(function(x){return '<i style="width:'+(x.v/tot*100)+'%;background:'+x.col+'"></i>';}).join('');
-  if(leg) leg.innerHTML=cats.map(function(x){return '<span><span class="dot" style="background:'+x.col+'"></span>'+x.l+' '+Math.round(x.v/tot*100)+'%</span>';}).join('');
+    {l:'פנסיה',v:c.penT||0,col:'#1E2D4A'},
+    {l:'קרנות השתלמות',v:c.hshT||0,col:'#3A4E73'},
+    {l:'גמל להשקעה',v:c.gmT||0,col:'#6B7A96'},
+    {l:'השקעות סחירות',v:c.invT||0,col:'#A07840'},
+    {l:'נדל"ן',v:c.reV||0,col:'#c8a96a'},
+    {l:'עו"ש',v:cash,col:'#8a8a8a',cash:true}
+  ];
+  // bar + percentages: positive values only (negative עו"ש excluded)
+  var pos=cats.filter(function(x){return x.v>0;});
+  var tot=pos.reduce(function(s,x){return s+x.v;},0);
+  if(bar) bar.innerHTML = tot>0 ? pos.map(function(x){return '<i style="width:'+(x.v/tot*100)+'%;background:'+x.col+'"></i>';}).join('') : '';
+  if(!box) return;
+  var rows=cats.filter(function(x){return x.v>0 || (x.cash && x.v<0);});
+  if(!rows.length){ box.innerHTML='<div style="padding:12px 4px;font-size:12px;color:#8a8a8a">הוסף נכסים כדי לראות פילוח</div>'; return; }
+  box.innerHTML=rows.map(function(x){
+    var neg=(x.v<0);
+    var meta=neg?'לא נכלל בפילוח':((tot>0)?Math.round(x.v/tot*100)+'%':'');
+    var val=neg?('−'+fmt(Math.abs(x.v))):fmt(x.v);
+    return '<div class="row"><div style="display:flex;align-items:center;gap:8px">'+
+      '<span class="dot" style="background:'+x.col+'"></span>'+
+      '<div><div class="r-name">'+x.l+'</div>'+(meta?'<div class="r-meta">'+meta+'</div>':'')+'</div></div>'+
+      '<div class="r-left"><div class="r-val"'+(neg?' style="color:var(--red)"':'')+'>'+val+'</div></div></div>';
+  }).join('');
 }
 function renderWealthPension(c){
   var box=document.getElementById('as-pen-list'); if(!box) return;
