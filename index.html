@@ -887,7 +887,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- עובר ושב עכשיו -->
   <div class="card">
-    <div class="sec-head"><div class="c-label">עובר ושב עכשיו</div><div class="sec-total" id="cf-cash-total">—</div></div>
+    <div class="sec-head"><div class="c-label">עובר ושב</div><div class="sec-total" id="cf-cash-total">—</div></div>
     <div id="cf-cash-list"></div>
   </div>
 
@@ -2062,7 +2062,7 @@ function renderJourneyMomentum(c){
       _jrMrow('התחייבויות', dLo, false)+
       '<div class="mrow"><span>תאריך החופש</span>'+dateRow+'</div>'+
     '</div>'+
-    '<div class="note">מתעדכן אוטומטית פעם בחודש'+(prevMonth?' · ההשוואה מול '+prevMonth:'')+'</div>';
+    '<div class="note">'+(prevMonth?'ההשוואה מול '+prevMonth+' · ':'')+'מתעדכן אוטומטית ב-1 לחודש</div>';
 }
 
 /* Journey — schema-additive editors (milestone.cost · settings.fireTargetManual) */
@@ -3616,6 +3616,34 @@ function _asPayoff(bal, pay){
   var d=new Date(); d.setMonth(d.getMonth()+m);
   return ' · אומדן '+(d.getMonth()+1)+'/'+String(d.getFullYear()).slice(-2);
 }
+/* ── Live loans: once per calendar month, reduce each loan balance by
+   (payment − interest). Stamps lastUpdated='YYYY-MM'; first sight only stamps
+   (no retroactive charge). Runs on load, mutates ND, persists. ── */
+function tickLoans(){
+  if(!Array.isArray(ND.loans) || !ND.loans.length) return false;
+  var now=new Date(), curIdx=now.getFullYear()*12+now.getMonth();
+  var curKey=now.getFullYear()+'-'+('0'+(now.getMonth()+1)).slice(-2);
+  function idxOf(k){ var p=(k||'').split('-'); return p.length===2 ? (parseInt(p[0],10)*12+(parseInt(p[1],10)-1)) : null; }
+  var changed=false;
+  ND.loans.forEach(function(l){
+    if(!(Number(l.balance)>0)){ if(!l.lastUpdated){ l.lastUpdated=curKey; changed=true; } return; }
+    if(!l.lastUpdated){ l.lastUpdated=curKey; changed=true; return; }   // first sight: stamp only
+    var last=idxOf(l.lastUpdated); if(last==null){ l.lastUpdated=curKey; changed=true; return; }
+    var months=curIdx-last; if(months<=0) return;
+    var bal=Number(l.balance), pay=Number(l.monthlyPayment)||0, mrate=(Number(l.rate)||0)/100/12;
+    for(var m=0; m<months && bal>0; m++){
+      var principal=pay-(bal*mrate);
+      if(principal<=0) break;               // payment can't cover interest → leave balance, just re-stamp
+      bal=Math.max(0, bal-principal);
+    }
+    var nb=Math.round(bal);
+    if(nb!==l.balance){ l.balance=nb; changed=true; }
+    if(l.lastUpdated!==curKey){ l.lastUpdated=curKey; changed=true; }
+  });
+  if(changed) saveToStorage();
+  return changed;
+}
+function _loanUpd(k){ var p=(k||'').split('-'); return p.length===2 ? (parseInt(p[1],10)+'/'+String(p[0]).slice(-2)) : ''; }
 function renderWealth(){
   if(!document.getElementById('pg-assets')) return;
   var c=calc();
@@ -3690,11 +3718,8 @@ function renderWealthInvest(c){
         '<div class="r-left"><div class="r-val">'+fmt(x.value||0)+'</div>'+(pct!=null?'<div class="r-delta '+(gain>=0?'up':'down')+'">'+(gain>=0?'+':'')+pct+'%</div>':'')+'</div></div>');
     });
   });
-  var cashV=ND.cash||0;
-  rows.push('<div class="row" onclick="goP(\'cf\')"><div><div class="r-name">מזומן ועו"ש</div><div class="r-meta">עריכה בתזרים ›</div></div>'+
-    '<div class="r-left"><div class="r-val" style="color:'+(cashV<0?'var(--red)':'var(--ink)')+'">'+fmt(cashV)+'</div></div></div>');
-  box.innerHTML=rows.join('');
-  _cfSet('as-inv-total', fmt(c.invT + Math.max(cashV,0)));
+  box.innerHTML=rows.length?rows.join(''):_asEmpty('אין השקעות עדיין');
+  _cfSet('as-inv-total', fmt(c.invT));
 }
 function renderWealthRE(c){
   var box=document.getElementById('as-re-list'); if(!box) return;
@@ -3713,7 +3738,8 @@ function renderWealthLoans(c){
     '<div class="r-left"><div class="r-val">'+fmt(x.mortgageBalance)+'</div></div></div>'); });
   (ND.loans||[]).forEach(function(x){
     var rate=x.rate||0;
-    var meta=rate+'% · '+fmt(x.monthlyPayment||0)+'/ח׳'+_asPayoff(x.balance,x.monthlyPayment);
+    var _upd=_loanUpd(x.lastUpdated);
+    var meta=rate+'% · '+fmt(x.monthlyPayment||0)+'/ח׳'+_asPayoff(x.balance,x.monthlyPayment)+(_upd?' · עודכן '+_upd:'');
     var delta = rate>=4?'ריבית גבוהה':(rate===0?'0% ריבית':'');
     var cls = rate>=4?'down':(rate===0?'up':'');
     rows.push(_asRow('loan',x.id,x.name||'הלוואה',meta,fmt(x.balance||0),delta,cls));
@@ -4924,6 +4950,7 @@ function _showApp(isNewLogin=false){
   window.STORAGE_KEY='numa_v2_'+uid;
   // Load data then init
   function _afterLoad(){
+    try{ tickLoans(); }catch(e){}
     if(name && !ND.profile.name){ ND.profile.name=name; saveToStorage(); }
     if(!ND.milestones) ND.milestones=[];
     render();
