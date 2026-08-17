@@ -790,12 +790,12 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 <!-- hero — the bottom line -->
 <div class="card hero">
-  <div class="c-label">שווי נטו</div>
+  <div class="c-label" data-i18n="ov_net_worth">שווי נטו</div>
   <div class="c-num" id="ov-net" style="font-size:40px">—</div>
   <div id="ov-hero-delta" style="display:none;align-items:center;gap:5px;margin-top:8px;font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px;width:fit-content"></div>
-  <div class="c-sub" style="margin-top:8px">נכסים פחות התחייבויות</div>
+  <div class="c-sub" style="margin-top:8px" data-i18n="ov_assets_minus">נכסים פחות התחייבויות</div>
   <div class="bar" style="background:rgba(255,255,255,.14);height:6px;margin:12px 0 6px"><i id="ov-hero-bar" style="width:0%;background:linear-gradient(90deg,#A07840,#c8a96a)"></i></div>
-  <div class="prog-meta" style="color:#aab4c8"><span>היום</span><span id="ov-hero-goal">—</span></div>
+  <div class="prog-meta" style="color:#aab4c8"><span data-i18n="ov_today">היום</span><span id="ov-hero-goal">—</span></div>
 </div>
 
 <!-- Numa Score: ring + 3 bars -->
@@ -809,35 +809,35 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </svg>
     <div style="flex:1">
       <div class="bar" style="margin-top:0"><i id="ovx-bs" style="width:0%;background:#2D6A3F"></i></div>
-      <div class="prog-meta"><span>חיסכון</span><span id="ovx-bsp">—</span></div>
+      <div class="prog-meta"><span data-i18n="sb_savings">חיסכון</span><span id="ovx-bsp">—</span></div>
       <div class="bar"><i id="ovx-bf" style="width:0%;background:#A07840"></i></div>
-      <div class="prog-meta"><span>התקדמות ליעד</span><span id="ovx-bfp">—</span></div>
+      <div class="prog-meta"><span data-i18n="sb_progress">התקדמות ליעד</span><span id="ovx-bfp">—</span></div>
       <div class="bar"><i id="ovx-bd" style="width:0%;background:#B8860B"></i></div>
-      <div class="prog-meta"><span>יחס חוב</span><span id="ovx-bdp">—</span></div>
+      <div class="prog-meta"><span data-i18n="sb_debt">יחס חוב</span><span id="ovx-bdp">—</span></div>
     </div>
   </div>
 </div>
 
 <!-- summary cards (stacked, clickable) -->
 <div class="card" onclick="goP('cf')" style="cursor:pointer">
-  <div class="sec-head"><div class="c-label">תזרים</div><div class="sec-total">‹</div></div>
+  <div class="sec-head"><div class="c-label" data-i18n="nav_cashflow">תזרים</div><div class="sec-total">‹</div></div>
   <div class="c-num" id="sum-cf-val" style="font-size:26px">—</div>
   <div class="c-sub" id="sum-cf-sub">—</div>
 </div>
 <div class="card" onclick="goP('assets')" style="cursor:pointer">
-  <div class="sec-head"><div class="c-label">הון</div><div class="sec-total">‹</div></div>
+  <div class="sec-head"><div class="c-label" data-i18n="nav_assets">הון</div><div class="sec-total">‹</div></div>
   <div class="c-num" id="sum-wealth-val" style="font-size:26px">—</div>
   <div class="c-sub" id="sum-wealth-sub">—</div>
 </div>
 <div class="card" onclick="goP('plan')" style="cursor:pointer">
-  <div class="sec-head"><div class="c-label">מסע</div><div class="sec-total">‹</div></div>
+  <div class="sec-head"><div class="c-label" data-i18n="nav_plan">מסע</div><div class="sec-total">‹</div></div>
   <div class="c-num" id="sum-journey-val" style="font-size:26px">—</div>
   <div class="c-sub" id="sum-journey-sub">—</div>
 </div>
 
 <!-- תובנות -->
 <div class="card">
-  <div class="c-label">תובנות</div>
+  <div class="c-label" data-i18n="ov_insights">תובנות</div>
   <div id="ov-insights"></div>
 </div>
 
@@ -875,36 +875,36 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
   <!-- hero -->
   <div class="card hero">
-    <div class="c-label">תזרים נטו החודש</div>
+    <div class="c-label" data-i18n="cf_net_month">תזרים נטו החודש</div>
     <div class="c-num" id="cf-hero">—</div>
     <div class="c-sub" id="cf-hero-sub">הזן הכנסות והוצאות</div>
     <div class="chips">
-      <div class="chip"><b id="cf-chip-inc">—</b><span>הכנסה</span></div>
-      <div class="chip"><b id="cf-chip-exp">—</b><span>הוצאות</span></div>
-      <div class="chip"><b id="cf-chip-ratio">—</b><span>יחס הוצאה</span></div>
+      <div class="chip"><b id="cf-chip-inc">—</b><span data-i18n="cf_income">הכנסה</span></div>
+      <div class="chip"><b id="cf-chip-exp">—</b><span data-i18n="cf_expenses_short">הוצאות</span></div>
+      <div class="chip"><b id="cf-chip-ratio">—</b><span data-i18n="cf_ratio">יחס הוצאה</span></div>
     </div>
   </div>
 
   <!-- עובר ושב עכשיו -->
   <div class="card">
-    <div class="sec-head"><div class="c-label">עובר ושב</div><div class="sec-total" id="cf-cash-total">—</div></div>
+    <div class="sec-head"><div class="c-label" data-i18n="cf_checking">עובר ושב</div><div class="sec-total" id="cf-cash-total">—</div></div>
     <div id="cf-cash-list"></div>
   </div>
 
   <!-- הכנסות גמישות -->
   <div class="card">
-    <div class="sec-head"><div class="c-label">הכנסות</div><div class="sec-total" id="cf-inc-total">—</div></div>
+    <div class="sec-head"><div class="c-label" data-i18n="cf_incomes">הכנסות</div><div class="sec-total" id="cf-inc-total">—</div></div>
     <div id="cf-inc-list"></div>
-    <button class="btn-add" onclick="cfAddIncome()">+ הוסף מקור הכנסה</button>
+    <button class="btn-add" onclick="cfAddIncome()" data-i18n="cf_add_income">+ הוסף מקור הכנסה</button>
   </div>
 
   <!-- הוצאות גמישות + פס פילוח -->
   <div class="card">
-    <div class="sec-head"><div class="c-label">הוצאות</div><div class="sec-total" id="cf-exp-total">—</div></div>
+    <div class="sec-head"><div class="c-label" data-i18n="cf_expenses">הוצאות</div><div class="sec-total" id="cf-exp-total">—</div></div>
     <div class="bar" id="cf-exp-bar"></div>
     <div class="legend" id="cf-exp-legend" style="margin-bottom:8px"></div>
     <div id="cf-exp-list"></div>
-    <button class="btn-add" onclick="cfAddExpense()">+ הוסף קטגוריה</button>
+    <button class="btn-add" onclick="cfAddExpense()" data-i18n="cf_add_category">+ הוסף קטגוריה</button>
   </div>
 
   <!-- hidden compat: legacy ids referenced by other renderers (kept guarded/no-op) -->
@@ -1473,7 +1473,23 @@ var T={
     no_invest:'אין השקעות — הוסף',no_realestate:'אין נכסי נדל"ן עדיין',
     no_loans:'אין הלוואות פעילות',monthly_payment:'החזר חודשי',
     total_interest:'סה"כ ריבית',total_cost:'עלות כוללת',
-    amort_note:'ריבית מעול 5% — שקול פירעון מוקדם לפני השקעה'
+    amort_note:'ריבית מעול 5% — שקול פירעון מוקדם לפני השקעה',
+    ov_net_worth:'שווי נטו',ov_assets_minus:'נכסים פחות התחייבויות',ov_today:'היום',ov_insights:'תובנות',ov_this_month:'החודש',ov_way_freedom:'מהדרך לחופש',age_word:'גיל',
+    sb_savings:'חיסכון',sb_progress:'התקדמות ליעד',sb_debt:'יחס חוב',
+    ins_high_interest:'ריבית גבוהה',ins_rate:'ריבית',ins_consider_payoff:'שקול פירעון מוקדם',ins_heads_up:'שים לב',
+    ins_emergency_missing:'קרן חירום חסרה',ins_3mo_exp:'3 חודשי הוצאות',ins_you_have:'יש לך',
+    ins_concentration:'ריכוז נכסים',ins_of_assets_in:'מהנכסים ב',ins_diversify:'שקול פיזור',
+    ins_great_savings:'שיעור חיסכון מצוין',ins_you_save:'אתה חוסך',ins_of_income_ontrack:'מההכנסה — על המסלול',ins_well_done:'כל הכבוד',
+    ins_no_alerts:'אין התראות — המצב הפיננסי שלך נראה מאוזן.',
+    cat_pension:'פנסיה',cat_studyfund:'קה"ש',cat_gemel:'גמל',cat_investments:'השקעות',cat_realestate:'נדל"ן',cat_cash:'מזומן',
+    sum_income:'הכנסה',sum_expense:'הוצאה',sum_income_vs_exp:'הכנסות מול הוצאות',
+    sum_assets:'נכסים',sum_liab:'התח׳',sum_assets_vs_liab:'נכסים מול התחייבויות',
+    sum_of_goal:'מהיעד',sum_progress_goal:'התקדמות ליעד',
+    cf_net_month:'תזרים נטו החודש',cf_enter_hint:'הזן הכנסות והוצאות',cf_surplus_ok:'עודף חודשי — כל הכבוד',cf_deficit:'הוצאות עולות על ההכנסה',
+    cf_income:'הכנסה',cf_expenses_short:'הוצאות',cf_ratio:'יחס הוצאה',
+    cf_checking:'עובר ושב',cf_incomes:'הכנסות',cf_add_income:'+ הוסף מקור הכנסה',cf_expenses:'הוצאות',cf_add_category:'+ הוסף קטגוריה',
+    cf_no_income:'אין הכנסות — הוסף מקור הכנסה',cf_no_expenses:'אין הוצאות — הוסף קטגוריה',
+    name_me:'שלי',name_partner:'בן/בת זוג'
   },
   en:{
     nav_overview:'Overview',nav_cashflow:'Cash Flow',nav_assets:'Wealth',
@@ -1504,7 +1520,23 @@ var T={
     no_invest:'No investments — Add',no_realestate:'No real estate yet',
     no_loans:'No active loans',monthly_payment:'Monthly payment',
     total_interest:'Total interest',total_cost:'Total cost',
-    amort_note:'Rate above 5% — consider early repayment before investing'
+    amort_note:'Rate above 5% — consider early repayment before investing',
+    ov_net_worth:'Net Worth',ov_assets_minus:'Assets minus liabilities',ov_today:'Today',ov_insights:'Insights',ov_this_month:'this month',ov_way_freedom:'of the way to freedom',age_word:'Age',
+    sb_savings:'Savings',sb_progress:'Progress to goal',sb_debt:'Debt ratio',
+    ins_high_interest:'High interest',ins_rate:'Rate',ins_consider_payoff:'consider early payoff',ins_heads_up:'Heads up',
+    ins_emergency_missing:'No emergency fund',ins_3mo_exp:'3 months of expenses',ins_you_have:'you have',
+    ins_concentration:'Asset concentration',ins_of_assets_in:'of assets in ',ins_diversify:'Diversify',
+    ins_great_savings:'Great savings rate',ins_you_save:'You save',ins_of_income_ontrack:'of income — on track',ins_well_done:'Well done',
+    ins_no_alerts:'No alerts — your finances look balanced.',
+    cat_pension:'Pension',cat_studyfund:'Study fund',cat_gemel:'Provident',cat_investments:'Investments',cat_realestate:'Real estate',cat_cash:'Cash',
+    sum_income:'Income',sum_expense:'Expense',sum_income_vs_exp:'Income vs expenses',
+    sum_assets:'Assets',sum_liab:'Liab',sum_assets_vs_liab:'Assets vs liabilities',
+    sum_of_goal:'of goal',sum_progress_goal:'Progress to goal',
+    cf_net_month:'Net cash flow this month',cf_enter_hint:'Enter income and expenses',cf_surplus_ok:'Monthly surplus — nice work',cf_deficit:'Expenses exceed income',
+    cf_income:'Income',cf_expenses_short:'Expenses',cf_ratio:'Expense ratio',
+    cf_checking:'Checking',cf_incomes:'Income',cf_add_income:'+ Add income source',cf_expenses:'Expenses',cf_add_category:'+ Add category',
+    cf_no_income:'No income yet — add a source',cf_no_expenses:'No expenses yet — add a category',
+    name_me:'Me',name_partner:'Partner'
   }
 };
 function t(key){
@@ -2114,15 +2146,15 @@ function renderOvHero(c){
       cap.style.display='flex';
       cap.style.background=up?'rgba(127,196,147,.15)':'rgba(224,169,160,.15)';
       cap.style.color=up?'#7fc493':'#e0a9a0';
-      cap.textContent=(up?'↑ +':'↓ −')+fmt(Math.abs(d))+' החודש';
+      cap.textContent=(up?'↑ +':'↓ −')+fmt(Math.abs(d))+' '+t('ov_this_month');
     }
   }
   var pct=(c.fireNumber>0)?Math.min(100,Math.round(Math.max(c.netWorth,0)/c.fireNumber*100)):0;
   var bar=document.getElementById('ov-hero-bar'); if(bar) bar.style.width=pct+'%';
   var goal=document.getElementById('ov-hero-goal');
   if(goal){
-    var age=(c.fireAge>0&&c.fireAge<120)?(' · גיל '+c.fireAge):'';
-    goal.textContent=(c.fireNumber>0)?(pct+'% מהדרך לחופש'+age):'—';
+    var age=(c.fireAge>0&&c.fireAge<120)?(' · '+t('age_word')+' '+c.fireAge):'';
+    goal.textContent=(c.fireNumber>0)?(pct+'% '+t('ov_way_freedom')+age):'—';
   }
 }
 function ovRenderOverview(c){
@@ -2139,11 +2171,11 @@ function ovRenderOverview(c){
   // Lean summary cards (data from calc() only)
   var _scf=document.getElementById('sum-cf-val');
   if(_scf){ if(c.totalIncome>0){ _scf.textContent=f(c.monthlySavings); _scf.style.color=_colNet(c.monthlySavings); } else { _scf.textContent='—'; _scf.style.color='#1E2D4A'; } }
-  set('sum-cf-sub', c.totalIncome>0 ? 'הכנסה '+f(c.totalIncome)+' · הוצאה '+f(c.totalExpenses) : 'הכנסות מול הוצאות');
+  set('sum-cf-sub', c.totalIncome>0 ? t('sum_income')+' '+f(c.totalIncome)+' · '+t('sum_expense')+' '+f(c.totalExpenses) : t('sum_income_vs_exp'));
   set('sum-wealth-val', c.netWorth!==0 ? f(c.netWorth) : '—');
-  set('sum-wealth-sub', (c.totalAssets>0||c.totalLiabilities>0) ? 'נכסים '+f(c.totalAssets)+' · התח׳ '+f(c.totalLiabilities) : 'נכסים מול התחייבויות');
-  set('sum-journey-val', (c.fireAge && c.fireAge>0 && c.fireAge<120) ? 'גיל '+c.fireAge : '—');
-  set('sum-journey-sub', c.fireNumber>0 ? Math.round(Math.max(c.netWorth,0)/c.fireNumber*100)+'% מהיעד' : 'התקדמות ליעד');
+  set('sum-wealth-sub', (c.totalAssets>0||c.totalLiabilities>0) ? t('sum_assets')+' '+f(c.totalAssets)+' · '+t('sum_liab')+' '+f(c.totalLiabilities) : t('sum_assets_vs_liab'));
+  set('sum-journey-val', (c.fireAge && c.fireAge>0 && c.fireAge<120) ? t('age_word')+' '+c.fireAge : '—');
+  set('sum-journey-sub', c.fireNumber>0 ? Math.round(Math.max(c.netWorth,0)/c.fireNumber*100)+'% '+t('sum_of_goal') : t('sum_progress_goal'));
   set('ov-k1',c.monthlySavings!==0?f(c.monthlySavings):'—');
   set('ov-k2',c.savingsRate>0?Math.round(c.savingsRate)+'%':'—');
   set('ov-k3',c.fireAge>0&&c.fireAge<120?'גיל '+c.fireAge:'—');
@@ -2186,19 +2218,19 @@ function renderOvInsights(){
   var el=document.getElementById('ov-insights'); if(!el) return;
   var c=(typeof calc==='function')?calc():{};
   var exp=c.totalExpenses||0, items=[];
-  (ND.loans||[]).forEach(function(ln){ if(items.length<3 && (ln.rate||0)>=4) items.push({name:'ריבית גבוהה'+(ln.name?' — '+ln.name:''),meta:'ריבית '+ln.rate+'% · שקול פירעון מוקדם',delta:'שים לב',cls:'down'}); });
-  if(items.length<3 && exp>0 && (ND.cash||0) < exp*3){ items.push({name:'קרן חירום חסרה',meta:'3 חודשי הוצאות = '+fmt(exp*3)+' · יש לך '+fmt(ND.cash||0),delta:'שים לב',cls:'down'}); }
+  (ND.loans||[]).forEach(function(ln){ if(items.length<3 && (ln.rate||0)>=4) items.push({name:t('ins_high_interest')+(ln.name?' — '+ln.name:''),meta:t('ins_rate')+' '+ln.rate+'% · '+t('ins_consider_payoff'),delta:t('ins_heads_up'),cls:'down'}); });
+  if(items.length<3 && exp>0 && (ND.cash||0) < exp*3){ items.push({name:t('ins_emergency_missing'),meta:t('ins_3mo_exp')+' = '+fmt(exp*3)+' · '+t('ins_you_have')+' '+fmt(ND.cash||0),delta:t('ins_heads_up'),cls:'down'}); }
   if(items.length<3 && c.totalAssets>0){
-    var acats=[{l:'פנסיה',v:c.penT||0},{l:'קה"ש',v:c.hshT||0},{l:'גמל',v:c.gmT||0},{l:'השקעות',v:c.invT||0},{l:'נדל"ן',v:c.reV||0},{l:'מזומן',v:ND.cash||0}];
+    var acats=[{l:t('cat_pension'),v:c.penT||0},{l:t('cat_studyfund'),v:c.hshT||0},{l:t('cat_gemel'),v:c.gmT||0},{l:t('cat_investments'),v:c.invT||0},{l:t('cat_realestate'),v:c.reV||0},{l:t('cat_cash'),v:ND.cash||0}];
     var top=acats.reduce(function(a,b){return b.v>a.v?b:a;},{v:0,l:''});
-    if(top.v/c.totalAssets>0.5) items.push({name:'ריכוז נכסים',meta:Math.round(top.v/c.totalAssets*100)+'% מהנכסים ב'+top.l,delta:'שקול פיזור',cls:'warn'});
+    if(top.v/c.totalAssets>0.5) items.push({name:t('ins_concentration'),meta:Math.round(top.v/c.totalAssets*100)+'% '+t('ins_of_assets_in')+top.l,delta:t('ins_diversify'),cls:'warn'});
   }
-  if(items.length<3 && c.totalIncome>0 && c.savingsRate>=20){ items.push({name:'שיעור חיסכון מצוין',meta:'אתה חוסך '+Math.round(c.savingsRate)+'% מההכנסה — על המסלול',delta:'כל הכבוד',cls:'up'}); }
+  if(items.length<3 && c.totalIncome>0 && c.savingsRate>=20){ items.push({name:t('ins_great_savings'),meta:t('ins_you_save')+' '+Math.round(c.savingsRate)+'% '+t('ins_of_income_ontrack'),delta:t('ins_well_done'),cls:'up'}); }
   if(items.length){
-    el.innerHTML=items.map(function(t){return '<div class="row"><div><div class="r-name">'+t.name+'</div><div class="r-meta">'+t.meta+'</div></div><div class="r-left"><span class="r-delta '+t.cls+'">'+t.delta+'</span></div></div>';}).join('');
+    el.innerHTML=items.map(function(x){return '<div class="row"><div><div class="r-name">'+x.name+'</div><div class="r-meta">'+x.meta+'</div></div><div class="r-left"><span class="r-delta '+x.cls+'">'+x.delta+'</span></div></div>';}).join('');
   } else {
     var hasData=((c.totalIncome||0)>0 || (c.totalAssets||0)>0 || exp>0 || (ND.loans||[]).length>0);
-    el.innerHTML='<div style="font-size:11px;color:#A8A8B0;text-align:center;padding:12px 0">'+(hasData?'אין התראות — המצב הפיננסי שלך נראה מאוזן.':t('empty_insights'))+'</div>';
+    el.innerHTML='<div style="font-size:11px;color:#A8A8B0;text-align:center;padding:12px 0">'+(hasData?t('ins_no_alerts'):t('empty_insights'))+'</div>';
   }
 }
 
@@ -2964,7 +2996,7 @@ function renderCF(c){
   // Hero
   var hero=document.getElementById('cf-hero');
   if(hero){ hero.textContent=hasData?((net>=0?'+':'−')+fmt(Math.abs(net))):'—'; hero.style.color=net>=0?'#7fc493':'#e0a9a0'; }
-  _cfSet('cf-hero-sub', !hasData?'הזן הכנסות והוצאות':(net>=0?'עודף חודשי — כל הכבוד':'הוצאות עולות על ההכנסה'));
+  _cfSet('cf-hero-sub', !hasData?t('cf_enter_hint'):(net>=0?t('cf_surplus_ok'):t('cf_deficit')));
   _cfSet('cf-chip-inc', incTotal>0?fmt(incTotal):'—');
   _cfSet('cf-chip-exp', expTotal>0?fmt(expTotal):'—');
   _cfSet('cf-chip-ratio', incTotal>0?Math.round(expTotal/incTotal*100)+'%':'—');
@@ -2978,7 +3010,7 @@ function renderCF(c){
     incBox.innerHTML = incomes.length ? incomes.map(function(x){
       return '<div class="row" onclick="cfEditIncome(\''+x.id+'\')"><div class="r-name">'+_esc(x.name||'הכנסה')+'</div>'+
         '<div class="r-left"><span class="r-val">'+fmt(Number(x.amount)||0)+'</span></div></div>';
-    }).join('') : '<div style="padding:12px 4px;font-size:12px;color:#8a8a8a">אין הכנסות — הוסף מקור הכנסה</div>';
+    }).join('') : '<div style="padding:12px 4px;font-size:12px;color:#8a8a8a">'+t('cf_no_income')+'</div>';
   }
   _cfSet('cf-inc-total', incTotal>0?fmt(incTotal):'—');
 
@@ -2990,8 +3022,8 @@ function renderCF(c){
 function renderCFCashRows(){
   var box=document.getElementById('cf-cash-list'); if(!box) return;
   if(!ND.cashAccounts) ND.cashAccounts={my:0,partner:0};
-  var myName=(ND.cashAccounts.nameMy||'').trim()||((ND.profile&&ND.profile.name)||'').trim()||'שלי';
-  var paName=(ND.cashAccounts.namePartner||'').trim()||'בן/בת זוג';
+  var myName=(ND.cashAccounts.nameMy||'').trim()||((ND.profile&&ND.profile.name)||'').trim()||t('name_me');
+  var paName=(ND.cashAccounts.namePartner||'').trim()||t('name_partner');
   var rows=[{k:'my',n:myName},{k:'partner',n:paName}];
   box.innerHTML=rows.map(function(r){
     var v=Number(ND.cashAccounts[r.k])||0;
@@ -3016,7 +3048,7 @@ function renderCFExpenses(expenses, expTotal){
     list.innerHTML = expenses.length ? expenses.map(function(x){
       return '<div class="row" onclick="cfEditExpense(\''+x.id+'\')"><div class="r-name">'+_esc(x.name||'הוצאה')+'</div>'+
         '<div class="r-left"><span class="r-val">'+fmt(Number(x.amount)||0)+'</span></div></div>';
-    }).join('') : '<div style="padding:12px 4px;font-size:12px;color:#8a8a8a">אין הוצאות — הוסף קטגוריה</div>';
+    }).join('') : '<div style="padding:12px 4px;font-size:12px;color:#8a8a8a">'+t('cf_no_expenses')+'</div>';
   }
 }
 
