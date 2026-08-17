@@ -743,7 +743,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div style="position:absolute;bottom:-1px;right:-1px;width:9px;height:9px;background:#27ae60;border-radius:50%;border:2px solid #fff"></div>
       <div id="avatar-menu" style="display:none;position:absolute;top:42px;right:0;background:#fff;border-radius:16px;width:190px;box-shadow:0 8px 30px rgba(0,0,0,.15);z-index:100;overflow:hidden">
         <div onclick="openSettings();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid rgba(0,0,0,.06)"><span data-i18n="settings">הגדרות</span> </div>
-        <div onclick="authSignOut();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#e74c3c;cursor:pointer;display:flex;align-items:center;gap:8px">התנתקות →</div>
+        <div onclick="authSignOut();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#e74c3c;cursor:pointer;display:flex;align-items:center;gap:8px"><span data-i18n="set_signout">התנתקות</span> →</div>
       </div>
     </div>
   </div>
@@ -1246,7 +1246,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 22px 14px">
     <div style="display:flex;align-items:center;gap:11px">
       <div style="width:40px;height:40px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center"><span style="color:#c8a96a;font-size:19px;font-weight:700;line-height:1">✦</span></div>
-      <div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:15px;font-weight:800;color:#1E2D4A">Numa AI</span><span class="ai-live-dot"></span></div><div style="font-size:10px;color:#6B7A96">היועץ הפיננסי שלך · מכיר את כל הנתונים</div></div>
+      <div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:15px;font-weight:800;color:#1E2D4A">Numa AI</span><span class="ai-live-dot"></span></div><div style="font-size:10px;color:#6B7A96" data-i18n="agent_sub">היועץ הפיננסי שלך · מכיר את כל הנתונים</div></div>
     </div>
     <button onclick="toggleAgent()" style="width:30px;height:30px;border-radius:50%;background:#ede9e0;border:none;font-size:14px;color:#6B7A96;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
   </div>
@@ -1522,7 +1522,7 @@ var T={
     ob_s1_title:'היי, מה שמך?',ob_s1_sub:'נתאים את Numa בדיוק לך',ob_ph_firstname:'שם פרטי',ob_ph_age:'גיל',ob_employment:'תעסוקה',ob_emp_employee:'שכיר/ת',ob_emp_self:'עצמאי/ת',ob_emp_retired:'גמלאי/ת',ob_family:'מצב משפחתי',ob_fam_single:'יחיד/ה',ob_fam_couple:'זוג',ob_fam_family:'זוג + ילדים',
     ob_s2_title:'מה רלוונטי אליך?',ob_s2_sub:'נציג רק את מה שמתאים לך',ob_r_pension:'פנסיה וקה"ש',ob_r_invest:'השקעות בשוק ההון',ob_r_re:'נדל"ן ומשכנתא',ob_r_loans:'הלוואות וחובות',ob_r_fire:'FIRE — עצמאות כלכלית',
     ob_s3_title:'העדפות תצוגה',ob_s3_sub:'תמיד אפשר לשנות בהגדרות',ob_language:'שפה',ob_currency:'מטבע',ob_curr_ils:'₪ שקל',ob_curr_usd:'$ דולר',ob_ready:'Numa מוכנה לך',ob_ready_sub:'הכל שמור ומסונכרן אוטומטית.<br>תוסיף נתונים בקצב שלך.',
-    au_welcome:'ברוך הבא — כניסה או הרשמה',au_ph_email:'אימייל',au_ph_pass:'סיסמה',au_ph_pass2:'אימות סיסמה',au_ph_name:'הכנס שמך',au_ph_pass_min:'לפחות 6 תווים',au_google:'המשך עם Google',toast_updated:'עודכן',toast_deleted:'נמחק',toast_saved:'נשמר',emp_notworking:'לא עובד',emp_employee:'שכיר',emp_self:'עצמאי',emp_retired:'גמלאי',app_title:'Numa — הכלכלה שלך בשליטה',ai_placeholder:'שאל כל שאלה על הכסף שלך...',chipq_freedom:'מתי אגיע לחופש כלכלי?',chipq_loan:'מה ההלוואה שהכי כדאי לסלק?',chipq_month:'איך נראה החודש שלי?'
+    au_welcome:'ברוך הבא — כניסה או הרשמה',au_ph_email:'אימייל',au_ph_pass:'סיסמה',au_ph_pass2:'אימות סיסמה',au_ph_name:'הכנס שמך',au_ph_pass_min:'לפחות 6 תווים',au_google:'המשך עם Google',toast_updated:'עודכן',toast_deleted:'נמחק',toast_saved:'נשמר',emp_notworking:'לא עובד',emp_employee:'שכיר',emp_self:'עצמאי',emp_retired:'גמלאי',app_title:'Numa — הכלכלה שלך בשליטה',ai_placeholder:'שאל כל שאלה על הכסף שלך...',chipq_freedom:'מתי אגיע לחופש כלכלי?',chipq_loan:'מה ההלוואה שהכי כדאי לסלק?',chipq_month:'איך נראה החודש שלי?',agent_sub:'היועץ הפיננסי שלך · מכיר את כל הנתונים',modal_delete_item:'מחק פריט'
 
   },
   en:{
@@ -1598,7 +1598,7 @@ var T={
     ob_s1_title:'Hi, what\'s your name?',ob_s1_sub:'We\'ll tailor Numa just for you',ob_ph_firstname:'First name',ob_ph_age:'Age',ob_employment:'Employment',ob_emp_employee:'Employee',ob_emp_self:'Self-employed',ob_emp_retired:'Retired',ob_family:'Marital status',ob_fam_single:'Single',ob_fam_couple:'Couple',ob_fam_family:'Couple + kids',
     ob_s2_title:'What\'s relevant to you?',ob_s2_sub:'We\'ll show only what fits you',ob_r_pension:'Pension & study funds',ob_r_invest:'Market investments',ob_r_re:'Real estate & mortgage',ob_r_loans:'Loans & debts',ob_r_fire:'FIRE — financial independence',
     ob_s3_title:'Display preferences',ob_s3_sub:'You can always change this in Settings',ob_language:'Language',ob_currency:'Currency',ob_curr_ils:'₪ Shekel',ob_curr_usd:'$ Dollar',ob_ready:'Numa is ready for you',ob_ready_sub:'Everything is saved and synced automatically.<br>Add data at your own pace.',
-    au_welcome:'Welcome — sign in or sign up',au_ph_email:'Email',au_ph_pass:'Password',au_ph_pass2:'Confirm password',au_ph_name:'Enter your name',au_ph_pass_min:'At least 6 characters',au_google:'Continue with Google',toast_updated:'Updated',toast_deleted:'Deleted',toast_saved:'Saved',emp_notworking:'Not working',emp_employee:'Employee',emp_self:'Self-employed',emp_retired:'Retired',app_title:'Numa — Your money in control',ai_placeholder:'Ask anything about your money...',chipq_freedom:'When will I reach financial freedom?',chipq_loan:'Which loan should I pay off first?',chipq_month:'How does my month look?'
+    au_welcome:'Welcome — sign in or sign up',au_ph_email:'Email',au_ph_pass:'Password',au_ph_pass2:'Confirm password',au_ph_name:'Enter your name',au_ph_pass_min:'At least 6 characters',au_google:'Continue with Google',toast_updated:'Updated',toast_deleted:'Deleted',toast_saved:'Saved',emp_notworking:'Not working',emp_employee:'Employee',emp_self:'Self-employed',emp_retired:'Retired',app_title:'Numa — Your money in control',ai_placeholder:'Ask anything about your money...',chipq_freedom:'When will I reach financial freedom?',chipq_loan:'Which loan should I pay off first?',chipq_month:'How does my month look?',agent_sub:'Your financial advisor · knows all your data',modal_delete_item:'Delete item'
 
   }
 };
@@ -3325,8 +3325,8 @@ function openAddModal(type, id){
   flds.forEach(function(f){
     html += '<div class="fld"><div class="il">'+f.l+'</div><input class="inp" id="nm_'+f.k+'" placeholder="'+f.p+'"'+(f.t?' type="'+f.t+'"':'')+'></div>';
   });
-  html += '<button class="btn-g" onclick="saveAddModal(\''+type+'\''+(id?(',\''+id+'\''):'')+')">שמור ✓</button>';
-  if(id && type!=='cash'){ html += '<button class="btn-del" onclick="deleteND(\''+ND_TYPE_ARRAY[type]+'\',\''+id+'\')">מחק פריט</button>'; }
+  html += '<button class="btn-g" onclick="saveAddModal(\''+type+'\''+(id?(',\''+id+'\''):'')+')">'+t('save')+' ✓</button>';
+  if(id && type!=='cash'){ html += '<button class="btn-del" onclick="deleteND(\''+ND_TYPE_ARRAY[type]+'\',\''+id+'\')">'+t('modal_delete_item')+'</button>'; }
   var cont = document.getElementById('add-modal-body');
   if(!cont){ // create modal if not exists
     var bg = document.createElement('div'); bg.className='sbg'; bg.id='bg-add'; bg.onclick=function(){closeS('add');}; document.body.appendChild(bg);
