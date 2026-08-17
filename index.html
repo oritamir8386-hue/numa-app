@@ -715,6 +715,18 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .mk .mrow{display:flex;justify-content:space-between;padding:10px 2px;border-bottom:1px solid var(--line);font-size:13px}
 .mk .mrow:last-child{border-bottom:none}
 .mk .note{text-align:center;font-size:10.5px;color:var(--muted);margin-top:10px}
+/* legends — per mockup .legend/.dot (fixes cramped inline text) */
+.mk .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+.mk .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:4px;vertical-align:middle;flex-shrink:0}
+/* unified add/edit modal — product design language */
+#sht-add{border-radius:20px 20px 0 0}
+#sht-add .sh-t{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:14px;letter-spacing:-.3px}
+#sht-add .fld{margin-bottom:10px}
+#sht-add .il{font-size:11px;font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0;margin-bottom:5px}
+#sht-add .inp{background:var(--field);border:none;border-radius:12px;padding:11px 14px;font-size:13px;color:var(--ink)}
+#sht-add .inp::placeholder{color:#b3ada1}
+#sht-add .btn-g{border-radius:12px;padding:12px;font-size:14px;box-shadow:none;margin-top:8px}
+#sht-add .btn-del{width:100%;background:none;border:none;color:#A32D2D;font-size:13px;font-weight:600;font-family:inherit;padding:11px;cursor:pointer;margin-top:2px}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
 </head>
@@ -943,6 +955,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div class="c-label">שווי נטו</div>
     <div class="c-num" id="as-nw">—</div>
     <div class="c-sub" id="as-nw-sub">—</div>
+    <div class="c-sub" id="as-nw-liquid" style="margin-top:3px;color:var(--gold-l)">—</div>
     <div class="chips">
       <div class="chip"><b id="as-chip-pen">—</b><span>פנסיה וקה"ש</span></div>
       <div class="chip"><b id="as-chip-inv">—</b><span>השקעות ונדל"ן</span></div>
@@ -1576,7 +1589,7 @@ var ND_DEFAULT = {
   realEstate:  [],  // [{id,name,marketValue,mortgageBalance,monthlyPayment}]
   loans:       [],  // [{id,name,balance,rate,monthlyPayment}]
   cash: 0,                          // derived cache = cashAccounts.my + cashAccounts.partner
-  cashAccounts: {my: 0, partner: 0},// single source for cash (checking accounts, may be negative)
+  cashAccounts: {my: 0, partner: 0, nameMy:'', namePartner:''},// single source for cash (checking accounts, may be negative) + account names
   history: [],   // [{date:'YYYY-MM', netWorth, totalAssets, totalLoans, savingsRate}] — monthly net-worth snapshots
   milestones: [],
   onboardingDone: false,
@@ -2044,23 +2057,8 @@ function renderJourneyMomentum(c){
 }
 
 /* Journey — schema-additive editors (milestone.cost · settings.fireTargetManual) */
-function jrAddEvent(){
-  var name=prompt('שם האירוע (חתונה, דירה, טיול...)'); if(name===null||!name.trim()) return;
-  var year=parseInt(prompt('שנה (למשל 2028)')); if(!(year>1900&&year<2200)) return;
-  var costS=prompt('עלות משוערת ₪ (אפשר להשאיר ריק)',''); var cost=parseInt((costS||'').replace(/[^\d]/g,''))||0;
-  if(!ND.milestones) ND.milestones=[];
-  ND.milestones.push({id:ndId(),text:name.trim(),year:year,cost:cost});
-  saveToStorage(); renderJourney();
-}
-function jrEditEvent(id){
-  var e=(ND.milestones||[]).find(function(x){return x.id===id;}); if(!e) return;
-  var name=prompt('שם האירוע (רוקן למחיקה)', e.text); if(name===null) return;
-  if(name.trim()===''){ if(confirm('למחוק את האירוע "'+e.text+'"?')){ ND.milestones=ND.milestones.filter(function(x){return x.id!==id;}); saveToStorage(); renderJourney(); } return; }
-  var year=parseInt(prompt('שנה', e.year))||e.year;
-  var costS=prompt('עלות משוערת ₪', e.cost||0); var cost=parseInt((costS||'').replace(/[^\d]/g,''))||0;
-  e.text=name.trim(); e.year=year; e.cost=cost;
-  saveToStorage(); renderJourney();
-}
+function jrAddEvent(){ openAddModal('event'); }
+function jrEditEvent(id){ openAddModal('event', id); }
 function editFireTarget(){
   var c=calc();
   var cur=(ND.settings&&ND.settings.fireTargetManual>0)?ND.settings.fireTargetManual:Math.round(c.fireNumber);
@@ -2960,8 +2958,9 @@ function renderCF(c){
 function renderCFCashRows(){
   var box=document.getElementById('cf-cash-list'); if(!box) return;
   if(!ND.cashAccounts) ND.cashAccounts={my:0,partner:0};
-  var myName=((ND.profile&&ND.profile.name)||'').trim()||'שלי';
-  var rows=[{k:'my',n:myName},{k:'partner',n:'בן/בת זוג'}];
+  var myName=(ND.cashAccounts.nameMy||'').trim()||((ND.profile&&ND.profile.name)||'').trim()||'שלי';
+  var paName=(ND.cashAccounts.namePartner||'').trim()||'בן/בת זוג';
+  var rows=[{k:'my',n:myName},{k:'partner',n:paName}];
   box.innerHTML=rows.map(function(r){
     var v=Number(ND.cashAccounts[r.k])||0;
     return '<div class="row" onclick="cfEditCash(\''+r.k+'\')"><div class="r-name">'+_esc(r.n)+'</div>'+
@@ -2989,44 +2988,12 @@ function renderCFExpenses(expenses, expTotal){
   }
 }
 
-/* ── Cash flow editors (schema-additive; sync back + persist) ── */
-function _cfAmt(promptTxt, def){ var v=prompt(promptTxt, def==null?'':def); if(v===null) return null; var n=parseFloat(String(v).replace(/[^\d.\-]/g,'')); return isNaN(n)?null:n; }
-function cfEditCash(k){
-  if(!ND.cashAccounts) ND.cashAccounts={my:0,partner:0};
-  var v=_cfAmt('יתרת עובר ושב (אפשר שלילי):', Number(ND.cashAccounts[k])||0);
-  if(v===null) return;
-  ND.cashAccounts[k]=v; saveToStorage(); render();
-}
-function cfAddIncome(){
-  var name=prompt('שם מקור ההכנסה (משכורת, שכ"ד, פרילנס...)'); if(name===null||!name.trim()) return;
-  var amt=_cfAmt('סכום חודשי נטו ₪:',''); if(!(amt>0)) return;
-  if(!Array.isArray(ND.incomes)) ND.incomes=[];
-  ND.incomes.push({id:ndId(),name:name.trim(),amount:Math.round(amt)});
-  cfSync(); saveToStorage(); render();
-}
-function cfEditIncome(id){
-  var x=(ND.incomes||[]).find(function(e){return e.id===id;}); if(!x) return;
-  var name=prompt('שם ההכנסה (רוקן למחיקה):', x.name); if(name===null) return;
-  if(!name.trim()){ if(confirm('למחוק את "'+x.name+'"?')){ ND.incomes=ND.incomes.filter(function(e){return e.id!==id;}); cfSync(); saveToStorage(); render(); } return; }
-  var amt=_cfAmt('סכום חודשי ₪:', x.amount); if(!(amt>0)) return;
-  x.name=name.trim(); x.amount=Math.round(amt);
-  cfSync(); saveToStorage(); render();
-}
-function cfAddExpense(){
-  var name=prompt('שם ההוצאה (דיור, מזון, רכב...)'); if(name===null||!name.trim()) return;
-  var amt=_cfAmt('סכום חודשי ₪:',''); if(!(amt>0)) return;
-  if(!Array.isArray(ND.expensesList)) ND.expensesList=[];
-  ND.expensesList.push({id:ndId(),name:name.trim(),amount:Math.round(amt),cat:_cfInferCat(name)});
-  cfSync(); saveToStorage(); render();
-}
-function cfEditExpense(id){
-  var x=(ND.expensesList||[]).find(function(e){return e.id===id;}); if(!x) return;
-  var name=prompt('שם ההוצאה (רוקן למחיקה):', x.name); if(name===null) return;
-  if(!name.trim()){ if(confirm('למחוק את "'+x.name+'"?')){ ND.expensesList=ND.expensesList.filter(function(e){return e.id!==id;}); cfSync(); saveToStorage(); render(); } return; }
-  var amt=_cfAmt('סכום חודשי ₪:', x.amount); if(!(amt>0)) return;
-  x.name=name.trim(); x.amount=Math.round(amt); x.cat=x.cat||_cfInferCat(name);
-  cfSync(); saveToStorage(); render();
-}
+/* ── Cash flow editors — unified styled modal (openAddModal) ── */
+function cfEditCash(k){ openAddModal('cash', k==='partner'?'partner':'my'); }
+function cfAddIncome(){ openAddModal('income'); }
+function cfEditIncome(id){ openAddModal('income', id); }
+function cfAddExpense(){ openAddModal('expense'); }
+function cfEditExpense(id){ openAddModal('expense', id); }
 
 /* ── RENDER: INVESTMENTS PAGE HEADER ── */
 function renderSTHeader(c){
@@ -3203,12 +3170,14 @@ function obNext(){}
 
 /* ── INVESTMENTS PAGE: ADD ITEM ── */
 // Maps an add-modal type to its underlying ND array key (some differ, e.g. investment→investments)
-var ND_TYPE_ARRAY = {pension:'pension',hishtalmut:'hishtalmut',gamel:'gamel',investment:'investments',realEstate:'realEstate',loan:'loans'};
+var ND_TYPE_ARRAY = {pension:'pension',hishtalmut:'hishtalmut',gamel:'gamel',investment:'investments',realEstate:'realEstate',loan:'loans',income:'incomes',expense:'expensesList',event:'milestones'};
 function openAddModal(type, id){
   var titles = {
     pension:'הוסף קרן פנסיה', hishtalmut:'הוסף קרן השתלמות',
     gamel:'הוסף גמל להשקעה', investment:'הוסף השקעה',
-    realEstate:'הוסף נכס נדל"ן', loan:'הוסף הלוואה'
+    realEstate:'הוסף נכס נדל"ן', loan:'הוסף הלוואה',
+    income:'הוסף מקור הכנסה', expense:'הוסף הוצאה',
+    cash:'ערוך חשבון עו"ש', event:'הוסף אירוע חיים'
   };
   var fields = {
     pension:    [{k:'name',l:'שם קרן',p:'הראל פנסיה'},{k:'balance',l:'יתרה (₪)',p:'0',t:'number'},{k:'monthlyDeposit',l:'הפקדה חודשית (₪)',p:'0',t:'number'},{k:'returnRate',l:'תשואה שנתית %',p:'7',t:'number'},{k:'fee',l:'דמי ניהול %',p:'0.5',t:'number'}],
@@ -3216,19 +3185,28 @@ function openAddModal(type, id){
     gamel:      [{k:'name',l:'שם הגמל',p:'אנליסט גמל'},{k:'balance',l:'יתרה (₪)',p:'0',t:'number'},{k:'monthlyDeposit',l:'הפקדה חודשית (₪)',p:'0',t:'number'}],
     investment: [{k:'name',l:'שם ההשקעה',p:'S&P 500 IVV'},{k:'ticker',l:'טיקר',p:'IVV'},{k:'value',l:'שווי כיום (₪)',p:'0',t:'number'},{k:'costBasis',l:'עלות (₪)',p:'0',t:'number'},{k:'monthlyDeposit',l:'הפקדה חודשית (₪)',p:'0',t:'number'}],
     realEstate: [{k:'name',l:'תיאור הנכס',p:'דירה ראשית — ת"א'},{k:'marketValue',l:'שווי שוק (₪)',p:'0',t:'number'},{k:'mortgageBalance',l:'יתרת משכנתא (₪)',p:'0',t:'number'},{k:'monthlyPayment',l:'תשלום חודשי (₪)',p:'0',t:'number'}],
-    loan:       [{k:'name',l:'שם ההלוואה',p:'הלוואת רכב'},{k:'balance',l:'יתרה (₪)',p:'0',t:'number'},{k:'rate',l:'ריבית שנתית %',p:'5',t:'number'},{k:'monthlyPayment',l:'תשלום חודשי (₪)',p:'0',t:'number'}]
+    loan:       [{k:'name',l:'שם ההלוואה',p:'הלוואת רכב'},{k:'balance',l:'יתרה (₪)',p:'0',t:'number'},{k:'rate',l:'ריבית שנתית %',p:'5',t:'number'},{k:'monthlyPayment',l:'תשלום חודשי (₪)',p:'0',t:'number'}],
+    income:     [{k:'name',l:'שם מקור ההכנסה',p:'משכורת'},{k:'amount',l:'סכום חודשי נטו (₪)',p:'0',t:'number'}],
+    expense:    [{k:'name',l:'שם ההוצאה',p:'דיור'},{k:'amount',l:'סכום חודשי (₪)',p:'0',t:'number'}],
+    cash:       [{k:'name',l:'שם בעל החשבון',p:'אורי'},{k:'balance',l:'יתרה (₪, אפשר שלילי)',p:'0',t:'number'}],
+    event:      [{k:'text',l:'שם האירוע',p:'חתונה'},{k:'year',l:'שנה',p:'2028',t:'number'},{k:'cost',l:'עלות משוערת (₪)',p:'0',t:'number'}]
   };
   var flds = fields[type];
   if(!flds) return;
   // Edit mode: locate existing item to prefill inputs and update-in-place on save
   var editItem = id ? ((ND[ND_TYPE_ARRAY[type]]||[]).filter(function(x){return x.id===id;})[0]) : null;
-  var modalTitle = id ? titles[type].replace('הוסף','ערוך') : titles[type];
+  if(type==='cash' && id){ // cash accounts are keyed 'my'/'partner', not by id
+    var capK = id==='my'?'My':'Partner';
+    editItem = { name: (ND.cashAccounts&&ND.cashAccounts['name'+capK]) || (id==='my'?(((ND.profile&&ND.profile.name)||'').trim()||'שלי'):'בן/בת זוג'),
+                 balance: (ND.cashAccounts&&Number(ND.cashAccounts[id]))||0 };
+  }
+  var modalTitle = (id && type!=='cash') ? titles[type].replace('הוסף','ערוך') : titles[type];
   var html = '<div class="sh-h"><div class="sh-b"></div></div><div class="sh-t">'+modalTitle+'</div>';
   flds.forEach(function(f){
-    html += '<div><div class="il">'+f.l+'</div><input class="inp" id="nm_'+f.k+'" placeholder="'+f.p+'"'+(f.t?' type="'+f.t+'"':'')+'></div>';
+    html += '<div class="fld"><div class="il">'+f.l+'</div><input class="inp" id="nm_'+f.k+'" placeholder="'+f.p+'"'+(f.t?' type="'+f.t+'"':'')+'></div>';
   });
-  html += '<button class="btn-g" style="margin-top:12px" onclick="saveAddModal(\''+type+'\''+(id?(',\''+id+'\''):'')+')">שמור ✓</button>';
-  if(id){ html += '<button class="btn-g" style="margin-top:8px;background:rgba(163,45,45,.08);color:#A32D2D;box-shadow:none" onclick="deleteND(\''+ND_TYPE_ARRAY[type]+'\',\''+id+'\')">מחק פריט</button>'; }
+  html += '<button class="btn-g" onclick="saveAddModal(\''+type+'\''+(id?(',\''+id+'\''):'')+')">שמור ✓</button>';
+  if(id && type!=='cash'){ html += '<button class="btn-del" onclick="deleteND(\''+ND_TYPE_ARRAY[type]+'\',\''+id+'\')">מחק פריט</button>'; }
   var cont = document.getElementById('add-modal-body');
   if(!cont){ // create modal if not exists
     var bg = document.createElement('div'); bg.className='sbg'; bg.id='bg-add'; bg.onclick=function(){closeS('add');}; document.body.appendChild(bg);
@@ -3261,11 +3239,27 @@ function saveAddModal(type, id){
   } else if(type==='loan'){
     item.name=get('name');item.balance=num('balance');item.rate=num('rate');item.monthlyPayment=num('monthlyPayment');
     ND.loans.push(item);
+  } else if(type==='income'){
+    item.name=get('name')||'הכנסה'; item.amount=Math.round(num('amount'));
+    if(!Array.isArray(ND.incomes))ND.incomes=[]; ND.incomes.push(item);
+  } else if(type==='expense'){
+    item.name=get('name')||'הוצאה'; item.amount=Math.round(num('amount')); item.cat=(typeof _cfInferCat==='function'?_cfInferCat(item.name):'other');
+    if(!Array.isArray(ND.expensesList))ND.expensesList=[]; ND.expensesList.push(item);
+  } else if(type==='event'){
+    item.text=get('text')||'אירוע'; item.year=parseInt(num('year'))||0; item.cost=Math.round(num('cost'));
+    if(!Array.isArray(ND.milestones))ND.milestones=[]; ND.milestones.push(item);
+  } else if(type==='cash'){
+    if(!ND.cashAccounts)ND.cashAccounts={my:0,partner:0};
+    var _ck=id||'my', _cap=_ck==='my'?'My':'Partner';
+    ND.cashAccounts[_ck]=num('balance');
+    var _nm=(get('name')||'').trim(); if(_nm) ND.cashAccounts['name'+_cap]=_nm;
+    saveToStorage(); closeS('add'); render(); showToast('עודכן'); return;
   }
   if(id){ // edit mode: the branch appended the edited item — move it back into the original slot (same id)
     var _arr=ND[ND_TYPE_ARRAY[type]];
     if(_arr){ var _ni=_arr.pop(); var _ix=_arr.findIndex(function(x){return x.id===id;}); if(_ix>=0)_arr[_ix]=_ni; else _arr.push(_ni); }
   }
+  try{ if((type==='income'||type==='expense') && typeof cfSync==='function') cfSync(); }catch(e){}
   saveToStorage();
   closeS('add');
   render();
@@ -3280,6 +3274,7 @@ function deleteND(type, id){
   if(!confirm('למחוק?')) return;
   try{closeS('add');}catch(e){}
   ND[type] = ND[type].filter(function(x){return x.id!==id;});
+  try{ if((type==='incomes'||type==='expensesList') && typeof cfSync==='function') cfSync(); }catch(e){}
   saveToStorage(); render(); renderSTFull();
   try{renderAssetsHub();}catch(e){}
   showToast('נמחק');
@@ -3594,6 +3589,8 @@ function renderWealth(){
   var c=calc();
   _cfSet('as-nw', fmt(c.netWorth));
   _cfSet('as-nw-sub', 'נכסים '+fmt(c.totalAssets)+' − התחייבויות '+fmt(c.totalLiabilities));
+  var _liquid=(c.invT||0)+Math.max(ND.cash||0,0)+(c.hshT||0);
+  _cfSet('as-nw-liquid', _liquid>0?'מתוכו נזיל: '+fmt(_liquid):'מתוכו נזיל: ₪0');
   _cfSet('as-chip-pen', fmt(c.penT+c.hshT+c.gmT));
   _cfSet('as-chip-inv', fmt(c.invT+c.reV));
   _cfSet('as-chip-debt', fmt(c.totalLiabilities));
