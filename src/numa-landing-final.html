@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Numa — מסך כניסה · v3</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"SF Pro Display",sans-serif;background:#0F1830;color:#f4efe6;
+    direction:rtl;line-height:1.5;min-height:100vh;display:flex;align-items:center;justify-content:center;
+    padding:34px 20px;position:relative;overflow:hidden}
+
+  /* רקע: aurora שקטה */
+  body::before{content:'';position:absolute;inset:0;
+    background:radial-gradient(900px 600px at 85% 0%,rgba(200,169,106,.10) 0%,transparent 55%),
+               radial-gradient(800px 600px at 0% 100%,rgba(61,82,120,.35) 0%,transparent 60%)}
+  .ring{position:absolute;border:1px solid rgba(200,169,106,.07);border-radius:50%;pointer-events:none}
+  .r1{width:560px;height:560px;top:-190px;left:-160px}
+  .r2{width:840px;height:840px;top:-320px;left:-290px}
+
+  .card{position:relative;z-index:2;width:100%;max-width:380px;text-align:center}
+
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .a1{animation:rise .6s .05s ease both}
+  .a2{animation:rise .6s .18s ease both}
+  .a3{animation:rise .6s .32s ease both}
+  .a4{animation:rise .6s .46s ease both}
+
+  /* לוגו — wordmark בלבד */
+  .brand b{display:block;font-size:34px;font-weight:800;letter-spacing:-1px}
+  .brand b i{color:#c8a96a;font-style:normal}
+  .sub{font-size:13.5px;color:#8e99b0;margin-top:6px}
+
+  /* ═══ הטלפון ═══ */
+  .phone-wrap{perspective:900px;margin:30px auto 26px}
+  .phone{width:236px;margin:0 auto;background:#151F35;border:1px solid rgba(255,255,255,.10);
+    border-radius:34px;padding:14px 12px 18px;box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 0 6px rgba(255,255,255,.03);
+    transform:rotateX(4deg) rotate(-1.6deg);animation:float 5.5s ease-in-out infinite;text-align:right}
+  @keyframes float{0%,100%{transform:rotateX(4deg) rotate(-1.6deg) translateY(0)}50%{transform:rotateX(4deg) rotate(-1.6deg) translateY(-9px)}}
+  .notch{width:64px;height:5px;border-radius:3px;background:rgba(255,255,255,.14);margin:0 auto 12px}
+
+  .p-greet{display:flex;justify-content:space-between;align-items:center;padding:0 2px 9px}
+  .p-greet small{font-size:8.5px;color:#7c88a0}
+  .p-greet .dot{width:16px;height:16px;border-radius:50%;background:#3D5278;display:flex;align-items:center;
+    justify-content:center;font-size:8px;font-weight:700;color:#fff}
+
+  .p-hero{background:linear-gradient(150deg,#1E2D4A,#243455);border-radius:16px;padding:13px 14px;
+    border:.5px solid rgba(255,255,255,.06)}
+  .ph-l{font-size:8.5px;font-weight:600;color:#c8a96a}
+  .ph-n{font-size:23px;font-weight:800;letter-spacing:-.8px;color:#fff;margin-top:1px}
+  .ph-d{display:inline-block;background:rgba(127,196,147,.15);color:#7fc493;border-radius:999px;
+    padding:1.5px 8px;font-size:8.5px;font-weight:800;margin-top:5px}
+  .ph-bar{height:3.5px;border-radius:2px;background:rgba(255,255,255,.09);margin-top:10px;overflow:hidden}
+  .ph-bar i{display:block;height:100%;width:34%;background:linear-gradient(90deg,#A07840,#c8a96a);border-radius:2px;
+    animation:fill 1.4s .7s cubic-bezier(.2,.8,.3,1) both}
+  @keyframes fill{from{width:0}to{width:34%}}
+
+  .p-row{display:flex;gap:7px;margin-top:8px}
+  .p-mini{flex:1;background:rgba(255,255,255,.05);border:.5px solid rgba(255,255,255,.06);border-radius:12px;padding:9px 10px}
+  .pm-l{font-size:7.5px;color:#8e99b0}
+  .pm-n{font-size:12.5px;font-weight:800;margin-top:1px}
+  .pm-n.gr{color:#7fc493}
+  .pm-n.gd{color:#c8a96a}
+
+  .p-journey{margin-top:8px;background:rgba(255,255,255,.05);border:.5px solid rgba(255,255,255,.06);
+    border-radius:12px;padding:9px 10px;display:flex;align-items:center;justify-content:space-between}
+  .pj-t{font-size:7.5px;color:#8e99b0}
+  .pj-v{font-size:11px;font-weight:800;color:#fff}
+  .pj-v i{color:#c8a96a;font-style:normal}
+  .p-ai{width:22px;height:22px;border-radius:50%;background:#1E2D4A;border:.5px solid rgba(200,169,106,.4);
+    display:flex;align-items:center;justify-content:center}
+
+  /* CTA */
+  .gbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#0F1830;
+    border:none;border-radius:15px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;
+    box-shadow:0 8px 26px rgba(0,0,0,.35);transition:transform .12s}
+  .gbtn:active{transform:scale(.98)}
+  .alt{margin-top:13px;font-size:12.5px;color:rgba(255,255,255,.42);cursor:pointer}
+  .priv{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:22px;font-size:10.5px;color:rgba(255,255,255,.3)}
+</style>
+</head>
+<body>
+<div class="ring r1"></div><div class="ring r2"></div>
+<div class="card">
+
+  <div class="brand a1">
+    <b>Nu<i>ma</i></b>
+  </div>
+
+  <div class="sub a2">שווי נטו, תזרים והמסע לחופש כלכלי — עם יועץ AI שמכיר את המספרים שלך.</div>
+
+  <!-- הטלפון: האפליקציה מוכרת את עצמה -->
+  <div class="phone-wrap a3" style="margin-top:24px">
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="p-greet">
+        <small>בוקר טוב, אורי</small>
+        <div class="dot">א</div>
+      </div>
+      <div class="p-hero">
+        <div class="ph-l">שווי נטו</div>
+        <div class="ph-n">₪761,000</div>
+        <div class="ph-d">↑ +₪12,400 החודש</div>
+        <div class="ph-bar"><i></i></div>
+      </div>
+      <div class="p-row">
+        <div class="p-mini"><div class="pm-l">תזרים החודש</div><div class="pm-n gr">+₪12k</div></div>
+        <div class="p-mini"><div class="pm-l">Numa Score</div><div class="pm-n gd">57</div></div>
+      </div>
+      <div class="p-journey">
+        <div>
+          <div class="pj-t">חופש כלכלי</div>
+          <div class="pj-v">גיל <i>54</i> · 10% מהדרך</div>
+        </div>
+        <div class="p-ai"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z" fill="#c8a96a"/></svg></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="a4">
+    <button class="gbtn">
+      <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      המשך עם Google
+    </button>
+    <div class="alt">כניסה עם אימייל וסיסמה</div>
+    <div class="priv">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      הנתונים שלך פרטיים ושמורים בחשבון שלך בלבד
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
