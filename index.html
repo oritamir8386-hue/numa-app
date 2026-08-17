@@ -766,8 +766,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     </script>
   </div>
   <!-- RIGHT: Agent button -->
-  <div onclick="toggleAgent()" style="width:42px;height:42px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;box-shadow:0 3px 12px rgba(30,45,74,.3)">
-    <span style="color:#c8a96a;font-size:20px;font-weight:700;line-height:1">✦</span>
+  <div onclick="toggleAgent()" class="ai-pill" aria-label="Numa AI">
+    <span class="ai-pill-star">✦</span><span class="ai-pill-txt">AI</span><span class="ai-pill-dot"></span>
   </div>
 </div>
 <!-- TOAST -->
@@ -1246,7 +1246,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 22px 14px">
     <div style="display:flex;align-items:center;gap:11px">
       <div style="width:40px;height:40px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center"><span style="color:#c8a96a;font-size:19px;font-weight:700;line-height:1">✦</span></div>
-      <div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:15px;font-weight:800;color:#1E2D4A">Numa AI</span><span style="width:7px;height:7px;background:#27ae60;border-radius:50%;display:inline-block"></span></div><div style="font-size:10px;color:#6B7A96">היועץ הפיננסי שלך</div></div>
+      <div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:15px;font-weight:800;color:#1E2D4A">Numa AI</span><span class="ai-live-dot"></span></div><div style="font-size:10px;color:#6B7A96">היועץ הפיננסי שלך · מכיר את כל הנתונים</div></div>
     </div>
     <button onclick="toggleAgent()" style="width:30px;height:30px;border-radius:50%;background:#ede9e0;border:none;font-size:14px;color:#6B7A96;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
   </div>
@@ -1260,18 +1260,28 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
   <!-- Input -->
   <div style="display:flex;align-items:center;gap:8px;padding:8px 20px max(env(safe-area-inset-bottom),12px)">
-    <input id="ai-inp" type="text" placeholder="שאל שאלה..." style="flex:1;background:#ede9e0;border:none;border-radius:22px;padding:10px 16px;font-size:13px;font-family:inherit;color:#1E2D4A;direction:rtl" onkeydown="if(event.key==='Enter')agentSend()"/>
-    <button onclick="agentSend()" style="width:40px;height:40px;background:#1E2D4A;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8a96a" stroke-width="2" stroke-linecap="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+    <input id="ai-inp" type="text" placeholder="שאל כל שאלה על הכסף שלך..." style="flex:1;background:#ede9e0;border:none;border-radius:22px;padding:11px 16px;font-size:13px;font-family:inherit;color:#1E2D4A;direction:rtl" onkeydown="if(event.key==='Enter')agentSend()"/>
+    <button onclick="agentSend()" style="width:40px;height:40px;background:#A07840;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(160,120,64,.3)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
     </button>
   </div>
 </div>
 <style>
 .agent-sheet.on{transform:translateY(0)!important}
 .agent-qchip{background:#ede9e0;color:#1E2D4A;border:none;border-radius:20px;padding:6px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit}
-.agent-msg-ai{background:#1E2D4A;color:#fff;border-radius:18px 18px 18px 6px;padding:11px 15px;font-size:13px;line-height:1.6;max-width:88%;align-self:flex-start;box-shadow:0 2px 10px rgba(30,45,74,.15)}
-.agent-msg-ai strong{color:#c8a96a}
-.agent-msg-user{background:#A07840;color:#fff;border-radius:18px 18px 6px 18px;padding:11px 15px;font-size:13px;line-height:1.6;max-width:88%;align-self:flex-end}
+.agent-msg-ai{background:#ede9e0;color:#1E2D4A;border-radius:18px 18px 6px 18px;padding:11px 15px;font-size:13px;line-height:1.6;max-width:88%;align-self:flex-start;box-shadow:0 1px 4px rgba(30,45,74,.06)}
+.agent-msg-ai strong{color:#A07840;font-weight:700}
+.agent-msg-ai ol,.agent-msg-ai ul{direction:rtl;text-align:right}
+.agent-msg-user{background:#1E2D4A;color:#fff;border-radius:18px 18px 18px 6px;padding:11px 15px;font-size:13px;line-height:1.6;max-width:88%;align-self:flex-end}
+/* topbar AI pill */
+.ai-pill{display:flex;align-items:center;gap:5px;background:#1E2D4A;border-radius:999px;padding:7px 12px;cursor:pointer;flex-shrink:0;box-shadow:0 3px 12px rgba(30,45,74,.28)}
+.ai-pill-star{color:#A07840;font-size:15px;line-height:1}
+.ai-pill-txt{color:#c8a96a;font-size:12px;font-weight:800;letter-spacing:.06em;direction:ltr}
+.ai-pill-dot{width:6px;height:6px;border-radius:50%;background:#27ae60;animation:aiPulse 2s ease-in-out infinite}
+@keyframes aiPulse{0%{box-shadow:0 0 0 0 rgba(39,174,96,.55)}70%{box-shadow:0 0 0 5px rgba(39,174,96,0)}100%{box-shadow:0 0 0 0 rgba(39,174,96,0)}}
+/* header live status dot */
+.ai-live-dot{width:7px;height:7px;background:#27ae60;border-radius:50%;display:inline-block;animation:aiBlink 1.4s ease-in-out infinite}
+@keyframes aiBlink{0%,100%{opacity:1}50%{opacity:.25}}
 .agent-typing{display:flex;gap:4px;padding:10px 14px;align-self:flex-start}
 .agent-typing span{width:6px;height:6px;background:rgba(30,45,74,.3);border-radius:50%;animation:agentDot .6s infinite alternate}
 .agent-typing span:nth-child(2){animation-delay:.2s}
@@ -3744,16 +3754,20 @@ function mdToHtml(md){
     .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
     .replace(/\*(.+?)\*/g,'<em>$1</em>')
     .replace(/`(.+?)`/g,'<code style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 4px">$1</code>');};
-  var out='',inList=false;
+  var out='', list=null; // 'ul' | 'ol' | null
+  function closeList(){ if(list){ out+='</'+list+'>'; list=null; } }
   String(md).split('\n').forEach(function(ln){
-    var li=ln.match(/^\s*[-*•]\s+(.*)$/), h=ln.match(/^\s*(#{1,4})\s+(.*)$/);
-    if(li){ if(!inList){out+='<ul style="margin:5px 0;padding-inline-start:18px">';inList=true;} out+='<li style="margin:2px 0">'+inline(li[1])+'</li>'; return; }
-    if(inList){out+='</ul>';inList=false;}
+    var ol=ln.match(/^\s*\d+[.)]\s+(.*)$/);
+    var ul=ln.match(/^\s*[-*•]\s+(.*)$/);
+    var h=ln.match(/^\s*(#{1,4})\s+(.*)$/);
+    if(ol){ if(list!=='ol'){ closeList(); out+='<ol style="margin:5px 0;padding-inline-start:20px;direction:rtl;text-align:right">'; list='ol'; } out+='<li style="margin:2px 0">'+inline(ol[1])+'</li>'; return; }
+    if(ul){ if(list!=='ul'){ closeList(); out+='<ul style="margin:5px 0;padding-inline-start:18px;direction:rtl;text-align:right">'; list='ul'; } out+='<li style="margin:2px 0">'+inline(ul[1])+'</li>'; return; }
+    closeList();
     if(h){ out+='<div style="font-weight:800;margin:5px 0 2px">'+inline(h[2])+'</div>'; return; }
     if(ln.trim()===''){ out+='<div style="height:5px"></div>'; return; }
     out+='<div>'+inline(ln)+'</div>';
   });
-  if(inList) out+='</ul>';
+  closeList();
   return out;
 }
 function agentSend(txt){
