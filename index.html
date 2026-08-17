@@ -11,7 +11,12 @@ window.PREVIEW_MODE = false; // Auth enabled — requires sign-in
 <meta http-equiv="Expires" content="0">
 <link rel="manifest" href="manifest.json">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title data-i18n="app_title">Numa — גלה כמה כסף אתה לא מנצל</title>
+<title data-i18n="app_title">Numa — Your money, in control</title>
+<meta name="description" content="Net worth, cash flow, and your journey to financial freedom — one clear picture.">
+<meta property="og:title" content="Numa — Your money, in control">
+<meta property="og:description" content="Net worth, cash flow, and your journey to financial freedom — one clear picture.">
+<meta property="og:image" content="https://numa-app.oritamir8386.workers.dev/icons/icon-512.png">
+<meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231E2D4A'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='-apple-system,sans-serif' font-size='32' font-weight='800' fill='%23C9A96E'%3EN%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="theme-color" content="#1E2D4A">
@@ -741,7 +746,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div style="position:relative" id="avatar-wrap">
       <div id="user-avatar-btn" onclick="toggleAvatarMenu()" style="width:36px;height:36px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#c8a96a;cursor:pointer;letter-spacing:-.5px">N</div>
       <div style="position:absolute;bottom:-1px;right:-1px;width:9px;height:9px;background:#27ae60;border-radius:50%;border:2px solid #fff"></div>
-      <div id="avatar-menu" style="display:none;position:absolute;top:42px;right:0;background:#fff;border-radius:16px;width:190px;box-shadow:0 8px 30px rgba(0,0,0,.15);z-index:100;overflow:hidden">
+      <div id="avatar-menu" style="display:none;position:absolute;top:42px;inset-inline-start:0;background:#fff;border-radius:16px;width:190px;box-shadow:0 8px 30px rgba(0,0,0,.15);z-index:100;overflow:hidden">
         <div onclick="openSettings();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid rgba(0,0,0,.06)"><span data-i18n="settings">הגדרות</span> </div>
         <div onclick="authSignOut();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#e74c3c;cursor:pointer;display:flex;align-items:center;gap:8px"><span data-i18n="set_signout">התנתקות</span> →</div>
       </div>
@@ -1602,7 +1607,7 @@ var T={
     ob_s1_title:'Hi, what\'s your name?',ob_s1_sub:'We\'ll tailor Numa just for you',ob_ph_firstname:'First name',ob_ph_age:'Age',ob_employment:'Employment',ob_emp_employee:'Employee',ob_emp_self:'Self-employed',ob_emp_retired:'Retired',ob_family:'Marital status',ob_fam_single:'Single',ob_fam_couple:'Couple',ob_fam_family:'Couple + kids',
     ob_s2_title:'What\'s relevant to you?',ob_s2_sub:'We\'ll show only what fits you',ob_r_pension:'Pension & study funds',ob_r_invest:'Market investments',ob_r_re:'Real estate & mortgage',ob_r_loans:'Loans & debts',ob_r_fire:'FIRE — financial independence',
     ob_s3_title:'Display preferences',ob_s3_sub:'You can always change this in Settings',ob_language:'Language',ob_currency:'Currency',ob_curr_ils:'₪ Shekel',ob_curr_usd:'$ Dollar',ob_ready:'Numa is ready for you',ob_ready_sub:'Everything is saved and synced automatically.<br>Add data at your own pace.',
-    au_welcome:'Welcome — sign in or sign up',au_ph_email:'Email',au_ph_pass:'Password',au_ph_pass2:'Confirm password',au_ph_name:'Enter your name',au_ph_pass_min:'At least 6 characters',au_google:'Continue with Google',toast_updated:'Updated',toast_deleted:'Deleted',toast_saved:'Saved',emp_notworking:'Not working',emp_employee:'Employee',emp_self:'Self-employed',emp_retired:'Retired',app_title:'Numa — Your money in control',ai_placeholder:'Ask anything about your money...',chipq_freedom:'When will I reach financial freedom?',chipq_loan:'Which loan should I pay off first?',chipq_month:'How does my month look?',agent_sub:'Your financial advisor · knows all your data',modal_delete_item:'Delete item',
+    au_welcome:'Welcome — sign in or sign up',au_ph_email:'Email',au_ph_pass:'Password',au_ph_pass2:'Confirm password',au_ph_name:'Enter your name',au_ph_pass_min:'At least 6 characters',au_google:'Continue with Google',toast_updated:'Updated',toast_deleted:'Deleted',toast_saved:'Saved',emp_notworking:'Not working',emp_employee:'Employee',emp_self:'Self-employed',emp_retired:'Retired',app_title:'Numa — Your money, in control',ai_placeholder:'Ask anything about your money...',chipq_freedom:'When will I reach financial freedom?',chipq_loan:'Which loan should I pay off first?',chipq_month:'How does my month look?',agent_sub:'Your financial advisor · knows all your data',modal_delete_item:'Delete item',
     au2_tagline:"In 5 minutes — see how much money you're leaving on the table",au2_or:'or',au2_email_toggle:'Sign in with email & password',au2_signin:'Sign in',au2_signup:'Sign up',au2_fullname:'Full name',au2_email:'Email',au2_password:'Password',au2_forgot:'Forgot password',
     au2_disc1a:'Numa is an informational tool only and is not licensed financial advice.',au2_disc1b:'For any financial decision, consult a licensed professional.',au2_trust:'Your data stays with you only · not sold · not shared',au2_disc2a:'Numa — a financial planning tool only',au2_disc2b:'Not licensed financial, investment, or tax advice',
     vf_title:'Check your email',vf_sub_a:'We sent you a confirmation link.',vf_sub_b:'Click it, then come back here.',vf_back:'Back to sign in',
@@ -4767,7 +4772,7 @@ function obEnterApp(){
   if ('serviceWorker' in navigator && !location.hostname.includes('claudeusercontent')) {
     window.addEventListener('load', () => {
       // גרסת ה-SW/cache — העלה את המספר בכל דפלוי כדי לאלץ עדכון cache (numa-v<N>)
-      navigator.serviceWorker.register('./sw.js?v=v7')
+      navigator.serviceWorker.register('./sw.js?v=v8')
         .then(reg => {
           swReg = reg;
           console.log('[Numa] Service Worker registered ');
