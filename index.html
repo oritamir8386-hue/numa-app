@@ -11,7 +11,7 @@ window.PREVIEW_MODE = false; // Auth enabled — requires sign-in
 <meta http-equiv="Expires" content="0">
 <link rel="manifest" href="manifest.json">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Numa — גלה כמה כסף אתה לא מנצל</title>
+<title data-i18n="app_title">Numa — גלה כמה כסף אתה לא מנצל</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231E2D4A'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='-apple-system,sans-serif' font-size='32' font-weight='800' fill='%23C9A96E'%3EN%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="theme-color" content="#1E2D4A">
@@ -740,7 +740,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
       <div id="user-avatar-btn" onclick="toggleAvatarMenu()" style="width:36px;height:36px;background:#1E2D4A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#c8a96a;cursor:pointer;letter-spacing:-.5px">N</div>
       <div style="position:absolute;bottom:-1px;right:-1px;width:9px;height:9px;background:#27ae60;border-radius:50%;border:2px solid #fff"></div>
       <div id="avatar-menu" style="display:none;position:absolute;top:42px;right:0;background:#fff;border-radius:16px;width:190px;box-shadow:0 8px 30px rgba(0,0,0,.15);z-index:100;overflow:hidden">
-        <div onclick="openSettings();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid rgba(0,0,0,.06)">הגדרות </div>
+        <div onclick="openSettings();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#1E2D4A;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:.5px solid rgba(0,0,0,.06)"><span data-i18n="settings">הגדרות</span> </div>
         <div onclick="authSignOut();toggleAvatarMenu()" style="padding:12px 16px;font-size:13px;color:#e74c3c;cursor:pointer;display:flex;align-items:center;gap:8px">התנתקות →</div>
       </div>
     </div>
@@ -1213,12 +1213,12 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 <!-- Employment picker sheet (outside .dev) -->
 <div id="set-emp-picker" style="display:none;position:fixed;inset:0;z-index:950;background:rgba(0,0,0,.4)" onclick="if(event.target===this)this.style.display='none'">
   <div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;padding:20px;padding-bottom:max(env(safe-area-inset-bottom),20px)">
-    <div style="font-size:17px;font-weight:700;color:#1E2D4A;margin-bottom:14px;text-align:center">סטטוס תעסוקה</div>
+    <div style="font-size:17px;font-weight:700;color:#1E2D4A;margin-bottom:14px;text-align:center" data-i18n="set_employment">סטטוס תעסוקה</div>
     <div style="display:flex;flex-direction:column;gap:6px">
-      <button class="emp-opt" onclick="pickEmployment('שכיר')">שכיר</button>
-      <button class="emp-opt" onclick="pickEmployment('עצמאי')">עצמאי</button>
-      <button class="emp-opt" onclick="pickEmployment('גמלאי')">גמלאי</button>
-      <button class="emp-opt" onclick="pickEmployment('לא עובד')">לא עובד</button>
+      <button class="emp-opt" onclick="pickEmployment('שכיר')" data-i18n="emp_employee">שכיר</button>
+      <button class="emp-opt" onclick="pickEmployment('עצמאי')" data-i18n="emp_self">עצמאי</button>
+      <button class="emp-opt" onclick="pickEmployment('גמלאי')" data-i18n="emp_retired">גמלאי</button>
+      <button class="emp-opt" onclick="pickEmployment('לא עובד')" data-i18n="emp_notworking">לא עובד</button>
     </div>
   </div>
 </div>
@@ -1228,7 +1228,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;padding:20px;padding-bottom:max(env(safe-area-inset-bottom),20px)">
     <div id="calc-editor-title" style="font-size:17px;font-weight:700;color:#1E2D4A;margin-bottom:14px;text-align:center"></div>
     <input id="calc-editor-inp" class="inp" type="number" style="font-size:18px;text-align:center;padding:12px;background:#ede9e0;border-radius:12px;width:100%;border:none;font-family:inherit;margin-bottom:12px"/>
-    <button onclick="saveCalcVal()" style="width:100%;background:#A07840;color:#fff;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">שמור</button>
+    <button onclick="saveCalcVal()" data-i18n="save" style="width:100%;background:#A07840;color:#fff;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">שמור</button>
   </div>
 </div>
 
@@ -1517,7 +1517,7 @@ var T={
     ob_s1_title:'היי, מה שמך?',ob_s1_sub:'נתאים את Numa בדיוק לך',ob_ph_firstname:'שם פרטי',ob_ph_age:'גיל',ob_employment:'תעסוקה',ob_emp_employee:'שכיר/ת',ob_emp_self:'עצמאי/ת',ob_emp_retired:'גמלאי/ת',ob_family:'מצב משפחתי',ob_fam_single:'יחיד/ה',ob_fam_couple:'זוג',ob_fam_family:'זוג + ילדים',
     ob_s2_title:'מה רלוונטי אליך?',ob_s2_sub:'נציג רק את מה שמתאים לך',ob_r_pension:'פנסיה וקה"ש',ob_r_invest:'השקעות בשוק ההון',ob_r_re:'נדל"ן ומשכנתא',ob_r_loans:'הלוואות וחובות',ob_r_fire:'FIRE — עצמאות כלכלית',
     ob_s3_title:'העדפות תצוגה',ob_s3_sub:'תמיד אפשר לשנות בהגדרות',ob_language:'שפה',ob_currency:'מטבע',ob_curr_ils:'₪ שקל',ob_curr_usd:'$ דולר',ob_ready:'Numa מוכנה לך',ob_ready_sub:'הכל שמור ומסונכרן אוטומטית.<br>תוסיף נתונים בקצב שלך.',
-    au_welcome:'ברוך הבא — כניסה או הרשמה',au_ph_email:'אימייל',au_ph_pass:'סיסמה',au_ph_pass2:'אימות סיסמה',au_ph_name:'הכנס שמך',au_ph_pass_min:'לפחות 6 תווים',au_google:'המשך עם Google'
+    au_welcome:'ברוך הבא — כניסה או הרשמה',au_ph_email:'אימייל',au_ph_pass:'סיסמה',au_ph_pass2:'אימות סיסמה',au_ph_name:'הכנס שמך',au_ph_pass_min:'לפחות 6 תווים',au_google:'המשך עם Google',toast_updated:'עודכן',toast_deleted:'נמחק',toast_saved:'נשמר',emp_notworking:'לא עובד',emp_employee:'שכיר',emp_self:'עצמאי',emp_retired:'גמלאי',app_title:'Numa — הכלכלה שלך בשליטה',ai_placeholder:'שאל כל שאלה על הכסף שלך...'
 
   },
   en:{
@@ -1593,7 +1593,7 @@ var T={
     ob_s1_title:'Hi, what\'s your name?',ob_s1_sub:'We\'ll tailor Numa just for you',ob_ph_firstname:'First name',ob_ph_age:'Age',ob_employment:'Employment',ob_emp_employee:'Employee',ob_emp_self:'Self-employed',ob_emp_retired:'Retired',ob_family:'Marital status',ob_fam_single:'Single',ob_fam_couple:'Couple',ob_fam_family:'Couple + kids',
     ob_s2_title:'What\'s relevant to you?',ob_s2_sub:'We\'ll show only what fits you',ob_r_pension:'Pension & study funds',ob_r_invest:'Market investments',ob_r_re:'Real estate & mortgage',ob_r_loans:'Loans & debts',ob_r_fire:'FIRE — financial independence',
     ob_s3_title:'Display preferences',ob_s3_sub:'You can always change this in Settings',ob_language:'Language',ob_currency:'Currency',ob_curr_ils:'₪ Shekel',ob_curr_usd:'$ Dollar',ob_ready:'Numa is ready for you',ob_ready_sub:'Everything is saved and synced automatically.<br>Add data at your own pace.',
-    au_welcome:'Welcome — sign in or sign up',au_ph_email:'Email',au_ph_pass:'Password',au_ph_pass2:'Confirm password',au_ph_name:'Enter your name',au_ph_pass_min:'At least 6 characters',au_google:'Continue with Google'
+    au_welcome:'Welcome — sign in or sign up',au_ph_email:'Email',au_ph_pass:'Password',au_ph_pass2:'Confirm password',au_ph_name:'Enter your name',au_ph_pass_min:'At least 6 characters',au_google:'Continue with Google',toast_updated:'Updated',toast_deleted:'Deleted',toast_saved:'Saved',emp_notworking:'Not working',emp_employee:'Employee',emp_self:'Self-employed',emp_retired:'Retired',app_title:'Numa — Your money in control',ai_placeholder:'Ask anything about your money...'
 
   }
 };
@@ -3368,7 +3368,7 @@ function saveAddModal(type, id){
     var _ck=id||'my', _cap=_ck==='my'?'My':'Partner';
     ND.cashAccounts[_ck]=num('balance');
     var _nm=(get('name')||'').trim(); if(_nm) ND.cashAccounts['name'+_cap]=_nm;
-    saveToStorage(); closeS('add'); render(); showToast('עודכן'); return;
+    saveToStorage(); closeS('add'); render(); showToast(t('toast_updated')); return;
   }
   if(id){ // edit mode: the branch appended the edited item — move it back into the original slot (same id)
     var _arr=ND[ND_TYPE_ARRAY[type]];
@@ -3382,7 +3382,7 @@ function saveAddModal(type, id){
   try{renderAssetsHub();}catch(e){}
   try{drawInvChart();}catch(e){}
   try{updateInvMiniChart();}catch(e){}
-  if(id) showToast('עודכן'); else smartToast(type);
+  if(id) showToast(t('toast_updated')); else smartToast(type);
 }
 
 function deleteND(type, id){
@@ -3392,7 +3392,7 @@ function deleteND(type, id){
   try{ if((type==='incomes'||type==='expensesList') && typeof cfSync==='function') cfSync(); }catch(e){}
   saveToStorage(); render(); renderSTFull();
   try{renderAssetsHub();}catch(e){}
-  showToast('נמחק');
+  showToast(t('toast_deleted'));
 }
 
 function parseNum(v){ return parseFloat(String(v).replace(/[^\d.]/g,''))||0; }
@@ -3727,6 +3727,7 @@ function tickLoans(){
   return changed;
 }
 function _loanUpd(k){ var p=(k||'').split('-'); return p.length===2 ? (parseInt(p[1],10)+'/'+String(p[0]).slice(-2)) : ''; }
+function _empLabel(v){ var m={'שכיר':'emp_employee','עצמאי':'emp_self','גמלאי':'emp_retired','לא עובד':'emp_notworking'}; return m[v]?t(m[v]):(v||''); }
 function renderWealth(){
   if(!document.getElementById('pg-assets')) return;
   var c=calc();
@@ -5747,7 +5748,7 @@ function openSettings(){
   // Load settings state
   var s=getSettings();
   // Employment
-  var empVal=document.getElementById('set-emp-val');if(empVal)empVal.textContent=s.employment||'שכיר';
+  var empVal=document.getElementById('set-emp-val');if(empVal)empVal.textContent=_empLabel(s.employment||'שכיר');
   // Family chips
   document.querySelectorAll('#set-family-chips .set-chip').forEach(function(c){c.classList.toggle('on',c.dataset.val===s.family);});
   // Category toggles
