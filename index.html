@@ -671,7 +671,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .mk .row:active{background:var(--field)}
 .mk .r-name{font-size:14px;font-weight:600}
 .mk .r-meta{font-size:11px;color:var(--muted);margin-top:2px}
-.mk .r-left{text-align:left;flex-shrink:0}
+.mk .r-left{text-align:end;flex-shrink:0}
 .mk .r-val{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
 .mk .r-delta{font-size:11px;font-weight:700;margin-top:1px}
 .mk .up{color:var(--green)} .mk .down{color:var(--red)} .mk .warn{color:var(--amber)}
@@ -683,12 +683,12 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .mk .sec-total{font-size:13px;font-weight:700;color:var(--muted)}
 .mk .btn-add{background:none;border:none;color:var(--gold);font-size:12.5px;font-weight:700;font-family:inherit;padding:10px 4px 0;cursor:pointer}
 /* מסלול התחנות */
-.mk .path{position:relative;margin:22px 4px 4px;padding-right:14px}
-.mk .path-line{position:absolute;right:20px;top:8px;bottom:8px;width:3px;border-radius:2px;background:var(--field)}
+.mk .path{position:relative;margin:22px 4px 4px;padding-inline-start:14px}
+.mk .path-line{position:absolute;inset-inline-start:20px;top:8px;bottom:8px;width:3px;border-radius:2px;background:var(--field)}
 .mk .station{position:relative;display:flex;align-items:flex-start;gap:16px;padding:0 0 24px}
 .mk .station:last-child{padding-bottom:0}
 .mk .st-dot{position:relative;z-index:2;width:15px;height:15px;border-radius:50%;flex-shrink:0;margin-top:3px;background:var(--field);border:3px solid #d9d2c2}
-.mk .station.here .st-dot{width:19px;height:19px;background:var(--gold);border:4px solid #fff;box-shadow:0 0 0 2px var(--gold);margin-right:-2px;margin-top:1px}
+.mk .station.here .st-dot{width:19px;height:19px;background:var(--gold);border:4px solid #fff;box-shadow:0 0 0 2px var(--gold);margin-inline-start:-2px;margin-top:1px}
 .mk .station.done .st-dot{background:var(--gold);border-color:var(--gold-l)}
 .mk .station.goal .st-dot{background:var(--green);border-color:#bcd8c4}
 .mk .st-body{flex:1}
@@ -696,7 +696,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .mk .station.here .st-name{color:var(--gold)}
 .mk .station.goal .st-name{color:var(--green)}
 .mk .st-meta{font-size:11px;color:var(--muted);margin-top:1px}
-.mk .st-val{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;text-align:left;flex-shrink:0}
+.mk .st-val{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;text-align:end;flex-shrink:0}
 .mk .ev-pin{display:inline-block;background:var(--field);color:var(--gold);font-size:10px;font-weight:700;border-radius:999px;padding:2px 9px;margin-top:4px}
 /* מנופים */
 .mk .lever{display:flex;align-items:center;gap:12px;padding:13px 2px;border-bottom:1px solid var(--line);cursor:pointer}
@@ -706,7 +706,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .mk .lv-body{flex:1}
 .mk .lv-t{font-size:13.5px;font-weight:600}
 .mk .lv-s{font-size:11px;color:var(--muted);margin-top:1px}
-.mk .lv-gain{font-size:13px;font-weight:800;color:var(--green);text-align:left;flex-shrink:0;white-space:nowrap}
+.mk .lv-gain{font-size:13px;font-weight:800;color:var(--green);text-align:end;flex-shrink:0;white-space:nowrap}
 .mk .lv-hint{font-size:10.5px;color:var(--muted);text-align:center;margin-top:10px}
 /* מומנטום */
 .mk .mom-hero{display:flex;align-items:baseline;gap:8px;margin-top:4px}
@@ -717,7 +717,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .mk .note{text-align:center;font-size:10.5px;color:var(--muted);margin-top:10px}
 /* legends — per mockup .legend/.dot (fixes cramped inline text) */
 .mk .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
-.mk .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:4px;vertical-align:middle;flex-shrink:0}
+.mk .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-inline-end:4px;vertical-align:middle;flex-shrink:0}
 /* unified add/edit modal — product design language */
 #sht-add{border-radius:20px 20px 0 0}
 #sht-add .sh-t{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:14px;letter-spacing:-.3px}
@@ -727,6 +727,8 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 #sht-add .inp::placeholder{color:#b3ada1}
 #sht-add .btn-g{border-radius:12px;padding:12px;font-size:14px;box-shadow:none;margin-top:8px}
 #sht-add .btn-del{width:100%;background:none;border:none;color:#A32D2D;font-size:13px;font-weight:600;font-family:inherit;padding:11px;cursor:pointer;margin-top:2px}
+[dir=ltr] .inp{direction:ltr}
+[dir=ltr] #settings-modal,[dir=ltr] #sht-add,[dir=ltr] .sht{text-align:start}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
 </head>
@@ -1083,7 +1085,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 
 <!-- ══════════════════ Settings Overlay (outside .dev for z-index) ══════════════════ -->
 <div id="settings-overlay" style="display:none;position:fixed;inset:0;z-index:900">
-<div id="settings-modal" style="position:fixed;inset:0;background:#f0ece4;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;direction:rtl;font-family:-apple-system,sans-serif;z-index:901">
+<div id="settings-modal" style="position:fixed;inset:0;background:#f0ece4;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;font-family:-apple-system,sans-serif;z-index:901">
 
   <!-- Sticky header -->
   <div style="position:sticky;top:0;z-index:10;background:#f0ece4;padding:calc(env(safe-area-inset-top, 0px) + 12px) 18px 12px;display:flex;justify-content:space-between;align-items:center">
@@ -1258,7 +1260,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   </div>
   <!-- Input -->
   <div style="display:flex;align-items:center;gap:8px;padding:8px 20px max(env(safe-area-inset-bottom),12px)">
-    <input id="ai-inp" type="text" placeholder="שאל כל שאלה על הכסף שלך..." style="flex:1;background:#ede9e0;border:none;border-radius:22px;padding:11px 16px;font-size:13px;font-family:inherit;color:#1E2D4A;direction:rtl" onkeydown="if(event.key==='Enter')agentSend()"/>
+    <input id="ai-inp" type="text" placeholder="שאל כל שאלה על הכסף שלך..." style="flex:1;background:#ede9e0;border:none;border-radius:22px;padding:11px 16px;font-size:13px;font-family:inherit;color:#1E2D4A" onkeydown="if(event.key==='Enter')agentSend()" data-i18n-ph="ai_placeholder"/>
     <button onclick="agentSend()" style="width:40px;height:40px;background:#A07840;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(160,120,64,.3)">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
     </button>
@@ -1269,7 +1271,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .agent-qchip{background:#ede9e0;color:#1E2D4A;border:none;border-radius:20px;padding:6px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit}
 .agent-msg-ai{background:#ede9e0;color:#1E2D4A;border-radius:18px 18px 6px 18px;padding:11px 15px;font-size:13px;line-height:1.6;max-width:88%;align-self:flex-start;box-shadow:0 1px 4px rgba(30,45,74,.06)}
 .agent-msg-ai strong{color:#A07840;font-weight:700}
-.agent-msg-ai ol,.agent-msg-ai ul{direction:rtl;text-align:right}
+.agent-msg-ai ol,.agent-msg-ai ul{text-align:start}
 .agent-msg-user{background:#1E2D4A;color:#fff;border-radius:18px 18px 18px 6px;padding:11px 15px;font-size:13px;line-height:1.6;max-width:88%;align-self:flex-end}
 /* topbar AI pill */
 .ai-pill{display:flex;align-items:center;gap:5px;background:#1E2D4A;border-radius:999px;padding:7px 12px;cursor:pointer;flex-shrink:0;box-shadow:0 3px 12px rgba(30,45,74,.28)}
@@ -1281,6 +1283,9 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
 .ai-live-dot{width:7px;height:7px;background:#27ae60;border-radius:50%;display:inline-block;animation:aiBlink 1.4s ease-in-out infinite}
 @keyframes aiBlink{0%,100%{opacity:1}50%{opacity:.25}}
 .agent-typing{display:flex;gap:4px;padding:10px 14px;align-self:flex-start}
+/* LTR agent bubble corners (mirror of RTL) */
+[dir=ltr] .agent-msg-user{border-radius:18px 18px 6px 18px}
+[dir=ltr] .agent-msg-ai{border-radius:18px 18px 18px 6px}
 .agent-typing span{width:6px;height:6px;background:rgba(30,45,74,.3);border-radius:50%;animation:agentDot .6s infinite alternate}
 .agent-typing span:nth-child(2){animation-delay:.2s}
 .agent-typing span:nth-child(3){animation-delay:.4s}
@@ -3909,8 +3914,8 @@ function mdToHtml(md){
     var ol=ln.match(/^\s*\d+[.)]\s+(.*)$/);
     var ul=ln.match(/^\s*[-*•]\s+(.*)$/);
     var h=ln.match(/^\s*(#{1,4})\s+(.*)$/);
-    if(ol){ if(list!=='ol'){ closeList(); out+='<ol style="margin:5px 0;padding-inline-start:20px;direction:rtl;text-align:right">'; list='ol'; } out+='<li style="margin:2px 0">'+inline(ol[1])+'</li>'; return; }
-    if(ul){ if(list!=='ul'){ closeList(); out+='<ul style="margin:5px 0;padding-inline-start:18px;direction:rtl;text-align:right">'; list='ul'; } out+='<li style="margin:2px 0">'+inline(ul[1])+'</li>'; return; }
+    if(ol){ if(list!=='ol'){ closeList(); out+='<ol style="margin:5px 0;padding-inline-start:20px">'; list='ol'; } out+='<li style="margin:2px 0">'+inline(ol[1])+'</li>'; return; }
+    if(ul){ if(list!=='ul'){ closeList(); out+='<ul style="margin:5px 0;padding-inline-start:18px">'; list='ul'; } out+='<li style="margin:2px 0">'+inline(ul[1])+'</li>'; return; }
     closeList();
     if(h){ out+='<div style="font-weight:800;margin:5px 0 2px">'+inline(h[2])+'</div>'; return; }
     if(ln.trim()===''){ out+='<div style="height:5px"></div>'; return; }
@@ -4581,7 +4586,7 @@ function obEnterApp(){
 .la-btn2:active{opacity:.6}
 @keyframes laIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 #auth-overlay{position:fixed;inset:0;z-index:998;background:#f0ece4;overflow-y:auto;display:none}
-.au-wrap{padding:56px 28px 40px;direction:rtl}
+.au-wrap{padding:56px 28px 40px}
 .au-logo{font-size:32px;font-weight:800;color:#1E2D4A;text-align:center}.au-logo span{color:#A07840}
 .au-sub{font-size:14px;color:#8a8a8a;text-align:center;margin-top:4px;margin-bottom:24px}
 .au-tabs{display:flex;background:#ede9e0;border-radius:12px;padding:4px;margin-bottom:20px}
