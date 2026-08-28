@@ -1503,7 +1503,7 @@ var T={
     as_pension_savings:'פנסיה וקה"ש',as_invest_re:'השקעות ונדל"ן',as_debts:'חובות',as_alloc:'פילוח נכסים',
     as_add_pension:'+ פנסיה',as_add_studyfund:'+ קה"ש',as_add_gemel:'+ גמל',as_invest_tap:'השקעות · לחיצה על שורה לעריכה',as_add_invest:'+ הוסף השקעה',
     as_realestate:'נדל"ן',as_add_re:'+ הוסף נדל"ן',as_loans:'הלוואות',as_add_loan:'+ הוסף הלוואה',
-    as_assets_word:'נכסים',as_liab_word:'התחייבויות',as_available_checking:'זמין בעו"ש',as_checking_neg:'עו"ש',as_not_in_breakdown:'לא נכלל בפילוח',as_add_assets_hint:'הוסף נכסים כדי לראות פילוח',
+    as_assets_word:'נכסים',assets_ex_pension:'נכסים (ללא פנסיה)',as_liab_word:'התחייבויות',as_available_checking:'זמין בעו"ש',as_checking_neg:'עו"ש',as_not_in_breakdown:'לא נכלל בפילוח',as_add_assets_hint:'הוסף נכסים כדי לראות פילוח',
     wcat_pension:'פנסיה',wcat_studyfund:'קרנות השתלמות',wcat_gemel:'גמל להשקעה',wcat_investments:'השקעות סחירות',wcat_re:'נדל"ן',wcat_checking:'עו"ש',
     pen_deposit:'הפקדה',pen_fee:'דמי ניהול',per_month:'/ח׳',sf_liquid:'נזיל',gemel_desc:'גמל להשקעה',inv_cost:'עלות בסיס',re_mortgage:'משכנתא',re_equity:'הון עצמי',loan_est:'אומדן',loan_updated:'עודכן',loan_high:'ריבית גבוהה',loan_zero:'0% ריבית',
     empty_pension:'אין חיסכון פנסיוני עדיין',empty_invest2:'אין השקעות עדיין',empty_re:'אין נדל"ן עדיין',empty_loans:'אין הלוואות',loan_one:'הלוואה',event_one:'אירוע',
@@ -1583,7 +1583,7 @@ var T={
     as_pension_savings:'Pension & Study funds',as_invest_re:'Investments & RE',as_debts:'Debts',as_alloc:'Asset breakdown',
     as_add_pension:'+ Pension',as_add_studyfund:'+ Study fund',as_add_gemel:'+ Provident',as_invest_tap:'Investments · tap a row to edit',as_add_invest:'+ Add investment',
     as_realestate:'Real estate',as_add_re:'+ Add real estate',as_loans:'Loans',as_add_loan:'+ Add loan',
-    as_assets_word:'Assets',as_liab_word:'liabilities',as_available_checking:'Available in checking',as_checking_neg:'Checking',as_not_in_breakdown:'not included',as_add_assets_hint:'Add assets to see the breakdown',
+    as_assets_word:'Assets',assets_ex_pension:'Assets (excl. pension)',as_liab_word:'liabilities',as_available_checking:'Available in checking',as_checking_neg:'Checking',as_not_in_breakdown:'not included',as_add_assets_hint:'Add assets to see the breakdown',
     wcat_pension:'Pension',wcat_studyfund:'Study funds',wcat_gemel:'Provident fund',wcat_investments:'Marketable investments',wcat_re:'Real estate',wcat_checking:'Checking',
     pen_deposit:'deposit',pen_fee:'fee',per_month:'/mo',sf_liquid:'liquid',gemel_desc:'Provident fund',inv_cost:'cost basis',re_mortgage:'Mortgage',re_equity:'equity',loan_est:'est.',loan_updated:'updated',loan_high:'High interest',loan_zero:'0% interest',
     empty_pension:'No retirement savings yet',empty_invest2:'No investments yet',empty_re:'No real estate yet',empty_loans:'No loans',loan_one:'Loan',event_one:'Event',
@@ -1808,7 +1808,7 @@ function calc(){
 
   var totalAssets      = penT + hshT + gmT + invT + reV + ND.cash;
   var totalLiabilities = reMrt + lnT;
-  var netWorth         = totalAssets - totalLiabilities;
+  var netWorth         = totalAssets - penT - totalLiabilities;   // pension excluded from net worth (still counted in totalAssets / breakdown)
 
   var totalIncome = ND.income.my + ND.income.partner + ND.income.extra;
   var expBase     = Object.values(ND.expenses).reduce(function(s,v){return s+Number(v)},0);
@@ -2248,7 +2248,7 @@ function ovRenderOverview(c){
   if(_scf){ if(c.totalIncome>0){ _scf.textContent=f(c.monthlySavings); _scf.style.color=_colNet(c.monthlySavings); } else { _scf.textContent='—'; _scf.style.color='#1E2D4A'; } }
   set('sum-cf-sub', c.totalIncome>0 ? t('sum_income')+' '+f(c.totalIncome)+' · '+t('sum_expense')+' '+f(c.totalExpenses) : t('sum_income_vs_exp'));
   set('sum-wealth-val', c.netWorth!==0 ? f(c.netWorth) : '—');
-  set('sum-wealth-sub', (c.totalAssets>0||c.totalLiabilities>0) ? t('sum_assets')+' '+f(c.totalAssets)+' · '+t('sum_liab')+' '+f(c.totalLiabilities) : t('sum_assets_vs_liab'));
+  set('sum-wealth-sub', (c.totalAssets>0||c.totalLiabilities>0) ? t('assets_ex_pension')+' '+f(c.totalAssets-c.penT)+' · '+t('sum_liab')+' '+f(c.totalLiabilities) : t('sum_assets_vs_liab'));
   set('sum-journey-val', (c.fireAge && c.fireAge>0 && c.fireAge<120) ? t('age_word')+' '+c.fireAge : '—');
   set('sum-journey-sub', c.fireNumber>0 ? Math.round(Math.max(c.netWorth,0)/c.fireNumber*100)+'% '+t('sum_of_goal') : t('sum_progress_goal'));
   set('ov-k1',c.monthlySavings!==0?f(c.monthlySavings):'—');
@@ -3750,7 +3750,7 @@ function renderWealth(){
   if(!document.getElementById('pg-assets')) return;
   var c=calc();
   _cfSet('as-nw', fmt(c.netWorth));
-  _cfSet('as-nw-sub', t('as_assets_word')+' '+fmt(c.totalAssets)+' − '+t('as_liab_word')+' '+fmt(c.totalLiabilities));
+  _cfSet('as-nw-sub', t('assets_ex_pension')+' '+fmt(c.totalAssets-c.penT)+' − '+t('as_liab_word')+' '+fmt(c.totalLiabilities));
   var _cash=ND.cash||0, _lqEl=document.getElementById('as-nw-liquid');
   if(_lqEl){
     if(_cash>=0){ _lqEl.textContent=t('as_available_checking')+': '+fmt(_cash); _lqEl.style.color='var(--gold-l)'; }
