@@ -1748,15 +1748,13 @@ async function loadFromCloud(){
       try{ localStorage.setItem(window.STORAGE_KEY, JSON.stringify(ND)); }catch(e){}
       // Sync settings from cloud to localStorage
       if(ND.settings) try{ var ls=JSON.parse(localStorage.getItem('numa_settings')||'{}'); localStorage.setItem('numa_settings',JSON.stringify(Object.assign(ls,ND.settings))); }catch(e){}
-      console.log('[Numa] Loaded from cloud');
       try{ _setSyncStatus('ok'); }catch(e){}
     } else {
       // No cloud data — upload current localStorage data
       loadFromStorage();
       _saveToCloud();
-      console.log('[Numa] No cloud data — uploaded local');
     }
-  } catch(e){ console.log('[Numa] Cloud load fallback to local', e); loadFromStorage(); }
+  } catch(e){ loadFromStorage(); }
 }
 function saveToStorage(){
   try{ saveNWSnapshot(); } catch(e){}
@@ -4881,7 +4879,6 @@ function obEnterApp(){
       navigator.serviceWorker.register('./sw.js?v=v8')
         .then(reg => {
           swReg = reg;
-          console.log('[Numa] Service Worker registered ');
 
           // בדוק עדכונים
           reg.addEventListener('updatefound', () => {
@@ -4894,7 +4891,7 @@ function obEnterApp(){
             });
           });
         })
-        .catch(err => console.log('[Numa] SW registration failed:', err));
+        .catch(function(){});
 
       // שמע להודעת עדכון
       navigator.serviceWorker.addEventListener('controllerchange', () => {
@@ -4918,7 +4915,6 @@ function obEnterApp(){
   window.addEventListener('appinstalled', () => {
     hideInstallBanner();
     deferredPrompt = null;
-    console.log('[Numa] App installed! ');
   });
 
   function showInstallBanner() {
@@ -4942,7 +4938,6 @@ function obEnterApp(){
         if (!deferredPrompt) return;
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
-        console.log('[Numa] Install outcome:', outcome);
         deferredPrompt = null;
         hideInstallBanner();
       });
@@ -5107,7 +5102,6 @@ function initSupabase(){
     });
     // Single auth handler for ALL cases
     _sb.auth.onAuthStateChange(function(event,session){
-      console.log('[Numa Auth]',event,session?.user?.email||'');
       if(event==='SIGNED_OUT'){
         currentUser=null;
         _showApp_done=false;
