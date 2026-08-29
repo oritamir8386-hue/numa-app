@@ -962,7 +962,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
     <div class="c-sub" id="as-nw-sub">—</div>
     <div class="c-sub" id="as-nw-liquid" style="margin-top:3px;color:var(--gold-l)">—</div>
     <div class="chips">
-      <div class="chip"><b id="as-chip-pen">—</b><span data-i18n="as_pension_savings">פנסיה וקה"ש</span></div>
+      <div class="chip"><b id="as-chip-pen">—</b><span data-i18n="as_kesh_gemel">קה"ש + גמל</span></div>
       <div class="chip"><b id="as-chip-inv">—</b><span data-i18n="as_invest_re">השקעות ונדל"ן</span></div>
       <div class="chip"><b class="bad" id="as-chip-debt">—</b><span data-i18n="as_debts">חובות</span></div>
     </div>
@@ -1500,7 +1500,7 @@ var T={
     cf_checking:'עובר ושב',cf_incomes:'הכנסות',cf_add_income:'+ הוסף מקור הכנסה',cf_expenses:'הוצאות',cf_add_category:'+ הוסף קטגוריה',
     cf_no_income:'אין הכנסות — הוסף מקור הכנסה',cf_no_expenses:'אין הוצאות — הוסף קטגוריה',
     name_me:'שלי',name_partner:'בן/בת זוג',
-    as_pension_savings:'פנסיה וקה"ש',as_invest_re:'השקעות ונדל"ן',as_debts:'חובות',as_alloc:'פילוח נכסים',
+    as_pension_savings:'פנסיה וקה"ש',as_kesh_gemel:'קה"ש + גמל',as_invest_re:'השקעות ונדל"ן',as_debts:'חובות',as_alloc:'פילוח נכסים',
     as_add_pension:'+ פנסיה',as_add_studyfund:'+ קה"ש',as_add_gemel:'+ גמל',as_invest_tap:'השקעות · לחיצה על שורה לעריכה',as_add_invest:'+ הוסף השקעה',
     as_realestate:'נדל"ן',as_add_re:'+ הוסף נדל"ן',as_loans:'הלוואות',as_add_loan:'+ הוסף הלוואה',
     as_assets_word:'נכסים',assets_ex_pension:'נכסים (ללא פנסיה)',as_liab_word:'התחייבויות',as_available_checking:'זמין בעו"ש',as_checking_neg:'עו"ש',as_not_in_breakdown:'לא נכלל בפילוח',as_add_assets_hint:'הוסף נכסים כדי לראות פילוח',
@@ -1580,7 +1580,7 @@ var T={
     cf_checking:'Checking',cf_incomes:'Income',cf_add_income:'+ Add income source',cf_expenses:'Expenses',cf_add_category:'+ Add category',
     cf_no_income:'No income yet — add a source',cf_no_expenses:'No expenses yet — add a category',
     name_me:'Me',name_partner:'Partner',
-    as_pension_savings:'Pension & Study funds',as_invest_re:'Investments & RE',as_debts:'Debts',as_alloc:'Asset breakdown',
+    as_pension_savings:'Pension & Study funds',as_kesh_gemel:'Study + Provident',as_invest_re:'Investments & RE',as_debts:'Debts',as_alloc:'Asset breakdown',
     as_add_pension:'+ Pension',as_add_studyfund:'+ Study fund',as_add_gemel:'+ Provident',as_invest_tap:'Investments · tap a row to edit',as_add_invest:'+ Add investment',
     as_realestate:'Real estate',as_add_re:'+ Add real estate',as_loans:'Loans',as_add_loan:'+ Add loan',
     as_assets_word:'Assets',assets_ex_pension:'Assets (excl. pension)',as_liab_word:'liabilities',as_available_checking:'Available in checking',as_checking_neg:'Checking',as_not_in_breakdown:'not included',as_add_assets_hint:'Add assets to see the breakdown',
@@ -3756,7 +3756,7 @@ function renderWealth(){
     if(_cash>=0){ _lqEl.textContent=t('as_available_checking')+': '+fmt(_cash); _lqEl.style.color='var(--gold-l)'; }
     else { _lqEl.textContent=t('as_checking_neg')+': −'+fmt(Math.abs(_cash)); _lqEl.style.color='#e0a9a0'; }
   }
-  _cfSet('as-chip-pen', fmt(c.penT+c.hshT+c.gmT));
+  _cfSet('as-chip-pen', fmt(c.hshT+c.gmT));
   _cfSet('as-chip-inv', fmt(c.invT+c.reV));
   _cfSet('as-chip-debt', fmt(c.totalLiabilities));
   renderWealthAlloc(c);
