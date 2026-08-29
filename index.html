@@ -756,6 +756,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div style="text-align:center;flex:1">
     <div style="font-size:11px;color:#8a8a8a;letter-spacing:.04em;font-weight:500">Numa</div>
     <div style="font-size:17px;font-weight:800;color:#1E2D4A;line-height:1.2" id="top-greeting">שלום</div>
+    <div style="font-size:11px;color:#8a8a8a;margin-top:2px" id="top-date"></div>
     <script>
     (function(){
       try{
@@ -5939,6 +5940,14 @@ function setCurrency(val){
   render();
   try{renderAssetsHub();}catch(e){}
 }
+/* Current date in the topbar — auto-updates by calendar (new Date), language-aware */
+function updateTopDate(){
+  var el=document.getElementById('top-date'); if(!el) return;
+  var lang=(typeof getSettings==='function'&&getSettings().language)||SETTINGS_DEFAULTS.language||'he';
+  var loc=(lang==='en')?'en-US':'he-IL';
+  try{ el.textContent=new Date().toLocaleDateString(loc,{weekday:'long',day:'numeric',month:'long',year:'numeric'}); }catch(e){}
+}
+try{ if(typeof window!=='undefined' && !window._topDateTick){ window._topDateTick=setInterval(updateTopDate,60000); } }catch(e){}
 function applyLanguage(){
   var lang=getSettings().language||SETTINGS_DEFAULTS.language||'he';
   var html=document.documentElement;
@@ -5962,6 +5971,7 @@ function applyLanguage(){
     greet.textContent=nm?tg+', '+nm:tg;
   }
   try{ _setSyncStatus(_syncState); }catch(e){}
+  try{ updateTopDate(); }catch(e){}
 }
 var _calcEditorKey='';
 function editCalcVal(key,title){
