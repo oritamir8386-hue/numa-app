@@ -1199,7 +1199,7 @@ body{background:#F5F2EC;display:flex;flex-direction:column;margin:0;padding:0;he
   <div>
     <div style="font-size:15px;font-weight:700;color:#1E2D4A;margin-bottom:8px" data-i18n="set_backup">גיבוי וסנכרון</div>
     <div style="background:#fff;border-radius:18px;overflow:hidden">
-      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="set_autosync">סנכרון אוטומטי</div><div style="font-size:11px;color:#8a8a8a" data-i18n="set_synced_now">מסונכרן · עכשיו</div></div></div><button class="cat-toggle on" data-cat="sync" onclick="toggleCat(this)"></button></div>
+      <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="set_autosync">סנכרון אוטומטי</div><div style="font-size:11px;color:#8a8a8a" id="sync-sub">מסונכרן</div></div></div><button class="cat-toggle on" data-cat="sync" onclick="toggleCat(this)"></button></div>
       <div class="set-row"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="set_backup_data">גבה נתונים</div><div style="font-size:11px;color:#8a8a8a" data-i18n="set_last_backup">גיבוי אחרון: היום</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
       <div class="set-row" style="border-bottom:none"><div style="display:flex;align-items:center;gap:12px;flex:1"><div><div style="font-size:15px;font-weight:500;color:#1E2D4A" data-i18n="set_export">ייצא נתונים</div><div style="font-size:11px;color:#8a8a8a">CSV / PDF</div></div></div><span style="color:rgba(0,0,0,.18)">›</span></div>
     </div>
@@ -1517,7 +1517,7 @@ var T={
     set_back:'חזרה',set_profile_sub:'Numa מותאמת לפי הפרופיל שלך — הכרטיסיות הרלוונטיות בלבד יוצגו',set_calc_sub:'ברירות מחדל לכל החישובים באפליקציה',
     set_employment:'סטטוס תעסוקה',set_family:'מצב משפחתי',fam_single:'יחיד',fam_couple:'זוג',fam_family:'זוג + ילדים',
     calc_return:'תשואה שנתית ברירת מחדל',calc_withdrawal:'כלל נסיגה',calc_inflation:'אינפלציה שנתית',calc_cgt:'מס רווחי הון',calc_retire_age:'גיל פרישה מתוכנן',
-    curr_shekel:'₪ שקל',set_autosync:'סנכרון אוטומטי',set_synced_now:'מסונכרן · עכשיו',set_backup_data:'גבה נתונים',set_last_backup:'גיבוי אחרון: היום',set_export:'ייצא נתונים',
+    curr_shekel:'₪ שקל',set_autosync:'סנכרון אוטומטי',set_synced_now:'מסונכרן · עכשיו',sync_ok:'מסונכרן',sync_retry:'לא מסונכרן — ננסה שוב',set_backup_data:'גבה נתונים',set_last_backup:'גיבוי אחרון: היום',set_export:'ייצא נתונים',
     modal_add:'הוסף',modal_edit:'ערוך',m_pension:'קרן פנסיה',m_hishtalmut:'קרן השתלמות',m_gamel:'גמל להשקעה',m_investment:'השקעה',m_realEstate:'נכס נדל"ן',m_loan:'הלוואה',m_income:'מקור הכנסה',m_expense:'הוצאה',m_cash:'חשבון עו"ש',m_event:'אירוע חיים',
     f_fund_name:'שם קרן',f_balance:'יתרה (₪)',f_monthly_deposit:'הפקדה חודשית (₪)',f_return:'תשואה שנתית %',f_fee:'דמי ניהול %',f_fund_name2:'שם הקרן',f_liquid_year:'שנת נזילות',f_gemel_name:'שם הגמל',f_invest_name:'שם ההשקעה',f_ticker:'טיקר',f_value_now:'שווי כיום (₪)',f_cost:'עלות בסיס (₪)',f_re_desc:'תיאור הנכס',f_market_value:'שווי שוק (₪)',f_mortgage_bal:'יתרת משכנתא (₪)',f_monthly_payment:'תשלום חודשי (₪)',f_loan_name:'שם ההלוואה',f_rate:'ריבית שנתית %',f_income_name:'שם מקור ההכנסה',f_amount_net:'סכום חודשי נטו (₪)',f_expense_name:'שם ההוצאה',f_amount_month:'סכום חודשי (₪)',f_account_name:'שם בעל החשבון',f_balance_neg:'יתרה (₪, אפשר שלילי)',f_event_name:'שם האירוע',f_year:'שנה',f_est_cost:'עלות משוערת (₪)',
     ph_delete_item:'למחוק?',ph_fire_target:'יעד החופש הכלכלי (₪).\nהשאר ריק לחישוב אוטומטי לפי ההוצאות:',
@@ -1597,7 +1597,7 @@ var T={
     set_back:'Back',set_profile_sub:'Numa adapts to your profile — only relevant sections are shown',set_calc_sub:'Defaults for all app calculations',
     set_employment:'Employment status',set_family:'Marital status',fam_single:'Single',fam_couple:'Couple',fam_family:'Couple + kids',
     calc_return:'Default annual return',calc_withdrawal:'Withdrawal rate',calc_inflation:'Annual inflation',calc_cgt:'Capital gains tax',calc_retire_age:'Planned retirement age',
-    curr_shekel:'₪ Shekel',set_autosync:'Auto-sync',set_synced_now:'Synced · now',set_backup_data:'Back up data',set_last_backup:'Last backup: today',set_export:'Export data',
+    curr_shekel:'₪ Shekel',set_autosync:'Auto-sync',set_synced_now:'Synced · now',sync_ok:'Synced',sync_retry:'Not synced — will retry',set_backup_data:'Back up data',set_last_backup:'Last backup: today',set_export:'Export data',
     modal_add:'Add',modal_edit:'Edit',m_pension:'pension fund',m_hishtalmut:'study fund',m_gamel:'provident fund',m_investment:'investment',m_realEstate:'real estate',m_loan:'loan',m_income:'income source',m_expense:'expense',m_cash:'checking account',m_event:'life event',
     f_fund_name:'Fund name',f_balance:'Balance (₪)',f_monthly_deposit:'Monthly deposit (₪)',f_return:'Annual return %',f_fee:'Management fee %',f_fund_name2:'Fund name',f_liquid_year:'Liquidity year',f_gemel_name:'Fund name',f_invest_name:'Investment name',f_ticker:'Ticker',f_value_now:'Current value (₪)',f_cost:'Cost basis (₪)',f_re_desc:'Property description',f_market_value:'Market value (₪)',f_mortgage_bal:'Mortgage balance (₪)',f_monthly_payment:'Monthly payment (₪)',f_loan_name:'Loan name',f_rate:'Annual interest %',f_income_name:'Income source name',f_amount_net:'Monthly net amount (₪)',f_expense_name:'Expense name',f_amount_month:'Monthly amount (₪)',f_account_name:'Account holder name',f_balance_neg:'Balance (₪, can be negative)',f_event_name:'Event name',f_year:'Year',f_est_cost:'Estimated cost (₪)',
     ph_delete_item:'Delete?',ph_fire_target:'Financial freedom target (₪).\nLeave empty to auto-calculate from expenses:',
@@ -1748,6 +1748,7 @@ async function loadFromCloud(){
       // Sync settings from cloud to localStorage
       if(ND.settings) try{ var ls=JSON.parse(localStorage.getItem('numa_settings')||'{}'); localStorage.setItem('numa_settings',JSON.stringify(Object.assign(ls,ND.settings))); }catch(e){}
       console.log('[Numa] Loaded from cloud');
+      try{ _setSyncStatus('ok'); }catch(e){}
     } else {
       // No cloud data — upload current localStorage data
       loadFromStorage();
@@ -1765,9 +1766,24 @@ function saveToStorage(){
 var _cloudTimer=null;
 // Timestamp of the cloud record we last loaded — used to detect newer writes from other devices
 var _cloudLoadedAt=null;
+var _cloudRetries=0;
+var _cloudMaxRetries=3;   // cap automatic retries so we don't loop forever if Supabase is down
+var _syncState='ok';
+function _setSyncStatus(state){
+  _syncState=state;
+  var el=document.getElementById('sync-sub');
+  if(el) el.textContent = (state==='retry') ? t('sync_retry') : t('sync_ok');
+}
 function _debounceSaveCloud(){
+  _cloudRetries=0;                       // fresh user change → fresh retry budget
   if(_cloudTimer) clearTimeout(_cloudTimer);
   _cloudTimer = setTimeout(_saveToCloud, 2000);
+}
+// Force an immediate cloud save (bypass debounce) — used on page exit
+function _flushCloudSave(){
+  _cloudRetries=0;
+  if(_cloudTimer){ clearTimeout(_cloudTimer); _cloudTimer=null; }
+  _saveToCloud();
 }
 async function _saveToCloud(){
   if(!_sb || !currentUser) return;
@@ -1777,6 +1793,7 @@ async function _saveToCloud(){
     if(cur.data && cur.data.updated_at && _cloudLoadedAt && new Date(cur.data.updated_at) > new Date(_cloudLoadedAt)){
       await loadFromCloud();
       try{ render(); }catch(e){}
+      _cloudRetries=0; try{ _setSyncStatus('ok'); }catch(e){}
       showToast('הנתונים עודכנו ממכשיר אחר','טענו מחדש את הגרסה העדכנית');
       return;
     }
@@ -1787,8 +1804,18 @@ async function _saveToCloud(){
       updated_at: stamp
     });
     _cloudLoadedAt = stamp;
-  } catch(e){ console.error('[Numa] Cloud save error:', e); }
+    _cloudRetries=0;
+    try{ _setSyncStatus('ok'); }catch(e){}
+  } catch(e){
+    console.error('[Numa] Cloud save error:', e);
+    try{ _setSyncStatus('retry'); }catch(e2){}
+    if(_cloudRetries < _cloudMaxRetries){ _cloudRetries++; setTimeout(_saveToCloud, 15000); }   // capped retries
+  }
 }
+// Force cloud save when the page is hidden / closing (localStorage is already saved synchronously)
+document.addEventListener('visibilitychange', function(){ if(document.hidden) _flushCloudSave(); });
+window.addEventListener('pagehide', _flushCloudSave);
+window.addEventListener('beforeunload', _flushCloudSave);
 
 /* ── CALCULATIONS ── */
 function calc(){
@@ -5934,6 +5961,7 @@ function applyLanguage(){
     var nm=ND.profile.name||(typeof currentUser!=='undefined'&&currentUser?(currentUser.user_metadata?.name||currentUser.email?.split('@')[0]||''):'');
     greet.textContent=nm?tg+', '+nm:tg;
   }
+  try{ _setSyncStatus(_syncState); }catch(e){}
 }
 var _calcEditorKey='';
 function editCalcVal(key,title){
