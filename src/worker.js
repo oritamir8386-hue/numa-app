@@ -46,18 +46,27 @@ export default {
   },
 
   async scheduled(controller, env) {
-    const url = `${SUPA_URL}/rest/v1/user_data?select=id&limit=1`;
+    // Keep-alive: a real write to the tiny `keepalive` table, so Supabase's
+    // free tier counts it as activity (an empty anon read of user_data didn't).
+    const url = `${SUPA_URL}/rest/v1/keepalive?id=eq.1`;
     try {
       const res = await fetch(url, {
-        method: 'GET',
+        method: 'PATCH',
         headers: {
           apikey: SUPA_KEY,
           Authorization: `Bearer ${SUPA_KEY}`,
-          Accept: 'application/json'
-        }
+          'Content-Type': 'application/json',
+          Prefer: 'return=representation'
+        },
+        body: JSON.stringify({ pinged_at: new Date().toISOString() })
       });
       if (!res.ok) {
         console.error('Supabase cron ping failed', res.status, await res.text());
+      } else {
+        const rows = await res.json();
+        if (!Array.isArray(rows) || rows.length === 0) {
+          console.error('Supabase cron ping updated no rows — check keepalive table/policy');
+        }
       }
     } catch (error) {
       console.error('Supabase cron ping error', error);
