@@ -15,8 +15,15 @@ window.PREVIEW_MODE = false; // Auth enabled — requires sign-in
 <meta name="description" content="Net worth, cash flow, and your journey to financial freedom — one clear picture.">
 <meta property="og:title" content="Numa — Your money, in control">
 <meta property="og:description" content="Net worth, cash flow, and your journey to financial freedom — one clear picture.">
-<meta property="og:image" content="https://numa-app.oritamir8386.workers.dev/icons/icon-512.png">
+<meta property="og:image" content="https://numa-app.oritamir8386.workers.dev/icons/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:url" content="https://numa-app.oritamir8386.workers.dev">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Numa — Your money, in control">
+<meta name="twitter:description" content="Net worth, cash flow, and your journey to financial freedom — one clear picture.">
+<meta name="twitter:image" content="https://numa-app.oritamir8386.workers.dev/icons/og-cover.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231E2D4A'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='-apple-system,sans-serif' font-size='32' font-weight='800' fill='%23C9A96E'%3EN%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="theme-color" content="#1E2D4A">
@@ -4876,7 +4883,7 @@ function obEnterApp(){
   if ('serviceWorker' in navigator && !location.hostname.includes('claudeusercontent')) {
     window.addEventListener('load', () => {
       // גרסת ה-SW/cache — העלה את המספר בכל דפלוי כדי לאלץ עדכון cache (numa-v<N>)
-      navigator.serviceWorker.register('./sw.js?v=v8')
+      navigator.serviceWorker.register('./sw.js?v=v9')
         .then(reg => {
           swReg = reg;
 
