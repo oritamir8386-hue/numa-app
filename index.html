@@ -4707,6 +4707,95 @@ function obEnterApp(){
 .ls-gbtn:active{transform:scale(.98)}
 .ls-alt{margin-top:13px;font-size:12.5px;color:rgba(255,255,255,.42);cursor:pointer}
 .ls-priv{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:22px;font-size:10.5px;color:rgba(255,255,255,.3)}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Desktop layout (dk-)  ·  ALL desktop changes live in this one block.
+   Below 1024px nothing here applies — mobile stays byte-for-byte unchanged.
+   New DOM is limited to the sidebar (built by the dk- IIFE); everything
+   else is the existing DOM rearranged with CSS grid/flex.
+   ════════════════════════════════════════════════════════════════════════ */
+.dk-side{display:none}            /* mobile: sidebar hidden (bottom nav is used instead) */
+@media (min-width:1024px){
+
+  /* ── shell: the phone column becomes [sidebar | content] ── */
+  .dev{
+    display:grid;
+    grid-template-columns:232px minmax(0,1fr);
+    grid-template-rows:auto 1fr;
+    grid-template-areas:"side top" "side scr";
+    max-width:none;margin:0;box-shadow:none;
+  }
+  .top{grid-area:top}
+  .scr{grid-area:scr;overflow-y:auto}
+  .nav{display:none}                          /* bottom nav hidden; sidebar replaces it */
+
+  /* ── sidebar (new element, built by the dk- IIFE) ── */
+  .dk-side{
+    grid-area:side;
+    display:flex;flex-direction:column;gap:6px;
+    background:#fff;border-inline-end:1px solid #e8e3d8;
+    padding:24px 16px;box-sizing:border-box;overflow-y:auto;
+  }
+  .dk-brand{font-size:26px;font-weight:800;letter-spacing:-1px;padding:0 10px 22px;color:#1E2D4A}
+  .dk-brand i{color:#A07840;font-style:normal}
+  .dk-link{
+    display:flex;align-items:center;gap:12px;width:100%;
+    padding:11px 12px;border-radius:12px;min-height:44px;box-sizing:border-box;
+    color:#5f5a52;font-weight:600;font-size:14px;font-family:inherit;
+    background:none;border:none;cursor:pointer;text-align:start;
+  }
+  .dk-link svg{width:18px;height:18px;flex-shrink:0}
+  .dk-link:hover{background:#f7f3ec}
+  .dk-link.dk-active{background:#f5efe3;color:#8a6530;font-weight:700}
+  .dk-spacer{flex:1}
+
+  /* relocated avatar + its existing dropdown (moved into the footer by the IIFE) */
+  .dk-userbox{display:flex;align-items:center;gap:10px;border-top:1px solid #e8e3d8;padding:14px 8px 0;margin-top:6px}
+  .dk-userbox #avatar-wrap{flex-shrink:0}
+  .dk-uname{font-size:13px;font-weight:600;color:#1E2D4A;line-height:1.3;cursor:pointer}
+  .dk-uname small{display:block;font-size:11px;color:#6f6a60;font-weight:500}
+  #avatar-menu{top:auto!important;bottom:48px!important;inset-inline-start:0!important}
+
+  /* ── topbar: greeting on one side, agent button on the other ── */
+  .top{
+    background:transparent!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+    border-bottom:none!important;padding:26px 32px 10px!important;
+    max-width:1280px;margin-inline:auto;width:100%;box-sizing:border-box;
+  }
+  .top > div:first-child{display:none}                 /* empty avatar slot (avatar now in sidebar) */
+  .top > div:has(#top-greeting){text-align:start!important;flex:1}
+  #top-greeting{font-size:26px!important;line-height:1.15}
+  .ai-pill{padding:11px 18px}
+  .ai-pill-txt{font-size:13px}
+
+  /* ── content column: cards in a grid, centered at 1280 ── */
+  .pg.on{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:18px!important;align-content:start;
+    max-width:1280px;margin-inline:auto;width:100%;
+    padding:8px 32px 48px!important;
+  }
+  .pg.on > .card.hero,.pg.on > .ov-hero{grid-column:1 / -1}   /* hero spans full row */
+
+  /* overview: override the existing ≥900px 2-col / full-span rules */
+  #pg-ov.on{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  #pg-ov.on > .card{grid-column:auto}
+  #pg-ov.on > .card.hero,#pg-ov.on > .ov-hero{grid-column:1 / -1}
+
+  /* ── agent: floating corner popup instead of the full-width bottom sheet ── */
+  #agent-overlay{display:none!important}
+  #ai-panel.agent-sheet{
+    left:auto!important;right:auto!important;top:auto!important;
+    inset-inline-end:28px;bottom:28px!important;
+    width:min(440px,calc(100vw - 56px));
+    border-radius:22px!important;max-height:calc(100vh - 56px);
+    box-shadow:0 18px 50px rgba(30,45,74,.22),0 2px 8px rgba(30,45,74,.08);
+    opacity:0;visibility:hidden;
+    transition:transform .32s cubic-bezier(.4,0,.2,1),opacity .25s ease,visibility .32s;
+  }
+  #ai-panel.agent-sheet.on{opacity:1;visibility:visible}
+}
 </style>
 
 <!-- ══════ LANDING PAGE ══════ -->
@@ -4883,7 +4972,7 @@ function obEnterApp(){
   if ('serviceWorker' in navigator && !location.hostname.includes('claudeusercontent')) {
     window.addEventListener('load', () => {
       // גרסת ה-SW/cache — העלה את המספר בכל דפלוי כדי לאלץ עדכון cache (numa-v<N>)
-      navigator.serviceWorker.register('./sw.js?v=v9')
+      navigator.serviceWorker.register('./sw.js?v=v10')
         .then(reg => {
           swReg = reg;
 
@@ -6391,6 +6480,72 @@ function showOnboarding(){
   document.body.style.overflow='hidden';
   ob2Go(0);
 }
+</script>
+
+<!-- ══ Desktop (dk-) sidebar · builds the sidebar, relocates the existing avatar
+        + dropdown, and mirrors the active tab from the bottom nav. Inert <1024px. ══ -->
+<script>
+(function(){
+  try{
+    var dev=document.querySelector('.dev');
+    if(!dev||document.querySelector('.dk-side')) return;
+
+    var ICON={
+      ov:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
+      cf:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>',
+      assets:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 100 4h4v-4h-4z"/></svg>',
+      plan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>'
+    };
+    var TABS=[['ov','סקירה'],['cf','תזרים'],['assets','הון'],['plan','מסע']];
+
+    var side=document.createElement('nav');
+    side.className='dk-side';
+    side.setAttribute('aria-label','ניווט ראשי');
+    var html='<div class="dk-brand">Nu<i>ma</i></div>';
+    TABS.forEach(function(t){
+      html+='<button type="button" class="dk-link" data-pg="'+t[0]+'" onclick="goP(\''+t[0]+'\')">'+ICON[t[0]]+'<span>'+t[1]+'</span></button>';
+    });
+    html+='<div class="dk-spacer"></div><div class="dk-userbox" id="dk-userbox"></div>';
+    side.innerHTML=html;
+    dev.insertBefore(side,dev.firstChild);
+
+    // name label beside the (soon relocated) avatar — opens the same dropdown
+    var box=side.querySelector('#dk-userbox');
+    var nm='';
+    try{var g=document.getElementById('top-greeting');if(g&&g.textContent.indexOf(',')>-1)nm=g.textContent.split(',').pop().trim();}catch(e){}
+    var name=document.createElement('div');
+    name.className='dk-uname';
+    name.setAttribute('onclick','event.stopPropagation();toggleAvatarMenu()');
+    name.innerHTML=(nm||'החשבון שלי')+'<small>הגדרות · התנתקות</small>';
+    box.appendChild(name);
+
+    // move the EXISTING avatar+dropdown into the sidebar on desktop, back to the topbar on mobile
+    var wrap=document.getElementById('avatar-wrap');
+    var homeParent=wrap?wrap.parentNode:null, homeNext=wrap?wrap.nextSibling:null;
+    function applyMode(){
+      if(!wrap) return;
+      var dk=window.matchMedia('(min-width:1024px)').matches;
+      if(dk){ if(wrap.parentNode!==box) box.insertBefore(wrap,box.firstChild); }
+      else if(homeParent && wrap.parentNode!==homeParent){ homeParent.insertBefore(wrap,homeNext); }
+    }
+    applyMode();
+    window.addEventListener('resize',applyMode);
+
+    // mirror the active tab from the bottom nav (.ni.on)
+    function sync(){
+      TABS.forEach(function(t){
+        var ni=document.getElementById('ni-'+t[0]);
+        var lk=side.querySelector('.dk-link[data-pg="'+t[0]+'"]');
+        if(ni&&lk) lk.classList.toggle('dk-active',ni.classList.contains('on'));
+      });
+    }
+    sync();
+    var nav=document.querySelector('.nav');
+    if(nav&&window.MutationObserver){
+      new MutationObserver(sync).observe(nav,{attributes:true,subtree:true,attributeFilter:['class']});
+    }
+  }catch(e){}
+})();
 </script>
 
 </body>
